@@ -479,6 +479,24 @@ export interface BatchReadCommandOutput extends BatchReadResponse, __MetadataBea
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To run a batch read command
+ * ```javascript
+ * //
+ * const input = {
+ *   "ConsistencyLevel": "EVENTUAL",
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *   "Operations": []
+ * };
+ * const command = new BatchReadCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "Responses": []
+ * }
+ * *\/
+ * // example id: to-run-a-batch-read-command-1506123433380
+ * ```
+ *
  */
 export class BatchReadCommand extends $Command
   .classBuilder<
@@ -488,9 +506,7 @@ export class BatchReadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -502,4 +518,16 @@ export class BatchReadCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchReadCommand)
   .de(de_BatchReadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchReadRequest;
+      output: BatchReadResponse;
+    };
+    sdk: {
+      input: BatchReadCommandInput;
+      output: BatchReadCommandOutput;
+    };
+  };
+}

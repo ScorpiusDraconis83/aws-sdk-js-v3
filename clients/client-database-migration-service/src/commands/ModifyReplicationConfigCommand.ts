@@ -139,9 +139,7 @@ export class ModifyReplicationConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class ModifyReplicationConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyReplicationConfigCommand)
   .de(de_ModifyReplicationConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyReplicationConfigMessage;
+      output: ModifyReplicationConfigResponse;
+    };
+    sdk: {
+      input: ModifyReplicationConfigCommandInput;
+      output: ModifyReplicationConfigCommandOutput;
+    };
+  };
+}

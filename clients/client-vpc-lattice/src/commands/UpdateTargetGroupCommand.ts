@@ -125,9 +125,7 @@ export class UpdateTargetGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VPCLatticeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class UpdateTargetGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTargetGroupCommand)
   .de(de_UpdateTargetGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTargetGroupRequest;
+      output: UpdateTargetGroupResponse;
+    };
+    sdk: {
+      input: UpdateTargetGroupCommandInput;
+      output: UpdateTargetGroupCommandOutput;
+    };
+  };
+}

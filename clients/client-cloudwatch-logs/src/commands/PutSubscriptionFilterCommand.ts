@@ -118,9 +118,7 @@ export class PutSubscriptionFilterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchLogsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class PutSubscriptionFilterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutSubscriptionFilterCommand)
   .de(de_PutSubscriptionFilterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutSubscriptionFilterRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutSubscriptionFilterCommandInput;
+      output: PutSubscriptionFilterCommandOutput;
+    };
+  };
+}

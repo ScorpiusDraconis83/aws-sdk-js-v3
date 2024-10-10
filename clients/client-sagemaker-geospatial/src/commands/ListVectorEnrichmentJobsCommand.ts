@@ -106,9 +106,7 @@ export class ListVectorEnrichmentJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerGeospatialClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class ListVectorEnrichmentJobsCommand extends $Command
   .f(ListVectorEnrichmentJobInputFilterSensitiveLog, ListVectorEnrichmentJobOutputFilterSensitiveLog)
   .ser(se_ListVectorEnrichmentJobsCommand)
   .de(de_ListVectorEnrichmentJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVectorEnrichmentJobInput;
+      output: ListVectorEnrichmentJobOutput;
+    };
+    sdk: {
+      input: ListVectorEnrichmentJobsCommandInput;
+      output: ListVectorEnrichmentJobsCommandOutput;
+    };
+  };
+}

@@ -83,9 +83,7 @@ export class DescribeFpgaImageAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DescribeFpgaImageAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeFpgaImageAttributeCommand)
   .de(de_DescribeFpgaImageAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFpgaImageAttributeRequest;
+      output: DescribeFpgaImageAttributeResult;
+    };
+    sdk: {
+      input: DescribeFpgaImageAttributeCommandInput;
+      output: DescribeFpgaImageAttributeCommandOutput;
+    };
+  };
+}

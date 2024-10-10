@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { ClaimDeviceRequest, ClaimDeviceResponse } from "../models/models_1";
+import { ClaimDeviceRequest, ClaimDeviceResponse } from "../models/models_2";
 import { de_ClaimDeviceCommand, se_ClaimDeviceCommand } from "../protocols/Aws_restJson1";
 
 /**
@@ -87,9 +87,7 @@ export class ClaimDeviceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ClaimDeviceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ClaimDeviceCommand)
   .de(de_ClaimDeviceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ClaimDeviceRequest;
+      output: {};
+    };
+    sdk: {
+      input: ClaimDeviceCommandInput;
+      output: ClaimDeviceCommandOutput;
+    };
+  };
+}

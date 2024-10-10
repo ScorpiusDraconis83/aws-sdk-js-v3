@@ -160,9 +160,7 @@ export class DescribeLaunchConfigurationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -174,4 +172,16 @@ export class DescribeLaunchConfigurationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLaunchConfigurationsCommand)
   .de(de_DescribeLaunchConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: LaunchConfigurationNamesType;
+      output: LaunchConfigurationsType;
+    };
+    sdk: {
+      input: DescribeLaunchConfigurationsCommandInput;
+      output: DescribeLaunchConfigurationsCommandOutput;
+    };
+  };
+}

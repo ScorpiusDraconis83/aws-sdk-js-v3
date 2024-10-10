@@ -85,9 +85,7 @@ export class StopEvaluationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class StopEvaluationJobCommand extends $Command
   .f(StopEvaluationJobRequestFilterSensitiveLog, void 0)
   .ser(se_StopEvaluationJobCommand)
   .de(de_StopEvaluationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopEvaluationJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopEvaluationJobCommandInput;
+      output: StopEvaluationJobCommandOutput;
+    };
+  };
+}

@@ -108,9 +108,7 @@ export class SignalWorkflowExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SWFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class SignalWorkflowExecutionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SignalWorkflowExecutionCommand)
   .de(de_SignalWorkflowExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SignalWorkflowExecutionInput;
+      output: {};
+    };
+    sdk: {
+      input: SignalWorkflowExecutionCommandInput;
+      output: SignalWorkflowExecutionCommandOutput;
+    };
+  };
+}

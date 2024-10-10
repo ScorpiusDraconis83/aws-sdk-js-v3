@@ -136,9 +136,7 @@ export class DescribeModelVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutEquipmentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -150,4 +148,16 @@ export class DescribeModelVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeModelVersionCommand)
   .de(de_DescribeModelVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeModelVersionRequest;
+      output: DescribeModelVersionResponse;
+    };
+    sdk: {
+      input: DescribeModelVersionCommandInput;
+      output: DescribeModelVersionCommandOutput;
+    };
+  };
+}

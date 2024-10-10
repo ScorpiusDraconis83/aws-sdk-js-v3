@@ -124,9 +124,7 @@ export class UpdateProjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeviceFarmClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class UpdateProjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateProjectCommand)
   .de(de_UpdateProjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProjectRequest;
+      output: UpdateProjectResult;
+    };
+    sdk: {
+      input: UpdateProjectCommandInput;
+      output: UpdateProjectCommandOutput;
+    };
+  };
+}

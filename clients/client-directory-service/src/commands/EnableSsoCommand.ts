@@ -82,9 +82,7 @@ export class EnableSsoCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectoryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class EnableSsoCommand extends $Command
   .f(EnableSsoRequestFilterSensitiveLog, void 0)
   .ser(se_EnableSsoCommand)
   .de(de_EnableSsoCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableSsoRequest;
+      output: {};
+    };
+    sdk: {
+      input: EnableSsoCommandInput;
+      output: EnableSsoCommandOutput;
+    };
+  };
+}

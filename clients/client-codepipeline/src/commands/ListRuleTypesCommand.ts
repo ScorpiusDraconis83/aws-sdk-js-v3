@@ -103,9 +103,7 @@ export class ListRuleTypesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodePipelineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class ListRuleTypesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRuleTypesCommand)
   .de(de_ListRuleTypesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRuleTypesInput;
+      output: ListRuleTypesOutput;
+    };
+    sdk: {
+      input: ListRuleTypesCommandInput;
+      output: ListRuleTypesCommandOutput;
+    };
+  };
+}

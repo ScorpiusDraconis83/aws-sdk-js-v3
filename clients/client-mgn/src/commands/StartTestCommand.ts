@@ -133,9 +133,7 @@ export class StartTestCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class StartTestCommand extends $Command
   .f(StartTestRequestFilterSensitiveLog, StartTestResponseFilterSensitiveLog)
   .ser(se_StartTestCommand)
   .de(de_StartTestCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartTestRequest;
+      output: StartTestResponse;
+    };
+    sdk: {
+      input: StartTestCommandInput;
+      output: StartTestCommandOutput;
+    };
+  };
+}

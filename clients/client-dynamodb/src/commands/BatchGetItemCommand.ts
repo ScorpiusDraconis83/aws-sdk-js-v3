@@ -346,9 +346,7 @@ export class BatchGetItemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DynamoDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -360,4 +358,16 @@ export class BatchGetItemCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetItemCommand)
   .de(de_BatchGetItemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetItemInput;
+      output: BatchGetItemOutput;
+    };
+    sdk: {
+      input: BatchGetItemCommandInput;
+      output: BatchGetItemCommandOutput;
+    };
+  };
+}

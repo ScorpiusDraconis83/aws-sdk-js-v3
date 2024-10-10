@@ -10,7 +10,7 @@ import {
   ServiceOutputTypes,
 } from "../DatabaseMigrationServiceClient";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { ListTagsForResourceMessage, ListTagsForResourceResponse } from "../models/models_0";
+import { ListTagsForResourceMessage, ListTagsForResourceResponse } from "../models/models_1";
 import { de_ListTagsForResourceCommand, se_ListTagsForResourceCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -69,6 +69,9 @@ export interface ListTagsForResourceCommandOutput extends ListTagsForResourceRes
  * @see {@link ListTagsForResourceCommandOutput} for command's `response` shape.
  * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
  * @throws {@link ResourceNotFoundFault} (client fault)
  *  <p>The resource could not be found.</p>
  *
@@ -101,9 +104,7 @@ export class ListTagsForResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +116,16 @@ export class ListTagsForResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTagsForResourceCommand)
   .de(de_ListTagsForResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForResourceMessage;
+      output: ListTagsForResourceResponse;
+    };
+    sdk: {
+      input: ListTagsForResourceCommandInput;
+      output: ListTagsForResourceCommandOutput;
+    };
+  };
+}

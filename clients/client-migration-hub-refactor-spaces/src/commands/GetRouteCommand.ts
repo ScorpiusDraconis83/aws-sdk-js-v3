@@ -119,9 +119,7 @@ export class GetRouteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MigrationHubRefactorSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class GetRouteCommand extends $Command
   .f(void 0, GetRouteResponseFilterSensitiveLog)
   .ser(se_GetRouteCommand)
   .de(de_GetRouteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRouteRequest;
+      output: GetRouteResponse;
+    };
+    sdk: {
+      input: GetRouteCommandInput;
+      output: GetRouteCommandOutput;
+    };
+  };
+}

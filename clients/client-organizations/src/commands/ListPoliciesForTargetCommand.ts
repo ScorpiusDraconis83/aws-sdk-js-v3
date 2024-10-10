@@ -49,7 +49,7 @@ export interface ListPoliciesForTargetCommandOutput extends ListPoliciesForTarge
  * const client = new OrganizationsClient(config);
  * const input = { // ListPoliciesForTargetRequest
  *   TargetId: "STRING_VALUE", // required
- *   Filter: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY", // required
+ *   Filter: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY", // required
  *   NextToken: "STRING_VALUE",
  *   MaxResults: Number("int"),
  * };
@@ -62,7 +62,7 @@ export interface ListPoliciesForTargetCommandOutput extends ListPoliciesForTarge
  * //       Arn: "STRING_VALUE",
  * //       Name: "STRING_VALUE",
  * //       Description: "STRING_VALUE",
- * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //       AwsManaged: true || false,
  * //     },
  * //   ],
@@ -247,9 +247,7 @@ export class ListPoliciesForTargetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -261,4 +259,16 @@ export class ListPoliciesForTargetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPoliciesForTargetCommand)
   .de(de_ListPoliciesForTargetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPoliciesForTargetRequest;
+      output: ListPoliciesForTargetResponse;
+    };
+    sdk: {
+      input: ListPoliciesForTargetCommandInput;
+      output: ListPoliciesForTargetCommandOutput;
+    };
+  };
+}

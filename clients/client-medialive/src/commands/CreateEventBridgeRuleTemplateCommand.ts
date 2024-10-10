@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { CreateEventBridgeRuleTemplateRequest, CreateEventBridgeRuleTemplateResponse } from "../models/models_1";
+import { CreateEventBridgeRuleTemplateRequest, CreateEventBridgeRuleTemplateResponse } from "../models/models_2";
 import {
   de_CreateEventBridgeRuleTemplateCommand,
   se_CreateEventBridgeRuleTemplateCommand,
@@ -114,9 +114,7 @@ export class CreateEventBridgeRuleTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateEventBridgeRuleTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateEventBridgeRuleTemplateCommand)
   .de(de_CreateEventBridgeRuleTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEventBridgeRuleTemplateRequest;
+      output: CreateEventBridgeRuleTemplateResponse;
+    };
+    sdk: {
+      input: CreateEventBridgeRuleTemplateCommandInput;
+      output: CreateEventBridgeRuleTemplateCommandOutput;
+    };
+  };
+}

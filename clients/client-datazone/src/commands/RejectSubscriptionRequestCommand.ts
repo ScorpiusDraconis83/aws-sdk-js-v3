@@ -82,6 +82,14 @@ export interface RejectSubscriptionRequestCommandOutput extends RejectSubscripti
  * //               shortDescription: "STRING_VALUE",
  * //             },
  * //           ],
+ * //           assetScope: { // AssetScope
+ * //             assetId: "STRING_VALUE", // required
+ * //             filterIds: [ // FilterIds // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             status: "STRING_VALUE", // required
+ * //             errorMessage: "STRING_VALUE",
+ * //           },
  * //         },
  * //         productListing: { // SubscribedProductListing
  * //           entityId: "STRING_VALUE",
@@ -153,9 +161,7 @@ export class RejectSubscriptionRequestCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -167,4 +173,16 @@ export class RejectSubscriptionRequestCommand extends $Command
   .f(RejectSubscriptionRequestInputFilterSensitiveLog, RejectSubscriptionRequestOutputFilterSensitiveLog)
   .ser(se_RejectSubscriptionRequestCommand)
   .de(de_RejectSubscriptionRequestCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RejectSubscriptionRequestInput;
+      output: RejectSubscriptionRequestOutput;
+    };
+    sdk: {
+      input: RejectSubscriptionRequestCommandInput;
+      output: RejectSubscriptionRequestCommandOutput;
+    };
+  };
+}

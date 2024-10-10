@@ -108,9 +108,7 @@ export class NotifyApplicationStateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MigrationHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class NotifyApplicationStateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_NotifyApplicationStateCommand)
   .de(de_NotifyApplicationStateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: NotifyApplicationStateRequest;
+      output: {};
+    };
+    sdk: {
+      input: NotifyApplicationStateCommandInput;
+      output: NotifyApplicationStateCommandOutput;
+    };
+  };
+}

@@ -8,6 +8,7 @@ import { AccelerationSettings, BillingTagsSource, Endpoint, HopDestination } fro
 import {
   Commitment,
   Job,
+  JobEngineVersion,
   JobSettings,
   JobStatus,
   JobTemplate,
@@ -15,12 +16,266 @@ import {
   Preset,
   PresetSettings,
   PricingPlan,
-  Queue,
-  QueueStatus,
   RenewalType,
+  ReservationPlanStatus,
   SimulateReservedQueue,
   StatusUpdateInterval,
+  Type,
 } from "./models_1";
+
+/**
+ * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+ * @public
+ */
+export interface ReservationPlan {
+  /**
+   * The length of the term of your reserved queue pricing plan commitment.
+   * @public
+   */
+  Commitment?: Commitment;
+
+  /**
+   * The timestamp in epoch seconds for when the current pricing plan term for this reserved queue expires.
+   * @public
+   */
+  ExpiresAt?: Date;
+
+  /**
+   * The timestamp in epoch seconds for when you set up the current pricing plan for this reserved queue.
+   * @public
+   */
+  PurchasedAt?: Date;
+
+  /**
+   * Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
+   * @public
+   */
+  RenewalType?: RenewalType;
+
+  /**
+   * Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. When you increase this number, you extend your existing commitment with a new 12-month commitment for a larger number of RTS. The new commitment begins when you purchase the additional capacity. You can't decrease the number of RTS in your reserved queue.
+   * @public
+   */
+  ReservedSlots?: number;
+
+  /**
+   * Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+   * @public
+   */
+  Status?: ReservationPlanStatus;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const QueueStatus = {
+  ACTIVE: "ACTIVE",
+  PAUSED: "PAUSED",
+} as const;
+
+/**
+ * @public
+ */
+export type QueueStatus = (typeof QueueStatus)[keyof typeof QueueStatus];
+
+/**
+ * You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
+ * @public
+ */
+export interface Queue {
+  /**
+   * An identifier for this resource that is unique within all of AWS.
+   * @public
+   */
+  Arn?: string;
+
+  /**
+   * The timestamp in epoch seconds for when you created the queue.
+   * @public
+   */
+  CreatedAt?: Date;
+
+  /**
+   * An optional description that you create for each queue.
+   * @public
+   */
+  Description?: string;
+
+  /**
+   * The timestamp in epoch seconds for when you most recently updated the queue.
+   * @public
+   */
+  LastUpdated?: Date;
+
+  /**
+   * A name that you create for each queue. Each name must be unique within your account.
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment.
+   * @public
+   */
+  PricingPlan?: PricingPlan;
+
+  /**
+   * The estimated number of jobs with a PROGRESSING status.
+   * @public
+   */
+  ProgressingJobsCount?: number;
+
+  /**
+   * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+   * @public
+   */
+  ReservationPlan?: ReservationPlan;
+
+  /**
+   * Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error.
+   * @public
+   */
+  Status?: QueueStatus;
+
+  /**
+   * The estimated number of jobs with a SUBMITTED status.
+   * @public
+   */
+  SubmittedJobsCount?: number;
+
+  /**
+   * Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
+   * @public
+   */
+  Type?: Type;
+}
+
+/**
+ * @public
+ */
+export interface AssociateCertificateRequest {
+  /**
+   * The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
+   * @public
+   */
+  Arn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateCertificateResponse {}
+
+/**
+ * The service can't process your request because of a problem in the request. Please check your request form and syntax.
+ * @public
+ */
+export class BadRequestException extends __BaseException {
+  readonly name: "BadRequestException" = "BadRequestException";
+  readonly $fault: "client" = "client";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<BadRequestException, __BaseException>) {
+    super({
+      name: "BadRequestException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, BadRequestException.prototype);
+    this.Message = opts.Message;
+  }
+}
+
+/**
+ * The service couldn't complete your request because there is a conflict with the current state of the resource.
+ * @public
+ */
+export class ConflictException extends __BaseException {
+  readonly name: "ConflictException" = "ConflictException";
+  readonly $fault: "client" = "client";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
+    super({
+      name: "ConflictException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ConflictException.prototype);
+    this.Message = opts.Message;
+  }
+}
+
+/**
+ * You don't have permissions for this action with the credentials you sent.
+ * @public
+ */
+export class ForbiddenException extends __BaseException {
+  readonly name: "ForbiddenException" = "ForbiddenException";
+  readonly $fault: "client" = "client";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ForbiddenException, __BaseException>) {
+    super({
+      name: "ForbiddenException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ForbiddenException.prototype);
+    this.Message = opts.Message;
+  }
+}
+
+/**
+ * The service encountered an unexpected condition and can't fulfill your request.
+ * @public
+ */
+export class InternalServerErrorException extends __BaseException {
+  readonly name: "InternalServerErrorException" = "InternalServerErrorException";
+  readonly $fault: "server" = "server";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InternalServerErrorException, __BaseException>) {
+    super({
+      name: "InternalServerErrorException",
+      $fault: "server",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InternalServerErrorException.prototype);
+    this.Message = opts.Message;
+  }
+}
+
+/**
+ * The resource you requested doesn't exist.
+ * @public
+ */
+export class NotFoundException extends __BaseException {
+  readonly name: "NotFoundException" = "NotFoundException";
+  readonly $fault: "client" = "client";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<NotFoundException, __BaseException>) {
+    super({
+      name: "NotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, NotFoundException.prototype);
+    this.Message = opts.Message;
+  }
+}
 
 /**
  * Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
@@ -87,6 +342,12 @@ export interface CreateJobRequest {
    * @public
    */
   HopDestinations?: HopDestination[];
+
+  /**
+   * Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. To specify a Job engine version: Enter a date in a YYYY-MM-DD format. For a list of valid Job engine versions, submit a ListVersions request. To not specify a Job engine version: Leave blank.
+   * @public
+   */
+  JobEngineVersion?: string;
 
   /**
    * Optional. When you create a job, you can either specify a job template or specify the transcoding settings individually.
@@ -922,6 +1183,40 @@ export interface ListTagsForResourceResponse {
    * @public
    */
   ResourceTags?: ResourceTags;
+}
+
+/**
+ * @public
+ */
+export interface ListVersionsRequest {
+  /**
+   * Optional. Number of valid Job engine versions, up to twenty, that will be returned at one time.
+   * @public
+   */
+  MaxResults?: number;
+
+  /**
+   * Optional. Use this string, provided with the response to a previous request, to request the next batch of Job engine versions.
+   * @public
+   */
+  NextToken?: string;
+}
+
+/**
+ * @public
+ */
+export interface ListVersionsResponse {
+  /**
+   * Optional. Use this string, provided with the response to a previous request, to request the next batch of Job engine versions.
+   * @public
+   */
+  NextToken?: string;
+
+  /**
+   * Retrieve a JSON array of all available Job engine versions and the date they expire.
+   * @public
+   */
+  Versions?: JobEngineVersion[];
 }
 
 /**

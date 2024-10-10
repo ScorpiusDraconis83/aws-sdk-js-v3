@@ -244,6 +244,36 @@ export interface UpdatePolicyCommandOutput extends UpdatePolicyOutput, __Metadat
  * <p>Base exception class for all service exceptions from VerifiedPermissions service.</p>
  *
  * @public
+ * @example UpdatePolicy
+ * ```javascript
+ * // The following example replaces the definition of the specified static policy with a new one.
+ * const input = {
+ *   "definition": {
+ *     "static": {
+ *       "statement": "permit(principal, action, resource in Album::\"public_folder\");"
+ *     }
+ *   },
+ *   "policyId": "9wYxMpljbbZQb5fcZHyJhY",
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+ * };
+ * const command = new UpdatePolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "createdDate": "2024-08-12T18:20:50.99Z",
+ *   "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+ *   "policyId": "9wYxMpljbbZQb5fcZHyJhY",
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+ *   "policyType": "STATIC",
+ *   "resource": {
+ *     "entityId": "public_folder",
+ *     "entityType": "Album"
+ *   }
+ * }
+ * *\/
+ * // example id: example-1
+ * ```
+ *
  */
 export class UpdatePolicyCommand extends $Command
   .classBuilder<
@@ -253,9 +283,7 @@ export class UpdatePolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VerifiedPermissionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -267,4 +295,16 @@ export class UpdatePolicyCommand extends $Command
   .f(UpdatePolicyInputFilterSensitiveLog, UpdatePolicyOutputFilterSensitiveLog)
   .ser(se_UpdatePolicyCommand)
   .de(de_UpdatePolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePolicyInput;
+      output: UpdatePolicyOutput;
+    };
+    sdk: {
+      input: UpdatePolicyCommandInput;
+      output: UpdatePolicyCommandOutput;
+    };
+  };
+}

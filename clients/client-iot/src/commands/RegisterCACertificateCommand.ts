@@ -114,9 +114,7 @@ export class RegisterCACertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class RegisterCACertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RegisterCACertificateCommand)
   .de(de_RegisterCACertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterCACertificateRequest;
+      output: RegisterCACertificateResponse;
+    };
+    sdk: {
+      input: RegisterCACertificateCommandInput;
+      output: RegisterCACertificateCommandOutput;
+    };
+  };
+}

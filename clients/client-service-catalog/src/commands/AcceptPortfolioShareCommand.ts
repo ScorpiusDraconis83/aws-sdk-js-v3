@@ -75,9 +75,7 @@ export class AcceptPortfolioShareCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -89,4 +87,16 @@ export class AcceptPortfolioShareCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AcceptPortfolioShareCommand)
   .de(de_AcceptPortfolioShareCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptPortfolioShareInput;
+      output: {};
+    };
+    sdk: {
+      input: AcceptPortfolioShareCommandInput;
+      output: AcceptPortfolioShareCommandOutput;
+    };
+  };
+}

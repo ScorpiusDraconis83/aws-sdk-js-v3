@@ -127,9 +127,7 @@ export class CreateAcceleratorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlobalAcceleratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class CreateAcceleratorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAcceleratorCommand)
   .de(de_CreateAcceleratorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAcceleratorRequest;
+      output: CreateAcceleratorResponse;
+    };
+    sdk: {
+      input: CreateAcceleratorCommandInput;
+      output: CreateAcceleratorCommandOutput;
+    };
+  };
+}

@@ -103,9 +103,7 @@ export class PutNotificationConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class PutNotificationConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutNotificationConfigurationCommand)
   .de(de_PutNotificationConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutNotificationConfigurationType;
+      output: {};
+    };
+    sdk: {
+      input: PutNotificationConfigurationCommandInput;
+      output: PutNotificationConfigurationCommandOutput;
+    };
+  };
+}

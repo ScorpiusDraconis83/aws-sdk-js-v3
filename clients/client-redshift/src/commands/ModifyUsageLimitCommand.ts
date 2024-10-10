@@ -90,9 +90,7 @@ export class ModifyUsageLimitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ModifyUsageLimitCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyUsageLimitCommand)
   .de(de_ModifyUsageLimitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyUsageLimitMessage;
+      output: UsageLimit;
+    };
+    sdk: {
+      input: ModifyUsageLimitCommandInput;
+      output: ModifyUsageLimitCommandOutput;
+    };
+  };
+}

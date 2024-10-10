@@ -113,9 +113,7 @@ export class ListCapabilitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: B2biClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class ListCapabilitiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCapabilitiesCommand)
   .de(de_ListCapabilitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCapabilitiesRequest;
+      output: ListCapabilitiesResponse;
+    };
+    sdk: {
+      input: ListCapabilitiesCommandInput;
+      output: ListCapabilitiesCommandOutput;
+    };
+  };
+}

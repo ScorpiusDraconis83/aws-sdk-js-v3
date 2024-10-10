@@ -91,9 +91,7 @@ export class SearchLocalGatewayRoutesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class SearchLocalGatewayRoutesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchLocalGatewayRoutesCommand)
   .de(de_SearchLocalGatewayRoutesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchLocalGatewayRoutesRequest;
+      output: SearchLocalGatewayRoutesResult;
+    };
+    sdk: {
+      input: SearchLocalGatewayRoutesCommandInput;
+      output: SearchLocalGatewayRoutesCommandOutput;
+    };
+  };
+}

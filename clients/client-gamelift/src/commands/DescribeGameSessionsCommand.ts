@@ -140,7 +140,7 @@ export interface DescribeGameSessionsCommandOutput extends DescribeGameSessionsO
  *             values before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link TerminalRoutingStrategyException} (client fault)
  *  <p>The service is unable to resolve the routing for a particular alias because it has a
@@ -167,9 +167,7 @@ export class DescribeGameSessionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class DescribeGameSessionsCommand extends $Command
   .f(void 0, DescribeGameSessionsOutputFilterSensitiveLog)
   .ser(se_DescribeGameSessionsCommand)
   .de(de_DescribeGameSessionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGameSessionsInput;
+      output: DescribeGameSessionsOutput;
+    };
+    sdk: {
+      input: DescribeGameSessionsCommandInput;
+      output: DescribeGameSessionsCommandOutput;
+    };
+  };
+}

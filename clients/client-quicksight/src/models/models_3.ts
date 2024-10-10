@@ -66,7 +66,6 @@ import {
   DatasetParameter,
   DataSetReference,
   DataSetUsageConfiguration,
-  DataSourceCredentials,
   DataSourceParameters,
   DisplayFormat,
   DisplayFormatOptions,
@@ -79,19 +78,281 @@ import {
   PhysicalTable,
   ResourcePermission,
   RowLevelPermissionDataSet,
-  RowLevelPermissionTagConfiguration,
-  RowLevelPermissionTagConfigurationFilterSensitiveLog,
   ServiceType,
   SheetDefinition,
   SnapshotFile,
   SnapshotS3DestinationConfiguration,
   SslProperties,
+  Status,
   Tag,
   ValidationStrategy,
   VpcConnectionProperties,
 } from "./models_2";
 
 import { QuickSightServiceException as __BaseException } from "./QuickSightServiceException";
+
+/**
+ * <p>A set of rules associated with a tag.</p>
+ * @public
+ */
+export interface RowLevelPermissionTagRule {
+  /**
+   * <p>The unique key for a tag.</p>
+   * @public
+   */
+  TagKey: string | undefined;
+
+  /**
+   * <p>The column name that a tag key is assigned to.</p>
+   * @public
+   */
+  ColumnName: string | undefined;
+
+  /**
+   * <p>A string that you want to use to delimit the values when you pass the values at run time. For example, you can delimit the values with a comma.</p>
+   * @public
+   */
+  TagMultiValueDelimiter?: string;
+
+  /**
+   * <p>A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.</p>
+   * @public
+   */
+  MatchAllValue?: string;
+}
+
+/**
+ * <p>The configuration of tags on a dataset to set row-level security. </p>
+ * @public
+ */
+export interface RowLevelPermissionTagConfiguration {
+  /**
+   * <p>The status of row-level security tags. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>
+   * @public
+   */
+  Status?: Status;
+
+  /**
+   * <p>A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.</p>
+   * @public
+   */
+  TagRules: RowLevelPermissionTagRule[] | undefined;
+
+  /**
+   * <p>A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.</p>
+   * @public
+   */
+  TagRuleConfigurations?: string[][];
+}
+
+/**
+ * @public
+ */
+export interface CreateDataSetRequest {
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The display name for the dataset.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>Declares the physical tables that are available in the underlying data sources.</p>
+   * @public
+   */
+  PhysicalTableMap: Record<string, PhysicalTable> | undefined;
+
+  /**
+   * <p>Configures the combination and transformation of the data from the physical tables.</p>
+   * @public
+   */
+  LogicalTableMap?: Record<string, LogicalTable>;
+
+  /**
+   * <p>Indicates whether you want to import the data into SPICE.</p>
+   * @public
+   */
+  ImportMode: DataSetImportMode | undefined;
+
+  /**
+   * <p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>
+   * @public
+   */
+  ColumnGroups?: ColumnGroup[];
+
+  /**
+   * <p>The folder that contains fields and nested subfolders for your dataset.</p>
+   * @public
+   */
+  FieldFolders?: Record<string, FieldFolder>;
+
+  /**
+   * <p>A list of resource permissions on the dataset.</p>
+   * @public
+   */
+  Permissions?: ResourcePermission[];
+
+  /**
+   * <p>The row-level security configuration for the data that you want to create.</p>
+   * @public
+   */
+  RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
+
+  /**
+   * <p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>
+   * @public
+   */
+  RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
+
+  /**
+   * <p>A set of one or more definitions of a <code>
+   *                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html">ColumnLevelPermissionRule</a>
+   *             </code>.</p>
+   * @public
+   */
+  ColumnLevelPermissionRules?: ColumnLevelPermissionRule[];
+
+  /**
+   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>
+   * @public
+   */
+  Tags?: Tag[];
+
+  /**
+   * <p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>
+   * @public
+   */
+  DataSetUsageConfiguration?: DataSetUsageConfiguration;
+
+  /**
+   * <p>The parameter declarations of the dataset.</p>
+   * @public
+   */
+  DatasetParameters?: DatasetParameter[];
+
+  /**
+   * <p>When you create the dataset, Amazon QuickSight adds the dataset to these folders.</p>
+   * @public
+   */
+  FolderArns?: string[];
+}
+
+/**
+ * @public
+ */
+export interface CreateDataSetResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
+   * @public
+   */
+  Arn?: string;
+
+  /**
+   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+   * @public
+   */
+  DataSetId?: string;
+
+  /**
+   * <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import
+   * 			mode is SPICE.</p>
+   * @public
+   */
+  IngestionArn?: string;
+
+  /**
+   * <p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
+   * 			mode is SPICE.</p>
+   * @public
+   */
+  IngestionId?: string;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number;
+}
+
+/**
+ * <p>The combination of user name and password that are used as credentials.</p>
+ * @public
+ */
+export interface CredentialPair {
+  /**
+   * <p>User name.</p>
+   * @public
+   */
+  Username: string | undefined;
+
+  /**
+   * <p>Password.</p>
+   * @public
+   */
+  Password: string | undefined;
+
+  /**
+   * <p>A set of alternate data source parameters that you want to share for these
+   *             credentials. The credentials are applied in tandem with the data source parameters when
+   *             you copy a data source by using a create or update request. The API operation compares
+   *             the <code>DataSourceParameters</code> structure that's in the request with the
+   *             structures in the <code>AlternateDataSourceParameters</code> allow list. If the
+   *             structures are an exact match, the request is allowed to use the new data source with
+   *             the existing credentials. If the <code>AlternateDataSourceParameters</code> list is
+   *             null, the <code>DataSourceParameters</code> originally used with these
+   *                 <code>Credentials</code> is automatically allowed.</p>
+   * @public
+   */
+  AlternateDataSourceParameters?: DataSourceParameters[];
+}
+
+/**
+ * <p>Data source credentials. This is a variant type structure. For this structure to be
+ *             valid, only one of the attributes can be non-null.</p>
+ * @public
+ */
+export interface DataSourceCredentials {
+  /**
+   * <p>Credential pair. For more information, see
+   *             <code>
+   *                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html">CredentialPair</a>
+   *             </code>.</p>
+   * @public
+   */
+  CredentialPair?: CredentialPair;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you
+   *             want to use. When <code>CopySourceArn</code> is not null, the credential pair from the
+   *             data source in the ARN is used as the credentials for the
+   *             <code>DataSourceCredentials</code> structure.</p>
+   * @public
+   */
+  CopySourceArn?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
+   * @public
+   */
+  SecretArn?: string;
+}
 
 /**
  * @public
@@ -2049,6 +2310,18 @@ export interface CreateThemeAliasResponse {
 }
 
 /**
+ * <p>Configuration options for a <code>Topic</code>.</p>
+ * @public
+ */
+export interface TopicConfigOptions {
+  /**
+   * <p>Enables Amazon Q Business Insights for a <code>Topic</code>.</p>
+   * @public
+   */
+  QBusinessInsightsEnabled?: boolean;
+}
+
+/**
  * @public
  * @enum
  */
@@ -3019,6 +3292,12 @@ export interface TopicDetails {
    * @public
    */
   DataSets?: DatasetMetadata[];
+
+  /**
+   * <p>Configuration options for a <code>Topic</code>.</p>
+   * @public
+   */
+  ConfigOptions?: TopicConfigOptions;
 }
 
 /**
@@ -5900,6 +6179,21 @@ export interface DescribeAssetBundleExportJobRequest {
 
 /**
  * @public
+ * @enum
+ */
+export const IncludeFolderMembers = {
+  NONE: "NONE",
+  ONE_LEVEL: "ONE_LEVEL",
+  RECURSE: "RECURSE",
+} as const;
+
+/**
+ * @public
+ */
+export type IncludeFolderMembers = (typeof IncludeFolderMembers)[keyof typeof IncludeFolderMembers];
+
+/**
+ * @public
  */
 export interface DescribeAssetBundleExportJobResponse {
   /**
@@ -6009,6 +6303,18 @@ export interface DescribeAssetBundleExportJobResponse {
    * @public
    */
   Warnings?: AssetBundleExportJobWarning[];
+
+  /**
+   * <p>The include folder memberships flag.</p>
+   * @public
+   */
+  IncludeFolderMemberships?: boolean;
+
+  /**
+   * <p>A setting that determines whether folder members are included.</p>
+   * @public
+   */
+  IncludeFolderMembers?: IncludeFolderMembers;
 }
 
 /**
@@ -7947,6 +8253,54 @@ export interface DescribeNamespaceResponse {
 /**
  * @public
  */
+export interface DescribeQPersonalizationConfigurationRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that contains the personalization configuration that the user wants described.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const PersonalizationMode = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+
+/**
+ * @public
+ */
+export type PersonalizationMode = (typeof PersonalizationMode)[keyof typeof PersonalizationMode];
+
+/**
+ * @public
+ */
+export interface DescribeQPersonalizationConfigurationResponse {
+  /**
+   * <p>A value that indicates whether personalization is enabled or not.</p>
+   * @public
+   */
+  PersonalizationMode?: PersonalizationMode;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number;
+}
+
+/**
+ * @public
+ */
 export interface DescribeRefreshScheduleRequest {
   /**
    * <p>The Amazon Web Services account ID.</p>
@@ -8948,360 +9302,52 @@ export interface DescribeTopicRefreshRequest {
 }
 
 /**
- * @public
- * @enum
+ * @internal
  */
-export const TopicRefreshStatus = {
-  CANCELLED: "CANCELLED",
-  COMPLETED: "COMPLETED",
-  FAILED: "FAILED",
-  INITIALIZED: "INITIALIZED",
-  RUNNING: "RUNNING",
-} as const;
+export const RowLevelPermissionTagRuleFilterSensitiveLog = (obj: RowLevelPermissionTagRule): any => ({
+  ...obj,
+  ...(obj.MatchAllValue && { MatchAllValue: SENSITIVE_STRING }),
+});
 
 /**
- * @public
+ * @internal
  */
-export type TopicRefreshStatus = (typeof TopicRefreshStatus)[keyof typeof TopicRefreshStatus];
+export const RowLevelPermissionTagConfigurationFilterSensitiveLog = (obj: RowLevelPermissionTagConfiguration): any => ({
+  ...obj,
+  ...(obj.TagRules && { TagRules: obj.TagRules.map((item) => RowLevelPermissionTagRuleFilterSensitiveLog(item)) }),
+});
 
 /**
- * <p>The details about the refresh of a topic.</p>
- * @public
+ * @internal
  */
-export interface TopicRefreshDetails {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the topic refresh.</p>
-   * @public
-   */
-  RefreshArn?: string;
-
-  /**
-   * <p>The ID of the refresh, which occurs as a result of topic creation or topic update.</p>
-   * @public
-   */
-  RefreshId?: string;
-
-  /**
-   * <p>The status of the refresh job that indicates whether the job is still running, completed successfully, or failed.</p>
-   * @public
-   */
-  RefreshStatus?: TopicRefreshStatus;
-}
+export const CreateDataSetRequestFilterSensitiveLog = (obj: CreateDataSetRequest): any => ({
+  ...obj,
+  ...(obj.PhysicalTableMap && {
+    PhysicalTableMap: Object.entries(obj.PhysicalTableMap).reduce(
+      (acc: any, [key, value]: [string, PhysicalTable]) => ((acc[key] = value), acc),
+      {}
+    ),
+  }),
+  ...(obj.LogicalTableMap && {
+    LogicalTableMap: Object.entries(obj.LogicalTableMap).reduce(
+      (acc: any, [key, value]: [string, LogicalTable]) => ((acc[key] = LogicalTableFilterSensitiveLog(value)), acc),
+      {}
+    ),
+  }),
+  ...(obj.RowLevelPermissionTagConfiguration && {
+    RowLevelPermissionTagConfiguration: RowLevelPermissionTagConfigurationFilterSensitiveLog(
+      obj.RowLevelPermissionTagConfiguration
+    ),
+  }),
+});
 
 /**
- * @public
+ * @internal
  */
-export interface DescribeTopicRefreshResponse {
-  /**
-   * <p>Details of the refresh, which is performed when the topic is created or updated.</p>
-   * @public
-   */
-  RefreshDetails?: TopicRefreshDetails;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   * @public
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   * @public
-   */
-  Status?: number;
-}
-
-/**
- * @public
- */
-export interface DescribeTopicRefreshScheduleRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   * @public
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the topic that contains the refresh schedule that you want to describe. This
-   *          ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   * @public
-   */
-  TopicId: string | undefined;
-
-  /**
-   * <p>The ID of the dataset.</p>
-   * @public
-   */
-  DatasetId: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DescribeTopicRefreshScheduleResponse {
-  /**
-   * <p>The ID of the topic that contains the refresh schedule that you want to describe. This
-   *          ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   * @public
-   */
-  TopicId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the topic.</p>
-   * @public
-   */
-  TopicArn?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
-   * @public
-   */
-  DatasetArn?: string;
-
-  /**
-   * <p>The definition of a refresh schedule.</p>
-   * @public
-   */
-  RefreshSchedule?: TopicRefreshSchedule;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   * @public
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   * @public
-   */
-  RequestId?: string;
-}
-
-/**
- * @public
- */
-export interface DescribeUserRequest {
-  /**
-   * <p>The name of the user that you want to describe.</p>
-   * @public
-   */
-  UserName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   * @public
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   * @public
-   */
-  Namespace: string | undefined;
-}
-
-/**
- * @public
- * @enum
- */
-export const IdentityType = {
-  IAM: "IAM",
-  IAM_IDENTITY_CENTER: "IAM_IDENTITY_CENTER",
-  QUICKSIGHT: "QUICKSIGHT",
-} as const;
-
-/**
- * @public
- */
-export type IdentityType = (typeof IdentityType)[keyof typeof IdentityType];
-
-/**
- * @public
- * @enum
- */
-export const UserRole = {
-  ADMIN: "ADMIN",
-  ADMIN_PRO: "ADMIN_PRO",
-  AUTHOR: "AUTHOR",
-  AUTHOR_PRO: "AUTHOR_PRO",
-  READER: "READER",
-  READER_PRO: "READER_PRO",
-  RESTRICTED_AUTHOR: "RESTRICTED_AUTHOR",
-  RESTRICTED_READER: "RESTRICTED_READER",
-} as const;
-
-/**
- * @public
- */
-export type UserRole = (typeof UserRole)[keyof typeof UserRole];
-
-/**
- * <p>A registered user of Amazon QuickSight. </p>
- * @public
- */
-export interface User {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the user.</p>
-   * @public
-   */
-  Arn?: string;
-
-  /**
-   * <p>The user's user name. This value is required if you are registering a user that will be managed in Amazon QuickSight. In the output, the value for <code>UserName</code> is
-   *                 <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>
-   *             and the corresponding IAM user is deleted.</p>
-   * @public
-   */
-  UserName?: string;
-
-  /**
-   * <p>The user's email address.</p>
-   * @public
-   */
-  Email?: string;
-
-  /**
-   * <p>The Amazon QuickSight role for the user. The user role can be one of the
-   *             following:.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>READER</code>: A user who has read-only access to dashboards.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,
-   *                     and dashboards.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>ADMIN</code>: A user who is an author, who can also manage Amazon
-   *                     Amazon QuickSight settings.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>RESTRICTED_READER</code>: This role isn't currently available for
-   *                     use.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for
-   *                     use.</p>
-   *             </li>
-   *          </ul>
-   * @public
-   */
-  Role?: UserRole;
-
-  /**
-   * <p>The type of identity authentication used by the user.</p>
-   * @public
-   */
-  IdentityType?: IdentityType;
-
-  /**
-   * <p>The active status of user. When you create an Amazon QuickSight user that's not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a
-   *             password.</p>
-   * @public
-   */
-  Active?: boolean;
-
-  /**
-   * <p>The principal ID of the user.</p>
-   * @public
-   */
-  PrincipalId?: string;
-
-  /**
-   * <p>The custom permissions profile associated with this user.</p>
-   * @public
-   */
-  CustomPermissionsName?: string;
-
-  /**
-   * <p>The type of supported external login provider that provides identity to let the user
-   *             federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p>
-   *             </li>
-   *          </ul>
-   * @public
-   */
-  ExternalLoginFederationProviderType?: string;
-
-  /**
-   * <p>The URL of the external login provider.</p>
-   * @public
-   */
-  ExternalLoginFederationProviderUrl?: string;
-
-  /**
-   * <p>The identity ID for the user in the external login provider.</p>
-   * @public
-   */
-  ExternalLoginId?: string;
-}
-
-/**
- * @public
- */
-export interface DescribeUserResponse {
-  /**
-   * <p>The user name.</p>
-   * @public
-   */
-  User?: User;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   * @public
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   * @public
-   */
-  Status?: number;
-}
-
-/**
- * @public
- */
-export interface DescribeVPCConnectionRequest {
-  /**
-   * <p>The Amazon Web Services account ID of the account that contains the VPC connection that
-   * 			you want described.</p>
-   * @public
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the VPC connection that
-   * 			you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.</p>
-   * @public
-   */
-  VPCConnectionId: string | undefined;
-}
+export const DataSourceCredentialsFilterSensitiveLog = (obj: DataSourceCredentials): any => ({
+  ...obj,
+  ...(obj.CredentialPair && { CredentialPair: obj.CredentialPair }),
+});
 
 /**
  * @internal

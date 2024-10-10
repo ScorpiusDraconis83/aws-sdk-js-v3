@@ -6,7 +6,8 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { ListStorageLensConfigurationsRequest, ListStorageLensConfigurationsResult } from "../models/models_0";
+import { ListStorageLensConfigurationsRequest } from "../models/models_0";
+import { ListStorageLensConfigurationsResult } from "../models/models_1";
 import {
   de_ListStorageLensConfigurationsCommand,
   se_ListStorageLensConfigurationsCommand,
@@ -109,4 +110,16 @@ export class ListStorageLensConfigurationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListStorageLensConfigurationsCommand)
   .de(de_ListStorageLensConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStorageLensConfigurationsRequest;
+      output: ListStorageLensConfigurationsResult;
+    };
+    sdk: {
+      input: ListStorageLensConfigurationsCommandInput;
+      output: ListStorageLensConfigurationsCommandOutput;
+    };
+  };
+}

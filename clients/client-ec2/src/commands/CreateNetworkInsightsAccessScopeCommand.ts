@@ -297,9 +297,7 @@ export class CreateNetworkInsightsAccessScopeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -311,4 +309,16 @@ export class CreateNetworkInsightsAccessScopeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateNetworkInsightsAccessScopeCommand)
   .de(de_CreateNetworkInsightsAccessScopeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkInsightsAccessScopeRequest;
+      output: CreateNetworkInsightsAccessScopeResult;
+    };
+    sdk: {
+      input: CreateNetworkInsightsAccessScopeCommandInput;
+      output: CreateNetworkInsightsAccessScopeCommandOutput;
+    };
+  };
+}

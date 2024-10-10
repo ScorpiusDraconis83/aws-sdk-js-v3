@@ -127,9 +127,7 @@ export class AttachLoadBalancerTlsCertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class AttachLoadBalancerTlsCertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AttachLoadBalancerTlsCertificateCommand)
   .de(de_AttachLoadBalancerTlsCertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AttachLoadBalancerTlsCertificateRequest;
+      output: AttachLoadBalancerTlsCertificateResult;
+    };
+    sdk: {
+      input: AttachLoadBalancerTlsCertificateCommandInput;
+      output: AttachLoadBalancerTlsCertificateCommandOutput;
+    };
+  };
+}

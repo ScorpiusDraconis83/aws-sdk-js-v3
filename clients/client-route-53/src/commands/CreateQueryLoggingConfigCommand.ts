@@ -283,9 +283,7 @@ export class CreateQueryLoggingConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -298,4 +296,16 @@ export class CreateQueryLoggingConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateQueryLoggingConfigCommand)
   .de(de_CreateQueryLoggingConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateQueryLoggingConfigRequest;
+      output: CreateQueryLoggingConfigResponse;
+    };
+    sdk: {
+      input: CreateQueryLoggingConfigCommandInput;
+      output: CreateQueryLoggingConfigCommandOutput;
+    };
+  };
+}

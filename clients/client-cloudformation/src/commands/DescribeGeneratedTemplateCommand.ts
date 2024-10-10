@@ -142,9 +142,7 @@ export class DescribeGeneratedTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -156,4 +154,16 @@ export class DescribeGeneratedTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeGeneratedTemplateCommand)
   .de(de_DescribeGeneratedTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGeneratedTemplateInput;
+      output: DescribeGeneratedTemplateOutput;
+    };
+    sdk: {
+      input: DescribeGeneratedTemplateCommandInput;
+      output: DescribeGeneratedTemplateCommandOutput;
+    };
+  };
+}

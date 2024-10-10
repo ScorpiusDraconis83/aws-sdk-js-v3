@@ -99,9 +99,7 @@ export class GetVoiceConnectorGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetVoiceConnectorGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetVoiceConnectorGroupCommand)
   .de(de_GetVoiceConnectorGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVoiceConnectorGroupRequest;
+      output: GetVoiceConnectorGroupResponse;
+    };
+    sdk: {
+      input: GetVoiceConnectorGroupCommandInput;
+      output: GetVoiceConnectorGroupCommandOutput;
+    };
+  };
+}

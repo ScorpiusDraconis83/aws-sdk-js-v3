@@ -849,9 +849,7 @@ export class CreateEndpointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -863,4 +861,16 @@ export class CreateEndpointCommand extends $Command
   .f(CreateEndpointMessageFilterSensitiveLog, CreateEndpointResponseFilterSensitiveLog)
   .ser(se_CreateEndpointCommand)
   .de(de_CreateEndpointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEndpointMessage;
+      output: CreateEndpointResponse;
+    };
+    sdk: {
+      input: CreateEndpointCommandInput;
+      output: CreateEndpointCommandOutput;
+    };
+  };
+}

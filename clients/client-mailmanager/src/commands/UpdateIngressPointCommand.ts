@@ -84,9 +84,7 @@ export class UpdateIngressPointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class UpdateIngressPointCommand extends $Command
   .f(UpdateIngressPointRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateIngressPointCommand)
   .de(de_UpdateIngressPointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateIngressPointRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateIngressPointCommandInput;
+      output: UpdateIngressPointCommandOutput;
+    };
+  };
+}

@@ -324,9 +324,7 @@ export class UpdateConnectorProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppflowClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -338,4 +336,16 @@ export class UpdateConnectorProfileCommand extends $Command
   .f(UpdateConnectorProfileRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateConnectorProfileCommand)
   .de(de_UpdateConnectorProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConnectorProfileRequest;
+      output: UpdateConnectorProfileResponse;
+    };
+    sdk: {
+      input: UpdateConnectorProfileCommandInput;
+      output: UpdateConnectorProfileCommandOutput;
+    };
+  };
+}

@@ -179,9 +179,7 @@ export class DescribeAlarmsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -193,4 +191,16 @@ export class DescribeAlarmsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAlarmsCommand)
   .de(de_DescribeAlarmsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAlarmsInput;
+      output: DescribeAlarmsOutput;
+    };
+    sdk: {
+      input: DescribeAlarmsCommandInput;
+      output: DescribeAlarmsCommandOutput;
+    };
+  };
+}

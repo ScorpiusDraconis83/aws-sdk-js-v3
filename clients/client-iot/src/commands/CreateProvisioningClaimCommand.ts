@@ -94,9 +94,7 @@ export class CreateProvisioningClaimCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class CreateProvisioningClaimCommand extends $Command
   .f(void 0, CreateProvisioningClaimResponseFilterSensitiveLog)
   .ser(se_CreateProvisioningClaimCommand)
   .de(de_CreateProvisioningClaimCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProvisioningClaimRequest;
+      output: CreateProvisioningClaimResponse;
+    };
+    sdk: {
+      input: CreateProvisioningClaimCommandInput;
+      output: CreateProvisioningClaimCommandOutput;
+    };
+  };
+}

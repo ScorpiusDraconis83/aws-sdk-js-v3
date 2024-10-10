@@ -28,9 +28,8 @@ export interface DeleteTransformerCommandInput extends DeleteTransformerRequest 
 export interface DeleteTransformerCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes the specified transformer. A transformer
- *    describes how to process the incoming EDI documents and extract the necessary
- *    information to the output file.</p>
+ * <p>Deletes the specified transformer. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,
+ *     a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -94,9 +93,7 @@ export class DeleteTransformerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: B2biClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +105,16 @@ export class DeleteTransformerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteTransformerCommand)
   .de(de_DeleteTransformerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransformerRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteTransformerCommandInput;
+      output: DeleteTransformerCommandOutput;
+    };
+  };
+}

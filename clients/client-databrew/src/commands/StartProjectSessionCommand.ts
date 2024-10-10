@@ -84,9 +84,7 @@ export class StartProjectSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataBrewClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class StartProjectSessionCommand extends $Command
   .f(void 0, StartProjectSessionResponseFilterSensitiveLog)
   .ser(se_StartProjectSessionCommand)
   .de(de_StartProjectSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartProjectSessionRequest;
+      output: StartProjectSessionResponse;
+    };
+    sdk: {
+      input: StartProjectSessionCommandInput;
+      output: StartProjectSessionCommandOutput;
+    };
+  };
+}

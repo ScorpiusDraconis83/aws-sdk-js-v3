@@ -41,6 +41,12 @@ export interface DescribeRouteTablesCommandOutput extends DescribeRouteTablesRes
  * // const { EC2Client, DescribeRouteTablesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeRouteTablesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   DryRun: true || false,
+ *   RouteTableIds: [ // RouteTableIdStringList
+ *     "STRING_VALUE",
+ *   ],
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -49,12 +55,6 @@ export interface DescribeRouteTablesCommandOutput extends DescribeRouteTablesRes
  *       ],
  *     },
  *   ],
- *   DryRun: true || false,
- *   RouteTableIds: [ // RouteTableIdStringList
- *     "STRING_VALUE",
- *   ],
- *   NextToken: "STRING_VALUE",
- *   MaxResults: Number("int"),
  * };
  * const command = new DescribeRouteTablesCommand(input);
  * const response = await client.send(command);
@@ -173,9 +173,7 @@ export class DescribeRouteTablesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -187,4 +185,16 @@ export class DescribeRouteTablesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRouteTablesCommand)
   .de(de_DescribeRouteTablesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRouteTablesRequest;
+      output: DescribeRouteTablesResult;
+    };
+    sdk: {
+      input: DescribeRouteTablesCommandInput;
+      output: DescribeRouteTablesCommandOutput;
+    };
+  };
+}

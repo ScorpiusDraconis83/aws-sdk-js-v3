@@ -123,9 +123,7 @@ export class DescribeDocumentVersionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class DescribeDocumentVersionsCommand extends $Command
   .f(DescribeDocumentVersionsRequestFilterSensitiveLog, DescribeDocumentVersionsResponseFilterSensitiveLog)
   .ser(se_DescribeDocumentVersionsCommand)
   .de(de_DescribeDocumentVersionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDocumentVersionsRequest;
+      output: DescribeDocumentVersionsResponse;
+    };
+    sdk: {
+      input: DescribeDocumentVersionsCommandInput;
+      output: DescribeDocumentVersionsCommandOutput;
+    };
+  };
+}

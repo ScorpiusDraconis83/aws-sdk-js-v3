@@ -309,9 +309,7 @@ export class CreateComputeEnvironmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -323,4 +321,16 @@ export class CreateComputeEnvironmentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateComputeEnvironmentCommand)
   .de(de_CreateComputeEnvironmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateComputeEnvironmentRequest;
+      output: CreateComputeEnvironmentResponse;
+    };
+    sdk: {
+      input: CreateComputeEnvironmentCommandInput;
+      output: CreateComputeEnvironmentCommandOutput;
+    };
+  };
+}

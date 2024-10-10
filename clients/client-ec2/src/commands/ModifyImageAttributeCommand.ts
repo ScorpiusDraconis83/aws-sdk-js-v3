@@ -49,18 +49,18 @@ export interface ModifyImageAttributeCommandOutput extends __MetadataBearer {}
  *   LaunchPermission: { // LaunchPermissionModifications
  *     Add: [ // LaunchPermissionList
  *       { // LaunchPermission
- *         Group: "all",
- *         UserId: "STRING_VALUE",
  *         OrganizationArn: "STRING_VALUE",
  *         OrganizationalUnitArn: "STRING_VALUE",
+ *         UserId: "STRING_VALUE",
+ *         Group: "all",
  *       },
  *     ],
  *     Remove: [
  *       {
- *         Group: "all",
- *         UserId: "STRING_VALUE",
  *         OrganizationArn: "STRING_VALUE",
  *         OrganizationalUnitArn: "STRING_VALUE",
+ *         UserId: "STRING_VALUE",
+ *         Group: "all",
  *       },
  *     ],
  *   },
@@ -75,7 +75,6 @@ export interface ModifyImageAttributeCommandOutput extends __MetadataBearer {}
  *     "STRING_VALUE",
  *   ],
  *   Value: "STRING_VALUE",
- *   DryRun: true || false,
  *   OrganizationArns: [ // OrganizationArnStringList
  *     "STRING_VALUE",
  *   ],
@@ -85,6 +84,7 @@ export interface ModifyImageAttributeCommandOutput extends __MetadataBearer {}
  *   ImdsSupport: {
  *     Value: "STRING_VALUE",
  *   },
+ *   DryRun: true || false,
  * };
  * const command = new ModifyImageAttributeCommand(input);
  * const response = await client.send(command);
@@ -147,9 +147,7 @@ export class ModifyImageAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class ModifyImageAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyImageAttributeCommand)
   .de(de_ModifyImageAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyImageAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifyImageAttributeCommandInput;
+      output: ModifyImageAttributeCommandOutput;
+    };
+  };
+}

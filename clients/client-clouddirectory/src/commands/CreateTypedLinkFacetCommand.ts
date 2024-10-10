@@ -115,6 +115,30 @@ export interface CreateTypedLinkFacetCommandOutput extends CreateTypedLinkFacetR
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To create a typed link facet
+ * ```javascript
+ * //
+ * const input = {
+ *   "Facet": {
+ *     "Attributes": [
+ *       {
+ *         "Name": "1",
+ *         "RequiredBehavior": "REQUIRED_ALWAYS",
+ *         "Type": "BINARY"
+ *       }
+ *     ],
+ *     "IdentityAttributeOrder": [
+ *       "1"
+ *     ],
+ *     "Name": "FacetExample"
+ *   },
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschema"
+ * };
+ * const command = new CreateTypedLinkFacetCommand(input);
+ * await client.send(command);
+ * // example id: to-create-a-typed-link-facet-1506127699199
+ * ```
+ *
  */
 export class CreateTypedLinkFacetCommand extends $Command
   .classBuilder<
@@ -124,9 +148,7 @@ export class CreateTypedLinkFacetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +160,16 @@ export class CreateTypedLinkFacetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTypedLinkFacetCommand)
   .de(de_CreateTypedLinkFacetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTypedLinkFacetRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateTypedLinkFacetCommandInput;
+      output: CreateTypedLinkFacetCommandOutput;
+    };
+  };
+}

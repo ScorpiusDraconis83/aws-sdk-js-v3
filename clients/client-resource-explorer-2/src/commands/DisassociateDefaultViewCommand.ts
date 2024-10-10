@@ -90,9 +90,7 @@ export class DisassociateDefaultViewCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResourceExplorer2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DisassociateDefaultViewCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateDefaultViewCommand)
   .de(de_DisassociateDefaultViewCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: DisassociateDefaultViewCommandInput;
+      output: DisassociateDefaultViewCommandOutput;
+    };
+  };
+}

@@ -125,9 +125,7 @@ export class ListHITsForQualificationTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MTurkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class ListHITsForQualificationTypeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListHITsForQualificationTypeCommand)
   .de(de_ListHITsForQualificationTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListHITsForQualificationTypeRequest;
+      output: ListHITsForQualificationTypeResponse;
+    };
+    sdk: {
+      input: ListHITsForQualificationTypeCommandInput;
+      output: ListHITsForQualificationTypeCommandOutput;
+    };
+  };
+}

@@ -97,9 +97,7 @@ export class ListResourceRequestsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudControlClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ListResourceRequestsCommand extends $Command
   .f(void 0, ListResourceRequestsOutputFilterSensitiveLog)
   .ser(se_ListResourceRequestsCommand)
   .de(de_ListResourceRequestsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResourceRequestsInput;
+      output: ListResourceRequestsOutput;
+    };
+    sdk: {
+      input: ListResourceRequestsCommandInput;
+      output: ListResourceRequestsCommandOutput;
+    };
+  };
+}

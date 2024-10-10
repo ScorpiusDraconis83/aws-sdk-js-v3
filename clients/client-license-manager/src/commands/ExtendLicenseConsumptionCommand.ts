@@ -89,9 +89,7 @@ export class ExtendLicenseConsumptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ExtendLicenseConsumptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExtendLicenseConsumptionCommand)
   .de(de_ExtendLicenseConsumptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExtendLicenseConsumptionRequest;
+      output: ExtendLicenseConsumptionResponse;
+    };
+    sdk: {
+      input: ExtendLicenseConsumptionCommandInput;
+      output: ExtendLicenseConsumptionCommandOutput;
+    };
+  };
+}

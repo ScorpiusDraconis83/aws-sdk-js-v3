@@ -105,9 +105,7 @@ export class DeletePackageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class DeletePackageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeletePackageCommand)
   .de(de_DeletePackageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePackageRequest;
+      output: DeletePackageResponse;
+    };
+    sdk: {
+      input: DeletePackageCommandInput;
+      output: DeletePackageCommandOutput;
+    };
+  };
+}

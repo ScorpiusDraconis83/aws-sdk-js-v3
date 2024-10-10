@@ -125,9 +125,7 @@ export class UpdatePackageVersionsStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeartifactClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class UpdatePackageVersionsStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdatePackageVersionsStatusCommand)
   .de(de_UpdatePackageVersionsStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePackageVersionsStatusRequest;
+      output: UpdatePackageVersionsStatusResult;
+    };
+    sdk: {
+      input: UpdatePackageVersionsStatusCommandInput;
+      output: UpdatePackageVersionsStatusCommandOutput;
+    };
+  };
+}

@@ -92,9 +92,7 @@ export class DeleteAttributesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DeleteAttributesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAttributesCommand)
   .de(de_DeleteAttributesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAttributesRequest;
+      output: DeleteAttributesResponse;
+    };
+    sdk: {
+      input: DeleteAttributesCommandInput;
+      output: DeleteAttributesCommandOutput;
+    };
+  };
+}

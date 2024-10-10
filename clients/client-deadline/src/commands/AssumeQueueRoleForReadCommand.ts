@@ -92,9 +92,7 @@ export class AssumeQueueRoleForReadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class AssumeQueueRoleForReadCommand extends $Command
   .f(void 0, AssumeQueueRoleForReadResponseFilterSensitiveLog)
   .ser(se_AssumeQueueRoleForReadCommand)
   .de(de_AssumeQueueRoleForReadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssumeQueueRoleForReadRequest;
+      output: AssumeQueueRoleForReadResponse;
+    };
+    sdk: {
+      input: AssumeQueueRoleForReadCommandInput;
+      output: AssumeQueueRoleForReadCommandOutput;
+    };
+  };
+}

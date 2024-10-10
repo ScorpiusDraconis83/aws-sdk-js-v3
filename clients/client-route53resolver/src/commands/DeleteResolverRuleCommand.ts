@@ -58,6 +58,7 @@ export interface DeleteResolverRuleCommandOutput extends DeleteResolverRuleRespo
  * //         Port: Number("int"),
  * //         Ipv6: "STRING_VALUE",
  * //         Protocol: "DoH" || "Do53" || "DoH-FIPS",
+ * //         ServerNameIndication: "STRING_VALUE",
  * //       },
  * //     ],
  * //     ResolverEndpointId: "STRING_VALUE",
@@ -104,9 +105,7 @@ export class DeleteResolverRuleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ResolverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +117,16 @@ export class DeleteResolverRuleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteResolverRuleCommand)
   .de(de_DeleteResolverRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResolverRuleRequest;
+      output: DeleteResolverRuleResponse;
+    };
+    sdk: {
+      input: DeleteResolverRuleCommandInput;
+      output: DeleteResolverRuleCommandOutput;
+    };
+  };
+}

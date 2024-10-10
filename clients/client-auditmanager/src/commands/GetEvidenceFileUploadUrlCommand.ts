@@ -102,9 +102,7 @@ export class GetEvidenceFileUploadUrlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class GetEvidenceFileUploadUrlCommand extends $Command
   .f(GetEvidenceFileUploadUrlRequestFilterSensitiveLog, GetEvidenceFileUploadUrlResponseFilterSensitiveLog)
   .ser(se_GetEvidenceFileUploadUrlCommand)
   .de(de_GetEvidenceFileUploadUrlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEvidenceFileUploadUrlRequest;
+      output: GetEvidenceFileUploadUrlResponse;
+    };
+    sdk: {
+      input: GetEvidenceFileUploadUrlCommandInput;
+      output: GetEvidenceFileUploadUrlCommandOutput;
+    };
+  };
+}

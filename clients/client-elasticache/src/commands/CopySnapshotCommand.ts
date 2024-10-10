@@ -30,7 +30,7 @@ export interface CopySnapshotCommandOutput extends CopySnapshotResult, __Metadat
 /**
  * <p>Makes a copy of an existing snapshot.</p>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  *          <important>
  *             <p>Users or groups that have permissions to use the <code>CopySnapshot</code>
@@ -285,9 +285,7 @@ export class CopySnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -299,4 +297,16 @@ export class CopySnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CopySnapshotCommand)
   .de(de_CopySnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopySnapshotMessage;
+      output: CopySnapshotResult;
+    };
+    sdk: {
+      input: CopySnapshotCommandInput;
+      output: CopySnapshotCommandOutput;
+    };
+  };
+}

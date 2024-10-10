@@ -163,9 +163,7 @@ export class GetPropertygraphStreamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NeptunedataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class GetPropertygraphStreamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetPropertygraphStreamCommand)
   .de(de_GetPropertygraphStreamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPropertygraphStreamInput;
+      output: GetPropertygraphStreamOutput;
+    };
+    sdk: {
+      input: GetPropertygraphStreamCommandInput;
+      output: GetPropertygraphStreamCommandOutput;
+    };
+  };
+}

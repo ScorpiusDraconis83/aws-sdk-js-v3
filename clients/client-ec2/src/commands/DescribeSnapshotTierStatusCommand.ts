@@ -96,9 +96,7 @@ export class DescribeSnapshotTierStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class DescribeSnapshotTierStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSnapshotTierStatusCommand)
   .de(de_DescribeSnapshotTierStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotTierStatusRequest;
+      output: DescribeSnapshotTierStatusResult;
+    };
+    sdk: {
+      input: DescribeSnapshotTierStatusCommandInput;
+      output: DescribeSnapshotTierStatusCommandOutput;
+    };
+  };
+}

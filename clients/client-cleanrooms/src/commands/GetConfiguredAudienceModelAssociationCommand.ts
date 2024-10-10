@@ -102,9 +102,7 @@ export class GetConfiguredAudienceModelAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class GetConfiguredAudienceModelAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConfiguredAudienceModelAssociationCommand)
   .de(de_GetConfiguredAudienceModelAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConfiguredAudienceModelAssociationInput;
+      output: GetConfiguredAudienceModelAssociationOutput;
+    };
+    sdk: {
+      input: GetConfiguredAudienceModelAssociationCommandInput;
+      output: GetConfiguredAudienceModelAssociationCommandOutput;
+    };
+  };
+}

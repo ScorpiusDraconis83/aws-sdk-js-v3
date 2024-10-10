@@ -87,9 +87,7 @@ export class UpdateConfigurationSetReputationMetricsEnabledCommand extends $Comm
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class UpdateConfigurationSetReputationMetricsEnabledCommand extends $Comm
   .f(void 0, void 0)
   .ser(se_UpdateConfigurationSetReputationMetricsEnabledCommand)
   .de(de_UpdateConfigurationSetReputationMetricsEnabledCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfigurationSetReputationMetricsEnabledRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateConfigurationSetReputationMetricsEnabledCommandInput;
+      output: UpdateConfigurationSetReputationMetricsEnabledCommandOutput;
+    };
+  };
+}

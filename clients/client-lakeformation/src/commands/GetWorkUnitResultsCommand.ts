@@ -91,9 +91,7 @@ export class GetWorkUnitResultsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LakeFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetWorkUnitResultsCommand extends $Command
   .f(GetWorkUnitResultsRequestFilterSensitiveLog, GetWorkUnitResultsResponseFilterSensitiveLog)
   .ser(se_GetWorkUnitResultsCommand)
   .de(de_GetWorkUnitResultsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkUnitResultsRequest;
+      output: GetWorkUnitResultsResponse;
+    };
+    sdk: {
+      input: GetWorkUnitResultsCommandInput;
+      output: GetWorkUnitResultsCommandOutput;
+    };
+  };
+}

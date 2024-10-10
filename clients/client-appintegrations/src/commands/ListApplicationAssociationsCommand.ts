@@ -117,9 +117,7 @@ export class ListApplicationAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppIntegrationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class ListApplicationAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListApplicationAssociationsCommand)
   .de(de_ListApplicationAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationAssociationsRequest;
+      output: ListApplicationAssociationsResponse;
+    };
+    sdk: {
+      input: ListApplicationAssociationsCommandInput;
+      output: ListApplicationAssociationsCommandOutput;
+    };
+  };
+}

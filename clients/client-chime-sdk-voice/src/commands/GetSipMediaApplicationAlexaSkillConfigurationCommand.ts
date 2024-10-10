@@ -107,9 +107,7 @@ export class GetSipMediaApplicationAlexaSkillConfigurationCommand extends $Comma
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class GetSipMediaApplicationAlexaSkillConfigurationCommand extends $Comma
   .f(void 0, GetSipMediaApplicationAlexaSkillConfigurationResponseFilterSensitiveLog)
   .ser(se_GetSipMediaApplicationAlexaSkillConfigurationCommand)
   .de(de_GetSipMediaApplicationAlexaSkillConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSipMediaApplicationAlexaSkillConfigurationRequest;
+      output: GetSipMediaApplicationAlexaSkillConfigurationResponse;
+    };
+    sdk: {
+      input: GetSipMediaApplicationAlexaSkillConfigurationCommandInput;
+      output: GetSipMediaApplicationAlexaSkillConfigurationCommandOutput;
+    };
+  };
+}

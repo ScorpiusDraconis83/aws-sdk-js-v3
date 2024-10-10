@@ -79,9 +79,7 @@ export class BatchDeleteWorldsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class BatchDeleteWorldsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchDeleteWorldsCommand)
   .de(de_BatchDeleteWorldsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteWorldsRequest;
+      output: BatchDeleteWorldsResponse;
+    };
+    sdk: {
+      input: BatchDeleteWorldsCommandInput;
+      output: BatchDeleteWorldsCommandOutput;
+    };
+  };
+}

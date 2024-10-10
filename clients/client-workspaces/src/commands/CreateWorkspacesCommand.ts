@@ -40,7 +40,7 @@ export interface CreateWorkspacesCommandOutput extends CreateWorkspacesResult, _
  *                </li>
  *                <li>
  *                   <p>You don't need to specify the <code>PCOIP</code> protocol for Linux bundles
- *                   because <code>WSP</code> is the default protocol for those bundles.</p>
+ *                   because <code>DCV</code> (formerly WSP) is the default protocol for those bundles.</p>
  *                </li>
  *                <li>
  *                   <p>User-decoupled WorkSpaces are only supported by Amazon WorkSpaces
@@ -209,9 +209,7 @@ export class CreateWorkspacesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -223,4 +221,16 @@ export class CreateWorkspacesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateWorkspacesCommand)
   .de(de_CreateWorkspacesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkspacesRequest;
+      output: CreateWorkspacesResult;
+    };
+    sdk: {
+      input: CreateWorkspacesCommandInput;
+      output: CreateWorkspacesCommandOutput;
+    };
+  };
+}

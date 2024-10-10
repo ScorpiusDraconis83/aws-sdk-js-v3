@@ -118,9 +118,7 @@ export class UpdateConnectorRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppflowClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class UpdateConnectorRegistrationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateConnectorRegistrationCommand)
   .de(de_UpdateConnectorRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConnectorRegistrationRequest;
+      output: UpdateConnectorRegistrationResponse;
+    };
+    sdk: {
+      input: UpdateConnectorRegistrationCommandInput;
+      output: UpdateConnectorRegistrationCommandOutput;
+    };
+  };
+}

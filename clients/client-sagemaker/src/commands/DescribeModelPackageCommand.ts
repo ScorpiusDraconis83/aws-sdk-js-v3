@@ -77,6 +77,7 @@ export interface DescribeModelPackageCommandOutput extends DescribeModelPackageO
  * //             HubAccessConfig: { // InferenceHubAccessConfig
  * //               HubContentArn: "STRING_VALUE", // required
  * //             },
+ * //             ManifestS3Uri: "STRING_VALUE",
  * //           },
  * //         },
  * //         ProductId: "STRING_VALUE",
@@ -124,6 +125,7 @@ export interface DescribeModelPackageCommandOutput extends DescribeModelPackageO
  * //             HubAccessConfig: {
  * //               HubContentArn: "STRING_VALUE", // required
  * //             },
+ * //             ManifestS3Uri: "STRING_VALUE",
  * //           },
  * //         },
  * //         AlgorithmName: "STRING_VALUE", // required
@@ -307,6 +309,7 @@ export interface DescribeModelPackageCommandOutput extends DescribeModelPackageO
  * //               HubAccessConfig: {
  * //                 HubContentArn: "STRING_VALUE", // required
  * //               },
+ * //               ManifestS3Uri: "STRING_VALUE",
  * //             },
  * //           },
  * //           ProductId: "STRING_VALUE",
@@ -372,9 +375,7 @@ export class DescribeModelPackageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -386,4 +387,16 @@ export class DescribeModelPackageCommand extends $Command
   .f(void 0, DescribeModelPackageOutputFilterSensitiveLog)
   .ser(se_DescribeModelPackageCommand)
   .de(de_DescribeModelPackageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeModelPackageInput;
+      output: DescribeModelPackageOutput;
+    };
+    sdk: {
+      input: DescribeModelPackageCommandInput;
+      output: DescribeModelPackageCommandOutput;
+    };
+  };
+}

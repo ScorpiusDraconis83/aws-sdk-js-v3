@@ -71,9 +71,7 @@ export class ConfigureLogsForChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaTailorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -85,4 +83,16 @@ export class ConfigureLogsForChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ConfigureLogsForChannelCommand)
   .de(de_ConfigureLogsForChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfigureLogsForChannelRequest;
+      output: ConfigureLogsForChannelResponse;
+    };
+    sdk: {
+      input: ConfigureLogsForChannelCommandInput;
+      output: ConfigureLogsForChannelCommandOutput;
+    };
+  };
+}

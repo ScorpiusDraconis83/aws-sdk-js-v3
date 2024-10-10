@@ -142,9 +142,7 @@ export class GetAppValidationConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -156,4 +154,16 @@ export class GetAppValidationConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAppValidationConfigurationCommand)
   .de(de_GetAppValidationConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAppValidationConfigurationRequest;
+      output: GetAppValidationConfigurationResponse;
+    };
+    sdk: {
+      input: GetAppValidationConfigurationCommandInput;
+      output: GetAppValidationConfigurationCommandOutput;
+    };
+  };
+}

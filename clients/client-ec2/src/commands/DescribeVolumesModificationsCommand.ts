@@ -58,6 +58,7 @@ export interface DescribeVolumesModificationsCommandOutput
  * const command = new DescribeVolumesModificationsCommand(input);
  * const response = await client.send(command);
  * // { // DescribeVolumesModificationsResult
+ * //   NextToken: "STRING_VALUE",
  * //   VolumesModifications: [ // VolumeModificationList
  * //     { // VolumeModification
  * //       VolumeId: "STRING_VALUE",
@@ -78,7 +79,6 @@ export interface DescribeVolumesModificationsCommandOutput
  * //       EndTime: new Date("TIMESTAMP"),
  * //     },
  * //   ],
- * //   NextToken: "STRING_VALUE",
  * // };
  *
  * ```
@@ -102,9 +102,7 @@ export class DescribeVolumesModificationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class DescribeVolumesModificationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVolumesModificationsCommand)
   .de(de_DescribeVolumesModificationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVolumesModificationsRequest;
+      output: DescribeVolumesModificationsResult;
+    };
+    sdk: {
+      input: DescribeVolumesModificationsCommandInput;
+      output: DescribeVolumesModificationsCommandOutput;
+    };
+  };
+}

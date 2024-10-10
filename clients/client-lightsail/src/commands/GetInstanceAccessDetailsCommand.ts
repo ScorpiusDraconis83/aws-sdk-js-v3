@@ -127,9 +127,7 @@ export class GetInstanceAccessDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class GetInstanceAccessDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetInstanceAccessDetailsCommand)
   .de(de_GetInstanceAccessDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceAccessDetailsRequest;
+      output: GetInstanceAccessDetailsResult;
+    };
+    sdk: {
+      input: GetInstanceAccessDetailsCommandInput;
+      output: GetInstanceAccessDetailsCommandOutput;
+    };
+  };
+}

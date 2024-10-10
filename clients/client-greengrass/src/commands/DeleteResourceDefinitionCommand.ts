@@ -66,9 +66,7 @@ export class DeleteResourceDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -80,4 +78,16 @@ export class DeleteResourceDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteResourceDefinitionCommand)
   .de(de_DeleteResourceDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResourceDefinitionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteResourceDefinitionCommandInput;
+      output: DeleteResourceDefinitionCommandOutput;
+    };
+  };
+}

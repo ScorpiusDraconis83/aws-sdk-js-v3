@@ -47,7 +47,7 @@ export interface DescribeClusterNodeCommandOutput extends DescribeClusterNodeRes
  * //     InstanceGroupName: "STRING_VALUE",
  * //     InstanceId: "STRING_VALUE",
  * //     InstanceStatus: { // ClusterInstanceStatusDetails
- * //       Status: "Running" || "Failure" || "Pending" || "ShuttingDown" || "SystemUpdating", // required
+ * //       Status: "Running" || "Failure" || "Pending" || "ShuttingDown" || "SystemUpdating" || "DeepHealthCheckInProgress", // required
  * //       Message: "STRING_VALUE",
  * //     },
  * //     InstanceType: "ml.p4d.24xlarge" || "ml.p4de.24xlarge" || "ml.p5.48xlarge" || "ml.trn1.32xlarge" || "ml.trn1n.32xlarge" || "ml.g5.xlarge" || "ml.g5.2xlarge" || "ml.g5.4xlarge" || "ml.g5.8xlarge" || "ml.g5.12xlarge" || "ml.g5.16xlarge" || "ml.g5.24xlarge" || "ml.g5.48xlarge" || "ml.c5.large" || "ml.c5.xlarge" || "ml.c5.2xlarge" || "ml.c5.4xlarge" || "ml.c5.9xlarge" || "ml.c5.12xlarge" || "ml.c5.18xlarge" || "ml.c5.24xlarge" || "ml.c5n.large" || "ml.c5n.2xlarge" || "ml.c5n.4xlarge" || "ml.c5n.9xlarge" || "ml.c5n.18xlarge" || "ml.m5.large" || "ml.m5.xlarge" || "ml.m5.2xlarge" || "ml.m5.4xlarge" || "ml.m5.8xlarge" || "ml.m5.12xlarge" || "ml.m5.16xlarge" || "ml.m5.24xlarge" || "ml.t3.medium" || "ml.t3.large" || "ml.t3.xlarge" || "ml.t3.2xlarge",
@@ -97,9 +97,7 @@ export class DescribeClusterNodeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DescribeClusterNodeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeClusterNodeCommand)
   .de(de_DescribeClusterNodeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterNodeRequest;
+      output: DescribeClusterNodeResponse;
+    };
+    sdk: {
+      input: DescribeClusterNodeCommandInput;
+      output: DescribeClusterNodeCommandOutput;
+    };
+  };
+}

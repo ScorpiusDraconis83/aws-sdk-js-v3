@@ -96,9 +96,7 @@ export class GetStorageProfileForQueueCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class GetStorageProfileForQueueCommand extends $Command
   .f(void 0, GetStorageProfileForQueueResponseFilterSensitiveLog)
   .ser(se_GetStorageProfileForQueueCommand)
   .de(de_GetStorageProfileForQueueCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStorageProfileForQueueRequest;
+      output: GetStorageProfileForQueueResponse;
+    };
+    sdk: {
+      input: GetStorageProfileForQueueCommandInput;
+      output: GetStorageProfileForQueueCommandOutput;
+    };
+  };
+}

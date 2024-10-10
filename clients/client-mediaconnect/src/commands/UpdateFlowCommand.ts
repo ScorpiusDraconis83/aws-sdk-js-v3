@@ -50,6 +50,9 @@ export interface UpdateFlowCommandOutput extends UpdateFlowResponse, __MetadataB
  *     MaintenanceScheduledDate: "STRING_VALUE",
  *     MaintenanceStartHour: "STRING_VALUE",
  *   },
+ *   SourceMonitoringConfig: { // MonitoringConfig
+ *     ThumbnailState: "ENABLED" || "DISABLED",
+ *   },
  * };
  * const command = new UpdateFlowCommand(input);
  * const response = await client.send(command);
@@ -328,6 +331,9 @@ export interface UpdateFlowCommandOutput extends UpdateFlowResponse, __MetadataB
  * //       MaintenanceScheduledDate: "STRING_VALUE",
  * //       MaintenanceStartHour: "STRING_VALUE",
  * //     },
+ * //     SourceMonitoringConfig: { // MonitoringConfig
+ * //       ThumbnailState: "ENABLED" || "DISABLED",
+ * //     },
  * //   },
  * // };
  *
@@ -370,9 +376,7 @@ export class UpdateFlowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -384,4 +388,16 @@ export class UpdateFlowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateFlowCommand)
   .de(de_UpdateFlowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFlowRequest;
+      output: UpdateFlowResponse;
+    };
+    sdk: {
+      input: UpdateFlowCommandInput;
+      output: UpdateFlowCommandOutput;
+    };
+  };
+}

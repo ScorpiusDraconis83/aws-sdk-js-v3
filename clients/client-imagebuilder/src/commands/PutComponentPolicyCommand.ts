@@ -96,9 +96,7 @@ export class PutComponentPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ImagebuilderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class PutComponentPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutComponentPolicyCommand)
   .de(de_PutComponentPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutComponentPolicyRequest;
+      output: PutComponentPolicyResponse;
+    };
+    sdk: {
+      input: PutComponentPolicyCommandInput;
+      output: PutComponentPolicyCommandOutput;
+    };
+  };
+}

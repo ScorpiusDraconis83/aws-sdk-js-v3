@@ -73,6 +73,8 @@ export interface UpdateChimeWebhookConfigurationCommandOutput
  * //         TagValue: "STRING_VALUE", // required
  * //       },
  * //     ],
+ * //     State: "STRING_VALUE",
+ * //     StateReason: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -109,9 +111,7 @@ export class UpdateChimeWebhookConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +123,16 @@ export class UpdateChimeWebhookConfigurationCommand extends $Command
   .f(UpdateChimeWebhookConfigurationRequestFilterSensitiveLog, UpdateChimeWebhookConfigurationResultFilterSensitiveLog)
   .ser(se_UpdateChimeWebhookConfigurationCommand)
   .de(de_UpdateChimeWebhookConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChimeWebhookConfigurationRequest;
+      output: UpdateChimeWebhookConfigurationResult;
+    };
+    sdk: {
+      input: UpdateChimeWebhookConfigurationCommandInput;
+      output: UpdateChimeWebhookConfigurationCommandOutput;
+    };
+  };
+}

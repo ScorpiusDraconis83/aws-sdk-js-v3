@@ -257,9 +257,7 @@ export class DescribeDryRunProgressCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -271,4 +269,16 @@ export class DescribeDryRunProgressCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeDryRunProgressCommand)
   .de(de_DescribeDryRunProgressCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDryRunProgressRequest;
+      output: DescribeDryRunProgressResponse;
+    };
+    sdk: {
+      input: DescribeDryRunProgressCommandInput;
+      output: DescribeDryRunProgressCommandOutput;
+    };
+  };
+}

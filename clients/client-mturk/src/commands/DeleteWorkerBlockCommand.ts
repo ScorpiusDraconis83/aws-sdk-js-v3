@@ -70,9 +70,7 @@ export class DeleteWorkerBlockCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MTurkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -84,4 +82,16 @@ export class DeleteWorkerBlockCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteWorkerBlockCommand)
   .de(de_DeleteWorkerBlockCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWorkerBlockRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteWorkerBlockCommandInput;
+      output: DeleteWorkerBlockCommandOutput;
+    };
+  };
+}

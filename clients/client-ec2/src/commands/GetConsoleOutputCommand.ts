@@ -42,15 +42,15 @@ export interface GetConsoleOutputCommandOutput extends GetConsoleOutputResult, _
  * const client = new EC2Client(config);
  * const input = { // GetConsoleOutputRequest
  *   InstanceId: "STRING_VALUE", // required
- *   DryRun: true || false,
  *   Latest: true || false,
+ *   DryRun: true || false,
  * };
  * const command = new GetConsoleOutputCommand(input);
  * const response = await client.send(command);
  * // { // GetConsoleOutputResult
  * //   InstanceId: "STRING_VALUE",
- * //   Output: "STRING_VALUE",
  * //   Timestamp: new Date("TIMESTAMP"),
+ * //   Output: "STRING_VALUE",
  * // };
  *
  * ```
@@ -92,9 +92,7 @@ export class GetConsoleOutputCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class GetConsoleOutputCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConsoleOutputCommand)
   .de(de_GetConsoleOutputCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConsoleOutputRequest;
+      output: GetConsoleOutputResult;
+    };
+    sdk: {
+      input: GetConsoleOutputCommandInput;
+      output: GetConsoleOutputCommandOutput;
+    };
+  };
+}

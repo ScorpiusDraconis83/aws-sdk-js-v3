@@ -78,9 +78,7 @@ export class DeleteWirelessGatewayTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class DeleteWirelessGatewayTaskCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteWirelessGatewayTaskCommand)
   .de(de_DeleteWirelessGatewayTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWirelessGatewayTaskRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteWirelessGatewayTaskCommandInput;
+      output: DeleteWirelessGatewayTaskCommandOutput;
+    };
+  };
+}

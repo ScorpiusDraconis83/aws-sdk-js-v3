@@ -135,9 +135,7 @@ export class GetStepCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class GetStepCommand extends $Command
   .f(void 0, GetStepResponseFilterSensitiveLog)
   .ser(se_GetStepCommand)
   .de(de_GetStepCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStepRequest;
+      output: GetStepResponse;
+    };
+    sdk: {
+      input: GetStepCommandInput;
+      output: GetStepCommandOutput;
+    };
+  };
+}

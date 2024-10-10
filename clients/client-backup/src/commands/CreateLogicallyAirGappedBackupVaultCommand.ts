@@ -111,9 +111,7 @@ export class CreateLogicallyAirGappedBackupVaultCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class CreateLogicallyAirGappedBackupVaultCommand extends $Command
   .f(CreateLogicallyAirGappedBackupVaultInputFilterSensitiveLog, void 0)
   .ser(se_CreateLogicallyAirGappedBackupVaultCommand)
   .de(de_CreateLogicallyAirGappedBackupVaultCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLogicallyAirGappedBackupVaultInput;
+      output: CreateLogicallyAirGappedBackupVaultOutput;
+    };
+    sdk: {
+      input: CreateLogicallyAirGappedBackupVaultCommandInput;
+      output: CreateLogicallyAirGappedBackupVaultCommandOutput;
+    };
+  };
+}

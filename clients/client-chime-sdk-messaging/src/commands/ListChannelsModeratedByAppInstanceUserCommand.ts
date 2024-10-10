@@ -118,9 +118,7 @@ export class ListChannelsModeratedByAppInstanceUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class ListChannelsModeratedByAppInstanceUserCommand extends $Command
   )
   .ser(se_ListChannelsModeratedByAppInstanceUserCommand)
   .de(de_ListChannelsModeratedByAppInstanceUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChannelsModeratedByAppInstanceUserRequest;
+      output: ListChannelsModeratedByAppInstanceUserResponse;
+    };
+    sdk: {
+      input: ListChannelsModeratedByAppInstanceUserCommandInput;
+      output: ListChannelsModeratedByAppInstanceUserCommandOutput;
+    };
+  };
+}

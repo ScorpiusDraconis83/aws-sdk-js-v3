@@ -227,9 +227,7 @@ export class StartFaceLivenessSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionStreamingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -253,4 +251,16 @@ export class StartFaceLivenessSessionCommand extends $Command
   .f(StartFaceLivenessSessionRequestFilterSensitiveLog, StartFaceLivenessSessionResponseFilterSensitiveLog)
   .ser(se_StartFaceLivenessSessionCommand)
   .de(de_StartFaceLivenessSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartFaceLivenessSessionRequest;
+      output: StartFaceLivenessSessionResponse;
+    };
+    sdk: {
+      input: StartFaceLivenessSessionCommandInput;
+      output: StartFaceLivenessSessionCommandOutput;
+    };
+  };
+}

@@ -82,9 +82,7 @@ export class ListReusableDelegationSetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class ListReusableDelegationSetsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListReusableDelegationSetsCommand)
   .de(de_ListReusableDelegationSetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReusableDelegationSetsRequest;
+      output: ListReusableDelegationSetsResponse;
+    };
+    sdk: {
+      input: ListReusableDelegationSetsCommandInput;
+      output: ListReusableDelegationSetsCommandOutput;
+    };
+  };
+}

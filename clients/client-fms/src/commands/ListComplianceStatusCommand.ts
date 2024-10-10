@@ -95,9 +95,7 @@ export class ListComplianceStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class ListComplianceStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListComplianceStatusCommand)
   .de(de_ListComplianceStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListComplianceStatusRequest;
+      output: ListComplianceStatusResponse;
+    };
+    sdk: {
+      input: ListComplianceStatusCommandInput;
+      output: ListComplianceStatusCommandOutput;
+    };
+  };
+}

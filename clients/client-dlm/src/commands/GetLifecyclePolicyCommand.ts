@@ -249,9 +249,7 @@ export class GetLifecyclePolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DLMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -263,4 +261,16 @@ export class GetLifecyclePolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetLifecyclePolicyCommand)
   .de(de_GetLifecyclePolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLifecyclePolicyRequest;
+      output: GetLifecyclePolicyResponse;
+    };
+    sdk: {
+      input: GetLifecyclePolicyCommandInput;
+      output: GetLifecyclePolicyCommandOutput;
+    };
+  };
+}

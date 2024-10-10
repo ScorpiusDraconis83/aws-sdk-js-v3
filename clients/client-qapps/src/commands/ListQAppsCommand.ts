@@ -54,6 +54,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  * //       createdAt: new Date("TIMESTAMP"), // required
  * //       canEdit: true || false,
  * //       status: "STRING_VALUE",
+ * //       isVerified: true || false,
  * //     },
  * //   ],
  * //   nextToken: "STRING_VALUE",
@@ -104,6 +105,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "7b9fe303-18bb-4643-952c-bfcf9f4c427f",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 1",
+ *       "isVerified": false,
  *       "status": "DRAFT",
  *       "title": "App 1"
  *     },
@@ -112,6 +114,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "dd178fd6-ad3d-49b3-a32d-e915cf423e37",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 2",
+ *       "isVerified": true,
  *       "status": "PUBLISHED",
  *       "title": "App 2"
  *     },
@@ -120,6 +123,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "3274b744-1a13-4aad-953f-eda2e4149e6e",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 3",
+ *       "isVerified": false,
  *       "status": "DRAFT",
  *       "title": "App 3"
  *     }
@@ -148,6 +152,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "bec8ee64-2635-41e8-aace-e1e418f4f295",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 4",
+ *       "isVerified": true,
  *       "status": "PUBLISHED",
  *       "title": "App 4"
  *     },
@@ -156,6 +161,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "c380a45d-bd77-45b0-a0e5-8a266c1d8bc4",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 5",
+ *       "isVerified": false,
  *       "status": "PUBLISHED",
  *       "title": "App 5"
  *     },
@@ -164,6 +170,7 @@ export interface ListQAppsCommandOutput extends ListQAppsOutput, __MetadataBeare
  *       "appId": "afc4ee80-9722-4396-85a6-7aeaff52c177",
  *       "createdAt": "2024-05-21T04:09:10.401Z",
  *       "description": "Description 6",
+ *       "isVerified": false,
  *       "status": "PUBLISHED",
  *       "title": "App 6"
  *     }
@@ -183,9 +190,7 @@ export class ListQAppsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -197,4 +202,16 @@ export class ListQAppsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListQAppsCommand)
   .de(de_ListQAppsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListQAppsInput;
+      output: ListQAppsOutput;
+    };
+    sdk: {
+      input: ListQAppsCommandInput;
+      output: ListQAppsCommandOutput;
+    };
+  };
+}

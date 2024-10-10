@@ -258,9 +258,7 @@ export class ListAccountsForParentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -272,4 +270,16 @@ export class ListAccountsForParentCommand extends $Command
   .f(void 0, ListAccountsForParentResponseFilterSensitiveLog)
   .ser(se_ListAccountsForParentCommand)
   .de(de_ListAccountsForParentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccountsForParentRequest;
+      output: ListAccountsForParentResponse;
+    };
+    sdk: {
+      input: ListAccountsForParentCommandInput;
+      output: ListAccountsForParentCommandOutput;
+    };
+  };
+}

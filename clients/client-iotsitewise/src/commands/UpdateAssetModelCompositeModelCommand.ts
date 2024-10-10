@@ -227,9 +227,7 @@ export class UpdateAssetModelCompositeModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -241,4 +239,16 @@ export class UpdateAssetModelCompositeModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateAssetModelCompositeModelCommand)
   .de(de_UpdateAssetModelCompositeModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssetModelCompositeModelRequest;
+      output: UpdateAssetModelCompositeModelResponse;
+    };
+    sdk: {
+      input: UpdateAssetModelCompositeModelCommandInput;
+      output: UpdateAssetModelCompositeModelCommandOutput;
+    };
+  };
+}

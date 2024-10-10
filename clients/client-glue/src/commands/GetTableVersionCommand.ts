@@ -341,9 +341,7 @@ export class GetTableVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -355,4 +353,16 @@ export class GetTableVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTableVersionCommand)
   .de(de_GetTableVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTableVersionRequest;
+      output: GetTableVersionResponse;
+    };
+    sdk: {
+      input: GetTableVersionCommandInput;
+      output: GetTableVersionCommandOutput;
+    };
+  };
+}

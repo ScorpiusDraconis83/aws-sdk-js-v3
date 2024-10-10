@@ -31,7 +31,7 @@ export interface DescribeProductsCommandOutput extends DescribeProductsResponse,
  * <p>Returns information about product integrations in Security Hub.</p>
  *          <p>You can optionally provide an integration ARN. If you provide an integration ARN, then
  *          the results only include that integration.</p>
- *          <p>If you do not provide an integration ARN, then the results include all of the available
+ *          <p>If you don't provide an integration ARN, then the results include all of the available
  *          product integrations. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -141,9 +141,7 @@ export class DescribeProductsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +153,16 @@ export class DescribeProductsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeProductsCommand)
   .de(de_DescribeProductsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProductsRequest;
+      output: DescribeProductsResponse;
+    };
+    sdk: {
+      input: DescribeProductsCommandInput;
+      output: DescribeProductsCommandOutput;
+    };
+  };
+}

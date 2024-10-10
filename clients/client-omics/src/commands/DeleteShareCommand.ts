@@ -87,9 +87,7 @@ export class DeleteShareCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class DeleteShareCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteShareCommand)
   .de(de_DeleteShareCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteShareRequest;
+      output: DeleteShareResponse;
+    };
+    sdk: {
+      input: DeleteShareCommandInput;
+      output: DeleteShareCommandOutput;
+    };
+  };
+}

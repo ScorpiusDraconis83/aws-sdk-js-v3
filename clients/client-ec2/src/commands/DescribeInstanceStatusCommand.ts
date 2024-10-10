@@ -69,6 +69,12 @@ export interface DescribeInstanceStatusCommandOutput extends DescribeInstanceSta
  * // const { EC2Client, DescribeInstanceStatusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeInstanceStatusRequest
+ *   InstanceIds: [ // InstanceIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -77,12 +83,6 @@ export interface DescribeInstanceStatusCommandOutput extends DescribeInstanceSta
  *       ],
  *     },
  *   ],
- *   InstanceIds: [ // InstanceIdStringList
- *     "STRING_VALUE",
- *   ],
- *   MaxResults: Number("int"),
- *   NextToken: "STRING_VALUE",
- *   DryRun: true || false,
  *   IncludeAllInstances: true || false,
  * };
  * const command = new DescribeInstanceStatusCommand(input);
@@ -208,9 +208,7 @@ export class DescribeInstanceStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -222,4 +220,16 @@ export class DescribeInstanceStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInstanceStatusCommand)
   .de(de_DescribeInstanceStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstanceStatusRequest;
+      output: DescribeInstanceStatusResult;
+    };
+    sdk: {
+      input: DescribeInstanceStatusCommandInput;
+      output: DescribeInstanceStatusCommandOutput;
+    };
+  };
+}

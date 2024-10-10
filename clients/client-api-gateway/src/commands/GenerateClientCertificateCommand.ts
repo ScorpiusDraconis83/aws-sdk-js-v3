@@ -90,9 +90,7 @@ export class GenerateClientCertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: APIGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class GenerateClientCertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GenerateClientCertificateCommand)
   .de(de_GenerateClientCertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateClientCertificateRequest;
+      output: ClientCertificate;
+    };
+    sdk: {
+      input: GenerateClientCertificateCommandInput;
+      output: GenerateClientCertificateCommandOutput;
+    };
+  };
+}

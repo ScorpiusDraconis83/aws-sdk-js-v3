@@ -102,9 +102,7 @@ export class CreateNetworkSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class CreateNetworkSettingsCommand extends $Command
   .f(CreateNetworkSettingsRequestFilterSensitiveLog, void 0)
   .ser(se_CreateNetworkSettingsCommand)
   .de(de_CreateNetworkSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkSettingsRequest;
+      output: CreateNetworkSettingsResponse;
+    };
+    sdk: {
+      input: CreateNetworkSettingsCommandInput;
+      output: CreateNetworkSettingsCommandOutput;
+    };
+  };
+}

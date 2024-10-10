@@ -80,13 +80,13 @@ export interface CopySnapshotCommandOutput extends CopySnapshotResult, __Metadat
  * const command = new CopySnapshotCommand(input);
  * const response = await client.send(command);
  * // { // CopySnapshotResult
- * //   SnapshotId: "STRING_VALUE",
  * //   Tags: [ // TagList
  * //     { // Tag
  * //       Key: "STRING_VALUE",
  * //       Value: "STRING_VALUE",
  * //     },
  * //   ],
+ * //   SnapshotId: "STRING_VALUE",
  * // };
  *
  * ```
@@ -129,9 +129,7 @@ export class CopySnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class CopySnapshotCommand extends $Command
   .f(CopySnapshotRequestFilterSensitiveLog, void 0)
   .ser(se_CopySnapshotCommand)
   .de(de_CopySnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopySnapshotRequest;
+      output: CopySnapshotResult;
+    };
+    sdk: {
+      input: CopySnapshotCommandInput;
+      output: CopySnapshotCommandOutput;
+    };
+  };
+}

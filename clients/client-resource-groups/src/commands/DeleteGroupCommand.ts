@@ -58,6 +58,12 @@ export interface DeleteGroupCommandOutput extends DeleteGroupOutput, __MetadataB
  * //     GroupArn: "STRING_VALUE", // required
  * //     Name: "STRING_VALUE", // required
  * //     Description: "STRING_VALUE",
+ * //     Criticality: Number("int"),
+ * //     Owner: "STRING_VALUE",
+ * //     DisplayName: "STRING_VALUE",
+ * //     ApplicationTag: { // ApplicationTag
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
  * //   },
  * // };
  *
@@ -101,9 +107,7 @@ export class DeleteGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResourceGroupsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +119,16 @@ export class DeleteGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteGroupCommand)
   .de(de_DeleteGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGroupInput;
+      output: DeleteGroupOutput;
+    };
+    sdk: {
+      input: DeleteGroupCommandInput;
+      output: DeleteGroupCommandOutput;
+    };
+  };
+}

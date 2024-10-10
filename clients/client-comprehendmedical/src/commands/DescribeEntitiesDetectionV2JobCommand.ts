@@ -112,9 +112,7 @@ export class DescribeEntitiesDetectionV2JobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendMedicalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class DescribeEntitiesDetectionV2JobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEntitiesDetectionV2JobCommand)
   .de(de_DescribeEntitiesDetectionV2JobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEntitiesDetectionV2JobRequest;
+      output: DescribeEntitiesDetectionV2JobResponse;
+    };
+    sdk: {
+      input: DescribeEntitiesDetectionV2JobCommandInput;
+      output: DescribeEntitiesDetectionV2JobCommandOutput;
+    };
+  };
+}

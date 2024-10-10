@@ -111,9 +111,7 @@ export class DescribeManagedProductsByVendorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class DescribeManagedProductsByVendorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeManagedProductsByVendorCommand)
   .de(de_DescribeManagedProductsByVendorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeManagedProductsByVendorRequest;
+      output: DescribeManagedProductsByVendorResponse;
+    };
+    sdk: {
+      input: DescribeManagedProductsByVendorCommandInput;
+      output: DescribeManagedProductsByVendorCommandOutput;
+    };
+  };
+}

@@ -116,7 +116,7 @@ export interface UpdateFleetPortSettingsCommandOutput extends UpdateFleetPortSet
  *             Resolve the issue before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link UnauthorizedException} (client fault)
  *  <p>The client failed authentication. Clients should not retry such requests.</p>
@@ -134,9 +134,7 @@ export class UpdateFleetPortSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +146,16 @@ export class UpdateFleetPortSettingsCommand extends $Command
   .f(UpdateFleetPortSettingsInputFilterSensitiveLog, void 0)
   .ser(se_UpdateFleetPortSettingsCommand)
   .de(de_UpdateFleetPortSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFleetPortSettingsInput;
+      output: UpdateFleetPortSettingsOutput;
+    };
+    sdk: {
+      input: UpdateFleetPortSettingsCommandInput;
+      output: UpdateFleetPortSettingsCommandOutput;
+    };
+  };
+}

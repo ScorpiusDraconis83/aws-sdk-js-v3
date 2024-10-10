@@ -96,9 +96,7 @@ export class GetUserIdCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IdentitystoreClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class GetUserIdCommand extends $Command
   .f(GetUserIdRequestFilterSensitiveLog, void 0)
   .ser(se_GetUserIdCommand)
   .de(de_GetUserIdCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUserIdRequest;
+      output: GetUserIdResponse;
+    };
+    sdk: {
+      input: GetUserIdCommandInput;
+      output: GetUserIdCommandOutput;
+    };
+  };
+}

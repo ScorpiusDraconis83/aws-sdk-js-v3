@@ -765,7 +765,6 @@ import {
   InvalidExportTaskStateFault,
   InvalidGlobalClusterStateFault,
   InvalidIntegrationStateFault,
-  InvalidMaxAcuFault,
   InvalidOptionGroupStateFault,
   InvalidSubnet,
   InvalidVPCNetworkStateFault,
@@ -7332,9 +7331,6 @@ const de_CommandError = async (output: __HttpResponse, context: __SerdeContext):
     case "DBShardGroupAlreadyExists":
     case "com.amazonaws.rds#DBShardGroupAlreadyExistsFault":
       throw await de_DBShardGroupAlreadyExistsFaultRes(parsedOutput, context);
-    case "InvalidMaxAcu":
-    case "com.amazonaws.rds#InvalidMaxAcuFault":
-      throw await de_InvalidMaxAcuFaultRes(parsedOutput, context);
     case "MaxDBShardGroupLimitReached":
     case "com.amazonaws.rds#MaxDBShardGroupLimitReached":
       throw await de_MaxDBShardGroupLimitReachedRes(parsedOutput, context);
@@ -9228,19 +9224,6 @@ const de_InvalidIntegrationStateFaultRes = async (
 };
 
 /**
- * deserializeAws_queryInvalidMaxAcuFaultRes
- */
-const de_InvalidMaxAcuFaultRes = async (parsedOutput: any, context: __SerdeContext): Promise<InvalidMaxAcuFault> => {
-  const body = parsedOutput.body;
-  const deserialized: any = de_InvalidMaxAcuFault(body.Error, context);
-  const exception = new InvalidMaxAcuFault({
-    $metadata: deserializeMetadata(parsedOutput),
-    ...deserialized,
-  });
-  return __decorateServiceException(exception, body);
-};
-
-/**
  * deserializeAws_queryInvalidOptionGroupStateFaultRes
  */
 const de_InvalidOptionGroupStateFaultRes = async (
@@ -10563,6 +10546,9 @@ const se_CreateDBClusterMessage = (input: CreateDBClusterMessage, context: __Ser
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
+  if (input[_CST] != null) {
+    entries[_CST] = input[_CST];
+  }
   if (input[_DBSI] != null) {
     entries[_DBSI] = input[_DBSI];
   }
@@ -11245,6 +11231,16 @@ const se_CreateDBShardGroupMessage = (input: CreateDBShardGroupMessage, context:
   if (input[_PA] != null) {
     entries[_PA] = input[_PA];
   }
+  if (input[_T] != null) {
+    const memberEntries = se_TagList(input[_T], context);
+    if (input[_T]?.length === 0) {
+      entries.Tags = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Tags.${key}`;
+      entries[loc] = value;
+    });
+  }
   return entries;
 };
 
@@ -11384,6 +11380,16 @@ const se_CreateGlobalClusterMessage = (input: CreateGlobalClusterMessage, contex
   }
   if (input[_SE] != null) {
     entries[_SE] = input[_SE];
+  }
+  if (input[_T] != null) {
+    const memberEntries = se_TagList(input[_T], context);
+    if (input[_T]?.length === 0) {
+      entries.Tags = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Tags.${key}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -14166,6 +14172,9 @@ const se_ModifyDBShardGroupMessage = (input: ModifyDBShardGroupMessage, context:
   }
   if (input[_MACUi] != null) {
     entries[_MACUi] = __serializeFloat(input[_MACUi]);
+  }
+  if (input[_CR] != null) {
+    entries[_CR] = input[_CR];
   }
   return entries;
 };
@@ -17423,6 +17432,9 @@ const de_DBCluster = (output: any, context: __SerdeContext): DBCluster => {
   if (output[_STt] != null) {
     contents[_STt] = __strictParseInt32(output[_STt]) as number;
   }
+  if (output[_CST] != null) {
+    contents[_CST] = __expectString(output[_CST]);
+  }
   if (output[_CD] != null) {
     contents[_CD] = de_CertificateDetails(output[_CD], context);
   }
@@ -19776,6 +19788,14 @@ const de_DBShardGroup = (output: any, context: __SerdeContext): DBShardGroup => 
   if (output[_End] != null) {
     contents[_End] = __expectString(output[_End]);
   }
+  if (output[_DBSGAh] != null) {
+    contents[_DBSGAh] = __expectString(output[_DBSGAh]);
+  }
+  if (output.TagList === "") {
+    contents[_TL] = [];
+  } else if (output[_TL] != null && output[_TL][_Tag] != null) {
+    contents[_TL] = de_TagList(__getArrayIfSingleItem(output[_TL][_Tag]), context);
+  }
   return contents;
 };
 
@@ -21289,6 +21309,11 @@ const de_GlobalCluster = (output: any, context: __SerdeContext): GlobalCluster =
   if (output[_FSa] != null) {
     contents[_FSa] = de_FailoverState(output[_FSa], context);
   }
+  if (output.TagList === "") {
+    contents[_TL] = [];
+  } else if (output[_TL] != null && output[_TL][_Tag] != null) {
+    contents[_TL] = de_TagList(__getArrayIfSingleItem(output[_TL][_Tag]), context);
+  }
   return contents;
 };
 
@@ -21897,17 +21922,6 @@ const de_InvalidGlobalClusterStateFault = (output: any, context: __SerdeContext)
  * deserializeAws_queryInvalidIntegrationStateFault
  */
 const de_InvalidIntegrationStateFault = (output: any, context: __SerdeContext): InvalidIntegrationStateFault => {
-  const contents: any = {};
-  if (output[_m] != null) {
-    contents[_m] = __expectString(output[_m]);
-  }
-  return contents;
-};
-
-/**
- * deserializeAws_queryInvalidMaxAcuFault
- */
-const de_InvalidMaxAcuFault = (output: any, context: __SerdeContext): InvalidMaxAcuFault => {
   const contents: any = {};
   if (output[_m] != null) {
     contents[_m] = __expectString(output[_m]);
@@ -25050,6 +25064,7 @@ const _CS = "CharacterSet";
 const _CSD = "CharacterSetDescription";
 const _CSI = "CustSubscriptionId";
 const _CSN = "CharacterSetName";
+const _CST = "ClusterScalabilityType";
 const _CT = "CopyTags";
 const _CTD = "CreateTenantDatabase";
 const _CTTS = "CopyTagsToSnapshot";
@@ -25149,6 +25164,7 @@ const _DBSAn = "DBSnapshotAttributes";
 const _DBSAna = "DBSnapshotAttribute";
 const _DBSG = "DBSecurityGroups";
 const _DBSGA = "DBSecurityGroupArn";
+const _DBSGAh = "DBShardGroupArn";
 const _DBSGAu = "DBSubnetGroupArn";
 const _DBSGD = "DBSecurityGroupDescription";
 const _DBSGDu = "DBSubnetGroupDescription";

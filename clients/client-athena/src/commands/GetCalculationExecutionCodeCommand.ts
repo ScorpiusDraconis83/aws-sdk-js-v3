@@ -78,9 +78,7 @@ export class GetCalculationExecutionCodeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AthenaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class GetCalculationExecutionCodeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetCalculationExecutionCodeCommand)
   .de(de_GetCalculationExecutionCodeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCalculationExecutionCodeRequest;
+      output: GetCalculationExecutionCodeResponse;
+    };
+    sdk: {
+      input: GetCalculationExecutionCodeCommandInput;
+      output: GetCalculationExecutionCodeCommandOutput;
+    };
+  };
+}

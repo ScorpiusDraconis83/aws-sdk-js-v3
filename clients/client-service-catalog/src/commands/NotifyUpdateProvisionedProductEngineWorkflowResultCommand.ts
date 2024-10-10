@@ -92,9 +92,7 @@ export class NotifyUpdateProvisionedProductEngineWorkflowResultCommand extends $
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class NotifyUpdateProvisionedProductEngineWorkflowResultCommand extends $
   .f(void 0, void 0)
   .ser(se_NotifyUpdateProvisionedProductEngineWorkflowResultCommand)
   .de(de_NotifyUpdateProvisionedProductEngineWorkflowResultCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: NotifyUpdateProvisionedProductEngineWorkflowResultInput;
+      output: {};
+    };
+    sdk: {
+      input: NotifyUpdateProvisionedProductEngineWorkflowResultCommandInput;
+      output: NotifyUpdateProvisionedProductEngineWorkflowResultCommandOutput;
+    };
+  };
+}

@@ -114,9 +114,7 @@ export class ListPackagesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeartifactClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class ListPackagesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPackagesCommand)
   .de(de_ListPackagesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPackagesRequest;
+      output: ListPackagesResult;
+    };
+    sdk: {
+      input: ListPackagesCommandInput;
+      output: ListPackagesCommandOutput;
+    };
+  };
+}

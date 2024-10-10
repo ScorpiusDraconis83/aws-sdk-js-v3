@@ -28,7 +28,7 @@ export interface TagResourceCommandInput extends TagResourceRequest {}
 export interface TagResourceCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Adds <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to a function.</p>
+ * <p>Adds <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to a function, event source mapping, or code signing configuration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -72,6 +72,20 @@ export interface TagResourceCommandOutput extends __MetadataBearer {}
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To add tags to an existing Lambda function
+ * ```javascript
+ * // The following example adds a tag with the key name DEPARTMENT and a value of 'Department A' to the specified Lambda function.
+ * const input = {
+ *   "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+ *   "Tags": {
+ *     "DEPARTMENT": "Department A"
+ *   }
+ * };
+ * const command = new TagResourceCommand(input);
+ * await client.send(command);
+ * // example id: to-add-tags-to-an-existing-lambda-function-1586491890446
+ * ```
+ *
  */
 export class TagResourceCommand extends $Command
   .classBuilder<
@@ -81,9 +95,7 @@ export class TagResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +107,16 @@ export class TagResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_TagResourceCommand)
   .de(de_TagResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
+}

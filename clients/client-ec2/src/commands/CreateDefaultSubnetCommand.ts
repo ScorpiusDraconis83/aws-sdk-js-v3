@@ -47,18 +47,10 @@ export interface CreateDefaultSubnetCommandOutput extends CreateDefaultSubnetRes
  * const response = await client.send(command);
  * // { // CreateDefaultSubnetResult
  * //   Subnet: { // Subnet
- * //     AvailabilityZone: "STRING_VALUE",
  * //     AvailabilityZoneId: "STRING_VALUE",
- * //     AvailableIpAddressCount: Number("int"),
- * //     CidrBlock: "STRING_VALUE",
- * //     DefaultForAz: true || false,
  * //     EnableLniAtDeviceIndex: Number("int"),
- * //     MapPublicIpOnLaunch: true || false,
  * //     MapCustomerOwnedIpOnLaunch: true || false,
  * //     CustomerOwnedIpv4Pool: "STRING_VALUE",
- * //     State: "pending" || "available" || "unavailable",
- * //     SubnetId: "STRING_VALUE",
- * //     VpcId: "STRING_VALUE",
  * //     OwnerId: "STRING_VALUE",
  * //     AssignIpv6AddressOnCreation: true || false,
  * //     Ipv6CidrBlockAssociationSet: [ // SubnetIpv6CidrBlockAssociationSet
@@ -88,6 +80,14 @@ export interface CreateDefaultSubnetCommandOutput extends CreateDefaultSubnetRes
  * //       EnableResourceNameDnsARecord: true || false,
  * //       EnableResourceNameDnsAAAARecord: true || false,
  * //     },
+ * //     SubnetId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "unavailable",
+ * //     VpcId: "STRING_VALUE",
+ * //     CidrBlock: "STRING_VALUE",
+ * //     AvailableIpAddressCount: Number("int"),
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     DefaultForAz: true || false,
+ * //     MapPublicIpOnLaunch: true || false,
  * //   },
  * // };
  *
@@ -112,9 +112,7 @@ export class CreateDefaultSubnetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class CreateDefaultSubnetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDefaultSubnetCommand)
   .de(de_CreateDefaultSubnetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDefaultSubnetRequest;
+      output: CreateDefaultSubnetResult;
+    };
+    sdk: {
+      input: CreateDefaultSubnetCommandInput;
+      output: CreateDefaultSubnetCommandOutput;
+    };
+  };
+}

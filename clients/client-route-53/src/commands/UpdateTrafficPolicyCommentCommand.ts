@@ -85,9 +85,7 @@ export class UpdateTrafficPolicyCommentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class UpdateTrafficPolicyCommentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTrafficPolicyCommentCommand)
   .de(de_UpdateTrafficPolicyCommentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrafficPolicyCommentRequest;
+      output: UpdateTrafficPolicyCommentResponse;
+    };
+    sdk: {
+      input: UpdateTrafficPolicyCommentCommandInput;
+      output: UpdateTrafficPolicyCommentCommandOutput;
+    };
+  };
+}

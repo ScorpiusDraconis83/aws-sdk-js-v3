@@ -103,9 +103,7 @@ export class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommand
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommand
   .f(void 0, void 0)
   .ser(se_CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommand)
   .de(de_CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest;
+      output: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult;
+    };
+    sdk: {
+      input: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommandInput;
+      output: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationCommandOutput;
+    };
+  };
+}

@@ -66,6 +66,9 @@ export interface AddTagsToResourceCommandOutput extends AddTagsToResourceRespons
  * @see {@link AddTagsToResourceCommandOutput} for command's `response` shape.
  * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
  * @throws {@link ResourceNotFoundFault} (client fault)
  *  <p>The resource could not be found.</p>
  *
@@ -99,9 +102,7 @@ export class AddTagsToResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +114,16 @@ export class AddTagsToResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddTagsToResourceCommand)
   .de(de_AddTagsToResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddTagsToResourceMessage;
+      output: {};
+    };
+    sdk: {
+      input: AddTagsToResourceCommandInput;
+      output: AddTagsToResourceCommandOutput;
+    };
+  };
+}

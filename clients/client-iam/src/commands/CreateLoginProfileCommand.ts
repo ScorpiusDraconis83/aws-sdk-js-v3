@@ -122,9 +122,7 @@ export class CreateLoginProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class CreateLoginProfileCommand extends $Command
   .f(CreateLoginProfileRequestFilterSensitiveLog, void 0)
   .ser(se_CreateLoginProfileCommand)
   .de(de_CreateLoginProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLoginProfileRequest;
+      output: CreateLoginProfileResponse;
+    };
+    sdk: {
+      input: CreateLoginProfileCommandInput;
+      output: CreateLoginProfileCommandOutput;
+    };
+  };
+}

@@ -170,9 +170,7 @@ export class DescribeServiceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppRunnerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -184,4 +182,16 @@ export class DescribeServiceCommand extends $Command
   .f(void 0, DescribeServiceResponseFilterSensitiveLog)
   .ser(se_DescribeServiceCommand)
   .de(de_DescribeServiceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeServiceRequest;
+      output: DescribeServiceResponse;
+    };
+    sdk: {
+      input: DescribeServiceCommandInput;
+      output: DescribeServiceCommandOutput;
+    };
+  };
+}

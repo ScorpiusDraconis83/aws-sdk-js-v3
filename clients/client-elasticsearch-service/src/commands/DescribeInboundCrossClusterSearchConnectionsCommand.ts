@@ -112,9 +112,7 @@ export class DescribeInboundCrossClusterSearchConnectionsCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class DescribeInboundCrossClusterSearchConnectionsCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_DescribeInboundCrossClusterSearchConnectionsCommand)
   .de(de_DescribeInboundCrossClusterSearchConnectionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInboundCrossClusterSearchConnectionsRequest;
+      output: DescribeInboundCrossClusterSearchConnectionsResponse;
+    };
+    sdk: {
+      input: DescribeInboundCrossClusterSearchConnectionsCommandInput;
+      output: DescribeInboundCrossClusterSearchConnectionsCommandOutput;
+    };
+  };
+}

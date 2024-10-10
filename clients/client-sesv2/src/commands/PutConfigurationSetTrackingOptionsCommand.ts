@@ -47,6 +47,7 @@ export interface PutConfigurationSetTrackingOptionsCommandOutput
  * const input = { // PutConfigurationSetTrackingOptionsRequest
  *   ConfigurationSetName: "STRING_VALUE", // required
  *   CustomRedirectDomain: "STRING_VALUE",
+ *   HttpsPolicy: "REQUIRE" || "REQUIRE_OPEN_ONLY" || "OPTIONAL",
  * };
  * const command = new PutConfigurationSetTrackingOptionsCommand(input);
  * const response = await client.send(command);
@@ -82,9 +83,7 @@ export class PutConfigurationSetTrackingOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +95,16 @@ export class PutConfigurationSetTrackingOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutConfigurationSetTrackingOptionsCommand)
   .de(de_PutConfigurationSetTrackingOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutConfigurationSetTrackingOptionsRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutConfigurationSetTrackingOptionsCommandInput;
+      output: PutConfigurationSetTrackingOptionsCommandOutput;
+    };
+  };
+}

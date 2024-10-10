@@ -113,9 +113,7 @@ export class UpdateOrganizationConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class UpdateOrganizationConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateOrganizationConfigurationCommand)
   .de(de_UpdateOrganizationConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateOrganizationConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateOrganizationConfigurationCommandInput;
+      output: UpdateOrganizationConfigurationCommandOutput;
+    };
+  };
+}

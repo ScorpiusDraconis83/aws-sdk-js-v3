@@ -425,9 +425,7 @@ export class UpdateDataSourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -439,4 +437,16 @@ export class UpdateDataSourceCommand extends $Command
   .f(UpdateDataSourceRequestFilterSensitiveLog, UpdateDataSourceResponseFilterSensitiveLog)
   .ser(se_UpdateDataSourceCommand)
   .de(de_UpdateDataSourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDataSourceRequest;
+      output: UpdateDataSourceResponse;
+    };
+    sdk: {
+      input: UpdateDataSourceCommandInput;
+      output: UpdateDataSourceCommandOutput;
+    };
+  };
+}

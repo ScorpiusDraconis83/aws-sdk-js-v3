@@ -92,9 +92,7 @@ export class DisassociateTrafficDistributionGroupUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DisassociateTrafficDistributionGroupUserCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateTrafficDistributionGroupUserCommand)
   .de(de_DisassociateTrafficDistributionGroupUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateTrafficDistributionGroupUserRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateTrafficDistributionGroupUserCommandInput;
+      output: DisassociateTrafficDistributionGroupUserCommandOutput;
+    };
+  };
+}

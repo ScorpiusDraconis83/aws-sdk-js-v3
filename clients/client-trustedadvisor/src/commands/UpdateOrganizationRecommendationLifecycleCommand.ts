@@ -93,9 +93,7 @@ export class UpdateOrganizationRecommendationLifecycleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TrustedAdvisorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UpdateOrganizationRecommendationLifecycleCommand extends $Command
   .f(UpdateOrganizationRecommendationLifecycleRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateOrganizationRecommendationLifecycleCommand)
   .de(de_UpdateOrganizationRecommendationLifecycleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateOrganizationRecommendationLifecycleRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateOrganizationRecommendationLifecycleCommandInput;
+      output: UpdateOrganizationRecommendationLifecycleCommandOutput;
+    };
+  };
+}

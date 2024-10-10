@@ -116,9 +116,7 @@ export class CreateUploadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeviceFarmClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class CreateUploadCommand extends $Command
   .f(void 0, CreateUploadResultFilterSensitiveLog)
   .ser(se_CreateUploadCommand)
   .de(de_CreateUploadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateUploadRequest;
+      output: CreateUploadResult;
+    };
+    sdk: {
+      input: CreateUploadCommandInput;
+      output: CreateUploadCommandOutput;
+    };
+  };
+}

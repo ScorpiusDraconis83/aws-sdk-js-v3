@@ -113,9 +113,7 @@ export class DescribeContinuousExportsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApplicationDiscoveryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class DescribeContinuousExportsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeContinuousExportsCommand)
   .de(de_DescribeContinuousExportsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContinuousExportsRequest;
+      output: DescribeContinuousExportsResponse;
+    };
+    sdk: {
+      input: DescribeContinuousExportsCommandInput;
+      output: DescribeContinuousExportsCommandOutput;
+    };
+  };
+}

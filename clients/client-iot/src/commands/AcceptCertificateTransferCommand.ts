@@ -90,9 +90,7 @@ export class AcceptCertificateTransferCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class AcceptCertificateTransferCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AcceptCertificateTransferCommand)
   .de(de_AcceptCertificateTransferCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptCertificateTransferRequest;
+      output: {};
+    };
+    sdk: {
+      input: AcceptCertificateTransferCommandInput;
+      output: AcceptCertificateTransferCommandOutput;
+    };
+  };
+}

@@ -135,9 +135,7 @@ export class ImportResourcesToDraftAppVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class ImportResourcesToDraftAppVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ImportResourcesToDraftAppVersionCommand)
   .de(de_ImportResourcesToDraftAppVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportResourcesToDraftAppVersionRequest;
+      output: ImportResourcesToDraftAppVersionResponse;
+    };
+    sdk: {
+      input: ImportResourcesToDraftAppVersionCommandInput;
+      output: ImportResourcesToDraftAppVersionCommandOutput;
+    };
+  };
+}

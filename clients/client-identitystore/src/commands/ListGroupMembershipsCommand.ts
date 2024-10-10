@@ -98,9 +98,7 @@ export class ListGroupMembershipsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IdentitystoreClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class ListGroupMembershipsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGroupMembershipsCommand)
   .de(de_ListGroupMembershipsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGroupMembershipsRequest;
+      output: ListGroupMembershipsResponse;
+    };
+    sdk: {
+      input: ListGroupMembershipsCommandInput;
+      output: ListGroupMembershipsCommandOutput;
+    };
+  };
+}

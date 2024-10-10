@@ -120,6 +120,7 @@ export interface ListEventSourceMappingsCommandOutput extends ListEventSourceMap
  * //         ErrorCode: "STRING_VALUE",
  * //         Message: "STRING_VALUE",
  * //       },
+ * //       EventSourceMappingArn: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -148,6 +149,32 @@ export interface ListEventSourceMappingsCommandOutput extends ListEventSourceMap
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To list the event source mappings for a function
+ * ```javascript
+ * // The following example returns a list of the event source mappings for a function named my-function.
+ * const input = {
+ *   "FunctionName": "my-function"
+ * };
+ * const command = new ListEventSourceMappingsCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "EventSourceMappings": [
+ *     {
+ *       "BatchSize": 5,
+ *       "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:mySQSqueue",
+ *       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+ *       "LastModified": 1569284520.333,
+ *       "State": "Enabled",
+ *       "StateTransitionReason": "USER_INITIATED",
+ *       "UUID": "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * // example id: to-list-the-event-source-mappings-for-a-function-1586490285906
+ * ```
+ *
  */
 export class ListEventSourceMappingsCommand extends $Command
   .classBuilder<
@@ -157,9 +184,7 @@ export class ListEventSourceMappingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -171,4 +196,16 @@ export class ListEventSourceMappingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEventSourceMappingsCommand)
   .de(de_ListEventSourceMappingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventSourceMappingsRequest;
+      output: ListEventSourceMappingsResponse;
+    };
+    sdk: {
+      input: ListEventSourceMappingsCommandInput;
+      output: ListEventSourceMappingsCommandOutput;
+    };
+  };
+}

@@ -90,9 +90,7 @@ export class GetWorkUnitsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LakeFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class GetWorkUnitsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetWorkUnitsCommand)
   .de(de_GetWorkUnitsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkUnitsRequest;
+      output: GetWorkUnitsResponse;
+    };
+    sdk: {
+      input: GetWorkUnitsCommandInput;
+      output: GetWorkUnitsCommandOutput;
+    };
+  };
+}

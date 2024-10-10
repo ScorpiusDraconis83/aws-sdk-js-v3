@@ -102,9 +102,7 @@ export class DescribeAppInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class DescribeAppInstanceCommand extends $Command
   .f(void 0, DescribeAppInstanceResponseFilterSensitiveLog)
   .ser(se_DescribeAppInstanceCommand)
   .de(de_DescribeAppInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAppInstanceRequest;
+      output: DescribeAppInstanceResponse;
+    };
+    sdk: {
+      input: DescribeAppInstanceCommandInput;
+      output: DescribeAppInstanceCommandOutput;
+    };
+  };
+}

@@ -149,9 +149,7 @@ export class PurchaseOfferingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeviceFarmClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +161,16 @@ export class PurchaseOfferingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PurchaseOfferingCommand)
   .de(de_PurchaseOfferingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseOfferingRequest;
+      output: PurchaseOfferingResult;
+    };
+    sdk: {
+      input: PurchaseOfferingCommandInput;
+      output: PurchaseOfferingCommandOutput;
+    };
+  };
+}

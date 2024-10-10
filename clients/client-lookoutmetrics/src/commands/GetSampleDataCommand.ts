@@ -112,9 +112,7 @@ export class GetSampleDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutMetricsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class GetSampleDataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSampleDataCommand)
   .de(de_GetSampleDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSampleDataRequest;
+      output: GetSampleDataResponse;
+    };
+    sdk: {
+      input: GetSampleDataCommandInput;
+      output: GetSampleDataCommandOutput;
+    };
+  };
+}

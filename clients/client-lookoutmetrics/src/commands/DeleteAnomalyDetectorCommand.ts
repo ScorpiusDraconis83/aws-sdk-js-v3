@@ -83,9 +83,7 @@ export class DeleteAnomalyDetectorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutMetricsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DeleteAnomalyDetectorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAnomalyDetectorCommand)
   .de(de_DeleteAnomalyDetectorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAnomalyDetectorRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteAnomalyDetectorCommandInput;
+      output: DeleteAnomalyDetectorCommandOutput;
+    };
+  };
+}

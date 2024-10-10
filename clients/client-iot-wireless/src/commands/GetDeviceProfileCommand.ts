@@ -122,9 +122,7 @@ export class GetDeviceProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class GetDeviceProfileCommand extends $Command
   .f(void 0, GetDeviceProfileResponseFilterSensitiveLog)
   .ser(se_GetDeviceProfileCommand)
   .de(de_GetDeviceProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeviceProfileRequest;
+      output: GetDeviceProfileResponse;
+    };
+    sdk: {
+      input: GetDeviceProfileCommandInput;
+      output: GetDeviceProfileCommandOutput;
+    };
+  };
+}

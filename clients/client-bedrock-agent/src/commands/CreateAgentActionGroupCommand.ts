@@ -167,9 +167,7 @@ export class CreateAgentActionGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class CreateAgentActionGroupCommand extends $Command
   .f(CreateAgentActionGroupRequestFilterSensitiveLog, CreateAgentActionGroupResponseFilterSensitiveLog)
   .ser(se_CreateAgentActionGroupCommand)
   .de(de_CreateAgentActionGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAgentActionGroupRequest;
+      output: CreateAgentActionGroupResponse;
+    };
+    sdk: {
+      input: CreateAgentActionGroupCommandInput;
+      output: CreateAgentActionGroupCommandOutput;
+    };
+  };
+}

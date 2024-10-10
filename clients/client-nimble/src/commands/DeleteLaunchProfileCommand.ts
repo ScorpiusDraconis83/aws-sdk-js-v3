@@ -158,9 +158,7 @@ export class DeleteLaunchProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -172,4 +170,16 @@ export class DeleteLaunchProfileCommand extends $Command
   .f(void 0, DeleteLaunchProfileResponseFilterSensitiveLog)
   .ser(se_DeleteLaunchProfileCommand)
   .de(de_DeleteLaunchProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLaunchProfileRequest;
+      output: DeleteLaunchProfileResponse;
+    };
+    sdk: {
+      input: DeleteLaunchProfileCommandInput;
+      output: DeleteLaunchProfileCommandOutput;
+    };
+  };
+}

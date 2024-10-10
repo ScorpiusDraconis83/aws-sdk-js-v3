@@ -45,8 +45,8 @@ export interface ConfirmProductInstanceCommandOutput extends ConfirmProductInsta
  * const command = new ConfirmProductInstanceCommand(input);
  * const response = await client.send(command);
  * // { // ConfirmProductInstanceResult
- * //   OwnerId: "STRING_VALUE",
  * //   Return: true || false,
+ * //   OwnerId: "STRING_VALUE",
  * // };
  *
  * ```
@@ -87,9 +87,7 @@ export class ConfirmProductInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ConfirmProductInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ConfirmProductInstanceCommand)
   .de(de_ConfirmProductInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfirmProductInstanceRequest;
+      output: ConfirmProductInstanceResult;
+    };
+    sdk: {
+      input: ConfirmProductInstanceCommandInput;
+      output: ConfirmProductInstanceCommandOutput;
+    };
+  };
+}

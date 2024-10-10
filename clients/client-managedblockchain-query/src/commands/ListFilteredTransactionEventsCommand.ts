@@ -144,9 +144,7 @@ export class ListFilteredTransactionEventsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ManagedBlockchainQueryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -158,4 +156,16 @@ export class ListFilteredTransactionEventsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFilteredTransactionEventsCommand)
   .de(de_ListFilteredTransactionEventsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFilteredTransactionEventsInput;
+      output: ListFilteredTransactionEventsOutput;
+    };
+    sdk: {
+      input: ListFilteredTransactionEventsCommandInput;
+      output: ListFilteredTransactionEventsCommandOutput;
+    };
+  };
+}

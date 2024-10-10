@@ -106,9 +106,7 @@ export class DescribeIdentityPoolCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class DescribeIdentityPoolCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeIdentityPoolCommand)
   .de(de_DescribeIdentityPoolCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIdentityPoolInput;
+      output: IdentityPool;
+    };
+    sdk: {
+      input: DescribeIdentityPoolCommandInput;
+      output: DescribeIdentityPoolCommandOutput;
+    };
+  };
+}

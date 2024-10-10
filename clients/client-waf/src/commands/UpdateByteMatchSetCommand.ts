@@ -255,9 +255,7 @@ export class UpdateByteMatchSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -269,4 +267,16 @@ export class UpdateByteMatchSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateByteMatchSetCommand)
   .de(de_UpdateByteMatchSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateByteMatchSetRequest;
+      output: UpdateByteMatchSetResponse;
+    };
+    sdk: {
+      input: UpdateByteMatchSetCommandInput;
+      output: UpdateByteMatchSetCommandOutput;
+    };
+  };
+}

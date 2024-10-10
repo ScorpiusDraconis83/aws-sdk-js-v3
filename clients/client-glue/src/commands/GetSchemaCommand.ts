@@ -93,9 +93,7 @@ export class GetSchemaCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class GetSchemaCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSchemaCommand)
   .de(de_GetSchemaCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSchemaInput;
+      output: GetSchemaResponse;
+    };
+    sdk: {
+      input: GetSchemaCommandInput;
+      output: GetSchemaCommandOutput;
+    };
+  };
+}

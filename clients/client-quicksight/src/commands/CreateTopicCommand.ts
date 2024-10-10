@@ -285,6 +285,9 @@ export interface CreateTopicCommandOutput extends CreateTopicResponse, __Metadat
  *         ],
  *       },
  *     ],
+ *     ConfigOptions: { // TopicConfigOptions
+ *       QBusinessInsightsEnabled: true || false,
+ *     },
  *   },
  *   Tags: [ // TagList
  *     { // Tag
@@ -351,9 +354,7 @@ export class CreateTopicCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -365,4 +366,16 @@ export class CreateTopicCommand extends $Command
   .f(CreateTopicRequestFilterSensitiveLog, void 0)
   .ser(se_CreateTopicCommand)
   .de(de_CreateTopicCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTopicRequest;
+      output: CreateTopicResponse;
+    };
+    sdk: {
+      input: CreateTopicCommandInput;
+      output: CreateTopicCommandOutput;
+    };
+  };
+}

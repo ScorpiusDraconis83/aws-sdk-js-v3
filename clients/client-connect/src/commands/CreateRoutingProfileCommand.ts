@@ -113,9 +113,7 @@ export class CreateRoutingProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class CreateRoutingProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRoutingProfileCommand)
   .de(de_CreateRoutingProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRoutingProfileRequest;
+      output: CreateRoutingProfileResponse;
+    };
+    sdk: {
+      input: CreateRoutingProfileCommandInput;
+      output: CreateRoutingProfileCommandOutput;
+    };
+  };
+}

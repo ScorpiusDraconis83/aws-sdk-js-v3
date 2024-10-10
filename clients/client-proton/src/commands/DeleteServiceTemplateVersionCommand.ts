@@ -123,9 +123,7 @@ export class DeleteServiceTemplateVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class DeleteServiceTemplateVersionCommand extends $Command
   .f(void 0, DeleteServiceTemplateVersionOutputFilterSensitiveLog)
   .ser(se_DeleteServiceTemplateVersionCommand)
   .de(de_DeleteServiceTemplateVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceTemplateVersionInput;
+      output: DeleteServiceTemplateVersionOutput;
+    };
+    sdk: {
+      input: DeleteServiceTemplateVersionCommandInput;
+      output: DeleteServiceTemplateVersionCommandOutput;
+    };
+  };
+}

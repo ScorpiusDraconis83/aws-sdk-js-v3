@@ -114,9 +114,7 @@ export class GetDataSourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MachineLearningClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class GetDataSourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDataSourceCommand)
   .de(de_GetDataSourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataSourceInput;
+      output: GetDataSourceOutput;
+    };
+    sdk: {
+      input: GetDataSourceCommandInput;
+      output: GetDataSourceCommandOutput;
+    };
+  };
+}

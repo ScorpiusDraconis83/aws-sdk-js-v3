@@ -101,9 +101,7 @@ export class SearchEntitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTThingsGraphClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class SearchEntitiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchEntitiesCommand)
   .de(de_SearchEntitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchEntitiesRequest;
+      output: SearchEntitiesResponse;
+    };
+    sdk: {
+      input: SearchEntitiesCommandInput;
+      output: SearchEntitiesCommandOutput;
+    };
+  };
+}

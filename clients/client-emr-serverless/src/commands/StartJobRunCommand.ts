@@ -150,9 +150,7 @@ export class StartJobRunCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRServerlessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -164,4 +162,16 @@ export class StartJobRunCommand extends $Command
   .f(StartJobRunRequestFilterSensitiveLog, void 0)
   .ser(se_StartJobRunCommand)
   .de(de_StartJobRunCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartJobRunRequest;
+      output: StartJobRunResponse;
+    };
+    sdk: {
+      input: StartJobRunCommandInput;
+      output: StartJobRunCommandOutput;
+    };
+  };
+}

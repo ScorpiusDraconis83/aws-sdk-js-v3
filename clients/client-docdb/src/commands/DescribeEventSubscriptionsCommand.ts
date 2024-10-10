@@ -97,9 +97,7 @@ export class DescribeEventSubscriptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DocDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DescribeEventSubscriptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEventSubscriptionsCommand)
   .de(de_DescribeEventSubscriptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventSubscriptionsMessage;
+      output: EventSubscriptionsMessage;
+    };
+    sdk: {
+      input: DescribeEventSubscriptionsCommandInput;
+      output: DescribeEventSubscriptionsCommandOutput;
+    };
+  };
+}

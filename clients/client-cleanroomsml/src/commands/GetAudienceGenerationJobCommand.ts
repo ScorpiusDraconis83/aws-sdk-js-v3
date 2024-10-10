@@ -120,9 +120,7 @@ export class GetAudienceGenerationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsMLClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class GetAudienceGenerationJobCommand extends $Command
   .f(void 0, GetAudienceGenerationJobResponseFilterSensitiveLog)
   .ser(se_GetAudienceGenerationJobCommand)
   .de(de_GetAudienceGenerationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAudienceGenerationJobRequest;
+      output: GetAudienceGenerationJobResponse;
+    };
+    sdk: {
+      input: GetAudienceGenerationJobCommandInput;
+      output: GetAudienceGenerationJobCommandOutput;
+    };
+  };
+}

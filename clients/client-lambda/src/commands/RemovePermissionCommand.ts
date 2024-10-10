@@ -28,7 +28,7 @@ export interface RemovePermissionCommandInput extends RemovePermissionRequest {}
 export interface RemovePermissionCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Revokes function-use permission from an Amazon Web Servicesservice or another Amazon Web Services account. You
+ * <p>Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account. You
  *       can get the ID of the statement from the output of <a>GetPolicy</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -83,6 +83,19 @@ export interface RemovePermissionCommandOutput extends __MetadataBearer {}
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To remove a Lambda function's permissions
+ * ```javascript
+ * // The following example removes a permissions statement named xaccount from the PROD alias of a function named my-function.
+ * const input = {
+ *   "FunctionName": "my-function",
+ *   "Qualifier": "PROD",
+ *   "StatementId": "xaccount"
+ * };
+ * const command = new RemovePermissionCommand(input);
+ * await client.send(command);
+ * // example id: to-remove-a-lambda-functions-permissions-1481661337021
+ * ```
+ *
  */
 export class RemovePermissionCommand extends $Command
   .classBuilder<
@@ -92,9 +105,7 @@ export class RemovePermissionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +117,16 @@ export class RemovePermissionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemovePermissionCommand)
   .de(de_RemovePermissionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemovePermissionRequest;
+      output: {};
+    };
+    sdk: {
+      input: RemovePermissionCommandInput;
+      output: RemovePermissionCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class CreateReadinessCheckCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53RecoveryReadinessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class CreateReadinessCheckCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateReadinessCheckCommand)
   .de(de_CreateReadinessCheckCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReadinessCheckRequest;
+      output: CreateReadinessCheckResponse;
+    };
+    sdk: {
+      input: CreateReadinessCheckCommandInput;
+      output: CreateReadinessCheckCommandOutput;
+    };
+  };
+}

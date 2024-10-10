@@ -52,6 +52,8 @@ export interface ListMicrosoftTeamsConfiguredTeamsCommandOutput
  * //       TenantId: "STRING_VALUE", // required
  * //       TeamId: "STRING_VALUE", // required
  * //       TeamName: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //       StateReason: "STRING_VALUE",
  * //     },
  * //   ],
  * //   NextToken: "STRING_VALUE",
@@ -87,9 +89,7 @@ export class ListMicrosoftTeamsConfiguredTeamsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +101,16 @@ export class ListMicrosoftTeamsConfiguredTeamsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListMicrosoftTeamsConfiguredTeamsCommand)
   .de(de_ListMicrosoftTeamsConfiguredTeamsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMicrosoftTeamsConfiguredTeamsRequest;
+      output: ListMicrosoftTeamsConfiguredTeamsResult;
+    };
+    sdk: {
+      input: ListMicrosoftTeamsConfiguredTeamsCommandInput;
+      output: ListMicrosoftTeamsConfiguredTeamsCommandOutput;
+    };
+  };
+}

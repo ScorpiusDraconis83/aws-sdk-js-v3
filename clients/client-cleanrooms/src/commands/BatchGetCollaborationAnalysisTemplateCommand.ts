@@ -139,9 +139,7 @@ export class BatchGetCollaborationAnalysisTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class BatchGetCollaborationAnalysisTemplateCommand extends $Command
   .f(void 0, BatchGetCollaborationAnalysisTemplateOutputFilterSensitiveLog)
   .ser(se_BatchGetCollaborationAnalysisTemplateCommand)
   .de(de_BatchGetCollaborationAnalysisTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetCollaborationAnalysisTemplateInput;
+      output: BatchGetCollaborationAnalysisTemplateOutput;
+    };
+    sdk: {
+      input: BatchGetCollaborationAnalysisTemplateCommandInput;
+      output: BatchGetCollaborationAnalysisTemplateCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class SearchFlowTemplatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTThingsGraphClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class SearchFlowTemplatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchFlowTemplatesCommand)
   .de(de_SearchFlowTemplatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchFlowTemplatesRequest;
+      output: SearchFlowTemplatesResponse;
+    };
+    sdk: {
+      input: SearchFlowTemplatesCommandInput;
+      output: SearchFlowTemplatesCommandOutput;
+    };
+  };
+}

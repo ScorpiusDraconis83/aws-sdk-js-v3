@@ -89,9 +89,7 @@ export class BatchDeleteDetectorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTEventsDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class BatchDeleteDetectorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchDeleteDetectorCommand)
   .de(de_BatchDeleteDetectorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteDetectorRequest;
+      output: BatchDeleteDetectorResponse;
+    };
+    sdk: {
+      input: BatchDeleteDetectorCommandInput;
+      output: BatchDeleteDetectorCommandOutput;
+    };
+  };
+}

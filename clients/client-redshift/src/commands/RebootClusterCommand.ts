@@ -267,9 +267,7 @@ export class RebootClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -281,4 +279,16 @@ export class RebootClusterCommand extends $Command
   .f(void 0, RebootClusterResultFilterSensitiveLog)
   .ser(se_RebootClusterCommand)
   .de(de_RebootClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RebootClusterMessage;
+      output: RebootClusterResult;
+    };
+    sdk: {
+      input: RebootClusterCommandInput;
+      output: RebootClusterCommandOutput;
+    };
+  };
+}

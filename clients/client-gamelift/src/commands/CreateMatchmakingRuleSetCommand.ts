@@ -127,9 +127,7 @@ export class CreateMatchmakingRuleSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class CreateMatchmakingRuleSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateMatchmakingRuleSetCommand)
   .de(de_CreateMatchmakingRuleSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMatchmakingRuleSetInput;
+      output: CreateMatchmakingRuleSetOutput;
+    };
+    sdk: {
+      input: CreateMatchmakingRuleSetCommandInput;
+      output: CreateMatchmakingRuleSetCommandOutput;
+    };
+  };
+}

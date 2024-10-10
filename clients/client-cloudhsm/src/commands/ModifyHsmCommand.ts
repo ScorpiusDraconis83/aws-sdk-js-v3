@@ -97,9 +97,7 @@ export class ModifyHsmCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudHSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ModifyHsmCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyHsmCommand)
   .de(de_ModifyHsmCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyHsmRequest;
+      output: ModifyHsmResponse;
+    };
+    sdk: {
+      input: ModifyHsmCommandInput;
+      output: ModifyHsmCommandOutput;
+    };
+  };
+}

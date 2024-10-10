@@ -37,11 +37,11 @@ export interface UnassignPrivateIpAddressesCommandOutput extends __MetadataBeare
  * // const { EC2Client, UnassignPrivateIpAddressesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // UnassignPrivateIpAddressesRequest
- *   NetworkInterfaceId: "STRING_VALUE", // required
- *   PrivateIpAddresses: [ // PrivateIpAddressStringList
+ *   Ipv4Prefixes: [ // IpPrefixList
  *     "STRING_VALUE",
  *   ],
- *   Ipv4Prefixes: [ // IpPrefixList
+ *   NetworkInterfaceId: "STRING_VALUE", // required
+ *   PrivateIpAddresses: [ // PrivateIpAddressStringList
  *     "STRING_VALUE",
  *   ],
  * };
@@ -84,9 +84,7 @@ export class UnassignPrivateIpAddressesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class UnassignPrivateIpAddressesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UnassignPrivateIpAddressesCommand)
   .de(de_UnassignPrivateIpAddressesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnassignPrivateIpAddressesRequest;
+      output: {};
+    };
+    sdk: {
+      input: UnassignPrivateIpAddressesCommandInput;
+      output: UnassignPrivateIpAddressesCommandOutput;
+    };
+  };
+}

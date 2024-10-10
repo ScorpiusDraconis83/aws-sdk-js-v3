@@ -73,9 +73,7 @@ export class DeleteCompilationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class DeleteCompilationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteCompilationJobCommand)
   .de(de_DeleteCompilationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCompilationJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteCompilationJobCommandInput;
+      output: DeleteCompilationJobCommandOutput;
+    };
+  };
+}

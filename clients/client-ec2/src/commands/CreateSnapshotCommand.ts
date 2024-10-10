@@ -79,18 +79,6 @@ export interface CreateSnapshotCommandOutput extends Snapshot, __MetadataBearer 
  * const command = new CreateSnapshotCommand(input);
  * const response = await client.send(command);
  * // { // Snapshot
- * //   DataEncryptionKeyId: "STRING_VALUE",
- * //   Description: "STRING_VALUE",
- * //   Encrypted: true || false,
- * //   KmsKeyId: "STRING_VALUE",
- * //   OwnerId: "STRING_VALUE",
- * //   Progress: "STRING_VALUE",
- * //   SnapshotId: "STRING_VALUE",
- * //   StartTime: new Date("TIMESTAMP"),
- * //   State: "pending" || "completed" || "error" || "recoverable" || "recovering",
- * //   StateMessage: "STRING_VALUE",
- * //   VolumeId: "STRING_VALUE",
- * //   VolumeSize: Number("int"),
  * //   OwnerAlias: "STRING_VALUE",
  * //   OutpostArn: "STRING_VALUE",
  * //   Tags: [ // TagList
@@ -102,6 +90,18 @@ export interface CreateSnapshotCommandOutput extends Snapshot, __MetadataBearer 
  * //   StorageTier: "archive" || "standard",
  * //   RestoreExpiryTime: new Date("TIMESTAMP"),
  * //   SseType: "sse-ebs" || "sse-kms" || "none",
+ * //   SnapshotId: "STRING_VALUE",
+ * //   VolumeId: "STRING_VALUE",
+ * //   State: "pending" || "completed" || "error" || "recoverable" || "recovering",
+ * //   StateMessage: "STRING_VALUE",
+ * //   StartTime: new Date("TIMESTAMP"),
+ * //   Progress: "STRING_VALUE",
+ * //   OwnerId: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   VolumeSize: Number("int"),
+ * //   Encrypted: true || false,
+ * //   KmsKeyId: "STRING_VALUE",
+ * //   DataEncryptionKeyId: "STRING_VALUE",
  * // };
  *
  * ```
@@ -149,9 +149,7 @@ export class CreateSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +161,16 @@ export class CreateSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSnapshotCommand)
   .de(de_CreateSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSnapshotRequest;
+      output: Snapshot;
+    };
+    sdk: {
+      input: CreateSnapshotCommandInput;
+      output: CreateSnapshotCommandOutput;
+    };
+  };
+}

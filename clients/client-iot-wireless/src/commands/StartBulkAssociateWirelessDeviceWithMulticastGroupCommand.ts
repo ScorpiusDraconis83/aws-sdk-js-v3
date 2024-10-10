@@ -95,9 +95,7 @@ export class StartBulkAssociateWirelessDeviceWithMulticastGroupCommand extends $
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class StartBulkAssociateWirelessDeviceWithMulticastGroupCommand extends $
   .f(void 0, void 0)
   .ser(se_StartBulkAssociateWirelessDeviceWithMulticastGroupCommand)
   .de(de_StartBulkAssociateWirelessDeviceWithMulticastGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartBulkAssociateWirelessDeviceWithMulticastGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput;
+      output: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput;
+    };
+  };
+}

@@ -92,9 +92,7 @@ export class PutPositionConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class PutPositionConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutPositionConfigurationCommand)
   .de(de_PutPositionConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPositionConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutPositionConfigurationCommandInput;
+      output: PutPositionConfigurationCommandOutput;
+    };
+  };
+}

@@ -103,9 +103,7 @@ export class StartDataQualityRuleRecommendationRunCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class StartDataQualityRuleRecommendationRunCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartDataQualityRuleRecommendationRunCommand)
   .de(de_StartDataQualityRuleRecommendationRunCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDataQualityRuleRecommendationRunRequest;
+      output: StartDataQualityRuleRecommendationRunResponse;
+    };
+    sdk: {
+      input: StartDataQualityRuleRecommendationRunCommandInput;
+      output: StartDataQualityRuleRecommendationRunCommandOutput;
+    };
+  };
+}

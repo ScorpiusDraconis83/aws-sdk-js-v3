@@ -165,9 +165,7 @@ export class UpdateWorkspaceAuthenticationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GrafanaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class UpdateWorkspaceAuthenticationCommand extends $Command
   .f(UpdateWorkspaceAuthenticationRequestFilterSensitiveLog, UpdateWorkspaceAuthenticationResponseFilterSensitiveLog)
   .ser(se_UpdateWorkspaceAuthenticationCommand)
   .de(de_UpdateWorkspaceAuthenticationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkspaceAuthenticationRequest;
+      output: UpdateWorkspaceAuthenticationResponse;
+    };
+    sdk: {
+      input: UpdateWorkspaceAuthenticationCommandInput;
+      output: UpdateWorkspaceAuthenticationCommandOutput;
+    };
+  };
+}

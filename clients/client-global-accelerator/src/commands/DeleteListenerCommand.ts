@@ -80,9 +80,7 @@ export class DeleteListenerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlobalAcceleratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DeleteListenerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteListenerCommand)
   .de(de_DeleteListenerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteListenerRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteListenerCommandInput;
+      output: DeleteListenerCommandOutput;
+    };
+  };
+}

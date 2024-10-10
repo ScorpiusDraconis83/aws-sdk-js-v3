@@ -171,9 +171,7 @@ export class ListContainerGroupDefinitionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -185,4 +183,16 @@ export class ListContainerGroupDefinitionsCommand extends $Command
   .f(void 0, ListContainerGroupDefinitionsOutputFilterSensitiveLog)
   .ser(se_ListContainerGroupDefinitionsCommand)
   .de(de_ListContainerGroupDefinitionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContainerGroupDefinitionsInput;
+      output: ListContainerGroupDefinitionsOutput;
+    };
+    sdk: {
+      input: ListContainerGroupDefinitionsCommandInput;
+      output: ListContainerGroupDefinitionsCommandOutput;
+    };
+  };
+}

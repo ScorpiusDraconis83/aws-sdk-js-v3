@@ -81,9 +81,7 @@ export class DeleteReplicationConfigurationTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DeleteReplicationConfigurationTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteReplicationConfigurationTemplateCommand)
   .de(de_DeleteReplicationConfigurationTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReplicationConfigurationTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteReplicationConfigurationTemplateCommandInput;
+      output: DeleteReplicationConfigurationTemplateCommandOutput;
+    };
+  };
+}

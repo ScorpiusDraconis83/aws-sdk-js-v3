@@ -74,9 +74,7 @@ export class DeleteRobotApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -88,4 +86,16 @@ export class DeleteRobotApplicationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRobotApplicationCommand)
   .de(de_DeleteRobotApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRobotApplicationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRobotApplicationCommandInput;
+      output: DeleteRobotApplicationCommandOutput;
+    };
+  };
+}

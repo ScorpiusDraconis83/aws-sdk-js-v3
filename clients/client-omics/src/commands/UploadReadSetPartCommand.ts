@@ -103,9 +103,7 @@ export class UploadReadSetPartCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class UploadReadSetPartCommand extends $Command
   .f(UploadReadSetPartRequestFilterSensitiveLog, void 0)
   .ser(se_UploadReadSetPartCommand)
   .de(de_UploadReadSetPartCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadReadSetPartRequest;
+      output: UploadReadSetPartResponse;
+    };
+    sdk: {
+      input: UploadReadSetPartCommandInput;
+      output: UploadReadSetPartCommandOutput;
+    };
+  };
+}

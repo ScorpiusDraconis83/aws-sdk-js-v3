@@ -201,9 +201,7 @@ export class UpdateSourceServerReplicationTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -215,4 +213,16 @@ export class UpdateSourceServerReplicationTypeCommand extends $Command
   .f(void 0, SourceServerFilterSensitiveLog)
   .ser(se_UpdateSourceServerReplicationTypeCommand)
   .de(de_UpdateSourceServerReplicationTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSourceServerReplicationTypeRequest;
+      output: SourceServer;
+    };
+    sdk: {
+      input: UpdateSourceServerReplicationTypeCommandInput;
+      output: UpdateSourceServerReplicationTypeCommandOutput;
+    };
+  };
+}

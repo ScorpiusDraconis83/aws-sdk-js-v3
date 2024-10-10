@@ -36,9 +36,6 @@ export interface DescribeExportTasksCommandOutput extends DescribeExportTasksRes
  * // const { EC2Client, DescribeExportTasksCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeExportTasksRequest
- *   ExportTaskIds: [ // ExportTaskIdStringList
- *     "STRING_VALUE",
- *   ],
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -46,6 +43,9 @@ export interface DescribeExportTasksCommandOutput extends DescribeExportTasksRes
  *         "STRING_VALUE",
  *       ],
  *     },
+ *   ],
+ *   ExportTaskIds: [ // ExportTaskIdStringList
+ *     "STRING_VALUE",
  *   ],
  * };
  * const command = new DescribeExportTasksCommand(input);
@@ -98,9 +98,7 @@ export class DescribeExportTasksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class DescribeExportTasksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeExportTasksCommand)
   .de(de_DescribeExportTasksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeExportTasksRequest;
+      output: DescribeExportTasksResult;
+    };
+    sdk: {
+      input: DescribeExportTasksCommandInput;
+      output: DescribeExportTasksCommandOutput;
+    };
+  };
+}

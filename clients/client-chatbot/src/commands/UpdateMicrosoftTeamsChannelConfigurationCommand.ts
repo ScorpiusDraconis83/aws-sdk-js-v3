@@ -85,6 +85,8 @@ export interface UpdateMicrosoftTeamsChannelConfigurationCommandOutput
  * //         TagValue: "STRING_VALUE", // required
  * //       },
  * //     ],
+ * //     State: "STRING_VALUE",
+ * //     StateReason: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -121,9 +123,7 @@ export class UpdateMicrosoftTeamsChannelConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +135,16 @@ export class UpdateMicrosoftTeamsChannelConfigurationCommand extends $Command
   .f(UpdateTeamsChannelConfigurationRequestFilterSensitiveLog, UpdateTeamsChannelConfigurationResultFilterSensitiveLog)
   .ser(se_UpdateMicrosoftTeamsChannelConfigurationCommand)
   .de(de_UpdateMicrosoftTeamsChannelConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTeamsChannelConfigurationRequest;
+      output: UpdateTeamsChannelConfigurationResult;
+    };
+    sdk: {
+      input: UpdateMicrosoftTeamsChannelConfigurationCommandInput;
+      output: UpdateMicrosoftTeamsChannelConfigurationCommandOutput;
+    };
+  };
+}

@@ -126,9 +126,7 @@ export class CreateEnvironmentTemplateVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class CreateEnvironmentTemplateVersionCommand extends $Command
   .f(CreateEnvironmentTemplateVersionInputFilterSensitiveLog, CreateEnvironmentTemplateVersionOutputFilterSensitiveLog)
   .ser(se_CreateEnvironmentTemplateVersionCommand)
   .de(de_CreateEnvironmentTemplateVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentTemplateVersionInput;
+      output: CreateEnvironmentTemplateVersionOutput;
+    };
+    sdk: {
+      input: CreateEnvironmentTemplateVersionCommandInput;
+      output: CreateEnvironmentTemplateVersionCommandOutput;
+    };
+  };
+}

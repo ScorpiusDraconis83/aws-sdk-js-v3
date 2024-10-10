@@ -132,9 +132,7 @@ export class CreateBucketAccessKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class CreateBucketAccessKeyCommand extends $Command
   .f(void 0, CreateBucketAccessKeyResultFilterSensitiveLog)
   .ser(se_CreateBucketAccessKeyCommand)
   .de(de_CreateBucketAccessKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBucketAccessKeyRequest;
+      output: CreateBucketAccessKeyResult;
+    };
+    sdk: {
+      input: CreateBucketAccessKeyCommandInput;
+      output: CreateBucketAccessKeyCommandOutput;
+    };
+  };
+}

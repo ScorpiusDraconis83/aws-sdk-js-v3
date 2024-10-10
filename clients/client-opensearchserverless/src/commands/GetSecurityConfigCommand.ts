@@ -94,9 +94,7 @@ export class GetSecurityConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchServerlessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetSecurityConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSecurityConfigCommand)
   .de(de_GetSecurityConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSecurityConfigRequest;
+      output: GetSecurityConfigResponse;
+    };
+    sdk: {
+      input: GetSecurityConfigCommandInput;
+      output: GetSecurityConfigCommandOutput;
+    };
+  };
+}

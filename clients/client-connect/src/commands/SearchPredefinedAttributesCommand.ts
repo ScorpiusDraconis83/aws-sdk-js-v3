@@ -123,9 +123,7 @@ export class SearchPredefinedAttributesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class SearchPredefinedAttributesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchPredefinedAttributesCommand)
   .de(de_SearchPredefinedAttributesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchPredefinedAttributesRequest;
+      output: SearchPredefinedAttributesResponse;
+    };
+    sdk: {
+      input: SearchPredefinedAttributesCommandInput;
+      output: SearchPredefinedAttributesCommandOutput;
+    };
+  };
+}

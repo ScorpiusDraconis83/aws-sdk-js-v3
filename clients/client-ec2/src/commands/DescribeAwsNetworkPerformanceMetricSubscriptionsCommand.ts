@@ -93,9 +93,7 @@ export class DescribeAwsNetworkPerformanceMetricSubscriptionsCommand extends $Co
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class DescribeAwsNetworkPerformanceMetricSubscriptionsCommand extends $Co
   .f(void 0, void 0)
   .ser(se_DescribeAwsNetworkPerformanceMetricSubscriptionsCommand)
   .de(de_DescribeAwsNetworkPerformanceMetricSubscriptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAwsNetworkPerformanceMetricSubscriptionsRequest;
+      output: DescribeAwsNetworkPerformanceMetricSubscriptionsResult;
+    };
+    sdk: {
+      input: DescribeAwsNetworkPerformanceMetricSubscriptionsCommandInput;
+      output: DescribeAwsNetworkPerformanceMetricSubscriptionsCommandOutput;
+    };
+  };
+}

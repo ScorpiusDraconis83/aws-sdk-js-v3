@@ -117,9 +117,7 @@ export class BatchDetectSyntaxCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class BatchDetectSyntaxCommand extends $Command
   .f(BatchDetectSyntaxRequestFilterSensitiveLog, BatchDetectSyntaxResponseFilterSensitiveLog)
   .ser(se_BatchDetectSyntaxCommand)
   .de(de_BatchDetectSyntaxCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectSyntaxRequest;
+      output: BatchDetectSyntaxResponse;
+    };
+    sdk: {
+      input: BatchDetectSyntaxCommandInput;
+      output: BatchDetectSyntaxCommandOutput;
+    };
+  };
+}

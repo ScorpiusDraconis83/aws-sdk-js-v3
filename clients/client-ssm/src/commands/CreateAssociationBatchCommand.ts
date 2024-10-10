@@ -102,6 +102,20 @@ export interface CreateAssociationBatchCommandOutput extends CreateAssociationBa
  *               },
  *             ],
  *           },
+ *           IncludeChildOrganizationUnits: true || false,
+ *           ExcludeAccounts: [ // ExcludeAccounts
+ *             "STRING_VALUE",
+ *           ],
+ *           Targets: [
+ *             {
+ *               Key: "STRING_VALUE",
+ *               Values: [
+ *                 "STRING_VALUE",
+ *               ],
+ *             },
+ *           ],
+ *           TargetsMaxConcurrency: "STRING_VALUE",
+ *           TargetsMaxErrors: "STRING_VALUE",
  *         },
  *       ],
  *       ScheduleOffset: Number("int"),
@@ -201,6 +215,20 @@ export interface CreateAssociationBatchCommandOutput extends CreateAssociationBa
  * //               },
  * //             ],
  * //           },
+ * //           IncludeChildOrganizationUnits: true || false,
+ * //           ExcludeAccounts: [ // ExcludeAccounts
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           Targets: [
+ * //             {
+ * //               Key: "STRING_VALUE",
+ * //               Values: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //           TargetsMaxConcurrency: "STRING_VALUE",
+ * //           TargetsMaxErrors: "STRING_VALUE",
  * //         },
  * //       ],
  * //       ScheduleOffset: Number("int"),
@@ -240,14 +268,7 @@ export interface CreateAssociationBatchCommandOutput extends CreateAssociationBa
  * //         },
  * //         AutomationTargetParameterName: "STRING_VALUE",
  * //         DocumentVersion: "STRING_VALUE",
- * //         Targets: [
- * //           {
- * //             Key: "STRING_VALUE",
- * //             Values: [
- * //               "STRING_VALUE",
- * //             ],
- * //           },
- * //         ],
+ * //         Targets: "<Targets>",
  * //         ScheduleExpression: "STRING_VALUE",
  * //         OutputLocation: {
  * //           S3Location: {
@@ -277,6 +298,13 @@ export interface CreateAssociationBatchCommandOutput extends CreateAssociationBa
  * //             TargetLocationMaxErrors: "STRING_VALUE",
  * //             ExecutionRoleName: "STRING_VALUE",
  * //             TargetLocationAlarmConfiguration: "<AlarmConfiguration>",
+ * //             IncludeChildOrganizationUnits: true || false,
+ * //             ExcludeAccounts: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             Targets: "<Targets>",
+ * //             TargetsMaxConcurrency: "STRING_VALUE",
+ * //             TargetsMaxErrors: "STRING_VALUE",
  * //           },
  * //         ],
  * //         ScheduleOffset: Number("int"),
@@ -373,9 +401,7 @@ export class CreateAssociationBatchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -387,4 +413,16 @@ export class CreateAssociationBatchCommand extends $Command
   .f(CreateAssociationBatchRequestFilterSensitiveLog, CreateAssociationBatchResultFilterSensitiveLog)
   .ser(se_CreateAssociationBatchCommand)
   .de(de_CreateAssociationBatchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAssociationBatchRequest;
+      output: CreateAssociationBatchResult;
+    };
+    sdk: {
+      input: CreateAssociationBatchCommandInput;
+      output: CreateAssociationBatchCommandOutput;
+    };
+  };
+}

@@ -106,9 +106,7 @@ export class ListGroupPoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class ListGroupPoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGroupPoliciesCommand)
   .de(de_ListGroupPoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGroupPoliciesRequest;
+      output: ListGroupPoliciesResponse;
+    };
+    sdk: {
+      input: ListGroupPoliciesCommandInput;
+      output: ListGroupPoliciesCommandOutput;
+    };
+  };
+}

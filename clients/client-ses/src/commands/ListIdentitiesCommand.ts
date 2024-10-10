@@ -103,9 +103,7 @@ export class ListIdentitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class ListIdentitiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListIdentitiesCommand)
   .de(de_ListIdentitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIdentitiesRequest;
+      output: ListIdentitiesResponse;
+    };
+    sdk: {
+      input: ListIdentitiesCommandInput;
+      output: ListIdentitiesCommandOutput;
+    };
+  };
+}

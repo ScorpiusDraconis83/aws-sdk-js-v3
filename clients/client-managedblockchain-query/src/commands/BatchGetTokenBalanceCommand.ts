@@ -145,9 +145,7 @@ export class BatchGetTokenBalanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ManagedBlockchainQueryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +157,16 @@ export class BatchGetTokenBalanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetTokenBalanceCommand)
   .de(de_BatchGetTokenBalanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetTokenBalanceInput;
+      output: BatchGetTokenBalanceOutput;
+    };
+    sdk: {
+      input: BatchGetTokenBalanceCommandInput;
+      output: BatchGetTokenBalanceCommandOutput;
+    };
+  };
+}

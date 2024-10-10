@@ -5,7 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { DescribeModelInput, DescribeModelOutput } from "../models/models_2";
+import { DescribeModelInput, DescribeModelOutput } from "../models/models_3";
 import { de_DescribeModelCommand, se_DescribeModelCommand } from "../protocols/Aws_json1_1";
 import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
 
@@ -65,6 +65,7 @@ export interface DescribeModelCommandOutput extends DescribeModelOutput, __Metad
  * //         HubAccessConfig: { // InferenceHubAccessConfig
  * //           HubContentArn: "STRING_VALUE", // required
  * //         },
+ * //         ManifestS3Uri: "STRING_VALUE",
  * //       },
  * //     },
  * //     AdditionalModelDataSources: [ // AdditionalModelDataSources
@@ -80,6 +81,7 @@ export interface DescribeModelCommandOutput extends DescribeModelOutput, __Metad
  * //           HubAccessConfig: {
  * //             HubContentArn: "STRING_VALUE", // required
  * //           },
+ * //           ManifestS3Uri: "STRING_VALUE",
  * //         },
  * //       },
  * //     ],
@@ -115,6 +117,7 @@ export interface DescribeModelCommandOutput extends DescribeModelOutput, __Metad
  * //           HubAccessConfig: {
  * //             HubContentArn: "STRING_VALUE", // required
  * //           },
+ * //           ManifestS3Uri: "STRING_VALUE",
  * //         },
  * //       },
  * //       AdditionalModelDataSources: [
@@ -181,9 +184,7 @@ export class DescribeModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -195,4 +196,16 @@ export class DescribeModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeModelCommand)
   .de(de_DescribeModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeModelInput;
+      output: DescribeModelOutput;
+    };
+    sdk: {
+      input: DescribeModelCommandInput;
+      output: DescribeModelCommandOutput;
+    };
+  };
+}

@@ -96,9 +96,7 @@ export class GetResourcePoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class GetResourcePoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetResourcePoliciesCommand)
   .de(de_GetResourcePoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourcePoliciesRequest;
+      output: GetResourcePoliciesResponse;
+    };
+    sdk: {
+      input: GetResourcePoliciesCommandInput;
+      output: GetResourcePoliciesCommandOutput;
+    };
+  };
+}

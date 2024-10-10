@@ -106,9 +106,7 @@ export class CreateBotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class CreateBotCommand extends $Command
   .f(CreateBotRequestFilterSensitiveLog, CreateBotResponseFilterSensitiveLog)
   .ser(se_CreateBotCommand)
   .de(de_CreateBotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBotRequest;
+      output: CreateBotResponse;
+    };
+    sdk: {
+      input: CreateBotCommandInput;
+      output: CreateBotCommandOutput;
+    };
+  };
+}

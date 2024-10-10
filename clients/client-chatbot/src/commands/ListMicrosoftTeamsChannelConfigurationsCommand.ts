@@ -77,6 +77,8 @@ export interface ListMicrosoftTeamsChannelConfigurationsCommandOutput
  * //           TagValue: "STRING_VALUE", // required
  * //         },
  * //       ],
+ * //       State: "STRING_VALUE",
+ * //       StateReason: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -111,9 +113,7 @@ export class ListMicrosoftTeamsChannelConfigurationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +125,16 @@ export class ListMicrosoftTeamsChannelConfigurationsCommand extends $Command
   .f(void 0, ListTeamsChannelConfigurationsResultFilterSensitiveLog)
   .ser(se_ListMicrosoftTeamsChannelConfigurationsCommand)
   .de(de_ListMicrosoftTeamsChannelConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTeamsChannelConfigurationsRequest;
+      output: ListTeamsChannelConfigurationsResult;
+    };
+    sdk: {
+      input: ListMicrosoftTeamsChannelConfigurationsCommandInput;
+      output: ListMicrosoftTeamsChannelConfigurationsCommandOutput;
+    };
+  };
+}

@@ -175,6 +175,9 @@ export interface CreateEventSourceMappingCommandOutput extends EventSourceMappin
  *   MaximumRecordAgeInSeconds: Number("int"),
  *   BisectBatchOnFunctionError: true || false,
  *   MaximumRetryAttempts: Number("int"),
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
  *   TumblingWindowInSeconds: Number("int"),
  *   Topics: [ // Topics
  *     "STRING_VALUE",
@@ -289,6 +292,7 @@ export interface CreateEventSourceMappingCommandOutput extends EventSourceMappin
  * //     ErrorCode: "STRING_VALUE",
  * //     Message: "STRING_VALUE",
  * //   },
+ * //   EventSourceMappingArn: "STRING_VALUE",
  * // };
  *
  * ```
@@ -318,6 +322,30 @@ export interface CreateEventSourceMappingCommandOutput extends EventSourceMappin
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To create a mapping between an event source and an AWS Lambda function
+ * ```javascript
+ * // The following example creates a mapping between an SQS queue and the my-function Lambda function.
+ * const input = {
+ *   "BatchSize": 5,
+ *   "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:my-queue",
+ *   "FunctionName": "my-function"
+ * };
+ * const command = new CreateEventSourceMappingCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "BatchSize": 5,
+ *   "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:my-queue",
+ *   "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+ *   "LastModified": 1569284520.333,
+ *   "State": "Creating",
+ *   "StateTransitionReason": "USER_INITIATED",
+ *   "UUID": "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE"
+ * }
+ * *\/
+ * // example id: to-create-a-mapping-between-an-event-source-and-an-aws-lambda-function-1586480555467
+ * ```
+ *
  */
 export class CreateEventSourceMappingCommand extends $Command
   .classBuilder<
@@ -327,9 +355,7 @@ export class CreateEventSourceMappingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -341,4 +367,16 @@ export class CreateEventSourceMappingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateEventSourceMappingCommand)
   .de(de_CreateEventSourceMappingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEventSourceMappingRequest;
+      output: EventSourceMappingConfiguration;
+    };
+    sdk: {
+      input: CreateEventSourceMappingCommandInput;
+      output: CreateEventSourceMappingCommandOutput;
+    };
+  };
+}

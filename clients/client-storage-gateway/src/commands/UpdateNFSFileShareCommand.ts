@@ -60,6 +60,7 @@ export interface UpdateNFSFileShareCommandOutput extends UpdateNFSFileShareOutpu
  * const client = new StorageGatewayClient(config);
  * const input = { // UpdateNFSFileShareInput
  *   FileShareARN: "STRING_VALUE", // required
+ *   EncryptionType: "SseS3" || "SseKms" || "DsseKms",
  *   KMSEncrypted: true || false,
  *   KMSKey: "STRING_VALUE",
  *   NFSFileShareDefaults: { // NFSFileShareDefaults
@@ -119,9 +120,7 @@ export class UpdateNFSFileShareCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +132,16 @@ export class UpdateNFSFileShareCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateNFSFileShareCommand)
   .de(de_UpdateNFSFileShareCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateNFSFileShareInput;
+      output: UpdateNFSFileShareOutput;
+    };
+    sdk: {
+      input: UpdateNFSFileShareCommandInput;
+      output: UpdateNFSFileShareCommandOutput;
+    };
+  };
+}

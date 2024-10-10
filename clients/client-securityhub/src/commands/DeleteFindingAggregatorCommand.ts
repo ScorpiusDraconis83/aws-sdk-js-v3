@@ -28,8 +28,13 @@ export interface DeleteFindingAggregatorCommandInput extends DeleteFindingAggreg
 export interface DeleteFindingAggregatorCommandOutput extends DeleteFindingAggregatorResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation.</p>
- *          <p>When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated.
+ * <note>
+ *             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
+ *          </note>
+ *          <p>Deletes a finding aggregator. When you delete the finding aggregator, you stop cross-Region aggregation. Finding replication stops
+ * occurring from the linked Regions to the home Region.</p>
+ *          <p>When you stop cross-Region aggregation, findings that were already replicated and sent to the home Region are still visible from
+ *         the home Region. However, new findings and finding updates are no longer replicated and sent to the home Region.
  *       </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -96,9 +101,7 @@ export class DeleteFindingAggregatorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +113,16 @@ export class DeleteFindingAggregatorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteFindingAggregatorCommand)
   .de(de_DeleteFindingAggregatorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFindingAggregatorRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteFindingAggregatorCommandInput;
+      output: DeleteFindingAggregatorCommandOutput;
+    };
+  };
+}

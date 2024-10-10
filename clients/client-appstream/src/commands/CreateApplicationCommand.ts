@@ -130,9 +130,7 @@ export class CreateApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class CreateApplicationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateApplicationCommand)
   .de(de_CreateApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApplicationRequest;
+      output: CreateApplicationResult;
+    };
+    sdk: {
+      input: CreateApplicationCommandInput;
+      output: CreateApplicationCommandOutput;
+    };
+  };
+}

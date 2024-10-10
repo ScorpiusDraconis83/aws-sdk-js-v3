@@ -100,9 +100,7 @@ export class ListEnabledBaselinesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ControlTowerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListEnabledBaselinesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEnabledBaselinesCommand)
   .de(de_ListEnabledBaselinesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEnabledBaselinesInput;
+      output: ListEnabledBaselinesOutput;
+    };
+    sdk: {
+      input: ListEnabledBaselinesCommandInput;
+      output: ListEnabledBaselinesCommandOutput;
+    };
+  };
+}

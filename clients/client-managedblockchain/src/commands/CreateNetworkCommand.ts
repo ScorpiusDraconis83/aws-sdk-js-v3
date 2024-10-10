@@ -138,9 +138,7 @@ export class CreateNetworkCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ManagedBlockchainClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class CreateNetworkCommand extends $Command
   .f(CreateNetworkInputFilterSensitiveLog, void 0)
   .ser(se_CreateNetworkCommand)
   .de(de_CreateNetworkCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkInput;
+      output: CreateNetworkOutput;
+    };
+    sdk: {
+      input: CreateNetworkCommandInput;
+      output: CreateNetworkCommandOutput;
+    };
+  };
+}

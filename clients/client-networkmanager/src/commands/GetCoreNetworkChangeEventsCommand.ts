@@ -99,9 +99,7 @@ export class GetCoreNetworkChangeEventsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetCoreNetworkChangeEventsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetCoreNetworkChangeEventsCommand)
   .de(de_GetCoreNetworkChangeEventsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCoreNetworkChangeEventsRequest;
+      output: GetCoreNetworkChangeEventsResponse;
+    };
+    sdk: {
+      input: GetCoreNetworkChangeEventsCommandInput;
+      output: GetCoreNetworkChangeEventsCommandOutput;
+    };
+  };
+}

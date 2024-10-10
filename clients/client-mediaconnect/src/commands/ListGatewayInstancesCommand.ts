@@ -90,9 +90,7 @@ export class ListGatewayInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ListGatewayInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGatewayInstancesCommand)
   .de(de_ListGatewayInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGatewayInstancesRequest;
+      output: ListGatewayInstancesResponse;
+    };
+    sdk: {
+      input: ListGatewayInstancesCommandInput;
+      output: ListGatewayInstancesCommandOutput;
+    };
+  };
+}

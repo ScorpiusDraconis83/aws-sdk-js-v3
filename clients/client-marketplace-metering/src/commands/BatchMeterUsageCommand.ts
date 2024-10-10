@@ -191,9 +191,7 @@ export class BatchMeterUsageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MarketplaceMeteringClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -205,4 +203,16 @@ export class BatchMeterUsageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchMeterUsageCommand)
   .de(de_BatchMeterUsageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchMeterUsageRequest;
+      output: BatchMeterUsageResult;
+    };
+    sdk: {
+      input: BatchMeterUsageCommandInput;
+      output: BatchMeterUsageCommandOutput;
+    };
+  };
+}

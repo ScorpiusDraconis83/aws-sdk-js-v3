@@ -107,9 +107,7 @@ export class AcceptPredictionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class AcceptPredictionsCommand extends $Command
   .f(AcceptPredictionsInputFilterSensitiveLog, void 0)
   .ser(se_AcceptPredictionsCommand)
   .de(de_AcceptPredictionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptPredictionsInput;
+      output: AcceptPredictionsOutput;
+    };
+    sdk: {
+      input: AcceptPredictionsCommandInput;
+      output: AcceptPredictionsCommandOutput;
+    };
+  };
+}

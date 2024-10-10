@@ -119,9 +119,7 @@ export class GetScalingConfigurationRecommendationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class GetScalingConfigurationRecommendationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetScalingConfigurationRecommendationCommand)
   .de(de_GetScalingConfigurationRecommendationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetScalingConfigurationRecommendationRequest;
+      output: GetScalingConfigurationRecommendationResponse;
+    };
+    sdk: {
+      input: GetScalingConfigurationRecommendationCommandInput;
+      output: GetScalingConfigurationRecommendationCommandOutput;
+    };
+  };
+}

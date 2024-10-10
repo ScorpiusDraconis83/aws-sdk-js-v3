@@ -83,9 +83,7 @@ export class ListLoggerDefinitionVersionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class ListLoggerDefinitionVersionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLoggerDefinitionVersionsCommand)
   .de(de_ListLoggerDefinitionVersionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLoggerDefinitionVersionsRequest;
+      output: ListLoggerDefinitionVersionsResponse;
+    };
+    sdk: {
+      input: ListLoggerDefinitionVersionsCommandInput;
+      output: ListLoggerDefinitionVersionsCommandOutput;
+    };
+  };
+}

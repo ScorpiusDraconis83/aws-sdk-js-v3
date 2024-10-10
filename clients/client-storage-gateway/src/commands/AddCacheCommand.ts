@@ -99,9 +99,7 @@ export class AddCacheCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class AddCacheCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddCacheCommand)
   .de(de_AddCacheCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddCacheInput;
+      output: AddCacheOutput;
+    };
+    sdk: {
+      input: AddCacheCommandInput;
+      output: AddCacheCommandOutput;
+    };
+  };
+}

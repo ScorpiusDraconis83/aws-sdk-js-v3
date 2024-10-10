@@ -370,6 +370,11 @@ import {
   DescribeNamespaceCommandOutput,
 } from "./commands/DescribeNamespaceCommand";
 import {
+  DescribeQPersonalizationConfigurationCommand,
+  DescribeQPersonalizationConfigurationCommandInput,
+  DescribeQPersonalizationConfigurationCommandOutput,
+} from "./commands/DescribeQPersonalizationConfigurationCommand";
+import {
   DescribeRefreshScheduleCommand,
   DescribeRefreshScheduleCommandInput,
   DescribeRefreshScheduleCommandOutput,
@@ -505,6 +510,11 @@ import {
   ListFolderMembersCommandOutput,
 } from "./commands/ListFolderMembersCommand";
 import { ListFoldersCommand, ListFoldersCommandInput, ListFoldersCommandOutput } from "./commands/ListFoldersCommand";
+import {
+  ListFoldersForResourceCommand,
+  ListFoldersForResourceCommandInput,
+  ListFoldersForResourceCommandOutput,
+} from "./commands/ListFoldersForResourceCommand";
 import {
   ListGroupMembershipsCommand,
   ListGroupMembershipsCommandInput,
@@ -762,6 +772,11 @@ import {
   UpdatePublicSharingSettingsCommandOutput,
 } from "./commands/UpdatePublicSharingSettingsCommand";
 import {
+  UpdateQPersonalizationConfigurationCommand,
+  UpdateQPersonalizationConfigurationCommandInput,
+  UpdateQPersonalizationConfigurationCommandOutput,
+} from "./commands/UpdateQPersonalizationConfigurationCommand";
+import {
   UpdateRefreshScheduleCommand,
   UpdateRefreshScheduleCommandInput,
   UpdateRefreshScheduleCommandOutput,
@@ -901,6 +916,7 @@ const commands = {
   DescribeIpRestrictionCommand,
   DescribeKeyRegistrationCommand,
   DescribeNamespaceCommand,
+  DescribeQPersonalizationConfigurationCommand,
   DescribeRefreshScheduleCommand,
   DescribeRoleCustomPermissionCommand,
   DescribeTemplateCommand,
@@ -929,6 +945,7 @@ const commands = {
   ListDataSourcesCommand,
   ListFolderMembersCommand,
   ListFoldersCommand,
+  ListFoldersForResourceCommand,
   ListGroupMembershipsCommand,
   ListGroupsCommand,
   ListIAMPolicyAssignmentsCommand,
@@ -985,6 +1002,7 @@ const commands = {
   UpdateIpRestrictionCommand,
   UpdateKeyRegistrationCommand,
   UpdatePublicSharingSettingsCommand,
+  UpdateQPersonalizationConfigurationCommand,
   UpdateRefreshScheduleCommand,
   UpdateRoleCustomPermissionCommand,
   UpdateSPICECapacityConfigurationCommand,
@@ -2238,6 +2256,23 @@ export interface QuickSight {
   ): void;
 
   /**
+   * @see {@link DescribeQPersonalizationConfigurationCommand}
+   */
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<DescribeQPersonalizationConfigurationCommandOutput>;
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    cb: (err: any, data?: DescribeQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: DescribeQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
    * @see {@link DescribeRefreshScheduleCommand}
    */
   describeRefreshSchedule(
@@ -2669,6 +2704,23 @@ export interface QuickSight {
     args: ListFoldersCommandInput,
     options: __HttpHandlerOptions,
     cb: (err: any, data?: ListFoldersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFoldersForResourceCommand}
+   */
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ListFoldersForResourceCommandOutput>;
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    cb: (err: any, data?: ListFoldersForResourceCommandOutput) => void
+  ): void;
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ListFoldersForResourceCommandOutput) => void
   ): void;
 
   /**
@@ -3519,6 +3571,23 @@ export interface QuickSight {
     args: UpdatePublicSharingSettingsCommandInput,
     options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdatePublicSharingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQPersonalizationConfigurationCommand}
+   */
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<UpdateQPersonalizationConfigurationCommandOutput>;
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: UpdateQPersonalizationConfigurationCommandOutput) => void
   ): void;
 
   /**

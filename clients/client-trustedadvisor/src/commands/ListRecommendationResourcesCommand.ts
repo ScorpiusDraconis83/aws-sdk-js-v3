@@ -105,9 +105,7 @@ export class ListRecommendationResourcesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TrustedAdvisorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class ListRecommendationResourcesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRecommendationResourcesCommand)
   .de(de_ListRecommendationResourcesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRecommendationResourcesRequest;
+      output: ListRecommendationResourcesResponse;
+    };
+    sdk: {
+      input: ListRecommendationResourcesCommandInput;
+      output: ListRecommendationResourcesCommandOutput;
+    };
+  };
+}

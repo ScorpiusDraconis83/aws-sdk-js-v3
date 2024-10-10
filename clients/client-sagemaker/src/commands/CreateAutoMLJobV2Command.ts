@@ -252,9 +252,7 @@ export class CreateAutoMLJobV2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -266,4 +264,16 @@ export class CreateAutoMLJobV2Command extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAutoMLJobV2Command)
   .de(de_CreateAutoMLJobV2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAutoMLJobV2Request;
+      output: CreateAutoMLJobV2Response;
+    };
+    sdk: {
+      input: CreateAutoMLJobV2CommandInput;
+      output: CreateAutoMLJobV2CommandOutput;
+    };
+  };
+}

@@ -118,9 +118,7 @@ export class AssociatePhoneNumbersWithVoiceConnectorGroupCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class AssociatePhoneNumbersWithVoiceConnectorGroupCommand extends $Comman
   .f(AssociatePhoneNumbersWithVoiceConnectorGroupRequestFilterSensitiveLog, void 0)
   .ser(se_AssociatePhoneNumbersWithVoiceConnectorGroupCommand)
   .de(de_AssociatePhoneNumbersWithVoiceConnectorGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociatePhoneNumbersWithVoiceConnectorGroupRequest;
+      output: AssociatePhoneNumbersWithVoiceConnectorGroupResponse;
+    };
+    sdk: {
+      input: AssociatePhoneNumbersWithVoiceConnectorGroupCommandInput;
+      output: AssociatePhoneNumbersWithVoiceConnectorGroupCommandOutput;
+    };
+  };
+}

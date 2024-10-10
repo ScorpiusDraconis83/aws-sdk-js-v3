@@ -79,6 +79,7 @@ import {
   NotFoundException,
   RequestEntityTooLargeException,
   ResourceNotFoundException,
+  ResourceToTag,
   RuntimeVersion,
   S3EncryptionConfig,
   ServiceQuotaExceededException,
@@ -133,6 +134,7 @@ export const se_CreateCanaryCommand = async (
       ExecutionRoleArn: [],
       FailureRetentionPeriodInDays: [],
       Name: [],
+      ResourcesToReplicateTags: (_) => _json(_),
       RunConfig: (_) => _json(_),
       RuntimeVersion: [],
       Schedule: (_) => _json(_),
@@ -507,10 +509,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{ResourceArn}");
   b.p("ResourceArn", () => input.ResourceArn!, "{ResourceArn}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.TagKeys, `TagKeys`) != null,
-      () => (input[_TK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => input[_TK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -1232,6 +1231,8 @@ const se_CanaryCodeInput = (input: CanaryCodeInput, context: __SerdeContext): an
 
 // se_EnvironmentVariablesMap omitted.
 
+// se_ResourceList omitted.
+
 // se_S3EncryptionConfig omitted.
 
 // se_SecurityGroupIds omitted.
@@ -1435,13 +1436,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _DL = "DeleteLambda";
 const _TK = "TagKeys";

@@ -89,9 +89,7 @@ export class DeleteDirectoryRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PcaConnectorAdClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class DeleteDirectoryRegistrationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDirectoryRegistrationCommand)
   .de(de_DeleteDirectoryRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDirectoryRegistrationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDirectoryRegistrationCommandInput;
+      output: DeleteDirectoryRegistrationCommandOutput;
+    };
+  };
+}

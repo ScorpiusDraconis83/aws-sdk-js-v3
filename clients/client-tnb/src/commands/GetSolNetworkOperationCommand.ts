@@ -130,9 +130,7 @@ export class GetSolNetworkOperationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class GetSolNetworkOperationCommand extends $Command
   .f(void 0, GetSolNetworkOperationOutputFilterSensitiveLog)
   .ser(se_GetSolNetworkOperationCommand)
   .de(de_GetSolNetworkOperationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSolNetworkOperationInput;
+      output: GetSolNetworkOperationOutput;
+    };
+    sdk: {
+      input: GetSolNetworkOperationCommandInput;
+      output: GetSolNetworkOperationCommandOutput;
+    };
+  };
+}

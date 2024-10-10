@@ -53,7 +53,6 @@ export interface CopyImageCommandOutput extends CopyImageResult, __MetadataBeare
  *   SourceImageId: "STRING_VALUE", // required
  *   SourceRegion: "STRING_VALUE", // required
  *   DestinationOutpostArn: "STRING_VALUE",
- *   DryRun: true || false,
  *   CopyImageTags: true || false,
  *   TagSpecifications: [ // TagSpecificationList
  *     { // TagSpecification
@@ -66,6 +65,7 @@ export interface CopyImageCommandOutput extends CopyImageResult, __MetadataBeare
  *       ],
  *     },
  *   ],
+ *   DryRun: true || false,
  * };
  * const command = new CopyImageCommand(input);
  * const response = await client.send(command);
@@ -113,9 +113,7 @@ export class CopyImageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class CopyImageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CopyImageCommand)
   .de(de_CopyImageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyImageRequest;
+      output: CopyImageResult;
+    };
+    sdk: {
+      input: CopyImageCommandInput;
+      output: CopyImageCommandOutput;
+    };
+  };
+}

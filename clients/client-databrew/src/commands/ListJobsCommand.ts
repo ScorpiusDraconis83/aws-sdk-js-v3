@@ -167,9 +167,7 @@ export class ListJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataBrewClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class ListJobsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListJobsCommand)
   .de(de_ListJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobsRequest;
+      output: ListJobsResponse;
+    };
+    sdk: {
+      input: ListJobsCommandInput;
+      output: ListJobsCommandOutput;
+    };
+  };
+}

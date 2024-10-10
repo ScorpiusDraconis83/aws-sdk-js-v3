@@ -94,9 +94,7 @@ export class DescribeDomainAutoTunesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class DescribeDomainAutoTunesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeDomainAutoTunesCommand)
   .de(de_DescribeDomainAutoTunesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDomainAutoTunesRequest;
+      output: DescribeDomainAutoTunesResponse;
+    };
+    sdk: {
+      input: DescribeDomainAutoTunesCommandInput;
+      output: DescribeDomainAutoTunesCommandOutput;
+    };
+  };
+}

@@ -170,9 +170,7 @@ export class DescribeBatchLoadTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TimestreamWriteClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -189,4 +187,16 @@ export class DescribeBatchLoadTaskCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeBatchLoadTaskCommand)
   .de(de_DescribeBatchLoadTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBatchLoadTaskRequest;
+      output: DescribeBatchLoadTaskResponse;
+    };
+    sdk: {
+      input: DescribeBatchLoadTaskCommandInput;
+      output: DescribeBatchLoadTaskCommandOutput;
+    };
+  };
+}

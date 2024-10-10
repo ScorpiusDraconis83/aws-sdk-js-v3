@@ -77,9 +77,7 @@ export class DeleteAssessmentFrameworkCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class DeleteAssessmentFrameworkCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAssessmentFrameworkCommand)
   .de(de_DeleteAssessmentFrameworkCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAssessmentFrameworkRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteAssessmentFrameworkCommandInput;
+      output: DeleteAssessmentFrameworkCommandOutput;
+    };
+  };
+}

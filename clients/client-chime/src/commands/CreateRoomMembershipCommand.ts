@@ -112,9 +112,7 @@ export class CreateRoomMembershipCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class CreateRoomMembershipCommand extends $Command
   .f(void 0, CreateRoomMembershipResponseFilterSensitiveLog)
   .ser(se_CreateRoomMembershipCommand)
   .de(de_CreateRoomMembershipCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRoomMembershipRequest;
+      output: CreateRoomMembershipResponse;
+    };
+    sdk: {
+      input: CreateRoomMembershipCommandInput;
+      output: CreateRoomMembershipCommandOutput;
+    };
+  };
+}

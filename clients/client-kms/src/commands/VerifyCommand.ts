@@ -228,9 +228,7 @@ export class VerifyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -242,4 +240,16 @@ export class VerifyCommand extends $Command
   .f(VerifyRequestFilterSensitiveLog, void 0)
   .ser(se_VerifyCommand)
   .de(de_VerifyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifyRequest;
+      output: VerifyResponse;
+    };
+    sdk: {
+      input: VerifyCommandInput;
+      output: VerifyCommandOutput;
+    };
+  };
+}

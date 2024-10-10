@@ -105,9 +105,7 @@ export class ListAppInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class ListAppInstancesCommand extends $Command
   .f(ListAppInstancesRequestFilterSensitiveLog, ListAppInstancesResponseFilterSensitiveLog)
   .ser(se_ListAppInstancesCommand)
   .de(de_ListAppInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppInstancesRequest;
+      output: ListAppInstancesResponse;
+    };
+    sdk: {
+      input: ListAppInstancesCommandInput;
+      output: ListAppInstancesCommandOutput;
+    };
+  };
+}

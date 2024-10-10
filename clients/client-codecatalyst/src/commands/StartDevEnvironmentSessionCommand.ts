@@ -107,9 +107,7 @@ export class StartDevEnvironmentSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCatalystClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class StartDevEnvironmentSessionCommand extends $Command
   .f(void 0, StartDevEnvironmentSessionResponseFilterSensitiveLog)
   .ser(se_StartDevEnvironmentSessionCommand)
   .de(de_StartDevEnvironmentSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDevEnvironmentSessionRequest;
+      output: StartDevEnvironmentSessionResponse;
+    };
+    sdk: {
+      input: StartDevEnvironmentSessionCommandInput;
+      output: StartDevEnvironmentSessionCommandOutput;
+    };
+  };
+}

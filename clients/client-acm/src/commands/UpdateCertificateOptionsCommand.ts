@@ -82,9 +82,7 @@ export class UpdateCertificateOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class UpdateCertificateOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateCertificateOptionsCommand)
   .de(de_UpdateCertificateOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCertificateOptionsRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateCertificateOptionsCommandInput;
+      output: UpdateCertificateOptionsCommandOutput;
+    };
+  };
+}

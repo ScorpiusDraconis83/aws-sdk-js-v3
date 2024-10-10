@@ -94,9 +94,7 @@ export class DeleteApplicationCloudWatchLoggingOptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisAnalyticsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class DeleteApplicationCloudWatchLoggingOptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteApplicationCloudWatchLoggingOptionCommand)
   .de(de_DeleteApplicationCloudWatchLoggingOptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApplicationCloudWatchLoggingOptionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteApplicationCloudWatchLoggingOptionCommandInput;
+      output: DeleteApplicationCloudWatchLoggingOptionCommandOutput;
+    };
+  };
+}

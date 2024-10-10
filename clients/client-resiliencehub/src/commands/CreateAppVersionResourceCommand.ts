@@ -170,9 +170,7 @@ export class CreateAppVersionResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -184,4 +182,16 @@ export class CreateAppVersionResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAppVersionResourceCommand)
   .de(de_CreateAppVersionResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAppVersionResourceRequest;
+      output: CreateAppVersionResourceResponse;
+    };
+    sdk: {
+      input: CreateAppVersionResourceCommandInput;
+      output: CreateAppVersionResourceCommandOutput;
+    };
+  };
+}

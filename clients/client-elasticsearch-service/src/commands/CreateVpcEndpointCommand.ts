@@ -114,9 +114,7 @@ export class CreateVpcEndpointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateVpcEndpointCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateVpcEndpointCommand)
   .de(de_CreateVpcEndpointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVpcEndpointRequest;
+      output: CreateVpcEndpointResponse;
+    };
+    sdk: {
+      input: CreateVpcEndpointCommandInput;
+      output: CreateVpcEndpointCommandOutput;
+    };
+  };
+}

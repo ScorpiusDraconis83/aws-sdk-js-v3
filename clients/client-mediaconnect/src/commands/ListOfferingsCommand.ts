@@ -93,9 +93,7 @@ export class ListOfferingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class ListOfferingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListOfferingsCommand)
   .de(de_ListOfferingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOfferingsRequest;
+      output: ListOfferingsResponse;
+    };
+    sdk: {
+      input: ListOfferingsCommandInput;
+      output: ListOfferingsCommandOutput;
+    };
+  };
+}

@@ -5,7 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { PutBucketNotificationConfigurationRequest } from "../models/models_0";
+import { PutBucketNotificationConfigurationRequest } from "../models/models_1";
 import {
   de_PutBucketNotificationConfigurationCommand,
   se_PutBucketNotificationConfigurationCommand,
@@ -219,4 +219,16 @@ export class PutBucketNotificationConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutBucketNotificationConfigurationCommand)
   .de(de_PutBucketNotificationConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutBucketNotificationConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutBucketNotificationConfigurationCommandInput;
+      output: PutBucketNotificationConfigurationCommandOutput;
+    };
+  };
+}

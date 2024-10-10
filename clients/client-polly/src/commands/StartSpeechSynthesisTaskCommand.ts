@@ -165,9 +165,7 @@ export class StartSpeechSynthesisTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PollyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class StartSpeechSynthesisTaskCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartSpeechSynthesisTaskCommand)
   .de(de_StartSpeechSynthesisTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSpeechSynthesisTaskInput;
+      output: StartSpeechSynthesisTaskOutput;
+    };
+    sdk: {
+      input: StartSpeechSynthesisTaskCommandInput;
+      output: StartSpeechSynthesisTaskCommandOutput;
+    };
+  };
+}

@@ -53,6 +53,9 @@ export interface GetConnectionCommandOutput extends GetConnectionResponse, __Met
  * //     ConnectionProperties: { // ConnectionProperties
  * //       "<keys>": "STRING_VALUE",
  * //     },
+ * //     AthenaProperties: { // PropertyMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
  * //     PhysicalConnectionRequirements: { // PhysicalConnectionRequirements
  * //       SubnetId: "STRING_VALUE",
  * //       SecurityGroupIdList: [ // SecurityGroupIdList
@@ -117,9 +120,7 @@ export class GetConnectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +132,16 @@ export class GetConnectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConnectionCommand)
   .de(de_GetConnectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConnectionRequest;
+      output: GetConnectionResponse;
+    };
+    sdk: {
+      input: GetConnectionCommandInput;
+      output: GetConnectionCommandOutput;
+    };
+  };
+}

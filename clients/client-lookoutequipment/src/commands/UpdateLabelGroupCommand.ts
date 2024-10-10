@@ -89,9 +89,7 @@ export class UpdateLabelGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutEquipmentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class UpdateLabelGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateLabelGroupCommand)
   .de(de_UpdateLabelGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLabelGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLabelGroupCommandInput;
+      output: UpdateLabelGroupCommandOutput;
+    };
+  };
+}

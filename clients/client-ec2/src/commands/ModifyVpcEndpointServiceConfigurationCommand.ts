@@ -99,9 +99,7 @@ export class ModifyVpcEndpointServiceConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class ModifyVpcEndpointServiceConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyVpcEndpointServiceConfigurationCommand)
   .de(de_ModifyVpcEndpointServiceConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcEndpointServiceConfigurationRequest;
+      output: ModifyVpcEndpointServiceConfigurationResult;
+    };
+    sdk: {
+      input: ModifyVpcEndpointServiceConfigurationCommandInput;
+      output: ModifyVpcEndpointServiceConfigurationCommandOutput;
+    };
+  };
+}

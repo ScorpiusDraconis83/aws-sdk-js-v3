@@ -80,9 +80,7 @@ export class StopEntitiesDetectionV2JobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendMedicalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class StopEntitiesDetectionV2JobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopEntitiesDetectionV2JobCommand)
   .de(de_StopEntitiesDetectionV2JobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopEntitiesDetectionV2JobRequest;
+      output: StopEntitiesDetectionV2JobResponse;
+    };
+    sdk: {
+      input: StopEntitiesDetectionV2JobCommandInput;
+      output: StopEntitiesDetectionV2JobCommandOutput;
+    };
+  };
+}

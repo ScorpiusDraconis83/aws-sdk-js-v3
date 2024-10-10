@@ -87,9 +87,7 @@ export class ListAppMonitorsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RUMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ListAppMonitorsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAppMonitorsCommand)
   .de(de_ListAppMonitorsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppMonitorsRequest;
+      output: ListAppMonitorsResponse;
+    };
+    sdk: {
+      input: ListAppMonitorsCommandInput;
+      output: ListAppMonitorsCommandOutput;
+    };
+  };
+}

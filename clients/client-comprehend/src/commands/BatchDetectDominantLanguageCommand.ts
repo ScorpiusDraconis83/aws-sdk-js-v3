@@ -106,9 +106,7 @@ export class BatchDetectDominantLanguageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class BatchDetectDominantLanguageCommand extends $Command
   .f(BatchDetectDominantLanguageRequestFilterSensitiveLog, BatchDetectDominantLanguageResponseFilterSensitiveLog)
   .ser(se_BatchDetectDominantLanguageCommand)
   .de(de_BatchDetectDominantLanguageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectDominantLanguageRequest;
+      output: BatchDetectDominantLanguageResponse;
+    };
+    sdk: {
+      input: BatchDetectDominantLanguageCommandInput;
+      output: BatchDetectDominantLanguageCommandOutput;
+    };
+  };
+}

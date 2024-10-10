@@ -104,9 +104,7 @@ export class DeleteRemediationConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class DeleteRemediationConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRemediationConfigurationCommand)
   .de(de_DeleteRemediationConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRemediationConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRemediationConfigurationCommandInput;
+      output: DeleteRemediationConfigurationCommandOutput;
+    };
+  };
+}

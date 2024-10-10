@@ -661,9 +661,7 @@ export class CopyDistributionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFrontClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -675,4 +673,16 @@ export class CopyDistributionCommand extends $Command
   .f(void 0, CopyDistributionResultFilterSensitiveLog)
   .ser(se_CopyDistributionCommand)
   .de(de_CopyDistributionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyDistributionRequest;
+      output: CopyDistributionResult;
+    };
+    sdk: {
+      input: CopyDistributionCommandInput;
+      output: CopyDistributionCommandOutput;
+    };
+  };
+}

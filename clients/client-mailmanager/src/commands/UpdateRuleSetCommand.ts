@@ -32,7 +32,7 @@ export interface UpdateRuleSetCommandInput extends UpdateRuleSetRequest {}
 export interface UpdateRuleSetCommandOutput extends UpdateRuleSetResponse, __MetadataBearer {}
 
 /**
- * <p>&gt;Update attributes of an already provisioned rule set.</p>
+ * <p>Update attributes of an already provisioned rule set.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -56,6 +56,7 @@ export interface UpdateRuleSetCommandOutput extends UpdateRuleSetResponse, __Met
  *           StringExpression: { // RuleStringExpression
  *             Evaluate: { // RuleStringToEvaluate Union: only one key present
  *               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ *               MimeHeaderAttribute: "STRING_VALUE",
  *             },
  *             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  *             Values: [ // RuleStringList // required
@@ -110,6 +111,7 @@ export interface UpdateRuleSetCommandOutput extends UpdateRuleSetResponse, __Met
  *           StringExpression: {
  *             Evaluate: {//  Union: only one key present
  *               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ *               MimeHeaderAttribute: "STRING_VALUE",
  *             },
  *             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  *             Values: [ // required
@@ -229,9 +231,7 @@ export class UpdateRuleSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -243,4 +243,16 @@ export class UpdateRuleSetCommand extends $Command
   .f(UpdateRuleSetRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateRuleSetCommand)
   .de(de_UpdateRuleSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRuleSetRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateRuleSetCommandInput;
+      output: UpdateRuleSetCommandOutput;
+    };
+  };
+}

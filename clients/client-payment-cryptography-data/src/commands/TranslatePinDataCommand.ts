@@ -160,9 +160,7 @@ export class TranslatePinDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -174,4 +172,16 @@ export class TranslatePinDataCommand extends $Command
   .f(TranslatePinDataInputFilterSensitiveLog, TranslatePinDataOutputFilterSensitiveLog)
   .ser(se_TranslatePinDataCommand)
   .de(de_TranslatePinDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TranslatePinDataInput;
+      output: TranslatePinDataOutput;
+    };
+    sdk: {
+      input: TranslatePinDataCommandInput;
+      output: TranslatePinDataCommandOutput;
+    };
+  };
+}

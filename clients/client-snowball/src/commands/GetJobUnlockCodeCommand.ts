@@ -105,9 +105,7 @@ export class GetJobUnlockCodeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SnowballClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class GetJobUnlockCodeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetJobUnlockCodeCommand)
   .de(de_GetJobUnlockCodeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobUnlockCodeRequest;
+      output: GetJobUnlockCodeResult;
+    };
+    sdk: {
+      input: GetJobUnlockCodeCommandInput;
+      output: GetJobUnlockCodeCommandOutput;
+    };
+  };
+}

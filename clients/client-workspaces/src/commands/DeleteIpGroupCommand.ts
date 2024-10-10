@@ -76,9 +76,7 @@ export class DeleteIpGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DeleteIpGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteIpGroupCommand)
   .de(de_DeleteIpGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIpGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteIpGroupCommandInput;
+      output: DeleteIpGroupCommandOutput;
+    };
+  };
+}

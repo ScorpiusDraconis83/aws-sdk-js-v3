@@ -88,9 +88,7 @@ export class CreateFilterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PersonalizeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class CreateFilterCommand extends $Command
   .f(CreateFilterRequestFilterSensitiveLog, void 0)
   .ser(se_CreateFilterCommand)
   .de(de_CreateFilterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFilterRequest;
+      output: CreateFilterResponse;
+    };
+    sdk: {
+      input: CreateFilterCommandInput;
+      output: CreateFilterCommandOutput;
+    };
+  };
+}

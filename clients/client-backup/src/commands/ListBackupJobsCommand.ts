@@ -121,9 +121,7 @@ export class ListBackupJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class ListBackupJobsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListBackupJobsCommand)
   .de(de_ListBackupJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBackupJobsInput;
+      output: ListBackupJobsOutput;
+    };
+    sdk: {
+      input: ListBackupJobsCommandInput;
+      output: ListBackupJobsCommandOutput;
+    };
+  };
+}

@@ -95,9 +95,7 @@ export class ListDashboardsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class ListDashboardsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListDashboardsCommand)
   .de(de_ListDashboardsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDashboardsRequest;
+      output: ListDashboardsResponse;
+    };
+    sdk: {
+      input: ListDashboardsCommandInput;
+      output: ListDashboardsCommandOutput;
+    };
+  };
+}

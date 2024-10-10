@@ -214,9 +214,7 @@ export class DeleteOrganizationalUnitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -228,4 +226,16 @@ export class DeleteOrganizationalUnitCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteOrganizationalUnitCommand)
   .de(de_DeleteOrganizationalUnitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteOrganizationalUnitRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteOrganizationalUnitCommandInput;
+      output: DeleteOrganizationalUnitCommandOutput;
+    };
+  };
+}

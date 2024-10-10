@@ -320,9 +320,7 @@ export class DecryptCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -334,4 +332,16 @@ export class DecryptCommand extends $Command
   .f(void 0, DecryptResponseFilterSensitiveLog)
   .ser(se_DecryptCommand)
   .de(de_DecryptCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DecryptRequest;
+      output: DecryptResponse;
+    };
+    sdk: {
+      input: DecryptCommandInput;
+      output: DecryptCommandOutput;
+    };
+  };
+}

@@ -113,9 +113,7 @@ export class GetMobileSdkReleaseCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class GetMobileSdkReleaseCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMobileSdkReleaseCommand)
   .de(de_GetMobileSdkReleaseCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMobileSdkReleaseRequest;
+      output: GetMobileSdkReleaseResponse;
+    };
+    sdk: {
+      input: GetMobileSdkReleaseCommandInput;
+      output: GetMobileSdkReleaseCommandOutput;
+    };
+  };
+}

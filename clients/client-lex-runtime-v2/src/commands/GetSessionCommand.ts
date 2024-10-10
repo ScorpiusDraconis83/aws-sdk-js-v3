@@ -220,9 +220,7 @@ export class GetSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexRuntimeV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -234,4 +232,16 @@ export class GetSessionCommand extends $Command
   .f(void 0, GetSessionResponseFilterSensitiveLog)
   .ser(se_GetSessionCommand)
   .de(de_GetSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSessionRequest;
+      output: GetSessionResponse;
+    };
+    sdk: {
+      input: GetSessionCommandInput;
+      output: GetSessionCommandOutput;
+    };
+  };
+}

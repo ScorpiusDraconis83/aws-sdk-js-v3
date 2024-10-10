@@ -197,9 +197,7 @@ export class CreateBridgeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -211,4 +209,16 @@ export class CreateBridgeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateBridgeCommand)
   .de(de_CreateBridgeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBridgeRequest;
+      output: CreateBridgeResponse;
+    };
+    sdk: {
+      input: CreateBridgeCommandInput;
+      output: CreateBridgeCommandOutput;
+    };
+  };
+}

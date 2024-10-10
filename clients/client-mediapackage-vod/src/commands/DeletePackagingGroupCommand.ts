@@ -81,9 +81,7 @@ export class DeletePackagingGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaPackageVodClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DeletePackagingGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeletePackagingGroupCommand)
   .de(de_DeletePackagingGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePackagingGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeletePackagingGroupCommandInput;
+      output: DeletePackagingGroupCommandOutput;
+    };
+  };
+}

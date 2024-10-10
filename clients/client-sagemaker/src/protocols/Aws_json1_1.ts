@@ -927,6 +927,8 @@ import {
   AnnotationConsolidationConfig,
   AppDetails,
   AppImageConfigDetails,
+  AppInstanceType,
+  AppLifecycleManagement,
   AppSpecification,
   AppType,
   ArtifactSource,
@@ -1009,6 +1011,8 @@ import {
   ClusterLifeCycleConfig,
   ClusterNodeDetails,
   ClusterNodeSummary,
+  ClusterOrchestrator,
+  ClusterOrchestratorEksConfig,
   ClusterSummary,
   CodeEditorAppImageConfig,
   CodeEditorAppSettings,
@@ -1034,16 +1038,11 @@ import {
   CreateActionResponse,
   CreateAlgorithmInput,
   CreateAlgorithmOutput,
-  CreateAppImageConfigRequest,
-  CreateAppImageConfigResponse,
   CreateAppRequest,
   CreateAppResponse,
-  CreateArtifactRequest,
-  CreateArtifactResponse,
-  CreateAutoMLJobRequest,
-  CreateAutoMLJobResponse,
   CustomImage,
   DataSource,
+  DeepHealthCheckType,
   DirectDeploySettings,
   EmrServerlessComputeConfig,
   EmrServerlessSettings,
@@ -1058,6 +1057,7 @@ import {
   HyperParameterTuningJobObjective,
   IamIdentity,
   IdentityProviderOAuthSetting,
+  IdleSettings,
   ImageClassificationJobConfig,
   ImageConfig,
   InferenceHubAccessConfig,
@@ -1074,7 +1074,6 @@ import {
   MetricsSource,
   ModelAccessConfig,
   ModelDataSource,
-  ModelDeployConfig,
   ModelInput,
   ModelPackageContainerDefinition,
   ModelRegisterSettings,
@@ -1089,7 +1088,6 @@ import {
   ProductionVariantInstanceType,
   RepositoryAuthConfig,
   ResourceConfig,
-  ResourceInUse,
   ResourceLimitExceeded,
   ResourceNotFound,
   ResourceSpec,
@@ -1127,6 +1125,12 @@ import {
   WorkspaceSettings,
 } from "../models/models_0";
 import {
+  CreateAppImageConfigRequest,
+  CreateAppImageConfigResponse,
+  CreateArtifactRequest,
+  CreateArtifactResponse,
+  CreateAutoMLJobRequest,
+  CreateAutoMLJobResponse,
   CreateAutoMLJobV2Request,
   CreateAutoMLJobV2Response,
   CreateClusterRequest,
@@ -1204,12 +1208,6 @@ import {
   CreateOptimizationJobResponse,
   CreatePipelineRequest,
   CreatePipelineResponse,
-  CreatePresignedDomainUrlRequest,
-  CreatePresignedDomainUrlResponse,
-  CreatePresignedMlflowTrackingServerUrlRequest,
-  CreatePresignedMlflowTrackingServerUrlResponse,
-  CreatePresignedNotebookInstanceUrlInput,
-  CreatePresignedNotebookInstanceUrlOutput,
   CustomFileSystemConfig,
   CustomPosixUserConfig,
   DataCaptureConfig,
@@ -1239,12 +1237,12 @@ import {
   EndpointInput,
   EndpointInputConfiguration,
   EnvironmentParameterRanges,
-  ExperimentConfig,
   Explainability,
   ExplainerConfig,
   FeatureDefinition,
   FileSource,
   FlowDefinitionOutputConfig,
+  HiddenSageMakerImage,
   HubS3StorageConfig,
   HumanLoopActivationConditionsConfig,
   HumanLoopActivationConfig,
@@ -1290,6 +1288,7 @@ import {
   ModelCardSecurityConfig,
   ModelCompilationConfig,
   ModelDataQuality,
+  ModelDeployConfig,
   ModelExplainabilityAppSpecification,
   ModelExplainabilityBaselineConfig,
   ModelExplainabilityJobInput,
@@ -1355,6 +1354,7 @@ import {
   RecommendationJobResourceLimit,
   RecommendationJobStoppingConditions,
   RecommendationJobVpcConfig,
+  ResourceInUse,
   ResourceLimits,
   RetryStrategy,
   RollingUpdatePolicy,
@@ -1382,6 +1382,12 @@ import {
   UserSettings,
 } from "../models/models_1";
 import {
+  CreatePresignedDomainUrlRequest,
+  CreatePresignedDomainUrlResponse,
+  CreatePresignedMlflowTrackingServerUrlRequest,
+  CreatePresignedMlflowTrackingServerUrlResponse,
+  CreatePresignedNotebookInstanceUrlInput,
+  CreatePresignedNotebookInstanceUrlOutput,
   CreateProcessingJobRequest,
   CreateProcessingJobResponse,
   CreateProjectInput,
@@ -1554,16 +1560,6 @@ import {
   DescribeInferenceRecommendationsJobRequest,
   DescribeInferenceRecommendationsJobResponse,
   DescribeLabelingJobRequest,
-  DescribeLabelingJobResponse,
-  DescribeLineageGroupRequest,
-  DescribeLineageGroupResponse,
-  DescribeMlflowTrackingServerRequest,
-  DescribeMlflowTrackingServerResponse,
-  DescribeModelBiasJobDefinitionRequest,
-  DescribeModelBiasJobDefinitionResponse,
-  DescribeModelCardRequest,
-  DescribeModelInput,
-  DescribeModelOutput,
   EbsStorageSettings,
   EdgeDeploymentStatus,
   EdgeModel,
@@ -1573,6 +1569,7 @@ import {
   EndpointOutputConfiguration,
   EndpointPerformance,
   EnvironmentParameter,
+  ExperimentConfig,
   ExperimentSource,
   FeatureParameter,
   FinalHyperParameterTuningJobObjectiveMetric,
@@ -1629,7 +1626,9 @@ import {
   ServiceCatalogProvisioningDetails,
   SessionChainingConfig,
   SourceIpConfig,
+  SpaceAppLifecycleManagement,
   SpaceCodeEditorAppSettings,
+  SpaceIdleSettings,
   SpaceJupyterLabAppSettings,
   SpaceSettings,
   SpaceSharingSettings,
@@ -1645,11 +1644,21 @@ import {
   WorkforceVpcConfigRequest,
 } from "../models/models_2";
 import {
+  DescribeLabelingJobResponse,
+  DescribeLineageGroupRequest,
+  DescribeLineageGroupResponse,
+  DescribeMlflowTrackingServerRequest,
+  DescribeMlflowTrackingServerResponse,
+  DescribeModelBiasJobDefinitionRequest,
+  DescribeModelBiasJobDefinitionResponse,
   DescribeModelCardExportJobRequest,
   DescribeModelCardExportJobResponse,
+  DescribeModelCardRequest,
   DescribeModelCardResponse,
   DescribeModelExplainabilityJobDefinitionRequest,
   DescribeModelExplainabilityJobDefinitionResponse,
+  DescribeModelInput,
+  DescribeModelOutput,
   DescribeModelPackageGroupInput,
   DescribeModelPackageGroupOutput,
   DescribeModelPackageInput,
@@ -1841,17 +1850,9 @@ import {
   ListMlflowTrackingServersRequest,
   ListMlflowTrackingServersResponse,
   ListModelBiasJobDefinitionsRequest,
-  ListModelBiasJobDefinitionsResponse,
-  ListModelCardExportJobsRequest,
-  ListModelCardExportJobsResponse,
-  ListModelCardsRequest,
-  ListModelCardsResponse,
-  ListModelCardVersionsRequest,
   MetricData,
   MetricSpecification,
   ModelCardExportArtifacts,
-  ModelCardExportJobSummary,
-  ModelCardSummary,
   ModelPackageStatusDetails,
   ModelPackageStatusItem,
   MonitoringExecutionSummary,
@@ -1887,6 +1888,12 @@ import {
   Workteam,
 } from "../models/models_3";
 import {
+  ListModelBiasJobDefinitionsResponse,
+  ListModelCardExportJobsRequest,
+  ListModelCardExportJobsResponse,
+  ListModelCardsRequest,
+  ListModelCardsResponse,
+  ListModelCardVersionsRequest,
   ListModelCardVersionsResponse,
   ListModelExplainabilityJobDefinitionsRequest,
   ListModelExplainabilityJobDefinitionsResponse,
@@ -1956,6 +1963,8 @@ import {
   ListWorkteamsResponse,
   Model,
   ModelCard,
+  ModelCardExportJobSummary,
+  ModelCardSummary,
   ModelCardVersionSummary,
   ModelDashboardEndpoint,
   ModelDashboardIndicatorAction,
@@ -2013,9 +2022,7 @@ import {
   ResourceConfigForUpdate,
   RetryPipelineExecutionRequest,
   RetryPipelineExecutionResponse,
-  SearchExpression,
   SearchRecord,
-  SearchRequest,
   SearchResponse,
   SelectiveExecutionResult,
   SendPipelineExecutionStepFailureRequest,
@@ -2141,12 +2148,12 @@ import {
   UpdateWorkforceRequest,
   UpdateWorkforceResponse,
   UpdateWorkteamRequest,
-  UpdateWorkteamResponse,
   UserProfileDetails,
   VariantProperty,
   Vertex,
   VisibilityConditions,
 } from "../models/models_4";
+import { SearchExpression, SearchRequest, UpdateWorkteamResponse } from "../models/models_5";
 import { SageMakerServiceException as __BaseException } from "../models/SageMakerServiceException";
 
 /**
@@ -13150,6 +13157,8 @@ const de_ResourceNotFoundRes = async (parsedOutput: any, context: __SerdeContext
 
 // se_AnnotationConsolidationConfig omitted.
 
+// se_AppLifecycleManagement omitted.
+
 // se_AppSpecification omitted.
 
 // se_ArtifactProperties omitted.
@@ -13333,6 +13342,10 @@ const se_BatchTransformInput = (input: BatchTransformInput, context: __SerdeCont
 // se_ClusterInstanceStorageConfigs omitted.
 
 // se_ClusterLifeCycleConfig omitted.
+
+// se_ClusterOrchestrator omitted.
+
+// se_ClusterOrchestratorEksConfig omitted.
 
 // se_CodeEditorAppImageConfig omitted.
 
@@ -14249,7 +14262,13 @@ const se_EndpointInput = (input: EndpointInput, context: __SerdeContext): any =>
 
 // se_HiddenAppTypesList omitted.
 
+// se_HiddenInstanceTypesList omitted.
+
 // se_HiddenMlToolsList omitted.
+
+// se_HiddenSageMakerImage omitted.
+
+// se_HiddenSageMakerImageVersionAliasesList omitted.
 
 // se_HolidayConfig omitted.
 
@@ -14341,6 +14360,8 @@ const se_HyperParameterTuningJobConfig = (input: HyperParameterTuningJobConfig, 
 // se_IdentityProviderOAuthSetting omitted.
 
 // se_IdentityProviderOAuthSettings omitted.
+
+// se_IdleSettings omitted.
 
 // se_ImageClassificationJobConfig omitted.
 
@@ -15785,6 +15806,8 @@ const se_MonitoringScheduleConfig = (input: MonitoringScheduleConfig, context: _
 
 // se_OnlineStoreSecurityConfig omitted.
 
+// se_OnStartDeepHealthChecks omitted.
+
 // se_OptimizationConfig omitted.
 
 // se_OptimizationConfigs omitted.
@@ -16157,7 +16180,11 @@ const se_SendPipelineExecutionStepSuccessRequest = (
 
 // se_SourceIpConfig omitted.
 
+// se_SpaceAppLifecycleManagement omitted.
+
 // se_SpaceCodeEditorAppSettings omitted.
+
+// se_SpaceIdleSettings omitted.
 
 // se_SpaceJupyterLabAppSettings omitted.
 
@@ -16504,6 +16531,8 @@ const se_UpdateTrialComponentRequest = (input: UpdateTrialComponentRequest, cont
 // se_VariantPropertyList omitted.
 
 // se_VectorConfig omitted.
+
+// se_VersionAliasesList omitted.
 
 // se_VisibilityConditions omitted.
 
@@ -16892,6 +16921,15 @@ const de_AppImageConfigList = (output: any, context: __SerdeContext): AppImageCo
       return de_AppImageConfigDetails(entry, context);
     });
   return retVal;
+};
+
+/**
+ * deserializeAws_json1_1AppLifecycleManagement
+ */
+const de_AppLifecycleManagement = (output: any, context: __SerdeContext): AppLifecycleManagement => {
+  return take(output, {
+    IdleSettings: (_: any) => de_IdleSettings(_, context),
+  }) as any;
 };
 
 /**
@@ -18074,6 +18112,7 @@ const de_ClusterInstanceGroupDetails = (output: any, context: __SerdeContext): C
     InstanceStorageConfigs: (_: any) => de_ClusterInstanceStorageConfigs(_, context),
     InstanceType: __expectString,
     LifeCycleConfig: (_: any) => de_ClusterLifeCycleConfig(_, context),
+    OnStartDeepHealthChecks: (_: any) => de_OnStartDeepHealthChecks(_, context),
     TargetCount: __expectInt32,
     ThreadsPerCore: __expectInt32,
   }) as any;
@@ -18190,6 +18229,24 @@ const de_ClusterNodeSummary = (output: any, context: __SerdeContext): ClusterNod
 };
 
 /**
+ * deserializeAws_json1_1ClusterOrchestrator
+ */
+const de_ClusterOrchestrator = (output: any, context: __SerdeContext): ClusterOrchestrator => {
+  return take(output, {
+    Eks: (_: any) => de_ClusterOrchestratorEksConfig(_, context),
+  }) as any;
+};
+
+/**
+ * deserializeAws_json1_1ClusterOrchestratorEksConfig
+ */
+const de_ClusterOrchestratorEksConfig = (output: any, context: __SerdeContext): ClusterOrchestratorEksConfig => {
+  return take(output, {
+    ClusterArn: __expectString,
+  }) as any;
+};
+
+/**
  * deserializeAws_json1_1ClusterSummaries
  */
 const de_ClusterSummaries = (output: any, context: __SerdeContext): ClusterSummary[] => {
@@ -18228,6 +18285,8 @@ const de_CodeEditorAppImageConfig = (output: any, context: __SerdeContext): Code
  */
 const de_CodeEditorAppSettings = (output: any, context: __SerdeContext): CodeEditorAppSettings => {
   return take(output, {
+    AppLifecycleManagement: (_: any) => de_AppLifecycleManagement(_, context),
+    BuiltInLifecycleConfigArn: __expectString,
     CustomImages: (_: any) => de_CustomImages(_, context),
     DefaultResourceSpec: (_: any) => de_ResourceSpec(_, context),
     LifecycleConfigArns: (_: any) => de_LifecycleConfigArns(_, context),
@@ -19806,6 +19865,7 @@ const de_DescribeAppResponse = (output: any, context: __SerdeContext): DescribeA
     AppArn: __expectString,
     AppName: __expectString,
     AppType: __expectString,
+    BuiltInLifecycleConfigArn: __expectString,
     CreationTime: (_: any) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     DomainId: __expectString,
     FailureReason: __expectString,
@@ -19917,6 +19977,8 @@ const de_DescribeClusterResponse = (output: any, context: __SerdeContext): Descr
     CreationTime: (_: any) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     FailureMessage: __expectString,
     InstanceGroups: (_: any) => de_ClusterInstanceGroupDetailsList(_, context),
+    NodeRecovery: __expectString,
+    Orchestrator: (_: any) => de_ClusterOrchestrator(_, context),
     VpcConfig: (_: any) => de_VpcConfig(_, context),
   }) as any;
 };
@@ -20061,6 +20123,7 @@ const de_DescribeDomainResponse = (output: any, context: __SerdeContext): Descri
     SingleSignOnManagedApplicationInstanceId: __expectString,
     Status: __expectString,
     SubnetIds: (_: any) => de_Subnets(_, context),
+    TagPropagation: __expectString,
     Url: __expectString,
     VpcId: __expectString,
   }) as any;
@@ -22420,6 +22483,18 @@ const de_HiddenAppTypesList = (output: any, context: __SerdeContext): AppType[] 
 };
 
 /**
+ * deserializeAws_json1_1HiddenInstanceTypesList
+ */
+const de_HiddenInstanceTypesList = (output: any, context: __SerdeContext): AppInstanceType[] => {
+  const retVal = (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return __expectString(entry) as any;
+    });
+  return retVal;
+};
+
+/**
  * deserializeAws_json1_1HiddenMlToolsList
  */
 const de_HiddenMlToolsList = (output: any, context: __SerdeContext): MlTools[] => {
@@ -22427,6 +22502,28 @@ const de_HiddenMlToolsList = (output: any, context: __SerdeContext): MlTools[] =
     .filter((e: any) => e != null)
     .map((entry: any) => {
       return __expectString(entry) as any;
+    });
+  return retVal;
+};
+
+/**
+ * deserializeAws_json1_1HiddenSageMakerImage
+ */
+const de_HiddenSageMakerImage = (output: any, context: __SerdeContext): HiddenSageMakerImage => {
+  return take(output, {
+    SageMakerImageName: __expectString,
+    VersionAliases: (_: any) => de_VersionAliasesList(_, context),
+  }) as any;
+};
+
+/**
+ * deserializeAws_json1_1HiddenSageMakerImageVersionAliasesList
+ */
+const de_HiddenSageMakerImageVersionAliasesList = (output: any, context: __SerdeContext): HiddenSageMakerImage[] => {
+  const retVal = (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return de_HiddenSageMakerImage(entry, context);
     });
   return retVal;
 };
@@ -23078,6 +23175,18 @@ const de_IdentityProviderOAuthSettings = (output: any, context: __SerdeContext):
 };
 
 /**
+ * deserializeAws_json1_1IdleSettings
+ */
+const de_IdleSettings = (output: any, context: __SerdeContext): IdleSettings => {
+  return take(output, {
+    IdleTimeoutInMinutes: __expectInt32,
+    LifecycleManagement: __expectString,
+    MaxIdleTimeoutInMinutes: __expectInt32,
+    MinIdleTimeoutInMinutes: __expectInt32,
+  }) as any;
+};
+
+/**
  * deserializeAws_json1_1Image
  */
 const de_Image = (output: any, context: __SerdeContext): Image => {
@@ -23596,6 +23705,8 @@ const de_JupyterLabAppImageConfig = (output: any, context: __SerdeContext): Jupy
  */
 const de_JupyterLabAppSettings = (output: any, context: __SerdeContext): JupyterLabAppSettings => {
   return take(output, {
+    AppLifecycleManagement: (_: any) => de_AppLifecycleManagement(_, context),
+    BuiltInLifecycleConfigArn: __expectString,
     CodeRepositories: (_: any) => de_CodeRepositories(_, context),
     CustomImages: (_: any) => de_CustomImages(_, context),
     DefaultResourceSpec: (_: any) => de_ResourceSpec(_, context),
@@ -26392,6 +26503,18 @@ const de_OnlineStoreSecurityConfig = (output: any, context: __SerdeContext): Onl
 };
 
 /**
+ * deserializeAws_json1_1OnStartDeepHealthChecks
+ */
+const de_OnStartDeepHealthChecks = (output: any, context: __SerdeContext): DeepHealthCheckType[] => {
+  const retVal = (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return __expectString(entry) as any;
+    });
+  return retVal;
+};
+
+/**
  * deserializeAws_json1_1OptimizationConfig
  */
 const de_OptimizationConfig = (output: any, context: __SerdeContext): OptimizationConfig => {
@@ -28043,6 +28166,7 @@ const de_S3ModelDataSource = (output: any, context: __SerdeContext): S3ModelData
   return take(output, {
     CompressionType: __expectString,
     HubAccessConfig: (_: any) => de_InferenceHubAccessConfig(_, context),
+    ManifestS3Uri: __expectString,
     ModelAccessConfig: (_: any) => de_ModelAccessConfig(_, context),
     S3DataType: __expectString,
     S3Uri: __expectString,
@@ -28403,10 +28527,20 @@ const de_SourceIpConfig = (output: any, context: __SerdeContext): SourceIpConfig
 };
 
 /**
+ * deserializeAws_json1_1SpaceAppLifecycleManagement
+ */
+const de_SpaceAppLifecycleManagement = (output: any, context: __SerdeContext): SpaceAppLifecycleManagement => {
+  return take(output, {
+    IdleSettings: (_: any) => de_SpaceIdleSettings(_, context),
+  }) as any;
+};
+
+/**
  * deserializeAws_json1_1SpaceCodeEditorAppSettings
  */
 const de_SpaceCodeEditorAppSettings = (output: any, context: __SerdeContext): SpaceCodeEditorAppSettings => {
   return take(output, {
+    AppLifecycleManagement: (_: any) => de_SpaceAppLifecycleManagement(_, context),
     DefaultResourceSpec: (_: any) => de_ResourceSpec(_, context),
   }) as any;
 };
@@ -28429,10 +28563,20 @@ const de_SpaceDetails = (output: any, context: __SerdeContext): SpaceDetails => 
 };
 
 /**
+ * deserializeAws_json1_1SpaceIdleSettings
+ */
+const de_SpaceIdleSettings = (output: any, context: __SerdeContext): SpaceIdleSettings => {
+  return take(output, {
+    IdleTimeoutInMinutes: __expectInt32,
+  }) as any;
+};
+
+/**
  * deserializeAws_json1_1SpaceJupyterLabAppSettings
  */
 const de_SpaceJupyterLabAppSettings = (output: any, context: __SerdeContext): SpaceJupyterLabAppSettings => {
   return take(output, {
+    AppLifecycleManagement: (_: any) => de_SpaceAppLifecycleManagement(_, context),
     CodeRepositories: (_: any) => de_CodeRepositories(_, context),
     DefaultResourceSpec: (_: any) => de_ResourceSpec(_, context),
   }) as any;
@@ -28618,7 +28762,9 @@ const de_StudioLifecycleConfigsList = (output: any, context: __SerdeContext): St
 const de_StudioWebPortalSettings = (output: any, context: __SerdeContext): StudioWebPortalSettings => {
   return take(output, {
     HiddenAppTypes: (_: any) => de_HiddenAppTypesList(_, context),
+    HiddenInstanceTypes: (_: any) => de_HiddenInstanceTypesList(_, context),
     HiddenMlTools: (_: any) => de_HiddenMlToolsList(_, context),
+    HiddenSageMakerImageVersionAliases: (_: any) => de_HiddenSageMakerImageVersionAliasesList(_, context),
   }) as any;
 };
 
@@ -29975,6 +30121,7 @@ const de_UserProfileList = (output: any, context: __SerdeContext): UserProfileDe
  */
 const de_UserSettings = (output: any, context: __SerdeContext): UserSettings => {
   return take(output, {
+    AutoMountHomeEFS: __expectString,
     CanvasAppSettings: (_: any) => de_CanvasAppSettings(_, context),
     CodeEditorAppSettings: (_: any) => de_CodeEditorAppSettings(_, context),
     CustomFileSystemConfigs: (_: any) => de_CustomFileSystemConfigs(_, context),
@@ -30002,6 +30149,18 @@ const de_VectorConfig = (output: any, context: __SerdeContext): VectorConfig => 
   return take(output, {
     Dimension: __expectInt32,
   }) as any;
+};
+
+/**
+ * deserializeAws_json1_1VersionAliasesList
+ */
+const de_VersionAliasesList = (output: any, context: __SerdeContext): string[] => {
+  const retVal = (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return __expectString(entry) as any;
+    });
+  return retVal;
 };
 
 /**

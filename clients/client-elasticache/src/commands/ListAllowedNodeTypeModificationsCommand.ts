@@ -33,7 +33,7 @@ export interface ListAllowedNodeTypeModificationsCommandOutput
     __MetadataBearer {}
 
 /**
- * <p>Lists all available node types that you can scale your Redis OSS cluster's or replication
+ * <p>Lists all available node types that you can scale with your cluster's replication
  *             group's current node type.</p>
  *          <p>When you use the <code>ModifyCacheCluster</code> or
  *                 <code>ModifyReplicationGroup</code> operations to scale your cluster or replication
@@ -118,9 +118,7 @@ export class ListAllowedNodeTypeModificationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ListAllowedNodeTypeModificationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAllowedNodeTypeModificationsCommand)
   .de(de_ListAllowedNodeTypeModificationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAllowedNodeTypeModificationsMessage;
+      output: AllowedNodeTypeModificationsMessage;
+    };
+    sdk: {
+      input: ListAllowedNodeTypeModificationsCommandInput;
+      output: ListAllowedNodeTypeModificationsCommandOutput;
+    };
+  };
+}

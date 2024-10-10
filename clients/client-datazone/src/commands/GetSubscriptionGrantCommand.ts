@@ -67,6 +67,14 @@ export interface GetSubscriptionGrantCommandOutput extends GetSubscriptionGrantO
  * //       },
  * //       grantedTimestamp: new Date("TIMESTAMP"),
  * //       failureTimestamp: new Date("TIMESTAMP"),
+ * //       assetScope: { // AssetScope
+ * //         assetId: "STRING_VALUE", // required
+ * //         filterIds: [ // FilterIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         status: "STRING_VALUE", // required
+ * //         errorMessage: "STRING_VALUE",
+ * //       },
  * //     },
  * //   ],
  * //   subscriptionId: "STRING_VALUE",
@@ -111,9 +119,7 @@ export class GetSubscriptionGrantCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +131,16 @@ export class GetSubscriptionGrantCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSubscriptionGrantCommand)
   .de(de_GetSubscriptionGrantCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSubscriptionGrantInput;
+      output: GetSubscriptionGrantOutput;
+    };
+    sdk: {
+      input: GetSubscriptionGrantCommandInput;
+      output: GetSubscriptionGrantCommandOutput;
+    };
+  };
+}

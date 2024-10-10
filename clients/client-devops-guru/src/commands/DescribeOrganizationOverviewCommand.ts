@@ -95,9 +95,7 @@ export class DescribeOrganizationOverviewCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DevOpsGuruClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DescribeOrganizationOverviewCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeOrganizationOverviewCommand)
   .de(de_DescribeOrganizationOverviewCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOrganizationOverviewRequest;
+      output: DescribeOrganizationOverviewResponse;
+    };
+    sdk: {
+      input: DescribeOrganizationOverviewCommandInput;
+      output: DescribeOrganizationOverviewCommandOutput;
+    };
+  };
+}

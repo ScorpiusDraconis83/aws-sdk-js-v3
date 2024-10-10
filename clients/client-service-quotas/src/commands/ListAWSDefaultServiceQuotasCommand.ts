@@ -124,9 +124,7 @@ export class ListAWSDefaultServiceQuotasCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceQuotasClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class ListAWSDefaultServiceQuotasCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAWSDefaultServiceQuotasCommand)
   .de(de_ListAWSDefaultServiceQuotasCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAWSDefaultServiceQuotasRequest;
+      output: ListAWSDefaultServiceQuotasResponse;
+    };
+    sdk: {
+      input: ListAWSDefaultServiceQuotasCommandInput;
+      output: ListAWSDefaultServiceQuotasCommandOutput;
+    };
+  };
+}

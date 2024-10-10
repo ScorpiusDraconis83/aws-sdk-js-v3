@@ -9,7 +9,7 @@ import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } 
 import {
   CreateCloudWatchAlarmTemplateGroupRequest,
   CreateCloudWatchAlarmTemplateGroupResponse,
-} from "../models/models_1";
+} from "../models/models_2";
 import {
   de_CreateCloudWatchAlarmTemplateGroupCommand,
   se_CreateCloudWatchAlarmTemplateGroupCommand,
@@ -103,9 +103,7 @@ export class CreateCloudWatchAlarmTemplateGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateCloudWatchAlarmTemplateGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCloudWatchAlarmTemplateGroupCommand)
   .de(de_CreateCloudWatchAlarmTemplateGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCloudWatchAlarmTemplateGroupRequest;
+      output: CreateCloudWatchAlarmTemplateGroupResponse;
+    };
+    sdk: {
+      input: CreateCloudWatchAlarmTemplateGroupCommandInput;
+      output: CreateCloudWatchAlarmTemplateGroupCommandOutput;
+    };
+  };
+}

@@ -86,9 +86,7 @@ export class ProvisionIpamPoolCidrCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class ProvisionIpamPoolCidrCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ProvisionIpamPoolCidrCommand)
   .de(de_ProvisionIpamPoolCidrCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ProvisionIpamPoolCidrRequest;
+      output: ProvisionIpamPoolCidrResult;
+    };
+    sdk: {
+      input: ProvisionIpamPoolCidrCommandInput;
+      output: ProvisionIpamPoolCidrCommandOutput;
+    };
+  };
+}

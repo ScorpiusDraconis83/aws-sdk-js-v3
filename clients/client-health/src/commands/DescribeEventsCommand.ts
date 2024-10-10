@@ -162,9 +162,7 @@ export class DescribeEventsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +174,16 @@ export class DescribeEventsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEventsCommand)
   .de(de_DescribeEventsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventsRequest;
+      output: DescribeEventsResponse;
+    };
+    sdk: {
+      input: DescribeEventsCommandInput;
+      output: DescribeEventsCommandOutput;
+    };
+  };
+}

@@ -144,9 +144,7 @@ export class DescribeStandardsControlsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -158,4 +156,16 @@ export class DescribeStandardsControlsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeStandardsControlsCommand)
   .de(de_DescribeStandardsControlsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStandardsControlsRequest;
+      output: DescribeStandardsControlsResponse;
+    };
+    sdk: {
+      input: DescribeStandardsControlsCommandInput;
+      output: DescribeStandardsControlsCommandOutput;
+    };
+  };
+}

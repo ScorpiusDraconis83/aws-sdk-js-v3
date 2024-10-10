@@ -269,6 +269,7 @@ export interface UpdateEventSourceMappingCommandOutput extends EventSourceMappin
  * //     ErrorCode: "STRING_VALUE",
  * //     Message: "STRING_VALUE",
  * //   },
+ * //   EventSourceMappingArn: "STRING_VALUE",
  * // };
  *
  * ```
@@ -302,6 +303,32 @@ export interface UpdateEventSourceMappingCommandOutput extends EventSourceMappin
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To update a Lambda function event source mapping
+ * ```javascript
+ * // This operation updates a Lambda function event source mapping
+ * const input = {
+ *   "BatchSize": 123,
+ *   "Enabled": true,
+ *   "FunctionName": "myFunction",
+ *   "UUID": "1234xCy789012"
+ * };
+ * const command = new UpdateEventSourceMappingCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "BatchSize": 123,
+ *   "EventSourceArn": "arn:aws:s3:::examplebucket/*",
+ *   "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:myFunction",
+ *   "LastModified": "2016-11-21T19:49:20.006+0000",
+ *   "LastProcessingResult": "",
+ *   "State": "",
+ *   "StateTransitionReason": "",
+ *   "UUID": "1234xCy789012"
+ * }
+ * *\/
+ * // example id: to-update-a-lambda-function-event-source-mapping-1481650907413
+ * ```
+ *
  */
 export class UpdateEventSourceMappingCommand extends $Command
   .classBuilder<
@@ -311,9 +338,7 @@ export class UpdateEventSourceMappingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -325,4 +350,16 @@ export class UpdateEventSourceMappingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateEventSourceMappingCommand)
   .de(de_UpdateEventSourceMappingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEventSourceMappingRequest;
+      output: EventSourceMappingConfiguration;
+    };
+    sdk: {
+      input: UpdateEventSourceMappingCommandInput;
+      output: UpdateEventSourceMappingCommandOutput;
+    };
+  };
+}

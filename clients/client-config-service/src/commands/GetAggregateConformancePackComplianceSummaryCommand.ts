@@ -110,9 +110,7 @@ export class GetAggregateConformancePackComplianceSummaryCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class GetAggregateConformancePackComplianceSummaryCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_GetAggregateConformancePackComplianceSummaryCommand)
   .de(de_GetAggregateConformancePackComplianceSummaryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAggregateConformancePackComplianceSummaryRequest;
+      output: GetAggregateConformancePackComplianceSummaryResponse;
+    };
+    sdk: {
+      input: GetAggregateConformancePackComplianceSummaryCommandInput;
+      output: GetAggregateConformancePackComplianceSummaryCommandOutput;
+    };
+  };
+}

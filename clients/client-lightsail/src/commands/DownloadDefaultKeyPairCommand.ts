@@ -97,9 +97,7 @@ export class DownloadDefaultKeyPairCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DownloadDefaultKeyPairCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DownloadDefaultKeyPairCommand)
   .de(de_DownloadDefaultKeyPairCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DownloadDefaultKeyPairResult;
+    };
+    sdk: {
+      input: DownloadDefaultKeyPairCommandInput;
+      output: DownloadDefaultKeyPairCommandOutput;
+    };
+  };
+}

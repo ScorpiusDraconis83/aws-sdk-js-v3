@@ -135,9 +135,7 @@ export class CreateUsagePlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: APIGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class CreateUsagePlanCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateUsagePlanCommand)
   .de(de_CreateUsagePlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateUsagePlanRequest;
+      output: UsagePlan;
+    };
+    sdk: {
+      input: CreateUsagePlanCommandInput;
+      output: CreateUsagePlanCommandOutput;
+    };
+  };
+}

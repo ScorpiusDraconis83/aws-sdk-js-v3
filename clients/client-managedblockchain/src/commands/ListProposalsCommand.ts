@@ -102,9 +102,7 @@ export class ListProposalsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ManagedBlockchainClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class ListProposalsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListProposalsCommand)
   .de(de_ListProposalsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProposalsInput;
+      output: ListProposalsOutput;
+    };
+    sdk: {
+      input: ListProposalsCommandInput;
+      output: ListProposalsCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class DescribeFHIRExportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthLakeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class DescribeFHIRExportJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeFHIRExportJobCommand)
   .de(de_DescribeFHIRExportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFHIRExportJobRequest;
+      output: DescribeFHIRExportJobResponse;
+    };
+    sdk: {
+      input: DescribeFHIRExportJobCommandInput;
+      output: DescribeFHIRExportJobCommandOutput;
+    };
+  };
+}

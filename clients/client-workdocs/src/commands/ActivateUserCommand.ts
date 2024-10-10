@@ -111,9 +111,7 @@ export class ActivateUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class ActivateUserCommand extends $Command
   .f(ActivateUserRequestFilterSensitiveLog, ActivateUserResponseFilterSensitiveLog)
   .ser(se_ActivateUserCommand)
   .de(de_ActivateUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ActivateUserRequest;
+      output: ActivateUserResponse;
+    };
+    sdk: {
+      input: ActivateUserCommandInput;
+      output: ActivateUserCommandOutput;
+    };
+  };
+}

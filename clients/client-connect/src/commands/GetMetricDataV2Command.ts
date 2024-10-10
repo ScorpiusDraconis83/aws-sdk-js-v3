@@ -162,9 +162,7 @@ export class GetMetricDataV2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +174,16 @@ export class GetMetricDataV2Command extends $Command
   .f(void 0, void 0)
   .ser(se_GetMetricDataV2Command)
   .de(de_GetMetricDataV2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMetricDataV2Request;
+      output: GetMetricDataV2Response;
+    };
+    sdk: {
+      input: GetMetricDataV2CommandInput;
+      output: GetMetricDataV2CommandOutput;
+    };
+  };
+}

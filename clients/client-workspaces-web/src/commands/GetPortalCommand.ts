@@ -102,9 +102,7 @@ export class GetPortalCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class GetPortalCommand extends $Command
   .f(void 0, GetPortalResponseFilterSensitiveLog)
   .ser(se_GetPortalCommand)
   .de(de_GetPortalCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPortalRequest;
+      output: GetPortalResponse;
+    };
+    sdk: {
+      input: GetPortalCommandInput;
+      output: GetPortalCommandOutput;
+    };
+  };
+}

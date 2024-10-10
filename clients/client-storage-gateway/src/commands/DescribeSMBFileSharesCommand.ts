@@ -50,6 +50,7 @@ export interface DescribeSMBFileSharesCommandOutput extends DescribeSMBFileShare
  * //       FileShareId: "STRING_VALUE",
  * //       FileShareStatus: "STRING_VALUE",
  * //       GatewayARN: "STRING_VALUE",
+ * //       EncryptionType: "SseS3" || "SseKms" || "DsseKms",
  * //       KMSEncrypted: true || false,
  * //       KMSKey: "STRING_VALUE",
  * //       Path: "STRING_VALUE",
@@ -121,9 +122,7 @@ export class DescribeSMBFileSharesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +134,16 @@ export class DescribeSMBFileSharesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSMBFileSharesCommand)
   .de(de_DescribeSMBFileSharesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSMBFileSharesInput;
+      output: DescribeSMBFileSharesOutput;
+    };
+    sdk: {
+      input: DescribeSMBFileSharesCommandInput;
+      output: DescribeSMBFileSharesCommandOutput;
+    };
+  };
+}

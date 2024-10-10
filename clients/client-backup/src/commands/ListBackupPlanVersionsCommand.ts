@@ -101,9 +101,7 @@ export class ListBackupPlanVersionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class ListBackupPlanVersionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListBackupPlanVersionsCommand)
   .de(de_ListBackupPlanVersionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBackupPlanVersionsInput;
+      output: ListBackupPlanVersionsOutput;
+    };
+    sdk: {
+      input: ListBackupPlanVersionsCommandInput;
+      output: ListBackupPlanVersionsCommandOutput;
+    };
+  };
+}

@@ -74,7 +74,7 @@ export interface DescribeConditionalForwardersCommandOutput
  *  <p>A client exception has occurred.</p>
  *
  * @throws {@link DirectoryUnavailableException} (client fault)
- *  <p>The specified directory is unavailable or could not be found.</p>
+ *  <p>The specified directory is unavailable.</p>
  *
  * @throws {@link EntityDoesNotExistException} (client fault)
  *  <p>The specified entity could not be found.</p>
@@ -101,9 +101,7 @@ export class DescribeConditionalForwardersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectoryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class DescribeConditionalForwardersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeConditionalForwardersCommand)
   .de(de_DescribeConditionalForwardersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConditionalForwardersRequest;
+      output: DescribeConditionalForwardersResult;
+    };
+    sdk: {
+      input: DescribeConditionalForwardersCommandInput;
+      output: DescribeConditionalForwardersCommandOutput;
+    };
+  };
+}

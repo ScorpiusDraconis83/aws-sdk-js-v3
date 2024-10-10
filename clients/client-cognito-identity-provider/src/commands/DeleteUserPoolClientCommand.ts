@@ -90,9 +90,7 @@ export class DeleteUserPoolClientCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DeleteUserPoolClientCommand extends $Command
   .f(DeleteUserPoolClientRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteUserPoolClientCommand)
   .de(de_DeleteUserPoolClientCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteUserPoolClientRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteUserPoolClientCommandInput;
+      output: DeleteUserPoolClientCommandOutput;
+    };
+  };
+}

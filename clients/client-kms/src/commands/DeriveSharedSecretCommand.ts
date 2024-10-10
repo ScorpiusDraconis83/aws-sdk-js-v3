@@ -254,9 +254,7 @@ export class DeriveSharedSecretCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -268,4 +266,16 @@ export class DeriveSharedSecretCommand extends $Command
   .f(void 0, DeriveSharedSecretResponseFilterSensitiveLog)
   .ser(se_DeriveSharedSecretCommand)
   .de(de_DeriveSharedSecretCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeriveSharedSecretRequest;
+      output: DeriveSharedSecretResponse;
+    };
+    sdk: {
+      input: DeriveSharedSecretCommandInput;
+      output: DeriveSharedSecretCommandOutput;
+    };
+  };
+}

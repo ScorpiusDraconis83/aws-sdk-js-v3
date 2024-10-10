@@ -87,9 +87,7 @@ export class DeleteStreamProcessorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class DeleteStreamProcessorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteStreamProcessorCommand)
   .de(de_DeleteStreamProcessorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStreamProcessorRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteStreamProcessorCommandInput;
+      output: DeleteStreamProcessorCommandOutput;
+    };
+  };
+}

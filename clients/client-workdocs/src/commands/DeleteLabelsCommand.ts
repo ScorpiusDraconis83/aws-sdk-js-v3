@@ -88,9 +88,7 @@ export class DeleteLabelsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class DeleteLabelsCommand extends $Command
   .f(DeleteLabelsRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteLabelsCommand)
   .de(de_DeleteLabelsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLabelsRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteLabelsCommandInput;
+      output: DeleteLabelsCommandOutput;
+    };
+  };
+}

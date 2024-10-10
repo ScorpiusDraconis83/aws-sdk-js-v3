@@ -114,9 +114,7 @@ export class CreateForecastExportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ForecastClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateForecastExportJobCommand extends $Command
   .f(CreateForecastExportJobRequestFilterSensitiveLog, void 0)
   .ser(se_CreateForecastExportJobCommand)
   .de(de_CreateForecastExportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateForecastExportJobRequest;
+      output: CreateForecastExportJobResponse;
+    };
+    sdk: {
+      input: CreateForecastExportJobCommandInput;
+      output: CreateForecastExportJobCommandOutput;
+    };
+  };
+}

@@ -108,9 +108,7 @@ export class ListProvisionedCapacityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class ListProvisionedCapacityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListProvisionedCapacityCommand)
   .de(de_ListProvisionedCapacityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProvisionedCapacityInput;
+      output: ListProvisionedCapacityOutput;
+    };
+    sdk: {
+      input: ListProvisionedCapacityCommandInput;
+      output: ListProvisionedCapacityCommandOutput;
+    };
+  };
+}

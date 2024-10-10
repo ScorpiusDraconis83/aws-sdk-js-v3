@@ -123,9 +123,7 @@ export class GetChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudTrailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class GetChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetChannelCommand)
   .de(de_GetChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetChannelRequest;
+      output: GetChannelResponse;
+    };
+    sdk: {
+      input: GetChannelCommandInput;
+      output: GetChannelCommandOutput;
+    };
+  };
+}

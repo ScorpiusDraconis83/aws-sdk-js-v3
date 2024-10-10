@@ -146,9 +146,7 @@ export class CreateQuickResponseCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -160,4 +158,16 @@ export class CreateQuickResponseCommand extends $Command
   .f(CreateQuickResponseRequestFilterSensitiveLog, CreateQuickResponseResponseFilterSensitiveLog)
   .ser(se_CreateQuickResponseCommand)
   .de(de_CreateQuickResponseCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateQuickResponseRequest;
+      output: CreateQuickResponseResponse;
+    };
+    sdk: {
+      input: CreateQuickResponseCommandInput;
+      output: CreateQuickResponseCommandOutput;
+    };
+  };
+}

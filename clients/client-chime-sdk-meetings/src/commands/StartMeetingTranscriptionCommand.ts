@@ -132,9 +132,7 @@ export class StartMeetingTranscriptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMeetingsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class StartMeetingTranscriptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartMeetingTranscriptionCommand)
   .de(de_StartMeetingTranscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMeetingTranscriptionRequest;
+      output: {};
+    };
+    sdk: {
+      input: StartMeetingTranscriptionCommandInput;
+      output: StartMeetingTranscriptionCommandOutput;
+    };
+  };
+}

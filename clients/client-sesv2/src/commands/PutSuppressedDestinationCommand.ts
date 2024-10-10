@@ -70,9 +70,7 @@ export class PutSuppressedDestinationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -84,4 +82,16 @@ export class PutSuppressedDestinationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutSuppressedDestinationCommand)
   .de(de_PutSuppressedDestinationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutSuppressedDestinationRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutSuppressedDestinationCommandInput;
+      output: PutSuppressedDestinationCommandOutput;
+    };
+  };
+}

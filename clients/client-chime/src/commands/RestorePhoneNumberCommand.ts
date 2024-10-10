@@ -121,9 +121,7 @@ export class RestorePhoneNumberCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class RestorePhoneNumberCommand extends $Command
   .f(void 0, RestorePhoneNumberResponseFilterSensitiveLog)
   .ser(se_RestorePhoneNumberCommand)
   .de(de_RestorePhoneNumberCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestorePhoneNumberRequest;
+      output: RestorePhoneNumberResponse;
+    };
+    sdk: {
+      input: RestorePhoneNumberCommandInput;
+      output: RestorePhoneNumberCommandOutput;
+    };
+  };
+}

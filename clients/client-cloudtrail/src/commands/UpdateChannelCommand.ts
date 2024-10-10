@@ -115,9 +115,7 @@ export class UpdateChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudTrailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class UpdateChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateChannelCommand)
   .de(de_UpdateChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChannelRequest;
+      output: UpdateChannelResponse;
+    };
+    sdk: {
+      input: UpdateChannelCommandInput;
+      output: UpdateChannelCommandOutput;
+    };
+  };
+}

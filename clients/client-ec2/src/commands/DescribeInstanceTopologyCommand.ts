@@ -62,7 +62,8 @@ export interface DescribeInstanceTopologyCommandOutput extends DescribeInstanceT
  *                   <li>
  *                      <p>
  *                         <code>p3dn.24xlarge</code> | <code>p4d.24xlarge</code> |
- *                                 <code>p4de.24xlarge</code> | <code>p5.48xlarge</code>
+ *                                 <code>p4de.24xlarge</code> | <code>p5.48xlarge</code> |
+ *                                 <code>p5e.48xlarge</code>
  *                      </p>
  *                   </li>
  *                   <li>
@@ -140,9 +141,7 @@ export class DescribeInstanceTopologyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +153,16 @@ export class DescribeInstanceTopologyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInstanceTopologyCommand)
   .de(de_DescribeInstanceTopologyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstanceTopologyRequest;
+      output: DescribeInstanceTopologyResult;
+    };
+    sdk: {
+      input: DescribeInstanceTopologyCommandInput;
+      output: DescribeInstanceTopologyCommandOutput;
+    };
+  };
+}

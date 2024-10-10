@@ -54,6 +54,7 @@ export interface CreateLibraryItemCommandOutput extends CreateLibraryItemOutput,
  * //   updatedAt: new Date("TIMESTAMP"),
  * //   updatedBy: "STRING_VALUE",
  * //   ratingCount: Number("int"), // required
+ * //   isVerified: true || false,
  * // };
  *
  * ```
@@ -108,6 +109,7 @@ export interface CreateLibraryItemCommandOutput extends CreateLibraryItemOutput,
  * {
  *   "createdAt": "2024-05-21T23:17:27.350Z",
  *   "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
+ *   "isVerified": false,
  *   "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
  *   "ratingCount": 0,
  *   "status": "PUBLISHED",
@@ -127,9 +129,7 @@ export class CreateLibraryItemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +141,16 @@ export class CreateLibraryItemCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateLibraryItemCommand)
   .de(de_CreateLibraryItemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLibraryItemInput;
+      output: CreateLibraryItemOutput;
+    };
+    sdk: {
+      input: CreateLibraryItemCommandInput;
+      output: CreateLibraryItemCommandOutput;
+    };
+  };
+}

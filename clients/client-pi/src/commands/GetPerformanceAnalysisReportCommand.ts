@@ -181,9 +181,7 @@ export class GetPerformanceAnalysisReportCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PIClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -195,4 +193,16 @@ export class GetPerformanceAnalysisReportCommand extends $Command
   .f(void 0, GetPerformanceAnalysisReportResponseFilterSensitiveLog)
   .ser(se_GetPerformanceAnalysisReportCommand)
   .de(de_GetPerformanceAnalysisReportCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPerformanceAnalysisReportRequest;
+      output: GetPerformanceAnalysisReportResponse;
+    };
+    sdk: {
+      input: GetPerformanceAnalysisReportCommandInput;
+      output: GetPerformanceAnalysisReportCommandOutput;
+    };
+  };
+}

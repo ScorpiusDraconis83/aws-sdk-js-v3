@@ -195,9 +195,7 @@ export class BatchGetSecretValueCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecretsManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -209,4 +207,16 @@ export class BatchGetSecretValueCommand extends $Command
   .f(void 0, BatchGetSecretValueResponseFilterSensitiveLog)
   .ser(se_BatchGetSecretValueCommand)
   .de(de_BatchGetSecretValueCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetSecretValueRequest;
+      output: BatchGetSecretValueResponse;
+    };
+    sdk: {
+      input: BatchGetSecretValueCommandInput;
+      output: BatchGetSecretValueCommandOutput;
+    };
+  };
+}

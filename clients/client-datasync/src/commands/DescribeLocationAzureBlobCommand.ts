@@ -80,9 +80,7 @@ export class DescribeLocationAzureBlobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DescribeLocationAzureBlobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLocationAzureBlobCommand)
   .de(de_DescribeLocationAzureBlobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocationAzureBlobRequest;
+      output: DescribeLocationAzureBlobResponse;
+    };
+    sdk: {
+      input: DescribeLocationAzureBlobCommandInput;
+      output: DescribeLocationAzureBlobCommandOutput;
+    };
+  };
+}

@@ -99,9 +99,7 @@ export class DisableHostedZoneDNSSECCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class DisableHostedZoneDNSSECCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisableHostedZoneDNSSECCommand)
   .de(de_DisableHostedZoneDNSSECCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableHostedZoneDNSSECRequest;
+      output: DisableHostedZoneDNSSECResponse;
+    };
+    sdk: {
+      input: DisableHostedZoneDNSSECCommandInput;
+      output: DisableHostedZoneDNSSECCommandOutput;
+    };
+  };
+}

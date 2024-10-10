@@ -199,9 +199,7 @@ export class GetDeploymentTargetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeDeployClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -213,4 +211,16 @@ export class GetDeploymentTargetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDeploymentTargetCommand)
   .de(de_GetDeploymentTargetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentTargetInput;
+      output: GetDeploymentTargetOutput;
+    };
+    sdk: {
+      input: GetDeploymentTargetCommandInput;
+      output: GetDeploymentTargetCommandOutput;
+    };
+  };
+}

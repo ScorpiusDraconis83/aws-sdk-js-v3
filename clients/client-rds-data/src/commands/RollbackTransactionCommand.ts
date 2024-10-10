@@ -121,9 +121,7 @@ export class RollbackTransactionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class RollbackTransactionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RollbackTransactionCommand)
   .de(de_RollbackTransactionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RollbackTransactionRequest;
+      output: RollbackTransactionResponse;
+    };
+    sdk: {
+      input: RollbackTransactionCommandInput;
+      output: RollbackTransactionCommandOutput;
+    };
+  };
+}

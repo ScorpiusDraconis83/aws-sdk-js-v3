@@ -103,9 +103,7 @@ export class CreateHarvestJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaPackageClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateHarvestJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateHarvestJobCommand)
   .de(de_CreateHarvestJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHarvestJobRequest;
+      output: CreateHarvestJobResponse;
+    };
+    sdk: {
+      input: CreateHarvestJobCommandInput;
+      output: CreateHarvestJobCommandOutput;
+    };
+  };
+}

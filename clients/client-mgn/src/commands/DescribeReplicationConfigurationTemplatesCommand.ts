@@ -114,9 +114,7 @@ export class DescribeReplicationConfigurationTemplatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class DescribeReplicationConfigurationTemplatesCommand extends $Command
   .f(void 0, DescribeReplicationConfigurationTemplatesResponseFilterSensitiveLog)
   .ser(se_DescribeReplicationConfigurationTemplatesCommand)
   .de(de_DescribeReplicationConfigurationTemplatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplicationConfigurationTemplatesRequest;
+      output: DescribeReplicationConfigurationTemplatesResponse;
+    };
+    sdk: {
+      input: DescribeReplicationConfigurationTemplatesCommandInput;
+      output: DescribeReplicationConfigurationTemplatesCommandOutput;
+    };
+  };
+}

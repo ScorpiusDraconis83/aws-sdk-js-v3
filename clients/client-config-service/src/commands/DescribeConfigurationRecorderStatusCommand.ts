@@ -97,9 +97,7 @@ export class DescribeConfigurationRecorderStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DescribeConfigurationRecorderStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeConfigurationRecorderStatusCommand)
   .de(de_DescribeConfigurationRecorderStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationRecorderStatusRequest;
+      output: DescribeConfigurationRecorderStatusResponse;
+    };
+    sdk: {
+      input: DescribeConfigurationRecorderStatusCommandInput;
+      output: DescribeConfigurationRecorderStatusCommandOutput;
+    };
+  };
+}

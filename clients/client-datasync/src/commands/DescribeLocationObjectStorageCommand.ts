@@ -87,9 +87,7 @@ export class DescribeLocationObjectStorageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class DescribeLocationObjectStorageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLocationObjectStorageCommand)
   .de(de_DescribeLocationObjectStorageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocationObjectStorageRequest;
+      output: DescribeLocationObjectStorageResponse;
+    };
+    sdk: {
+      input: DescribeLocationObjectStorageCommandInput;
+      output: DescribeLocationObjectStorageCommandOutput;
+    };
+  };
+}

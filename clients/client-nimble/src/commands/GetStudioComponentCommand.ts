@@ -156,9 +156,7 @@ export class GetStudioComponentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -170,4 +168,16 @@ export class GetStudioComponentCommand extends $Command
   .f(void 0, GetStudioComponentResponseFilterSensitiveLog)
   .ser(se_GetStudioComponentCommand)
   .de(de_GetStudioComponentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStudioComponentRequest;
+      output: GetStudioComponentResponse;
+    };
+    sdk: {
+      input: GetStudioComponentCommandInput;
+      output: GetStudioComponentCommandOutput;
+    };
+  };
+}

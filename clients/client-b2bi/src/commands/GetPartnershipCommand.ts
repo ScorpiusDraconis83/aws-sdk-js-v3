@@ -55,6 +55,34 @@ export interface GetPartnershipCommandOutput extends GetPartnershipResponse, __M
  * //   capabilities: [ // PartnershipCapabilities
  * //     "STRING_VALUE",
  * //   ],
+ * //   capabilityOptions: { // CapabilityOptions
+ * //     outboundEdi: { // OutboundEdiOptions Union: only one key present
+ * //       x12: { // X12Envelope
+ * //         common: { // X12OutboundEdiHeaders
+ * //           interchangeControlHeaders: { // X12InterchangeControlHeaders
+ * //             senderIdQualifier: "STRING_VALUE",
+ * //             senderId: "STRING_VALUE",
+ * //             receiverIdQualifier: "STRING_VALUE",
+ * //             receiverId: "STRING_VALUE",
+ * //             repetitionSeparator: "STRING_VALUE",
+ * //             acknowledgmentRequestedCode: "STRING_VALUE",
+ * //             usageIndicatorCode: "STRING_VALUE",
+ * //           },
+ * //           functionalGroupHeaders: { // X12FunctionalGroupHeaders
+ * //             applicationSenderCode: "STRING_VALUE",
+ * //             applicationReceiverCode: "STRING_VALUE",
+ * //             responsibleAgencyCode: "STRING_VALUE",
+ * //           },
+ * //           delimiters: { // X12Delimiters
+ * //             componentSeparator: "STRING_VALUE",
+ * //             dataElementSeparator: "STRING_VALUE",
+ * //             segmentTerminator: "STRING_VALUE",
+ * //           },
+ * //           validateEdi: true || false,
+ * //         },
+ * //       },
+ * //     },
+ * //   },
  * //   tradingPartnerId: "STRING_VALUE",
  * //   createdAt: new Date("TIMESTAMP"), // required
  * //   modifiedAt: new Date("TIMESTAMP"),
@@ -123,9 +151,7 @@ export class GetPartnershipCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: B2biClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +163,16 @@ export class GetPartnershipCommand extends $Command
   .f(void 0, GetPartnershipResponseFilterSensitiveLog)
   .ser(se_GetPartnershipCommand)
   .de(de_GetPartnershipCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPartnershipRequest;
+      output: GetPartnershipResponse;
+    };
+    sdk: {
+      input: GetPartnershipCommandInput;
+      output: GetPartnershipCommandOutput;
+    };
+  };
+}

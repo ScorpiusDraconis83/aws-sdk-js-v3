@@ -94,9 +94,7 @@ export class BatchDisassociateUserStackCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class BatchDisassociateUserStackCommand extends $Command
   .f(BatchDisassociateUserStackRequestFilterSensitiveLog, BatchDisassociateUserStackResultFilterSensitiveLog)
   .ser(se_BatchDisassociateUserStackCommand)
   .de(de_BatchDisassociateUserStackCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDisassociateUserStackRequest;
+      output: BatchDisassociateUserStackResult;
+    };
+    sdk: {
+      input: BatchDisassociateUserStackCommandInput;
+      output: BatchDisassociateUserStackCommandOutput;
+    };
+  };
+}

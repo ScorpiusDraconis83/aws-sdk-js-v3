@@ -84,9 +84,7 @@ export class ListThingsInThingGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class ListThingsInThingGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListThingsInThingGroupCommand)
   .de(de_ListThingsInThingGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListThingsInThingGroupRequest;
+      output: ListThingsInThingGroupResponse;
+    };
+    sdk: {
+      input: ListThingsInThingGroupCommandInput;
+      output: ListThingsInThingGroupCommandOutput;
+    };
+  };
+}

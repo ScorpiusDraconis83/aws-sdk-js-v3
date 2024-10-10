@@ -92,9 +92,7 @@ export class GetOutpostCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OutpostsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class GetOutpostCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetOutpostCommand)
   .de(de_GetOutpostCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOutpostInput;
+      output: GetOutpostOutput;
+    };
+    sdk: {
+      input: GetOutpostCommandInput;
+      output: GetOutpostCommandOutput;
+    };
+  };
+}

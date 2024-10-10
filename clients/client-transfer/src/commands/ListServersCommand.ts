@@ -91,9 +91,7 @@ export class ListServersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TransferClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListServersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListServersCommand)
   .de(de_ListServersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListServersRequest;
+      output: ListServersResponse;
+    };
+    sdk: {
+      input: ListServersCommandInput;
+      output: ListServersCommandOutput;
+    };
+  };
+}

@@ -74,9 +74,7 @@ export class GetAssociatedIpv6PoolCidrsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -88,4 +86,16 @@ export class GetAssociatedIpv6PoolCidrsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAssociatedIpv6PoolCidrsCommand)
   .de(de_GetAssociatedIpv6PoolCidrsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAssociatedIpv6PoolCidrsRequest;
+      output: GetAssociatedIpv6PoolCidrsResult;
+    };
+    sdk: {
+      input: GetAssociatedIpv6PoolCidrsCommandInput;
+      output: GetAssociatedIpv6PoolCidrsCommandOutput;
+    };
+  };
+}

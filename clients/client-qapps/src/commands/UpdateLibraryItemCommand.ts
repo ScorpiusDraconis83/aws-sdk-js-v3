@@ -28,7 +28,7 @@ export interface UpdateLibraryItemCommandInput extends UpdateLibraryItemInput {}
 export interface UpdateLibraryItemCommandOutput extends UpdateLibraryItemOutput, __MetadataBearer {}
 
 /**
- * <p>Updates the metadata and status of a library item for an Amazon Q App.</p>
+ * <p>Updates the library item for an Amazon Q App.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -63,6 +63,7 @@ export interface UpdateLibraryItemCommandOutput extends UpdateLibraryItemOutput,
  * //   ratingCount: Number("int"), // required
  * //   isRatedByUser: true || false,
  * //   userCount: Number("int"),
+ * //   isVerified: true || false,
  * // };
  *
  * ```
@@ -75,6 +76,10 @@ export interface UpdateLibraryItemCommandOutput extends UpdateLibraryItemOutput,
  *
  * @throws {@link AccessDeniedException} (client fault)
  *  <p>The client is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation could not be completed due to a
+ *       conflict with the current state of the resource.</p>
  *
  * @throws {@link InternalServerException} (server fault)
  *  <p>An internal service error occurred while processing the request.</p>
@@ -126,6 +131,7 @@ export interface UpdateLibraryItemCommandOutput extends UpdateLibraryItemOutput,
  *   ],
  *   "createdAt": "2024-05-21T23:17:27.350Z",
  *   "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
+ *   "isVerified": false,
  *   "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
  *   "ratingCount": 24,
  *   "status": "DISABLED",
@@ -145,9 +151,7 @@ export class UpdateLibraryItemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +163,16 @@ export class UpdateLibraryItemCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateLibraryItemCommand)
   .de(de_UpdateLibraryItemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLibraryItemInput;
+      output: UpdateLibraryItemOutput;
+    };
+    sdk: {
+      input: UpdateLibraryItemCommandInput;
+      output: UpdateLibraryItemCommandOutput;
+    };
+  };
+}

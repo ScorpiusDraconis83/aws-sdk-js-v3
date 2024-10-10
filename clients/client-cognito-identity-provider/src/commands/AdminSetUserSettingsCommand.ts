@@ -118,9 +118,7 @@ export class AdminSetUserSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class AdminSetUserSettingsCommand extends $Command
   .f(AdminSetUserSettingsRequestFilterSensitiveLog, void 0)
   .ser(se_AdminSetUserSettingsCommand)
   .de(de_AdminSetUserSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminSetUserSettingsRequest;
+      output: {};
+    };
+    sdk: {
+      input: AdminSetUserSettingsCommandInput;
+      output: AdminSetUserSettingsCommandOutput;
+    };
+  };
+}

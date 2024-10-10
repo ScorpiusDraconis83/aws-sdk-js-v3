@@ -129,9 +129,7 @@ export class PrepareQueryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TimestreamQueryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +146,16 @@ export class PrepareQueryCommand extends $Command
   .f(PrepareQueryRequestFilterSensitiveLog, PrepareQueryResponseFilterSensitiveLog)
   .ser(se_PrepareQueryCommand)
   .de(de_PrepareQueryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PrepareQueryRequest;
+      output: PrepareQueryResponse;
+    };
+    sdk: {
+      input: PrepareQueryCommandInput;
+      output: PrepareQueryCommandOutput;
+    };
+  };
+}

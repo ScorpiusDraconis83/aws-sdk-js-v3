@@ -36,6 +36,10 @@ export interface DescribeAddressesCommandOutput extends DescribeAddressesResult,
  * // const { EC2Client, DescribeAddressesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeAddressesRequest
+ *   PublicIps: [ // PublicIpStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -44,21 +48,15 @@ export interface DescribeAddressesCommandOutput extends DescribeAddressesResult,
  *       ],
  *     },
  *   ],
- *   PublicIps: [ // PublicIpStringList
- *     "STRING_VALUE",
- *   ],
  *   AllocationIds: [ // AllocationIdList
  *     "STRING_VALUE",
  *   ],
- *   DryRun: true || false,
  * };
  * const command = new DescribeAddressesCommand(input);
  * const response = await client.send(command);
  * // { // DescribeAddressesResult
  * //   Addresses: [ // AddressList
  * //     { // Address
- * //       InstanceId: "STRING_VALUE",
- * //       PublicIp: "STRING_VALUE",
  * //       AllocationId: "STRING_VALUE",
  * //       AssociationId: "STRING_VALUE",
  * //       Domain: "vpc" || "standard",
@@ -76,6 +74,8 @@ export interface DescribeAddressesCommandOutput extends DescribeAddressesResult,
  * //       CustomerOwnedIp: "STRING_VALUE",
  * //       CustomerOwnedIpv4Pool: "STRING_VALUE",
  * //       CarrierIp: "STRING_VALUE",
+ * //       InstanceId: "STRING_VALUE",
+ * //       PublicIp: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -131,9 +131,7 @@ export class DescribeAddressesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class DescribeAddressesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAddressesCommand)
   .de(de_DescribeAddressesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAddressesRequest;
+      output: DescribeAddressesResult;
+    };
+    sdk: {
+      input: DescribeAddressesCommandInput;
+      output: DescribeAddressesCommandOutput;
+    };
+  };
+}

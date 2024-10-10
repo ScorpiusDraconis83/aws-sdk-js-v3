@@ -94,9 +94,7 @@ export class DeleteBackendEnvironmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class DeleteBackendEnvironmentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteBackendEnvironmentCommand)
   .de(de_DeleteBackendEnvironmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBackendEnvironmentRequest;
+      output: DeleteBackendEnvironmentResult;
+    };
+    sdk: {
+      input: DeleteBackendEnvironmentCommandInput;
+      output: DeleteBackendEnvironmentCommandOutput;
+    };
+  };
+}

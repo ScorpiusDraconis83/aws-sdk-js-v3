@@ -255,9 +255,7 @@ export class ListOriginEndpointsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaPackageClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -269,4 +267,16 @@ export class ListOriginEndpointsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListOriginEndpointsCommand)
   .de(de_ListOriginEndpointsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOriginEndpointsRequest;
+      output: ListOriginEndpointsResponse;
+    };
+    sdk: {
+      input: ListOriginEndpointsCommandInput;
+      output: ListOriginEndpointsCommandOutput;
+    };
+  };
+}

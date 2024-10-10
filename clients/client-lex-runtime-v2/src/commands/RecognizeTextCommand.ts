@@ -356,9 +356,7 @@ export class RecognizeTextCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexRuntimeV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -370,4 +368,16 @@ export class RecognizeTextCommand extends $Command
   .f(RecognizeTextRequestFilterSensitiveLog, RecognizeTextResponseFilterSensitiveLog)
   .ser(se_RecognizeTextCommand)
   .de(de_RecognizeTextCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RecognizeTextRequest;
+      output: RecognizeTextResponse;
+    };
+    sdk: {
+      input: RecognizeTextCommandInput;
+      output: RecognizeTextCommandOutput;
+    };
+  };
+}

@@ -128,9 +128,7 @@ export class CreateDBSecurityGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class CreateDBSecurityGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDBSecurityGroupCommand)
   .de(de_CreateDBSecurityGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDBSecurityGroupMessage;
+      output: CreateDBSecurityGroupResult;
+    };
+    sdk: {
+      input: CreateDBSecurityGroupCommandInput;
+      output: CreateDBSecurityGroupCommandOutput;
+    };
+  };
+}

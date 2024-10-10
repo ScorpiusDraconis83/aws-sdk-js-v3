@@ -94,9 +94,7 @@ export class GetTransitGatewayPolicyTableAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetTransitGatewayPolicyTableAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTransitGatewayPolicyTableAssociationsCommand)
   .de(de_GetTransitGatewayPolicyTableAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayPolicyTableAssociationsRequest;
+      output: GetTransitGatewayPolicyTableAssociationsResult;
+    };
+    sdk: {
+      input: GetTransitGatewayPolicyTableAssociationsCommandInput;
+      output: GetTransitGatewayPolicyTableAssociationsCommandOutput;
+    };
+  };
+}

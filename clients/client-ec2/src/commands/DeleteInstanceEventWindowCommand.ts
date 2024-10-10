@@ -72,9 +72,7 @@ export class DeleteInstanceEventWindowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -86,4 +84,16 @@ export class DeleteInstanceEventWindowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteInstanceEventWindowCommand)
   .de(de_DeleteInstanceEventWindowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInstanceEventWindowRequest;
+      output: DeleteInstanceEventWindowResult;
+    };
+    sdk: {
+      input: DeleteInstanceEventWindowCommandInput;
+      output: DeleteInstanceEventWindowCommandOutput;
+    };
+  };
+}

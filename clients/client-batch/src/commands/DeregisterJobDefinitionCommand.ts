@@ -83,9 +83,7 @@ export class DeregisterJobDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DeregisterJobDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeregisterJobDefinitionCommand)
   .de(de_DeregisterJobDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterJobDefinitionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeregisterJobDefinitionCommandInput;
+      output: DeregisterJobDefinitionCommandOutput;
+    };
+  };
+}

@@ -53,6 +53,7 @@ export interface UpdateSMBFileShareCommandOutput extends UpdateSMBFileShareOutpu
  * const client = new StorageGatewayClient(config);
  * const input = { // UpdateSMBFileShareInput
  *   FileShareARN: "STRING_VALUE", // required
+ *   EncryptionType: "SseS3" || "SseKms" || "DsseKms",
  *   KMSEncrypted: true || false,
  *   KMSKey: "STRING_VALUE",
  *   DefaultStorageClass: "STRING_VALUE",
@@ -115,9 +116,7 @@ export class UpdateSMBFileShareCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +128,16 @@ export class UpdateSMBFileShareCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateSMBFileShareCommand)
   .de(de_UpdateSMBFileShareCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSMBFileShareInput;
+      output: UpdateSMBFileShareOutput;
+    };
+    sdk: {
+      input: UpdateSMBFileShareCommandInput;
+      output: UpdateSMBFileShareCommandOutput;
+    };
+  };
+}

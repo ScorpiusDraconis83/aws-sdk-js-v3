@@ -92,9 +92,7 @@ export class CreateGroupProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class CreateGroupProfileCommand extends $Command
   .f(void 0, CreateGroupProfileOutputFilterSensitiveLog)
   .ser(se_CreateGroupProfileCommand)
   .de(de_CreateGroupProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGroupProfileInput;
+      output: CreateGroupProfileOutput;
+    };
+    sdk: {
+      input: CreateGroupProfileCommandInput;
+      output: CreateGroupProfileCommandOutput;
+    };
+  };
+}

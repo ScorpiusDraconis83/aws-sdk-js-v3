@@ -131,9 +131,7 @@ export class DescribeLoadBalancersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class DescribeLoadBalancersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLoadBalancersCommand)
   .de(de_DescribeLoadBalancersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLoadBalancersRequest;
+      output: DescribeLoadBalancersResponse;
+    };
+    sdk: {
+      input: DescribeLoadBalancersCommandInput;
+      output: DescribeLoadBalancersCommandOutput;
+    };
+  };
+}

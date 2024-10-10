@@ -1035,6 +1035,7 @@ export class UnsupportedUpstreamRegistryException extends __BaseException {
 export const EncryptionType = {
   AES256: "AES256",
   KMS: "KMS",
+  KMS_DSSE: "KMS_DSSE",
 } as const;
 
 /**
@@ -1061,15 +1062,17 @@ export interface EncryptionConfiguration {
    *          <p>If you use the <code>KMS</code> encryption type, the contents of the repository will
    *             be encrypted using server-side encryption with Key Management Service key stored in KMS. When you
    *             use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key
-   *             for Amazon ECR, or specify your own KMS key, which you already created. For more
-   *             information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">Protecting data using server-side
-   *                 encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the
-   *                 <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>
+   *             for Amazon ECR, or specify your own KMS key, which you already created.</p>
+   *          <p>If you use the <code>KMS_DSSE</code> encryption type, the contents of the repository
+   *             will be encrypted with two layers of encryption using server-side encryption with the
+   *             KMS Management Service key stored in KMS. Similar to the <code>KMS</code> encryption type, you
+   *             can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS
+   *             key, which you've already created. </p>
    *          <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption
    *             with Amazon S3-managed encryption keys which encrypts the images in the repository using an
-   *             AES256 encryption algorithm. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Protecting data using
-   *                 server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the
-   *                 <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>
+   *             AES256 encryption algorithm.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html">Amazon ECR encryption at
+   *             rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>
    * @public
    */
   encryptionType: EncryptionType | undefined;
@@ -1445,9 +1448,9 @@ export interface CreateRepositoryCreationTemplateRequest {
 
   /**
    * <p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as
-   *             the registry that you are configuring. Amazon ECR will assume your supplied role when
-   *             the customRoleArn is specified. When this field isn't specified, Amazon ECR will
-   *             use the service-linked role for the repository creation template.</p>
+   *             the registry that you are configuring. Amazon ECR will assume your supplied role when the
+   *             customRoleArn is specified. When this field isn't specified, Amazon ECR will use the
+   *             service-linked role for the repository creation template.</p>
    * @public
    */
   customRoleArn?: string;
@@ -1517,9 +1520,9 @@ export interface RepositoryCreationTemplate {
   appliedFor?: RCTAppliedFor[];
 
   /**
-   * <p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when
-   *             the customRoleArn is specified. When this field isn't specified, Amazon ECR will
-   *             use the service-linked role for the repository creation template.</p>
+   * <p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role
+   *             when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the
+   *             service-linked role for the repository creation template.</p>
    * @public
    */
   customRoleArn?: string;
@@ -2453,6 +2456,12 @@ export interface VulnerablePackage {
    * @public
    */
   version?: string;
+
+  /**
+   * <p>The version of the package that contains the vulnerability fix.</p>
+   * @public
+   */
+  fixedInVersion?: string;
 }
 
 /**
@@ -2811,6 +2820,21 @@ export interface EnhancedImageScanFinding {
    * @public
    */
   updatedAt?: Date;
+
+  /**
+   * <p>Details on whether a fix is available through a version update. This value can be
+   *                 <code>YES</code>, <code>NO</code>, or <code>PARTIAL</code>. A <code>PARTIAL</code>
+   *             fix means that some, but not all, of the packages identified in the finding have fixes
+   *             available through updated versions.</p>
+   * @public
+   */
+  fixAvailable?: string;
+
+  /**
+   * <p>If a finding discovered in your environment has an exploit available.</p>
+   * @public
+   */
+  exploitAvailable?: string;
 }
 
 /**
@@ -4892,9 +4916,9 @@ export interface UpdateRepositoryCreationTemplateRequest {
 
   /**
    * <p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as
-   *             the registry that you are configuring. Amazon ECR will assume your supplied role when
-   *             the customRoleArn is specified. When this field isn't specified, Amazon ECR will
-   *             use the service-linked role for the repository creation template.</p>
+   *             the registry that you are configuring. Amazon ECR will assume your supplied role when the
+   *             customRoleArn is specified. When this field isn't specified, Amazon ECR will use the
+   *             service-linked role for the repository creation template.</p>
    * @public
    */
   customRoleArn?: string;

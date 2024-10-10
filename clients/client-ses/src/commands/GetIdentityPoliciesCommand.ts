@@ -102,9 +102,7 @@ export class GetIdentityPoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class GetIdentityPoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetIdentityPoliciesCommand)
   .de(de_GetIdentityPoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIdentityPoliciesRequest;
+      output: GetIdentityPoliciesResponse;
+    };
+    sdk: {
+      input: GetIdentityPoliciesCommandInput;
+      output: GetIdentityPoliciesCommandOutput;
+    };
+  };
+}

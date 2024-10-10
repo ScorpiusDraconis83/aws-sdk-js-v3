@@ -41,21 +41,6 @@ export interface ModifyNetworkInterfaceAttributeCommandOutput extends __Metadata
  * // const { EC2Client, ModifyNetworkInterfaceAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ModifyNetworkInterfaceAttributeRequest
- *   Attachment: { // NetworkInterfaceAttachmentChanges
- *     AttachmentId: "STRING_VALUE",
- *     DeleteOnTermination: true || false,
- *   },
- *   Description: { // AttributeValue
- *     Value: "STRING_VALUE",
- *   },
- *   DryRun: true || false,
- *   Groups: [ // SecurityGroupIdStringList
- *     "STRING_VALUE",
- *   ],
- *   NetworkInterfaceId: "STRING_VALUE", // required
- *   SourceDestCheck: { // AttributeBooleanValue
- *     Value: true || false,
- *   },
  *   EnaSrdSpecification: { // EnaSrdSpecification
  *     EnaSrdEnabled: true || false,
  *     EnaSrdUdpSpecification: { // EnaSrdUdpSpecification
@@ -69,6 +54,21 @@ export interface ModifyNetworkInterfaceAttributeCommandOutput extends __Metadata
  *     UdpTimeout: Number("int"),
  *   },
  *   AssociatePublicIpAddress: true || false,
+ *   DryRun: true || false,
+ *   NetworkInterfaceId: "STRING_VALUE", // required
+ *   Description: { // AttributeValue
+ *     Value: "STRING_VALUE",
+ *   },
+ *   SourceDestCheck: { // AttributeBooleanValue
+ *     Value: true || false,
+ *   },
+ *   Groups: [ // SecurityGroupIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   Attachment: { // NetworkInterfaceAttachmentChanges
+ *     AttachmentId: "STRING_VALUE",
+ *     DeleteOnTermination: true || false,
+ *   },
  * };
  * const command = new ModifyNetworkInterfaceAttributeCommand(input);
  * const response = await client.send(command);
@@ -153,9 +153,7 @@ export class ModifyNetworkInterfaceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -167,4 +165,16 @@ export class ModifyNetworkInterfaceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyNetworkInterfaceAttributeCommand)
   .de(de_ModifyNetworkInterfaceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyNetworkInterfaceAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifyNetworkInterfaceAttributeCommandInput;
+      output: ModifyNetworkInterfaceAttributeCommandOutput;
+    };
+  };
+}

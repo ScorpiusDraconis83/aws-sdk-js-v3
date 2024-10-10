@@ -100,9 +100,7 @@ export class ListChecksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TrustedAdvisorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListChecksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListChecksCommand)
   .de(de_ListChecksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChecksRequest;
+      output: ListChecksResponse;
+    };
+    sdk: {
+      input: ListChecksCommandInput;
+      output: ListChecksCommandOutput;
+    };
+  };
+}

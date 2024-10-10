@@ -103,9 +103,7 @@ export class CreateFHIRDatastoreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthLakeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateFHIRDatastoreCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFHIRDatastoreCommand)
   .de(de_CreateFHIRDatastoreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFHIRDatastoreRequest;
+      output: CreateFHIRDatastoreResponse;
+    };
+    sdk: {
+      input: CreateFHIRDatastoreCommandInput;
+      output: CreateFHIRDatastoreCommandOutput;
+    };
+  };
+}

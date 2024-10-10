@@ -83,9 +83,7 @@ export class GetPhoneNumberSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class GetPhoneNumberSettingsCommand extends $Command
   .f(void 0, GetPhoneNumberSettingsResponseFilterSensitiveLog)
   .ser(se_GetPhoneNumberSettingsCommand)
   .de(de_GetPhoneNumberSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetPhoneNumberSettingsResponse;
+    };
+    sdk: {
+      input: GetPhoneNumberSettingsCommandInput;
+      output: GetPhoneNumberSettingsCommandOutput;
+    };
+  };
+}

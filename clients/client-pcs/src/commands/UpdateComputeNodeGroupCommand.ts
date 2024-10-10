@@ -238,9 +238,7 @@ export class UpdateComputeNodeGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PCSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -252,4 +250,16 @@ export class UpdateComputeNodeGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateComputeNodeGroupCommand)
   .de(de_UpdateComputeNodeGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateComputeNodeGroupRequest;
+      output: UpdateComputeNodeGroupResponse;
+    };
+    sdk: {
+      input: UpdateComputeNodeGroupCommandInput;
+      output: UpdateComputeNodeGroupCommandOutput;
+    };
+  };
+}

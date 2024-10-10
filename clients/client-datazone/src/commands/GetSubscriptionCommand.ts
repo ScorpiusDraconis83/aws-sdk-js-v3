@@ -76,6 +76,14 @@ export interface GetSubscriptionCommandOutput extends GetSubscriptionOutput, __M
  * //             shortDescription: "STRING_VALUE",
  * //           },
  * //         ],
+ * //         assetScope: { // AssetScope
+ * //           assetId: "STRING_VALUE", // required
+ * //           filterIds: [ // FilterIds // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           status: "STRING_VALUE", // required
+ * //           errorMessage: "STRING_VALUE",
+ * //         },
  * //       },
  * //       productListing: { // SubscribedProductListing
  * //         entityId: "STRING_VALUE",
@@ -143,9 +151,7 @@ export class GetSubscriptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +163,16 @@ export class GetSubscriptionCommand extends $Command
   .f(void 0, GetSubscriptionOutputFilterSensitiveLog)
   .ser(se_GetSubscriptionCommand)
   .de(de_GetSubscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSubscriptionInput;
+      output: GetSubscriptionOutput;
+    };
+    sdk: {
+      input: GetSubscriptionCommandInput;
+      output: GetSubscriptionCommandOutput;
+    };
+  };
+}

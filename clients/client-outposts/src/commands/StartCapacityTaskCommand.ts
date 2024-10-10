@@ -105,9 +105,7 @@ export class StartCapacityTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OutpostsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class StartCapacityTaskCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartCapacityTaskCommand)
   .de(de_StartCapacityTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartCapacityTaskInput;
+      output: StartCapacityTaskOutput;
+    };
+    sdk: {
+      input: StartCapacityTaskCommandInput;
+      output: StartCapacityTaskCommandOutput;
+    };
+  };
+}

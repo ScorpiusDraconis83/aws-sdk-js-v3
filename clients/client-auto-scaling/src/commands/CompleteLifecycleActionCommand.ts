@@ -122,9 +122,7 @@ export class CompleteLifecycleActionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class CompleteLifecycleActionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CompleteLifecycleActionCommand)
   .de(de_CompleteLifecycleActionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CompleteLifecycleActionType;
+      output: {};
+    };
+    sdk: {
+      input: CompleteLifecycleActionCommandInput;
+      output: CompleteLifecycleActionCommandOutput;
+    };
+  };
+}

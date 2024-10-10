@@ -115,9 +115,7 @@ export class ModifyCacheParameterGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class ModifyCacheParameterGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyCacheParameterGroupCommand)
   .de(de_ModifyCacheParameterGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyCacheParameterGroupMessage;
+      output: CacheParameterGroupNameMessage;
+    };
+    sdk: {
+      input: ModifyCacheParameterGroupCommandInput;
+      output: ModifyCacheParameterGroupCommandOutput;
+    };
+  };
+}

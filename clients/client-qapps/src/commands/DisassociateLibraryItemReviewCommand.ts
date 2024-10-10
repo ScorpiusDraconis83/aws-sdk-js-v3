@@ -57,6 +57,10 @@ export interface DisassociateLibraryItemReviewCommandOutput extends __MetadataBe
  * @throws {@link AccessDeniedException} (client fault)
  *  <p>The client is not authorized to perform the requested operation.</p>
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation could not be completed due to a
+ *       conflict with the current state of the resource.</p>
+ *
  * @throws {@link InternalServerException} (server fault)
  *  <p>An internal service error occurred while processing the request.</p>
  *
@@ -102,9 +106,7 @@ export class DisassociateLibraryItemReviewCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +118,16 @@ export class DisassociateLibraryItemReviewCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateLibraryItemReviewCommand)
   .de(de_DisassociateLibraryItemReviewCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateLibraryItemReviewInput;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateLibraryItemReviewCommandInput;
+      output: DisassociateLibraryItemReviewCommandOutput;
+    };
+  };
+}

@@ -95,9 +95,7 @@ export class UpdateViewMetadataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class UpdateViewMetadataCommand extends $Command
   .f(UpdateViewMetadataRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateViewMetadataCommand)
   .de(de_UpdateViewMetadataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateViewMetadataRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateViewMetadataCommandInput;
+      output: UpdateViewMetadataCommandOutput;
+    };
+  };
+}

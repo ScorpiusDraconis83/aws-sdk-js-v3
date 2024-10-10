@@ -76,9 +76,7 @@ export class DeleteWorldTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DeleteWorldTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteWorldTemplateCommand)
   .de(de_DeleteWorldTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWorldTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteWorldTemplateCommandInput;
+      output: DeleteWorldTemplateCommandOutput;
+    };
+  };
+}

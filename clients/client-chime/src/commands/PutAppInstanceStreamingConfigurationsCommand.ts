@@ -117,9 +117,7 @@ export class PutAppInstanceStreamingConfigurationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class PutAppInstanceStreamingConfigurationsCommand extends $Command
   )
   .ser(se_PutAppInstanceStreamingConfigurationsCommand)
   .de(de_PutAppInstanceStreamingConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAppInstanceStreamingConfigurationsRequest;
+      output: PutAppInstanceStreamingConfigurationsResponse;
+    };
+    sdk: {
+      input: PutAppInstanceStreamingConfigurationsCommandInput;
+      output: PutAppInstanceStreamingConfigurationsCommandOutput;
+    };
+  };
+}

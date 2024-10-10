@@ -181,6 +181,7 @@ export class InvalidClientTokenException extends __BaseException {
 export const ActionCategory = {
   Approval: "Approval",
   Build: "Build",
+  Compute: "Compute",
   Deploy: "Deploy",
   Invoke: "Invoke",
   Source: "Source",
@@ -409,6 +410,12 @@ export interface OutputArtifact {
    * @public
    */
   name: string | undefined;
+
+  /**
+   * <p>The files that you want to associate with the output artifact that will be exported from the compute action.</p>
+   * @public
+   */
+  files?: string[];
 }
 
 /**
@@ -453,6 +460,18 @@ export interface ActionDeclaration {
   configuration?: Record<string, string>;
 
   /**
+   * <p>The shell commands to run with your compute action in CodePipeline. All commands are
+   *             supported except multi-line formats. While CodeBuild logs and permissions are used, you
+   *             do not need to create any resources in CodeBuild.</p>
+   *          <note>
+   *             <p>Using compute time for this action will incur separate charges in
+   *                 CodeBuild.</p>
+   *          </note>
+   * @public
+   */
+  commands?: string[];
+
+  /**
    * <p>The name or ID of the result of the action declaration, such as a test or build
    *             artifact.</p>
    * @public
@@ -465,6 +484,12 @@ export interface ActionDeclaration {
    * @public
    */
   inputArtifacts?: InputArtifact[];
+
+  /**
+   * <p>The list of variables that are to be exported from the compute action. This is specifically CodeBuild environment variables as used for that action.</p>
+   * @public
+   */
+  outputVariables?: string[];
 
   /**
    * <p>The ARN of the IAM service role that performs the declared action. This is assumed
@@ -1791,20 +1816,8 @@ export type RuleOwner = (typeof RuleOwner)[keyof typeof RuleOwner];
  */
 export interface RuleTypeId {
   /**
-   * <p>A category defines what kind of rule can be run in the stage, and constrains
-   *             the provider type for the rule. Valid categories are limited to one of the following
-   *             values. </p>
-   *          <ul>
-   *             <li>
-   *                <p>INVOKE</p>
-   *             </li>
-   *             <li>
-   *                <p>Approval</p>
-   *             </li>
-   *             <li>
-   *                <p>Rule</p>
-   *             </li>
-   *          </ul>
+   * <p>A category defines what kind of rule can be run in the stage, and constrains the provider
+   *             type for the rule. The valid category is <code>Rule</code>. </p>
    * @public
    */
   category: RuleCategory | undefined;
@@ -1817,10 +1830,7 @@ export interface RuleTypeId {
   owner?: RuleOwner;
 
   /**
-   * <p>The provider of the service being called by the rule. Valid providers are
-   *             determined by the rulecategory. For example, a managed rule in the Rule category type
-   *             has an owner of AWS, which would be specified as
-   *             <code>AWS</code>.</p>
+   * <p>The rule provider, such as the <code>DeploymentWindow</code> rule.</p>
    * @public
    */
   provider: string | undefined;
@@ -5118,6 +5128,18 @@ export interface WebhookAuthConfiguration {
   /**
    * <p>The property used to configure GitHub authentication. For GITHUB_HMAC, only the
    *                 <code>SecretToken</code> property must be set.</p>
+   *          <important>
+   *             <p>When creating CodePipeline webhooks, do not use your own credentials or
+   *                 reuse the same secret token across multiple webhooks. For optimal security, generate
+   *                 a unique secret token for each webhook you create. The secret token is an arbitrary
+   *                 string that you provide, which GitHub uses to compute and sign the webhook payloads
+   *                 sent to CodePipeline, for protecting the integrity and authenticity of the
+   *                 webhook payloads. Using your own credentials or reusing the same token across
+   *                 multiple webhooks can lead to security vulnerabilities.</p>
+   *          </important>
+   *          <note>
+   *             <p>If a secret token was provided, it will be redacted in the response.</p>
+   *          </note>
    * @public
    */
   SecretToken?: string;
@@ -5187,6 +5209,18 @@ export interface WebhookDefinition {
 
   /**
    * <p>Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.</p>
+   *          <important>
+   *             <p>When creating CodePipeline webhooks, do not use your own credentials or
+   *                 reuse the same secret token across multiple webhooks. For optimal security, generate
+   *                 a unique secret token for each webhook you create. The secret token is an arbitrary
+   *                 string that you provide, which GitHub uses to compute and sign the webhook payloads
+   *                 sent to CodePipeline, for protecting the integrity and authenticity of the
+   *                 webhook payloads. Using your own credentials or reusing the same token across
+   *                 multiple webhooks can lead to security vulnerabilities.</p>
+   *          </important>
+   *          <note>
+   *             <p>If a secret token was provided, it will be redacted in the response.</p>
+   *          </note>
    *          <ul>
    *             <li>
    *                <p>For information about the authentication scheme implemented by GITHUB_HMAC,

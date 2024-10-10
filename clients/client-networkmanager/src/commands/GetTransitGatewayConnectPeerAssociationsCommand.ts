@@ -107,9 +107,7 @@ export class GetTransitGatewayConnectPeerAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class GetTransitGatewayConnectPeerAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTransitGatewayConnectPeerAssociationsCommand)
   .de(de_GetTransitGatewayConnectPeerAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayConnectPeerAssociationsRequest;
+      output: GetTransitGatewayConnectPeerAssociationsResponse;
+    };
+    sdk: {
+      input: GetTransitGatewayConnectPeerAssociationsCommandInput;
+      output: GetTransitGatewayConnectPeerAssociationsCommandOutput;
+    };
+  };
+}

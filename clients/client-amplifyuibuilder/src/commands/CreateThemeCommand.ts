@@ -132,9 +132,7 @@ export class CreateThemeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyUIBuilderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class CreateThemeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateThemeCommand)
   .de(de_CreateThemeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateThemeRequest;
+      output: CreateThemeResponse;
+    };
+    sdk: {
+      input: CreateThemeCommandInput;
+      output: CreateThemeCommandOutput;
+    };
+  };
+}

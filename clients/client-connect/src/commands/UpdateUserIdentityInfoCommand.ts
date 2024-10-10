@@ -95,9 +95,7 @@ export class UpdateUserIdentityInfoCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class UpdateUserIdentityInfoCommand extends $Command
   .f(UpdateUserIdentityInfoRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateUserIdentityInfoCommand)
   .de(de_UpdateUserIdentityInfoCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateUserIdentityInfoRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateUserIdentityInfoCommandInput;
+      output: UpdateUserIdentityInfoCommandOutput;
+    };
+  };
+}

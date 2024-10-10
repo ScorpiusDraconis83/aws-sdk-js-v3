@@ -80,9 +80,7 @@ export class ListBuildBatchesForProjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class ListBuildBatchesForProjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListBuildBatchesForProjectCommand)
   .de(de_ListBuildBatchesForProjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBuildBatchesForProjectInput;
+      output: ListBuildBatchesForProjectOutput;
+    };
+    sdk: {
+      input: ListBuildBatchesForProjectCommandInput;
+      output: ListBuildBatchesForProjectCommandOutput;
+    };
+  };
+}

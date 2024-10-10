@@ -76,9 +76,7 @@ export class DeleteRedshiftIdcApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DeleteRedshiftIdcApplicationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRedshiftIdcApplicationCommand)
   .de(de_DeleteRedshiftIdcApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRedshiftIdcApplicationMessage;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRedshiftIdcApplicationCommandInput;
+      output: DeleteRedshiftIdcApplicationCommandOutput;
+    };
+  };
+}

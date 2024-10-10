@@ -94,9 +94,7 @@ export class UpdateTaskExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class UpdateTaskExecutionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTaskExecutionCommand)
   .de(de_UpdateTaskExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTaskExecutionRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateTaskExecutionCommandInput;
+      output: UpdateTaskExecutionCommandOutput;
+    };
+  };
+}

@@ -150,9 +150,7 @@ export class ListDatasetEntriesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -164,4 +162,16 @@ export class ListDatasetEntriesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListDatasetEntriesCommand)
   .de(de_ListDatasetEntriesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDatasetEntriesRequest;
+      output: ListDatasetEntriesResponse;
+    };
+    sdk: {
+      input: ListDatasetEntriesCommandInput;
+      output: ListDatasetEntriesCommandOutput;
+    };
+  };
+}

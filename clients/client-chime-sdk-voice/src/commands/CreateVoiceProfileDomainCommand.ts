@@ -124,9 +124,7 @@ export class CreateVoiceProfileDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class CreateVoiceProfileDomainCommand extends $Command
   .f(CreateVoiceProfileDomainRequestFilterSensitiveLog, CreateVoiceProfileDomainResponseFilterSensitiveLog)
   .ser(se_CreateVoiceProfileDomainCommand)
   .de(de_CreateVoiceProfileDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVoiceProfileDomainRequest;
+      output: CreateVoiceProfileDomainResponse;
+    };
+    sdk: {
+      input: CreateVoiceProfileDomainCommandInput;
+      output: CreateVoiceProfileDomainCommandOutput;
+    };
+  };
+}

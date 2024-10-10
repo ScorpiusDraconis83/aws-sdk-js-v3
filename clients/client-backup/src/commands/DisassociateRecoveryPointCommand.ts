@@ -88,9 +88,7 @@ export class DisassociateRecoveryPointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class DisassociateRecoveryPointCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateRecoveryPointCommand)
   .de(de_DisassociateRecoveryPointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateRecoveryPointInput;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateRecoveryPointCommandInput;
+      output: DisassociateRecoveryPointCommandOutput;
+    };
+  };
+}

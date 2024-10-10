@@ -94,9 +94,7 @@ export class ListCustomRoutingListenersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlobalAcceleratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class ListCustomRoutingListenersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCustomRoutingListenersCommand)
   .de(de_ListCustomRoutingListenersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomRoutingListenersRequest;
+      output: ListCustomRoutingListenersResponse;
+    };
+    sdk: {
+      input: ListCustomRoutingListenersCommandInput;
+      output: ListCustomRoutingListenersCommandOutput;
+    };
+  };
+}

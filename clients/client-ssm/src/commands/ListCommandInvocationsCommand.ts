@@ -155,9 +155,7 @@ export class ListCommandInvocationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -169,4 +167,16 @@ export class ListCommandInvocationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCommandInvocationsCommand)
   .de(de_ListCommandInvocationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCommandInvocationsRequest;
+      output: ListCommandInvocationsResult;
+    };
+    sdk: {
+      input: ListCommandInvocationsCommandInput;
+      output: ListCommandInvocationsCommandOutput;
+    };
+  };
+}

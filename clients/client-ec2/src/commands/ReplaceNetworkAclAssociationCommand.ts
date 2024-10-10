@@ -41,8 +41,8 @@ export interface ReplaceNetworkAclAssociationCommandOutput
  * // const { EC2Client, ReplaceNetworkAclAssociationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ReplaceNetworkAclAssociationRequest
- *   AssociationId: "STRING_VALUE", // required
  *   DryRun: true || false,
+ *   AssociationId: "STRING_VALUE", // required
  *   NetworkAclId: "STRING_VALUE", // required
  * };
  * const command = new ReplaceNetworkAclAssociationCommand(input);
@@ -89,9 +89,7 @@ export class ReplaceNetworkAclAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ReplaceNetworkAclAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ReplaceNetworkAclAssociationCommand)
   .de(de_ReplaceNetworkAclAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReplaceNetworkAclAssociationRequest;
+      output: ReplaceNetworkAclAssociationResult;
+    };
+    sdk: {
+      input: ReplaceNetworkAclAssociationCommandInput;
+      output: ReplaceNetworkAclAssociationCommandOutput;
+    };
+  };
+}

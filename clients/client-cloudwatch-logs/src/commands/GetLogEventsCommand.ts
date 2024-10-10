@@ -100,9 +100,7 @@ export class GetLogEventsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchLogsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class GetLogEventsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetLogEventsCommand)
   .de(de_GetLogEventsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLogEventsRequest;
+      output: GetLogEventsResponse;
+    };
+    sdk: {
+      input: GetLogEventsCommandInput;
+      output: GetLogEventsCommandOutput;
+    };
+  };
+}

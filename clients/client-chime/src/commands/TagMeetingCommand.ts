@@ -102,9 +102,7 @@ export class TagMeetingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class TagMeetingCommand extends $Command
   .f(TagMeetingRequestFilterSensitiveLog, void 0)
   .ser(se_TagMeetingCommand)
   .de(de_TagMeetingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagMeetingRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagMeetingCommandInput;
+      output: TagMeetingCommandOutput;
+    };
+  };
+}

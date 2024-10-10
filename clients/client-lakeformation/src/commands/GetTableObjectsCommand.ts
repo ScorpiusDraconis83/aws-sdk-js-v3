@@ -107,9 +107,7 @@ export class GetTableObjectsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LakeFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class GetTableObjectsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTableObjectsCommand)
   .de(de_GetTableObjectsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTableObjectsRequest;
+      output: GetTableObjectsResponse;
+    };
+    sdk: {
+      input: GetTableObjectsCommandInput;
+      output: GetTableObjectsCommandOutput;
+    };
+  };
+}

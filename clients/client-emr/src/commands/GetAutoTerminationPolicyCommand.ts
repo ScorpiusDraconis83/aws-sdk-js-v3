@@ -67,9 +67,7 @@ export class GetAutoTerminationPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -81,4 +79,16 @@ export class GetAutoTerminationPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAutoTerminationPolicyCommand)
   .de(de_GetAutoTerminationPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAutoTerminationPolicyInput;
+      output: GetAutoTerminationPolicyOutput;
+    };
+    sdk: {
+      input: GetAutoTerminationPolicyCommandInput;
+      output: GetAutoTerminationPolicyCommandOutput;
+    };
+  };
+}

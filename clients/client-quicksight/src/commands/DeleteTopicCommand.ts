@@ -90,9 +90,7 @@ export class DeleteTopicCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DeleteTopicCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteTopicCommand)
   .de(de_DeleteTopicCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTopicRequest;
+      output: DeleteTopicResponse;
+    };
+    sdk: {
+      input: DeleteTopicCommandInput;
+      output: DeleteTopicCommandOutput;
+    };
+  };
+}

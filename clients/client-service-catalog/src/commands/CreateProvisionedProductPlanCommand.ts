@@ -114,9 +114,7 @@ export class CreateProvisionedProductPlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateProvisionedProductPlanCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateProvisionedProductPlanCommand)
   .de(de_CreateProvisionedProductPlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProvisionedProductPlanInput;
+      output: CreateProvisionedProductPlanOutput;
+    };
+    sdk: {
+      input: CreateProvisionedProductPlanCommandInput;
+      output: CreateProvisionedProductPlanCommandOutput;
+    };
+  };
+}

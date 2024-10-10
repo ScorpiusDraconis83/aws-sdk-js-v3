@@ -47,7 +47,6 @@ export interface CreateKeyPairCommandOutput extends KeyPair, __MetadataBearer {}
  * const client = new EC2Client(config);
  * const input = { // CreateKeyPairRequest
  *   KeyName: "STRING_VALUE", // required
- *   DryRun: true || false,
  *   KeyType: "rsa" || "ed25519",
  *   TagSpecifications: [ // TagSpecificationList
  *     { // TagSpecification
@@ -61,13 +60,11 @@ export interface CreateKeyPairCommandOutput extends KeyPair, __MetadataBearer {}
  *     },
  *   ],
  *   KeyFormat: "pem" || "ppk",
+ *   DryRun: true || false,
  * };
  * const command = new CreateKeyPairCommand(input);
  * const response = await client.send(command);
  * // { // KeyPair
- * //   KeyFingerprint: "STRING_VALUE",
- * //   KeyMaterial: "STRING_VALUE",
- * //   KeyName: "STRING_VALUE",
  * //   KeyPairId: "STRING_VALUE",
  * //   Tags: [ // TagList
  * //     { // Tag
@@ -75,6 +72,9 @@ export interface CreateKeyPairCommandOutput extends KeyPair, __MetadataBearer {}
  * //       Value: "STRING_VALUE",
  * //     },
  * //   ],
+ * //   KeyName: "STRING_VALUE",
+ * //   KeyFingerprint: "STRING_VALUE",
+ * //   KeyMaterial: "STRING_VALUE",
  * // };
  *
  * ```
@@ -109,9 +109,7 @@ export class CreateKeyPairCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class CreateKeyPairCommand extends $Command
   .f(void 0, KeyPairFilterSensitiveLog)
   .ser(se_CreateKeyPairCommand)
   .de(de_CreateKeyPairCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateKeyPairRequest;
+      output: KeyPair;
+    };
+    sdk: {
+      input: CreateKeyPairCommandInput;
+      output: CreateKeyPairCommandOutput;
+    };
+  };
+}

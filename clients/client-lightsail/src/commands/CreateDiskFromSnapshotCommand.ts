@@ -142,9 +142,7 @@ export class CreateDiskFromSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -156,4 +154,16 @@ export class CreateDiskFromSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDiskFromSnapshotCommand)
   .de(de_CreateDiskFromSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDiskFromSnapshotRequest;
+      output: CreateDiskFromSnapshotResult;
+    };
+    sdk: {
+      input: CreateDiskFromSnapshotCommandInput;
+      output: CreateDiskFromSnapshotCommandOutput;
+    };
+  };
+}

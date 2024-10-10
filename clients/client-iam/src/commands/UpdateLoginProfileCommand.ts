@@ -105,9 +105,7 @@ export class UpdateLoginProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class UpdateLoginProfileCommand extends $Command
   .f(UpdateLoginProfileRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateLoginProfileCommand)
   .de(de_UpdateLoginProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLoginProfileRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLoginProfileCommandInput;
+      output: UpdateLoginProfileCommandOutput;
+    };
+  };
+}

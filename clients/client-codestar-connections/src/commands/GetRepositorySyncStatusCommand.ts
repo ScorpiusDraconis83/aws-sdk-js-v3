@@ -98,9 +98,7 @@ export class GetRepositorySyncStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeStarConnectionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class GetRepositorySyncStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetRepositorySyncStatusCommand)
   .de(de_GetRepositorySyncStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRepositorySyncStatusInput;
+      output: GetRepositorySyncStatusOutput;
+    };
+    sdk: {
+      input: GetRepositorySyncStatusCommandInput;
+      output: GetRepositorySyncStatusCommandOutput;
+    };
+  };
+}

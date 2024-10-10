@@ -109,9 +109,7 @@ export class GetFederationTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class GetFederationTokenCommand extends $Command
   .f(void 0, GetFederationTokenResponseFilterSensitiveLog)
   .ser(se_GetFederationTokenCommand)
   .de(de_GetFederationTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFederationTokenRequest;
+      output: GetFederationTokenResponse;
+    };
+    sdk: {
+      input: GetFederationTokenCommandInput;
+      output: GetFederationTokenCommandOutput;
+    };
+  };
+}

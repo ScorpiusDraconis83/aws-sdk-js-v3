@@ -119,9 +119,7 @@ export class GetServiceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MigrationHubRefactorSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class GetServiceCommand extends $Command
   .f(void 0, GetServiceResponseFilterSensitiveLog)
   .ser(se_GetServiceCommand)
   .de(de_GetServiceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceRequest;
+      output: GetServiceResponse;
+    };
+    sdk: {
+      input: GetServiceCommandInput;
+      output: GetServiceCommandOutput;
+    };
+  };
+}

@@ -100,9 +100,7 @@ export class ListCustomerManagedPolicyReferencesInPermissionSetCommand extends $
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOAdminClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListCustomerManagedPolicyReferencesInPermissionSetCommand extends $
   .f(void 0, void 0)
   .ser(se_ListCustomerManagedPolicyReferencesInPermissionSetCommand)
   .de(de_ListCustomerManagedPolicyReferencesInPermissionSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomerManagedPolicyReferencesInPermissionSetRequest;
+      output: ListCustomerManagedPolicyReferencesInPermissionSetResponse;
+    };
+    sdk: {
+      input: ListCustomerManagedPolicyReferencesInPermissionSetCommandInput;
+      output: ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput;
+    };
+  };
+}

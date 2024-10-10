@@ -66,9 +66,7 @@ export class PingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PrivateNetworksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -80,4 +78,16 @@ export class PingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PingCommand)
   .de(de_PingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: PingResponse;
+    };
+    sdk: {
+      input: PingCommandInput;
+      output: PingCommandOutput;
+    };
+  };
+}

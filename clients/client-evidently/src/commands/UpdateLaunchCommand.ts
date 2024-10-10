@@ -177,9 +177,7 @@ export class UpdateLaunchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EvidentlyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -191,4 +189,16 @@ export class UpdateLaunchCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateLaunchCommand)
   .de(de_UpdateLaunchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLaunchRequest;
+      output: UpdateLaunchResponse;
+    };
+    sdk: {
+      input: UpdateLaunchCommandInput;
+      output: UpdateLaunchCommandOutput;
+    };
+  };
+}

@@ -52,7 +52,7 @@ export interface EnableClientAuthenticationCommandOutput extends EnableClientAut
  * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
  * @throws {@link AccessDeniedException} (client fault)
- *  <p>Client authentication is not available in this region at this time.</p>
+ *  <p>You do not have sufficient access to perform this action.</p>
  *
  * @throws {@link ClientException} (client fault)
  *  <p>A client exception has occurred.</p>
@@ -86,9 +86,7 @@ export class EnableClientAuthenticationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectoryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class EnableClientAuthenticationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnableClientAuthenticationCommand)
   .de(de_EnableClientAuthenticationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableClientAuthenticationRequest;
+      output: {};
+    };
+    sdk: {
+      input: EnableClientAuthenticationCommandInput;
+      output: EnableClientAuthenticationCommandOutput;
+    };
+  };
+}

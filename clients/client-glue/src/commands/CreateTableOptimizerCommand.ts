@@ -39,10 +39,23 @@ export interface CreateTableOptimizerCommandOutput extends CreateTableOptimizerR
  *   CatalogId: "STRING_VALUE", // required
  *   DatabaseName: "STRING_VALUE", // required
  *   TableName: "STRING_VALUE", // required
- *   Type: "compaction", // required
+ *   Type: "compaction" || "retention" || "orphan_file_deletion", // required
  *   TableOptimizerConfiguration: { // TableOptimizerConfiguration
  *     roleArn: "STRING_VALUE",
  *     enabled: true || false,
+ *     retentionConfiguration: { // RetentionConfiguration
+ *       icebergConfiguration: { // IcebergRetentionConfiguration
+ *         snapshotRetentionPeriodInDays: Number("int"),
+ *         numberOfSnapshotsToRetain: Number("int"),
+ *         cleanExpiredFiles: true || false,
+ *       },
+ *     },
+ *     orphanFileDeletionConfiguration: { // OrphanFileDeletionConfiguration
+ *       icebergConfiguration: { // IcebergOrphanFileDeletionConfiguration
+ *         orphanFileRetentionPeriodInDays: Number("int"),
+ *         location: "STRING_VALUE",
+ *       },
+ *     },
  *   },
  * };
  * const command = new CreateTableOptimizerCommand(input);
@@ -72,6 +85,12 @@ export interface CreateTableOptimizerCommandOutput extends CreateTableOptimizerR
  * @throws {@link InvalidInputException} (client fault)
  *  <p>The input provided was not valid.</p>
  *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling threshhold was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A value could not be validated.</p>
+ *
  * @throws {@link GlueServiceException}
  * <p>Base exception class for all service exceptions from Glue service.</p>
  *
@@ -85,9 +104,7 @@ export class CreateTableOptimizerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +116,16 @@ export class CreateTableOptimizerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTableOptimizerCommand)
   .de(de_CreateTableOptimizerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTableOptimizerRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateTableOptimizerCommandInput;
+      output: CreateTableOptimizerCommandOutput;
+    };
+  };
+}

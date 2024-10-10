@@ -83,9 +83,7 @@ export class SetTypeConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class SetTypeConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SetTypeConfigurationCommand)
   .de(de_SetTypeConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetTypeConfigurationInput;
+      output: SetTypeConfigurationOutput;
+    };
+    sdk: {
+      input: SetTypeConfigurationCommandInput;
+      output: SetTypeConfigurationCommandOutput;
+    };
+  };
+}

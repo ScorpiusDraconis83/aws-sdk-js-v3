@@ -123,9 +123,7 @@ export class GetBatchJobExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: M2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class GetBatchJobExecutionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetBatchJobExecutionCommand)
   .de(de_GetBatchJobExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBatchJobExecutionRequest;
+      output: GetBatchJobExecutionResponse;
+    };
+    sdk: {
+      input: GetBatchJobExecutionCommandInput;
+      output: GetBatchJobExecutionCommandOutput;
+    };
+  };
+}

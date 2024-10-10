@@ -60,7 +60,7 @@ export interface DeleteReservationCommandOutput extends DeleteReservationRespons
  * //   ReservationId: "STRING_VALUE",
  * //   ResourceSpecification: { // ReservationResourceSpecification
  * //     ChannelClass: "STANDARD" || "SINGLE_PIPELINE",
- * //     Codec: "MPEG2" || "AVC" || "HEVC" || "AUDIO" || "LINK",
+ * //     Codec: "MPEG2" || "AVC" || "HEVC" || "AUDIO" || "LINK" || "AV1",
  * //     MaximumBitrate: "MAX_10_MBPS" || "MAX_20_MBPS" || "MAX_50_MBPS",
  * //     MaximumFramerate: "MAX_30_FPS" || "MAX_60_FPS",
  * //     Resolution: "SD" || "HD" || "FHD" || "UHD",
@@ -121,9 +121,7 @@ export class DeleteReservationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class DeleteReservationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteReservationCommand)
   .de(de_DeleteReservationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReservationRequest;
+      output: DeleteReservationResponse;
+    };
+    sdk: {
+      input: DeleteReservationCommandInput;
+      output: DeleteReservationCommandOutput;
+    };
+  };
+}

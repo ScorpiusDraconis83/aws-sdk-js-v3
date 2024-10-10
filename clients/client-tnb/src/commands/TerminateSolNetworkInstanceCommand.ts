@@ -100,9 +100,7 @@ export class TerminateSolNetworkInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class TerminateSolNetworkInstanceCommand extends $Command
   .f(TerminateSolNetworkInstanceInputFilterSensitiveLog, TerminateSolNetworkInstanceOutputFilterSensitiveLog)
   .ser(se_TerminateSolNetworkInstanceCommand)
   .de(de_TerminateSolNetworkInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TerminateSolNetworkInstanceInput;
+      output: TerminateSolNetworkInstanceOutput;
+    };
+    sdk: {
+      input: TerminateSolNetworkInstanceCommandInput;
+      output: TerminateSolNetworkInstanceCommandOutput;
+    };
+  };
+}

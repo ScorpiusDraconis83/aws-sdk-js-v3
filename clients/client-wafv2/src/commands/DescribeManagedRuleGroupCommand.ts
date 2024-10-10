@@ -183,9 +183,7 @@ export class DescribeManagedRuleGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -197,4 +195,16 @@ export class DescribeManagedRuleGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeManagedRuleGroupCommand)
   .de(de_DescribeManagedRuleGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeManagedRuleGroupRequest;
+      output: DescribeManagedRuleGroupResponse;
+    };
+    sdk: {
+      input: DescribeManagedRuleGroupCommandInput;
+      output: DescribeManagedRuleGroupCommandOutput;
+    };
+  };
+}

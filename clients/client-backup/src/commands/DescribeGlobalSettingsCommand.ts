@@ -76,9 +76,7 @@ export class DescribeGlobalSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DescribeGlobalSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeGlobalSettingsCommand)
   .de(de_DescribeGlobalSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeGlobalSettingsOutput;
+    };
+    sdk: {
+      input: DescribeGlobalSettingsCommandInput;
+      output: DescribeGlobalSettingsCommandOutput;
+    };
+  };
+}

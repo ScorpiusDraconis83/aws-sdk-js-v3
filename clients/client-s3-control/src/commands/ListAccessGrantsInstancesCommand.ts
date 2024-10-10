@@ -58,6 +58,8 @@ export interface ListAccessGrantsInstancesCommandOutput extends ListAccessGrants
  * //       AccessGrantsInstanceArn: "STRING_VALUE",
  * //       CreatedAt: new Date("TIMESTAMP"),
  * //       IdentityCenterArn: "STRING_VALUE",
+ * //       IdentityCenterInstanceArn: "STRING_VALUE",
+ * //       IdentityCenterApplicationArn: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -101,4 +103,16 @@ export class ListAccessGrantsInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAccessGrantsInstancesCommand)
   .de(de_ListAccessGrantsInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccessGrantsInstancesRequest;
+      output: ListAccessGrantsInstancesResult;
+    };
+    sdk: {
+      input: ListAccessGrantsInstancesCommandInput;
+      output: ListAccessGrantsInstancesCommandOutput;
+    };
+  };
+}

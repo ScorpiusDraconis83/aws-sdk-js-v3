@@ -92,9 +92,7 @@ export class DetectKeyPhrasesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DetectKeyPhrasesCommand extends $Command
   .f(DetectKeyPhrasesRequestFilterSensitiveLog, DetectKeyPhrasesResponseFilterSensitiveLog)
   .ser(se_DetectKeyPhrasesCommand)
   .de(de_DetectKeyPhrasesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetectKeyPhrasesRequest;
+      output: DetectKeyPhrasesResponse;
+    };
+    sdk: {
+      input: DetectKeyPhrasesCommandInput;
+      output: DetectKeyPhrasesCommandOutput;
+    };
+  };
+}

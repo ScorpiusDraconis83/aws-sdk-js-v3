@@ -116,9 +116,7 @@ export class GetProfileObjectTypeTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class GetProfileObjectTypeTemplateCommand extends $Command
   .f(void 0, GetProfileObjectTypeTemplateResponseFilterSensitiveLog)
   .ser(se_GetProfileObjectTypeTemplateCommand)
   .de(de_GetProfileObjectTypeTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetProfileObjectTypeTemplateRequest;
+      output: GetProfileObjectTypeTemplateResponse;
+    };
+    sdk: {
+      input: GetProfileObjectTypeTemplateCommandInput;
+      output: GetProfileObjectTypeTemplateCommandOutput;
+    };
+  };
+}

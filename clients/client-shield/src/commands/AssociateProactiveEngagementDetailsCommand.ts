@@ -98,9 +98,7 @@ export class AssociateProactiveEngagementDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ShieldClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class AssociateProactiveEngagementDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateProactiveEngagementDetailsCommand)
   .de(de_AssociateProactiveEngagementDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateProactiveEngagementDetailsRequest;
+      output: {};
+    };
+    sdk: {
+      input: AssociateProactiveEngagementDetailsCommandInput;
+      output: AssociateProactiveEngagementDetailsCommandOutput;
+    };
+  };
+}

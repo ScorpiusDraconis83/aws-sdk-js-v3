@@ -33,7 +33,7 @@ export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsListMes
  *             describe a single snapshot, or just the snapshots associated with a particular cache
  *             cluster.</p>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -189,9 +189,7 @@ export class DescribeSnapshotsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -203,4 +201,16 @@ export class DescribeSnapshotsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSnapshotsCommand)
   .de(de_DescribeSnapshotsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotsMessage;
+      output: DescribeSnapshotsListMessage;
+    };
+    sdk: {
+      input: DescribeSnapshotsCommandInput;
+      output: DescribeSnapshotsCommandOutput;
+    };
+  };
+}

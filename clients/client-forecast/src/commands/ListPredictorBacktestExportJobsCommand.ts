@@ -105,9 +105,7 @@ export class ListPredictorBacktestExportJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ForecastClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class ListPredictorBacktestExportJobsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPredictorBacktestExportJobsCommand)
   .de(de_ListPredictorBacktestExportJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPredictorBacktestExportJobsRequest;
+      output: ListPredictorBacktestExportJobsResponse;
+    };
+    sdk: {
+      input: ListPredictorBacktestExportJobsCommandInput;
+      output: ListPredictorBacktestExportJobsCommandOutput;
+    };
+  };
+}

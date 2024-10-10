@@ -237,9 +237,7 @@ export class ListParentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -251,4 +249,16 @@ export class ListParentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListParentsCommand)
   .de(de_ListParentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListParentsRequest;
+      output: ListParentsResponse;
+    };
+    sdk: {
+      input: ListParentsCommandInput;
+      output: ListParentsCommandOutput;
+    };
+  };
+}

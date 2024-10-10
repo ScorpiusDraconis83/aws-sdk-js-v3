@@ -951,9 +951,7 @@ export class CreateDistributionWithTagsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFrontClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -965,4 +963,16 @@ export class CreateDistributionWithTagsCommand extends $Command
   .f(CreateDistributionWithTagsRequestFilterSensitiveLog, CreateDistributionWithTagsResultFilterSensitiveLog)
   .ser(se_CreateDistributionWithTagsCommand)
   .de(de_CreateDistributionWithTagsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDistributionWithTagsRequest;
+      output: CreateDistributionWithTagsResult;
+    };
+    sdk: {
+      input: CreateDistributionWithTagsCommandInput;
+      output: CreateDistributionWithTagsCommandOutput;
+    };
+  };
+}

@@ -91,9 +91,7 @@ export class ListClientVpcConnectionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KafkaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListClientVpcConnectionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListClientVpcConnectionsCommand)
   .de(de_ListClientVpcConnectionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListClientVpcConnectionsRequest;
+      output: ListClientVpcConnectionsResponse;
+    };
+    sdk: {
+      input: ListClientVpcConnectionsCommandInput;
+      output: ListClientVpcConnectionsCommandOutput;
+    };
+  };
+}

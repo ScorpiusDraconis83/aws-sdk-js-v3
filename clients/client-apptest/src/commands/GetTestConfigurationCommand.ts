@@ -128,9 +128,7 @@ export class GetTestConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppTestClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class GetTestConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTestConfigurationCommand)
   .de(de_GetTestConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTestConfigurationRequest;
+      output: GetTestConfigurationResponse;
+    };
+    sdk: {
+      input: GetTestConfigurationCommandInput;
+      output: GetTestConfigurationCommandOutput;
+    };
+  };
+}

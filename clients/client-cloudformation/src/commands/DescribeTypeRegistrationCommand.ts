@@ -75,9 +75,7 @@ export class DescribeTypeRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -89,4 +87,16 @@ export class DescribeTypeRegistrationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeTypeRegistrationCommand)
   .de(de_DescribeTypeRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTypeRegistrationInput;
+      output: DescribeTypeRegistrationOutput;
+    };
+    sdk: {
+      input: DescribeTypeRegistrationCommandInput;
+      output: DescribeTypeRegistrationCommandOutput;
+    };
+  };
+}

@@ -376,9 +376,7 @@ export class ModifyClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -390,4 +388,16 @@ export class ModifyClusterCommand extends $Command
   .f(ModifyClusterMessageFilterSensitiveLog, ModifyClusterResultFilterSensitiveLog)
   .ser(se_ModifyClusterCommand)
   .de(de_ModifyClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClusterMessage;
+      output: ModifyClusterResult;
+    };
+    sdk: {
+      input: ModifyClusterCommandInput;
+      output: ModifyClusterCommandOutput;
+    };
+  };
+}

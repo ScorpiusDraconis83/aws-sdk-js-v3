@@ -9,7 +9,7 @@ import { commonParams } from "../endpoint/EndpointParameters";
 import {
   ModifyVpcEndpointServicePayerResponsibilityRequest,
   ModifyVpcEndpointServicePayerResponsibilityResult,
-} from "../models/models_6";
+} from "../models/models_7";
 import {
   de_ModifyVpcEndpointServicePayerResponsibilityCommand,
   se_ModifyVpcEndpointServicePayerResponsibilityCommand,
@@ -76,9 +76,7 @@ export class ModifyVpcEndpointServicePayerResponsibilityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class ModifyVpcEndpointServicePayerResponsibilityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyVpcEndpointServicePayerResponsibilityCommand)
   .de(de_ModifyVpcEndpointServicePayerResponsibilityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcEndpointServicePayerResponsibilityRequest;
+      output: ModifyVpcEndpointServicePayerResponsibilityResult;
+    };
+    sdk: {
+      input: ModifyVpcEndpointServicePayerResponsibilityCommandInput;
+      output: ModifyVpcEndpointServicePayerResponsibilityCommandOutput;
+    };
+  };
+}

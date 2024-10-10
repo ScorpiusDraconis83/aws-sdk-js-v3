@@ -39,7 +39,7 @@ export interface GetTableOptimizerCommandOutput extends GetTableOptimizerRespons
  *   CatalogId: "STRING_VALUE", // required
  *   DatabaseName: "STRING_VALUE", // required
  *   TableName: "STRING_VALUE", // required
- *   Type: "compaction", // required
+ *   Type: "compaction" || "retention" || "orphan_file_deletion", // required
  * };
  * const command = new GetTableOptimizerCommand(input);
  * const response = await client.send(command);
@@ -48,10 +48,23 @@ export interface GetTableOptimizerCommandOutput extends GetTableOptimizerRespons
  * //   DatabaseName: "STRING_VALUE",
  * //   TableName: "STRING_VALUE",
  * //   TableOptimizer: { // TableOptimizer
- * //     type: "compaction",
+ * //     type: "compaction" || "retention" || "orphan_file_deletion",
  * //     configuration: { // TableOptimizerConfiguration
  * //       roleArn: "STRING_VALUE",
  * //       enabled: true || false,
+ * //       retentionConfiguration: { // RetentionConfiguration
+ * //         icebergConfiguration: { // IcebergRetentionConfiguration
+ * //           snapshotRetentionPeriodInDays: Number("int"),
+ * //           numberOfSnapshotsToRetain: Number("int"),
+ * //           cleanExpiredFiles: true || false,
+ * //         },
+ * //       },
+ * //       orphanFileDeletionConfiguration: { // OrphanFileDeletionConfiguration
+ * //         icebergConfiguration: { // IcebergOrphanFileDeletionConfiguration
+ * //           orphanFileRetentionPeriodInDays: Number("int"),
+ * //           location: "STRING_VALUE",
+ * //         },
+ * //       },
  * //     },
  * //     lastRun: { // TableOptimizerRun
  * //       eventType: "starting" || "completed" || "failed" || "in_progress",
@@ -64,6 +77,30 @@ export interface GetTableOptimizerCommandOutput extends GetTableOptimizerRespons
  * //         JobDurationInHour: "STRING_VALUE",
  * //       },
  * //       error: "STRING_VALUE",
+ * //       compactionMetrics: { // CompactionMetrics
+ * //         IcebergMetrics: { // IcebergCompactionMetrics
+ * //           NumberOfBytesCompacted: Number("long"),
+ * //           NumberOfFilesCompacted: Number("long"),
+ * //           NumberOfDpus: Number("int"),
+ * //           JobDurationInHour: Number("double"),
+ * //         },
+ * //       },
+ * //       retentionMetrics: { // RetentionMetrics
+ * //         IcebergMetrics: { // IcebergRetentionMetrics
+ * //           NumberOfDataFilesDeleted: Number("long"),
+ * //           NumberOfManifestFilesDeleted: Number("long"),
+ * //           NumberOfManifestListsDeleted: Number("long"),
+ * //           NumberOfDpus: Number("int"),
+ * //           JobDurationInHour: Number("double"),
+ * //         },
+ * //       },
+ * //       orphanFileDeletionMetrics: { // OrphanFileDeletionMetrics
+ * //         IcebergMetrics: { // IcebergOrphanFileDeletionMetrics
+ * //           NumberOfOrphanFilesDeleted: Number("long"),
+ * //           NumberOfDpus: Number("int"),
+ * //           JobDurationInHour: Number("double"),
+ * //         },
+ * //       },
  * //     },
  * //   },
  * // };
@@ -88,6 +125,9 @@ export interface GetTableOptimizerCommandOutput extends GetTableOptimizerRespons
  * @throws {@link InvalidInputException} (client fault)
  *  <p>The input provided was not valid.</p>
  *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling threshhold was exceeded.</p>
+ *
  * @throws {@link GlueServiceException}
  * <p>Base exception class for all service exceptions from Glue service.</p>
  *
@@ -101,9 +141,7 @@ export class GetTableOptimizerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +153,16 @@ export class GetTableOptimizerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTableOptimizerCommand)
   .de(de_GetTableOptimizerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTableOptimizerRequest;
+      output: GetTableOptimizerResponse;
+    };
+    sdk: {
+      input: GetTableOptimizerCommandInput;
+      output: GetTableOptimizerCommandOutput;
+    };
+  };
+}

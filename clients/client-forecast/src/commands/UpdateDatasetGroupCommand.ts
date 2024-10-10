@@ -82,9 +82,7 @@ export class UpdateDatasetGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ForecastClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class UpdateDatasetGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateDatasetGroupCommand)
   .de(de_UpdateDatasetGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDatasetGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateDatasetGroupCommandInput;
+      output: UpdateDatasetGroupCommandOutput;
+    };
+  };
+}

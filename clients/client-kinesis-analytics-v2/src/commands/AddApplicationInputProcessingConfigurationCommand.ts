@@ -112,9 +112,7 @@ export class AddApplicationInputProcessingConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisAnalyticsV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class AddApplicationInputProcessingConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddApplicationInputProcessingConfigurationCommand)
   .de(de_AddApplicationInputProcessingConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationInputProcessingConfigurationRequest;
+      output: AddApplicationInputProcessingConfigurationResponse;
+    };
+    sdk: {
+      input: AddApplicationInputProcessingConfigurationCommandInput;
+      output: AddApplicationInputProcessingConfigurationCommandOutput;
+    };
+  };
+}

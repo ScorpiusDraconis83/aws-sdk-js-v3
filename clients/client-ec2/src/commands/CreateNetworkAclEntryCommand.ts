@@ -44,22 +44,22 @@ export interface CreateNetworkAclEntryCommandOutput extends __MetadataBearer {}
  * // const { EC2Client, CreateNetworkAclEntryCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // CreateNetworkAclEntryRequest
- *   CidrBlock: "STRING_VALUE",
  *   DryRun: true || false,
+ *   NetworkAclId: "STRING_VALUE", // required
+ *   RuleNumber: Number("int"), // required
+ *   Protocol: "STRING_VALUE", // required
+ *   RuleAction: "allow" || "deny", // required
  *   Egress: true || false, // required
+ *   CidrBlock: "STRING_VALUE",
+ *   Ipv6CidrBlock: "STRING_VALUE",
  *   IcmpTypeCode: { // IcmpTypeCode
  *     Code: Number("int"),
  *     Type: Number("int"),
  *   },
- *   Ipv6CidrBlock: "STRING_VALUE",
- *   NetworkAclId: "STRING_VALUE", // required
  *   PortRange: { // PortRange
  *     From: Number("int"),
  *     To: Number("int"),
  *   },
- *   Protocol: "STRING_VALUE", // required
- *   RuleAction: "allow" || "deny", // required
- *   RuleNumber: Number("int"), // required
  * };
  * const command = new CreateNetworkAclEntryCommand(input);
  * const response = await client.send(command);
@@ -106,9 +106,7 @@ export class CreateNetworkAclEntryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class CreateNetworkAclEntryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateNetworkAclEntryCommand)
   .de(de_CreateNetworkAclEntryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkAclEntryRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateNetworkAclEntryCommandInput;
+      output: CreateNetworkAclEntryCommandOutput;
+    };
+  };
+}

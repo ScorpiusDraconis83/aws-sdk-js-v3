@@ -80,6 +80,18 @@ export interface DeleteTypedLinkFacetCommandOutput extends DeleteTypedLinkFacetR
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To delete a typed link facet
+ * ```javascript
+ * //
+ * const input = {
+ *   "Name": "ExampleFacet",
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschematest"
+ * };
+ * const command = new DeleteTypedLinkFacetCommand(input);
+ * await client.send(command);
+ * // example id: to-delete-a-typed-link-facet-1507576290714
+ * ```
+ *
  */
 export class DeleteTypedLinkFacetCommand extends $Command
   .classBuilder<
@@ -89,9 +101,7 @@ export class DeleteTypedLinkFacetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +113,16 @@ export class DeleteTypedLinkFacetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteTypedLinkFacetCommand)
   .de(de_DeleteTypedLinkFacetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTypedLinkFacetRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteTypedLinkFacetCommandInput;
+      output: DeleteTypedLinkFacetCommandOutput;
+    };
+  };
+}

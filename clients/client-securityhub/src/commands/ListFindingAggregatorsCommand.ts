@@ -28,7 +28,8 @@ export interface ListFindingAggregatorsCommandInput extends ListFindingAggregato
 export interface ListFindingAggregatorsCommandOutput extends ListFindingAggregatorsResponse, __MetadataBearer {}
 
 /**
- * <p>If finding aggregation is enabled, then <code>ListFindingAggregators</code> returns the ARN of the finding aggregator. You can run this operation from any Region.</p>
+ * <p>If cross-Region aggregation is enabled, then <code>ListFindingAggregators</code> returns the Amazon Resource Name (ARN)
+ * of the finding aggregator. You can run this operation from any Amazon Web Services Region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -106,9 +107,7 @@ export class ListFindingAggregatorsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +119,16 @@ export class ListFindingAggregatorsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFindingAggregatorsCommand)
   .de(de_ListFindingAggregatorsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFindingAggregatorsRequest;
+      output: ListFindingAggregatorsResponse;
+    };
+    sdk: {
+      input: ListFindingAggregatorsCommandInput;
+      output: ListFindingAggregatorsCommandOutput;
+    };
+  };
+}

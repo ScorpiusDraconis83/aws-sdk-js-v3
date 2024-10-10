@@ -94,9 +94,7 @@ export class CancelDomainTransferToAnotherAwsAccountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53DomainsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class CancelDomainTransferToAnotherAwsAccountCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CancelDomainTransferToAnotherAwsAccountCommand)
   .de(de_CancelDomainTransferToAnotherAwsAccountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelDomainTransferToAnotherAwsAccountRequest;
+      output: CancelDomainTransferToAnotherAwsAccountResponse;
+    };
+    sdk: {
+      input: CancelDomainTransferToAnotherAwsAccountCommandInput;
+      output: CancelDomainTransferToAnotherAwsAccountCommandOutput;
+    };
+  };
+}

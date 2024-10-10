@@ -116,9 +116,7 @@ export class ValidateSolFunctionPackageContentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class ValidateSolFunctionPackageContentCommand extends $Command
   .f(ValidateSolFunctionPackageContentInputFilterSensitiveLog, void 0)
   .ser(se_ValidateSolFunctionPackageContentCommand)
   .de(de_ValidateSolFunctionPackageContentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ValidateSolFunctionPackageContentInput;
+      output: ValidateSolFunctionPackageContentOutput;
+    };
+    sdk: {
+      input: ValidateSolFunctionPackageContentCommandInput;
+      output: ValidateSolFunctionPackageContentCommandOutput;
+    };
+  };
+}

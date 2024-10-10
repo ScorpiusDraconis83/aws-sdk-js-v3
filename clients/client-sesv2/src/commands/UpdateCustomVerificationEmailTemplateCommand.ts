@@ -90,9 +90,7 @@ export class UpdateCustomVerificationEmailTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class UpdateCustomVerificationEmailTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateCustomVerificationEmailTemplateCommand)
   .de(de_UpdateCustomVerificationEmailTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCustomVerificationEmailTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateCustomVerificationEmailTemplateCommandInput;
+      output: UpdateCustomVerificationEmailTemplateCommandOutput;
+    };
+  };
+}

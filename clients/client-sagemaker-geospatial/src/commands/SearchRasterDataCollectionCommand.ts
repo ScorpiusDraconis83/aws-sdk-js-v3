@@ -186,9 +186,7 @@ export class SearchRasterDataCollectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerGeospatialClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -200,4 +198,16 @@ export class SearchRasterDataCollectionCommand extends $Command
   .f(SearchRasterDataCollectionInputFilterSensitiveLog, SearchRasterDataCollectionOutputFilterSensitiveLog)
   .ser(se_SearchRasterDataCollectionCommand)
   .de(de_SearchRasterDataCollectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchRasterDataCollectionInput;
+      output: SearchRasterDataCollectionOutput;
+    };
+    sdk: {
+      input: SearchRasterDataCollectionCommandInput;
+      output: SearchRasterDataCollectionCommandOutput;
+    };
+  };
+}

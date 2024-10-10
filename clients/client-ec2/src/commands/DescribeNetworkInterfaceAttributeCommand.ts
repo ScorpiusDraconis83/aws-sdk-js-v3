@@ -41,9 +41,9 @@ export interface DescribeNetworkInterfaceAttributeCommandOutput
  * // const { EC2Client, DescribeNetworkInterfaceAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeNetworkInterfaceAttributeRequest
- *   Attribute: "description" || "groupSet" || "sourceDestCheck" || "attachment" || "associatePublicIpAddress",
  *   DryRun: true || false,
  *   NetworkInterfaceId: "STRING_VALUE", // required
+ *   Attribute: "description" || "groupSet" || "sourceDestCheck" || "attachment" || "associatePublicIpAddress",
  * };
  * const command = new DescribeNetworkInterfaceAttributeCommand(input);
  * const response = await client.send(command);
@@ -69,8 +69,8 @@ export interface DescribeNetworkInterfaceAttributeCommandOutput
  * //   },
  * //   Groups: [ // GroupIdentifierList
  * //     { // GroupIdentifier
- * //       GroupName: "STRING_VALUE",
  * //       GroupId: "STRING_VALUE",
+ * //       GroupName: "STRING_VALUE",
  * //     },
  * //   ],
  * //   NetworkInterfaceId: "STRING_VALUE",
@@ -190,9 +190,7 @@ export class DescribeNetworkInterfaceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -204,4 +202,16 @@ export class DescribeNetworkInterfaceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeNetworkInterfaceAttributeCommand)
   .de(de_DescribeNetworkInterfaceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNetworkInterfaceAttributeRequest;
+      output: DescribeNetworkInterfaceAttributeResult;
+    };
+    sdk: {
+      input: DescribeNetworkInterfaceAttributeCommandInput;
+      output: DescribeNetworkInterfaceAttributeCommandOutput;
+    };
+  };
+}

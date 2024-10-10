@@ -108,9 +108,7 @@ export class ListMediaPipelineKinesisVideoStreamPoolsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMediaPipelinesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class ListMediaPipelineKinesisVideoStreamPoolsCommand extends $Command
   .f(void 0, ListMediaPipelineKinesisVideoStreamPoolsResponseFilterSensitiveLog)
   .ser(se_ListMediaPipelineKinesisVideoStreamPoolsCommand)
   .de(de_ListMediaPipelineKinesisVideoStreamPoolsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMediaPipelineKinesisVideoStreamPoolsRequest;
+      output: ListMediaPipelineKinesisVideoStreamPoolsResponse;
+    };
+    sdk: {
+      input: ListMediaPipelineKinesisVideoStreamPoolsCommandInput;
+      output: ListMediaPipelineKinesisVideoStreamPoolsCommandOutput;
+    };
+  };
+}

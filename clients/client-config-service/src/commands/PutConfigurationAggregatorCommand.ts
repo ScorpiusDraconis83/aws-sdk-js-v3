@@ -173,9 +173,7 @@ export class PutConfigurationAggregatorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -187,4 +185,16 @@ export class PutConfigurationAggregatorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutConfigurationAggregatorCommand)
   .de(de_PutConfigurationAggregatorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutConfigurationAggregatorRequest;
+      output: PutConfigurationAggregatorResponse;
+    };
+    sdk: {
+      input: PutConfigurationAggregatorCommandInput;
+      output: PutConfigurationAggregatorCommandOutput;
+    };
+  };
+}

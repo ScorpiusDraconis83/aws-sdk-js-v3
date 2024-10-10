@@ -114,9 +114,7 @@ export class CreateInstanceAccessControlAttributeConfigurationCommand extends $C
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOAdminClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateInstanceAccessControlAttributeConfigurationCommand extends $C
   .f(void 0, void 0)
   .ser(se_CreateInstanceAccessControlAttributeConfigurationCommand)
   .de(de_CreateInstanceAccessControlAttributeConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateInstanceAccessControlAttributeConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateInstanceAccessControlAttributeConfigurationCommandInput;
+      output: CreateInstanceAccessControlAttributeConfigurationCommandOutput;
+    };
+  };
+}

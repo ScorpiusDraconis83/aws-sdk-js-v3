@@ -86,9 +86,7 @@ export class DeregisterAccountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class DeregisterAccountCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeregisterAccountCommand)
   .de(de_DeregisterAccountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DeregisterAccountResponse;
+    };
+    sdk: {
+      input: DeregisterAccountCommandInput;
+      output: DeregisterAccountCommandOutput;
+    };
+  };
+}

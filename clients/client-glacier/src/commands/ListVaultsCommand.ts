@@ -135,9 +135,7 @@ export class ListVaultsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class ListVaultsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListVaultsCommand)
   .de(de_ListVaultsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVaultsInput;
+      output: ListVaultsOutput;
+    };
+    sdk: {
+      input: ListVaultsCommandInput;
+      output: ListVaultsCommandOutput;
+    };
+  };
+}

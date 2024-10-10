@@ -295,6 +295,9 @@ export interface DescribeTopicCommandOutput extends DescribeTopicResponse, __Met
  * //         ],
  * //       },
  * //     ],
+ * //     ConfigOptions: { // TopicConfigOptions
+ * //       QBusinessInsightsEnabled: true || false,
+ * //     },
  * //   },
  * //   RequestId: "STRING_VALUE",
  * //   Status: Number("int"),
@@ -339,9 +342,7 @@ export class DescribeTopicCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -353,4 +354,16 @@ export class DescribeTopicCommand extends $Command
   .f(void 0, DescribeTopicResponseFilterSensitiveLog)
   .ser(se_DescribeTopicCommand)
   .de(de_DescribeTopicCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTopicRequest;
+      output: DescribeTopicResponse;
+    };
+    sdk: {
+      input: DescribeTopicCommandInput;
+      output: DescribeTopicCommandOutput;
+    };
+  };
+}

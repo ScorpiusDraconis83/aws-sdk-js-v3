@@ -67,9 +67,7 @@ export class StopConfigurationRecorderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -81,4 +79,16 @@ export class StopConfigurationRecorderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopConfigurationRecorderCommand)
   .de(de_StopConfigurationRecorderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopConfigurationRecorderRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopConfigurationRecorderCommandInput;
+      output: StopConfigurationRecorderCommandOutput;
+    };
+  };
+}

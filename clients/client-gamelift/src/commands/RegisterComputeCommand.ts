@@ -163,9 +163,7 @@ export class RegisterComputeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class RegisterComputeCommand extends $Command
   .f(RegisterComputeInputFilterSensitiveLog, RegisterComputeOutputFilterSensitiveLog)
   .ser(se_RegisterComputeCommand)
   .de(de_RegisterComputeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterComputeInput;
+      output: RegisterComputeOutput;
+    };
+    sdk: {
+      input: RegisterComputeCommandInput;
+      output: RegisterComputeCommandOutput;
+    };
+  };
+}

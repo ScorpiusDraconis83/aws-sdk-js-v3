@@ -72,9 +72,7 @@ export class DeleteApiDestinationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EventBridgeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -86,4 +84,16 @@ export class DeleteApiDestinationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteApiDestinationCommand)
   .de(de_DeleteApiDestinationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApiDestinationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteApiDestinationCommandInput;
+      output: DeleteApiDestinationCommandOutput;
+    };
+  };
+}

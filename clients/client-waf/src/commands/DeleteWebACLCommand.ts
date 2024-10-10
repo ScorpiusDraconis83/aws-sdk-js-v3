@@ -151,9 +151,7 @@ export class DeleteWebACLCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class DeleteWebACLCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteWebACLCommand)
   .de(de_DeleteWebACLCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWebACLRequest;
+      output: DeleteWebACLResponse;
+    };
+    sdk: {
+      input: DeleteWebACLCommandInput;
+      output: DeleteWebACLCommandOutput;
+    };
+  };
+}

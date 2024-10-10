@@ -63,6 +63,7 @@ export interface ListLibraryItemsCommandOutput extends ListLibraryItemsOutput, _
  * //       ratingCount: Number("int"), // required
  * //       isRatedByUser: true || false,
  * //       userCount: Number("int"),
+ * //       isVerified: true || false,
  * //     },
  * //   ],
  * //   nextToken: "STRING_VALUE",
@@ -127,6 +128,7 @@ export interface ListLibraryItemsCommandOutput extends ListLibraryItemsOutput, _
  *       "createdAt": "2024-05-21T23:17:27.350Z",
  *       "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
  *       "isRatedByUser": true,
+ *       "isVerified": false,
  *       "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
  *       "ratingCount": 3,
  *       "status": "PUBLISHED",
@@ -146,6 +148,7 @@ export interface ListLibraryItemsCommandOutput extends ListLibraryItemsOutput, _
  *       "createdAt": "2024-05-08T16:09:56.080Z",
  *       "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
  *       "isRatedByUser": false,
+ *       "isVerified": false,
  *       "libraryItemId": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
  *       "ratingCount": 5,
  *       "status": "PUBLISHED",
@@ -165,6 +168,7 @@ export interface ListLibraryItemsCommandOutput extends ListLibraryItemsOutput, _
  *       "createdAt": "2024-05-07T22:57:59.327Z",
  *       "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
  *       "isRatedByUser": false,
+ *       "isVerified": false,
  *       "libraryItemId": "549abfe0-f5c4-45a2-bb9b-c05987a49c6d",
  *       "ratingCount": 8,
  *       "status": "PUBLISHED",
@@ -188,9 +192,7 @@ export class ListLibraryItemsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -202,4 +204,16 @@ export class ListLibraryItemsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLibraryItemsCommand)
   .de(de_ListLibraryItemsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLibraryItemsInput;
+      output: ListLibraryItemsOutput;
+    };
+    sdk: {
+      input: ListLibraryItemsCommandInput;
+      output: ListLibraryItemsCommandOutput;
+    };
+  };
+}

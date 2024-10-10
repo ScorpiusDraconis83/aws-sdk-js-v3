@@ -127,9 +127,7 @@ export class ListInferenceExecutionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutEquipmentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class ListInferenceExecutionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListInferenceExecutionsCommand)
   .de(de_ListInferenceExecutionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInferenceExecutionsRequest;
+      output: ListInferenceExecutionsResponse;
+    };
+    sdk: {
+      input: ListInferenceExecutionsCommandInput;
+      output: ListInferenceExecutionsCommandOutput;
+    };
+  };
+}

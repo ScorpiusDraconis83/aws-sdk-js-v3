@@ -129,9 +129,7 @@ export class GlobalSignOutCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class GlobalSignOutCommand extends $Command
   .f(GlobalSignOutRequestFilterSensitiveLog, void 0)
   .ser(se_GlobalSignOutCommand)
   .de(de_GlobalSignOutCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GlobalSignOutRequest;
+      output: {};
+    };
+    sdk: {
+      input: GlobalSignOutCommandInput;
+      output: GlobalSignOutCommandOutput;
+    };
+  };
+}

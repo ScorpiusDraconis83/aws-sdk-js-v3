@@ -83,9 +83,7 @@ export class SetRepositoryPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class SetRepositoryPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SetRepositoryPolicyCommand)
   .de(de_SetRepositoryPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetRepositoryPolicyRequest;
+      output: SetRepositoryPolicyResponse;
+    };
+    sdk: {
+      input: SetRepositoryPolicyCommandInput;
+      output: SetRepositoryPolicyCommandOutput;
+    };
+  };
+}

@@ -3,6 +3,174 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.669.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.668.0...v3.669.0) (2024-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.668.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.667.0...v3.668.0) (2024-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.665.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.664.0...v3.665.0) (2024-10-04)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+
+### Features
+
+* **middleware-user-agent:** add client config for userAgentAppId ([#6524](https://github.com/aws/aws-sdk-js-v3/issues/6524)) ([2990ea8](https://github.com/aws/aws-sdk-js-v3/commit/2990ea8f0d689966a9de0000d579f147c2d4af81))
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+# [3.659.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.1...v3.659.0) (2024-09-26)
+
+
+### Features
+
+* **client-lambda:** Reverting Lambda resource-based policy and block public access APIs. ([e1ff422](https://github.com/aws/aws-sdk-js-v3/commit/e1ff4229428570b75a58009b4c6972f1ff6fb217))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.658.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.657.0...v3.658.0) (2024-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.656.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.655.0...v3.656.0) (2024-09-20)
+
+
+### Features
+
+* **clients:** update command documentation examples as of 2024-09-20 ([ab843b8](https://github.com/aws/aws-sdk-js-v3/commit/ab843b8d6e9e96e5a5da7bc6e7253b580d05e3c6))
+
+
+
+
+
+# [3.655.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.654.0...v3.655.0) (2024-09-19)
+
+
+### Features
+
+* **client-lambda:** Tagging support for Lambda event source mapping, and code signing configuration resources. ([97088ae](https://github.com/aws/aws-sdk-js-v3/commit/97088ae81c64333d7571b9702497d18a64b2985d))
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.653.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.652.0...v3.653.0) (2024-09-17)
+
+
+### Features
+
+* **client-lambda:** Support for JSON resource-based policies and block public access ([566bb05](https://github.com/aws/aws-sdk-js-v3/commit/566bb05232a186ef130785caeae12ca538a189c0))
+
+
+
+
+
+## [3.651.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.0...v3.651.1) (2024-09-13)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.650.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.649.0...v3.650.0) (2024-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.645.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.644.0...v3.645.0) (2024-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-lambda
+
+
+
+
+
 # [3.637.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.636.0...v3.637.0) (2024-08-22)
 
 **Note:** Version bump only for package @aws-sdk/client-lambda

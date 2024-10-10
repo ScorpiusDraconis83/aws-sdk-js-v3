@@ -114,9 +114,7 @@ export class GetContainerServiceMetricDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class GetContainerServiceMetricDataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetContainerServiceMetricDataCommand)
   .de(de_GetContainerServiceMetricDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetContainerServiceMetricDataRequest;
+      output: GetContainerServiceMetricDataResult;
+    };
+    sdk: {
+      input: GetContainerServiceMetricDataCommandInput;
+      output: GetContainerServiceMetricDataCommandOutput;
+    };
+  };
+}

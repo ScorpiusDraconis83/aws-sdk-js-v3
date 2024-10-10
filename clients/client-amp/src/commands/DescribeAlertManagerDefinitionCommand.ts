@@ -95,9 +95,7 @@ export class DescribeAlertManagerDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmpClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DescribeAlertManagerDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAlertManagerDefinitionCommand)
   .de(de_DescribeAlertManagerDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAlertManagerDefinitionRequest;
+      output: DescribeAlertManagerDefinitionResponse;
+    };
+    sdk: {
+      input: DescribeAlertManagerDefinitionCommandInput;
+      output: DescribeAlertManagerDefinitionCommandOutput;
+    };
+  };
+}

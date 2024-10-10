@@ -91,9 +91,7 @@ export class GetAttachmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectParticipantClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetAttachmentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAttachmentCommand)
   .de(de_GetAttachmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAttachmentRequest;
+      output: GetAttachmentResponse;
+    };
+    sdk: {
+      input: GetAttachmentCommandInput;
+      output: GetAttachmentCommandOutput;
+    };
+  };
+}

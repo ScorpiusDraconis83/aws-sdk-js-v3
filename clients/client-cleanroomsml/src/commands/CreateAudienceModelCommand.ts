@@ -88,9 +88,7 @@ export class CreateAudienceModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsMLClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class CreateAudienceModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAudienceModelCommand)
   .de(de_CreateAudienceModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAudienceModelRequest;
+      output: CreateAudienceModelResponse;
+    };
+    sdk: {
+      input: CreateAudienceModelCommandInput;
+      output: CreateAudienceModelCommandOutput;
+    };
+  };
+}

@@ -84,6 +84,8 @@ export interface UpdateSlackChannelConfigurationCommandOutput
  * //         TagValue: "STRING_VALUE", // required
  * //       },
  * //     ],
+ * //     State: "STRING_VALUE",
+ * //     StateReason: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -120,9 +122,7 @@ export class UpdateSlackChannelConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +134,16 @@ export class UpdateSlackChannelConfigurationCommand extends $Command
   .f(UpdateSlackChannelConfigurationRequestFilterSensitiveLog, UpdateSlackChannelConfigurationResultFilterSensitiveLog)
   .ser(se_UpdateSlackChannelConfigurationCommand)
   .de(de_UpdateSlackChannelConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSlackChannelConfigurationRequest;
+      output: UpdateSlackChannelConfigurationResult;
+    };
+    sdk: {
+      input: UpdateSlackChannelConfigurationCommandInput;
+      output: UpdateSlackChannelConfigurationCommandOutput;
+    };
+  };
+}

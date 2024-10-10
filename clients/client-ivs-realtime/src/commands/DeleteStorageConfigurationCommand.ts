@@ -84,9 +84,7 @@ export class DeleteStorageConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IVSRealTimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class DeleteStorageConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteStorageConfigurationCommand)
   .de(de_DeleteStorageConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStorageConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteStorageConfigurationCommandInput;
+      output: DeleteStorageConfigurationCommandOutput;
+    };
+  };
+}

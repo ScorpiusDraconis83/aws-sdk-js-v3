@@ -84,9 +84,7 @@ export class RemoveAllResourcePermissionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class RemoveAllResourcePermissionsCommand extends $Command
   .f(RemoveAllResourcePermissionsRequestFilterSensitiveLog, void 0)
   .ser(se_RemoveAllResourcePermissionsCommand)
   .de(de_RemoveAllResourcePermissionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveAllResourcePermissionsRequest;
+      output: {};
+    };
+    sdk: {
+      input: RemoveAllResourcePermissionsCommandInput;
+      output: RemoveAllResourcePermissionsCommandOutput;
+    };
+  };
+}

@@ -120,9 +120,7 @@ export class DeleteMessageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SQSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class DeleteMessageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteMessageCommand)
   .de(de_DeleteMessageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMessageRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteMessageCommandInput;
+      output: DeleteMessageCommandOutput;
+    };
+  };
+}

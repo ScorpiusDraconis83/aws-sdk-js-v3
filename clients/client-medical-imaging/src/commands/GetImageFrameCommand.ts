@@ -94,9 +94,7 @@ export class GetImageFrameCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MedicalImagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetImageFrameCommand extends $Command
   .f(void 0, GetImageFrameResponseFilterSensitiveLog)
   .ser(se_GetImageFrameCommand)
   .de(de_GetImageFrameCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetImageFrameRequest;
+      output: GetImageFrameResponse;
+    };
+    sdk: {
+      input: GetImageFrameCommandInput;
+      output: GetImageFrameCommandOutput;
+    };
+  };
+}

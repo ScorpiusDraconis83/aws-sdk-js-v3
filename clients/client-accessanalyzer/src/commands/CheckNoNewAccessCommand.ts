@@ -102,9 +102,7 @@ export class CheckNoNewAccessCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccessAnalyzerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class CheckNoNewAccessCommand extends $Command
   .f(CheckNoNewAccessRequestFilterSensitiveLog, void 0)
   .ser(se_CheckNoNewAccessCommand)
   .de(de_CheckNoNewAccessCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CheckNoNewAccessRequest;
+      output: CheckNoNewAccessResponse;
+    };
+    sdk: {
+      input: CheckNoNewAccessCommandInput;
+      output: CheckNoNewAccessCommandOutput;
+    };
+  };
+}

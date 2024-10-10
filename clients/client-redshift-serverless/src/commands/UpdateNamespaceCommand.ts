@@ -118,9 +118,7 @@ export class UpdateNamespaceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftServerlessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class UpdateNamespaceCommand extends $Command
   .f(UpdateNamespaceRequestFilterSensitiveLog, UpdateNamespaceResponseFilterSensitiveLog)
   .ser(se_UpdateNamespaceCommand)
   .de(de_UpdateNamespaceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateNamespaceRequest;
+      output: UpdateNamespaceResponse;
+    };
+    sdk: {
+      input: UpdateNamespaceCommandInput;
+      output: UpdateNamespaceCommandOutput;
+    };
+  };
+}

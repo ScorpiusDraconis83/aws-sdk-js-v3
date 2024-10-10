@@ -105,9 +105,7 @@ export class GetAccountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class GetAccountCommand extends $Command
   .f(void 0, GetAccountResponseFilterSensitiveLog)
   .ser(se_GetAccountCommand)
   .de(de_GetAccountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAccountResponse;
+    };
+    sdk: {
+      input: GetAccountCommandInput;
+      output: GetAccountCommandOutput;
+    };
+  };
+}

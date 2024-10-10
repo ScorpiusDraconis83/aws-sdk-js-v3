@@ -132,9 +132,7 @@ export class ListSessionAnalyticsDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexModelsV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class ListSessionAnalyticsDataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSessionAnalyticsDataCommand)
   .de(de_ListSessionAnalyticsDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSessionAnalyticsDataRequest;
+      output: ListSessionAnalyticsDataResponse;
+    };
+    sdk: {
+      input: ListSessionAnalyticsDataCommandInput;
+      output: ListSessionAnalyticsDataCommandOutput;
+    };
+  };
+}

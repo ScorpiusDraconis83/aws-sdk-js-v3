@@ -89,9 +89,7 @@ export class CreateCrossAccountAuthorizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53RecoveryReadinessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class CreateCrossAccountAuthorizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCrossAccountAuthorizationCommand)
   .de(de_CreateCrossAccountAuthorizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCrossAccountAuthorizationRequest;
+      output: CreateCrossAccountAuthorizationResponse;
+    };
+    sdk: {
+      input: CreateCrossAccountAuthorizationCommandInput;
+      output: CreateCrossAccountAuthorizationCommandOutput;
+    };
+  };
+}

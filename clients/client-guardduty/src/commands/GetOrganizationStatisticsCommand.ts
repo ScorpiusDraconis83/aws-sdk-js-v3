@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { GetOrganizationStatisticsResponse } from "../models/models_0";
+import { GetOrganizationStatisticsResponse } from "../models/models_1";
 import { de_GetOrganizationStatisticsCommand, se_GetOrganizationStatisticsCommand } from "../protocols/Aws_restJson1";
 
 /**
@@ -92,9 +92,7 @@ export class GetOrganizationStatisticsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class GetOrganizationStatisticsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetOrganizationStatisticsCommand)
   .de(de_GetOrganizationStatisticsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetOrganizationStatisticsResponse;
+    };
+    sdk: {
+      input: GetOrganizationStatisticsCommandInput;
+      output: GetOrganizationStatisticsCommandOutput;
+    };
+  };
+}

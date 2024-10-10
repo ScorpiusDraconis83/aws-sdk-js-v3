@@ -275,9 +275,7 @@ export class ListCreateAccountStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -289,4 +287,16 @@ export class ListCreateAccountStatusCommand extends $Command
   .f(void 0, ListCreateAccountStatusResponseFilterSensitiveLog)
   .ser(se_ListCreateAccountStatusCommand)
   .de(de_ListCreateAccountStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCreateAccountStatusRequest;
+      output: ListCreateAccountStatusResponse;
+    };
+    sdk: {
+      input: ListCreateAccountStatusCommandInput;
+      output: ListCreateAccountStatusCommandOutput;
+    };
+  };
+}

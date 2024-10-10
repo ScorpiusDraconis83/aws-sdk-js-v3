@@ -136,9 +136,7 @@ export class DescribeUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IdentitystoreClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -150,4 +148,16 @@ export class DescribeUserCommand extends $Command
   .f(void 0, DescribeUserResponseFilterSensitiveLog)
   .ser(se_DescribeUserCommand)
   .de(de_DescribeUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserRequest;
+      output: DescribeUserResponse;
+    };
+    sdk: {
+      input: DescribeUserCommandInput;
+      output: DescribeUserCommandOutput;
+    };
+  };
+}

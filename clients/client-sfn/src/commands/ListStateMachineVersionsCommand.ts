@@ -100,9 +100,7 @@ export class ListStateMachineVersionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SFNClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListStateMachineVersionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListStateMachineVersionsCommand)
   .de(de_ListStateMachineVersionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStateMachineVersionsInput;
+      output: ListStateMachineVersionsOutput;
+    };
+    sdk: {
+      input: ListStateMachineVersionsCommandInput;
+      output: ListStateMachineVersionsCommandOutput;
+    };
+  };
+}

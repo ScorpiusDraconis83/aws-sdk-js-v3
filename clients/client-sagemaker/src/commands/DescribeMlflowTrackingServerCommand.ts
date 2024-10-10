@@ -5,7 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { DescribeMlflowTrackingServerRequest, DescribeMlflowTrackingServerResponse } from "../models/models_2";
+import { DescribeMlflowTrackingServerRequest, DescribeMlflowTrackingServerResponse } from "../models/models_3";
 import {
   de_DescribeMlflowTrackingServerCommand,
   se_DescribeMlflowTrackingServerCommand,
@@ -105,9 +105,7 @@ export class DescribeMlflowTrackingServerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class DescribeMlflowTrackingServerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeMlflowTrackingServerCommand)
   .de(de_DescribeMlflowTrackingServerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeMlflowTrackingServerRequest;
+      output: DescribeMlflowTrackingServerResponse;
+    };
+    sdk: {
+      input: DescribeMlflowTrackingServerCommandInput;
+      output: DescribeMlflowTrackingServerCommandOutput;
+    };
+  };
+}

@@ -140,9 +140,7 @@ export class CreateCompilationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class CreateCompilationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCompilationJobCommand)
   .de(de_CreateCompilationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCompilationJobRequest;
+      output: CreateCompilationJobResponse;
+    };
+    sdk: {
+      input: CreateCompilationJobCommandInput;
+      output: CreateCompilationJobCommandOutput;
+    };
+  };
+}

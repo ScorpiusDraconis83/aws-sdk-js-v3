@@ -88,9 +88,7 @@ export class CreateRelayCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class CreateRelayCommand extends $Command
   .f(CreateRelayRequestFilterSensitiveLog, void 0)
   .ser(se_CreateRelayCommand)
   .de(de_CreateRelayCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRelayRequest;
+      output: CreateRelayResponse;
+    };
+    sdk: {
+      input: CreateRelayCommandInput;
+      output: CreateRelayCommandOutput;
+    };
+  };
+}

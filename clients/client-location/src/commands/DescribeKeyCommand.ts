@@ -101,9 +101,7 @@ export class DescribeKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class DescribeKeyCommand extends $Command
   .f(void 0, DescribeKeyResponseFilterSensitiveLog)
   .ser(se_DescribeKeyCommand)
   .de(de_DescribeKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeKeyRequest;
+      output: DescribeKeyResponse;
+    };
+    sdk: {
+      input: DescribeKeyCommandInput;
+      output: DescribeKeyCommandOutput;
+    };
+  };
+}

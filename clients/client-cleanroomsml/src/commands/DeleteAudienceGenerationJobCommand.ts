@@ -78,9 +78,7 @@ export class DeleteAudienceGenerationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsMLClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class DeleteAudienceGenerationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAudienceGenerationJobCommand)
   .de(de_DeleteAudienceGenerationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAudienceGenerationJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteAudienceGenerationJobCommandInput;
+      output: DeleteAudienceGenerationJobCommandOutput;
+    };
+  };
+}

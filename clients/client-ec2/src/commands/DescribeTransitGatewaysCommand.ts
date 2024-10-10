@@ -110,9 +110,7 @@ export class DescribeTransitGatewaysCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class DescribeTransitGatewaysCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeTransitGatewaysCommand)
   .de(de_DescribeTransitGatewaysCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTransitGatewaysRequest;
+      output: DescribeTransitGatewaysResult;
+    };
+    sdk: {
+      input: DescribeTransitGatewaysCommandInput;
+      output: DescribeTransitGatewaysCommandOutput;
+    };
+  };
+}

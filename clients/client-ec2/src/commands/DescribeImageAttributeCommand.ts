@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { DescribeImageAttributeRequest, ImageAttribute } from "../models/models_3";
+import { DescribeImageAttributeRequest, ImageAttribute } from "../models/models_4";
 import { de_DescribeImageAttributeCommand, se_DescribeImageAttributeCommand } from "../protocols/Aws_ec2";
 
 /**
@@ -48,39 +48,6 @@ export interface DescribeImageAttributeCommandOutput extends ImageAttribute, __M
  * const command = new DescribeImageAttributeCommand(input);
  * const response = await client.send(command);
  * // { // ImageAttribute
- * //   BlockDeviceMappings: [ // BlockDeviceMappingList
- * //     { // BlockDeviceMapping
- * //       DeviceName: "STRING_VALUE",
- * //       VirtualName: "STRING_VALUE",
- * //       Ebs: { // EbsBlockDevice
- * //         DeleteOnTermination: true || false,
- * //         Iops: Number("int"),
- * //         SnapshotId: "STRING_VALUE",
- * //         VolumeSize: Number("int"),
- * //         VolumeType: "standard" || "io1" || "io2" || "gp2" || "sc1" || "st1" || "gp3",
- * //         KmsKeyId: "STRING_VALUE",
- * //         Throughput: Number("int"),
- * //         OutpostArn: "STRING_VALUE",
- * //         Encrypted: true || false,
- * //       },
- * //       NoDevice: "STRING_VALUE",
- * //     },
- * //   ],
- * //   ImageId: "STRING_VALUE",
- * //   LaunchPermissions: [ // LaunchPermissionList
- * //     { // LaunchPermission
- * //       Group: "all",
- * //       UserId: "STRING_VALUE",
- * //       OrganizationArn: "STRING_VALUE",
- * //       OrganizationalUnitArn: "STRING_VALUE",
- * //     },
- * //   ],
- * //   ProductCodes: [ // ProductCodeList
- * //     { // ProductCode
- * //       ProductCodeId: "STRING_VALUE",
- * //       ProductCodeType: "devpay" || "marketplace",
- * //     },
- * //   ],
  * //   Description: { // AttributeValue
  * //     Value: "STRING_VALUE",
  * //   },
@@ -101,6 +68,39 @@ export interface DescribeImageAttributeCommandOutput extends ImageAttribute, __M
  * //   LastLaunchedTime: "<AttributeValue>",
  * //   ImdsSupport: "<AttributeValue>",
  * //   DeregistrationProtection: "<AttributeValue>",
+ * //   ImageId: "STRING_VALUE",
+ * //   LaunchPermissions: [ // LaunchPermissionList
+ * //     { // LaunchPermission
+ * //       OrganizationArn: "STRING_VALUE",
+ * //       OrganizationalUnitArn: "STRING_VALUE",
+ * //       UserId: "STRING_VALUE",
+ * //       Group: "all",
+ * //     },
+ * //   ],
+ * //   ProductCodes: [ // ProductCodeList
+ * //     { // ProductCode
+ * //       ProductCodeId: "STRING_VALUE",
+ * //       ProductCodeType: "devpay" || "marketplace",
+ * //     },
+ * //   ],
+ * //   BlockDeviceMappings: [ // BlockDeviceMappingList
+ * //     { // BlockDeviceMapping
+ * //       Ebs: { // EbsBlockDevice
+ * //         DeleteOnTermination: true || false,
+ * //         Iops: Number("int"),
+ * //         SnapshotId: "STRING_VALUE",
+ * //         VolumeSize: Number("int"),
+ * //         VolumeType: "standard" || "io1" || "io2" || "gp2" || "sc1" || "st1" || "gp3",
+ * //         KmsKeyId: "STRING_VALUE",
+ * //         Throughput: Number("int"),
+ * //         OutpostArn: "STRING_VALUE",
+ * //         Encrypted: true || false,
+ * //       },
+ * //       NoDevice: "STRING_VALUE",
+ * //       DeviceName: "STRING_VALUE",
+ * //       VirtualName: "STRING_VALUE",
+ * //     },
+ * //   ],
  * // };
  *
  * ```
@@ -146,9 +146,7 @@ export class DescribeImageAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -160,4 +158,16 @@ export class DescribeImageAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeImageAttributeCommand)
   .de(de_DescribeImageAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImageAttributeRequest;
+      output: ImageAttribute;
+    };
+    sdk: {
+      input: DescribeImageAttributeCommandInput;
+      output: DescribeImageAttributeCommandOutput;
+    };
+  };
+}

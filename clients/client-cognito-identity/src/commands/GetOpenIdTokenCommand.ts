@@ -6,7 +6,12 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoIdentityClient";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { GetOpenIdTokenInput, GetOpenIdTokenResponse } from "../models/models_0";
+import {
+  GetOpenIdTokenInput,
+  GetOpenIdTokenInputFilterSensitiveLog,
+  GetOpenIdTokenResponse,
+  GetOpenIdTokenResponseFilterSensitiveLog,
+} from "../models/models_0";
 import { de_GetOpenIdTokenCommand, se_GetOpenIdTokenCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -97,9 +102,7 @@ export class GetOpenIdTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,7 +111,19 @@ export class GetOpenIdTokenCommand extends $Command
   })
   .s("AWSCognitoIdentityService", "GetOpenIdToken", {})
   .n("CognitoIdentityClient", "GetOpenIdTokenCommand")
-  .f(void 0, void 0)
+  .f(GetOpenIdTokenInputFilterSensitiveLog, GetOpenIdTokenResponseFilterSensitiveLog)
   .ser(se_GetOpenIdTokenCommand)
   .de(de_GetOpenIdTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOpenIdTokenInput;
+      output: GetOpenIdTokenResponse;
+    };
+    sdk: {
+      input: GetOpenIdTokenCommandInput;
+      output: GetOpenIdTokenCommandOutput;
+    };
+  };
+}

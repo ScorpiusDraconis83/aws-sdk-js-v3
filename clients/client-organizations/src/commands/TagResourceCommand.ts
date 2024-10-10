@@ -277,9 +277,8 @@ export interface TagResourceCommandOutput extends __MetadataBearer {}
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  *
@@ -414,9 +413,7 @@ export class TagResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -428,4 +425,16 @@ export class TagResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_TagResourceCommand)
   .de(de_TagResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
+}

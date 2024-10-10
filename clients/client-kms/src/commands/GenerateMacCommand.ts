@@ -187,9 +187,7 @@ export class GenerateMacCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -201,4 +199,16 @@ export class GenerateMacCommand extends $Command
   .f(GenerateMacRequestFilterSensitiveLog, void 0)
   .ser(se_GenerateMacCommand)
   .de(de_GenerateMacCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateMacRequest;
+      output: GenerateMacResponse;
+    };
+    sdk: {
+      input: GenerateMacCommandInput;
+      output: GenerateMacCommandOutput;
+    };
+  };
+}

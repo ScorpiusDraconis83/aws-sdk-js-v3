@@ -88,9 +88,7 @@ export class UpdateEventBusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EventBridgeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class UpdateEventBusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateEventBusCommand)
   .de(de_UpdateEventBusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEventBusRequest;
+      output: UpdateEventBusResponse;
+    };
+    sdk: {
+      input: UpdateEventBusCommandInput;
+      output: UpdateEventBusCommandOutput;
+    };
+  };
+}

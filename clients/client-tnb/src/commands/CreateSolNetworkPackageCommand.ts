@@ -103,9 +103,7 @@ export class CreateSolNetworkPackageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateSolNetworkPackageCommand extends $Command
   .f(CreateSolNetworkPackageInputFilterSensitiveLog, CreateSolNetworkPackageOutputFilterSensitiveLog)
   .ser(se_CreateSolNetworkPackageCommand)
   .de(de_CreateSolNetworkPackageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSolNetworkPackageInput;
+      output: CreateSolNetworkPackageOutput;
+    };
+    sdk: {
+      input: CreateSolNetworkPackageCommandInput;
+      output: CreateSolNetworkPackageCommandOutput;
+    };
+  };
+}

@@ -102,9 +102,7 @@ export class ListEulaAcceptancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class ListEulaAcceptancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEulaAcceptancesCommand)
   .de(de_ListEulaAcceptancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEulaAcceptancesRequest;
+      output: ListEulaAcceptancesResponse;
+    };
+    sdk: {
+      input: ListEulaAcceptancesCommandInput;
+      output: ListEulaAcceptancesCommandOutput;
+    };
+  };
+}

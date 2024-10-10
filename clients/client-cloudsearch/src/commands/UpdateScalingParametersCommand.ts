@@ -102,9 +102,7 @@ export class UpdateScalingParametersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class UpdateScalingParametersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateScalingParametersCommand)
   .de(de_UpdateScalingParametersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateScalingParametersRequest;
+      output: UpdateScalingParametersResponse;
+    };
+    sdk: {
+      input: UpdateScalingParametersCommandInput;
+      output: UpdateScalingParametersCommandOutput;
+    };
+  };
+}

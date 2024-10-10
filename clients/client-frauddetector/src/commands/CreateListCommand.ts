@@ -90,9 +90,7 @@ export class CreateListCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class CreateListCommand extends $Command
   .f(CreateListRequestFilterSensitiveLog, void 0)
   .ser(se_CreateListCommand)
   .de(de_CreateListCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateListRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateListCommandInput;
+      output: CreateListCommandOutput;
+    };
+  };
+}

@@ -125,9 +125,7 @@ export class BatchGetAssetPropertyValueCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class BatchGetAssetPropertyValueCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetAssetPropertyValueCommand)
   .de(de_BatchGetAssetPropertyValueCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetAssetPropertyValueRequest;
+      output: BatchGetAssetPropertyValueResponse;
+    };
+    sdk: {
+      input: BatchGetAssetPropertyValueCommandInput;
+      output: BatchGetAssetPropertyValueCommandOutput;
+    };
+  };
+}

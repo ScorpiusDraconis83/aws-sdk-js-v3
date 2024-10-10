@@ -84,9 +84,7 @@ export class EnableRegionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccountClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class EnableRegionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnableRegionCommand)
   .de(de_EnableRegionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableRegionRequest;
+      output: {};
+    };
+    sdk: {
+      input: EnableRegionCommandInput;
+      output: EnableRegionCommandOutput;
+    };
+  };
+}

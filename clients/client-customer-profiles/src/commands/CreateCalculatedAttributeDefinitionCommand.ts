@@ -148,9 +148,7 @@ export class CreateCalculatedAttributeDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class CreateCalculatedAttributeDefinitionCommand extends $Command
   )
   .ser(se_CreateCalculatedAttributeDefinitionCommand)
   .de(de_CreateCalculatedAttributeDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCalculatedAttributeDefinitionRequest;
+      output: CreateCalculatedAttributeDefinitionResponse;
+    };
+    sdk: {
+      input: CreateCalculatedAttributeDefinitionCommandInput;
+      output: CreateCalculatedAttributeDefinitionCommandOutput;
+    };
+  };
+}

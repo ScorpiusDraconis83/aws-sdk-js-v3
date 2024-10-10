@@ -126,9 +126,7 @@ export class CreatePluginCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QBusinessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class CreatePluginCommand extends $Command
   .f(CreatePluginRequestFilterSensitiveLog, void 0)
   .ser(se_CreatePluginCommand)
   .de(de_CreatePluginCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePluginRequest;
+      output: CreatePluginResponse;
+    };
+    sdk: {
+      input: CreatePluginCommandInput;
+      output: CreatePluginCommandOutput;
+    };
+  };
+}

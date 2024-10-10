@@ -80,9 +80,7 @@ export class DeleteProductCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DeleteProductCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteProductCommand)
   .de(de_DeleteProductCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProductInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteProductCommandInput;
+      output: DeleteProductCommandOutput;
+    };
+  };
+}

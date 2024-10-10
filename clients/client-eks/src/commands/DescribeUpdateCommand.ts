@@ -108,9 +108,7 @@ export class DescribeUpdateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EKSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class DescribeUpdateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeUpdateCommand)
   .de(de_DescribeUpdateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUpdateRequest;
+      output: DescribeUpdateResponse;
+    };
+    sdk: {
+      input: DescribeUpdateCommandInput;
+      output: DescribeUpdateCommandOutput;
+    };
+  };
+}

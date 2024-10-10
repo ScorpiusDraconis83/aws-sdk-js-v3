@@ -245,9 +245,7 @@ export class CreateDataSourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -259,4 +257,16 @@ export class CreateDataSourceCommand extends $Command
   .f(CreateDataSourceInputFilterSensitiveLog, CreateDataSourceOutputFilterSensitiveLog)
   .ser(se_CreateDataSourceCommand)
   .de(de_CreateDataSourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataSourceInput;
+      output: CreateDataSourceOutput;
+    };
+    sdk: {
+      input: CreateDataSourceCommandInput;
+      output: CreateDataSourceCommandOutput;
+    };
+  };
+}

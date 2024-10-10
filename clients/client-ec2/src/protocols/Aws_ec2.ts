@@ -29,6 +29,10 @@ import {
   AcceptAddressTransferCommandOutput,
 } from "../commands/AcceptAddressTransferCommand";
 import {
+  AcceptCapacityReservationBillingOwnershipCommandInput,
+  AcceptCapacityReservationBillingOwnershipCommandOutput,
+} from "../commands/AcceptCapacityReservationBillingOwnershipCommand";
+import {
   AcceptReservedInstancesExchangeQuoteCommandInput,
   AcceptReservedInstancesExchangeQuoteCommandOutput,
 } from "../commands/AcceptReservedInstancesExchangeQuoteCommand";
@@ -76,6 +80,10 @@ import {
   AssignPrivateNatGatewayAddressCommandOutput,
 } from "../commands/AssignPrivateNatGatewayAddressCommand";
 import { AssociateAddressCommandInput, AssociateAddressCommandOutput } from "../commands/AssociateAddressCommand";
+import {
+  AssociateCapacityReservationBillingOwnerCommandInput,
+  AssociateCapacityReservationBillingOwnerCommandOutput,
+} from "../commands/AssociateCapacityReservationBillingOwnerCommand";
 import {
   AssociateClientVpnTargetNetworkCommandInput,
   AssociateClientVpnTargetNetworkCommandOutput,
@@ -770,6 +778,10 @@ import {
   DescribeCapacityBlockOfferingsCommandOutput,
 } from "../commands/DescribeCapacityBlockOfferingsCommand";
 import {
+  DescribeCapacityReservationBillingRequestsCommandInput,
+  DescribeCapacityReservationBillingRequestsCommandOutput,
+} from "../commands/DescribeCapacityReservationBillingRequestsCommand";
+import {
   DescribeCapacityReservationFleetsCommandInput,
   DescribeCapacityReservationFleetsCommandOutput,
 } from "../commands/DescribeCapacityReservationFleetsCommand";
@@ -1355,6 +1367,10 @@ import {
   DisassociateAddressCommandOutput,
 } from "../commands/DisassociateAddressCommand";
 import {
+  DisassociateCapacityReservationBillingOwnerCommandInput,
+  DisassociateCapacityReservationBillingOwnerCommandOutput,
+} from "../commands/DisassociateCapacityReservationBillingOwnerCommand";
+import {
   DisassociateClientVpnTargetNetworkCommandInput,
   DisassociateClientVpnTargetNetworkCommandOutput,
 } from "../commands/DisassociateClientVpnTargetNetworkCommand";
@@ -1740,6 +1756,10 @@ import {
   ModifyInstanceCapacityReservationAttributesCommandOutput,
 } from "../commands/ModifyInstanceCapacityReservationAttributesCommand";
 import {
+  ModifyInstanceCpuOptionsCommandInput,
+  ModifyInstanceCpuOptionsCommandOutput,
+} from "../commands/ModifyInstanceCpuOptionsCommand";
+import {
   ModifyInstanceCreditSpecificationCommandInput,
   ModifyInstanceCreditSpecificationCommandOutput,
 } from "../commands/ModifyInstanceCreditSpecificationCommand";
@@ -1969,6 +1989,10 @@ import {
   RegisterTransitGatewayMulticastGroupSourcesCommandOutput,
 } from "../commands/RegisterTransitGatewayMulticastGroupSourcesCommand";
 import {
+  RejectCapacityReservationBillingOwnershipCommandInput,
+  RejectCapacityReservationBillingOwnershipCommandOutput,
+} from "../commands/RejectCapacityReservationBillingOwnershipCommand";
+import {
   RejectTransitGatewayMulticastDomainAssociationsCommandInput,
   RejectTransitGatewayMulticastDomainAssociationsCommandOutput,
 } from "../commands/RejectTransitGatewayMulticastDomainAssociationsCommand";
@@ -2150,7 +2174,6 @@ import {
 import { WithdrawByoipCidrCommandInput, WithdrawByoipCidrCommandOutput } from "../commands/WithdrawByoipCidrCommand";
 import { EC2ServiceException as __BaseException } from "../models/EC2ServiceException";
 import {
-  _InstanceType,
   AcceleratorCount,
   AcceleratorCountRequest,
   AcceleratorManufacturer,
@@ -2160,6 +2183,8 @@ import {
   AcceleratorType,
   AcceptAddressTransferRequest,
   AcceptAddressTransferResult,
+  AcceptCapacityReservationBillingOwnershipRequest,
+  AcceptCapacityReservationBillingOwnershipResult,
   AcceptReservedInstancesExchangeQuoteRequest,
   AcceptReservedInstancesExchangeQuoteResult,
   AcceptTransitGatewayMulticastDomainAssociationsRequest,
@@ -2215,6 +2240,8 @@ import {
   AssignPrivateNatGatewayAddressResult,
   AssociateAddressRequest,
   AssociateAddressResult,
+  AssociateCapacityReservationBillingOwnerRequest,
+  AssociateCapacityReservationBillingOwnerResult,
   AssociateClientVpnTargetNetworkRequest,
   AssociateClientVpnTargetNetworkResult,
   AssociateDhcpOptionsRequest,
@@ -2303,7 +2330,6 @@ import {
   CopySnapshotRequest,
   CopySnapshotResult,
   CreateCapacityReservationBySplittingRequest,
-  CreateCapacityReservationBySplittingResult,
   CreateCapacityReservationRequest,
   CreateCapacityReservationResult,
   DeviceOptions,
@@ -2343,7 +2369,6 @@ import {
   Protocol,
   PtrUpdateStatus,
   ReferencedSecurityGroup,
-  ReservationFleetInstanceSpecification,
   ReservedInstancesListing,
   ResourceStatement,
   ResourceStatementRequest,
@@ -2389,6 +2414,7 @@ import {
   VpcPeeringConnectionVpcInfo,
 } from "../models/models_0";
 import {
+  _InstanceType,
   AttributeValue,
   BaselineEbsBandwidthMbps,
   BaselineEbsBandwidthMbpsRequest,
@@ -2409,6 +2435,7 @@ import {
   ConnectionTrackingSpecification,
   ConnectionTrackingSpecificationRequest,
   CpuManufacturer,
+  CreateCapacityReservationBySplittingResult,
   CreateCapacityReservationFleetRequest,
   CreateCapacityReservationFleetResult,
   CreateCarrierGatewayRequest,
@@ -2482,7 +2509,6 @@ import {
   CreateNetworkInsightsAccessScopeRequest,
   CreateNetworkInsightsAccessScopeResult,
   CreateNetworkInsightsPathRequest,
-  CreateNetworkInsightsPathResult,
   CreditSpecification,
   CreditSpecificationRequest,
   CustomerGateway,
@@ -2501,7 +2527,6 @@ import {
   ExportToS3Task,
   ExportToS3TaskSpecification,
   FederatedAuthenticationRequest,
-  FilterPortRange,
   FleetCapacityReservation,
   FleetLaunchTemplateConfigRequest,
   FleetLaunchTemplateOverrides,
@@ -2593,12 +2618,10 @@ import {
   NetworkBandwidthGbpsRequest,
   NetworkInsightsAccessScope,
   NetworkInsightsAccessScopeContent,
-  NetworkInsightsPath,
   NetworkInterfaceCount,
   NetworkInterfaceCountRequest,
   NewDhcpConfiguration,
   OnDemandOptionsRequest,
-  PathFilter,
   PathRequestFilter,
   Placement,
   PlacementResponse,
@@ -2608,6 +2631,7 @@ import {
   RequestFilterPortRange,
   RequestIpamResourceTag,
   RequestLaunchTemplateData,
+  ReservationFleetInstanceSpecification,
   ResponseLaunchTemplateData,
   SpotOptionsRequest,
   StateReason,
@@ -2629,6 +2653,7 @@ import {
   CloudWatchLogOptionsSpecification,
   ConnectionNotification,
   ConnectionTrackingConfiguration,
+  CreateNetworkInsightsPathResult,
   CreateNetworkInterfacePermissionRequest,
   CreateNetworkInterfacePermissionResult,
   CreateNetworkInterfaceRequest,
@@ -2766,11 +2791,10 @@ import {
   DeleteLaunchTemplateRequest,
   DeleteLaunchTemplateResult,
   DeleteLaunchTemplateVersionsRequest,
-  DeleteLaunchTemplateVersionsResponseErrorItem,
-  DeleteLaunchTemplateVersionsResponseSuccessItem,
   DnsEntry,
   DnsOptions,
   DnsOptionsSpecification,
+  FilterPortRange,
   GroupIdentifier,
   IKEVersionsListValue,
   IKEVersionsRequestListValue,
@@ -2778,6 +2802,7 @@ import {
   InstanceSpecification,
   Ipv6PrefixSpecification,
   LastError,
+  NetworkInsightsPath,
   NetworkInterface,
   NetworkInterfaceAssociation,
   NetworkInterfaceAttachment,
@@ -2785,6 +2810,7 @@ import {
   NetworkInterfacePermission,
   NetworkInterfacePermissionState,
   NetworkInterfacePrivateIpAddress,
+  PathFilter,
   Phase1DHGroupNumbersListValue,
   Phase1DHGroupNumbersRequestListValue,
   Phase1EncryptionAlgorithmsListValue,
@@ -2802,7 +2828,6 @@ import {
   PrivateDnsNameConfiguration,
   PropagatingVgw,
   ReplaceRootVolumeTask,
-  ResponseError,
   Route,
   RouteTable,
   RouteTableAssociation,
@@ -2869,7 +2894,9 @@ import {
   AvailableCapacity,
   Byoasn,
   CapacityBlockOffering,
+  CapacityReservationBillingRequest,
   CapacityReservationFleet,
+  CapacityReservationInfo,
   CapacityReservationOptions,
   CertificateAuthentication,
   ClassicLinkInstance,
@@ -2883,6 +2910,8 @@ import {
   ClientVpnRoute,
   ConnectionLogResponseOptions,
   ConversionTask,
+  DeleteLaunchTemplateVersionsResponseErrorItem,
+  DeleteLaunchTemplateVersionsResponseSuccessItem,
   DeleteLaunchTemplateVersionsResult,
   DeleteLocalGatewayRouteRequest,
   DeleteLocalGatewayRouteResult,
@@ -3011,6 +3040,8 @@ import {
   DescribeByoipCidrsResult,
   DescribeCapacityBlockOfferingsRequest,
   DescribeCapacityBlockOfferingsResult,
+  DescribeCapacityReservationBillingRequestsRequest,
+  DescribeCapacityReservationBillingRequestsResult,
   DescribeCapacityReservationFleetsRequest,
   DescribeCapacityReservationFleetsResult,
   DescribeCapacityReservationsRequest,
@@ -3077,8 +3108,6 @@ import {
   DescribeIdentityIdFormatResult,
   DescribeIdFormatRequest,
   DescribeIdFormatResult,
-  DescribeImageAttributeRequest,
-  DescribeImagesRequest,
   DestinationOptionsResponse,
   DirectoryServiceAuthentication,
   DiskImageDescription,
@@ -3108,7 +3137,6 @@ import {
   HostProperties,
   HostReservation,
   IdFormat,
-  ImageAttribute,
   ImportInstanceTaskDetails,
   ImportInstanceVolumeDetailItem,
   ImportVolumeTaskDetails,
@@ -3116,11 +3144,11 @@ import {
   InstanceTagNotificationAttribute,
   IpamPoolCidr,
   IpamPoolCidrFailureReason,
-  LaunchPermission,
   LoadPermission,
   OnDemandOptions,
   PciId,
   ProductCode,
+  ResponseError,
   SpotOptions,
   Subscription,
   SuccessfulQueuedPurchaseDeletion,
@@ -3134,11 +3162,11 @@ import {
   AttributeBooleanValue,
   BootModeType,
   CapacityReservationSpecificationResponse,
-  ClassicLoadBalancer,
-  ClassicLoadBalancersConfig,
   ConnectionTrackingSpecificationResponse,
   CpuOptions,
   CreateVolumePermission,
+  DescribeImageAttributeRequest,
+  DescribeImagesRequest,
   DescribeImagesResult,
   DescribeImportImageTasksRequest,
   DescribeImportImageTasksResult,
@@ -3289,6 +3317,7 @@ import {
   HibernationOptions,
   HistoryRecord,
   Image,
+  ImageAttribute,
   ImportImageLicenseConfigurationResponse,
   ImportImageTask,
   ImportSnapshotTask,
@@ -3308,7 +3337,6 @@ import {
   InstanceNetworkInterface,
   InstanceNetworkInterfaceAssociation,
   InstanceNetworkInterfaceAttachment,
-  InstanceNetworkInterfaceSpecification,
   InstancePrivateIpAddress,
   InstanceState,
   InstanceStatus,
@@ -3321,8 +3349,7 @@ import {
   InstanceTypeOffering,
   Ipv6Pool,
   KeyPairInfo,
-  LaunchTemplateConfig,
-  LaunchTemplateOverrides,
+  LaunchPermission,
   LicenseConfiguration,
   LocalGateway,
   LocalGatewayVirtualInterface,
@@ -3375,13 +3402,8 @@ import {
   SnapshotDetail,
   SnapshotTaskDetail,
   SnapshotTierStatus,
-  SpotFleetLaunchSpecification,
   SpotFleetMonitoring,
-  SpotFleetTagSpecification,
-  SpotPlacement,
   SupportedAdditionalProcessorFeature,
-  TargetGroup,
-  TargetGroupsConfig,
   UsageClassType,
   UserBucketDetails,
   VCpuInfo,
@@ -3389,9 +3411,9 @@ import {
 } from "../models/models_4";
 import {
   AssociatedRole,
-  AthenaIntegration,
-  CapacityReservationGroup,
   ClassicLinkDnsSupport,
+  ClassicLoadBalancer,
+  ClassicLoadBalancersConfig,
   ClientCertificateRevocationListStatus,
   CoipAddressUsage,
   DataQuery,
@@ -3527,6 +3549,8 @@ import {
   DisableVpcClassicLinkRequest,
   DisableVpcClassicLinkResult,
   DisassociateAddressRequest,
+  DisassociateCapacityReservationBillingOwnerRequest,
+  DisassociateCapacityReservationBillingOwnerResult,
   DisassociateClientVpnTargetNetworkRequest,
   DisassociateClientVpnTargetNetworkResult,
   DisassociateEnclaveCertificateIamRoleRequest,
@@ -3623,37 +3647,35 @@ import {
   GetEbsDefaultKmsKeyIdResult,
   GetEbsEncryptionByDefaultRequest,
   GetEbsEncryptionByDefaultResult,
-  GetFlowLogsIntegrationTemplateRequest,
-  GetFlowLogsIntegrationTemplateResult,
-  GetGroupsForCapacityReservationRequest,
-  GetGroupsForCapacityReservationResult,
-  GetHostReservationPurchasePreviewRequest,
-  GetHostReservationPurchasePreviewResult,
-  GetImageBlockPublicAccessStateRequest,
-  GetImageBlockPublicAccessStateResult,
   InstanceEventWindowDisassociationRequest,
   InstanceFamilyCreditSpecification,
+  InstanceNetworkInterfaceSpecification,
   InstanceUsage,
-  IntegrateServices,
   Ipv6CidrAssociation,
   LaunchSpecification,
+  LaunchTemplateConfig,
+  LaunchTemplateOverrides,
   LoadBalancersConfig,
   MetricPoint,
   PrivateDnsDetails,
-  Purchase,
   RunInstancesMonitoringEnabled,
   ServiceDetail,
   SpotCapacityRebalance,
+  SpotFleetLaunchSpecification,
   SpotFleetRequestConfig,
   SpotFleetRequestConfigData,
+  SpotFleetTagSpecification,
   SpotInstanceRequest,
   SpotInstanceStatus,
   SpotMaintenanceStrategies,
+  SpotPlacement,
   SpotPrice,
   StaleIpPermission,
   StaleSecurityGroup,
   StoreImageTaskResult,
   TagDescription,
+  TargetGroup,
+  TargetGroupsConfig,
   TransitGatewayAttachment,
   TransitGatewayAttachmentAssociation,
   TransitGatewayPropagation,
@@ -3674,7 +3696,9 @@ import {
   VpcEndpointConnection,
 } from "../models/models_5";
 import {
+  AthenaIntegration,
   BlobAttributeValue,
+  CapacityReservationGroup,
   CapacityReservationSpecification,
   ClientData,
   CreateVolumePermissionModifications,
@@ -3682,6 +3706,14 @@ import {
   DiskImageDetail,
   DnsServersOptionsModifyStructure,
   EbsInstanceBlockDeviceSpecification,
+  GetFlowLogsIntegrationTemplateRequest,
+  GetFlowLogsIntegrationTemplateResult,
+  GetGroupsForCapacityReservationRequest,
+  GetGroupsForCapacityReservationResult,
+  GetHostReservationPurchasePreviewRequest,
+  GetHostReservationPurchasePreviewResult,
+  GetImageBlockPublicAccessStateRequest,
+  GetImageBlockPublicAccessStateResult,
   GetInstanceMetadataDefaultsRequest,
   GetInstanceMetadataDefaultsResult,
   GetInstanceTpmEkPubRequest,
@@ -3773,6 +3805,7 @@ import {
   InstanceMetadataDefaultsResponse,
   InstanceRequirementsWithMetadataRequest,
   InstanceTypeInfoFromInstanceRequirements,
+  IntegrateServices,
   IpamAddressHistoryRecord,
   IpamDiscoveredAccount,
   IpamDiscoveredPublicAddress,
@@ -3818,6 +3851,8 @@ import {
   ModifyInstanceAttributeRequest,
   ModifyInstanceCapacityReservationAttributesRequest,
   ModifyInstanceCapacityReservationAttributesResult,
+  ModifyInstanceCpuOptionsRequest,
+  ModifyInstanceCpuOptionsResult,
   ModifyInstanceCreditSpecificationRequest,
   ModifyInstanceCreditSpecificationResult,
   ModifyInstanceEventStartTimeRequest,
@@ -3903,22 +3938,10 @@ import {
   ModifyVpcEndpointResult,
   ModifyVpcEndpointServiceConfigurationRequest,
   ModifyVpcEndpointServiceConfigurationResult,
-  ModifyVpcEndpointServicePayerResponsibilityRequest,
-  ModifyVpcEndpointServicePayerResponsibilityResult,
-  ModifyVpcEndpointServicePermissionsRequest,
-  ModifyVpcEndpointServicePermissionsResult,
-  ModifyVpcPeeringConnectionOptionsRequest,
-  ModifyVpcPeeringConnectionOptionsResult,
-  ModifyVpcTenancyRequest,
-  ModifyVpcTenancyResult,
-  ModifyVpnConnectionOptionsRequest,
-  ModifyVpnConnectionRequest,
-  ModifyVpnConnectionResult,
   NetworkInterfaceAttachmentChanges,
-  PeeringConnectionOptions,
-  PeeringConnectionOptionsRequest,
   PrefixListAssociation,
   PrefixListEntry,
+  Purchase,
   RemoveIpamOperatingRegion,
   RemovePrefixListEntry,
   ReservationValue,
@@ -3967,7 +3990,18 @@ import {
   IpamCidrAuthorizationContext,
   LaunchTemplateSpecification,
   LicenseConfigurationRequest,
+  ModifyVpcEndpointServicePayerResponsibilityRequest,
+  ModifyVpcEndpointServicePayerResponsibilityResult,
+  ModifyVpcEndpointServicePermissionsRequest,
+  ModifyVpcEndpointServicePermissionsResult,
+  ModifyVpcPeeringConnectionOptionsRequest,
+  ModifyVpcPeeringConnectionOptionsResult,
+  ModifyVpcTenancyRequest,
+  ModifyVpcTenancyResult,
+  ModifyVpnConnectionOptionsRequest,
   ModifyVpnConnectionOptionsResult,
+  ModifyVpnConnectionRequest,
+  ModifyVpnConnectionResult,
   ModifyVpnTunnelCertificateRequest,
   ModifyVpnTunnelCertificateResult,
   ModifyVpnTunnelOptionsRequest,
@@ -3981,6 +4015,8 @@ import {
   MoveByoipCidrToIpamResult,
   MoveCapacityReservationInstancesRequest,
   MoveCapacityReservationInstancesResult,
+  PeeringConnectionOptions,
+  PeeringConnectionOptionsRequest,
   PrivateDnsNameOptionsRequest,
   ProvisionByoipCidrRequest,
   ProvisionByoipCidrResult,
@@ -4009,6 +4045,8 @@ import {
   RegisterTransitGatewayMulticastGroupMembersResult,
   RegisterTransitGatewayMulticastGroupSourcesRequest,
   RegisterTransitGatewayMulticastGroupSourcesResult,
+  RejectCapacityReservationBillingOwnershipRequest,
+  RejectCapacityReservationBillingOwnershipResult,
   RejectTransitGatewayMulticastDomainAssociationsRequest,
   RejectTransitGatewayMulticastDomainAssociationsResult,
   RejectTransitGatewayPeeringAttachmentRequest,
@@ -4138,6 +4176,23 @@ export const se_AcceptAddressTransferCommand = async (
   body = buildFormUrlencodedString({
     ...se_AcceptAddressTransferRequest(input, context),
     [_A]: _AAT,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
+ * serializeAws_ec2AcceptCapacityReservationBillingOwnershipCommand
+ */
+export const se_AcceptCapacityReservationBillingOwnershipCommand = async (
+  input: AcceptCapacityReservationBillingOwnershipCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_AcceptCapacityReservationBillingOwnershipRequest(input, context),
+    [_A]: _ACRBO,
     [_V]: _,
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -4393,6 +4448,23 @@ export const se_AssociateAddressCommand = async (
   body = buildFormUrlencodedString({
     ...se_AssociateAddressRequest(input, context),
     [_A]: _AAs,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
+ * serializeAws_ec2AssociateCapacityReservationBillingOwnerCommand
+ */
+export const se_AssociateCapacityReservationBillingOwnerCommand = async (
+  input: AssociateCapacityReservationBillingOwnerCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_AssociateCapacityReservationBillingOwnerRequest(input, context),
+    [_A]: _ACRBOs,
     [_V]: _,
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -8071,6 +8143,23 @@ export const se_DescribeCapacityBlockOfferingsCommand = async (
 };
 
 /**
+ * serializeAws_ec2DescribeCapacityReservationBillingRequestsCommand
+ */
+export const se_DescribeCapacityReservationBillingRequestsCommand = async (
+  input: DescribeCapacityReservationBillingRequestsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_DescribeCapacityReservationBillingRequestsRequest(input, context),
+    [_A]: _DCRBR,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
  * serializeAws_ec2DescribeCapacityReservationFleetsCommand
  */
 export const se_DescribeCapacityReservationFleetsCommand = async (
@@ -10876,6 +10965,23 @@ export const se_DisassociateAddressCommand = async (
 };
 
 /**
+ * serializeAws_ec2DisassociateCapacityReservationBillingOwnerCommand
+ */
+export const se_DisassociateCapacityReservationBillingOwnerCommand = async (
+  input: DisassociateCapacityReservationBillingOwnerCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_DisassociateCapacityReservationBillingOwnerRequest(input, context),
+    [_A]: _DCRBO,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
  * serializeAws_ec2DisassociateClientVpnTargetNetworkCommand
  */
 export const se_DisassociateClientVpnTargetNetworkCommand = async (
@@ -12729,6 +12835,23 @@ export const se_ModifyInstanceCapacityReservationAttributesCommand = async (
 };
 
 /**
+ * serializeAws_ec2ModifyInstanceCpuOptionsCommand
+ */
+export const se_ModifyInstanceCpuOptionsCommand = async (
+  input: ModifyInstanceCpuOptionsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_ModifyInstanceCpuOptionsRequest(input, context),
+    [_A]: _MICO,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
  * serializeAws_ec2ModifyInstanceCreditSpecificationCommand
  */
 export const se_ModifyInstanceCreditSpecificationCommand = async (
@@ -13868,6 +13991,23 @@ export const se_RegisterTransitGatewayMulticastGroupSourcesCommand = async (
 };
 
 /**
+ * serializeAws_ec2RejectCapacityReservationBillingOwnershipCommand
+ */
+export const se_RejectCapacityReservationBillingOwnershipCommand = async (
+  input: RejectCapacityReservationBillingOwnershipCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_RejectCapacityReservationBillingOwnershipRequest(input, context),
+    [_A]: _RCRBO,
+    [_V]: _,
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
  * serializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommand
  */
 export const se_RejectTransitGatewayMulticastDomainAssociationsCommand = async (
@@ -14806,6 +14946,26 @@ export const de_AcceptAddressTransferCommand = async (
 };
 
 /**
+ * deserializeAws_ec2AcceptCapacityReservationBillingOwnershipCommand
+ */
+export const de_AcceptCapacityReservationBillingOwnershipCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<AcceptCapacityReservationBillingOwnershipCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_AcceptCapacityReservationBillingOwnershipResult(data, context);
+  const response: AcceptCapacityReservationBillingOwnershipCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_ec2AcceptReservedInstancesExchangeQuoteCommand
  */
 export const de_AcceptReservedInstancesExchangeQuoteCommand = async (
@@ -15099,6 +15259,26 @@ export const de_AssociateAddressCommand = async (
   let contents: any = {};
   contents = de_AssociateAddressResult(data, context);
   const response: AssociateAddressCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
+ * deserializeAws_ec2AssociateCapacityReservationBillingOwnerCommand
+ */
+export const de_AssociateCapacityReservationBillingOwnerCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<AssociateCapacityReservationBillingOwnerCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_AssociateCapacityReservationBillingOwnerResult(data, context);
+  const response: AssociateCapacityReservationBillingOwnerCommandOutput = {
     $metadata: deserializeMetadata(output),
     ...contents,
   };
@@ -19345,6 +19525,26 @@ export const de_DescribeCapacityBlockOfferingsCommand = async (
 };
 
 /**
+ * deserializeAws_ec2DescribeCapacityReservationBillingRequestsCommand
+ */
+export const de_DescribeCapacityReservationBillingRequestsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeCapacityReservationBillingRequestsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_DescribeCapacityReservationBillingRequestsResult(data, context);
+  const response: DescribeCapacityReservationBillingRequestsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_ec2DescribeCapacityReservationFleetsCommand
  */
 export const de_DescribeCapacityReservationFleetsCommand = async (
@@ -22630,6 +22830,26 @@ export const de_DisassociateAddressCommand = async (
 };
 
 /**
+ * deserializeAws_ec2DisassociateCapacityReservationBillingOwnerCommand
+ */
+export const de_DisassociateCapacityReservationBillingOwnerCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DisassociateCapacityReservationBillingOwnerCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_DisassociateCapacityReservationBillingOwnerResult(data, context);
+  const response: DisassociateCapacityReservationBillingOwnerCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_ec2DisassociateClientVpnTargetNetworkCommand
  */
 export const de_DisassociateClientVpnTargetNetworkCommand = async (
@@ -24789,6 +25009,26 @@ export const de_ModifyInstanceCapacityReservationAttributesCommand = async (
 };
 
 /**
+ * deserializeAws_ec2ModifyInstanceCpuOptionsCommand
+ */
+export const de_ModifyInstanceCpuOptionsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ModifyInstanceCpuOptionsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_ModifyInstanceCpuOptionsResult(data, context);
+  const response: ModifyInstanceCpuOptionsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_ec2ModifyInstanceCreditSpecificationCommand
  */
 export const de_ModifyInstanceCreditSpecificationCommand = async (
@@ -26111,6 +26351,26 @@ export const de_RegisterTransitGatewayMulticastGroupSourcesCommand = async (
 };
 
 /**
+ * deserializeAws_ec2RejectCapacityReservationBillingOwnershipCommand
+ */
+export const de_RejectCapacityReservationBillingOwnershipCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<RejectCapacityReservationBillingOwnershipCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = de_RejectCapacityReservationBillingOwnershipResult(data, context);
+  const response: RejectCapacityReservationBillingOwnershipCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommand
  */
 export const de_RejectTransitGatewayMulticastDomainAssociationsCommand = async (
@@ -27303,6 +27563,23 @@ const se_AcceptAddressTransferRequest = (input: AcceptAddressTransferRequest, co
 };
 
 /**
+ * serializeAws_ec2AcceptCapacityReservationBillingOwnershipRequest
+ */
+const se_AcceptCapacityReservationBillingOwnershipRequest = (
+  input: AcceptCapacityReservationBillingOwnershipRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_CRI] != null) {
+    entries[_CRI] = input[_CRI];
+  }
+  return entries;
+};
+
+/**
  * serializeAws_ec2AcceptReservedInstancesExchangeQuoteRequest
  */
 const se_AcceptReservedInstancesExchangeQuoteRequest = (
@@ -27599,9 +27876,6 @@ const se_AllocateAddressRequest = (input: AllocateAddressRequest, context: __Ser
   if (input[_COIP] != null) {
     entries[_COIP] = input[_COIP];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -27612,6 +27886,9 @@ const se_AllocateAddressRequest = (input: AllocateAddressRequest, context: __Ser
   if (input[_IPI] != null) {
     entries[_IPI] = input[_IPI];
   }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   return entries;
 };
 
@@ -27620,23 +27897,8 @@ const se_AllocateAddressRequest = (input: AllocateAddressRequest, context: __Ser
  */
 const se_AllocateHostsRequest = (input: AllocateHostsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AP] != null) {
-    entries[_AP] = input[_AP];
-  }
-  if (input[_AZ] != null) {
-    entries[_AZ] = input[_AZ];
-  }
-  if (input[_CTl] != null) {
-    entries[_CTl] = input[_CTl];
-  }
-  if (input[_IT] != null) {
-    entries[_IT] = input[_IT];
-  }
   if (input[_IF] != null) {
     entries[_IF] = input[_IF];
-  }
-  if (input[_Q] != null) {
-    entries[_Q] = input[_Q];
   }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
@@ -27660,6 +27922,21 @@ const se_AllocateHostsRequest = (input: AllocateHostsRequest, context: __SerdeCo
       const loc = `AssetId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_AP] != null) {
+    entries[_AP] = input[_AP];
+  }
+  if (input[_CTl] != null) {
+    entries[_CTl] = input[_CTl];
+  }
+  if (input[_IT] != null) {
+    entries[_IT] = input[_IT];
+  }
+  if (input[_Q] != null) {
+    entries[_Q] = input[_Q];
+  }
+  if (input[_AZ] != null) {
+    entries[_AZ] = input[_AZ];
   }
   return entries;
 };
@@ -27852,16 +28129,6 @@ const se_AssetIdList = (input: string[], context: __SerdeContext): any => {
  */
 const se_AssignIpv6AddressesRequest = (input: AssignIpv6AddressesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_IAC] != null) {
-    entries[_IAC] = input[_IAC];
-  }
-  if (input[_IA] != null) {
-    const memberEntries = se_Ipv6AddressList(input[_IA], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_IPC] != null) {
     entries[_IPC] = input[_IPC];
   }
@@ -27875,6 +28142,16 @@ const se_AssignIpv6AddressesRequest = (input: AssignIpv6AddressesRequest, contex
   if (input[_NII] != null) {
     entries[_NII] = input[_NII];
   }
+  if (input[_IA] != null) {
+    const memberEntries = se_Ipv6AddressList(input[_IA], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_IAC] != null) {
+    entries[_IAC] = input[_IAC];
+  }
   return entries;
 };
 
@@ -27883,8 +28160,15 @@ const se_AssignIpv6AddressesRequest = (input: AssignIpv6AddressesRequest, contex
  */
 const se_AssignPrivateIpAddressesRequest = (input: AssignPrivateIpAddressesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AR] != null) {
-    entries[_AR] = input[_AR];
+  if (input[_IPp] != null) {
+    const memberEntries = se_IpPrefixList(input[_IPp], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Ipv4Prefix.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_IPCp] != null) {
+    entries[_IPCp] = input[_IPCp];
   }
   if (input[_NII] != null) {
     entries[_NII] = input[_NII];
@@ -27899,15 +28183,8 @@ const se_AssignPrivateIpAddressesRequest = (input: AssignPrivateIpAddressesReque
   if (input[_SPIAC] != null) {
     entries[_SPIAC] = input[_SPIAC];
   }
-  if (input[_IPp] != null) {
-    const memberEntries = se_IpPrefixList(input[_IPp], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Ipv4Prefix.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_IPCp] != null) {
-    entries[_IPCp] = input[_IPCp];
+  if (input[_AR] != null) {
+    entries[_AR] = input[_AR];
   }
   return entries;
 };
@@ -27953,9 +28230,6 @@ const se_AssociateAddressRequest = (input: AssociateAddressRequest, context: __S
   if (input[_PI] != null) {
     entries[_PI] = input[_PI];
   }
-  if (input[_ARl] != null) {
-    entries[_ARl] = input[_ARl];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -27964,6 +28238,29 @@ const se_AssociateAddressRequest = (input: AssociateAddressRequest, context: __S
   }
   if (input[_PIAr] != null) {
     entries[_PIAr] = input[_PIAr];
+  }
+  if (input[_ARl] != null) {
+    entries[_ARl] = input[_ARl];
+  }
+  return entries;
+};
+
+/**
+ * serializeAws_ec2AssociateCapacityReservationBillingOwnerRequest
+ */
+const se_AssociateCapacityReservationBillingOwnerRequest = (
+  input: AssociateCapacityReservationBillingOwnerRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_CRI] != null) {
+    entries[_CRI] = input[_CRI];
+  }
+  if (input[_URBOI] != null) {
+    entries[_URBOI] = input[_URBOI];
   }
   return entries;
 };
@@ -28162,17 +28459,17 @@ const se_AssociateNatGatewayAddressRequest = (
  */
 const se_AssociateRouteTableRequest = (input: AssociateRouteTableRequest, context: __SerdeContext): any => {
   const entries: any = {};
+  if (input[_GI] != null) {
+    entries[_GI] = input[_GI];
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
-  }
-  if (input[_RTI] != null) {
-    entries[_RTI] = input[_RTI];
   }
   if (input[_SIub] != null) {
     entries[_SIub] = input[_SIub];
   }
-  if (input[_GI] != null) {
-    entries[_GI] = input[_GI];
+  if (input[_RTI] != null) {
+    entries[_RTI] = input[_RTI];
   }
   return entries;
 };
@@ -28182,17 +28479,17 @@ const se_AssociateRouteTableRequest = (input: AssociateRouteTableRequest, contex
  */
 const se_AssociateSubnetCidrBlockRequest = (input: AssociateSubnetCidrBlockRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_ICB] != null) {
-    entries[_ICB] = input[_ICB];
-  }
-  if (input[_SIub] != null) {
-    entries[_SIub] = input[_SIub];
-  }
   if (input[_IIPI] != null) {
     entries[_IIPI] = input[_IIPI];
   }
   if (input[_INL] != null) {
     entries[_INL] = input[_INL];
+  }
+  if (input[_SIub] != null) {
+    entries[_SIub] = input[_SIub];
+  }
+  if (input[_ICB] != null) {
+    entries[_ICB] = input[_ICB];
   }
   return entries;
 };
@@ -28298,14 +28595,8 @@ const se_AssociateTrunkInterfaceRequest = (input: AssociateTrunkInterfaceRequest
  */
 const se_AssociateVpcCidrBlockRequest = (input: AssociateVpcCidrBlockRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_APICB] != null) {
-    entries[_APICB] = input[_APICB];
-  }
   if (input[_CB] != null) {
     entries[_CB] = input[_CB];
-  }
-  if (input[_VI] != null) {
-    entries[_VI] = input[_VI];
   }
   if (input[_ICBNBG] != null) {
     entries[_ICBNBG] = input[_ICBNBG];
@@ -28327,6 +28618,12 @@ const se_AssociateVpcCidrBlockRequest = (input: AssociateVpcCidrBlockRequest, co
   }
   if (input[_INL] != null) {
     entries[_INL] = input[_INL];
+  }
+  if (input[_VI] != null) {
+    entries[_VI] = input[_VI];
+  }
+  if (input[_APICB] != null) {
+    entries[_APICB] = input[_APICB];
   }
   return entries;
 };
@@ -28394,18 +28691,18 @@ const se_AttachClassicLinkVpcRequest = (input: AttachClassicLinkVpcRequest, cont
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_VI] != null) {
+    entries[_VI] = input[_VI];
+  }
   if (input[_G] != null) {
     const memberEntries = se_GroupIdStringList(input[_G], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `SecurityGroupId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
-  if (input[_VI] != null) {
-    entries[_VI] = input[_VI];
   }
   return entries;
 };
@@ -28432,18 +28729,6 @@ const se_AttachInternetGatewayRequest = (input: AttachInternetGatewayRequest, co
  */
 const se_AttachNetworkInterfaceRequest = (input: AttachNetworkInterfaceRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DIev] != null) {
-    entries[_DIev] = input[_DIev];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
-  if (input[_NII] != null) {
-    entries[_NII] = input[_NII];
-  }
   if (input[_NCI] != null) {
     entries[_NCI] = input[_NCI];
   }
@@ -28453,6 +28738,18 @@ const se_AttachNetworkInterfaceRequest = (input: AttachNetworkInterfaceRequest, 
       const loc = `EnaSrdSpecification.${key}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_NII] != null) {
+    entries[_NII] = input[_NII];
+  }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_DIev] != null) {
+    entries[_DIev] = input[_DIev];
   }
   return entries;
 };
@@ -28582,19 +28879,6 @@ const se_AuthorizeSecurityGroupEgressRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_GIr] != null) {
-    entries[_GIr] = input[_GIr];
-  }
-  if (input[_IPpe] != null) {
-    const memberEntries = se_IpPermissionList(input[_IPpe], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `IpPermissions.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -28602,23 +28886,36 @@ const se_AuthorizeSecurityGroupEgressRequest = (
       entries[loc] = value;
     });
   }
-  if (input[_CIi] != null) {
-    entries[_CIi] = input[_CIi];
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
-  if (input[_FP] != null) {
-    entries[_FP] = input[_FP];
-  }
-  if (input[_IPpr] != null) {
-    entries[_IPpr] = input[_IPpr];
-  }
-  if (input[_TP] != null) {
-    entries[_TP] = input[_TP];
+  if (input[_GIr] != null) {
+    entries[_GIr] = input[_GIr];
   }
   if (input[_SSGN] != null) {
     entries[_SSGN] = input[_SSGN];
   }
   if (input[_SSGOI] != null) {
     entries[_SSGOI] = input[_SSGOI];
+  }
+  if (input[_IPpr] != null) {
+    entries[_IPpr] = input[_IPpr];
+  }
+  if (input[_FP] != null) {
+    entries[_FP] = input[_FP];
+  }
+  if (input[_TP] != null) {
+    entries[_TP] = input[_TP];
+  }
+  if (input[_CIi] != null) {
+    entries[_CIi] = input[_CIi];
+  }
+  if (input[_IPpe] != null) {
+    const memberEntries = se_IpPermissionList(input[_IPpe], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `IpPermissions.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -28662,15 +28959,15 @@ const se_AuthorizeSecurityGroupIngressRequest = (
   if (input[_TP] != null) {
     entries[_TP] = input[_TP];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -28751,12 +29048,6 @@ const se_BlobAttributeValue = (input: BlobAttributeValue, context: __SerdeContex
  */
 const se_BlockDeviceMapping = (input: BlockDeviceMapping, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DN] != null) {
-    entries[_DN] = input[_DN];
-  }
-  if (input[_VN] != null) {
-    entries[_VN] = input[_VN];
-  }
   if (input[_E] != null) {
     const memberEntries = se_EbsBlockDevice(input[_E], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -28766,6 +29057,12 @@ const se_BlockDeviceMapping = (input: BlockDeviceMapping, context: __SerdeContex
   }
   if (input[_ND] != null) {
     entries[_ND] = input[_ND];
+  }
+  if (input[_DN] != null) {
+    entries[_DN] = input[_DN];
+  }
+  if (input[_VN] != null) {
+    entries[_VN] = input[_VN];
   }
   return entries;
 };
@@ -28899,11 +29196,11 @@ const se_CancelCapacityReservationRequest = (input: CancelCapacityReservationReq
  */
 const se_CancelConversionRequest = (input: CancelConversionRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CTI] != null) {
-    entries[_CTI] = input[_CTI];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_CTI] != null) {
+    entries[_CTI] = input[_CTI];
   }
   if (input[_RM] != null) {
     entries[_RM] = input[_RM];
@@ -29487,9 +29784,6 @@ const se_CopyImageRequest = (input: CopyImageRequest, context: __SerdeContext): 
   if (input[_DOA] != null) {
     entries[_DOA] = input[_DOA];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_CITo] != null) {
     entries[_CITo] = input[_CITo];
   }
@@ -29499,6 +29793,9 @@ const se_CopyImageRequest = (input: CopyImageRequest, context: __SerdeContext): 
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -29937,11 +30234,11 @@ const se_CreateCustomerGatewayRequest = (input: CreateCustomerGatewayRequest, co
   if (input[_IAp] != null) {
     entries[_IAp] = input[_IAp];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_BAE] != null) {
     entries[_BAE] = input[_BAE];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -30204,15 +30501,12 @@ const se_CreateFpgaImageRequest = (input: CreateFpgaImageRequest, context: __Ser
  */
 const se_CreateImageRequest = (input: CreateImageRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_BDM] != null) {
-    const memberEntries = se_BlockDeviceMappingRequestList(input[_BDM], context);
+  if (input[_TS] != null) {
+    const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `BlockDeviceMapping.${key.substring(key.indexOf(".") + 1)}`;
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -30223,13 +30517,16 @@ const se_CreateImageRequest = (input: CreateImageRequest, context: __SerdeContex
   if (input[_N] != null) {
     entries[_N] = input[_N];
   }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
+  }
   if (input[_NR] != null) {
     entries[_NR] = input[_NR];
   }
-  if (input[_TS] != null) {
-    const memberEntries = se_TagSpecificationList(input[_TS], context);
+  if (input[_BDM] != null) {
+    const memberEntries = se_BlockDeviceMappingRequestList(input[_BDM], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      const loc = `BlockDeviceMapping.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -30312,15 +30609,15 @@ const se_CreateInstanceEventWindowRequest = (input: CreateInstanceEventWindowReq
  */
 const se_CreateInstanceExportTaskRequest = (input: CreateInstanceExportTaskRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
-  if (input[_ETST] != null) {
-    const memberEntries = se_ExportToS3TaskSpecification(input[_ETST], context);
+  if (input[_TS] != null) {
+    const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `ExportToS3.${key}`;
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
   }
   if (input[_IIn] != null) {
     entries[_IIn] = input[_IIn];
@@ -30328,10 +30625,10 @@ const se_CreateInstanceExportTaskRequest = (input: CreateInstanceExportTaskReque
   if (input[_TE] != null) {
     entries[_TE] = input[_TE];
   }
-  if (input[_TS] != null) {
-    const memberEntries = se_TagSpecificationList(input[_TS], context);
+  if (input[_ETST] != null) {
+    const memberEntries = se_ExportToS3TaskSpecification(input[_ETST], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      const loc = `ExportToS3.${key}`;
       entries[loc] = value;
     });
   }
@@ -30575,9 +30872,6 @@ const se_CreateKeyPairRequest = (input: CreateKeyPairRequest, context: __SerdeCo
   if (input[_KN] != null) {
     entries[_KN] = input[_KN];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_KT] != null) {
     entries[_KT] = input[_KT];
   }
@@ -30590,6 +30884,9 @@ const se_CreateKeyPairRequest = (input: CreateKeyPairRequest, context: __SerdeCo
   }
   if (input[_KF] != null) {
     entries[_KF] = input[_KF];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -30872,14 +31169,29 @@ const se_CreateNatGatewayRequest = (input: CreateNatGatewayRequest, context: __S
  */
 const se_CreateNetworkAclEntryRequest = (input: CreateNetworkAclEntryRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CB] != null) {
-    entries[_CB] = input[_CB];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_NAI] != null) {
+    entries[_NAI] = input[_NAI];
+  }
+  if (input[_RNu] != null) {
+    entries[_RNu] = input[_RNu];
+  }
+  if (input[_P] != null) {
+    entries[_P] = input[_P];
+  }
+  if (input[_RAu] != null) {
+    entries[_RAu] = input[_RAu];
+  }
   if (input[_Eg] != null) {
     entries[_Eg] = input[_Eg];
+  }
+  if (input[_CB] != null) {
+    entries[_CB] = input[_CB];
+  }
+  if (input[_ICB] != null) {
+    entries[_ICB] = input[_ICB];
   }
   if (input[_ITC] != null) {
     const memberEntries = se_IcmpTypeCode(input[_ITC], context);
@@ -30888,27 +31200,12 @@ const se_CreateNetworkAclEntryRequest = (input: CreateNetworkAclEntryRequest, co
       entries[loc] = value;
     });
   }
-  if (input[_ICB] != null) {
-    entries[_ICB] = input[_ICB];
-  }
-  if (input[_NAI] != null) {
-    entries[_NAI] = input[_NAI];
-  }
   if (input[_PR] != null) {
     const memberEntries = se_PortRange(input[_PR], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `PortRange.${key}`;
       entries[loc] = value;
     });
-  }
-  if (input[_P] != null) {
-    entries[_P] = input[_P];
-  }
-  if (input[_RAu] != null) {
-    entries[_RAu] = input[_RAu];
-  }
-  if (input[_RNu] != null) {
-    entries[_RNu] = input[_RNu];
   }
   return entries;
 };
@@ -30918,12 +31215,6 @@ const se_CreateNetworkAclEntryRequest = (input: CreateNetworkAclEntryRequest, co
  */
 const se_CreateNetworkAclRequest = (input: CreateNetworkAclRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_VI] != null) {
-    entries[_VI] = input[_VI];
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -30936,6 +31227,12 @@ const se_CreateNetworkAclRequest = (input: CreateNetworkAclRequest, context: __S
   }
   if (input[_CTl] != null) {
     entries[_CTl] = input[_CTl];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_VI] != null) {
+    entries[_VI] = input[_VI];
   }
   return entries;
 };
@@ -31068,42 +31365,6 @@ const se_CreateNetworkInterfacePermissionRequest = (
  */
 const se_CreateNetworkInterfaceRequest = (input: CreateNetworkInterfaceRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_G] != null) {
-    const memberEntries = se_SecurityGroupIdStringList(input[_G], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `SecurityGroupId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_IAC] != null) {
-    entries[_IAC] = input[_IAC];
-  }
-  if (input[_IA] != null) {
-    const memberEntries = se_InstanceIpv6AddressList(input[_IA], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_PIAr] != null) {
-    entries[_PIAr] = input[_PIAr];
-  }
-  if (input[_PIA] != null) {
-    const memberEntries = se_PrivateIpAddressSpecificationList(input[_PIA], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `PrivateIpAddresses.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_SPIAC] != null) {
-    entries[_SPIAC] = input[_SPIAC];
-  }
   if (input[_IPp] != null) {
     const memberEntries = se_Ipv4PrefixList(input[_IPp], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -31126,9 +31387,6 @@ const se_CreateNetworkInterfaceRequest = (input: CreateNetworkInterfaceRequest, 
   }
   if (input[_ITn] != null) {
     entries[_ITn] = input[_ITn];
-  }
-  if (input[_SIub] != null) {
-    entries[_SIub] = input[_SIub];
   }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
@@ -31153,6 +31411,45 @@ const se_CreateNetworkInterfaceRequest = (input: CreateNetworkInterfaceRequest, 
       entries[loc] = value;
     });
   }
+  if (input[_SIub] != null) {
+    entries[_SIub] = input[_SIub];
+  }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
+  }
+  if (input[_PIAr] != null) {
+    entries[_PIAr] = input[_PIAr];
+  }
+  if (input[_G] != null) {
+    const memberEntries = se_SecurityGroupIdStringList(input[_G], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SecurityGroupId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_PIA] != null) {
+    const memberEntries = se_PrivateIpAddressSpecificationList(input[_PIA], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `PrivateIpAddresses.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_SPIAC] != null) {
+    entries[_SPIAC] = input[_SPIAC];
+  }
+  if (input[_IA] != null) {
+    const memberEntries = se_InstanceIpv6AddressList(input[_IA], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_IAC] != null) {
+    entries[_IAC] = input[_IAC];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   return entries;
 };
 
@@ -31161,15 +31458,6 @@ const se_CreateNetworkInterfaceRequest = (input: CreateNetworkInterfaceRequest, 
  */
 const se_CreatePlacementGroupRequest = (input: CreatePlacementGroupRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_GN] != null) {
-    entries[_GN] = input[_GN];
-  }
-  if (input[_Str] != null) {
-    entries[_Str] = input[_Str];
-  }
   if (input[_PCa] != null) {
     entries[_PCa] = input[_PCa];
   }
@@ -31182,6 +31470,15 @@ const se_CreatePlacementGroupRequest = (input: CreatePlacementGroupRequest, cont
   }
   if (input[_SL] != null) {
     entries[_SL] = input[_SL];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_GN] != null) {
+    entries[_GN] = input[_GN];
+  }
+  if (input[_Str] != null) {
+    entries[_Str] = input[_Str];
   }
   return entries;
 };
@@ -31254,8 +31551,8 @@ const se_CreateReservedInstancesListingRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_CTl] != null) {
-    entries[_CTl] = input[_CTl];
+  if (input[_RIIe] != null) {
+    entries[_RIIe] = input[_RIIe];
   }
   if (input[_IC] != null) {
     entries[_IC] = input[_IC];
@@ -31267,8 +31564,8 @@ const se_CreateReservedInstancesListingRequest = (
       entries[loc] = value;
     });
   }
-  if (input[_RIIe] != null) {
-    entries[_RIIe] = input[_RIIe];
+  if (input[_CTl] != null) {
+    entries[_CTl] = input[_CTl];
   }
   return entries;
 };
@@ -31305,32 +31602,11 @@ const se_CreateRestoreImageTaskRequest = (input: CreateRestoreImageTaskRequest, 
  */
 const se_CreateRouteRequest = (input: CreateRouteRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DCB] != null) {
-    entries[_DCB] = input[_DCB];
-  }
-  if (input[_DICB] != null) {
-    entries[_DICB] = input[_DICB];
-  }
   if (input[_DPLI] != null) {
     entries[_DPLI] = input[_DPLI];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_VEIp] != null) {
     entries[_VEIp] = input[_VEIp];
-  }
-  if (input[_EOIGI] != null) {
-    entries[_EOIGI] = input[_EOIGI];
-  }
-  if (input[_GI] != null) {
-    entries[_GI] = input[_GI];
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
-  if (input[_NGI] != null) {
-    entries[_NGI] = input[_NGI];
   }
   if (input[_TGI] != null) {
     entries[_TGI] = input[_TGI];
@@ -31341,17 +31617,38 @@ const se_CreateRouteRequest = (input: CreateRouteRequest, context: __SerdeContex
   if (input[_CGI] != null) {
     entries[_CGI] = input[_CGI];
   }
-  if (input[_NII] != null) {
-    entries[_NII] = input[_NII];
+  if (input[_CNAo] != null) {
+    entries[_CNAo] = input[_CNAo];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   if (input[_RTI] != null) {
     entries[_RTI] = input[_RTI];
   }
+  if (input[_DCB] != null) {
+    entries[_DCB] = input[_DCB];
+  }
+  if (input[_GI] != null) {
+    entries[_GI] = input[_GI];
+  }
+  if (input[_DICB] != null) {
+    entries[_DICB] = input[_DICB];
+  }
+  if (input[_EOIGI] != null) {
+    entries[_EOIGI] = input[_EOIGI];
+  }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_NII] != null) {
+    entries[_NII] = input[_NII];
+  }
   if (input[_VPCI] != null) {
     entries[_VPCI] = input[_VPCI];
   }
-  if (input[_CNAo] != null) {
-    entries[_CNAo] = input[_CNAo];
+  if (input[_NGI] != null) {
+    entries[_NGI] = input[_NGI];
   }
   return entries;
 };
@@ -31361,12 +31658,6 @@ const se_CreateRouteRequest = (input: CreateRouteRequest, context: __SerdeContex
  */
 const se_CreateRouteTableRequest = (input: CreateRouteTableRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_VI] != null) {
-    entries[_VI] = input[_VI];
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -31379,6 +31670,12 @@ const se_CreateRouteTableRequest = (input: CreateRouteTableRequest, context: __S
   }
   if (input[_CTl] != null) {
     entries[_CTl] = input[_CTl];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_VI] != null) {
+    entries[_VI] = input[_VI];
   }
   return entries;
 };
@@ -31479,11 +31776,11 @@ const se_CreateSpotDatafeedSubscriptionRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_B] != null) {
-    entries[_B] = input[_B];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_B] != null) {
+    entries[_B] = input[_B];
   }
   if (input[_Pr] != null) {
     entries[_Pr] = input[_Pr];
@@ -31578,9 +31875,6 @@ const se_CreateSubnetRequest = (input: CreateSubnetRequest, context: __SerdeCont
   if (input[_VI] != null) {
     entries[_VI] = input[_VI];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_IN] != null) {
     entries[_IN] = input[_IN];
   }
@@ -31595,6 +31889,9 @@ const se_CreateSubnetRequest = (input: CreateSubnetRequest, context: __SerdeCont
   }
   if (input[_INL] != null) {
     entries[_INL] = input[_INL];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -32542,11 +32839,11 @@ const se_CreateVerifiedAccessTrustProviderRequest = (
  */
 const se_CreateVolumePermission = (input: CreateVolumePermission, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Gr] != null) {
-    entries[_Gr] = input[_Gr];
-  }
   if (input[_UIs] != null) {
     entries[_UIs] = input[_UIs];
+  }
+  if (input[_Gr] != null) {
+    entries[_Gr] = input[_Gr];
   }
   return entries;
 };
@@ -32624,9 +32921,6 @@ const se_CreateVolumeRequest = (input: CreateVolumeRequest, context: __SerdeCont
   if (input[_VT] != null) {
     entries[_VT] = input[_VT];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -32645,6 +32939,9 @@ const se_CreateVolumeRequest = (input: CreateVolumeRequest, context: __SerdeCont
   }
   if (input[_CTl] != null) {
     entries[_CTl] = input[_CTl];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -32815,18 +33112,6 @@ const se_CreateVpcPeeringConnectionRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_POI] != null) {
-    entries[_POI] = input[_POI];
-  }
-  if (input[_PVI] != null) {
-    entries[_PVI] = input[_PVI];
-  }
-  if (input[_VI] != null) {
-    entries[_VI] = input[_VI];
-  }
   if (input[_PRe] != null) {
     entries[_PRe] = input[_PRe];
   }
@@ -32836,6 +33121,18 @@ const se_CreateVpcPeeringConnectionRequest = (
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_VI] != null) {
+    entries[_VI] = input[_VI];
+  }
+  if (input[_PVI] != null) {
+    entries[_PVI] = input[_PVI];
+  }
+  if (input[_POI] != null) {
+    entries[_POI] = input[_POI];
   }
   return entries;
 };
@@ -32847,9 +33144,6 @@ const se_CreateVpcRequest = (input: CreateVpcRequest, context: __SerdeContext): 
   const entries: any = {};
   if (input[_CB] != null) {
     entries[_CB] = input[_CB];
-  }
-  if (input[_APICB] != null) {
-    entries[_APICB] = input[_APICB];
   }
   if (input[_IPpv] != null) {
     entries[_IPpv] = input[_IPpv];
@@ -32869,12 +33163,6 @@ const se_CreateVpcRequest = (input: CreateVpcRequest, context: __SerdeContext): 
   if (input[_INL] != null) {
     entries[_INL] = input[_INL];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_ITns] != null) {
-    entries[_ITns] = input[_ITns];
-  }
   if (input[_ICBNBG] != null) {
     entries[_ICBNBG] = input[_ICBNBG];
   }
@@ -32884,6 +33172,15 @@ const se_CreateVpcRequest = (input: CreateVpcRequest, context: __SerdeContext): 
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_ITns] != null) {
+    entries[_ITns] = input[_ITns];
+  }
+  if (input[_APICB] != null) {
+    entries[_APICB] = input[_APICB];
   }
   return entries;
 };
@@ -32905,6 +33202,13 @@ const se_CreateVpnConnectionRequest = (input: CreateVpnConnectionRequest, contex
   if (input[_TGI] != null) {
     entries[_TGI] = input[_TGI];
   }
+  if (input[_TS] != null) {
+    const memberEntries = se_TagSpecificationList(input[_TS], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -32912,13 +33216,6 @@ const se_CreateVpnConnectionRequest = (input: CreateVpnConnectionRequest, contex
     const memberEntries = se_VpnConnectionOptionsSpecification(input[_O], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `Options.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_TS] != null) {
-    const memberEntries = se_TagSpecificationList(input[_TS], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -33529,14 +33826,14 @@ const se_DeleteNetworkAclEntryRequest = (input: DeleteNetworkAclEntryRequest, co
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_Eg] != null) {
-    entries[_Eg] = input[_Eg];
-  }
   if (input[_NAI] != null) {
     entries[_NAI] = input[_NAI];
   }
   if (input[_RNu] != null) {
     entries[_RNu] = input[_RNu];
+  }
+  if (input[_Eg] != null) {
+    entries[_Eg] = input[_Eg];
   }
   return entries;
 };
@@ -33727,12 +34024,6 @@ const se_DeleteQueuedReservedInstancesRequest = (
  */
 const se_DeleteRouteRequest = (input: DeleteRouteRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DCB] != null) {
-    entries[_DCB] = input[_DCB];
-  }
-  if (input[_DICB] != null) {
-    entries[_DICB] = input[_DICB];
-  }
   if (input[_DPLI] != null) {
     entries[_DPLI] = input[_DPLI];
   }
@@ -33741,6 +34032,12 @@ const se_DeleteRouteRequest = (input: DeleteRouteRequest, context: __SerdeContex
   }
   if (input[_RTI] != null) {
     entries[_RTI] = input[_RTI];
+  }
+  if (input[_DCB] != null) {
+    entries[_DCB] = input[_DCB];
+  }
+  if (input[_DICB] != null) {
+    entries[_DICB] = input[_DICB];
   }
   return entries;
 };
@@ -34528,15 +34825,15 @@ const se_DeregisterTransitGatewayMulticastGroupSourcesRequest = (
  */
 const se_DescribeAccountAttributesRequest = (input: DescribeAccountAttributesRequest, context: __SerdeContext): any => {
   const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   if (input[_AN] != null) {
     const memberEntries = se_AccountAttributeNameStringList(input[_AN], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `AttributeName.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -34576,17 +34873,20 @@ const se_DescribeAddressesAttributeRequest = (
  */
 const se_DescribeAddressesRequest = (input: DescribeAddressesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_PIu] != null) {
     const memberEntries = se_PublicIpStringList(input[_PIu], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `PublicIp.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -34596,9 +34896,6 @@ const se_DescribeAddressesRequest = (input: DescribeAddressesRequest, context: _
       const loc = `AllocationId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -34643,13 +34940,6 @@ const se_DescribeAggregateIdFormatRequest = (input: DescribeAggregateIdFormatReq
  */
 const se_DescribeAvailabilityZonesRequest = (input: DescribeAvailabilityZonesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_ZN] != null) {
     const memberEntries = se_ZoneNameStringList(input[_ZN], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -34669,6 +34959,13 @@ const se_DescribeAvailabilityZonesRequest = (input: DescribeAvailabilityZonesReq
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -34712,15 +35009,15 @@ const se_DescribeBundleTasksRequest = (input: DescribeBundleTasksRequest, contex
       entries[loc] = value;
     });
   }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   if (input[_Fi] != null) {
     const memberEntries = se_FilterList(input[_Fi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -34773,6 +35070,43 @@ const se_DescribeCapacityBlockOfferingsRequest = (
   }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
+  }
+  return entries;
+};
+
+/**
+ * serializeAws_ec2DescribeCapacityReservationBillingRequestsRequest
+ */
+const se_DescribeCapacityReservationBillingRequestsRequest = (
+  input: DescribeCapacityReservationBillingRequestsRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input[_CRIa] != null) {
+    const memberEntries = se_CapacityReservationIdSet(input[_CRIa], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `CapacityReservationId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_Ro] != null) {
+    entries[_Ro] = input[_Ro];
+  }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -34884,13 +35218,6 @@ const se_DescribeClassicLinkInstancesRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -34901,11 +35228,18 @@ const se_DescribeClassicLinkInstancesRequest = (
       entries[loc] = value;
     });
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -35104,15 +35438,15 @@ const se_DescribeCoipPoolsRequest = (input: DescribeCoipPoolsRequest, context: _
  */
 const se_DescribeConversionTasksRequest = (input: DescribeConversionTasksRequest, context: __SerdeContext): any => {
   const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   if (input[_CTIo] != null) {
     const memberEntries = se_ConversionIdStringList(input[_CTIo], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `ConversionTaskId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -35154,21 +35488,21 @@ const se_DescribeDhcpOptionsRequest = (input: DescribeDhcpOptionsRequest, contex
       entries[loc] = value;
     });
   }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   if (input[_Fi] != null) {
     const memberEntries = se_FilterList(input[_Fi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -35274,17 +35608,17 @@ const se_DescribeExportImageTasksRequest = (input: DescribeExportImageTasksReque
  */
 const se_DescribeExportTasksRequest = (input: DescribeExportTasksRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_ETIx] != null) {
-    const memberEntries = se_ExportTaskIdStringList(input[_ETIx], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `ExportTaskId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_Fi] != null) {
     const memberEntries = se_FilterList(input[_Fi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_ETIx] != null) {
+    const memberEntries = se_ExportTaskIdStringList(input[_ETIx], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `ExportTaskId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -35588,13 +35922,6 @@ const se_DescribeHostReservationsRequest = (input: DescribeHostReservationsReque
  */
 const se_DescribeHostsRequest = (input: DescribeHostsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fil] != null) {
-    const memberEntries = se_FilterList(input[_Fil], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_HI] != null) {
     const memberEntries = se_RequestHostIdList(input[_HI], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -35602,11 +35929,18 @@ const se_DescribeHostsRequest = (input: DescribeHostsRequest, context: __SerdeCo
       entries[loc] = value;
     });
   }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
+  if (input[_Fil] != null) {
+    const memberEntries = se_FilterList(input[_Fil], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -35647,11 +35981,11 @@ const se_DescribeIamInstanceProfileAssociationsRequest = (
  */
 const se_DescribeIdentityIdFormatRequest = (input: DescribeIdentityIdFormatRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_PAr] != null) {
-    entries[_PAr] = input[_PAr];
-  }
   if (input[_Res] != null) {
     entries[_Res] = input[_Res];
+  }
+  if (input[_PAr] != null) {
+    entries[_PAr] = input[_PAr];
   }
   return entries;
 };
@@ -35696,13 +36030,6 @@ const se_DescribeImagesRequest = (input: DescribeImagesRequest, context: __Serde
       entries[loc] = value;
     });
   }
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_IImag] != null) {
     const memberEntries = se_ImageIdStringList(input[_IImag], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -35723,14 +36050,21 @@ const se_DescribeImagesRequest = (input: DescribeImagesRequest, context: __Serde
   if (input[_IDn] != null) {
     entries[_IDn] = input[_IDn];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -35805,14 +36139,14 @@ const se_DescribeImportSnapshotTasksRequest = (
  */
 const se_DescribeInstanceAttributeRequest = (input: DescribeInstanceAttributeRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_At] != null) {
-    entries[_At] = input[_At];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
   if (input[_IIn] != null) {
     entries[_IIn] = input[_IIn];
+  }
+  if (input[_At] != null) {
+    entries[_At] = input[_At];
   }
   return entries;
 };
@@ -35938,13 +36272,6 @@ const se_DescribeInstanceEventWindowsRequest = (
  */
 const se_DescribeInstancesRequest = (input: DescribeInstancesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_IIns] != null) {
     const memberEntries = se_InstanceIdStringList(input[_IIns], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -35955,11 +36282,18 @@ const se_DescribeInstancesRequest = (input: DescribeInstancesRequest, context: _
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -35969,13 +36303,6 @@ const se_DescribeInstancesRequest = (input: DescribeInstancesRequest, context: _
  */
 const se_DescribeInstanceStatusRequest = (input: DescribeInstanceStatusRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_IIns] != null) {
     const memberEntries = se_InstanceIdStringList(input[_IIns], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -35991,6 +36318,13 @@ const se_DescribeInstanceStatusRequest = (input: DescribeInstanceStatusRequest, 
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input[_IAI] != null) {
     entries[_IAI] = input[_IAI];
@@ -36134,12 +36468,11 @@ const se_DescribeInstanceTypesRequest = (input: DescribeInstanceTypesRequest, co
  */
 const se_DescribeInternetGatewaysRequest = (input: DescribeInternetGatewaysRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -36151,11 +36484,12 @@ const se_DescribeInternetGatewaysRequest = (input: DescribeInternetGatewaysReque
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -36408,13 +36742,6 @@ const se_DescribeIpv6PoolsRequest = (input: DescribeIpv6PoolsRequest, context: _
  */
 const se_DescribeKeyPairsRequest = (input: DescribeKeyPairsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_KNe] != null) {
     const memberEntries = se_KeyNameStringList(input[_KNe], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -36429,11 +36756,18 @@ const se_DescribeKeyPairsRequest = (input: DescribeKeyPairsRequest, context: __S
       entries[loc] = value;
     });
   }
+  if (input[_IPK] != null) {
+    entries[_IPK] = input[_IPK];
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_IPK] != null) {
-    entries[_IPK] = input[_IPK];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -36824,21 +37158,8 @@ const se_DescribeManagedPrefixListsRequest = (
  */
 const se_DescribeMovingAddressesRequest = (input: DescribeMovingAddressesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
-  }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
   }
   if (input[_PIu] != null) {
     const memberEntries = se_ValueStringList(input[_PIu], context);
@@ -36846,6 +37167,19 @@ const se_DescribeMovingAddressesRequest = (input: DescribeMovingAddressesRequest
       const loc = `PublicIp.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -36886,12 +37220,11 @@ const se_DescribeNatGatewaysRequest = (input: DescribeNatGatewaysRequest, contex
  */
 const se_DescribeNetworkAclsRequest = (input: DescribeNetworkAclsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -36903,11 +37236,12 @@ const se_DescribeNetworkAclsRequest = (input: DescribeNetworkAclsRequest, contex
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37074,14 +37408,14 @@ const se_DescribeNetworkInterfaceAttributeRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_At] != null) {
-    entries[_At] = input[_At];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
   if (input[_NII] != null) {
     entries[_NII] = input[_NII];
+  }
+  if (input[_At] != null) {
+    entries[_At] = input[_At];
   }
   return entries;
 };
@@ -37122,12 +37456,11 @@ const se_DescribeNetworkInterfacePermissionsRequest = (
  */
 const se_DescribeNetworkInterfacesRequest = (input: DescribeNetworkInterfacesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -37139,11 +37472,12 @@ const se_DescribeNetworkInterfacesRequest = (input: DescribeNetworkInterfacesReq
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37153,10 +37487,10 @@ const se_DescribeNetworkInterfacesRequest = (input: DescribeNetworkInterfacesReq
  */
 const se_DescribePlacementGroupsRequest = (input: DescribePlacementGroupsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
+  if (input[_GIro] != null) {
+    const memberEntries = se_PlacementGroupIdStringList(input[_GIro], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -37170,10 +37504,10 @@ const se_DescribePlacementGroupsRequest = (input: DescribePlacementGroupsRequest
       entries[loc] = value;
     });
   }
-  if (input[_GIro] != null) {
-    const memberEntries = se_PlacementGroupIdStringList(input[_GIro], context);
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -37268,13 +37602,6 @@ const se_DescribePublicIpv4PoolsRequest = (input: DescribePublicIpv4PoolsRequest
  */
 const se_DescribeRegionsRequest = (input: DescribeRegionsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_RNe] != null) {
     const memberEntries = se_RegionNameStringList(input[_RNe], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -37282,11 +37609,18 @@ const se_DescribeRegionsRequest = (input: DescribeRegionsRequest, context: __Ser
       entries[loc] = value;
     });
   }
+  if (input[_ARll] != null) {
+    entries[_ARll] = input[_ARll];
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_ARll] != null) {
-    entries[_ARll] = input[_ARll];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37333,18 +37667,18 @@ const se_DescribeReservedInstancesListingsRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
+  if (input[_RIIe] != null) {
+    entries[_RIIe] = input[_RIIe];
+  }
+  if (input[_RILI] != null) {
+    entries[_RILI] = input[_RILI];
+  }
   if (input[_Fi] != null) {
     const memberEntries = se_FilterList(input[_Fi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_RIIe] != null) {
-    entries[_RIIe] = input[_RIIe];
-  }
-  if (input[_RILI] != null) {
-    entries[_RILI] = input[_RILI];
   }
   return entries;
 };
@@ -37357,13 +37691,6 @@ const se_DescribeReservedInstancesModificationsRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_RIMI] != null) {
     const memberEntries = se_ReservedInstancesModificationIdStringList(input[_RIMI], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -37373,6 +37700,13 @@ const se_DescribeReservedInstancesModificationsRequest = (
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37387,13 +37721,6 @@ const se_DescribeReservedInstancesOfferingsRequest = (
   const entries: any = {};
   if (input[_AZ] != null) {
     entries[_AZ] = input[_AZ];
-  }
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
   }
   if (input[_IM] != null) {
     entries[_IM] = input[_IM];
@@ -37426,17 +37753,24 @@ const se_DescribeReservedInstancesOfferingsRequest = (
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input[_ITns] != null) {
     entries[_ITns] = input[_ITns];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_OT] != null) {
+    entries[_OT] = input[_OT];
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
-  if (input[_OT] != null) {
-    entries[_OT] = input[_OT];
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -37446,13 +37780,6 @@ const se_DescribeReservedInstancesOfferingsRequest = (
  */
 const se_DescribeReservedInstancesRequest = (input: DescribeReservedInstancesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_OC] != null) {
     entries[_OC] = input[_OC];
   }
@@ -37466,6 +37793,13 @@ const se_DescribeReservedInstancesRequest = (input: DescribeReservedInstancesReq
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input[_OT] != null) {
     entries[_OT] = input[_OT];
   }
@@ -37477,12 +37811,11 @@ const se_DescribeReservedInstancesRequest = (input: DescribeReservedInstancesReq
  */
 const se_DescribeRouteTablesRequest = (input: DescribeRouteTablesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -37494,11 +37827,12 @@ const se_DescribeRouteTablesRequest = (input: DescribeRouteTablesRequest, contex
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37651,13 +37985,6 @@ const se_DescribeSecurityGroupRulesRequest = (
  */
 const se_DescribeSecurityGroupsRequest = (input: DescribeSecurityGroupsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_GIro] != null) {
     const memberEntries = se_GroupIdStringList(input[_GIro], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -37672,14 +37999,21 @@ const se_DescribeSecurityGroupsRequest = (input: DescribeSecurityGroupsRequest, 
       entries[loc] = value;
     });
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37706,13 +38040,6 @@ const se_DescribeSnapshotAttributeRequest = (input: DescribeSnapshotAttributeReq
  */
 const se_DescribeSnapshotsRequest = (input: DescribeSnapshotsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
   }
@@ -37742,6 +38069,13 @@ const se_DescribeSnapshotsRequest = (input: DescribeSnapshotsRequest, context: _
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37798,14 +38132,14 @@ const se_DescribeSpotFleetInstancesRequest = (
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_SFRIp] != null) {
+    entries[_SFRIp] = input[_SFRIp];
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
-  if (input[_SFRIp] != null) {
-    entries[_SFRIp] = input[_SFRIp];
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -37821,20 +38155,20 @@ const se_DescribeSpotFleetRequestHistoryRequest = (
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_SFRIp] != null) {
+    entries[_SFRIp] = input[_SFRIp];
+  }
   if (input[_ETv] != null) {
     entries[_ETv] = input[_ETv];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_STt] != null) {
+    entries[_STt] = __serializeDateTime(input[_STt]);
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
-  if (input[_SFRIp] != null) {
-    entries[_SFRIp] = input[_SFRIp];
-  }
-  if (input[_STt] != null) {
-    entries[_STt] = __serializeDateTime(input[_STt]);
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -37847,18 +38181,18 @@ const se_DescribeSpotFleetRequestsRequest = (input: DescribeSpotFleetRequestsReq
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
-  }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
   if (input[_SFRI] != null) {
     const memberEntries = se_SpotFleetRequestIdList(input[_SFRI], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `SpotFleetRequestId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -37871,12 +38205,11 @@ const se_DescribeSpotInstanceRequestsRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -37888,11 +38221,12 @@ const se_DescribeSpotInstanceRequestsRequest = (
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -37902,18 +38236,11 @@ const se_DescribeSpotInstanceRequestsRequest = (
  */
 const se_DescribeSpotPriceHistoryRequest = (input: DescribeSpotPriceHistoryRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_AZ] != null) {
-    entries[_AZ] = input[_AZ];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_STt] != null) {
+    entries[_STt] = __serializeDateTime(input[_STt]);
   }
   if (input[_ETn] != null) {
     entries[_ETn] = __serializeDateTime(input[_ETn]);
@@ -37925,12 +38252,6 @@ const se_DescribeSpotPriceHistoryRequest = (input: DescribeSpotPriceHistoryReque
       entries[loc] = value;
     });
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
-  }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
   if (input[_PDro] != null) {
     const memberEntries = se_ProductDescriptionList(input[_PDro], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -37938,8 +38259,21 @@ const se_DescribeSpotPriceHistoryRequest = (input: DescribeSpotPriceHistoryReque
       entries[loc] = value;
     });
   }
-  if (input[_STt] != null) {
-    entries[_STt] = __serializeDateTime(input[_STt]);
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_AZ] != null) {
+    entries[_AZ] = input[_AZ];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
+  }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
   }
   return entries;
 };
@@ -38017,14 +38351,14 @@ const se_DescribeSubnetsRequest = (input: DescribeSubnetsRequest, context: __Ser
       entries[loc] = value;
     });
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -38798,13 +39132,6 @@ const se_DescribeVolumesModificationsRequest = (
  */
 const se_DescribeVolumesRequest = (input: DescribeVolumesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_VIol] != null) {
     const memberEntries = se_VolumeIdStringList(input[_VIol], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -38815,11 +39142,18 @@ const se_DescribeVolumesRequest = (input: DescribeVolumesRequest, context: __Ser
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   return entries;
 };
@@ -38829,13 +39163,6 @@ const se_DescribeVolumesRequest = (input: DescribeVolumesRequest, context: __Ser
  */
 const se_DescribeVolumeStatusRequest = (input: DescribeVolumeStatusRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
   }
@@ -38851,6 +39178,13 @@ const se_DescribeVolumeStatusRequest = (input: DescribeVolumeStatusRequest, cont
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -38880,18 +39214,18 @@ const se_DescribeVpcClassicLinkDnsSupportRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
-  }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
   if (input[_VIp] != null) {
     const memberEntries = se_VpcClassicLinkIdList(input[_VIp], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `VpcIds.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
+  }
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
   }
   return entries;
 };
@@ -38901,13 +39235,6 @@ const se_DescribeVpcClassicLinkDnsSupportRequest = (
  */
 const se_DescribeVpcClassicLinkRequest = (input: DescribeVpcClassicLinkRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -38915,6 +39242,13 @@ const se_DescribeVpcClassicLinkRequest = (input: DescribeVpcClassicLinkRequest, 
     const memberEntries = se_VpcClassicLinkIdList(input[_VIp], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `VpcId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -39115,12 +39449,11 @@ const se_DescribeVpcPeeringConnectionsRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_Fi] != null) {
-    const memberEntries = se_FilterList(input[_Fi], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
+  if (input[_NT] != null) {
+    entries[_NT] = input[_NT];
+  }
+  if (input[_MR] != null) {
+    entries[_MR] = input[_MR];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -39132,11 +39465,12 @@ const se_DescribeVpcPeeringConnectionsRequest = (
       entries[loc] = value;
     });
   }
-  if (input[_NT] != null) {
-    entries[_NT] = input[_NT];
-  }
-  if (input[_MR] != null) {
-    entries[_MR] = input[_MR];
+  if (input[_Fi] != null) {
+    const memberEntries = se_FilterList(input[_Fi], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -39160,14 +39494,14 @@ const se_DescribeVpcsRequest = (input: DescribeVpcsRequest, context: __SerdeCont
       entries[loc] = value;
     });
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_NT] != null) {
     entries[_NT] = input[_NT];
   }
   if (input[_MR] != null) {
     entries[_MR] = input[_MR];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -39278,11 +39612,11 @@ const se_DetachInternetGatewayRequest = (input: DetachInternetGatewayRequest, co
  */
 const se_DetachNetworkInterfaceRequest = (input: DetachNetworkInterfaceRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AIt] != null) {
-    entries[_AIt] = input[_AIt];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_AIt] != null) {
+    entries[_AIt] = input[_AIt];
   }
   if (input[_F] != null) {
     entries[_F] = input[_F];
@@ -39678,6 +40012,26 @@ const se_DisassociateAddressRequest = (input: DisassociateAddressRequest, contex
 };
 
 /**
+ * serializeAws_ec2DisassociateCapacityReservationBillingOwnerRequest
+ */
+const se_DisassociateCapacityReservationBillingOwnerRequest = (
+  input: DisassociateCapacityReservationBillingOwnerRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_CRI] != null) {
+    entries[_CRI] = input[_CRI];
+  }
+  if (input[_URBOI] != null) {
+    entries[_URBOI] = input[_URBOI];
+  }
+  return entries;
+};
+
+/**
  * serializeAws_ec2DisassociateClientVpnTargetNetworkRequest
  */
 const se_DisassociateClientVpnTargetNetworkRequest = (
@@ -39821,11 +40175,11 @@ const se_DisassociateNatGatewayAddressRequest = (
  */
 const se_DisassociateRouteTableRequest = (input: DisassociateRouteTableRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AIss] != null) {
-    entries[_AIss] = input[_AIss];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_AIss] != null) {
+    entries[_AIss] = input[_AIss];
   }
   return entries;
 };
@@ -39975,11 +40329,11 @@ const se_DiskImage = (input: DiskImage, context: __SerdeContext): any => {
  */
 const se_DiskImageDetail = (input: DiskImageDetail, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_By] != null) {
-    entries[_By] = input[_By];
-  }
   if (input[_Fo] != null) {
     entries[_Fo] = input[_Fo];
+  }
+  if (input[_By] != null) {
+    entries[_By] = input[_By];
   }
   if (input[_IMU] != null) {
     entries[_IMU] = input[_IMU];
@@ -40081,11 +40435,11 @@ const se_EbsInstanceBlockDeviceSpecification = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_DOT] != null) {
-    entries[_DOT] = input[_DOT];
-  }
   if (input[_VIo] != null) {
     entries[_VIo] = input[_VIo];
+  }
+  if (input[_DOT] != null) {
+    entries[_DOT] = input[_DOT];
   }
   return entries;
 };
@@ -40777,11 +41131,11 @@ const se_ExportTaskS3LocationRequest = (input: ExportTaskS3LocationRequest, cont
  */
 const se_ExportToS3TaskSpecification = (input: ExportToS3TaskSpecification, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CFo] != null) {
-    entries[_CFo] = input[_CFo];
-  }
   if (input[_DIFi] != null) {
     entries[_DIFi] = input[_DIFi];
+  }
+  if (input[_CFo] != null) {
+    entries[_CFo] = input[_CFo];
   }
   if (input[_SB] != null) {
     entries[_SB] = input[_SB];
@@ -41299,11 +41653,11 @@ const se_GetConsoleOutputRequest = (input: GetConsoleOutputRequest, context: __S
   if (input[_IIn] != null) {
     entries[_IIn] = input[_IIn];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_La] != null) {
     entries[_La] = input[_La];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -42355,11 +42709,11 @@ const se_GetVpnTunnelReplacementStatusRequest = (
  */
 const se_GroupIdentifier = (input: GroupIdentifier, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_GN] != null) {
-    entries[_GN] = input[_GN];
-  }
   if (input[_GIr] != null) {
     entries[_GIr] = input[_GIr];
+  }
+  if (input[_GN] != null) {
+    entries[_GN] = input[_GN];
   }
   return entries;
 };
@@ -42733,18 +43087,8 @@ const se_ImportInstanceLaunchSpecification = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_AId] != null) {
-    entries[_AId] = input[_AId];
-  }
   if (input[_Arc] != null) {
     entries[_Arc] = input[_Arc];
-  }
-  if (input[_GIro] != null) {
-    const memberEntries = se_SecurityGroupIdStringList(input[_GIro], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
   }
   if (input[_GNr] != null) {
     const memberEntries = se_SecurityGroupStringList(input[_GNr], context);
@@ -42753,14 +43097,25 @@ const se_ImportInstanceLaunchSpecification = (
       entries[loc] = value;
     });
   }
-  if (input[_IISB] != null) {
-    entries[_IISB] = input[_IISB];
+  if (input[_GIro] != null) {
+    const memberEntries = se_SecurityGroupIdStringList(input[_GIro], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_AId] != null) {
+    entries[_AId] = input[_AId];
+  }
+  if (input[_UD] != null) {
+    const memberEntries = se_UserData(input[_UD], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `UserData.${key}`;
+      entries[loc] = value;
+    });
   }
   if (input[_IT] != null) {
     entries[_IT] = input[_IT];
-  }
-  if (input[_Mon] != null) {
-    entries[_Mon] = input[_Mon];
   }
   if (input[_Pl] != null) {
     const memberEntries = se_Placement(input[_Pl], context);
@@ -42769,18 +43124,17 @@ const se_ImportInstanceLaunchSpecification = (
       entries[loc] = value;
     });
   }
-  if (input[_PIAr] != null) {
-    entries[_PIAr] = input[_PIAr];
+  if (input[_Mon] != null) {
+    entries[_Mon] = input[_Mon];
   }
   if (input[_SIub] != null) {
     entries[_SIub] = input[_SIub];
   }
-  if (input[_UD] != null) {
-    const memberEntries = se_UserData(input[_UD], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `UserData.${key}`;
-      entries[loc] = value;
-    });
+  if (input[_IISB] != null) {
+    entries[_IISB] = input[_IISB];
+  }
+  if (input[_PIAr] != null) {
+    entries[_PIAr] = input[_PIAr];
   }
   return entries;
 };
@@ -42790,23 +43144,23 @@ const se_ImportInstanceLaunchSpecification = (
  */
 const se_ImportInstanceRequest = (input: ImportInstanceRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
-  if (input[_DIis] != null) {
-    const memberEntries = se_DiskImageList(input[_DIis], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `DiskImage.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
   }
   if (input[_LSa] != null) {
     const memberEntries = se_ImportInstanceLaunchSpecification(input[_LSa], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `LaunchSpecification.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_DIis] != null) {
+    const memberEntries = se_DiskImageList(input[_DIis], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DiskImage.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -42821,6 +43175,13 @@ const se_ImportInstanceRequest = (input: ImportInstanceRequest, context: __Serde
  */
 const se_ImportKeyPairRequest = (input: ImportKeyPairRequest, context: __SerdeContext): any => {
   const entries: any = {};
+  if (input[_TS] != null) {
+    const memberEntries = se_TagSpecificationList(input[_TS], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -42829,13 +43190,6 @@ const se_ImportKeyPairRequest = (input: ImportKeyPairRequest, context: __SerdeCo
   }
   if (input[_PKM] != null) {
     entries[_PKM] = context.base64Encoder(input[_PKM]);
-  }
-  if (input[_TS] != null) {
-    const memberEntries = se_TagSpecificationList(input[_TS], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
   }
   return entries;
 };
@@ -42924,14 +43278,11 @@ const se_ImportTaskIdList = (input: string[], context: __SerdeContext): any => {
  */
 const se_ImportVolumeRequest = (input: ImportVolumeRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AZ] != null) {
-    entries[_AZ] = input[_AZ];
-  }
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_AZ] != null) {
+    entries[_AZ] = input[_AZ];
   }
   if (input[_Im] != null) {
     const memberEntries = se_DiskImageDetail(input[_Im], context);
@@ -42939,6 +43290,9 @@ const se_ImportVolumeRequest = (input: ImportVolumeRequest, context: __SerdeCont
       const loc = `Image.${key}`;
       entries[loc] = value;
     });
+  }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
   }
   if (input[_Vo] != null) {
     const memberEntries = se_VolumeDetail(input[_Vo], context);
@@ -42984,11 +43338,11 @@ const se_InstanceBlockDeviceMappingSpecification = (
       entries[loc] = value;
     });
   }
-  if (input[_ND] != null) {
-    entries[_ND] = input[_ND];
-  }
   if (input[_VN] != null) {
     entries[_VN] = input[_VN];
+  }
+  if (input[_ND] != null) {
+    entries[_ND] = input[_ND];
   }
   return entries;
 };
@@ -43987,11 +44341,21 @@ const se_IpList = (input: string[], context: __SerdeContext): any => {
  */
 const se_IpPermission = (input: IpPermission, context: __SerdeContext): any => {
   const entries: any = {};
+  if (input[_IPpr] != null) {
+    entries[_IPpr] = input[_IPpr];
+  }
   if (input[_FP] != null) {
     entries[_FP] = input[_FP];
   }
-  if (input[_IPpr] != null) {
-    entries[_IPpr] = input[_IPpr];
+  if (input[_TP] != null) {
+    entries[_TP] = input[_TP];
+  }
+  if (input[_UIGP] != null) {
+    const memberEntries = se_UserIdGroupPairList(input[_UIGP], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Groups.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input[_IRp] != null) {
     const memberEntries = se_IpRangeList(input[_IRp], context);
@@ -44011,16 +44375,6 @@ const se_IpPermission = (input: IpPermission, context: __SerdeContext): any => {
     const memberEntries = se_PrefixListIdList(input[_PLIr], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `PrefixListIds.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_TP] != null) {
-    entries[_TP] = input[_TP];
-  }
-  if (input[_UIGP] != null) {
-    const memberEntries = se_UserIdGroupPairList(input[_UIGP], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Groups.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -44067,11 +44421,11 @@ const se_IpPrefixList = (input: string[], context: __SerdeContext): any => {
  */
 const se_IpRange = (input: IpRange, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CIi] != null) {
-    entries[_CIi] = input[_CIi];
-  }
   if (input[_De] != null) {
     entries[_De] = input[_De];
+  }
+  if (input[_CIi] != null) {
+    entries[_CIi] = input[_CIi];
   }
   return entries;
 };
@@ -44192,11 +44546,11 @@ const se_Ipv6PrefixSpecificationRequest = (input: Ipv6PrefixSpecificationRequest
  */
 const se_Ipv6Range = (input: Ipv6Range, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CIid] != null) {
-    entries[_CIid] = input[_CIid];
-  }
   if (input[_De] != null) {
     entries[_De] = input[_De];
+  }
+  if (input[_CIid] != null) {
+    entries[_CIid] = input[_CIid];
   }
   return entries;
 };
@@ -44257,17 +44611,17 @@ const se_KeyPairIdStringList = (input: string[], context: __SerdeContext): any =
  */
 const se_LaunchPermission = (input: LaunchPermission, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Gr] != null) {
-    entries[_Gr] = input[_Gr];
-  }
-  if (input[_UIs] != null) {
-    entries[_UIs] = input[_UIs];
-  }
   if (input[_OAr] != null) {
     entries[_OAr] = input[_OAr];
   }
   if (input[_OUA] != null) {
     entries[_OUA] = input[_OUA];
+  }
+  if (input[_UIs] != null) {
+    entries[_UIs] = input[_UIs];
+  }
+  if (input[_Gr] != null) {
+    entries[_Gr] = input[_Gr];
   }
   return entries;
 };
@@ -45683,16 +46037,6 @@ const se_ModifyFpgaImageAttributeRequest = (input: ModifyFpgaImageAttributeReque
  */
 const se_ModifyHostsRequest = (input: ModifyHostsRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AP] != null) {
-    entries[_AP] = input[_AP];
-  }
-  if (input[_HI] != null) {
-    const memberEntries = se_RequestHostIdList(input[_HI], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `HostId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_HR] != null) {
     entries[_HR] = input[_HR];
   }
@@ -45705,6 +46049,16 @@ const se_ModifyHostsRequest = (input: ModifyHostsRequest, context: __SerdeContex
   if (input[_HM] != null) {
     entries[_HM] = input[_HM];
   }
+  if (input[_HI] != null) {
+    const memberEntries = se_RequestHostIdList(input[_HI], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `HostId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_AP] != null) {
+    entries[_AP] = input[_AP];
+  }
   return entries;
 };
 
@@ -45713,14 +46067,14 @@ const se_ModifyHostsRequest = (input: ModifyHostsRequest, context: __SerdeContex
  */
 const se_ModifyIdentityIdFormatRequest = (input: ModifyIdentityIdFormatRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_PAr] != null) {
-    entries[_PAr] = input[_PAr];
-  }
   if (input[_Res] != null) {
     entries[_Res] = input[_Res];
   }
   if (input[_ULI] != null) {
     entries[_ULI] = input[_ULI];
+  }
+  if (input[_PAr] != null) {
+    entries[_PAr] = input[_PAr];
   }
   return entries;
 };
@@ -45791,9 +46145,6 @@ const se_ModifyImageAttributeRequest = (input: ModifyImageAttributeRequest, cont
   if (input[_Va] != null) {
     entries[_Va] = input[_Va];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_OArg] != null) {
     const memberEntries = se_OrganizationArnStringList(input[_OArg], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -45815,6 +46166,9 @@ const se_ModifyImageAttributeRequest = (input: ModifyImageAttributeRequest, cont
       entries[loc] = value;
     });
   }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
   return entries;
 };
 
@@ -45830,8 +46184,24 @@ const se_ModifyInstanceAttributeRequest = (input: ModifyInstanceAttributeRequest
       entries[loc] = value;
     });
   }
+  if (input[_DAS] != null) {
+    const memberEntries = se_AttributeBooleanValue(input[_DAS], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DisableApiStop.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
   if (input[_At] != null) {
     entries[_At] = input[_At];
+  }
+  if (input[_Va] != null) {
+    entries[_Va] = input[_Va];
   }
   if (input[_BDM] != null) {
     const memberEntries = se_InstanceBlockDeviceMappingSpecificationList(input[_BDM], context);
@@ -45844,40 +46214,6 @@ const se_ModifyInstanceAttributeRequest = (input: ModifyInstanceAttributeRequest
     const memberEntries = se_AttributeBooleanValue(input[_DATis], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `DisableApiTermination.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_EO] != null) {
-    const memberEntries = se_AttributeBooleanValue(input[_EO], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `EbsOptimized.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_ESn] != null) {
-    const memberEntries = se_AttributeBooleanValue(input[_ESn], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `EnaSupport.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_G] != null) {
-    const memberEntries = se_GroupIdStringList(input[_G], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
-  if (input[_IISB] != null) {
-    const memberEntries = se_AttributeValue(input[_IISB], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `InstanceInitiatedShutdownBehavior.${key}`;
       entries[loc] = value;
     });
   }
@@ -45902,13 +46238,6 @@ const se_ModifyInstanceAttributeRequest = (input: ModifyInstanceAttributeRequest
       entries[loc] = value;
     });
   }
-  if (input[_SNS] != null) {
-    const memberEntries = se_AttributeValue(input[_SNS], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `SriovNetSupport.${key}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_UD] != null) {
     const memberEntries = se_BlobAttributeValue(input[_UD], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -45916,13 +46245,38 @@ const se_ModifyInstanceAttributeRequest = (input: ModifyInstanceAttributeRequest
       entries[loc] = value;
     });
   }
-  if (input[_Va] != null) {
-    entries[_Va] = input[_Va];
-  }
-  if (input[_DAS] != null) {
-    const memberEntries = se_AttributeBooleanValue(input[_DAS], context);
+  if (input[_IISB] != null) {
+    const memberEntries = se_AttributeValue(input[_IISB], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `DisableApiStop.${key}`;
+      const loc = `InstanceInitiatedShutdownBehavior.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_G] != null) {
+    const memberEntries = se_GroupIdStringList(input[_G], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `GroupId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_EO] != null) {
+    const memberEntries = se_AttributeBooleanValue(input[_EO], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `EbsOptimized.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_SNS] != null) {
+    const memberEntries = se_AttributeValue(input[_SNS], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SriovNetSupport.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_ESn] != null) {
+    const memberEntries = se_AttributeBooleanValue(input[_ESn], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `EnaSupport.${key}`;
       entries[loc] = value;
     });
   }
@@ -45946,6 +46300,26 @@ const se_ModifyInstanceCapacityReservationAttributesRequest = (
       const loc = `CapacityReservationSpecification.${key}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  return entries;
+};
+
+/**
+ * serializeAws_ec2ModifyInstanceCpuOptionsRequest
+ */
+const se_ModifyInstanceCpuOptionsRequest = (input: ModifyInstanceCpuOptionsRequest, context: __SerdeContext): any => {
+  const entries: any = {};
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_CC] != null) {
+    entries[_CC] = input[_CC];
+  }
+  if (input[_TPC] != null) {
+    entries[_TPC] = input[_TPC];
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
@@ -46110,20 +46484,8 @@ const se_ModifyInstanceMetadataOptionsRequest = (
  */
 const se_ModifyInstancePlacementRequest = (input: ModifyInstancePlacementRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_Af] != null) {
-    entries[_Af] = input[_Af];
-  }
   if (input[_GN] != null) {
     entries[_GN] = input[_GN];
-  }
-  if (input[_HIo] != null) {
-    entries[_HIo] = input[_HIo];
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
-  if (input[_Te] != null) {
-    entries[_Te] = input[_Te];
   }
   if (input[_PN] != null) {
     entries[_PN] = input[_PN];
@@ -46133,6 +46495,18 @@ const se_ModifyInstancePlacementRequest = (input: ModifyInstancePlacementRequest
   }
   if (input[_GIr] != null) {
     entries[_GIr] = input[_GIr];
+  }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_Te] != null) {
+    entries[_Te] = input[_Te];
+  }
+  if (input[_Af] != null) {
+    entries[_Af] = input[_Af];
+  }
+  if (input[_HIo] != null) {
+    entries[_HIo] = input[_HIo];
   }
   return entries;
 };
@@ -46394,40 +46768,6 @@ const se_ModifyNetworkInterfaceAttributeRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_Att] != null) {
-    const memberEntries = se_NetworkInterfaceAttachmentChanges(input[_Att], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Attachment.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_De] != null) {
-    const memberEntries = se_AttributeValue(input[_De], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Description.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_G] != null) {
-    const memberEntries = se_SecurityGroupIdStringList(input[_G], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `SecurityGroupId.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_NII] != null) {
-    entries[_NII] = input[_NII];
-  }
-  if (input[_SDC] != null) {
-    const memberEntries = se_AttributeBooleanValue(input[_SDC], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `SourceDestCheck.${key}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_ESS] != null) {
     const memberEntries = se_EnaSrdSpecification(input[_ESS], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -46447,6 +46787,40 @@ const se_ModifyNetworkInterfaceAttributeRequest = (
   }
   if (input[_APIAs] != null) {
     entries[_APIAs] = input[_APIAs];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_NII] != null) {
+    entries[_NII] = input[_NII];
+  }
+  if (input[_De] != null) {
+    const memberEntries = se_AttributeValue(input[_De], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Description.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_SDC] != null) {
+    const memberEntries = se_AttributeBooleanValue(input[_SDC], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SourceDestCheck.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_G] != null) {
+    const memberEntries = se_SecurityGroupIdStringList(input[_G], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SecurityGroupId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_Att] != null) {
+    const memberEntries = se_NetworkInterfaceAttachmentChanges(input[_Att], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Attachment.${key}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -46586,9 +46960,6 @@ const se_ModifySnapshotTierRequest = (input: ModifySnapshotTierRequest, context:
  */
 const se_ModifySpotFleetRequestRequest = (input: ModifySpotFleetRequestRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_ECTP] != null) {
-    entries[_ECTP] = input[_ECTP];
-  }
   if (input[_LTC] != null) {
     const memberEntries = se_LaunchTemplateConfigList(input[_LTC], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -46596,17 +46967,20 @@ const se_ModifySpotFleetRequestRequest = (input: ModifySpotFleetRequestRequest, 
       entries[loc] = value;
     });
   }
+  if (input[_ODTC] != null) {
+    entries[_ODTC] = input[_ODTC];
+  }
+  if (input[_Con] != null) {
+    entries[_Con] = input[_Con];
+  }
   if (input[_SFRIp] != null) {
     entries[_SFRIp] = input[_SFRIp];
   }
   if (input[_TCa] != null) {
     entries[_TCa] = input[_TCa];
   }
-  if (input[_ODTC] != null) {
-    entries[_ODTC] = input[_ODTC];
-  }
-  if (input[_Con] != null) {
-    entries[_Con] = input[_Con];
+  if (input[_ECTP] != null) {
+    entries[_ECTP] = input[_ECTP];
   }
   return entries;
 };
@@ -48637,9 +49011,6 @@ const se_Phase2IntegrityAlgorithmsRequestListValue = (
  */
 const se_Placement = (input: Placement, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AZ] != null) {
-    entries[_AZ] = input[_AZ];
-  }
   if (input[_Af] != null) {
     entries[_Af] = input[_Af];
   }
@@ -48663,6 +49034,9 @@ const se_Placement = (input: Placement, context: __SerdeContext): any => {
   }
   if (input[_GIr] != null) {
     entries[_GIr] = input[_GIr];
+  }
+  if (input[_AZ] != null) {
+    entries[_AZ] = input[_AZ];
   }
   return entries;
 };
@@ -48767,14 +49141,14 @@ const se_PrefixListResourceIdStringList = (input: string[], context: __SerdeCont
  */
 const se_PriceScheduleSpecification = (input: PriceScheduleSpecification, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CCu] != null) {
-    entries[_CCu] = input[_CCu];
+  if (input[_Ter] != null) {
+    entries[_Ter] = input[_Ter];
   }
   if (input[_Pric] != null) {
     entries[_Pric] = __serializeFloat(input[_Pric]);
   }
-  if (input[_Ter] != null) {
-    entries[_Ter] = input[_Ter];
+  if (input[_CCu] != null) {
+    entries[_CCu] = input[_CCu];
   }
   return entries;
 };
@@ -49200,6 +49574,9 @@ const se_PurchaseReservedInstancesOfferingRequest = (
   if (input[_RIOIe] != null) {
     entries[_RIOIe] = input[_RIOIe];
   }
+  if (input[_PTu] != null) {
+    entries[_PTu] = __serializeDateTime(input[_PTu]);
+  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
@@ -49209,9 +49586,6 @@ const se_PurchaseReservedInstancesOfferingRequest = (
       const loc = `LimitPrice.${key}`;
       entries[loc] = value;
     });
-  }
-  if (input[_PTu] != null) {
-    entries[_PTu] = __serializeDateTime(input[_PTu]);
   }
   return entries;
 };
@@ -49317,49 +49691,12 @@ const se_RegisterImageRequest = (input: RegisterImageRequest, context: __SerdeCo
   if (input[_IL] != null) {
     entries[_IL] = input[_IL];
   }
-  if (input[_Arc] != null) {
-    entries[_Arc] = input[_Arc];
-  }
-  if (input[_BDM] != null) {
-    const memberEntries = se_BlockDeviceMappingRequestList(input[_BDM], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `BlockDeviceMapping.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_ESn] != null) {
-    entries[_ESn] = input[_ESn];
-  }
-  if (input[_KI] != null) {
-    entries[_KI] = input[_KI];
-  }
-  if (input[_N] != null) {
-    entries[_N] = input[_N];
-  }
   if (input[_BPi] != null) {
     const memberEntries = se_BillingProductList(input[_BPi], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `BillingProduct.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
-  }
-  if (input[_RIa] != null) {
-    entries[_RIa] = input[_RIa];
-  }
-  if (input[_RDN] != null) {
-    entries[_RDN] = input[_RDN];
-  }
-  if (input[_SNS] != null) {
-    entries[_SNS] = input[_SNS];
-  }
-  if (input[_VTir] != null) {
-    entries[_VTir] = input[_VTir];
   }
   if (input[_BM] != null) {
     entries[_BM] = input[_BM];
@@ -49379,6 +49716,43 @@ const se_RegisterImageRequest = (input: RegisterImageRequest, context: __SerdeCo
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_N] != null) {
+    entries[_N] = input[_N];
+  }
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
+  }
+  if (input[_Arc] != null) {
+    entries[_Arc] = input[_Arc];
+  }
+  if (input[_KI] != null) {
+    entries[_KI] = input[_KI];
+  }
+  if (input[_RIa] != null) {
+    entries[_RIa] = input[_RIa];
+  }
+  if (input[_RDN] != null) {
+    entries[_RDN] = input[_RDN];
+  }
+  if (input[_BDM] != null) {
+    const memberEntries = se_BlockDeviceMappingRequestList(input[_BDM], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `BlockDeviceMapping.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_VTir] != null) {
+    entries[_VTir] = input[_VTir];
+  }
+  if (input[_SNS] != null) {
+    entries[_SNS] = input[_SNS];
+  }
+  if (input[_ESn] != null) {
+    entries[_ESn] = input[_ESn];
   }
   return entries;
 };
@@ -49475,6 +49849,23 @@ const se_RegisterTransitGatewayMulticastGroupSourcesRequest = (
   }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  return entries;
+};
+
+/**
+ * serializeAws_ec2RejectCapacityReservationBillingOwnershipRequest
+ */
+const se_RejectCapacityReservationBillingOwnershipRequest = (
+  input: RejectCapacityReservationBillingOwnershipRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_CRI] != null) {
+    entries[_CRI] = input[_CRI];
   }
   return entries;
 };
@@ -49725,11 +50116,11 @@ const se_ReplaceNetworkAclAssociationRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_AIss] != null) {
-    entries[_AIss] = input[_AIss];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_AIss] != null) {
+    entries[_AIss] = input[_AIss];
   }
   if (input[_NAI] != null) {
     entries[_NAI] = input[_NAI];
@@ -49742,14 +50133,29 @@ const se_ReplaceNetworkAclAssociationRequest = (
  */
 const se_ReplaceNetworkAclEntryRequest = (input: ReplaceNetworkAclEntryRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_CB] != null) {
-    entries[_CB] = input[_CB];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
+  if (input[_NAI] != null) {
+    entries[_NAI] = input[_NAI];
+  }
+  if (input[_RNu] != null) {
+    entries[_RNu] = input[_RNu];
+  }
+  if (input[_P] != null) {
+    entries[_P] = input[_P];
+  }
+  if (input[_RAu] != null) {
+    entries[_RAu] = input[_RAu];
+  }
   if (input[_Eg] != null) {
     entries[_Eg] = input[_Eg];
+  }
+  if (input[_CB] != null) {
+    entries[_CB] = input[_CB];
+  }
+  if (input[_ICB] != null) {
+    entries[_ICB] = input[_ICB];
   }
   if (input[_ITC] != null) {
     const memberEntries = se_IcmpTypeCode(input[_ITC], context);
@@ -49758,27 +50164,12 @@ const se_ReplaceNetworkAclEntryRequest = (input: ReplaceNetworkAclEntryRequest, 
       entries[loc] = value;
     });
   }
-  if (input[_ICB] != null) {
-    entries[_ICB] = input[_ICB];
-  }
-  if (input[_NAI] != null) {
-    entries[_NAI] = input[_NAI];
-  }
   if (input[_PR] != null) {
     const memberEntries = se_PortRange(input[_PR], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `PortRange.${key}`;
       entries[loc] = value;
     });
-  }
-  if (input[_P] != null) {
-    entries[_P] = input[_P];
-  }
-  if (input[_RAu] != null) {
-    entries[_RAu] = input[_RAu];
-  }
-  if (input[_RNu] != null) {
-    entries[_RNu] = input[_RNu];
   }
   return entries;
 };
@@ -49804,35 +50195,14 @@ const se_ReplaceRootVolumeTaskIds = (input: string[], context: __SerdeContext): 
  */
 const se_ReplaceRouteRequest = (input: ReplaceRouteRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DCB] != null) {
-    entries[_DCB] = input[_DCB];
-  }
-  if (input[_DICB] != null) {
-    entries[_DICB] = input[_DICB];
-  }
   if (input[_DPLI] != null) {
     entries[_DPLI] = input[_DPLI];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
   }
   if (input[_VEIp] != null) {
     entries[_VEIp] = input[_VEIp];
   }
-  if (input[_EOIGI] != null) {
-    entries[_EOIGI] = input[_EOIGI];
-  }
-  if (input[_GI] != null) {
-    entries[_GI] = input[_GI];
-  }
-  if (input[_IIn] != null) {
-    entries[_IIn] = input[_IIn];
-  }
   if (input[_LTo] != null) {
     entries[_LTo] = input[_LTo];
-  }
-  if (input[_NGI] != null) {
-    entries[_NGI] = input[_NGI];
   }
   if (input[_TGI] != null) {
     entries[_TGI] = input[_TGI];
@@ -49843,17 +50213,38 @@ const se_ReplaceRouteRequest = (input: ReplaceRouteRequest, context: __SerdeCont
   if (input[_CGI] != null) {
     entries[_CGI] = input[_CGI];
   }
-  if (input[_NII] != null) {
-    entries[_NII] = input[_NII];
+  if (input[_CNAo] != null) {
+    entries[_CNAo] = input[_CNAo];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   if (input[_RTI] != null) {
     entries[_RTI] = input[_RTI];
   }
+  if (input[_DCB] != null) {
+    entries[_DCB] = input[_DCB];
+  }
+  if (input[_GI] != null) {
+    entries[_GI] = input[_GI];
+  }
+  if (input[_DICB] != null) {
+    entries[_DICB] = input[_DICB];
+  }
+  if (input[_EOIGI] != null) {
+    entries[_EOIGI] = input[_EOIGI];
+  }
+  if (input[_IIn] != null) {
+    entries[_IIn] = input[_IIn];
+  }
+  if (input[_NII] != null) {
+    entries[_NII] = input[_NII];
+  }
   if (input[_VPCI] != null) {
     entries[_VPCI] = input[_VPCI];
   }
-  if (input[_CNAo] != null) {
-    entries[_CNAo] = input[_CNAo];
+  if (input[_NGI] != null) {
+    entries[_NGI] = input[_NGI];
   }
   return entries;
 };
@@ -49866,11 +50257,11 @@ const se_ReplaceRouteTableAssociationRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input[_AIss] != null) {
-    entries[_AIss] = input[_AIss];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
+  }
+  if (input[_AIss] != null) {
+    entries[_AIss] = input[_AIss];
   }
   if (input[_RTI] != null) {
     entries[_RTI] = input[_RTI];
@@ -49929,14 +50320,8 @@ const se_ReplaceVpnTunnelRequest = (input: ReplaceVpnTunnelRequest, context: __S
  */
 const se_ReportInstanceStatusRequest = (input: ReportInstanceStatusRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_De] != null) {
-    entries[_De] = input[_De];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
-  }
-  if (input[_ETn] != null) {
-    entries[_ETn] = __serializeDateTime(input[_ETn]);
   }
   if (input[_In] != null) {
     const memberEntries = se_InstanceIdStringList(input[_In], context);
@@ -49945,6 +50330,15 @@ const se_ReportInstanceStatusRequest = (input: ReportInstanceStatusRequest, cont
       entries[loc] = value;
     });
   }
+  if (input[_Statu] != null) {
+    entries[_Statu] = input[_Statu];
+  }
+  if (input[_STt] != null) {
+    entries[_STt] = __serializeDateTime(input[_STt]);
+  }
+  if (input[_ETn] != null) {
+    entries[_ETn] = __serializeDateTime(input[_ETn]);
+  }
   if (input[_RCe] != null) {
     const memberEntries = se_ReasonCodesList(input[_RCe], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -49952,11 +50346,8 @@ const se_ReportInstanceStatusRequest = (input: ReportInstanceStatusRequest, cont
       entries[loc] = value;
     });
   }
-  if (input[_STt] != null) {
-    entries[_STt] = __serializeDateTime(input[_STt]);
-  }
-  if (input[_Statu] != null) {
-    entries[_Statu] = input[_Statu];
+  if (input[_De] != null) {
+    entries[_De] = input[_De];
   }
   return entries;
 };
@@ -50264,42 +50655,12 @@ const se_RequestSpotFleetRequest = (input: RequestSpotFleetRequest, context: __S
  */
 const se_RequestSpotInstancesRequest = (input: RequestSpotInstancesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_AZG] != null) {
-    entries[_AZG] = input[_AZG];
-  }
-  if (input[_BDMl] != null) {
-    entries[_BDMl] = input[_BDMl];
-  }
-  if (input[_CTl] != null) {
-    entries[_CTl] = input[_CTl];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_IC] != null) {
-    entries[_IC] = input[_IC];
-  }
-  if (input[_LG] != null) {
-    entries[_LG] = input[_LG];
-  }
   if (input[_LSa] != null) {
     const memberEntries = se_RequestSpotLaunchSpecification(input[_LSa], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `LaunchSpecification.${key}`;
       entries[loc] = value;
     });
-  }
-  if (input[_SPp] != null) {
-    entries[_SPp] = input[_SPp];
-  }
-  if (input[_T] != null) {
-    entries[_T] = input[_T];
-  }
-  if (input[_VF] != null) {
-    entries[_VF] = __serializeDateTime(input[_VF]);
-  }
-  if (input[_VU] != null) {
-    entries[_VU] = __serializeDateTime(input[_VU]);
   }
   if (input[_TS] != null) {
     const memberEntries = se_TagSpecificationList(input[_TS], context);
@@ -50310,6 +50671,36 @@ const se_RequestSpotInstancesRequest = (input: RequestSpotInstancesRequest, cont
   }
   if (input[_IIB] != null) {
     entries[_IIB] = input[_IIB];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_SPp] != null) {
+    entries[_SPp] = input[_SPp];
+  }
+  if (input[_CTl] != null) {
+    entries[_CTl] = input[_CTl];
+  }
+  if (input[_IC] != null) {
+    entries[_IC] = input[_IC];
+  }
+  if (input[_T] != null) {
+    entries[_T] = input[_T];
+  }
+  if (input[_VF] != null) {
+    entries[_VF] = __serializeDateTime(input[_VF]);
+  }
+  if (input[_VU] != null) {
+    entries[_VU] = __serializeDateTime(input[_VU]);
+  }
+  if (input[_LG] != null) {
+    entries[_LG] = input[_LG];
+  }
+  if (input[_AZG] != null) {
+    entries[_AZG] = input[_AZG];
+  }
+  if (input[_BDMl] != null) {
+    entries[_BDMl] = input[_BDMl];
   }
   return entries;
 };
@@ -50674,14 +51065,14 @@ const se_ResetImageAttributeRequest = (input: ResetImageAttributeRequest, contex
  */
 const se_ResetInstanceAttributeRequest = (input: ResetInstanceAttributeRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_At] != null) {
-    entries[_At] = input[_At];
-  }
   if (input[_DRr] != null) {
     entries[_DRr] = input[_DRr];
   }
   if (input[_IIn] != null) {
     entries[_IIn] = input[_IIn];
+  }
+  if (input[_At] != null) {
+    entries[_At] = input[_At];
   }
   return entries;
 };
@@ -50912,19 +51303,6 @@ const se_RevokeClientVpnIngressRequest = (input: RevokeClientVpnIngressRequest, 
  */
 const se_RevokeSecurityGroupEgressRequest = (input: RevokeSecurityGroupEgressRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_GIr] != null) {
-    entries[_GIr] = input[_GIr];
-  }
-  if (input[_IPpe] != null) {
-    const memberEntries = se_IpPermissionList(input[_IPpe], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `IpPermissions.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_SGRI] != null) {
     const memberEntries = se_SecurityGroupRuleIdList(input[_SGRI], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -50932,23 +51310,36 @@ const se_RevokeSecurityGroupEgressRequest = (input: RevokeSecurityGroupEgressReq
       entries[loc] = value;
     });
   }
-  if (input[_CIi] != null) {
-    entries[_CIi] = input[_CIi];
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
-  if (input[_FP] != null) {
-    entries[_FP] = input[_FP];
-  }
-  if (input[_IPpr] != null) {
-    entries[_IPpr] = input[_IPpr];
-  }
-  if (input[_TP] != null) {
-    entries[_TP] = input[_TP];
+  if (input[_GIr] != null) {
+    entries[_GIr] = input[_GIr];
   }
   if (input[_SSGN] != null) {
     entries[_SSGN] = input[_SSGN];
   }
   if (input[_SSGOI] != null) {
     entries[_SSGOI] = input[_SSGOI];
+  }
+  if (input[_IPpr] != null) {
+    entries[_IPpr] = input[_IPpr];
+  }
+  if (input[_FP] != null) {
+    entries[_FP] = input[_FP];
+  }
+  if (input[_TP] != null) {
+    entries[_TP] = input[_TP];
+  }
+  if (input[_CIi] != null) {
+    entries[_CIi] = input[_CIi];
+  }
+  if (input[_IPpe] != null) {
+    const memberEntries = se_IpPermissionList(input[_IPpe], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `IpPermissions.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -50992,15 +51383,15 @@ const se_RevokeSecurityGroupIngressRequest = (
   if (input[_TP] != null) {
     entries[_TP] = input[_TP];
   }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
   if (input[_SGRI] != null) {
     const memberEntries = se_SecurityGroupRuleIdList(input[_SGRI], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `SecurityGroupRuleId.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
   }
   return entries;
 };
@@ -51109,44 +51500,6 @@ const se_RunInstancesRequest = (input: RunInstancesRequest, context: __SerdeCont
   if (input[_UD] != null) {
     entries[_UD] = input[_UD];
   }
-  if (input[_AId] != null) {
-    entries[_AId] = input[_AId];
-  }
-  if (input[_CTl] === undefined) {
-    input[_CTl] = generateIdempotencyToken();
-  }
-  if (input[_CTl] != null) {
-    entries[_CTl] = input[_CTl];
-  }
-  if (input[_DATis] != null) {
-    entries[_DATis] = input[_DATis];
-  }
-  if (input[_DRr] != null) {
-    entries[_DRr] = input[_DRr];
-  }
-  if (input[_EO] != null) {
-    entries[_EO] = input[_EO];
-  }
-  if (input[_IIP] != null) {
-    const memberEntries = se_IamInstanceProfileSpecification(input[_IIP], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `IamInstanceProfile.${key}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_IISB] != null) {
-    entries[_IISB] = input[_IISB];
-  }
-  if (input[_NI] != null) {
-    const memberEntries = se_InstanceNetworkInterfaceSpecificationList(input[_NI], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `NetworkInterface.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_PIAr] != null) {
-    entries[_PIAr] = input[_PIAr];
-  }
   if (input[_EGSl] != null) {
     const memberEntries = se_ElasticGpuSpecifications(input[_EGSl], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -51250,6 +51603,44 @@ const se_RunInstancesRequest = (input: RunInstancesRequest, context: __SerdeCont
   }
   if (input[_EPI] != null) {
     entries[_EPI] = input[_EPI];
+  }
+  if (input[_DRr] != null) {
+    entries[_DRr] = input[_DRr];
+  }
+  if (input[_DATis] != null) {
+    entries[_DATis] = input[_DATis];
+  }
+  if (input[_IISB] != null) {
+    entries[_IISB] = input[_IISB];
+  }
+  if (input[_PIAr] != null) {
+    entries[_PIAr] = input[_PIAr];
+  }
+  if (input[_CTl] === undefined) {
+    input[_CTl] = generateIdempotencyToken();
+  }
+  if (input[_CTl] != null) {
+    entries[_CTl] = input[_CTl];
+  }
+  if (input[_AId] != null) {
+    entries[_AId] = input[_AId];
+  }
+  if (input[_NI] != null) {
+    const memberEntries = se_InstanceNetworkInterfaceSpecificationList(input[_NI], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `NetworkInterface.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_IIP] != null) {
+    const memberEntries = se_IamInstanceProfileSpecification(input[_IIP], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `IamInstanceProfile.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_EO] != null) {
+    entries[_EO] = input[_EO];
   }
   return entries;
 };
@@ -52091,13 +52482,6 @@ const se_SpotCapacityRebalance = (input: SpotCapacityRebalance, context: __Serde
  */
 const se_SpotFleetLaunchSpecification = (input: SpotFleetLaunchSpecification, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_SG] != null) {
-    const memberEntries = se_GroupIdentifierList(input[_SG], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `GroupSet.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_ATd] != null) {
     entries[_ATd] = input[_ATd];
   }
@@ -52177,6 +52561,13 @@ const se_SpotFleetLaunchSpecification = (input: SpotFleetLaunchSpecification, co
     const memberEntries = se_InstanceRequirements(input[_IR], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `InstanceRequirements.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input[_SG] != null) {
+    const memberEntries = se_GroupIdentifierList(input[_SG], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `GroupSet.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -53317,13 +53708,6 @@ const se_TrunkInterfaceAssociationIdList = (input: string[], context: __SerdeCon
  */
 const se_UnassignIpv6AddressesRequest = (input: UnassignIpv6AddressesRequest, context: __SerdeContext): any => {
   const entries: any = {};
-  if (input[_IA] != null) {
-    const memberEntries = se_Ipv6AddressList(input[_IA], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
   if (input[_IP] != null) {
     const memberEntries = se_IpPrefixList(input[_IP], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
@@ -53333,6 +53717,13 @@ const se_UnassignIpv6AddressesRequest = (input: UnassignIpv6AddressesRequest, co
   }
   if (input[_NII] != null) {
     entries[_NII] = input[_NII];
+  }
+  if (input[_IA] != null) {
+    const memberEntries = se_Ipv6AddressList(input[_IA], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Ipv6Addresses.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -53345,6 +53736,13 @@ const se_UnassignPrivateIpAddressesRequest = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
+  if (input[_IPp] != null) {
+    const memberEntries = se_IpPrefixList(input[_IPp], context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Ipv4Prefix.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input[_NII] != null) {
     entries[_NII] = input[_NII];
   }
@@ -53352,13 +53750,6 @@ const se_UnassignPrivateIpAddressesRequest = (
     const memberEntries = se_PrivateIpAddressStringList(input[_PIA], context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `PrivateIpAddress.${key.substring(key.indexOf(".") + 1)}`;
-      entries[loc] = value;
-    });
-  }
-  if (input[_IPp] != null) {
-    const memberEntries = se_IpPrefixList(input[_IPp], context);
-    Object.entries(memberEntries).forEach(([key, value]) => {
-      const loc = `Ipv4Prefix.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -53541,23 +53932,23 @@ const se_UserIdGroupPair = (input: UserIdGroupPair, context: __SerdeContext): an
   if (input[_De] != null) {
     entries[_De] = input[_De];
   }
-  if (input[_GIr] != null) {
-    entries[_GIr] = input[_GIr];
+  if (input[_UIs] != null) {
+    entries[_UIs] = input[_UIs];
   }
   if (input[_GN] != null) {
     entries[_GN] = input[_GN];
   }
-  if (input[_PSe] != null) {
-    entries[_PSe] = input[_PSe];
-  }
-  if (input[_UIs] != null) {
-    entries[_UIs] = input[_UIs];
+  if (input[_GIr] != null) {
+    entries[_GIr] = input[_GIr];
   }
   if (input[_VI] != null) {
     entries[_VI] = input[_VI];
   }
   if (input[_VPCI] != null) {
     entries[_VPCI] = input[_VPCI];
+  }
+  if (input[_PSe] != null) {
+    entries[_PSe] = input[_PSe];
   }
   return entries;
 };
@@ -54028,9 +54419,6 @@ const se_VpnConnectionOptionsSpecification = (
   if (input[_EA] != null) {
     entries[_EA] = input[_EA];
   }
-  if (input[_SRO] != null) {
-    entries[_SRO] = input[_SRO];
-  }
   if (input[_TIIV] != null) {
     entries[_TIIV] = input[_TIIV];
   }
@@ -54058,6 +54446,9 @@ const se_VpnConnectionOptionsSpecification = (
   }
   if (input[_TTGAI] != null) {
     entries[_TTGAI] = input[_TTGAI];
+  }
+  if (input[_SRO] != null) {
+    entries[_SRO] = input[_SRO];
   }
   return entries;
 };
@@ -54329,6 +54720,20 @@ const de_AcceptAddressTransferResult = (output: any, context: __SerdeContext): A
   const contents: any = {};
   if (output[_aT] != null) {
     contents[_ATdd] = de_AddressTransfer(output[_aT], context);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_ec2AcceptCapacityReservationBillingOwnershipResult
+ */
+const de_AcceptCapacityReservationBillingOwnershipResult = (
+  output: any,
+  context: __SerdeContext
+): AcceptCapacityReservationBillingOwnershipResult => {
+  const contents: any = {};
+  if (output[_r] != null) {
+    contents[_Ret] = __parseBoolean(output[_r]);
   }
   return contents;
 };
@@ -54649,12 +55054,6 @@ const de_AdditionalDetailList = (output: any, context: __SerdeContext): Addition
  */
 const de_Address = (output: any, context: __SerdeContext): Address => {
   const contents: any = {};
-  if (output[_iI] != null) {
-    contents[_IIn] = __expectString(output[_iI]);
-  }
-  if (output[_pI] != null) {
-    contents[_PI] = __expectString(output[_pI]);
-  }
   if (output[_aI] != null) {
     contents[_AIl] = __expectString(output[_aI]);
   }
@@ -54692,6 +55091,12 @@ const de_Address = (output: any, context: __SerdeContext): Address => {
   }
   if (output[_cI] != null) {
     contents[_CIa] = __expectString(output[_cI]);
+  }
+  if (output[_iI] != null) {
+    contents[_IIn] = __expectString(output[_iI]);
+  }
+  if (output[_pI] != null) {
+    contents[_PI] = __expectString(output[_pI]);
   }
   return contents;
 };
@@ -54791,9 +55196,6 @@ const de_AdvertiseByoipCidrResult = (output: any, context: __SerdeContext): Adve
  */
 const de_AllocateAddressResult = (output: any, context: __SerdeContext): AllocateAddressResult => {
   const contents: any = {};
-  if (output[_pI] != null) {
-    contents[_PI] = __expectString(output[_pI]);
-  }
   if (output[_aI] != null) {
     contents[_AIl] = __expectString(output[_aI]);
   }
@@ -54814,6 +55216,9 @@ const de_AllocateAddressResult = (output: any, context: __SerdeContext): Allocat
   }
   if (output[_cI] != null) {
     contents[_CIa] = __expectString(output[_cI]);
+  }
+  if (output[_pI] != null) {
+    contents[_PI] = __expectString(output[_pI]);
   }
   return contents;
 };
@@ -55268,6 +55673,20 @@ const de_AssociateAddressResult = (output: any, context: __SerdeContext): Associ
   const contents: any = {};
   if (output[_aIs] != null) {
     contents[_AIss] = __expectString(output[_aIs]);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_ec2AssociateCapacityReservationBillingOwnerResult
+ */
+const de_AssociateCapacityReservationBillingOwnerResult = (
+  output: any,
+  context: __SerdeContext
+): AssociateCapacityReservationBillingOwnerResult => {
+  const contents: any = {};
+  if (output[_r] != null) {
+    contents[_Ret] = __parseBoolean(output[_r]);
   }
   return contents;
 };
@@ -55746,9 +56165,6 @@ const de_AuthorizeSecurityGroupIngressResult = (
  */
 const de_AvailabilityZone = (output: any, context: __SerdeContext): AvailabilityZone => {
   const contents: any = {};
-  if (output[_zS] != null) {
-    contents[_Stat] = __expectString(output[_zS]);
-  }
   if (output[_oIS] != null) {
     contents[_OIS] = __expectString(output[_oIS]);
   }
@@ -55780,6 +56196,9 @@ const de_AvailabilityZone = (output: any, context: __SerdeContext): Availability
   }
   if (output[_pZI] != null) {
     contents[_PZI] = __expectString(output[_pZI]);
+  }
+  if (output[_zS] != null) {
+    contents[_Stat] = __expectString(output[_zS]);
   }
   return contents;
 };
@@ -55863,17 +56282,17 @@ const de_BaselineEbsBandwidthMbps = (output: any, context: __SerdeContext): Base
  */
 const de_BlockDeviceMapping = (output: any, context: __SerdeContext): BlockDeviceMapping => {
   const contents: any = {};
-  if (output[_dN] != null) {
-    contents[_DN] = __expectString(output[_dN]);
-  }
-  if (output[_vN] != null) {
-    contents[_VN] = __expectString(output[_vN]);
-  }
   if (output[_eb] != null) {
     contents[_E] = de_EbsBlockDevice(output[_eb], context);
   }
   if (output[_nD] != null) {
     contents[_ND] = __expectString(output[_nD]);
+  }
+  if (output[_dN] != null) {
+    contents[_DN] = __expectString(output[_dN]);
+  }
+  if (output[_vN] != null) {
+    contents[_VN] = __expectString(output[_vN]);
   }
   return contents;
 };
@@ -55916,29 +56335,29 @@ const de_BundleInstanceResult = (output: any, context: __SerdeContext): BundleIn
  */
 const de_BundleTask = (output: any, context: __SerdeContext): BundleTask => {
   const contents: any = {};
-  if (output[_bI] != null) {
-    contents[_BIu] = __expectString(output[_bI]);
-  }
-  if (output[_er] != null) {
-    contents[_BTE] = de_BundleTaskError(output[_er], context);
-  }
   if (output[_iI] != null) {
     contents[_IIn] = __expectString(output[_iI]);
   }
-  if (output[_pro] != null) {
-    contents[_Prog] = __expectString(output[_pro]);
-  }
-  if (output[_sT] != null) {
-    contents[_STt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_sT]));
+  if (output[_bI] != null) {
+    contents[_BIu] = __expectString(output[_bI]);
   }
   if (output[_st] != null) {
     contents[_Stat] = __expectString(output[_st]);
   }
-  if (output[_sto] != null) {
-    contents[_St] = de_Storage(output[_sto], context);
+  if (output[_sT] != null) {
+    contents[_STt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_sT]));
   }
   if (output[_uT] != null) {
     contents[_UTp] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_uT]));
+  }
+  if (output[_sto] != null) {
+    contents[_St] = de_Storage(output[_sto], context);
+  }
+  if (output[_pro] != null) {
+    contents[_Prog] = __expectString(output[_pro]);
+  }
+  if (output[_er] != null) {
+    contents[_BTE] = de_BundleTaskError(output[_er], context);
   }
   return contents;
 };
@@ -56444,7 +56863,56 @@ const de_CapacityReservation = (output: any, context: __SerdeContext): CapacityR
   if (output[_rT] != null) {
     contents[_RTe] = __expectString(output[_rT]);
   }
+  if (output[_uRBOI] != null) {
+    contents[_URBOI] = __expectString(output[_uRBOI]);
+  }
   return contents;
+};
+
+/**
+ * deserializeAws_ec2CapacityReservationBillingRequest
+ */
+const de_CapacityReservationBillingRequest = (
+  output: any,
+  context: __SerdeContext
+): CapacityReservationBillingRequest => {
+  const contents: any = {};
+  if (output[_cRI] != null) {
+    contents[_CRI] = __expectString(output[_cRI]);
+  }
+  if (output[_rB] != null) {
+    contents[_RB] = __expectString(output[_rB]);
+  }
+  if (output[_uRBOI] != null) {
+    contents[_URBOI] = __expectString(output[_uRBOI]);
+  }
+  if (output[_lUT] != null) {
+    contents[_LUT] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_lUT]));
+  }
+  if (output[_sta] != null) {
+    contents[_Statu] = __expectString(output[_sta]);
+  }
+  if (output[_sM] != null) {
+    contents[_SM] = __expectString(output[_sM]);
+  }
+  if (output[_cRIa] != null) {
+    contents[_CRIap] = de_CapacityReservationInfo(output[_cRIa], context);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_ec2CapacityReservationBillingRequestSet
+ */
+const de_CapacityReservationBillingRequestSet = (
+  output: any,
+  context: __SerdeContext
+): CapacityReservationBillingRequest[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return de_CapacityReservationBillingRequest(entry, context);
+    });
 };
 
 /**
@@ -56563,6 +57031,23 @@ const de_CapacityReservationGroupSet = (output: any, context: __SerdeContext): C
     .map((entry: any) => {
       return de_CapacityReservationGroup(entry, context);
     });
+};
+
+/**
+ * deserializeAws_ec2CapacityReservationInfo
+ */
+const de_CapacityReservationInfo = (output: any, context: __SerdeContext): CapacityReservationInfo => {
+  const contents: any = {};
+  if (output[_iT] != null) {
+    contents[_IT] = __expectString(output[_iT]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output[_t] != null) {
+    contents[_Te] = __expectString(output[_t]);
+  }
+  return contents;
 };
 
 /**
@@ -57252,11 +57737,11 @@ const de_CoipPoolSet = (output: any, context: __SerdeContext): CoipPool[] => {
  */
 const de_ConfirmProductInstanceResult = (output: any, context: __SerdeContext): ConfirmProductInstanceResult => {
   const contents: any = {};
-  if (output[_oI] != null) {
-    contents[_OIwn] = __expectString(output[_oI]);
-  }
   if (output[_r] != null) {
     contents[_Ret] = __parseBoolean(output[_r]);
+  }
+  if (output[_oI] != null) {
+    contents[_OIwn] = __expectString(output[_oI]);
   }
   return contents;
 };
@@ -57452,13 +57937,13 @@ const de_CopyImageResult = (output: any, context: __SerdeContext): CopyImageResu
  */
 const de_CopySnapshotResult = (output: any, context: __SerdeContext): CopySnapshotResult => {
   const contents: any = {};
-  if (output[_sIn] != null) {
-    contents[_SIn] = __expectString(output[_sIn]);
-  }
   if (output.tagSet === "") {
     contents[_Ta] = [];
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
+  }
+  if (output[_sIn] != null) {
+    contents[_SIn] = __expectString(output[_sIn]);
   }
   return contents;
 };
@@ -57985,7 +58470,7 @@ const de_CreateLaunchTemplateVersionResult = (
 const de_CreateLocalGatewayRouteResult = (output: any, context: __SerdeContext): CreateLocalGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_LocalGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_LocalGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -58457,7 +58942,7 @@ const de_CreateTransitGatewayResult = (output: any, context: __SerdeContext): Cr
 const de_CreateTransitGatewayRouteResult = (output: any, context: __SerdeContext): CreateTransitGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_TransitGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_TransitGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -58562,11 +59047,11 @@ const de_CreateVerifiedAccessTrustProviderResult = (
  */
 const de_CreateVolumePermission = (output: any, context: __SerdeContext): CreateVolumePermission => {
   const contents: any = {};
-  if (output[_g] != null) {
-    contents[_Gr] = __expectString(output[_g]);
-  }
   if (output[_uI] != null) {
     contents[_UIs] = __expectString(output[_uI]);
+  }
+  if (output[_g] != null) {
+    contents[_Gr] = __expectString(output[_g]);
   }
   return contents;
 };
@@ -58693,23 +59178,8 @@ const de_CreditSpecification = (output: any, context: __SerdeContext): CreditSpe
  */
 const de_CustomerGateway = (output: any, context: __SerdeContext): CustomerGateway => {
   const contents: any = {};
-  if (output[_bA] != null) {
-    contents[_BA] = __expectString(output[_bA]);
-  }
-  if (output[_cGIu] != null) {
-    contents[_CGIu] = __expectString(output[_cGIu]);
-  }
-  if (output[_iAp] != null) {
-    contents[_IAp] = __expectString(output[_iAp]);
-  }
   if (output[_cAe] != null) {
     contents[_CA] = __expectString(output[_cAe]);
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_ty] != null) {
-    contents[_T] = __expectString(output[_ty]);
   }
   if (output[_dN] != null) {
     contents[_DN] = __expectString(output[_dN]);
@@ -58721,6 +59191,21 @@ const de_CustomerGateway = (output: any, context: __SerdeContext): CustomerGatew
   }
   if (output[_bAE] != null) {
     contents[_BAE] = __expectString(output[_bAE]);
+  }
+  if (output[_cGIu] != null) {
+    contents[_CGIu] = __expectString(output[_cGIu]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
+  }
+  if (output[_ty] != null) {
+    contents[_T] = __expectString(output[_ty]);
+  }
+  if (output[_iAp] != null) {
+    contents[_IAp] = __expectString(output[_iAp]);
+  }
+  if (output[_bA] != null) {
+    contents[_BA] = __expectString(output[_bA]);
   }
   return contents;
 };
@@ -59182,7 +59667,7 @@ const de_DeleteLaunchTemplateVersionsResult = (
 const de_DeleteLocalGatewayRouteResult = (output: any, context: __SerdeContext): DeleteLocalGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_LocalGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_LocalGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -59532,7 +60017,7 @@ const de_DeleteTransitGatewayResult = (output: any, context: __SerdeContext): De
 const de_DeleteTransitGatewayRouteResult = (output: any, context: __SerdeContext): DeleteTransitGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_TransitGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_TransitGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -59954,6 +60439,25 @@ const de_DescribeCapacityBlockOfferingsResult = (
 };
 
 /**
+ * deserializeAws_ec2DescribeCapacityReservationBillingRequestsResult
+ */
+const de_DescribeCapacityReservationBillingRequestsResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeCapacityReservationBillingRequestsResult => {
+  const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
+  if (output.capacityReservationBillingRequestSet === "") {
+    contents[_CRBR] = [];
+  } else if (output[_cRBRS] != null && output[_cRBRS][_i] != null) {
+    contents[_CRBR] = de_CapacityReservationBillingRequestSet(__getArrayIfSingleItem(output[_cRBRS][_i]), context);
+  }
+  return contents;
+};
+
+/**
  * deserializeAws_ec2DescribeCapacityReservationFleetsResult
  */
 const de_DescribeCapacityReservationFleetsResult = (
@@ -60089,9 +60593,9 @@ const de_DescribeClientVpnEndpointsResult = (
 const de_DescribeClientVpnRoutesResult = (output: any, context: __SerdeContext): DescribeClientVpnRoutesResult => {
   const contents: any = {};
   if (output.routes === "") {
-    contents[_Rou] = [];
+    contents[_Rout] = [];
   } else if (output[_rou] != null && output[_rou][_i] != null) {
-    contents[_Rou] = de_ClientVpnRouteSet(__getArrayIfSingleItem(output[_rou][_i]), context);
+    contents[_Rout] = de_ClientVpnRouteSet(__getArrayIfSingleItem(output[_rou][_i]), context);
   }
   if (output[_nTe] != null) {
     contents[_NT] = __expectString(output[_nTe]);
@@ -60176,13 +60680,13 @@ const de_DescribeCustomerGatewaysResult = (output: any, context: __SerdeContext)
  */
 const de_DescribeDhcpOptionsResult = (output: any, context: __SerdeContext): DescribeDhcpOptionsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.dhcpOptionsSet === "") {
     contents[_DOh] = [];
   } else if (output[_dOS] != null && output[_dOS][_i] != null) {
     contents[_DOh] = de_DhcpOptionsList(__getArrayIfSingleItem(output[_dOS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -60673,13 +61177,13 @@ const de_DescribeIdFormatResult = (output: any, context: __SerdeContext): Descri
  */
 const de_DescribeImagesResult = (output: any, context: __SerdeContext): DescribeImagesResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.imagesSet === "") {
     contents[_Ima] = [];
   } else if (output[_iSm] != null && output[_iSm][_i] != null) {
     contents[_Ima] = de_ImageList(__getArrayIfSingleItem(output[_iSm][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -60795,13 +61299,13 @@ const de_DescribeInstanceEventWindowsResult = (
  */
 const de_DescribeInstancesResult = (output: any, context: __SerdeContext): DescribeInstancesResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.reservationSet === "") {
     contents[_Rese] = [];
   } else if (output[_rS] != null && output[_rS][_i] != null) {
     contents[_Rese] = de_ReservationList(__getArrayIfSingleItem(output[_rS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -61571,13 +62075,13 @@ const de_DescribeReservedInstancesOfferingsResult = (
   context: __SerdeContext
 ): DescribeReservedInstancesOfferingsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.reservedInstancesOfferingsSet === "") {
     contents[_RIO] = [];
   } else if (output[_rIOS] != null && output[_rIOS][_i] != null) {
     contents[_RIO] = de_ReservedInstancesOfferingList(__getArrayIfSingleItem(output[_rIOS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -61689,13 +62193,13 @@ const de_DescribeSecurityGroupRulesResult = (
  */
 const de_DescribeSecurityGroupsResult = (output: any, context: __SerdeContext): DescribeSecurityGroupsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.securityGroupInfo === "") {
     contents[_SG] = [];
   } else if (output[_sGIec] != null && output[_sGIec][_i] != null) {
     contents[_SG] = de_SecurityGroupList(__getArrayIfSingleItem(output[_sGIec][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -61705,11 +62209,6 @@ const de_DescribeSecurityGroupsResult = (output: any, context: __SerdeContext): 
  */
 const de_DescribeSnapshotAttributeResult = (output: any, context: __SerdeContext): DescribeSnapshotAttributeResult => {
   const contents: any = {};
-  if (output.createVolumePermission === "") {
-    contents[_CVPr] = [];
-  } else if (output[_cVP] != null && output[_cVP][_i] != null) {
-    contents[_CVPr] = de_CreateVolumePermissionList(__getArrayIfSingleItem(output[_cVP][_i]), context);
-  }
   if (output.productCodes === "") {
     contents[_PCr] = [];
   } else if (output[_pC] != null && output[_pC][_i] != null) {
@@ -61717,6 +62216,11 @@ const de_DescribeSnapshotAttributeResult = (output: any, context: __SerdeContext
   }
   if (output[_sIn] != null) {
     contents[_SIn] = __expectString(output[_sIn]);
+  }
+  if (output.createVolumePermission === "") {
+    contents[_CVPr] = [];
+  } else if (output[_cVP] != null && output[_cVP][_i] != null) {
+    contents[_CVPr] = de_CreateVolumePermissionList(__getArrayIfSingleItem(output[_cVP][_i]), context);
   }
   return contents;
 };
@@ -61726,13 +62230,13 @@ const de_DescribeSnapshotAttributeResult = (output: any, context: __SerdeContext
  */
 const de_DescribeSnapshotsResult = (output: any, context: __SerdeContext): DescribeSnapshotsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.snapshotSet === "") {
     contents[_Sn] = [];
   } else if (output[_sS] != null && output[_sS][_i] != null) {
     contents[_Sn] = de_SnapshotList(__getArrayIfSingleItem(output[_sS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -61914,13 +62418,13 @@ const de_DescribeStoreImageTasksResult = (output: any, context: __SerdeContext):
  */
 const de_DescribeSubnetsResult = (output: any, context: __SerdeContext): DescribeSubnetsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.subnetSet === "") {
     contents[_Subn] = [];
   } else if (output[_sSub] != null && output[_sSub][_i] != null) {
     contents[_Subn] = de_SubnetList(__getArrayIfSingleItem(output[_sSub][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -62351,13 +62855,13 @@ const de_DescribeVolumesModificationsResult = (
   context: __SerdeContext
 ): DescribeVolumesModificationsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.volumeModificationSet === "") {
     contents[_VMo] = [];
   } else if (output[_vMS] != null && output[_vMS][_i] != null) {
     contents[_VMo] = de_VolumeModificationList(__getArrayIfSingleItem(output[_vMS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -62367,13 +62871,13 @@ const de_DescribeVolumesModificationsResult = (
  */
 const de_DescribeVolumesResult = (output: any, context: __SerdeContext): DescribeVolumesResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.volumeSet === "") {
     contents[_Vol] = [];
   } else if (output[_vS] != null && output[_vS][_i] != null) {
     contents[_Vol] = de_VolumeList(__getArrayIfSingleItem(output[_vS][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -62399,9 +62903,6 @@ const de_DescribeVolumeStatusResult = (output: any, context: __SerdeContext): De
  */
 const de_DescribeVpcAttributeResult = (output: any, context: __SerdeContext): DescribeVpcAttributeResult => {
   const contents: any = {};
-  if (output[_vI] != null) {
-    contents[_VI] = __expectString(output[_vI]);
-  }
   if (output[_eDH] != null) {
     contents[_EDH] = de_AttributeBooleanValue(output[_eDH], context);
   }
@@ -62410,6 +62911,9 @@ const de_DescribeVpcAttributeResult = (output: any, context: __SerdeContext): De
   }
   if (output[_eNAUM] != null) {
     contents[_ENAUM] = de_AttributeBooleanValue(output[_eNAUM], context);
+  }
+  if (output[_vI] != null) {
+    contents[_VI] = __expectString(output[_vI]);
   }
   return contents;
 };
@@ -62586,13 +63090,13 @@ const de_DescribeVpcPeeringConnectionsResult = (
  */
 const de_DescribeVpcsResult = (output: any, context: __SerdeContext): DescribeVpcsResult => {
   const contents: any = {};
+  if (output[_nTe] != null) {
+    contents[_NT] = __expectString(output[_nTe]);
+  }
   if (output.vpcSet === "") {
     contents[_Vpc] = [];
   } else if (output[_vSp] != null && output[_vSp][_i] != null) {
     contents[_Vpc] = de_VpcList(__getArrayIfSingleItem(output[_vSp][_i]), context);
-  }
-  if (output[_nTe] != null) {
-    contents[_NT] = __expectString(output[_nTe]);
   }
   return contents;
 };
@@ -62725,14 +63229,6 @@ const de_DhcpConfigurationValueList = (output: any, context: __SerdeContext): At
  */
 const de_DhcpOptions = (output: any, context: __SerdeContext): DhcpOptions => {
   const contents: any = {};
-  if (output.dhcpConfigurationSet === "") {
-    contents[_DCh] = [];
-  } else if (output[_dCS] != null && output[_dCS][_i] != null) {
-    contents[_DCh] = de_DhcpConfigurationList(__getArrayIfSingleItem(output[_dCS][_i]), context);
-  }
-  if (output[_dOI] != null) {
-    contents[_DOI] = __expectString(output[_dOI]);
-  }
   if (output[_oI] != null) {
     contents[_OIwn] = __expectString(output[_oI]);
   }
@@ -62740,6 +63236,14 @@ const de_DhcpOptions = (output: any, context: __SerdeContext): DhcpOptions => {
     contents[_Ta] = [];
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
+  }
+  if (output[_dOI] != null) {
+    contents[_DOI] = __expectString(output[_dOI]);
+  }
+  if (output.dhcpConfigurationSet === "") {
+    contents[_DCh] = [];
+  } else if (output[_dCS] != null && output[_dCS][_i] != null) {
+    contents[_DCh] = de_DhcpConfigurationList(__getArrayIfSingleItem(output[_dCS][_i]), context);
   }
   return contents;
 };
@@ -63124,6 +63628,20 @@ const de_DisableVpcClassicLinkDnsSupportResult = (
  * deserializeAws_ec2DisableVpcClassicLinkResult
  */
 const de_DisableVpcClassicLinkResult = (output: any, context: __SerdeContext): DisableVpcClassicLinkResult => {
+  const contents: any = {};
+  if (output[_r] != null) {
+    contents[_Ret] = __parseBoolean(output[_r]);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_ec2DisassociateCapacityReservationBillingOwnerResult
+ */
+const de_DisassociateCapacityReservationBillingOwnerResult = (
+  output: any,
+  context: __SerdeContext
+): DisassociateCapacityReservationBillingOwnerResult => {
   const contents: any = {};
   if (output[_r] != null) {
     contents[_Ret] = __parseBoolean(output[_r]);
@@ -65506,11 +66024,11 @@ const de_GetConsoleOutputResult = (output: any, context: __SerdeContext): GetCon
   if (output[_iI] != null) {
     contents[_IIn] = __expectString(output[_iI]);
   }
-  if (output[_ou] != null) {
-    contents[_Ou] = __expectString(output[_ou]);
-  }
   if (output[_ti] != null) {
     contents[_Tim] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_ti]));
+  }
+  if (output[_ou] != null) {
+    contents[_Ou] = __expectString(output[_ou]);
   }
   return contents;
 };
@@ -65927,11 +66445,11 @@ const de_GetPasswordDataResult = (output: any, context: __SerdeContext): GetPass
   if (output[_iI] != null) {
     contents[_IIn] = __expectString(output[_iI]);
   }
-  if (output[_pD] != null) {
-    contents[_PDa] = __expectString(output[_pD]);
-  }
   if (output[_ti] != null) {
     contents[_Tim] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_ti]));
+  }
+  if (output[_pD] != null) {
+    contents[_PDa] = __expectString(output[_pD]);
   }
   return contents;
 };
@@ -66348,11 +66866,11 @@ const de_GpuInfo = (output: any, context: __SerdeContext): GpuInfo => {
  */
 const de_GroupIdentifier = (output: any, context: __SerdeContext): GroupIdentifier => {
   const contents: any = {};
-  if (output[_gN] != null) {
-    contents[_GN] = __expectString(output[_gN]);
-  }
   if (output[_gIr] != null) {
     contents[_GIr] = __expectString(output[_gIr]);
+  }
+  if (output[_gN] != null) {
+    contents[_GN] = __expectString(output[_gN]);
   }
   return contents;
 };
@@ -66827,49 +67345,11 @@ const de_IKEVersionsListValue = (output: any, context: __SerdeContext): IKEVersi
  */
 const de_Image = (output: any, context: __SerdeContext): Image => {
   const contents: any = {};
-  if (output[_arc] != null) {
-    contents[_Arc] = __expectString(output[_arc]);
-  }
-  if (output[_cDr] != null) {
-    contents[_CDre] = __expectString(output[_cDr]);
-  }
-  if (output[_iIma] != null) {
-    contents[_IIma] = __expectString(output[_iIma]);
-  }
-  if (output[_iL] != null) {
-    contents[_IL] = __expectString(output[_iL]);
-  }
-  if (output[_iTm] != null) {
-    contents[_ITm] = __expectString(output[_iTm]);
-  }
-  if (output[_iPs] != null) {
-    contents[_Pu] = __parseBoolean(output[_iPs]);
-  }
-  if (output[_kI] != null) {
-    contents[_KI] = __expectString(output[_kI]);
-  }
-  if (output[_iOI] != null) {
-    contents[_OIwn] = __expectString(output[_iOI]);
-  }
-  if (output[_pl] != null) {
-    contents[_Pla] = __expectString(output[_pl]);
-  }
   if (output[_pDl] != null) {
     contents[_PDl] = __expectString(output[_pDl]);
   }
   if (output[_uO] != null) {
     contents[_UO] = __expectString(output[_uO]);
-  }
-  if (output.productCodes === "") {
-    contents[_PCr] = [];
-  } else if (output[_pC] != null && output[_pC][_i] != null) {
-    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
-  }
-  if (output[_rIa] != null) {
-    contents[_RIa] = __expectString(output[_rIa]);
-  }
-  if (output[_iSma] != null) {
-    contents[_Stat] = __expectString(output[_iSma]);
   }
   if (output.blockDeviceMapping === "") {
     contents[_BDM] = [];
@@ -66932,6 +67412,44 @@ const de_Image = (output: any, context: __SerdeContext): Image => {
   if (output[_lLT] != null) {
     contents[_LLT] = __expectString(output[_lLT]);
   }
+  if (output[_iIma] != null) {
+    contents[_IIma] = __expectString(output[_iIma]);
+  }
+  if (output[_iL] != null) {
+    contents[_IL] = __expectString(output[_iL]);
+  }
+  if (output[_iSma] != null) {
+    contents[_Stat] = __expectString(output[_iSma]);
+  }
+  if (output[_iOI] != null) {
+    contents[_OIwn] = __expectString(output[_iOI]);
+  }
+  if (output[_cDr] != null) {
+    contents[_CDre] = __expectString(output[_cDr]);
+  }
+  if (output[_iPs] != null) {
+    contents[_Pu] = __parseBoolean(output[_iPs]);
+  }
+  if (output.productCodes === "") {
+    contents[_PCr] = [];
+  } else if (output[_pC] != null && output[_pC][_i] != null) {
+    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
+  }
+  if (output[_arc] != null) {
+    contents[_Arc] = __expectString(output[_arc]);
+  }
+  if (output[_iTm] != null) {
+    contents[_ITm] = __expectString(output[_iTm]);
+  }
+  if (output[_kI] != null) {
+    contents[_KI] = __expectString(output[_kI]);
+  }
+  if (output[_rIa] != null) {
+    contents[_RIa] = __expectString(output[_rIa]);
+  }
+  if (output[_pl] != null) {
+    contents[_Pla] = __expectString(output[_pl]);
+  }
   return contents;
 };
 
@@ -66940,24 +67458,6 @@ const de_Image = (output: any, context: __SerdeContext): Image => {
  */
 const de_ImageAttribute = (output: any, context: __SerdeContext): ImageAttribute => {
   const contents: any = {};
-  if (output.blockDeviceMapping === "") {
-    contents[_BDM] = [];
-  } else if (output[_bDM] != null && output[_bDM][_i] != null) {
-    contents[_BDM] = de_BlockDeviceMappingList(__getArrayIfSingleItem(output[_bDM][_i]), context);
-  }
-  if (output[_iIma] != null) {
-    contents[_IIma] = __expectString(output[_iIma]);
-  }
-  if (output.launchPermission === "") {
-    contents[_LPau] = [];
-  } else if (output[_lPa] != null && output[_lPa][_i] != null) {
-    contents[_LPau] = de_LaunchPermissionList(__getArrayIfSingleItem(output[_lPa][_i]), context);
-  }
-  if (output.productCodes === "") {
-    contents[_PCr] = [];
-  } else if (output[_pC] != null && output[_pC][_i] != null) {
-    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
-  }
   if (output[_de] != null) {
     contents[_De] = de_AttributeValue(output[_de], context);
   }
@@ -66987,6 +67487,24 @@ const de_ImageAttribute = (output: any, context: __SerdeContext): ImageAttribute
   }
   if (output[_dP] != null) {
     contents[_DPer] = de_AttributeValue(output[_dP], context);
+  }
+  if (output[_iIma] != null) {
+    contents[_IIma] = __expectString(output[_iIma]);
+  }
+  if (output.launchPermission === "") {
+    contents[_LPau] = [];
+  } else if (output[_lPa] != null && output[_lPa][_i] != null) {
+    contents[_LPau] = de_LaunchPermissionList(__getArrayIfSingleItem(output[_lPa][_i]), context);
+  }
+  if (output.productCodes === "") {
+    contents[_PCr] = [];
+  } else if (output[_pC] != null && output[_pC][_i] != null) {
+    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
+  }
+  if (output.blockDeviceMapping === "") {
+    contents[_BDM] = [];
+  } else if (output[_bDM] != null && output[_bDM][_i] != null) {
+    contents[_BDM] = de_BlockDeviceMappingList(__getArrayIfSingleItem(output[_bDM][_i]), context);
   }
   return contents;
 };
@@ -67474,68 +67992,6 @@ const de_InsideCidrBlocksStringList = (output: any, context: __SerdeContext): st
  */
 const de_Instance = (output: any, context: __SerdeContext): Instance => {
   const contents: any = {};
-  if (output[_aLI] != null) {
-    contents[_ALI] = __strictParseInt32(output[_aLI]) as number;
-  }
-  if (output[_iIma] != null) {
-    contents[_IIma] = __expectString(output[_iIma]);
-  }
-  if (output[_iI] != null) {
-    contents[_IIn] = __expectString(output[_iI]);
-  }
-  if (output[_iT] != null) {
-    contents[_IT] = __expectString(output[_iT]);
-  }
-  if (output[_kI] != null) {
-    contents[_KI] = __expectString(output[_kI]);
-  }
-  if (output[_kN] != null) {
-    contents[_KN] = __expectString(output[_kN]);
-  }
-  if (output[_lTau] != null) {
-    contents[_LTaun] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_lTau]));
-  }
-  if (output[_mo] != null) {
-    contents[_Mon] = de_Monitoring(output[_mo], context);
-  }
-  if (output[_pla] != null) {
-    contents[_Pl] = de_Placement(output[_pla], context);
-  }
-  if (output[_pl] != null) {
-    contents[_Pla] = __expectString(output[_pl]);
-  }
-  if (output[_pDN] != null) {
-    contents[_PDN] = __expectString(output[_pDN]);
-  }
-  if (output[_pIA] != null) {
-    contents[_PIAr] = __expectString(output[_pIA]);
-  }
-  if (output.productCodes === "") {
-    contents[_PCr] = [];
-  } else if (output[_pC] != null && output[_pC][_i] != null) {
-    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
-  }
-  if (output[_dNn] != null) {
-    contents[_PDNu] = __expectString(output[_dNn]);
-  }
-  if (output[_iAp] != null) {
-    contents[_PIAu] = __expectString(output[_iAp]);
-  }
-  if (output[_rIa] != null) {
-    contents[_RIa] = __expectString(output[_rIa]);
-  }
-  if (output[_iSnst] != null) {
-    contents[_Stat] = de_InstanceState(output[_iSnst], context);
-  }
-  if (output[_rea] != null) {
-    contents[_STRt] = __expectString(output[_rea]);
-  }
-  if (output[_sIu] != null) {
-    contents[_SIub] = __expectString(output[_sIu]);
-  }
-  if (output[_vI] != null) {
-    contents[_VI] = __expectString(output[_vI]);
-  }
   if (output[_arc] != null) {
     contents[_Arc] = __expectString(output[_arc]);
   }
@@ -67664,6 +68120,68 @@ const de_Instance = (output: any, context: __SerdeContext): Instance => {
   if (output[_cIBM] != null) {
     contents[_CIBM] = __expectString(output[_cIBM]);
   }
+  if (output[_iI] != null) {
+    contents[_IIn] = __expectString(output[_iI]);
+  }
+  if (output[_iIma] != null) {
+    contents[_IIma] = __expectString(output[_iIma]);
+  }
+  if (output[_iSnst] != null) {
+    contents[_Stat] = de_InstanceState(output[_iSnst], context);
+  }
+  if (output[_pDN] != null) {
+    contents[_PDN] = __expectString(output[_pDN]);
+  }
+  if (output[_dNn] != null) {
+    contents[_PDNu] = __expectString(output[_dNn]);
+  }
+  if (output[_rea] != null) {
+    contents[_STRt] = __expectString(output[_rea]);
+  }
+  if (output[_kN] != null) {
+    contents[_KN] = __expectString(output[_kN]);
+  }
+  if (output[_aLI] != null) {
+    contents[_ALI] = __strictParseInt32(output[_aLI]) as number;
+  }
+  if (output.productCodes === "") {
+    contents[_PCr] = [];
+  } else if (output[_pC] != null && output[_pC][_i] != null) {
+    contents[_PCr] = de_ProductCodeList(__getArrayIfSingleItem(output[_pC][_i]), context);
+  }
+  if (output[_iT] != null) {
+    contents[_IT] = __expectString(output[_iT]);
+  }
+  if (output[_lTau] != null) {
+    contents[_LTaun] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_lTau]));
+  }
+  if (output[_pla] != null) {
+    contents[_Pl] = de_Placement(output[_pla], context);
+  }
+  if (output[_kI] != null) {
+    contents[_KI] = __expectString(output[_kI]);
+  }
+  if (output[_rIa] != null) {
+    contents[_RIa] = __expectString(output[_rIa]);
+  }
+  if (output[_pl] != null) {
+    contents[_Pla] = __expectString(output[_pl]);
+  }
+  if (output[_mo] != null) {
+    contents[_Mon] = de_Monitoring(output[_mo], context);
+  }
+  if (output[_sIu] != null) {
+    contents[_SIub] = __expectString(output[_sIu]);
+  }
+  if (output[_vI] != null) {
+    contents[_VI] = __expectString(output[_vI]);
+  }
+  if (output[_pIA] != null) {
+    contents[_PIAr] = __expectString(output[_pIA]);
+  }
+  if (output[_iAp] != null) {
+    contents[_PIAu] = __expectString(output[_iAp]);
+  }
   return contents;
 };
 
@@ -67703,11 +68221,6 @@ const de_InstanceAttachmentEnaSrdUdpSpecification = (
  */
 const de_InstanceAttribute = (output: any, context: __SerdeContext): InstanceAttribute => {
   const contents: any = {};
-  if (output.groupSet === "") {
-    contents[_G] = [];
-  } else if (output[_gS] != null && output[_gS][_i] != null) {
-    contents[_G] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
-  }
   if (output.blockDeviceMapping === "") {
     contents[_BDM] = [];
   } else if (output[_bDM] != null && output[_bDM][_i] != null) {
@@ -67759,6 +68272,11 @@ const de_InstanceAttribute = (output: any, context: __SerdeContext): InstanceAtt
   }
   if (output[_dASi] != null) {
     contents[_DAS] = de_AttributeBooleanValue(output[_dASi], context);
+  }
+  if (output.groupSet === "") {
+    contents[_G] = [];
+  } else if (output[_gS] != null && output[_gS][_i] != null) {
+    contents[_G] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
   }
   return contents;
 };
@@ -68623,11 +69141,11 @@ const de_InstanceState = (output: any, context: __SerdeContext): InstanceState =
  */
 const de_InstanceStateChange = (output: any, context: __SerdeContext): InstanceStateChange => {
   const contents: any = {};
-  if (output[_cSu] != null) {
-    contents[_CSu] = de_InstanceState(output[_cSu], context);
-  }
   if (output[_iI] != null) {
     contents[_IIn] = __expectString(output[_iI]);
+  }
+  if (output[_cSu] != null) {
+    contents[_CSu] = de_InstanceState(output[_cSu], context);
   }
   if (output[_pS] != null) {
     contents[_PSr] = de_InstanceState(output[_pS], context);
@@ -69396,6 +69914,9 @@ const de_IpamDiscoveredResourceCidr = (output: any, context: __SerdeContext): Ip
   if (output[_vI] != null) {
     contents[_VI] = __expectString(output[_vI]);
   }
+  if (output[_sIu] != null) {
+    contents[_SIub] = __expectString(output[_sIu]);
+  }
   if (output[_nIASet] != null) {
     contents[_NIASet] = __expectString(output[_nIASet]);
   }
@@ -70058,11 +70579,19 @@ const de_IpamSet = (output: any, context: __SerdeContext): Ipam[] => {
  */
 const de_IpPermission = (output: any, context: __SerdeContext): IpPermission => {
   const contents: any = {};
+  if (output[_iPpr] != null) {
+    contents[_IPpr] = __expectString(output[_iPpr]);
+  }
   if (output[_fP] != null) {
     contents[_FP] = __strictParseInt32(output[_fP]) as number;
   }
-  if (output[_iPpr] != null) {
-    contents[_IPpr] = __expectString(output[_iPpr]);
+  if (output[_tPo] != null) {
+    contents[_TP] = __strictParseInt32(output[_tPo]) as number;
+  }
+  if (output.groups === "") {
+    contents[_UIGP] = [];
+  } else if (output[_gr] != null && output[_gr][_i] != null) {
+    contents[_UIGP] = de_UserIdGroupPairList(__getArrayIfSingleItem(output[_gr][_i]), context);
   }
   if (output.ipRanges === "") {
     contents[_IRp] = [];
@@ -70078,14 +70607,6 @@ const de_IpPermission = (output: any, context: __SerdeContext): IpPermission => 
     contents[_PLIr] = [];
   } else if (output[_pLIr] != null && output[_pLIr][_i] != null) {
     contents[_PLIr] = de_PrefixListIdList(__getArrayIfSingleItem(output[_pLIr][_i]), context);
-  }
-  if (output[_tPo] != null) {
-    contents[_TP] = __strictParseInt32(output[_tPo]) as number;
-  }
-  if (output.groups === "") {
-    contents[_UIGP] = [];
-  } else if (output[_gr] != null && output[_gr][_i] != null) {
-    contents[_UIGP] = de_UserIdGroupPairList(__getArrayIfSingleItem(output[_gr][_i]), context);
   }
   return contents;
 };
@@ -70117,11 +70638,11 @@ const de_IpPrefixList = (output: any, context: __SerdeContext): string[] => {
  */
 const de_IpRange = (output: any, context: __SerdeContext): IpRange => {
   const contents: any = {};
-  if (output[_cIi] != null) {
-    contents[_CIi] = __expectString(output[_cIi]);
-  }
   if (output[_de] != null) {
     contents[_De] = __expectString(output[_de]);
+  }
+  if (output[_cIi] != null) {
+    contents[_CIi] = __expectString(output[_cIi]);
   }
   return contents;
 };
@@ -70378,11 +70899,11 @@ const de_Ipv6PrefixSpecificationResponse = (output: any, context: __SerdeContext
  */
 const de_Ipv6Range = (output: any, context: __SerdeContext): Ipv6Range => {
   const contents: any = {};
-  if (output[_cIid] != null) {
-    contents[_CIid] = __expectString(output[_cIid]);
-  }
   if (output[_de] != null) {
     contents[_De] = __expectString(output[_de]);
+  }
+  if (output[_cIid] != null) {
+    contents[_CIid] = __expectString(output[_cIid]);
   }
   return contents;
 };
@@ -70403,15 +70924,6 @@ const de_Ipv6RangeList = (output: any, context: __SerdeContext): Ipv6Range[] => 
  */
 const de_KeyPair = (output: any, context: __SerdeContext): KeyPair => {
   const contents: any = {};
-  if (output[_kFe] != null) {
-    contents[_KFe] = __expectString(output[_kFe]);
-  }
-  if (output[_kM] != null) {
-    contents[_KM] = __expectString(output[_kM]);
-  }
-  if (output[_kN] != null) {
-    contents[_KN] = __expectString(output[_kN]);
-  }
   if (output[_kPI] != null) {
     contents[_KPI] = __expectString(output[_kPI]);
   }
@@ -70419,6 +70931,15 @@ const de_KeyPair = (output: any, context: __SerdeContext): KeyPair => {
     contents[_Ta] = [];
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
+  }
+  if (output[_kN] != null) {
+    contents[_KN] = __expectString(output[_kN]);
+  }
+  if (output[_kFe] != null) {
+    contents[_KFe] = __expectString(output[_kFe]);
+  }
+  if (output[_kM] != null) {
+    contents[_KM] = __expectString(output[_kM]);
   }
   return contents;
 };
@@ -70430,12 +70951,6 @@ const de_KeyPairInfo = (output: any, context: __SerdeContext): KeyPairInfo => {
   const contents: any = {};
   if (output[_kPI] != null) {
     contents[_KPI] = __expectString(output[_kPI]);
-  }
-  if (output[_kFe] != null) {
-    contents[_KFe] = __expectString(output[_kFe]);
-  }
-  if (output[_kN] != null) {
-    contents[_KN] = __expectString(output[_kN]);
   }
   if (output[_kT] != null) {
     contents[_KT] = __expectString(output[_kT]);
@@ -70450,6 +70965,12 @@ const de_KeyPairInfo = (output: any, context: __SerdeContext): KeyPairInfo => {
   }
   if (output[_cTr] != null) {
     contents[_CTr] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_cTr]));
+  }
+  if (output[_kN] != null) {
+    contents[_KN] = __expectString(output[_kN]);
+  }
+  if (output[_kFe] != null) {
+    contents[_KFe] = __expectString(output[_kFe]);
   }
   return contents;
 };
@@ -70484,17 +71005,17 @@ const de_LastError = (output: any, context: __SerdeContext): LastError => {
  */
 const de_LaunchPermission = (output: any, context: __SerdeContext): LaunchPermission => {
   const contents: any = {};
-  if (output[_g] != null) {
-    contents[_Gr] = __expectString(output[_g]);
-  }
-  if (output[_uI] != null) {
-    contents[_UIs] = __expectString(output[_uI]);
-  }
   if (output[_oAr] != null) {
     contents[_OAr] = __expectString(output[_oAr]);
   }
   if (output[_oUA] != null) {
     contents[_OUA] = __expectString(output[_oUA]);
+  }
+  if (output[_uI] != null) {
+    contents[_UIs] = __expectString(output[_uI]);
+  }
+  if (output[_g] != null) {
+    contents[_Gr] = __expectString(output[_g]);
   }
   return contents;
 };
@@ -70517,11 +71038,6 @@ const de_LaunchSpecification = (output: any, context: __SerdeContext): LaunchSpe
   const contents: any = {};
   if (output[_uDs] != null) {
     contents[_UD] = __expectString(output[_uDs]);
-  }
-  if (output.groupSet === "") {
-    contents[_SG] = [];
-  } else if (output[_gS] != null && output[_gS][_i] != null) {
-    contents[_SG] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
   }
   if (output[_aTdd] != null) {
     contents[_ATd] = __expectString(output[_aTdd]);
@@ -70562,6 +71078,11 @@ const de_LaunchSpecification = (output: any, context: __SerdeContext): LaunchSpe
   }
   if (output[_sIu] != null) {
     contents[_SIub] = __expectString(output[_sIu]);
+  }
+  if (output.groupSet === "") {
+    contents[_SG] = [];
+  } else if (output[_gS] != null && output[_gS][_i] != null) {
+    contents[_SG] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
   }
   if (output[_mo] != null) {
     contents[_Mon] = de_RunInstancesMonitoringEnabled(output[_mo], context);
@@ -72159,6 +72680,23 @@ const de_ModifyInstanceCapacityReservationAttributesResult = (
 };
 
 /**
+ * deserializeAws_ec2ModifyInstanceCpuOptionsResult
+ */
+const de_ModifyInstanceCpuOptionsResult = (output: any, context: __SerdeContext): ModifyInstanceCpuOptionsResult => {
+  const contents: any = {};
+  if (output[_iI] != null) {
+    contents[_IIn] = __expectString(output[_iI]);
+  }
+  if (output[_cCo] != null) {
+    contents[_CC] = __strictParseInt32(output[_cCo]) as number;
+  }
+  if (output[_tPC] != null) {
+    contents[_TPC] = __strictParseInt32(output[_tPC]) as number;
+  }
+  return contents;
+};
+
+/**
  * deserializeAws_ec2ModifyInstanceCreditSpecificationResult
  */
 const de_ModifyInstanceCreditSpecificationResult = (
@@ -72341,7 +72879,7 @@ const de_ModifyLaunchTemplateResult = (output: any, context: __SerdeContext): Mo
 const de_ModifyLocalGatewayRouteResult = (output: any, context: __SerdeContext): ModifyLocalGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_LocalGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_LocalGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -74322,9 +74860,6 @@ const de_Phase2IntegrityAlgorithmsListValue = (
  */
 const de_Placement = (output: any, context: __SerdeContext): Placement => {
   const contents: any = {};
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
   if (output[_af] != null) {
     contents[_Af] = __expectString(output[_af]);
   }
@@ -74348,6 +74883,9 @@ const de_Placement = (output: any, context: __SerdeContext): Placement => {
   }
   if (output[_gIr] != null) {
     contents[_GIr] = __expectString(output[_gIr]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
   }
   return contents;
 };
@@ -75215,14 +75753,14 @@ const de_ReferencedSecurityGroup = (output: any, context: __SerdeContext): Refer
  */
 const de_Region = (output: any, context: __SerdeContext): Region => {
   const contents: any = {};
-  if (output[_rEe] != null) {
-    contents[_Endp] = __expectString(output[_rEe]);
+  if (output[_oIS] != null) {
+    contents[_OIS] = __expectString(output[_oIS]);
   }
   if (output[_rNe] != null) {
     contents[_RN] = __expectString(output[_rNe]);
   }
-  if (output[_oIS] != null) {
-    contents[_OIS] = __expectString(output[_oIS]);
+  if (output[_rEe] != null) {
+    contents[_Endp] = __expectString(output[_rEe]);
   }
   return contents;
 };
@@ -75287,6 +75825,20 @@ const de_RegisterTransitGatewayMulticastGroupSourcesResult = (
   const contents: any = {};
   if (output[_rMGS] != null) {
     contents[_RMGS] = de_TransitGatewayMulticastRegisteredGroupSources(output[_rMGS], context);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_ec2RejectCapacityReservationBillingOwnershipResult
+ */
+const de_RejectCapacityReservationBillingOwnershipResult = (
+  output: any,
+  context: __SerdeContext
+): RejectCapacityReservationBillingOwnershipResult => {
+  const contents: any = {};
+  if (output[_r] != null) {
+    contents[_Ret] = __parseBoolean(output[_r]);
   }
   return contents;
 };
@@ -75494,7 +76046,7 @@ const de_ReplaceTransitGatewayRouteResult = (
 ): ReplaceTransitGatewayRouteResult => {
   const contents: any = {};
   if (output[_ro] != null) {
-    contents[_Ro] = de_TransitGatewayRoute(output[_ro], context);
+    contents[_Rou] = de_TransitGatewayRoute(output[_ro], context);
   }
   return contents;
 };
@@ -75539,6 +76091,15 @@ const de_RequestSpotInstancesResult = (output: any, context: __SerdeContext): Re
  */
 const de_Reservation = (output: any, context: __SerdeContext): Reservation => {
   const contents: any = {};
+  if (output[_rIes] != null) {
+    contents[_RIeser] = __expectString(output[_rIes]);
+  }
+  if (output[_oI] != null) {
+    contents[_OIwn] = __expectString(output[_oI]);
+  }
+  if (output[_rIeq] != null) {
+    contents[_RIeq] = __expectString(output[_rIeq]);
+  }
   if (output.groupSet === "") {
     contents[_G] = [];
   } else if (output[_gS] != null && output[_gS][_i] != null) {
@@ -75548,15 +76109,6 @@ const de_Reservation = (output: any, context: __SerdeContext): Reservation => {
     contents[_In] = [];
   } else if (output[_iSn] != null && output[_iSn][_i] != null) {
     contents[_In] = de_InstanceList(__getArrayIfSingleItem(output[_iSn][_i]), context);
-  }
-  if (output[_oI] != null) {
-    contents[_OIwn] = __expectString(output[_oI]);
-  }
-  if (output[_rIeq] != null) {
-    contents[_RIeq] = __expectString(output[_rIeq]);
-  }
-  if (output[_rIes] != null) {
-    contents[_RIeser] = __expectString(output[_rIes]);
   }
   return contents;
 };
@@ -75625,39 +76177,6 @@ const de_ReservedInstanceReservationValueSet = (
  */
 const de_ReservedInstances = (output: any, context: __SerdeContext): ReservedInstances => {
   const contents: any = {};
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
-  if (output[_du] != null) {
-    contents[_Du] = __strictParseLong(output[_du]) as number;
-  }
-  if (output[_end] != null) {
-    contents[_End] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_end]));
-  }
-  if (output[_fPi] != null) {
-    contents[_FPi] = __strictParseFloat(output[_fPi]) as number;
-  }
-  if (output[_iC] != null) {
-    contents[_IC] = __strictParseInt32(output[_iC]) as number;
-  }
-  if (output[_iT] != null) {
-    contents[_IT] = __expectString(output[_iT]);
-  }
-  if (output[_pDr] != null) {
-    contents[_PDr] = __expectString(output[_pDr]);
-  }
-  if (output[_rII] != null) {
-    contents[_RIIe] = __expectString(output[_rII]);
-  }
-  if (output[_star] != null) {
-    contents[_Star] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_star]));
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_uPs] != null) {
-    contents[_UPs] = __strictParseFloat(output[_uPs]) as number;
-  }
   if (output[_cC] != null) {
     contents[_CCu] = __expectString(output[_cC]);
   }
@@ -75682,6 +76201,39 @@ const de_ReservedInstances = (output: any, context: __SerdeContext): ReservedIns
     contents[_Ta] = [];
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
+  }
+  if (output[_rII] != null) {
+    contents[_RIIe] = __expectString(output[_rII]);
+  }
+  if (output[_iT] != null) {
+    contents[_IT] = __expectString(output[_iT]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output[_star] != null) {
+    contents[_Star] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_star]));
+  }
+  if (output[_end] != null) {
+    contents[_End] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_end]));
+  }
+  if (output[_du] != null) {
+    contents[_Du] = __strictParseLong(output[_du]) as number;
+  }
+  if (output[_uPs] != null) {
+    contents[_UPs] = __strictParseFloat(output[_uPs]) as number;
+  }
+  if (output[_fPi] != null) {
+    contents[_FPi] = __strictParseFloat(output[_fPi]) as number;
+  }
+  if (output[_iC] != null) {
+    contents[_IC] = __strictParseInt32(output[_iC]) as number;
+  }
+  if (output[_pDr] != null) {
+    contents[_PDr] = __expectString(output[_pDr]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
   }
   return contents;
 };
@@ -75875,27 +76427,6 @@ const de_ReservedInstancesModificationResultList = (
  */
 const de_ReservedInstancesOffering = (output: any, context: __SerdeContext): ReservedInstancesOffering => {
   const contents: any = {};
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
-  if (output[_du] != null) {
-    contents[_Du] = __strictParseLong(output[_du]) as number;
-  }
-  if (output[_fPi] != null) {
-    contents[_FPi] = __strictParseFloat(output[_fPi]) as number;
-  }
-  if (output[_iT] != null) {
-    contents[_IT] = __expectString(output[_iT]);
-  }
-  if (output[_pDr] != null) {
-    contents[_PDr] = __expectString(output[_pDr]);
-  }
-  if (output[_rIOI] != null) {
-    contents[_RIOIe] = __expectString(output[_rIOI]);
-  }
-  if (output[_uPs] != null) {
-    contents[_UPs] = __strictParseFloat(output[_uPs]) as number;
-  }
   if (output[_cC] != null) {
     contents[_CCu] = __expectString(output[_cC]);
   }
@@ -75923,6 +76454,27 @@ const de_ReservedInstancesOffering = (output: any, context: __SerdeContext): Res
   }
   if (output[_sc] != null) {
     contents[_Sc] = __expectString(output[_sc]);
+  }
+  if (output[_rIOI] != null) {
+    contents[_RIOIe] = __expectString(output[_rIOI]);
+  }
+  if (output[_iT] != null) {
+    contents[_IT] = __expectString(output[_iT]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output[_du] != null) {
+    contents[_Du] = __strictParseLong(output[_du]) as number;
+  }
+  if (output[_uPs] != null) {
+    contents[_UPs] = __strictParseFloat(output[_uPs]) as number;
+  }
+  if (output[_fPi] != null) {
+    contents[_FPi] = __strictParseFloat(output[_fPi]) as number;
+  }
+  if (output[_pDr] != null) {
+    contents[_PDr] = __expectString(output[_pDr]);
   }
   return contents;
 };
@@ -76408,9 +76960,9 @@ const de_RouteTable = (output: any, context: __SerdeContext): RouteTable => {
     contents[_RTI] = __expectString(output[_rTI]);
   }
   if (output.routeSet === "") {
-    contents[_Rou] = [];
+    contents[_Rout] = [];
   } else if (output[_rSo] != null && output[_rSo][_i] != null) {
-    contents[_Rou] = de_RouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
+    contents[_Rout] = de_RouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
   }
   if (output.tagSet === "") {
     contents[_Ta] = [];
@@ -76767,9 +77319,9 @@ const de_ScheduledInstanceSet = (output: any, context: __SerdeContext): Schedule
 const de_SearchLocalGatewayRoutesResult = (output: any, context: __SerdeContext): SearchLocalGatewayRoutesResult => {
   const contents: any = {};
   if (output.routeSet === "") {
-    contents[_Rou] = [];
+    contents[_Rout] = [];
   } else if (output[_rSo] != null && output[_rSo][_i] != null) {
-    contents[_Rou] = de_LocalGatewayRouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
+    contents[_Rout] = de_LocalGatewayRouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
   }
   if (output[_nTe] != null) {
     contents[_NT] = __expectString(output[_nTe]);
@@ -76805,9 +77357,9 @@ const de_SearchTransitGatewayRoutesResult = (
 ): SearchTransitGatewayRoutesResult => {
   const contents: any = {};
   if (output.routeSet === "") {
-    contents[_Rou] = [];
+    contents[_Rout] = [];
   } else if (output[_rSo] != null && output[_rSo][_i] != null) {
-    contents[_Rou] = de_TransitGatewayRouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
+    contents[_Rout] = de_TransitGatewayRouteList(__getArrayIfSingleItem(output[_rSo][_i]), context);
   }
   if (output[_aRAd] != null) {
     contents[_ARAd] = __parseBoolean(output[_aRAd]);
@@ -76820,20 +77372,6 @@ const de_SearchTransitGatewayRoutesResult = (
  */
 const de_SecurityGroup = (output: any, context: __SerdeContext): SecurityGroup => {
   const contents: any = {};
-  if (output[_gD] != null) {
-    contents[_De] = __expectString(output[_gD]);
-  }
-  if (output[_gN] != null) {
-    contents[_GN] = __expectString(output[_gN]);
-  }
-  if (output.ipPermissions === "") {
-    contents[_IPpe] = [];
-  } else if (output[_iPpe] != null && output[_iPpe][_i] != null) {
-    contents[_IPpe] = de_IpPermissionList(__getArrayIfSingleItem(output[_iPpe][_i]), context);
-  }
-  if (output[_oI] != null) {
-    contents[_OIwn] = __expectString(output[_oI]);
-  }
   if (output[_gIr] != null) {
     contents[_GIr] = __expectString(output[_gIr]);
   }
@@ -76849,6 +77387,20 @@ const de_SecurityGroup = (output: any, context: __SerdeContext): SecurityGroup =
   }
   if (output[_vI] != null) {
     contents[_VI] = __expectString(output[_vI]);
+  }
+  if (output[_oI] != null) {
+    contents[_OIwn] = __expectString(output[_oI]);
+  }
+  if (output[_gN] != null) {
+    contents[_GN] = __expectString(output[_gN]);
+  }
+  if (output[_gD] != null) {
+    contents[_De] = __expectString(output[_gD]);
+  }
+  if (output.ipPermissions === "") {
+    contents[_IPpe] = [];
+  } else if (output[_iPpe] != null && output[_iPpe][_i] != null) {
+    contents[_IPpe] = de_IpPermissionList(__getArrayIfSingleItem(output[_iPpe][_i]), context);
   }
   return contents;
 };
@@ -77222,42 +77774,6 @@ const de_ServiceTypeDetailSet = (output: any, context: __SerdeContext): ServiceT
  */
 const de_Snapshot = (output: any, context: __SerdeContext): Snapshot => {
   const contents: any = {};
-  if (output[_dEKI] != null) {
-    contents[_DEKI] = __expectString(output[_dEKI]);
-  }
-  if (output[_de] != null) {
-    contents[_De] = __expectString(output[_de]);
-  }
-  if (output[_enc] != null) {
-    contents[_Enc] = __parseBoolean(output[_enc]);
-  }
-  if (output[_kKI] != null) {
-    contents[_KKI] = __expectString(output[_kKI]);
-  }
-  if (output[_oI] != null) {
-    contents[_OIwn] = __expectString(output[_oI]);
-  }
-  if (output[_pro] != null) {
-    contents[_Prog] = __expectString(output[_pro]);
-  }
-  if (output[_sIn] != null) {
-    contents[_SIn] = __expectString(output[_sIn]);
-  }
-  if (output[_sT] != null) {
-    contents[_STt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_sT]));
-  }
-  if (output[_sta] != null) {
-    contents[_Stat] = __expectString(output[_sta]);
-  }
-  if (output[_sM] != null) {
-    contents[_SMt] = __expectString(output[_sM]);
-  }
-  if (output[_vIo] != null) {
-    contents[_VIo] = __expectString(output[_vIo]);
-  }
-  if (output[_vSo] != null) {
-    contents[_VS] = __strictParseInt32(output[_vSo]) as number;
-  }
   if (output[_oAw] != null) {
     contents[_OAw] = __expectString(output[_oAw]);
   }
@@ -77277,6 +77793,42 @@ const de_Snapshot = (output: any, context: __SerdeContext): Snapshot => {
   }
   if (output[_sTs] != null) {
     contents[_STs] = __expectString(output[_sTs]);
+  }
+  if (output[_sIn] != null) {
+    contents[_SIn] = __expectString(output[_sIn]);
+  }
+  if (output[_vIo] != null) {
+    contents[_VIo] = __expectString(output[_vIo]);
+  }
+  if (output[_sta] != null) {
+    contents[_Stat] = __expectString(output[_sta]);
+  }
+  if (output[_sM] != null) {
+    contents[_SMt] = __expectString(output[_sM]);
+  }
+  if (output[_sT] != null) {
+    contents[_STt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_sT]));
+  }
+  if (output[_pro] != null) {
+    contents[_Prog] = __expectString(output[_pro]);
+  }
+  if (output[_oI] != null) {
+    contents[_OIwn] = __expectString(output[_oI]);
+  }
+  if (output[_de] != null) {
+    contents[_De] = __expectString(output[_de]);
+  }
+  if (output[_vSo] != null) {
+    contents[_VS] = __strictParseInt32(output[_vSo]) as number;
+  }
+  if (output[_enc] != null) {
+    contents[_Enc] = __parseBoolean(output[_enc]);
+  }
+  if (output[_kKI] != null) {
+    contents[_KKI] = __expectString(output[_kKI]);
+  }
+  if (output[_dEKI] != null) {
+    contents[_DEKI] = __expectString(output[_dEKI]);
   }
   return contents;
 };
@@ -77572,11 +78124,6 @@ const de_SpotDatafeedSubscription = (output: any, context: __SerdeContext): Spot
  */
 const de_SpotFleetLaunchSpecification = (output: any, context: __SerdeContext): SpotFleetLaunchSpecification => {
   const contents: any = {};
-  if (output.groupSet === "") {
-    contents[_SG] = [];
-  } else if (output[_gS] != null && output[_gS][_i] != null) {
-    contents[_SG] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
-  }
   if (output[_aTdd] != null) {
     contents[_ATd] = __expectString(output[_aTdd]);
   }
@@ -77636,6 +78183,11 @@ const de_SpotFleetLaunchSpecification = (output: any, context: __SerdeContext): 
   }
   if (output[_iR] != null) {
     contents[_IR] = de_InstanceRequirements(output[_iR], context);
+  }
+  if (output.groupSet === "") {
+    contents[_SG] = [];
+  } else if (output[_gS] != null && output[_gS][_i] != null) {
+    contents[_SG] = de_GroupIdentifierList(__getArrayIfSingleItem(output[_gS][_i]), context);
   }
   return contents;
 };
@@ -78273,41 +78825,17 @@ const de_StringList = (output: any, context: __SerdeContext): string[] => {
  */
 const de_Subnet = (output: any, context: __SerdeContext): Subnet => {
   const contents: any = {};
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
   if (output[_aZI] != null) {
     contents[_AZI] = __expectString(output[_aZI]);
   }
-  if (output[_aIAC] != null) {
-    contents[_AIAC] = __strictParseInt32(output[_aIAC]) as number;
-  }
-  if (output[_cB] != null) {
-    contents[_CB] = __expectString(output[_cB]);
-  }
-  if (output[_dFA] != null) {
-    contents[_DFA] = __parseBoolean(output[_dFA]);
-  }
   if (output[_eLADI] != null) {
     contents[_ELADI] = __strictParseInt32(output[_eLADI]) as number;
-  }
-  if (output[_mPIOL] != null) {
-    contents[_MPIOL] = __parseBoolean(output[_mPIOL]);
   }
   if (output[_mCOIOL] != null) {
     contents[_MCOIOL] = __parseBoolean(output[_mCOIOL]);
   }
   if (output[_cOIP] != null) {
     contents[_COIP] = __expectString(output[_cOIP]);
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_sIu] != null) {
-    contents[_SIub] = __expectString(output[_sIu]);
-  }
-  if (output[_vI] != null) {
-    contents[_VI] = __expectString(output[_vI]);
   }
   if (output[_oI] != null) {
     contents[_OIwn] = __expectString(output[_oI]);
@@ -78339,6 +78867,30 @@ const de_Subnet = (output: any, context: __SerdeContext): Subnet => {
   }
   if (output[_pDNOOL] != null) {
     contents[_PDNOOL] = de_PrivateDnsNameOptionsOnLaunch(output[_pDNOOL], context);
+  }
+  if (output[_sIu] != null) {
+    contents[_SIub] = __expectString(output[_sIu]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
+  }
+  if (output[_vI] != null) {
+    contents[_VI] = __expectString(output[_vI]);
+  }
+  if (output[_cB] != null) {
+    contents[_CB] = __expectString(output[_cB]);
+  }
+  if (output[_aIAC] != null) {
+    contents[_AIAC] = __strictParseInt32(output[_aIAC]) as number;
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output[_dFA] != null) {
+    contents[_DFA] = __parseBoolean(output[_dFA]);
+  }
+  if (output[_mPIOL] != null) {
+    contents[_MPIOL] = __parseBoolean(output[_mPIOL]);
   }
   return contents;
 };
@@ -80817,23 +81369,23 @@ const de_UserIdGroupPair = (output: any, context: __SerdeContext): UserIdGroupPa
   if (output[_de] != null) {
     contents[_De] = __expectString(output[_de]);
   }
-  if (output[_gIr] != null) {
-    contents[_GIr] = __expectString(output[_gIr]);
+  if (output[_uI] != null) {
+    contents[_UIs] = __expectString(output[_uI]);
   }
   if (output[_gN] != null) {
     contents[_GN] = __expectString(output[_gN]);
   }
-  if (output[_pSee] != null) {
-    contents[_PSe] = __expectString(output[_pSee]);
-  }
-  if (output[_uI] != null) {
-    contents[_UIs] = __expectString(output[_uI]);
+  if (output[_gIr] != null) {
+    contents[_GIr] = __expectString(output[_gIr]);
   }
   if (output[_vI] != null) {
     contents[_VI] = __expectString(output[_vI]);
   }
   if (output[_vPCI] != null) {
     contents[_VPCI] = __expectString(output[_vPCI]);
+  }
+  if (output[_pSee] != null) {
+    contents[_PSe] = __expectString(output[_pSee]);
   }
   return contents;
 };
@@ -80991,8 +81543,8 @@ const de_VerifiedAccessEndpoint = (output: any, context: __SerdeContext): Verifi
   if (output[_cTre] != null) {
     contents[_CTre] = __expectString(output[_cTre]);
   }
-  if (output[_lUT] != null) {
-    contents[_LUT] = __expectString(output[_lUT]);
+  if (output[_lUTa] != null) {
+    contents[_LUTa] = __expectString(output[_lUTa]);
   }
   if (output[_dT] != null) {
     contents[_DTel] = __expectString(output[_dT]);
@@ -81112,8 +81664,8 @@ const de_VerifiedAccessGroup = (output: any, context: __SerdeContext): VerifiedA
   if (output[_cTre] != null) {
     contents[_CTre] = __expectString(output[_cTre]);
   }
-  if (output[_lUT] != null) {
-    contents[_LUT] = __expectString(output[_lUT]);
+  if (output[_lUTa] != null) {
+    contents[_LUTa] = __expectString(output[_lUTa]);
   }
   if (output[_dT] != null) {
     contents[_DTel] = __expectString(output[_dT]);
@@ -81159,8 +81711,8 @@ const de_VerifiedAccessInstance = (output: any, context: __SerdeContext): Verifi
   if (output[_cTre] != null) {
     contents[_CTre] = __expectString(output[_cTre]);
   }
-  if (output[_lUT] != null) {
-    contents[_LUT] = __expectString(output[_lUT]);
+  if (output[_lUTa] != null) {
+    contents[_LUTa] = __expectString(output[_lUTa]);
   }
   if (output.tagSet === "") {
     contents[_Ta] = [];
@@ -81364,8 +81916,8 @@ const de_VerifiedAccessTrustProvider = (output: any, context: __SerdeContext): V
   if (output[_cTre] != null) {
     contents[_CTre] = __expectString(output[_cTre]);
   }
-  if (output[_lUT] != null) {
-    contents[_LUT] = __expectString(output[_lUT]);
+  if (output[_lUTa] != null) {
+    contents[_LUTa] = __expectString(output[_lUTa]);
   }
   if (output.tagSet === "") {
     contents[_Ta] = [];
@@ -81482,37 +82034,8 @@ const de_VirtualizationTypeList = (output: any, context: __SerdeContext): Virtua
  */
 const de_Volume = (output: any, context: __SerdeContext): Volume => {
   const contents: any = {};
-  if (output.attachmentSet === "") {
-    contents[_Atta] = [];
-  } else if (output[_aSt] != null && output[_aSt][_i] != null) {
-    contents[_Atta] = de_VolumeAttachmentList(__getArrayIfSingleItem(output[_aSt][_i]), context);
-  }
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
-  if (output[_cTr] != null) {
-    contents[_CTr] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_cTr]));
-  }
-  if (output[_enc] != null) {
-    contents[_Enc] = __parseBoolean(output[_enc]);
-  }
-  if (output[_kKI] != null) {
-    contents[_KKI] = __expectString(output[_kKI]);
-  }
   if (output[_oA] != null) {
     contents[_OA] = __expectString(output[_oA]);
-  }
-  if (output[_si] != null) {
-    contents[_Siz] = __strictParseInt32(output[_si]) as number;
-  }
-  if (output[_sIn] != null) {
-    contents[_SIn] = __expectString(output[_sIn]);
-  }
-  if (output[_sta] != null) {
-    contents[_Stat] = __expectString(output[_sta]);
-  }
-  if (output[_vIo] != null) {
-    contents[_VIo] = __expectString(output[_vIo]);
   }
   if (output[_io] != null) {
     contents[_Io] = __strictParseInt32(output[_io]) as number;
@@ -81537,6 +82060,35 @@ const de_Volume = (output: any, context: __SerdeContext): Volume => {
   if (output[_sTs] != null) {
     contents[_STs] = __expectString(output[_sTs]);
   }
+  if (output[_vIo] != null) {
+    contents[_VIo] = __expectString(output[_vIo]);
+  }
+  if (output[_si] != null) {
+    contents[_Siz] = __strictParseInt32(output[_si]) as number;
+  }
+  if (output[_sIn] != null) {
+    contents[_SIn] = __expectString(output[_sIn]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output[_sta] != null) {
+    contents[_Stat] = __expectString(output[_sta]);
+  }
+  if (output[_cTr] != null) {
+    contents[_CTr] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_cTr]));
+  }
+  if (output.attachmentSet === "") {
+    contents[_Atta] = [];
+  } else if (output[_aSt] != null && output[_aSt][_i] != null) {
+    contents[_Atta] = de_VolumeAttachmentList(__getArrayIfSingleItem(output[_aSt][_i]), context);
+  }
+  if (output[_enc] != null) {
+    contents[_Enc] = __parseBoolean(output[_enc]);
+  }
+  if (output[_kKI] != null) {
+    contents[_KKI] = __expectString(output[_kKI]);
+  }
   return contents;
 };
 
@@ -81545,21 +82097,6 @@ const de_Volume = (output: any, context: __SerdeContext): Volume => {
  */
 const de_VolumeAttachment = (output: any, context: __SerdeContext): VolumeAttachment => {
   const contents: any = {};
-  if (output[_aTt] != null) {
-    contents[_ATtt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_aTt]));
-  }
-  if (output[_dev] != null) {
-    contents[_Dev] = __expectString(output[_dev]);
-  }
-  if (output[_iI] != null) {
-    contents[_IIn] = __expectString(output[_iI]);
-  }
-  if (output[_sta] != null) {
-    contents[_Stat] = __expectString(output[_sta]);
-  }
-  if (output[_vIo] != null) {
-    contents[_VIo] = __expectString(output[_vIo]);
-  }
   if (output[_dOT] != null) {
     contents[_DOT] = __parseBoolean(output[_dOT]);
   }
@@ -81568,6 +82105,21 @@ const de_VolumeAttachment = (output: any, context: __SerdeContext): VolumeAttach
   }
   if (output[_iOS] != null) {
     contents[_IOS] = __expectString(output[_iOS]);
+  }
+  if (output[_vIo] != null) {
+    contents[_VIo] = __expectString(output[_vIo]);
+  }
+  if (output[_iI] != null) {
+    contents[_IIn] = __expectString(output[_iI]);
+  }
+  if (output[_dev] != null) {
+    contents[_Dev] = __expectString(output[_dev]);
+  }
+  if (output[_sta] != null) {
+    contents[_Stat] = __expectString(output[_sta]);
+  }
+  if (output[_aTt] != null) {
+    contents[_ATtt] = __expectNonNull(__parseRfc3339DateTimeWithOffset(output[_aTt]));
   }
   return contents;
 };
@@ -81846,18 +82398,6 @@ const de_VolumeStatusList = (output: any, context: __SerdeContext): VolumeStatus
  */
 const de_Vpc = (output: any, context: __SerdeContext): Vpc => {
   const contents: any = {};
-  if (output[_cB] != null) {
-    contents[_CB] = __expectString(output[_cB]);
-  }
-  if (output[_dOI] != null) {
-    contents[_DOI] = __expectString(output[_dOI]);
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_vI] != null) {
-    contents[_VI] = __expectString(output[_vI]);
-  }
   if (output[_oI] != null) {
     contents[_OIwn] = __expectString(output[_oI]);
   }
@@ -81882,6 +82422,18 @@ const de_Vpc = (output: any, context: __SerdeContext): Vpc => {
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
   }
+  if (output[_vI] != null) {
+    contents[_VI] = __expectString(output[_vI]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
+  }
+  if (output[_cB] != null) {
+    contents[_CB] = __expectString(output[_cB]);
+  }
+  if (output[_dOI] != null) {
+    contents[_DOI] = __expectString(output[_dOI]);
+  }
   return contents;
 };
 
@@ -81890,11 +82442,11 @@ const de_Vpc = (output: any, context: __SerdeContext): Vpc => {
  */
 const de_VpcAttachment = (output: any, context: __SerdeContext): VpcAttachment => {
   const contents: any = {};
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
   if (output[_vI] != null) {
     contents[_VI] = __expectString(output[_vI]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
   }
   return contents;
 };
@@ -82292,26 +82844,8 @@ const de_VpcPeeringConnectionVpcInfo = (output: any, context: __SerdeContext): V
  */
 const de_VpnConnection = (output: any, context: __SerdeContext): VpnConnection => {
   const contents: any = {};
-  if (output[_cGC] != null) {
-    contents[_CGC] = __expectString(output[_cGC]);
-  }
-  if (output[_cGIu] != null) {
-    contents[_CGIu] = __expectString(output[_cGIu]);
-  }
   if (output[_ca] != null) {
     contents[_Cat] = __expectString(output[_ca]);
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_ty] != null) {
-    contents[_T] = __expectString(output[_ty]);
-  }
-  if (output[_vCI] != null) {
-    contents[_VCI] = __expectString(output[_vCI]);
-  }
-  if (output[_vGI] != null) {
-    contents[_VGI] = __expectString(output[_vGI]);
   }
   if (output[_tGI] != null) {
     contents[_TGI] = __expectString(output[_tGI]);
@@ -82329,9 +82863,9 @@ const de_VpnConnection = (output: any, context: __SerdeContext): VpnConnection =
     contents[_O] = de_VpnConnectionOptions(output[_op], context);
   }
   if (output.routes === "") {
-    contents[_Rou] = [];
+    contents[_Rout] = [];
   } else if (output[_rou] != null && output[_rou][_i] != null) {
-    contents[_Rou] = de_VpnStaticRouteList(__getArrayIfSingleItem(output[_rou][_i]), context);
+    contents[_Rout] = de_VpnStaticRouteList(__getArrayIfSingleItem(output[_rou][_i]), context);
   }
   if (output.tagSet === "") {
     contents[_Ta] = [];
@@ -82342,6 +82876,24 @@ const de_VpnConnection = (output: any, context: __SerdeContext): VpnConnection =
     contents[_VTg] = [];
   } else if (output[_vTg] != null && output[_vTg][_i] != null) {
     contents[_VTg] = de_VgwTelemetryList(__getArrayIfSingleItem(output[_vTg][_i]), context);
+  }
+  if (output[_vCI] != null) {
+    contents[_VCI] = __expectString(output[_vCI]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
+  }
+  if (output[_cGC] != null) {
+    contents[_CGC] = __expectString(output[_cGC]);
+  }
+  if (output[_ty] != null) {
+    contents[_T] = __expectString(output[_ty]);
+  }
+  if (output[_cGIu] != null) {
+    contents[_CGIu] = __expectString(output[_cGIu]);
+  }
+  if (output[_vGI] != null) {
+    contents[_VGI] = __expectString(output[_vGI]);
   }
   return contents;
 };
@@ -82433,23 +82985,6 @@ const de_VpnConnectionOptions = (output: any, context: __SerdeContext): VpnConne
  */
 const de_VpnGateway = (output: any, context: __SerdeContext): VpnGateway => {
   const contents: any = {};
-  if (output[_aZ] != null) {
-    contents[_AZ] = __expectString(output[_aZ]);
-  }
-  if (output[_st] != null) {
-    contents[_Stat] = __expectString(output[_st]);
-  }
-  if (output[_ty] != null) {
-    contents[_T] = __expectString(output[_ty]);
-  }
-  if (output.attachments === "") {
-    contents[_VAp] = [];
-  } else if (output[_att] != null && output[_att][_i] != null) {
-    contents[_VAp] = de_VpcAttachmentList(__getArrayIfSingleItem(output[_att][_i]), context);
-  }
-  if (output[_vGI] != null) {
-    contents[_VGI] = __expectString(output[_vGI]);
-  }
   if (output[_aSA] != null) {
     contents[_ASA] = __strictParseLong(output[_aSA]) as number;
   }
@@ -82457,6 +82992,23 @@ const de_VpnGateway = (output: any, context: __SerdeContext): VpnGateway => {
     contents[_Ta] = [];
   } else if (output[_tS] != null && output[_tS][_i] != null) {
     contents[_Ta] = de_TagList(__getArrayIfSingleItem(output[_tS][_i]), context);
+  }
+  if (output[_vGI] != null) {
+    contents[_VGI] = __expectString(output[_vGI]);
+  }
+  if (output[_st] != null) {
+    contents[_Stat] = __expectString(output[_st]);
+  }
+  if (output[_ty] != null) {
+    contents[_T] = __expectString(output[_ty]);
+  }
+  if (output[_aZ] != null) {
+    contents[_AZ] = __expectString(output[_aZ]);
+  }
+  if (output.attachments === "") {
+    contents[_VAp] = [];
+  } else if (output[_att] != null && output[_att][_i] != null) {
+    contents[_VAp] = de_VpcAttachmentList(__getArrayIfSingleItem(output[_att][_i]), context);
   }
   return contents;
 };
@@ -82588,6 +83140,8 @@ const _ABHP = "ActualBlockHourlyPrice";
 const _AC = "AllowedCidrs";
 const _ACIA = "AssociateCarrierIpAddress";
 const _ACLV = "AttachClassicLinkVpc";
+const _ACRBO = "AcceptCapacityReservationBillingOwnership";
+const _ACRBOs = "AssociateCapacityReservationBillingOwner";
 const _ACT = "ArchivalCompleteTime";
 const _ACVI = "AuthorizeClientVpnIngress";
 const _ACVTN = "AssociateClientVpnTargetNetwork";
@@ -82953,6 +83507,7 @@ const _CPIo = "CoipPoolId";
 const _CPo = "CoipPools";
 const _CR = "CreateRoute";
 const _CRA = "CapacityReservationArn";
+const _CRBR = "CapacityReservationBillingRequests";
 const _CRCC = "ClientRootCertificateChain";
 const _CRCCA = "ClientRootCertificateChainArn";
 const _CRF = "CapacityReservationFleets";
@@ -82965,6 +83520,7 @@ const _CRIL = "CancelReservedInstancesListing";
 const _CRILr = "CreateReservedInstancesListing";
 const _CRIT = "CreateRestoreImageTask";
 const _CRIa = "CapacityReservationIds";
+const _CRIap = "CapacityReservationInfo";
 const _CRL = "CertificateRevocationList";
 const _CRO = "CapacityReservationOptions";
 const _CRP = "CapacityReservationPreference";
@@ -83100,6 +83656,8 @@ const _DCLV = "DetachClassicLinkVpc";
 const _DCP = "DeleteCoipPool";
 const _DCPe = "DescribeCoipPools";
 const _DCR = "DescribeCapacityReservations";
+const _DCRBO = "DisassociateCapacityReservationBillingOwner";
+const _DCRBR = "DescribeCapacityReservationBillingRequests";
 const _DCRF = "DescribeCapacityReservationFleets";
 const _DCRI = "DestinationCapacityReservationId";
 const _DCRe = "DestinationCapacityReservation";
@@ -84044,7 +84602,8 @@ const _LTau = "LaunchTemplates";
 const _LTaun = "LaunchTime";
 const _LTi = "LicenseType";
 const _LTo = "LocalTarget";
-const _LUT = "LastUpdatedTime";
+const _LUT = "LastUpdateTime";
+const _LUTa = "LastUpdatedTime";
 const _LV = "LogVersion";
 const _LVN = "LatestVersionNumber";
 const _La = "Latest";
@@ -84094,6 +84653,7 @@ const _MI = "ModifyIpam";
 const _MIA = "ModifyImageAttribute";
 const _MIAo = "ModifyInstanceAttribute";
 const _MIC = "MaxInstanceCount";
+const _MICO = "ModifyInstanceCpuOptions";
 const _MICRA = "ModifyInstanceCapacityReservationAttributes";
 const _MICS = "ModifyInstanceCreditSpecification";
 const _MIEST = "ModifyInstanceEventStartTime";
@@ -84481,10 +85041,12 @@ const _RATC = "RestoreAddressToClassic";
 const _RAe = "ResolveAlias";
 const _RAo = "RoleArn";
 const _RAu = "RuleAction";
+const _RB = "RequestedBy";
 const _RBET = "RecycleBinEnterTime";
 const _RBETe = "RecycleBinExitTime";
 const _RBUI = "RestorableByUserIds";
 const _RC = "ResourceCidr";
+const _RCRBO = "RejectCapacityReservationBillingOwnership";
 const _RCS = "ResourceComplianceStatus";
 const _RCVI = "RevokeClientVpnIngress";
 const _RCe = "ReasonCodes";
@@ -84637,8 +85199,9 @@ const _Res = "Resource";
 const _Rese = "Reservations";
 const _Resu = "Result";
 const _Ret = "Return";
-const _Ro = "Route";
-const _Rou = "Routes";
+const _Ro = "Role";
+const _Rou = "Route";
+const _Rout = "Routes";
 const _S = "Source";
 const _SA = "StartupAction";
 const _SAI = "SecondaryAllocationIds";
@@ -85019,6 +85582,7 @@ const _UPNGA = "UnassignPrivateNatGatewayAddress";
 const _UPS = "UploadPolicySignature";
 const _UPp = "UpfrontPrice";
 const _UPs = "UsagePrice";
+const _URBOI = "UnusedReservationBillingOwnerId";
 const _US = "UnlockSnapshot";
 const _USGRDE = "UpdateSecurityGroupRuleDescriptionsEgress";
 const _USGRDI = "UpdateSecurityGroupRuleDescriptionsIngress";
@@ -85375,12 +85939,14 @@ const _cPI = "coipPoolId";
 const _cPS = "coipPoolSet";
 const _cR = "capacityReservation";
 const _cRA = "capacityReservationArn";
+const _cRBRS = "capacityReservationBillingRequestSet";
 const _cRCC = "clientRootCertificateChain";
 const _cRFA = "capacityReservationFleetArn";
 const _cRFI = "capacityReservationFleetId";
 const _cRFS = "capacityReservationFleetSet";
 const _cRGS = "capacityReservationGroupSet";
 const _cRI = "capacityReservationId";
+const _cRIa = "capacityReservationInfo";
 const _cRL = "certificateRevocationList";
 const _cRO = "capacityReservationOptions";
 const _cRP = "capacityReservationPreference";
@@ -85975,7 +86541,8 @@ const _lTa = "launchTemplates";
 const _lTau = "launchTime";
 const _lTi = "licenseType";
 const _lTo = "locationType";
-const _lUT = "lastUpdatedTime";
+const _lUT = "lastUpdateTime";
+const _lUTa = "lastUpdatedTime";
 const _lV = "logVersion";
 const _lVN = "latestVersionNumber";
 const _lo = "location";
@@ -86274,6 +86841,7 @@ const _pu = "public";
 const _pur = "purchase";
 const _r = "return";
 const _rA = "ruleAction";
+const _rB = "requestedBy";
 const _rBET = "recycleBinEnterTime";
 const _rBETe = "recycleBinExitTime";
 const _rC = "returnCode";
@@ -86686,6 +87254,7 @@ const _uP = "upfrontPrice";
 const _uPS = "uploadPolicySignature";
 const _uPp = "uploadPolicy";
 const _uPs = "usagePrice";
+const _uRBOI = "unusedReservationBillingOwnerId";
 const _uS = "usageStrategy";
 const _uST = "udpStreamTimeout";
 const _uT = "updateTime";

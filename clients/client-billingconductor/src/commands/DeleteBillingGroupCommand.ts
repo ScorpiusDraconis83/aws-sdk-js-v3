@@ -82,9 +82,7 @@ export class DeleteBillingGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BillingconductorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DeleteBillingGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteBillingGroupCommand)
   .de(de_DeleteBillingGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBillingGroupInput;
+      output: DeleteBillingGroupOutput;
+    };
+    sdk: {
+      input: DeleteBillingGroupCommandInput;
+      output: DeleteBillingGroupCommandOutput;
+    };
+  };
+}

@@ -143,9 +143,7 @@ export class ChangeMessageVisibilityBatchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SQSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +155,16 @@ export class ChangeMessageVisibilityBatchCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ChangeMessageVisibilityBatchCommand)
   .de(de_ChangeMessageVisibilityBatchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ChangeMessageVisibilityBatchRequest;
+      output: ChangeMessageVisibilityBatchResult;
+    };
+    sdk: {
+      input: ChangeMessageVisibilityBatchCommandInput;
+      output: ChangeMessageVisibilityBatchCommandOutput;
+    };
+  };
+}

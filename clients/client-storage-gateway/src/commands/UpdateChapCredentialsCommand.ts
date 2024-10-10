@@ -108,9 +108,7 @@ export class UpdateChapCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class UpdateChapCredentialsCommand extends $Command
   .f(UpdateChapCredentialsInputFilterSensitiveLog, void 0)
   .ser(se_UpdateChapCredentialsCommand)
   .de(de_UpdateChapCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChapCredentialsInput;
+      output: UpdateChapCredentialsOutput;
+    };
+    sdk: {
+      input: UpdateChapCredentialsCommandInput;
+      output: UpdateChapCredentialsCommandOutput;
+    };
+  };
+}

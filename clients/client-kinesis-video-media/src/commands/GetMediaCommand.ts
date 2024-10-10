@@ -148,9 +148,7 @@ export class GetMediaCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisVideoMediaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -162,4 +160,16 @@ export class GetMediaCommand extends $Command
   .f(void 0, GetMediaOutputFilterSensitiveLog)
   .ser(se_GetMediaCommand)
   .de(de_GetMediaCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMediaInput;
+      output: GetMediaOutput;
+    };
+    sdk: {
+      input: GetMediaCommandInput;
+      output: GetMediaCommandOutput;
+    };
+  };
+}

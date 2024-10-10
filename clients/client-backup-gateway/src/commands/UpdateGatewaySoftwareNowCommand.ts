@@ -84,9 +84,7 @@ export class UpdateGatewaySoftwareNowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class UpdateGatewaySoftwareNowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateGatewaySoftwareNowCommand)
   .de(de_UpdateGatewaySoftwareNowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGatewaySoftwareNowInput;
+      output: UpdateGatewaySoftwareNowOutput;
+    };
+    sdk: {
+      input: UpdateGatewaySoftwareNowCommandInput;
+      output: UpdateGatewaySoftwareNowCommandOutput;
+    };
+  };
+}

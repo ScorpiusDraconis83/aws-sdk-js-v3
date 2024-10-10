@@ -6,8 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { DescribeImagesRequest } from "../models/models_3";
-import { DescribeImagesResult } from "../models/models_4";
+import { DescribeImagesRequest, DescribeImagesResult } from "../models/models_4";
 import { de_DescribeImagesCommand, se_DescribeImagesCommand } from "../protocols/Aws_ec2";
 
 /**
@@ -55,14 +54,6 @@ export interface DescribeImagesCommandOutput extends DescribeImagesResult, __Met
  *   ExecutableUsers: [ // ExecutableByStringList
  *     "STRING_VALUE",
  *   ],
- *   Filters: [ // FilterList
- *     { // Filter
- *       Name: "STRING_VALUE",
- *       Values: [ // ValueStringList
- *         "STRING_VALUE",
- *       ],
- *     },
- *   ],
  *   ImageIds: [ // ImageIdStringList
  *     "STRING_VALUE",
  *   ],
@@ -71,38 +62,28 @@ export interface DescribeImagesCommandOutput extends DescribeImagesResult, __Met
  *   ],
  *   IncludeDeprecated: true || false,
  *   IncludeDisabled: true || false,
- *   DryRun: true || false,
  *   MaxResults: Number("int"),
  *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
  * };
  * const command = new DescribeImagesCommand(input);
  * const response = await client.send(command);
  * // { // DescribeImagesResult
+ * //   NextToken: "STRING_VALUE",
  * //   Images: [ // ImageList
  * //     { // Image
- * //       Architecture: "i386" || "x86_64" || "arm64" || "x86_64_mac" || "arm64_mac",
- * //       CreationDate: "STRING_VALUE",
- * //       ImageId: "STRING_VALUE",
- * //       ImageLocation: "STRING_VALUE",
- * //       ImageType: "machine" || "kernel" || "ramdisk",
- * //       Public: true || false,
- * //       KernelId: "STRING_VALUE",
- * //       OwnerId: "STRING_VALUE",
- * //       Platform: "Windows",
  * //       PlatformDetails: "STRING_VALUE",
  * //       UsageOperation: "STRING_VALUE",
- * //       ProductCodes: [ // ProductCodeList
- * //         { // ProductCode
- * //           ProductCodeId: "STRING_VALUE",
- * //           ProductCodeType: "devpay" || "marketplace",
- * //         },
- * //       ],
- * //       RamdiskId: "STRING_VALUE",
- * //       State: "pending" || "available" || "invalid" || "deregistered" || "transient" || "failed" || "error" || "disabled",
  * //       BlockDeviceMappings: [ // BlockDeviceMappingList
  * //         { // BlockDeviceMapping
- * //           DeviceName: "STRING_VALUE",
- * //           VirtualName: "STRING_VALUE",
  * //           Ebs: { // EbsBlockDevice
  * //             DeleteOnTermination: true || false,
  * //             Iops: Number("int"),
@@ -115,6 +96,8 @@ export interface DescribeImagesCommandOutput extends DescribeImagesResult, __Met
  * //             Encrypted: true || false,
  * //           },
  * //           NoDevice: "STRING_VALUE",
+ * //           DeviceName: "STRING_VALUE",
+ * //           VirtualName: "STRING_VALUE",
  * //         },
  * //       ],
  * //       Description: "STRING_VALUE",
@@ -143,9 +126,25 @@ export interface DescribeImagesCommandOutput extends DescribeImagesResult, __Met
  * //       SourceInstanceId: "STRING_VALUE",
  * //       DeregistrationProtection: "STRING_VALUE",
  * //       LastLaunchedTime: "STRING_VALUE",
+ * //       ImageId: "STRING_VALUE",
+ * //       ImageLocation: "STRING_VALUE",
+ * //       State: "pending" || "available" || "invalid" || "deregistered" || "transient" || "failed" || "error" || "disabled",
+ * //       OwnerId: "STRING_VALUE",
+ * //       CreationDate: "STRING_VALUE",
+ * //       Public: true || false,
+ * //       ProductCodes: [ // ProductCodeList
+ * //         { // ProductCode
+ * //           ProductCodeId: "STRING_VALUE",
+ * //           ProductCodeType: "devpay" || "marketplace",
+ * //         },
+ * //       ],
+ * //       Architecture: "i386" || "x86_64" || "arm64" || "x86_64_mac" || "arm64_mac",
+ * //       ImageType: "machine" || "kernel" || "ramdisk",
+ * //       KernelId: "STRING_VALUE",
+ * //       RamdiskId: "STRING_VALUE",
+ * //       Platform: "Windows",
  * //     },
  * //   ],
- * //   NextToken: "STRING_VALUE",
  * // };
  *
  * ```
@@ -215,9 +214,7 @@ export class DescribeImagesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -229,4 +226,16 @@ export class DescribeImagesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeImagesCommand)
   .de(de_DescribeImagesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImagesRequest;
+      output: DescribeImagesResult;
+    };
+    sdk: {
+      input: DescribeImagesCommandInput;
+      output: DescribeImagesCommandOutput;
+    };
+  };
+}

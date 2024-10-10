@@ -111,9 +111,7 @@ export class GetOrderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PrivateNetworksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class GetOrderCommand extends $Command
   .f(void 0, GetOrderResponseFilterSensitiveLog)
   .ser(se_GetOrderCommand)
   .de(de_GetOrderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOrderRequest;
+      output: GetOrderResponse;
+    };
+    sdk: {
+      input: GetOrderCommandInput;
+      output: GetOrderCommandOutput;
+    };
+  };
+}

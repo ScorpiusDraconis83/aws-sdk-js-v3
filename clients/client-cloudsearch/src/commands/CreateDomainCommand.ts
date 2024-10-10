@@ -103,9 +103,7 @@ export class CreateDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class CreateDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDomainCommand)
   .de(de_CreateDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDomainRequest;
+      output: CreateDomainResponse;
+    };
+    sdk: {
+      input: CreateDomainCommandInput;
+      output: CreateDomainCommandOutput;
+    };
+  };
+}

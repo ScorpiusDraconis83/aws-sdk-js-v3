@@ -175,9 +175,7 @@ export class GetLambdaFunctionRecommendationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComputeOptimizerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -189,4 +187,16 @@ export class GetLambdaFunctionRecommendationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetLambdaFunctionRecommendationsCommand)
   .de(de_GetLambdaFunctionRecommendationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLambdaFunctionRecommendationsRequest;
+      output: GetLambdaFunctionRecommendationsResponse;
+    };
+    sdk: {
+      input: GetLambdaFunctionRecommendationsCommandInput;
+      output: GetLambdaFunctionRecommendationsCommandOutput;
+    };
+  };
+}

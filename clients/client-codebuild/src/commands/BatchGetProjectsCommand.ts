@@ -184,7 +184,7 @@ export interface BatchGetProjectsCommandOutput extends BatchGetProjectsOutput, _
  * //         scopeConfiguration: { // ScopeConfiguration
  * //           name: "STRING_VALUE", // required
  * //           domain: "STRING_VALUE",
- * //           scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL", // required
+ * //           scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
  * //         },
  * //       },
  * //       vpcConfig: { // VpcConfig
@@ -269,9 +269,7 @@ export class BatchGetProjectsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -283,4 +281,16 @@ export class BatchGetProjectsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetProjectsCommand)
   .de(de_BatchGetProjectsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetProjectsInput;
+      output: BatchGetProjectsOutput;
+    };
+    sdk: {
+      input: BatchGetProjectsCommandInput;
+      output: BatchGetProjectsCommandOutput;
+    };
+  };
+}

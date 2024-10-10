@@ -713,9 +713,7 @@ export class CreateVolumeFromBackupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -727,4 +725,16 @@ export class CreateVolumeFromBackupCommand extends $Command
   .f(void 0, CreateVolumeFromBackupResponseFilterSensitiveLog)
   .ser(se_CreateVolumeFromBackupCommand)
   .de(de_CreateVolumeFromBackupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVolumeFromBackupRequest;
+      output: CreateVolumeFromBackupResponse;
+    };
+    sdk: {
+      input: CreateVolumeFromBackupCommandInput;
+      output: CreateVolumeFromBackupCommandOutput;
+    };
+  };
+}

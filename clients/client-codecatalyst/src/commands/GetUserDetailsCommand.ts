@@ -93,9 +93,7 @@ export class GetUserDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCatalystClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class GetUserDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetUserDetailsCommand)
   .de(de_GetUserDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUserDetailsRequest;
+      output: GetUserDetailsResponse;
+    };
+    sdk: {
+      input: GetUserDetailsCommandInput;
+      output: GetUserDetailsCommandOutput;
+    };
+  };
+}

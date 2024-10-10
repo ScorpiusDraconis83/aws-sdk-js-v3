@@ -112,9 +112,7 @@ export class ListRepositoriesForApprovalRuleTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCommitClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class ListRepositoriesForApprovalRuleTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRepositoriesForApprovalRuleTemplateCommand)
   .de(de_ListRepositoriesForApprovalRuleTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRepositoriesForApprovalRuleTemplateInput;
+      output: ListRepositoriesForApprovalRuleTemplateOutput;
+    };
+    sdk: {
+      input: ListRepositoriesForApprovalRuleTemplateCommandInput;
+      output: ListRepositoriesForApprovalRuleTemplateCommandOutput;
+    };
+  };
+}

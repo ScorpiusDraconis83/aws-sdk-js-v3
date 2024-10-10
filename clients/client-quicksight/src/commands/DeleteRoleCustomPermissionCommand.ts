@@ -92,9 +92,7 @@ export class DeleteRoleCustomPermissionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DeleteRoleCustomPermissionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRoleCustomPermissionCommand)
   .de(de_DeleteRoleCustomPermissionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRoleCustomPermissionRequest;
+      output: DeleteRoleCustomPermissionResponse;
+    };
+    sdk: {
+      input: DeleteRoleCustomPermissionCommandInput;
+      output: DeleteRoleCustomPermissionCommandOutput;
+    };
+  };
+}

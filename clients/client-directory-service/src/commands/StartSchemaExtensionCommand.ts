@@ -59,7 +59,7 @@ export interface StartSchemaExtensionCommandOutput extends StartSchemaExtensionR
  *  <p>A client exception has occurred.</p>
  *
  * @throws {@link DirectoryUnavailableException} (client fault)
- *  <p>The specified directory is unavailable or could not be found.</p>
+ *  <p>The specified directory is unavailable.</p>
  *
  * @throws {@link EntityDoesNotExistException} (client fault)
  *  <p>The specified entity could not be found.</p>
@@ -88,9 +88,7 @@ export class StartSchemaExtensionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectoryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class StartSchemaExtensionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartSchemaExtensionCommand)
   .de(de_StartSchemaExtensionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSchemaExtensionRequest;
+      output: StartSchemaExtensionResult;
+    };
+    sdk: {
+      input: StartSchemaExtensionCommandInput;
+      output: StartSchemaExtensionCommandOutput;
+    };
+  };
+}

@@ -110,9 +110,7 @@ export class DeleteProjectVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class DeleteProjectVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteProjectVersionCommand)
   .de(de_DeleteProjectVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProjectVersionRequest;
+      output: DeleteProjectVersionResponse;
+    };
+    sdk: {
+      input: DeleteProjectVersionCommandInput;
+      output: DeleteProjectVersionCommandOutput;
+    };
+  };
+}

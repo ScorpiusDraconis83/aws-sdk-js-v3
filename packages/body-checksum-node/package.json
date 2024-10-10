@@ -1,6 +1,6 @@
 {
   "name": "@aws-sdk/body-checksum-node",
-  "version": "3.620.0",
+  "version": "3.667.0",
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
     "build:cjs": "node ../../scripts/compilation/inline body-checksum-node",
@@ -24,8 +24,8 @@
     "@aws-sdk/sha256-tree-hash": "*",
     "@aws-sdk/types": "*",
     "@smithy/is-array-buffer": "^3.0.0",
-    "@smithy/protocol-http": "^4.1.0",
-    "@smithy/types": "^3.3.0",
+    "@smithy/protocol-http": "^4.1.4",
+    "@smithy/types": "^3.5.0",
     "@smithy/util-hex-encoding": "^3.0.0",
     "@smithy/util-utf8": "^3.0.0",
     "tslib": "^2.6.2"

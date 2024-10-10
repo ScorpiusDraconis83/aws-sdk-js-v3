@@ -114,9 +114,7 @@ export class ListSuggestedResiliencyPoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class ListSuggestedResiliencyPoliciesCommand extends $Command
   .f(void 0, ListSuggestedResiliencyPoliciesResponseFilterSensitiveLog)
   .ser(se_ListSuggestedResiliencyPoliciesCommand)
   .de(de_ListSuggestedResiliencyPoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSuggestedResiliencyPoliciesRequest;
+      output: ListSuggestedResiliencyPoliciesResponse;
+    };
+    sdk: {
+      input: ListSuggestedResiliencyPoliciesCommandInput;
+      output: ListSuggestedResiliencyPoliciesCommandOutput;
+    };
+  };
+}

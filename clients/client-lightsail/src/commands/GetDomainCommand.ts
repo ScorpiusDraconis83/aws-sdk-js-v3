@@ -133,9 +133,7 @@ export class GetDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class GetDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDomainCommand)
   .de(de_GetDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDomainRequest;
+      output: GetDomainResult;
+    };
+    sdk: {
+      input: GetDomainCommandInput;
+      output: GetDomainCommandOutput;
+    };
+  };
+}

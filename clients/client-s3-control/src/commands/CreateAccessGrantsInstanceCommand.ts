@@ -64,6 +64,8 @@ export interface CreateAccessGrantsInstanceCommandOutput extends CreateAccessGra
  * //   AccessGrantsInstanceId: "STRING_VALUE",
  * //   AccessGrantsInstanceArn: "STRING_VALUE",
  * //   IdentityCenterArn: "STRING_VALUE",
+ * //   IdentityCenterInstanceArn: "STRING_VALUE",
+ * //   IdentityCenterApplicationArn: "STRING_VALUE",
  * // };
  *
  * ```
@@ -105,4 +107,16 @@ export class CreateAccessGrantsInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAccessGrantsInstanceCommand)
   .de(de_CreateAccessGrantsInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAccessGrantsInstanceRequest;
+      output: CreateAccessGrantsInstanceResult;
+    };
+    sdk: {
+      input: CreateAccessGrantsInstanceCommandInput;
+      output: CreateAccessGrantsInstanceCommandOutput;
+    };
+  };
+}

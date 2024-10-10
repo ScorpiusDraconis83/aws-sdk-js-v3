@@ -94,9 +94,7 @@ export class RemoveTagsFromCertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class RemoveTagsFromCertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemoveTagsFromCertificateCommand)
   .de(de_RemoveTagsFromCertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveTagsFromCertificateRequest;
+      output: {};
+    };
+    sdk: {
+      input: RemoveTagsFromCertificateCommandInput;
+      output: RemoveTagsFromCertificateCommandOutput;
+    };
+  };
+}

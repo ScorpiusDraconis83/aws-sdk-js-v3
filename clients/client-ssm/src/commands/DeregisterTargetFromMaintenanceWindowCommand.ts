@@ -90,9 +90,7 @@ export class DeregisterTargetFromMaintenanceWindowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DeregisterTargetFromMaintenanceWindowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeregisterTargetFromMaintenanceWindowCommand)
   .de(de_DeregisterTargetFromMaintenanceWindowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterTargetFromMaintenanceWindowRequest;
+      output: DeregisterTargetFromMaintenanceWindowResult;
+    };
+    sdk: {
+      input: DeregisterTargetFromMaintenanceWindowCommandInput;
+      output: DeregisterTargetFromMaintenanceWindowCommandOutput;
+    };
+  };
+}

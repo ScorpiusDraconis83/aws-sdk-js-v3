@@ -79,9 +79,7 @@ export class UpdateTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class UpdateTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTemplateCommand)
   .de(de_UpdateTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateTemplateCommandInput;
+      output: UpdateTemplateCommandOutput;
+    };
+  };
+}

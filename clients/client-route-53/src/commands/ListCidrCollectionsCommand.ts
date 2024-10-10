@@ -78,9 +78,7 @@ export class ListCidrCollectionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class ListCidrCollectionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCidrCollectionsCommand)
   .de(de_ListCidrCollectionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCidrCollectionsRequest;
+      output: ListCidrCollectionsResponse;
+    };
+    sdk: {
+      input: ListCidrCollectionsCommandInput;
+      output: ListCidrCollectionsCommandOutput;
+    };
+  };
+}

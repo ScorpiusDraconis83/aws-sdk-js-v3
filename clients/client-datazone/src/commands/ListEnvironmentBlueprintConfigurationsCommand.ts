@@ -122,9 +122,7 @@ export class ListEnvironmentBlueprintConfigurationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class ListEnvironmentBlueprintConfigurationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEnvironmentBlueprintConfigurationsCommand)
   .de(de_ListEnvironmentBlueprintConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEnvironmentBlueprintConfigurationsInput;
+      output: ListEnvironmentBlueprintConfigurationsOutput;
+    };
+    sdk: {
+      input: ListEnvironmentBlueprintConfigurationsCommandInput;
+      output: ListEnvironmentBlueprintConfigurationsCommandOutput;
+    };
+  };
+}

@@ -44,8 +44,8 @@ export interface CreateSpotDatafeedSubscriptionCommandOutput
  * // const { EC2Client, CreateSpotDatafeedSubscriptionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // CreateSpotDatafeedSubscriptionRequest
- *   Bucket: "STRING_VALUE", // required
  *   DryRun: true || false,
+ *   Bucket: "STRING_VALUE", // required
  *   Prefix: "STRING_VALUE",
  * };
  * const command = new CreateSpotDatafeedSubscriptionCommand(input);
@@ -106,9 +106,7 @@ export class CreateSpotDatafeedSubscriptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class CreateSpotDatafeedSubscriptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSpotDatafeedSubscriptionCommand)
   .de(de_CreateSpotDatafeedSubscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSpotDatafeedSubscriptionRequest;
+      output: CreateSpotDatafeedSubscriptionResult;
+    };
+    sdk: {
+      input: CreateSpotDatafeedSubscriptionCommandInput;
+      output: CreateSpotDatafeedSubscriptionCommandOutput;
+    };
+  };
+}

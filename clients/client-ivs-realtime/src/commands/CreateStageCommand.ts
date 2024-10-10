@@ -78,6 +78,8 @@ export interface CreateStageCommandOutput extends CreateStageResponse, __Metadat
  * //     endpoints: { // StageEndpoints
  * //       events: "STRING_VALUE",
  * //       whip: "STRING_VALUE",
+ * //       rtmp: "STRING_VALUE",
+ * //       rtmps: "STRING_VALUE",
  * //     },
  * //   },
  * //   participantTokens: [ // ParticipantTokenList
@@ -130,9 +132,7 @@ export class CreateStageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IVSRealTimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +144,16 @@ export class CreateStageCommand extends $Command
   .f(void 0, CreateStageResponseFilterSensitiveLog)
   .ser(se_CreateStageCommand)
   .de(de_CreateStageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStageRequest;
+      output: CreateStageResponse;
+    };
+    sdk: {
+      input: CreateStageCommandInput;
+      output: CreateStageCommandOutput;
+    };
+  };
+}

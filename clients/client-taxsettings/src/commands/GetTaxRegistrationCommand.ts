@@ -168,9 +168,7 @@ export class GetTaxRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TaxSettingsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -182,4 +180,16 @@ export class GetTaxRegistrationCommand extends $Command
   .f(void 0, GetTaxRegistrationResponseFilterSensitiveLog)
   .ser(se_GetTaxRegistrationCommand)
   .de(de_GetTaxRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTaxRegistrationRequest;
+      output: GetTaxRegistrationResponse;
+    };
+    sdk: {
+      input: GetTaxRegistrationCommandInput;
+      output: GetTaxRegistrationCommandOutput;
+    };
+  };
+}

@@ -6,7 +6,12 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoIdentityClient";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { GetCredentialsForIdentityInput, GetCredentialsForIdentityResponse } from "../models/models_0";
+import {
+  GetCredentialsForIdentityInput,
+  GetCredentialsForIdentityInputFilterSensitiveLog,
+  GetCredentialsForIdentityResponse,
+  GetCredentialsForIdentityResponseFilterSensitiveLog,
+} from "../models/models_0";
 import { de_GetCredentialsForIdentityCommand, se_GetCredentialsForIdentityCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -107,9 +112,7 @@ export class GetCredentialsForIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,7 +121,19 @@ export class GetCredentialsForIdentityCommand extends $Command
   })
   .s("AWSCognitoIdentityService", "GetCredentialsForIdentity", {})
   .n("CognitoIdentityClient", "GetCredentialsForIdentityCommand")
-  .f(void 0, void 0)
+  .f(GetCredentialsForIdentityInputFilterSensitiveLog, GetCredentialsForIdentityResponseFilterSensitiveLog)
   .ser(se_GetCredentialsForIdentityCommand)
   .de(de_GetCredentialsForIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCredentialsForIdentityInput;
+      output: GetCredentialsForIdentityResponse;
+    };
+    sdk: {
+      input: GetCredentialsForIdentityCommandInput;
+      output: GetCredentialsForIdentityCommandOutput;
+    };
+  };
+}

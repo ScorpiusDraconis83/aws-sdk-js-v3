@@ -95,9 +95,7 @@ export class UpdateDocumentVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class UpdateDocumentVersionCommand extends $Command
   .f(UpdateDocumentVersionRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateDocumentVersionCommand)
   .de(de_UpdateDocumentVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDocumentVersionRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateDocumentVersionCommandInput;
+      output: UpdateDocumentVersionCommandOutput;
+    };
+  };
+}

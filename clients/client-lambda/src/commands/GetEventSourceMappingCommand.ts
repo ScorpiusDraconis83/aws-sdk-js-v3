@@ -114,6 +114,7 @@ export interface GetEventSourceMappingCommandOutput extends EventSourceMappingCo
  * //     ErrorCode: "STRING_VALUE",
  * //     Message: "STRING_VALUE",
  * //   },
+ * //   EventSourceMappingArn: "STRING_VALUE",
  * // };
  *
  * ```
@@ -140,6 +141,33 @@ export interface GetEventSourceMappingCommandOutput extends EventSourceMappingCo
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To get a Lambda function's event source mapping
+ * ```javascript
+ * // The following example returns details about an event source mapping. To get a mapping's UUID, use ListEventSourceMappings.
+ * const input = {
+ *   "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2"
+ * };
+ * const command = new GetEventSourceMappingCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "BatchSize": 500,
+ *   "BisectBatchOnFunctionError": false,
+ *   "DestinationConfig": {},
+ *   "EventSourceArn": "arn:aws:sqs:us-east-2:123456789012:mySQSqueue",
+ *   "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:myFunction",
+ *   "LastModified": "${timestamp}",
+ *   "LastProcessingResult": "No records processed",
+ *   "MaximumRecordAgeInSeconds": 604800,
+ *   "MaximumRetryAttempts": 10000,
+ *   "State": "Creating",
+ *   "StateTransitionReason": "User action",
+ *   "UUID": "14e0db71-xmpl-4eb5-b481-8945cf9d10c2"
+ * }
+ * *\/
+ * // example id: to-get-a-lambda-functions-event-source-mapping-1481661622799
+ * ```
+ *
  */
 export class GetEventSourceMappingCommand extends $Command
   .classBuilder<
@@ -149,9 +177,7 @@ export class GetEventSourceMappingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +189,16 @@ export class GetEventSourceMappingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetEventSourceMappingCommand)
   .de(de_GetEventSourceMappingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEventSourceMappingRequest;
+      output: EventSourceMappingConfiguration;
+    };
+    sdk: {
+      input: GetEventSourceMappingCommandInput;
+      output: GetEventSourceMappingCommandOutput;
+    };
+  };
+}

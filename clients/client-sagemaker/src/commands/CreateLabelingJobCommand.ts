@@ -122,7 +122,7 @@ export interface CreateLabelingJobCommandOutput extends CreateLabelingJobRespons
  *       UiTemplateS3Uri: "STRING_VALUE",
  *       HumanTaskUiArn: "STRING_VALUE",
  *     },
- *     PreHumanTaskLambdaArn: "STRING_VALUE", // required
+ *     PreHumanTaskLambdaArn: "STRING_VALUE",
  *     TaskKeywords: [ // TaskKeywords
  *       "STRING_VALUE",
  *     ],
@@ -184,9 +184,7 @@ export class CreateLabelingJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -198,4 +196,16 @@ export class CreateLabelingJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateLabelingJobCommand)
   .de(de_CreateLabelingJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLabelingJobRequest;
+      output: CreateLabelingJobResponse;
+    };
+    sdk: {
+      input: CreateLabelingJobCommandInput;
+      output: CreateLabelingJobCommandOutput;
+    };
+  };
+}

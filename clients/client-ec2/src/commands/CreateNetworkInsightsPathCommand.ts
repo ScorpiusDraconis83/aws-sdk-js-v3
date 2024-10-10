@@ -6,7 +6,8 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { CreateNetworkInsightsPathRequest, CreateNetworkInsightsPathResult } from "../models/models_1";
+import { CreateNetworkInsightsPathRequest } from "../models/models_1";
+import { CreateNetworkInsightsPathResult } from "../models/models_2";
 import { de_CreateNetworkInsightsPathCommand, se_CreateNetworkInsightsPathCommand } from "../protocols/Aws_ec2";
 
 /**
@@ -152,9 +153,7 @@ export class CreateNetworkInsightsPathCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -166,4 +165,16 @@ export class CreateNetworkInsightsPathCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateNetworkInsightsPathCommand)
   .de(de_CreateNetworkInsightsPathCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkInsightsPathRequest;
+      output: CreateNetworkInsightsPathResult;
+    };
+    sdk: {
+      input: CreateNetworkInsightsPathCommandInput;
+      output: CreateNetworkInsightsPathCommandOutput;
+    };
+  };
+}

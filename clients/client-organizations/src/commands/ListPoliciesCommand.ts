@@ -46,7 +46,7 @@ export interface ListPoliciesCommandOutput extends ListPoliciesResponse, __Metad
  * // const { OrganizationsClient, ListPoliciesCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
  * const client = new OrganizationsClient(config);
  * const input = { // ListPoliciesRequest
- *   Filter: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY", // required
+ *   Filter: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY", // required
  *   NextToken: "STRING_VALUE",
  *   MaxResults: Number("int"),
  * };
@@ -59,7 +59,7 @@ export interface ListPoliciesCommandOutput extends ListPoliciesResponse, __Metad
  * //       Arn: "STRING_VALUE",
  * //       Name: "STRING_VALUE",
  * //       Description: "STRING_VALUE",
- * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //       AwsManaged: true || false,
  * //     },
  * //   ],
@@ -255,9 +255,7 @@ export class ListPoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -269,4 +267,16 @@ export class ListPoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPoliciesCommand)
   .de(de_ListPoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPoliciesRequest;
+      output: ListPoliciesResponse;
+    };
+    sdk: {
+      input: ListPoliciesCommandInput;
+      output: ListPoliciesCommandOutput;
+    };
+  };
+}

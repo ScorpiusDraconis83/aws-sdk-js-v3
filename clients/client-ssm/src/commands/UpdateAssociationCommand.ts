@@ -114,6 +114,20 @@ export interface UpdateAssociationCommandOutput extends UpdateAssociationResult,
  *           },
  *         ],
  *       },
+ *       IncludeChildOrganizationUnits: true || false,
+ *       ExcludeAccounts: [ // ExcludeAccounts
+ *         "STRING_VALUE",
+ *       ],
+ *       Targets: [
+ *         {
+ *           Key: "STRING_VALUE",
+ *           Values: [
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       TargetsMaxConcurrency: "STRING_VALUE",
+ *       TargetsMaxErrors: "STRING_VALUE",
  *     },
  *   ],
  *   ScheduleOffset: Number("int"),
@@ -210,6 +224,20 @@ export interface UpdateAssociationCommandOutput extends UpdateAssociationResult,
  * //             },
  * //           ],
  * //         },
+ * //         IncludeChildOrganizationUnits: true || false,
+ * //         ExcludeAccounts: [ // ExcludeAccounts
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Targets: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         TargetsMaxConcurrency: "STRING_VALUE",
+ * //         TargetsMaxErrors: "STRING_VALUE",
  * //       },
  * //     ],
  * //     ScheduleOffset: Number("int"),
@@ -303,9 +331,7 @@ export class UpdateAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -317,4 +343,16 @@ export class UpdateAssociationCommand extends $Command
   .f(UpdateAssociationRequestFilterSensitiveLog, UpdateAssociationResultFilterSensitiveLog)
   .ser(se_UpdateAssociationCommand)
   .de(de_UpdateAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssociationRequest;
+      output: UpdateAssociationResult;
+    };
+    sdk: {
+      input: UpdateAssociationCommandInput;
+      output: UpdateAssociationCommandOutput;
+    };
+  };
+}

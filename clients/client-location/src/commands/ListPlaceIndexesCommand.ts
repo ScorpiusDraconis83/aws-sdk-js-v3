@@ -89,9 +89,7 @@ export class ListPlaceIndexesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ListPlaceIndexesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPlaceIndexesCommand)
   .de(de_ListPlaceIndexesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPlaceIndexesRequest;
+      output: ListPlaceIndexesResponse;
+    };
+    sdk: {
+      input: ListPlaceIndexesCommandInput;
+      output: ListPlaceIndexesCommandOutput;
+    };
+  };
+}

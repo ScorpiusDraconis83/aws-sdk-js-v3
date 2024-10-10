@@ -6,10 +6,8 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import {
-  CreateCapacityReservationBySplittingRequest,
-  CreateCapacityReservationBySplittingResult,
-} from "../models/models_0";
+import { CreateCapacityReservationBySplittingRequest } from "../models/models_0";
+import { CreateCapacityReservationBySplittingResult } from "../models/models_1";
 import {
   de_CreateCapacityReservationBySplittingCommand,
   se_CreateCapacityReservationBySplittingCommand,
@@ -100,6 +98,7 @@ export interface CreateCapacityReservationBySplittingCommandOutput
  * //       },
  * //     ],
  * //     ReservationType: "default" || "capacity-block",
+ * //     UnusedReservationBillingOwnerId: "STRING_VALUE",
  * //   },
  * //   DestinationCapacityReservation: {
  * //     CapacityReservationId: "STRING_VALUE",
@@ -136,6 +135,7 @@ export interface CreateCapacityReservationBySplittingCommandOutput
  * //       },
  * //     ],
  * //     ReservationType: "default" || "capacity-block",
+ * //     UnusedReservationBillingOwnerId: "STRING_VALUE",
  * //   },
  * //   InstanceCount: Number("int"),
  * // };
@@ -161,9 +161,7 @@ export class CreateCapacityReservationBySplittingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -175,4 +173,16 @@ export class CreateCapacityReservationBySplittingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCapacityReservationBySplittingCommand)
   .de(de_CreateCapacityReservationBySplittingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCapacityReservationBySplittingRequest;
+      output: CreateCapacityReservationBySplittingResult;
+    };
+    sdk: {
+      input: CreateCapacityReservationBySplittingCommandInput;
+      output: CreateCapacityReservationBySplittingCommandOutput;
+    };
+  };
+}

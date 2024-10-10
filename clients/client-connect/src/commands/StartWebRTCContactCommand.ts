@@ -134,9 +134,7 @@ export class StartWebRTCContactCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +146,16 @@ export class StartWebRTCContactCommand extends $Command
   .f(StartWebRTCContactRequestFilterSensitiveLog, StartWebRTCContactResponseFilterSensitiveLog)
   .ser(se_StartWebRTCContactCommand)
   .de(de_StartWebRTCContactCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartWebRTCContactRequest;
+      output: StartWebRTCContactResponse;
+    };
+    sdk: {
+      input: StartWebRTCContactCommandInput;
+      output: StartWebRTCContactCommandOutput;
+    };
+  };
+}

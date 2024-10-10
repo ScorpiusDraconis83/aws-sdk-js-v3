@@ -99,9 +99,7 @@ export class BatchGetNamedQueryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AthenaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class BatchGetNamedQueryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetNamedQueryCommand)
   .de(de_BatchGetNamedQueryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetNamedQueryInput;
+      output: BatchGetNamedQueryOutput;
+    };
+    sdk: {
+      input: BatchGetNamedQueryCommandInput;
+      output: BatchGetNamedQueryCommandOutput;
+    };
+  };
+}

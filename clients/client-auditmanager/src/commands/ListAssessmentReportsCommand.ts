@@ -93,9 +93,7 @@ export class ListAssessmentReportsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class ListAssessmentReportsCommand extends $Command
   .f(void 0, ListAssessmentReportsResponseFilterSensitiveLog)
   .ser(se_ListAssessmentReportsCommand)
   .de(de_ListAssessmentReportsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssessmentReportsRequest;
+      output: ListAssessmentReportsResponse;
+    };
+    sdk: {
+      input: ListAssessmentReportsCommandInput;
+      output: ListAssessmentReportsCommandOutput;
+    };
+  };
+}

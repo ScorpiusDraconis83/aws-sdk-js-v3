@@ -118,9 +118,7 @@ export class GetTemplateStepCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MigrationHubOrchestratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class GetTemplateStepCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTemplateStepCommand)
   .de(de_GetTemplateStepCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTemplateStepRequest;
+      output: GetTemplateStepResponse;
+    };
+    sdk: {
+      input: GetTemplateStepCommandInput;
+      output: GetTemplateStepCommandOutput;
+    };
+  };
+}

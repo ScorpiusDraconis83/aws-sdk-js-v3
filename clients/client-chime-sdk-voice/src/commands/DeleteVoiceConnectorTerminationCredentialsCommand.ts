@@ -95,9 +95,7 @@ export class DeleteVoiceConnectorTerminationCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DeleteVoiceConnectorTerminationCredentialsCommand extends $Command
   .f(DeleteVoiceConnectorTerminationCredentialsRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteVoiceConnectorTerminationCredentialsCommand)
   .de(de_DeleteVoiceConnectorTerminationCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVoiceConnectorTerminationCredentialsRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteVoiceConnectorTerminationCredentialsCommandInput;
+      output: DeleteVoiceConnectorTerminationCredentialsCommandOutput;
+    };
+  };
+}

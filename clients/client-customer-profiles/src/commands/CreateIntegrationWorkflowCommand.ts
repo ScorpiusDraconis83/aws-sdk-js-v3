@@ -167,9 +167,7 @@ export class CreateIntegrationWorkflowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class CreateIntegrationWorkflowCommand extends $Command
   .f(CreateIntegrationWorkflowRequestFilterSensitiveLog, void 0)
   .ser(se_CreateIntegrationWorkflowCommand)
   .de(de_CreateIntegrationWorkflowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIntegrationWorkflowRequest;
+      output: CreateIntegrationWorkflowResponse;
+    };
+    sdk: {
+      input: CreateIntegrationWorkflowCommandInput;
+      output: CreateIntegrationWorkflowCommandOutput;
+    };
+  };
+}

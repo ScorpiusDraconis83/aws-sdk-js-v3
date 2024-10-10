@@ -107,9 +107,7 @@ export class DescribePortalCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class DescribePortalCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribePortalCommand)
   .de(de_DescribePortalCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePortalRequest;
+      output: DescribePortalResponse;
+    };
+    sdk: {
+      input: DescribePortalCommandInput;
+      output: DescribePortalCommandOutput;
+    };
+  };
+}

@@ -106,9 +106,7 @@ export class GetSitesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class GetSitesCommand extends $Command
   .f(void 0, GetSitesResponseFilterSensitiveLog)
   .ser(se_GetSitesCommand)
   .de(de_GetSitesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSitesRequest;
+      output: GetSitesResponse;
+    };
+    sdk: {
+      input: GetSitesCommandInput;
+      output: GetSitesCommandOutput;
+    };
+  };
+}

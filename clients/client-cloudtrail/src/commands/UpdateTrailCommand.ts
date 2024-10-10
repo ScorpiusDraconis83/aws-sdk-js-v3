@@ -270,9 +270,7 @@ export class UpdateTrailCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudTrailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -284,4 +282,16 @@ export class UpdateTrailCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTrailCommand)
   .de(de_UpdateTrailCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrailRequest;
+      output: UpdateTrailResponse;
+    };
+    sdk: {
+      input: UpdateTrailCommandInput;
+      output: UpdateTrailCommandOutput;
+    };
+  };
+}

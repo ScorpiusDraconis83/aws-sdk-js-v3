@@ -83,6 +83,22 @@ export interface EnableDirectoryCommandOutput extends EnableDirectoryResponse, _
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To enable a disabled directory
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+ * };
+ * const command = new EnableDirectoryCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+ * }
+ * *\/
+ * // example id: to-enable-a-disabled-directory-1507253506378
+ * ```
+ *
  */
 export class EnableDirectoryCommand extends $Command
   .classBuilder<
@@ -92,9 +108,7 @@ export class EnableDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +120,16 @@ export class EnableDirectoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnableDirectoryCommand)
   .de(de_EnableDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableDirectoryRequest;
+      output: EnableDirectoryResponse;
+    };
+    sdk: {
+      input: EnableDirectoryCommandInput;
+      output: EnableDirectoryCommandOutput;
+    };
+  };
+}

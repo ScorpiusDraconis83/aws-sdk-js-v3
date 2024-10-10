@@ -134,9 +134,7 @@ export class StartSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EBSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +146,16 @@ export class StartSnapshotCommand extends $Command
   .f(StartSnapshotRequestFilterSensitiveLog, StartSnapshotResponseFilterSensitiveLog)
   .ser(se_StartSnapshotCommand)
   .de(de_StartSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSnapshotRequest;
+      output: StartSnapshotResponse;
+    };
+    sdk: {
+      input: StartSnapshotCommandInput;
+      output: StartSnapshotCommandOutput;
+    };
+  };
+}

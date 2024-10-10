@@ -107,9 +107,7 @@ export class DescribePHIDetectionJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendMedicalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class DescribePHIDetectionJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribePHIDetectionJobCommand)
   .de(de_DescribePHIDetectionJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePHIDetectionJobRequest;
+      output: DescribePHIDetectionJobResponse;
+    };
+    sdk: {
+      input: DescribePHIDetectionJobCommandInput;
+      output: DescribePHIDetectionJobCommandOutput;
+    };
+  };
+}

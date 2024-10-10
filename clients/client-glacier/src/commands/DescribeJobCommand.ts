@@ -207,9 +207,7 @@ export class DescribeJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -221,4 +219,16 @@ export class DescribeJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeJobCommand)
   .de(de_DescribeJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeJobInput;
+      output: GlacierJobDescription;
+    };
+    sdk: {
+      input: DescribeJobCommandInput;
+      output: DescribeJobCommandOutput;
+    };
+  };
+}

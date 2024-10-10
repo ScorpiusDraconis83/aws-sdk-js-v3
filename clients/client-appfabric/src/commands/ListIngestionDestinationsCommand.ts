@@ -89,9 +89,7 @@ export class ListIngestionDestinationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppFabricClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ListIngestionDestinationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListIngestionDestinationsCommand)
   .de(de_ListIngestionDestinationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIngestionDestinationsRequest;
+      output: ListIngestionDestinationsResponse;
+    };
+    sdk: {
+      input: ListIngestionDestinationsCommandInput;
+      output: ListIngestionDestinationsCommandOutput;
+    };
+  };
+}

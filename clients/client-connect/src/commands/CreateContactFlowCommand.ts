@@ -100,9 +100,7 @@ export class CreateContactFlowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class CreateContactFlowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateContactFlowCommand)
   .de(de_CreateContactFlowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateContactFlowRequest;
+      output: CreateContactFlowResponse;
+    };
+    sdk: {
+      input: CreateContactFlowCommandInput;
+      output: CreateContactFlowCommandOutput;
+    };
+  };
+}

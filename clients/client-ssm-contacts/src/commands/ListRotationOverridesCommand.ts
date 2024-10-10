@@ -96,9 +96,7 @@ export class ListRotationOverridesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMContactsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class ListRotationOverridesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRotationOverridesCommand)
   .de(de_ListRotationOverridesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRotationOverridesRequest;
+      output: ListRotationOverridesResult;
+    };
+    sdk: {
+      input: ListRotationOverridesCommandInput;
+      output: ListRotationOverridesCommandOutput;
+    };
+  };
+}

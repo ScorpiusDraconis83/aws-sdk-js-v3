@@ -167,9 +167,7 @@ export class CreateSubscriberCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityLakeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class CreateSubscriberCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSubscriberCommand)
   .de(de_CreateSubscriberCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSubscriberRequest;
+      output: CreateSubscriberResponse;
+    };
+    sdk: {
+      input: CreateSubscriberCommandInput;
+      output: CreateSubscriberCommandOutput;
+    };
+  };
+}

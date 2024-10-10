@@ -80,6 +80,7 @@ export interface CreateModelPackageCommandOutput extends CreateModelPackageOutpu
  *             HubAccessConfig: { // InferenceHubAccessConfig
  *               HubContentArn: "STRING_VALUE", // required
  *             },
+ *             ManifestS3Uri: "STRING_VALUE",
  *           },
  *         },
  *         ProductId: "STRING_VALUE",
@@ -165,6 +166,7 @@ export interface CreateModelPackageCommandOutput extends CreateModelPackageOutpu
  *             HubAccessConfig: {
  *               HubContentArn: "STRING_VALUE", // required
  *             },
+ *             ManifestS3Uri: "STRING_VALUE",
  *           },
  *         },
  *         AlgorithmName: "STRING_VALUE", // required
@@ -278,6 +280,7 @@ export interface CreateModelPackageCommandOutput extends CreateModelPackageOutpu
  *               HubAccessConfig: {
  *                 HubContentArn: "STRING_VALUE", // required
  *               },
+ *               ManifestS3Uri: "STRING_VALUE",
  *             },
  *           },
  *           ProductId: "STRING_VALUE",
@@ -356,9 +359,7 @@ export class CreateModelPackageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -370,4 +371,16 @@ export class CreateModelPackageCommand extends $Command
   .f(CreateModelPackageInputFilterSensitiveLog, void 0)
   .ser(se_CreateModelPackageCommand)
   .de(de_CreateModelPackageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateModelPackageInput;
+      output: CreateModelPackageOutput;
+    };
+    sdk: {
+      input: CreateModelPackageCommandInput;
+      output: CreateModelPackageCommandOutput;
+    };
+  };
+}

@@ -56,6 +56,7 @@ export interface CreateRuleSetCommandOutput extends CreateRuleSetResponse, __Met
  *           StringExpression: { // RuleStringExpression
  *             Evaluate: { // RuleStringToEvaluate Union: only one key present
  *               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ *               MimeHeaderAttribute: "STRING_VALUE",
  *             },
  *             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  *             Values: [ // RuleStringList // required
@@ -110,6 +111,7 @@ export interface CreateRuleSetCommandOutput extends CreateRuleSetResponse, __Met
  *           StringExpression: {
  *             Evaluate: {//  Union: only one key present
  *               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ *               MimeHeaderAttribute: "STRING_VALUE",
  *             },
  *             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  *             Values: [ // required
@@ -237,9 +239,7 @@ export class CreateRuleSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -251,4 +251,16 @@ export class CreateRuleSetCommand extends $Command
   .f(CreateRuleSetRequestFilterSensitiveLog, void 0)
   .ser(se_CreateRuleSetCommand)
   .de(de_CreateRuleSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRuleSetRequest;
+      output: CreateRuleSetResponse;
+    };
+    sdk: {
+      input: CreateRuleSetCommandInput;
+      output: CreateRuleSetCommandOutput;
+    };
+  };
+}

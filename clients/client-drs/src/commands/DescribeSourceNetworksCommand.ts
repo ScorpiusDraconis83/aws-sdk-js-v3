@@ -110,9 +110,7 @@ export class DescribeSourceNetworksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DrsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class DescribeSourceNetworksCommand extends $Command
   .f(void 0, DescribeSourceNetworksResponseFilterSensitiveLog)
   .ser(se_DescribeSourceNetworksCommand)
   .de(de_DescribeSourceNetworksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSourceNetworksRequest;
+      output: DescribeSourceNetworksResponse;
+    };
+    sdk: {
+      input: DescribeSourceNetworksCommandInput;
+      output: DescribeSourceNetworksCommandOutput;
+    };
+  };
+}

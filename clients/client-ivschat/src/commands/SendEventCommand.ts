@@ -86,9 +86,7 @@ export class SendEventCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IvschatClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class SendEventCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SendEventCommand)
   .de(de_SendEventCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendEventRequest;
+      output: SendEventResponse;
+    };
+    sdk: {
+      input: SendEventCommandInput;
+      output: SendEventCommandOutput;
+    };
+  };
+}

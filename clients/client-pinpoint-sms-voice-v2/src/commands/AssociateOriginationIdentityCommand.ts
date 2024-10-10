@@ -112,9 +112,7 @@ export class AssociateOriginationIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointSMSVoiceV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class AssociateOriginationIdentityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateOriginationIdentityCommand)
   .de(de_AssociateOriginationIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateOriginationIdentityRequest;
+      output: AssociateOriginationIdentityResult;
+    };
+    sdk: {
+      input: AssociateOriginationIdentityCommandInput;
+      output: AssociateOriginationIdentityCommandOutput;
+    };
+  };
+}

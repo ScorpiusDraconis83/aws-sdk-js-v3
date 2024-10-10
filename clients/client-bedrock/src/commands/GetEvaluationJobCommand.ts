@@ -155,9 +155,7 @@ export class GetEvaluationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -169,4 +167,16 @@ export class GetEvaluationJobCommand extends $Command
   .f(GetEvaluationJobRequestFilterSensitiveLog, GetEvaluationJobResponseFilterSensitiveLog)
   .ser(se_GetEvaluationJobCommand)
   .de(de_GetEvaluationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEvaluationJobRequest;
+      output: GetEvaluationJobResponse;
+    };
+    sdk: {
+      input: GetEvaluationJobCommandInput;
+      output: GetEvaluationJobCommandOutput;
+    };
+  };
+}

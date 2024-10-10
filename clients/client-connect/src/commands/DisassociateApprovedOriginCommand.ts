@@ -80,9 +80,7 @@ export class DisassociateApprovedOriginCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DisassociateApprovedOriginCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateApprovedOriginCommand)
   .de(de_DisassociateApprovedOriginCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateApprovedOriginRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateApprovedOriginCommandInput;
+      output: DisassociateApprovedOriginCommandOutput;
+    };
+  };
+}

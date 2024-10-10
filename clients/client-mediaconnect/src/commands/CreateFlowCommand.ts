@@ -257,6 +257,9 @@ export interface CreateFlowCommandOutput extends CreateFlowResponse, __MetadataB
  *     MaintenanceDay: "Monday" || "Tuesday" || "Wednesday" || "Thursday" || "Friday" || "Saturday" || "Sunday", // required
  *     MaintenanceStartHour: "STRING_VALUE", // required
  *   },
+ *   SourceMonitoringConfig: { // MonitoringConfig
+ *     ThumbnailState: "ENABLED" || "DISABLED",
+ *   },
  * };
  * const command = new CreateFlowCommand(input);
  * const response = await client.send(command);
@@ -535,6 +538,9 @@ export interface CreateFlowCommandOutput extends CreateFlowResponse, __MetadataB
  * //       MaintenanceScheduledDate: "STRING_VALUE",
  * //       MaintenanceStartHour: "STRING_VALUE",
  * //     },
+ * //     SourceMonitoringConfig: { // MonitoringConfig
+ * //       ThumbnailState: "ENABLED" || "DISABLED",
+ * //     },
  * //   },
  * // };
  *
@@ -577,9 +583,7 @@ export class CreateFlowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -591,4 +595,16 @@ export class CreateFlowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFlowCommand)
   .de(de_CreateFlowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFlowRequest;
+      output: CreateFlowResponse;
+    };
+    sdk: {
+      input: CreateFlowCommandInput;
+      output: CreateFlowCommandOutput;
+    };
+  };
+}

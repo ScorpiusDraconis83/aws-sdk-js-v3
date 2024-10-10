@@ -176,9 +176,7 @@ export class CreateDBSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -190,4 +188,16 @@ export class CreateDBSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDBSnapshotCommand)
   .de(de_CreateDBSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDBSnapshotMessage;
+      output: CreateDBSnapshotResult;
+    };
+    sdk: {
+      input: CreateDBSnapshotCommandInput;
+      output: CreateDBSnapshotCommandOutput;
+    };
+  };
+}

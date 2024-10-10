@@ -69,6 +69,17 @@ export interface DeleteFunctionConcurrencyCommandOutput extends __MetadataBearer
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To remove the reserved concurrent execution limit from a function
+ * ```javascript
+ * // The following example deletes the reserved concurrent execution limit from a function named my-function.
+ * const input = {
+ *   "FunctionName": "my-function"
+ * };
+ * const command = new DeleteFunctionConcurrencyCommand(input);
+ * await client.send(command);
+ * // example id: to-remove-the-reserved-concurrent-execution-limit-from-a-function-1586480714680
+ * ```
+ *
  */
 export class DeleteFunctionConcurrencyCommand extends $Command
   .classBuilder<
@@ -78,9 +89,7 @@ export class DeleteFunctionConcurrencyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +101,16 @@ export class DeleteFunctionConcurrencyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteFunctionConcurrencyCommand)
   .de(de_DeleteFunctionConcurrencyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFunctionConcurrencyRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteFunctionConcurrencyCommandInput;
+      output: DeleteFunctionConcurrencyCommandOutput;
+    };
+  };
+}

@@ -118,9 +118,7 @@ export class GetWebExperienceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QBusinessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class GetWebExperienceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetWebExperienceCommand)
   .de(de_GetWebExperienceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWebExperienceRequest;
+      output: GetWebExperienceResponse;
+    };
+    sdk: {
+      input: GetWebExperienceCommandInput;
+      output: GetWebExperienceCommandOutput;
+    };
+  };
+}

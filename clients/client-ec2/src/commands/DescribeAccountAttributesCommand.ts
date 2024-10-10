@@ -71,10 +71,10 @@ export interface DescribeAccountAttributesCommandOutput extends DescribeAccountA
  * // const { EC2Client, DescribeAccountAttributesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeAccountAttributesRequest
+ *   DryRun: true || false,
  *   AttributeNames: [ // AccountAttributeNameStringList
  *     "supported-platforms" || "default-vpc",
  *   ],
- *   DryRun: true || false,
  * };
  * const command = new DescribeAccountAttributesCommand(input);
  * const response = await client.send(command);
@@ -208,9 +208,7 @@ export class DescribeAccountAttributesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -222,4 +220,16 @@ export class DescribeAccountAttributesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAccountAttributesCommand)
   .de(de_DescribeAccountAttributesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountAttributesRequest;
+      output: DescribeAccountAttributesResult;
+    };
+    sdk: {
+      input: DescribeAccountAttributesCommandInput;
+      output: DescribeAccountAttributesCommandOutput;
+    };
+  };
+}

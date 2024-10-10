@@ -8,7 +8,9 @@ import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTy
 import { commonParams } from "../endpoint/EndpointParameters";
 import {
   GetOpenIdTokenForDeveloperIdentityInput,
+  GetOpenIdTokenForDeveloperIdentityInputFilterSensitiveLog,
   GetOpenIdTokenForDeveloperIdentityResponse,
+  GetOpenIdTokenForDeveloperIdentityResponseFilterSensitiveLog,
 } from "../models/models_0";
 import {
   de_GetOpenIdTokenForDeveloperIdentityCommand,
@@ -118,9 +120,7 @@ export class GetOpenIdTokenForDeveloperIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,7 +129,22 @@ export class GetOpenIdTokenForDeveloperIdentityCommand extends $Command
   })
   .s("AWSCognitoIdentityService", "GetOpenIdTokenForDeveloperIdentity", {})
   .n("CognitoIdentityClient", "GetOpenIdTokenForDeveloperIdentityCommand")
-  .f(void 0, void 0)
+  .f(
+    GetOpenIdTokenForDeveloperIdentityInputFilterSensitiveLog,
+    GetOpenIdTokenForDeveloperIdentityResponseFilterSensitiveLog
+  )
   .ser(se_GetOpenIdTokenForDeveloperIdentityCommand)
   .de(de_GetOpenIdTokenForDeveloperIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOpenIdTokenForDeveloperIdentityInput;
+      output: GetOpenIdTokenForDeveloperIdentityResponse;
+    };
+    sdk: {
+      input: GetOpenIdTokenForDeveloperIdentityCommandInput;
+      output: GetOpenIdTokenForDeveloperIdentityCommandOutput;
+    };
+  };
+}

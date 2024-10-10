@@ -82,9 +82,7 @@ export class DeleteRevisionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataExchangeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DeleteRevisionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRevisionCommand)
   .de(de_DeleteRevisionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRevisionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRevisionCommandInput;
+      output: DeleteRevisionCommandOutput;
+    };
+  };
+}

@@ -147,9 +147,7 @@ export class DeleteSizeConstraintSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class DeleteSizeConstraintSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSizeConstraintSetCommand)
   .de(de_DeleteSizeConstraintSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSizeConstraintSetRequest;
+      output: DeleteSizeConstraintSetResponse;
+    };
+    sdk: {
+      input: DeleteSizeConstraintSetCommandInput;
+      output: DeleteSizeConstraintSetCommandOutput;
+    };
+  };
+}

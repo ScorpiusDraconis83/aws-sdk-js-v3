@@ -121,9 +121,7 @@ export class DecreaseNodeGroupsInGlobalReplicationGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class DecreaseNodeGroupsInGlobalReplicationGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DecreaseNodeGroupsInGlobalReplicationGroupCommand)
   .de(de_DecreaseNodeGroupsInGlobalReplicationGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DecreaseNodeGroupsInGlobalReplicationGroupMessage;
+      output: DecreaseNodeGroupsInGlobalReplicationGroupResult;
+    };
+    sdk: {
+      input: DecreaseNodeGroupsInGlobalReplicationGroupCommandInput;
+      output: DecreaseNodeGroupsInGlobalReplicationGroupCommandOutput;
+    };
+  };
+}

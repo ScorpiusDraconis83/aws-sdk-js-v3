@@ -106,6 +106,31 @@ export interface PutFunctionEventInvokeConfigCommandOutput extends FunctionEvent
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To configure error handling for asynchronous invocation
+ * ```javascript
+ * // The following example sets a maximum event age of one hour and disables retries for the specified function.
+ * const input = {
+ *   "FunctionName": "my-function",
+ *   "MaximumEventAgeInSeconds": 3600,
+ *   "MaximumRetryAttempts": 0
+ * };
+ * const command = new PutFunctionEventInvokeConfigCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "DestinationConfig": {
+ *     "OnFailure": {},
+ *     "OnSuccess": {}
+ *   },
+ *   "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST",
+ *   "LastModified": "${timestamp}",
+ *   "MaximumEventAgeInSeconds": 3600,
+ *   "MaximumRetryAttempts": 0
+ * }
+ * *\/
+ * // example id: to-configure-error-handling-for-asynchronous-invocation-1586491524021
+ * ```
+ *
  */
 export class PutFunctionEventInvokeConfigCommand extends $Command
   .classBuilder<
@@ -115,9 +140,7 @@ export class PutFunctionEventInvokeConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +152,16 @@ export class PutFunctionEventInvokeConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutFunctionEventInvokeConfigCommand)
   .de(de_PutFunctionEventInvokeConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutFunctionEventInvokeConfigRequest;
+      output: FunctionEventInvokeConfig;
+    };
+    sdk: {
+      input: PutFunctionEventInvokeConfigCommandInput;
+      output: PutFunctionEventInvokeConfigCommandOutput;
+    };
+  };
+}

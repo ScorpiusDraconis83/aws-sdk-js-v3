@@ -171,9 +171,7 @@ export class CreateKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -185,4 +183,16 @@ export class CreateKeyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateKeyCommand)
   .de(de_CreateKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateKeyInput;
+      output: CreateKeyOutput;
+    };
+    sdk: {
+      input: CreateKeyCommandInput;
+      output: CreateKeyCommandOutput;
+    };
+  };
+}

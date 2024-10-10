@@ -95,9 +95,7 @@ export class ListNotebookExecutionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class ListNotebookExecutionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListNotebookExecutionsCommand)
   .de(de_ListNotebookExecutionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNotebookExecutionsInput;
+      output: ListNotebookExecutionsOutput;
+    };
+    sdk: {
+      input: ListNotebookExecutionsCommandInput;
+      output: ListNotebookExecutionsCommandOutput;
+    };
+  };
+}

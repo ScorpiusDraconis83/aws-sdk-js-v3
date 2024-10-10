@@ -130,9 +130,7 @@ export class GetMergeOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCommitClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class GetMergeOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMergeOptionsCommand)
   .de(de_GetMergeOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMergeOptionsInput;
+      output: GetMergeOptionsOutput;
+    };
+    sdk: {
+      input: GetMergeOptionsCommandInput;
+      output: GetMergeOptionsCommandOutput;
+    };
+  };
+}

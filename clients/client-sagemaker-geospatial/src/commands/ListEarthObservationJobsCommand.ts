@@ -106,9 +106,7 @@ export class ListEarthObservationJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerGeospatialClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class ListEarthObservationJobsCommand extends $Command
   .f(ListEarthObservationJobInputFilterSensitiveLog, ListEarthObservationJobOutputFilterSensitiveLog)
   .ser(se_ListEarthObservationJobsCommand)
   .de(de_ListEarthObservationJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEarthObservationJobInput;
+      output: ListEarthObservationJobOutput;
+    };
+    sdk: {
+      input: ListEarthObservationJobsCommandInput;
+      output: ListEarthObservationJobsCommandOutput;
+    };
+  };
+}

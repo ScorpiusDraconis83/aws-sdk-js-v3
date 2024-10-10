@@ -85,9 +85,7 @@ export class UpdateModelCardCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class UpdateModelCardCommand extends $Command
   .f(UpdateModelCardRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateModelCardCommand)
   .de(de_UpdateModelCardCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateModelCardRequest;
+      output: UpdateModelCardResponse;
+    };
+    sdk: {
+      input: UpdateModelCardCommandInput;
+      output: UpdateModelCardCommandOutput;
+    };
+  };
+}

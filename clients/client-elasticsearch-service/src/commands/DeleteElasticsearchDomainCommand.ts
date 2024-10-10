@@ -210,9 +210,7 @@ export class DeleteElasticsearchDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -224,4 +222,16 @@ export class DeleteElasticsearchDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteElasticsearchDomainCommand)
   .de(de_DeleteElasticsearchDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteElasticsearchDomainRequest;
+      output: DeleteElasticsearchDomainResponse;
+    };
+    sdk: {
+      input: DeleteElasticsearchDomainCommandInput;
+      output: DeleteElasticsearchDomainCommandOutput;
+    };
+  };
+}

@@ -565,6 +565,10 @@ import {
   StartContactStreamingCommandOutput,
 } from "../commands/StartContactStreamingCommand";
 import {
+  StartOutboundChatContactCommandInput,
+  StartOutboundChatContactCommandOutput,
+} from "../commands/StartOutboundChatContactCommand";
+import {
   StartOutboundVoiceContactCommandInput,
   StartOutboundVoiceContactCommandOutput,
 } from "../commands/StartOutboundVoiceContactCommand";
@@ -932,7 +936,6 @@ import {
   SegmentAttributeValue,
   SignInConfig,
   SignInDistribution,
-  TaskTemplateMetadata,
   TelephonyConfig,
   Threshold,
   ThresholdV2,
@@ -1010,6 +1013,7 @@ import {
   Sort,
   Step,
   TagSearchCondition,
+  TaskTemplateMetadata,
   Transcript,
   TranscriptCriteria,
   UpdateParticipantRoleConfigChannelInfo,
@@ -3622,7 +3626,7 @@ export const se_ListAgentStatusesCommand = async (
   const query: any = map({
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
-    [_AST]: [() => input.AgentStatusTypes !== void 0, () => (input[_AST]! || []).map((_entry) => _entry as any)],
+    [_AST]: [() => input.AgentStatusTypes !== void 0, () => input[_AST]! || []],
   });
   let body: any;
   b.m("GET").h(headers).q(query).b(body);
@@ -3764,7 +3768,7 @@ export const se_ListContactFlowsCommand = async (
   b.bp("/contact-flows-summary/{InstanceId}");
   b.p("InstanceId", () => input.InstanceId!, "{InstanceId}", false);
   const query: any = map({
-    [_cFT]: [() => input.ContactFlowTypes !== void 0, () => (input[_CFT]! || []).map((_entry) => _entry as any)],
+    [_cFT]: [() => input.ContactFlowTypes !== void 0, () => input[_CFT]! || []],
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
   });
@@ -3786,10 +3790,7 @@ export const se_ListContactReferencesCommand = async (
   b.p("InstanceId", () => input.InstanceId!, "{InstanceId}", false);
   b.p("ContactId", () => input.ContactId!, "{ContactId}", false);
   const query: any = map({
-    [_rTe]: [
-      __expectNonNull(input.ReferenceTypes, `ReferenceTypes`) != null,
-      () => (input[_RTe]! || []).map((_entry) => _entry as any),
-    ],
+    [_rTe]: [__expectNonNull(input.ReferenceTypes, `ReferenceTypes`) != null, () => input[_RTe]! || []],
     [_nT]: [, input[_NT]!],
   });
   let body: any;
@@ -4038,11 +4039,8 @@ export const se_ListPhoneNumbersCommand = async (
   b.bp("/phone-numbers-summary/{InstanceId}");
   b.p("InstanceId", () => input.InstanceId!, "{InstanceId}", false);
   const query: any = map({
-    [_pNT]: [() => input.PhoneNumberTypes !== void 0, () => (input[_PNT]! || []).map((_entry) => _entry as any)],
-    [_pNCC]: [
-      () => input.PhoneNumberCountryCodes !== void 0,
-      () => (input[_PNCC]! || []).map((_entry) => _entry as any),
-    ],
+    [_pNT]: [() => input.PhoneNumberTypes !== void 0, () => input[_PNT]! || []],
+    [_pNCC]: [() => input.PhoneNumberCountryCodes !== void 0, () => input[_PNCC]! || []],
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
   });
@@ -4152,7 +4150,7 @@ export const se_ListQueuesCommand = async (
   b.bp("/queues-summary/{InstanceId}");
   b.p("InstanceId", () => input.InstanceId!, "{InstanceId}", false);
   const query: any = map({
-    [_qT]: [() => input.QueueTypes !== void 0, () => (input[_QT]! || []).map((_entry) => _entry as any)],
+    [_qT]: [() => input.QueueTypes !== void 0, () => input[_QT]! || []],
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
   });
@@ -4175,7 +4173,7 @@ export const se_ListQuickConnectsCommand = async (
   const query: any = map({
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
-    [_QCT]: [() => input.QuickConnectTypes !== void 0, () => (input[_QCT]! || []).map((_entry) => _entry as any)],
+    [_QCT]: [() => input.QuickConnectTypes !== void 0, () => input[_QCT]! || []],
   });
   let body: any;
   b.m("GET").h(headers).q(query).b(body);
@@ -5307,6 +5305,39 @@ export const se_StartContactStreamingCommand = async (
 };
 
 /**
+ * serializeAws_restJson1StartOutboundChatContactCommand
+ */
+export const se_StartOutboundChatContactCommand = async (
+  input: StartOutboundChatContactCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    "content-type": "application/json",
+  };
+  b.bp("/contact/outbound-chat");
+  let body: any;
+  body = JSON.stringify(
+    take(input, {
+      Attributes: (_) => _json(_),
+      ChatDurationInMinutes: [],
+      ClientToken: [true, (_) => _ ?? generateIdempotencyToken()],
+      ContactFlowId: [],
+      DestinationEndpoint: (_) => _json(_),
+      InitialSystemMessage: (_) => _json(_),
+      InstanceId: [],
+      ParticipantDetails: (_) => _json(_),
+      RelatedContactId: [],
+      SegmentAttributes: (_) => _json(_),
+      SourceEndpoint: (_) => _json(_),
+      SupportedMessagingContentTypes: (_) => _json(_),
+    })
+  );
+  b.m("PUT").h(headers).b(body);
+  return b.build();
+};
+
+/**
  * serializeAws_restJson1StartOutboundVoiceContactCommand
  */
 export const se_StartOutboundVoiceContactCommand = async (
@@ -5612,10 +5643,7 @@ export const se_UntagContactCommand = async (
   b.p("ContactId", () => input.ContactId!, "{ContactId}", false);
   b.p("InstanceId", () => input.InstanceId!, "{InstanceId}", false);
   const query: any = map({
-    [_TK]: [
-      __expectNonNull(input.TagKeys, `TagKeys`) != null,
-      () => (input[_TK]! || []).map((_entry) => _entry as any),
-    ],
+    [_TK]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => input[_TK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -5634,10 +5662,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{resourceArn}");
   b.p("resourceArn", () => input.resourceArn!, "{resourceArn}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.tagKeys, `tagKeys`) != null,
-      () => (input[_tK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.tagKeys, `tagKeys`) != null, () => input[_tK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -8375,6 +8400,7 @@ export const de_DescribeInstanceCommand = async (
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   const doc = take(data, {
     Instance: (_) => de_Instance(_, context),
+    ReplicationConfiguration: _json,
   });
   Object.assign(contents, doc);
   return contents;
@@ -10869,6 +10895,27 @@ export const de_StartContactStreamingCommand = async (
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   const doc = take(data, {
     StreamingId: __expectString,
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1StartOutboundChatContactCommand
+ */
+export const de_StartOutboundChatContactCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<StartOutboundChatContactCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    ContactId: __expectString,
   });
   Object.assign(contents, doc);
   return contents;
@@ -15265,6 +15312,12 @@ const de_RealTimeContactAnalysisTimeData = (output: any, context: __SerdeContext
 
 // de_ReferenceSummaryList omitted.
 
+// de_ReplicationConfiguration omitted.
+
+// de_ReplicationStatusSummary omitted.
+
+// de_ReplicationStatusSummaryList omitted.
+
 // de_RequiredFieldInfo omitted.
 
 // de_RequiredTaskTemplateFields omitted.
@@ -15878,13 +15931,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _ARA = "AssociatedResourceArn";
 const _AST = "AgentStatusTypes";

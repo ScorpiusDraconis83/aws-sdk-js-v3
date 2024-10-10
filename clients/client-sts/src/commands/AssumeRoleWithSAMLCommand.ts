@@ -293,9 +293,7 @@ export class AssumeRoleWithSAMLCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: STSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -307,4 +305,16 @@ export class AssumeRoleWithSAMLCommand extends $Command
   .f(AssumeRoleWithSAMLRequestFilterSensitiveLog, AssumeRoleWithSAMLResponseFilterSensitiveLog)
   .ser(se_AssumeRoleWithSAMLCommand)
   .de(de_AssumeRoleWithSAMLCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssumeRoleWithSAMLRequest;
+      output: AssumeRoleWithSAMLResponse;
+    };
+    sdk: {
+      input: AssumeRoleWithSAMLCommandInput;
+      output: AssumeRoleWithSAMLCommandOutput;
+    };
+  };
+}

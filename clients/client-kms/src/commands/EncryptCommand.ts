@@ -293,9 +293,7 @@ export class EncryptCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -307,4 +305,16 @@ export class EncryptCommand extends $Command
   .f(EncryptRequestFilterSensitiveLog, void 0)
   .ser(se_EncryptCommand)
   .de(de_EncryptCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EncryptRequest;
+      output: EncryptResponse;
+    };
+    sdk: {
+      input: EncryptCommandInput;
+      output: EncryptCommandOutput;
+    };
+  };
+}

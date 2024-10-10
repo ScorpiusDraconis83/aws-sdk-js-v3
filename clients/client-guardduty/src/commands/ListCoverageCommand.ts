@@ -140,9 +140,7 @@ export class ListCoverageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class ListCoverageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCoverageCommand)
   .de(de_ListCoverageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCoverageRequest;
+      output: ListCoverageResponse;
+    };
+    sdk: {
+      input: ListCoverageCommandInput;
+      output: ListCoverageCommandOutput;
+    };
+  };
+}

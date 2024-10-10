@@ -225,9 +225,7 @@ export class GetAssetFilterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -239,4 +237,16 @@ export class GetAssetFilterCommand extends $Command
   .f(void 0, GetAssetFilterOutputFilterSensitiveLog)
   .ser(se_GetAssetFilterCommand)
   .de(de_GetAssetFilterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAssetFilterInput;
+      output: GetAssetFilterOutput;
+    };
+    sdk: {
+      input: GetAssetFilterCommandInput;
+      output: GetAssetFilterCommandOutput;
+    };
+  };
+}

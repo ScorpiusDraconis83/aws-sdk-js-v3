@@ -28,8 +28,13 @@ export interface GetInvitationsCountCommandInput extends GetInvitationsCountRequ
 export interface GetInvitationsCountCommandOutput extends GetInvitationsCountResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the count of all Security Hub membership invitations that were sent to the
- *          current member account, not including the currently accepted invitation. </p>
+ * <note>
+ *             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts.
+ *            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a>
+ *            in the <i>Security Hub User Guide</i>.</p>
+ *          </note>
+ *          <p>Returns the count of all Security Hub membership invitations that were sent to the
+ *          calling member account, not including the currently accepted invitation. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -94,9 +99,7 @@ export class GetInvitationsCountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +111,16 @@ export class GetInvitationsCountCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetInvitationsCountCommand)
   .de(de_GetInvitationsCountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetInvitationsCountResponse;
+    };
+    sdk: {
+      input: GetInvitationsCountCommandInput;
+      output: GetInvitationsCountCommandOutput;
+    };
+  };
+}

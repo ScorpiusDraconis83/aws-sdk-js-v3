@@ -90,9 +90,7 @@ export class RestoreAnalysisCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class RestoreAnalysisCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RestoreAnalysisCommand)
   .de(de_RestoreAnalysisCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreAnalysisRequest;
+      output: RestoreAnalysisResponse;
+    };
+    sdk: {
+      input: RestoreAnalysisCommandInput;
+      output: RestoreAnalysisCommandOutput;
+    };
+  };
+}

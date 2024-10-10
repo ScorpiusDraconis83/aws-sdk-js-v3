@@ -76,9 +76,7 @@ export class GetAccountSettingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class GetAccountSettingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAccountSettingCommand)
   .de(de_GetAccountSettingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAccountSettingRequest;
+      output: GetAccountSettingResponse;
+    };
+    sdk: {
+      input: GetAccountSettingCommandInput;
+      output: GetAccountSettingCommandOutput;
+    };
+  };
+}

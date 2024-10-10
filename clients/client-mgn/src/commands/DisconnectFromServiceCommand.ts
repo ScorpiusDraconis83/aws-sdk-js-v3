@@ -190,9 +190,7 @@ export class DisconnectFromServiceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -204,4 +202,16 @@ export class DisconnectFromServiceCommand extends $Command
   .f(void 0, SourceServerFilterSensitiveLog)
   .ser(se_DisconnectFromServiceCommand)
   .de(de_DisconnectFromServiceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisconnectFromServiceRequest;
+      output: SourceServer;
+    };
+    sdk: {
+      input: DisconnectFromServiceCommandInput;
+      output: DisconnectFromServiceCommandOutput;
+    };
+  };
+}

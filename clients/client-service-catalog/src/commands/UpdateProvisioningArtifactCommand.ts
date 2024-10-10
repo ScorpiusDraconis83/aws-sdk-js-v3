@@ -91,9 +91,7 @@ export class UpdateProvisioningArtifactCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class UpdateProvisioningArtifactCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateProvisioningArtifactCommand)
   .de(de_UpdateProvisioningArtifactCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProvisioningArtifactInput;
+      output: UpdateProvisioningArtifactOutput;
+    };
+    sdk: {
+      input: UpdateProvisioningArtifactCommandInput;
+      output: UpdateProvisioningArtifactCommandOutput;
+    };
+  };
+}

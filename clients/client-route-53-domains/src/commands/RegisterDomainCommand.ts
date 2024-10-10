@@ -216,9 +216,7 @@ export class RegisterDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53DomainsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +228,16 @@ export class RegisterDomainCommand extends $Command
   .f(RegisterDomainRequestFilterSensitiveLog, void 0)
   .ser(se_RegisterDomainCommand)
   .de(de_RegisterDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterDomainRequest;
+      output: RegisterDomainResponse;
+    };
+    sdk: {
+      input: RegisterDomainCommandInput;
+      output: RegisterDomainCommandOutput;
+    };
+  };
+}

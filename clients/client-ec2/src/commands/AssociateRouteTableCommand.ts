@@ -42,10 +42,10 @@ export interface AssociateRouteTableCommandOutput extends AssociateRouteTableRes
  * // const { EC2Client, AssociateRouteTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // AssociateRouteTableRequest
- *   DryRun: true || false,
- *   RouteTableId: "STRING_VALUE", // required
- *   SubnetId: "STRING_VALUE",
  *   GatewayId: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   SubnetId: "STRING_VALUE",
+ *   RouteTableId: "STRING_VALUE", // required
  * };
  * const command = new AssociateRouteTableCommand(input);
  * const response = await client.send(command);
@@ -95,9 +95,7 @@ export class AssociateRouteTableCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class AssociateRouteTableCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateRouteTableCommand)
   .de(de_AssociateRouteTableCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateRouteTableRequest;
+      output: AssociateRouteTableResult;
+    };
+    sdk: {
+      input: AssociateRouteTableCommandInput;
+      output: AssociateRouteTableCommandOutput;
+    };
+  };
+}

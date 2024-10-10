@@ -65,7 +65,7 @@ export interface ListLabelingJobsCommandOutput extends ListLabelingJobsResponse,
  * //         Unlabeled: Number("int"),
  * //       },
  * //       WorkteamArn: "STRING_VALUE", // required
- * //       PreHumanTaskLambdaArn: "STRING_VALUE", // required
+ * //       PreHumanTaskLambdaArn: "STRING_VALUE",
  * //       AnnotationConsolidationLambdaArn: "STRING_VALUE",
  * //       FailureReason: "STRING_VALUE",
  * //       LabelingJobOutput: { // LabelingJobOutput
@@ -113,9 +113,7 @@ export class ListLabelingJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class ListLabelingJobsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLabelingJobsCommand)
   .de(de_ListLabelingJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLabelingJobsRequest;
+      output: ListLabelingJobsResponse;
+    };
+    sdk: {
+      input: ListLabelingJobsCommandInput;
+      output: ListLabelingJobsCommandOutput;
+    };
+  };
+}

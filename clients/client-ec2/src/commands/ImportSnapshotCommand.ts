@@ -126,9 +126,7 @@ export class ImportSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class ImportSnapshotCommand extends $Command
   .f(ImportSnapshotRequestFilterSensitiveLog, ImportSnapshotResultFilterSensitiveLog)
   .ser(se_ImportSnapshotCommand)
   .de(de_ImportSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportSnapshotRequest;
+      output: ImportSnapshotResult;
+    };
+    sdk: {
+      input: ImportSnapshotCommandInput;
+      output: ImportSnapshotCommandOutput;
+    };
+  };
+}

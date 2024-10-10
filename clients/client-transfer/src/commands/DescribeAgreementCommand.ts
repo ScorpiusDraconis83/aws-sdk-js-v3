@@ -95,9 +95,7 @@ export class DescribeAgreementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TransferClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DescribeAgreementCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAgreementCommand)
   .de(de_DescribeAgreementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAgreementRequest;
+      output: DescribeAgreementResponse;
+    };
+    sdk: {
+      input: DescribeAgreementCommandInput;
+      output: DescribeAgreementCommandOutput;
+    };
+  };
+}

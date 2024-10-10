@@ -268,9 +268,7 @@ export class StartTranscriptionJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TranscribeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -282,4 +280,16 @@ export class StartTranscriptionJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartTranscriptionJobCommand)
   .de(de_StartTranscriptionJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartTranscriptionJobRequest;
+      output: StartTranscriptionJobResponse;
+    };
+    sdk: {
+      input: StartTranscriptionJobCommandInput;
+      output: StartTranscriptionJobCommandOutput;
+    };
+  };
+}

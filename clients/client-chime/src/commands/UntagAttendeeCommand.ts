@@ -93,9 +93,7 @@ export class UntagAttendeeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UntagAttendeeCommand extends $Command
   .f(UntagAttendeeRequestFilterSensitiveLog, void 0)
   .ser(se_UntagAttendeeCommand)
   .de(de_UntagAttendeeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagAttendeeRequest;
+      output: {};
+    };
+    sdk: {
+      input: UntagAttendeeCommandInput;
+      output: UntagAttendeeCommandOutput;
+    };
+  };
+}

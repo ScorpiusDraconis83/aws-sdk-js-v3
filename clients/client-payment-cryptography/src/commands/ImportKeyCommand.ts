@@ -335,9 +335,7 @@ export class ImportKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -349,4 +347,16 @@ export class ImportKeyCommand extends $Command
   .f(ImportKeyInputFilterSensitiveLog, void 0)
   .ser(se_ImportKeyCommand)
   .de(de_ImportKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportKeyInput;
+      output: ImportKeyOutput;
+    };
+    sdk: {
+      input: ImportKeyCommandInput;
+      output: ImportKeyCommandOutput;
+    };
+  };
+}

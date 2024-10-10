@@ -51,7 +51,7 @@ export interface DeleteRepositoryCreationTemplateCommandOutput
  * //     prefix: "STRING_VALUE",
  * //     description: "STRING_VALUE",
  * //     encryptionConfiguration: { // EncryptionConfigurationForRepositoryCreationTemplate
- * //       encryptionType: "AES256" || "KMS", // required
+ * //       encryptionType: "AES256" || "KMS" || "KMS_DSSE", // required
  * //       kmsKey: "STRING_VALUE",
  * //     },
  * //     resourceTags: [ // TagList
@@ -132,9 +132,7 @@ export class DeleteRepositoryCreationTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class DeleteRepositoryCreationTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRepositoryCreationTemplateCommand)
   .de(de_DeleteRepositoryCreationTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRepositoryCreationTemplateRequest;
+      output: DeleteRepositoryCreationTemplateResponse;
+    };
+    sdk: {
+      input: DeleteRepositoryCreationTemplateCommandInput;
+      output: DeleteRepositoryCreationTemplateCommandOutput;
+    };
+  };
+}

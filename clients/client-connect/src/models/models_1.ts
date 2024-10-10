@@ -844,6 +844,90 @@ export interface Instance {
 
 /**
  * @public
+ * @enum
+ */
+export const InstanceReplicationStatus = {
+  INSTANCE_REPLICATION_COMPLETE: "INSTANCE_REPLICATION_COMPLETE",
+  INSTANCE_REPLICATION_DELETION_FAILED: "INSTANCE_REPLICATION_DELETION_FAILED",
+  INSTANCE_REPLICATION_FAILED: "INSTANCE_REPLICATION_FAILED",
+  INSTANCE_REPLICATION_IN_PROGRESS: "INSTANCE_REPLICATION_IN_PROGRESS",
+  INSTANCE_REPLICA_DELETING: "INSTANCE_REPLICA_DELETING",
+  RESOURCE_REPLICATION_NOT_STARTED: "RESOURCE_REPLICATION_NOT_STARTED",
+} as const;
+
+/**
+ * @public
+ */
+export type InstanceReplicationStatus = (typeof InstanceReplicationStatus)[keyof typeof InstanceReplicationStatus];
+
+/**
+ * <p>Status information about the replication process, where you use the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html">ReplicateInstance</a> API to create a replica of your Amazon Connect instance in
+ *    another Amazon Web Services Region. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html">Set up Amazon Connect
+ *     Global Resiliency</a> in the <i>Amazon Connect Administrator Guide</i>.
+ *   </p>
+ * @public
+ */
+export interface ReplicationStatusSummary {
+  /**
+   * <p>The Amazon Web Services Region. This can be either the source or the replica Region,
+   *    depending where it appears in the summary list.</p>
+   * @public
+   */
+  Region?: string;
+
+  /**
+   * <p>The state of the replication.</p>
+   * @public
+   */
+  ReplicationStatus?: InstanceReplicationStatus;
+
+  /**
+   * <p>A description of the replication status. Use this information to resolve any issues that are
+   *    preventing the successful replication of your Amazon Connect instance to another
+   *    Region.</p>
+   * @public
+   */
+  ReplicationStatusReason?: string;
+}
+
+/**
+ * <p>Details about the status of the replication of a source Amazon Connect instance across
+ *     Amazon Web Services Regions. Use these details to understand the general status of a given
+ *    replication. For information about why a replication process may fail, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html#why-replicateinstance-fails">Why a ReplicateInstance call fails</a> in the <i>Create a replica of your existing
+ *      Amazon Connect instance</i> topic in the <i>Amazon Connect Administrator
+ *     Guide</i>. </p>
+ * @public
+ */
+export interface ReplicationConfiguration {
+  /**
+   * <p>A list of replication status summaries. The summaries contain details about the replication
+   *    of configuration information for Amazon Connect resources, for each Amazon Web Services
+   *    Region.</p>
+   * @public
+   */
+  ReplicationStatusSummaryList?: ReplicationStatusSummary[];
+
+  /**
+   * <p>The Amazon Web Services Region where the source Amazon Connect instance was created. This
+   *    is the Region where the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html">ReplicateInstance</a> API was
+   *    called to start the replication process.</p>
+   * @public
+   */
+  SourceRegion?: string;
+
+  /**
+   * <p>The URL that is used to sign-in to your Amazon Connect instance according to your
+   *    traffic distribution group configuration. For more information about sign-in and traffic
+   *    distribution groups, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html">Important things to
+   *     know</a> in the <i>Create traffic distribution groups</i> topic in the
+   *      <i>Amazon Connect Administrator Guide</i>. </p>
+   * @public
+   */
+  GlobalSignInEndpoint?: string;
+}
+
+/**
+ * @public
  */
 export interface DescribeInstanceResponse {
   /**
@@ -851,6 +935,17 @@ export interface DescribeInstanceResponse {
    * @public
    */
   Instance?: Instance;
+
+  /**
+   * <p>Status information about the replication process. This field is included only when you are
+   *    using the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html">ReplicateInstance</a> API to
+   *    replicate an Amazon Connect instance across Amazon Web Services Regions. For information about
+   *    replicating Amazon Connect instances, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html">Create a replica of your
+   *     existing Amazon Connect instance</a> in the <i>Amazon Connect Administrator
+   *     Guide</i>.</p>
+   * @public
+   */
+  ReplicationConfiguration?: ReplicationConfiguration;
 }
 
 /**
@@ -4543,7 +4638,8 @@ export interface MetricFilterV2 {
    * <p>The values to use for filtering data. </p>
    *          <p>Valid metric filter values for <code>INITIATION_METHOD</code>: <code>INBOUND</code> |
    *     <code>OUTBOUND</code> | <code>TRANSFER</code> | <code>QUEUE_TRANSFER</code> |
-   *     <code>CALLBACK</code> | <code>API</code>
+   *     <code>CALLBACK</code> | <code>API</code> | <code>WEBRTC_API</code> | <code>MONITOR</code> |
+   *     <code>DISCONNECT</code> | <code>EXTERNAL_OUTBOUND</code>
    *          </p>
    *          <p>Valid metric filter values for <code>DISCONNECT_REASON</code>:
    *     <code>CUSTOMER_DISCONNECT</code> | <code>AGENT_DISCONNECT</code> |
@@ -4570,8 +4666,8 @@ export interface MetricFilterV2 {
  */
 export interface ThresholdV2 {
   /**
-   * <p>The type of comparison. Only "less than" (LT) and "greater than" (GT) comparisons are
-   *    supported.</p>
+   * <p>The type of comparison. Currently, "less than" (LT), "less than equal" (LTE), and "greater
+   *    than" (GT) comparisons are supported.</p>
    * @public
    */
   Comparison?: string;
@@ -5277,8 +5373,8 @@ export interface GetMetricDataV2Request {
    *                <p>Unit: Count</p>
    *                <p>Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect</p>
    *                <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than").</p>
+   *       (inclusive), in seconds. For <code>Comparison</code>, you can use <code>LT</code> (for "Less
+   *       than") or <code>LTE</code> (for "Less than equal").</p>
    *                <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-removed-historical">Contacts removed from queue in X seconds</a>
    *                </p>
    *             </dd>
@@ -5288,8 +5384,8 @@ export interface GetMetricDataV2Request {
    *                <p>Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype,
    *       Q in Connect</p>
    *                <p>Threshold: For <code>ThresholdValue</code> enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than").</p>
+   *       (inclusive), in seconds. For <code>Comparison</code>, you can use <code>LT</code> (for "Less
+   *       than") or <code>LTE</code> (for "Less than equal").</p>
    *                <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical">Contacts resolved in X</a>
    *                </p>
    *             </dd>
@@ -5509,8 +5605,8 @@ export interface GetMetricDataV2Request {
    *                <p>Unit: Percent</p>
    *                <p>Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect</p>
    *                <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than"). </p>
+   *       (inclusive), in seconds. For <code>Comparison</code>, you can use <code>LT</code> (for "Less
+   *       than") or <code>LTE</code> (for "Less than equal").</p>
    *                <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical">Service level X</a>
    *                </p>
    *             </dd>
@@ -5544,7 +5640,7 @@ export interface GetMetricDataV2Request {
    *        metric.</p>
    *                </note>
    *             </dd>
-   *             <dt>SUM_CONTACTS_ABANDONED</dt>
+   *             <dt>CONTACTS_ABANDONED</dt>
    *             <dd>
    *                <p>Unit: Count</p>
    *                <p>Metric filter: </p>
@@ -5567,8 +5663,8 @@ export interface GetMetricDataV2Request {
    *                <p>Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype,
    *       Q in Connect</p>
    *                <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than"). </p>
+   *       (inclusive), in seconds. For <code>Comparison</code>, you can use <code>LT</code> (for "Less
+   *       than") or <code>LTE</code> (for "Less than equal").</p>
    *                <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical">Contacts abandoned in X seconds</a>
    *                </p>
    *             </dd>
@@ -5578,8 +5674,8 @@ export interface GetMetricDataV2Request {
    *                <p>Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype,
    *       Q in Connect</p>
    *                <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than"). </p>
+   *       (inclusive), in seconds. For <code>Comparison</code>, you can use <code>LT</code> (for "Less
+   *       than") or <code>LTE</code> (for "Less than equal").</p>
    *                <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical">Contacts answered in X seconds</a>
    *                </p>
    *             </dd>
@@ -9769,121 +9865,6 @@ export interface ListTagsForResourceResponse {
    * @public
    */
   tags?: Record<string, string>;
-}
-
-/**
- * @public
- */
-export interface ListTaskTemplatesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
-   * @public
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   *          <important>
-   *             <p>It is not expected that you set this because the value returned in the previous response is
-   *     always null.</p>
-   *          </important>
-   * @public
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   *          <important>
-   *             <p>It is not expected that you set this.</p>
-   *          </important>
-   * @public
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
-   * Tasks can only be created from <code>ACTIVE</code> templates.
-   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
-   * @public
-   */
-  Status?: TaskTemplateStatus;
-
-  /**
-   * <p>The name of the task template.</p>
-   * @public
-   */
-  Name?: string;
-}
-
-/**
- * <p>Contains summary information about the task template.</p>
- * @public
- */
-export interface TaskTemplateMetadata {
-  /**
-   * <p>A unique identifier for the task template.</p>
-   * @public
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the task template.</p>
-   * @public
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the task template.</p>
-   * @public
-   */
-  Name?: string;
-
-  /**
-   * <p>The description of the task template.</p>
-   * @public
-   */
-  Description?: string;
-
-  /**
-   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
-   * Tasks can only be created from <code>ACTIVE</code> templates.
-   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
-   * @public
-   */
-  Status?: TaskTemplateStatus;
-
-  /**
-   * <p>The timestamp when the task template was last modified.</p>
-   * @public
-   */
-  LastModifiedTime?: Date;
-
-  /**
-   * <p>The timestamp when the task template was created.</p>
-   * @public
-   */
-  CreatedTime?: Date;
-}
-
-/**
- * @public
- */
-export interface ListTaskTemplatesResponse {
-  /**
-   * <p>Provides details about a list of task templates belonging to an instance.</p>
-   * @public
-   */
-  TaskTemplates?: TaskTemplateMetadata[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   *          <important>
-   *             <p>This is always returned as a null in the response.</p>
-   *          </important>
-   * @public
-   */
-  NextToken?: string;
 }
 
 /**

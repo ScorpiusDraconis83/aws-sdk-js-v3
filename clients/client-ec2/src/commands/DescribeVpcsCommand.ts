@@ -49,19 +49,16 @@ export interface DescribeVpcsCommandOutput extends DescribeVpcsResult, __Metadat
  *   VpcIds: [ // VpcIdStringList
  *     "STRING_VALUE",
  *   ],
- *   DryRun: true || false,
  *   NextToken: "STRING_VALUE",
  *   MaxResults: Number("int"),
+ *   DryRun: true || false,
  * };
  * const command = new DescribeVpcsCommand(input);
  * const response = await client.send(command);
  * // { // DescribeVpcsResult
+ * //   NextToken: "STRING_VALUE",
  * //   Vpcs: [ // VpcList
  * //     { // Vpc
- * //       CidrBlock: "STRING_VALUE",
- * //       DhcpOptionsId: "STRING_VALUE",
- * //       State: "pending" || "available",
- * //       VpcId: "STRING_VALUE",
  * //       OwnerId: "STRING_VALUE",
  * //       InstanceTenancy: "default" || "dedicated" || "host",
  * //       Ipv6CidrBlockAssociationSet: [ // VpcIpv6CidrBlockAssociationSet
@@ -95,9 +92,12 @@ export interface DescribeVpcsCommandOutput extends DescribeVpcsResult, __Metadat
  * //           Value: "STRING_VALUE",
  * //         },
  * //       ],
+ * //       VpcId: "STRING_VALUE",
+ * //       State: "pending" || "available",
+ * //       CidrBlock: "STRING_VALUE",
+ * //       DhcpOptionsId: "STRING_VALUE",
  * //     },
  * //   ],
- * //   NextToken: "STRING_VALUE",
  * // };
  *
  * ```
@@ -154,9 +154,7 @@ export class DescribeVpcsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class DescribeVpcsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVpcsCommand)
   .de(de_DescribeVpcsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcsRequest;
+      output: DescribeVpcsResult;
+    };
+    sdk: {
+      input: DescribeVpcsCommandInput;
+      output: DescribeVpcsCommandOutput;
+    };
+  };
+}

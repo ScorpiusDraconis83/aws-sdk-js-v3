@@ -6,8 +6,8 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { ModifyVpnConnectionOptionsRequest } from "../models/models_6";
 import {
+  ModifyVpnConnectionOptionsRequest,
   ModifyVpnConnectionOptionsResult,
   ModifyVpnConnectionOptionsResultFilterSensitiveLog,
 } from "../models/models_7";
@@ -55,13 +55,7 @@ export interface ModifyVpnConnectionOptionsCommandOutput extends ModifyVpnConnec
  * const response = await client.send(command);
  * // { // ModifyVpnConnectionOptionsResult
  * //   VpnConnection: { // VpnConnection
- * //     CustomerGatewayConfiguration: "STRING_VALUE",
- * //     CustomerGatewayId: "STRING_VALUE",
  * //     Category: "STRING_VALUE",
- * //     State: "pending" || "available" || "deleting" || "deleted",
- * //     Type: "ipsec.1",
- * //     VpnConnectionId: "STRING_VALUE",
- * //     VpnGatewayId: "STRING_VALUE",
  * //     TransitGatewayId: "STRING_VALUE",
  * //     CoreNetworkArn: "STRING_VALUE",
  * //     CoreNetworkAttachmentArn: "STRING_VALUE",
@@ -159,6 +153,12 @@ export interface ModifyVpnConnectionOptionsCommandOutput extends ModifyVpnConnec
  * //         CertificateArn: "STRING_VALUE",
  * //       },
  * //     ],
+ * //     VpnConnectionId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "deleting" || "deleted",
+ * //     CustomerGatewayConfiguration: "STRING_VALUE",
+ * //     Type: "ipsec.1",
+ * //     CustomerGatewayId: "STRING_VALUE",
+ * //     VpnGatewayId: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -183,9 +183,7 @@ export class ModifyVpnConnectionOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -197,4 +195,16 @@ export class ModifyVpnConnectionOptionsCommand extends $Command
   .f(void 0, ModifyVpnConnectionOptionsResultFilterSensitiveLog)
   .ser(se_ModifyVpnConnectionOptionsCommand)
   .de(de_ModifyVpnConnectionOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpnConnectionOptionsRequest;
+      output: ModifyVpnConnectionOptionsResult;
+    };
+    sdk: {
+      input: ModifyVpnConnectionOptionsCommandInput;
+      output: ModifyVpnConnectionOptionsCommandOutput;
+    };
+  };
+}

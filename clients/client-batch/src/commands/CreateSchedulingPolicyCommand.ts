@@ -87,9 +87,7 @@ export class CreateSchedulingPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class CreateSchedulingPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSchedulingPolicyCommand)
   .de(de_CreateSchedulingPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSchedulingPolicyRequest;
+      output: CreateSchedulingPolicyResponse;
+    };
+    sdk: {
+      input: CreateSchedulingPolicyCommandInput;
+      output: CreateSchedulingPolicyCommandOutput;
+    };
+  };
+}

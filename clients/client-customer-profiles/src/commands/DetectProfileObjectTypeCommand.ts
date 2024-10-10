@@ -111,9 +111,7 @@ export class DetectProfileObjectTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class DetectProfileObjectTypeCommand extends $Command
   .f(DetectProfileObjectTypeRequestFilterSensitiveLog, DetectProfileObjectTypeResponseFilterSensitiveLog)
   .ser(se_DetectProfileObjectTypeCommand)
   .de(de_DetectProfileObjectTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetectProfileObjectTypeRequest;
+      output: DetectProfileObjectTypeResponse;
+    };
+    sdk: {
+      input: DetectProfileObjectTypeCommandInput;
+      output: DetectProfileObjectTypeCommandOutput;
+    };
+  };
+}

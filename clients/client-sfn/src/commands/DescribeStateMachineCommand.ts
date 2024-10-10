@@ -146,9 +146,7 @@ export class DescribeStateMachineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SFNClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -160,4 +158,16 @@ export class DescribeStateMachineCommand extends $Command
   .f(void 0, DescribeStateMachineOutputFilterSensitiveLog)
   .ser(se_DescribeStateMachineCommand)
   .de(de_DescribeStateMachineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStateMachineInput;
+      output: DescribeStateMachineOutput;
+    };
+    sdk: {
+      input: DescribeStateMachineCommandInput;
+      output: DescribeStateMachineCommandOutput;
+    };
+  };
+}

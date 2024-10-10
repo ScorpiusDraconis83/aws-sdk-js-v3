@@ -100,9 +100,7 @@ export class DescribeGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IdentitystoreClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class DescribeGroupCommand extends $Command
   .f(void 0, DescribeGroupResponseFilterSensitiveLog)
   .ser(se_DescribeGroupCommand)
   .de(de_DescribeGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGroupRequest;
+      output: DescribeGroupResponse;
+    };
+    sdk: {
+      input: DescribeGroupCommandInput;
+      output: DescribeGroupCommandOutput;
+    };
+  };
+}

@@ -86,9 +86,7 @@ export class UpdateUserProficienciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class UpdateUserProficienciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateUserProficienciesCommand)
   .de(de_UpdateUserProficienciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateUserProficienciesRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateUserProficienciesCommandInput;
+      output: UpdateUserProficienciesCommandOutput;
+    };
+  };
+}

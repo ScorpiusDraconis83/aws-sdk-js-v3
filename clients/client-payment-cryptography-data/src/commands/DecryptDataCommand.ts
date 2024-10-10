@@ -149,9 +149,7 @@ export class DecryptDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +161,16 @@ export class DecryptDataCommand extends $Command
   .f(DecryptDataInputFilterSensitiveLog, DecryptDataOutputFilterSensitiveLog)
   .ser(se_DecryptDataCommand)
   .de(de_DecryptDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DecryptDataInput;
+      output: DecryptDataOutput;
+    };
+    sdk: {
+      input: DecryptDataCommandInput;
+      output: DecryptDataCommandOutput;
+    };
+  };
+}

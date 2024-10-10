@@ -1,6 +1,10 @@
 import { S3Client, S3ClientConfigType } from "@aws-sdk/client-s3";
 import { defaultProvider as credentialDefaultProvider, defaultProvider } from "@aws-sdk/credential-provider-node";
 import { NODE_USE_ARN_REGION_CONFIG_OPTIONS } from "@aws-sdk/middleware-bucket-endpoint";
+import {
+  DEFAULT_REQUEST_CHECKSUM_CALCULATION,
+  DEFAULT_RESPONSE_CHECKSUM_VALIDATION,
+} from "@aws-sdk/middleware-flexible-checksums";
 import { S3ExpressIdentityProviderImpl } from "@aws-sdk/middleware-sdk-s3";
 import { SignatureV4MultiRegion } from "@aws-sdk/signature-v4-multi-region";
 import { defaultUserAgent } from "@aws-sdk/util-user-agent-node";
@@ -40,6 +44,7 @@ export const initializeWithMaximalConfiguration = () => {
     region: loadNodeConfig(NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS),
     credentials: defaultProvider({}),
     endpoint: "endpoint",
+    cacheMiddleware: true,
     requestHandler: new NodeHttpHandler({
       httpsAgent: new https.Agent({
         maxSockets: 200,
@@ -106,6 +111,7 @@ export const initializeWithMaximalConfiguration = () => {
     utf8Encoder: toUtf8,
     httpAuthSchemes: [],
     httpAuthSchemeProvider: (() => null) as unknown as HttpAuthSchemeProvider<any>,
+    serviceConfiguredEndpoint: null as never,
     // END internal options
 
     // S3 specific options below
@@ -120,6 +126,9 @@ export const initializeWithMaximalConfiguration = () => {
     signingEscapePath: false,
     bucketEndpoint: false,
     sigv4aSigningRegionSet: [],
+    requestChecksumCalculation: DEFAULT_REQUEST_CHECKSUM_CALCULATION,
+    responseChecksumValidation: DEFAULT_RESPONSE_CHECKSUM_VALIDATION,
+    userAgentAppId: "testApp",
   };
 
   const s3 = new S3Client(config);

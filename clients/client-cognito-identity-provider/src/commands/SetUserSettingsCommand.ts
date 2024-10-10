@@ -114,9 +114,7 @@ export class SetUserSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class SetUserSettingsCommand extends $Command
   .f(SetUserSettingsRequestFilterSensitiveLog, void 0)
   .ser(se_SetUserSettingsCommand)
   .de(de_SetUserSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetUserSettingsRequest;
+      output: {};
+    };
+    sdk: {
+      input: SetUserSettingsCommandInput;
+      output: SetUserSettingsCommandOutput;
+    };
+  };
+}

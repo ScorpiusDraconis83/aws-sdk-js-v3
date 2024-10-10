@@ -99,9 +99,7 @@ export class GetApnsChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetApnsChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetApnsChannelCommand)
   .de(de_GetApnsChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApnsChannelRequest;
+      output: GetApnsChannelResponse;
+    };
+    sdk: {
+      input: GetApnsChannelCommandInput;
+      output: GetApnsChannelCommandOutput;
+    };
+  };
+}

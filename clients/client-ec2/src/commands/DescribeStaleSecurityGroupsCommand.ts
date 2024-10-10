@@ -66,12 +66,12 @@ export interface DescribeStaleSecurityGroupsCommandOutput extends DescribeStaleS
  * //           UserIdGroupPairs: [ // UserIdGroupPairSet
  * //             { // UserIdGroupPair
  * //               Description: "STRING_VALUE",
- * //               GroupId: "STRING_VALUE",
- * //               GroupName: "STRING_VALUE",
- * //               PeeringStatus: "STRING_VALUE",
  * //               UserId: "STRING_VALUE",
+ * //               GroupName: "STRING_VALUE",
+ * //               GroupId: "STRING_VALUE",
  * //               VpcId: "STRING_VALUE",
  * //               VpcPeeringConnectionId: "STRING_VALUE",
+ * //               PeeringStatus: "STRING_VALUE",
  * //             },
  * //           ],
  * //         },
@@ -90,12 +90,12 @@ export interface DescribeStaleSecurityGroupsCommandOutput extends DescribeStaleS
  * //           UserIdGroupPairs: [
  * //             {
  * //               Description: "STRING_VALUE",
- * //               GroupId: "STRING_VALUE",
- * //               GroupName: "STRING_VALUE",
- * //               PeeringStatus: "STRING_VALUE",
  * //               UserId: "STRING_VALUE",
+ * //               GroupName: "STRING_VALUE",
+ * //               GroupId: "STRING_VALUE",
  * //               VpcId: "STRING_VALUE",
  * //               VpcPeeringConnectionId: "STRING_VALUE",
+ * //               PeeringStatus: "STRING_VALUE",
  * //             },
  * //           ],
  * //         },
@@ -126,9 +126,7 @@ export class DescribeStaleSecurityGroupsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class DescribeStaleSecurityGroupsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeStaleSecurityGroupsCommand)
   .de(de_DescribeStaleSecurityGroupsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStaleSecurityGroupsRequest;
+      output: DescribeStaleSecurityGroupsResult;
+    };
+    sdk: {
+      input: DescribeStaleSecurityGroupsCommandInput;
+      output: DescribeStaleSecurityGroupsCommandOutput;
+    };
+  };
+}

@@ -50,16 +50,16 @@ export interface AssignPrivateIpAddressesCommandOutput extends AssignPrivateIpAd
  * // const { EC2Client, AssignPrivateIpAddressesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // AssignPrivateIpAddressesRequest
- *   AllowReassignment: true || false,
+ *   Ipv4Prefixes: [ // IpPrefixList
+ *     "STRING_VALUE",
+ *   ],
+ *   Ipv4PrefixCount: Number("int"),
  *   NetworkInterfaceId: "STRING_VALUE", // required
  *   PrivateIpAddresses: [ // PrivateIpAddressStringList
  *     "STRING_VALUE",
  *   ],
  *   SecondaryPrivateIpAddressCount: Number("int"),
- *   Ipv4Prefixes: [ // IpPrefixList
- *     "STRING_VALUE",
- *   ],
- *   Ipv4PrefixCount: Number("int"),
+ *   AllowReassignment: true || false,
  * };
  * const command = new AssignPrivateIpAddressesCommand(input);
  * const response = await client.send(command);
@@ -124,9 +124,7 @@ export class AssignPrivateIpAddressesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class AssignPrivateIpAddressesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssignPrivateIpAddressesCommand)
   .de(de_AssignPrivateIpAddressesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssignPrivateIpAddressesRequest;
+      output: AssignPrivateIpAddressesResult;
+    };
+    sdk: {
+      input: AssignPrivateIpAddressesCommandInput;
+      output: AssignPrivateIpAddressesCommandOutput;
+    };
+  };
+}

@@ -81,9 +81,7 @@ export class DescribeActivityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SFNClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DescribeActivityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeActivityCommand)
   .de(de_DescribeActivityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeActivityInput;
+      output: DescribeActivityOutput;
+    };
+    sdk: {
+      input: DescribeActivityCommandInput;
+      output: DescribeActivityCommandOutput;
+    };
+  };
+}

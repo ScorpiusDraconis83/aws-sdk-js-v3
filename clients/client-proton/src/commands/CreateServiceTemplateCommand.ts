@@ -114,9 +114,7 @@ export class CreateServiceTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateServiceTemplateCommand extends $Command
   .f(CreateServiceTemplateInputFilterSensitiveLog, CreateServiceTemplateOutputFilterSensitiveLog)
   .ser(se_CreateServiceTemplateCommand)
   .de(de_CreateServiceTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateServiceTemplateInput;
+      output: CreateServiceTemplateOutput;
+    };
+    sdk: {
+      input: CreateServiceTemplateCommandInput;
+      output: CreateServiceTemplateCommandOutput;
+    };
+  };
+}

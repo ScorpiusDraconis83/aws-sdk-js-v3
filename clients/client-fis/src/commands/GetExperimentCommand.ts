@@ -47,7 +47,7 @@ export interface GetExperimentCommandOutput extends GetExperimentResponse, __Met
  * //     experimentTemplateId: "STRING_VALUE",
  * //     roleArn: "STRING_VALUE",
  * //     state: { // ExperimentState
- * //       status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed",
+ * //       status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed" || "cancelled",
  * //       reason: "STRING_VALUE",
  * //       error: { // ExperimentError
  * //         accountId: "STRING_VALUE",
@@ -157,9 +157,7 @@ export class GetExperimentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FisClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -171,4 +169,16 @@ export class GetExperimentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetExperimentCommand)
   .de(de_GetExperimentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExperimentRequest;
+      output: GetExperimentResponse;
+    };
+    sdk: {
+      input: GetExperimentCommandInput;
+      output: GetExperimentCommandOutput;
+    };
+  };
+}

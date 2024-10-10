@@ -129,9 +129,7 @@ export class CreateAgentAliasCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class CreateAgentAliasCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAgentAliasCommand)
   .de(de_CreateAgentAliasCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAgentAliasRequest;
+      output: CreateAgentAliasResponse;
+    };
+    sdk: {
+      input: CreateAgentAliasCommandInput;
+      output: CreateAgentAliasCommandOutput;
+    };
+  };
+}

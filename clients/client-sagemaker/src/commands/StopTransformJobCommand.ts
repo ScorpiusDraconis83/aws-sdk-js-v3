@@ -71,9 +71,7 @@ export class StopTransformJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -85,4 +83,16 @@ export class StopTransformJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopTransformJobCommand)
   .de(de_StopTransformJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopTransformJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopTransformJobCommandInput;
+      output: StopTransformJobCommandOutput;
+    };
+  };
+}

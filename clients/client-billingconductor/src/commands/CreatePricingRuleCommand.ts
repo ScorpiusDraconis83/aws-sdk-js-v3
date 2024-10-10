@@ -111,9 +111,7 @@ export class CreatePricingRuleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BillingconductorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class CreatePricingRuleCommand extends $Command
   .f(CreatePricingRuleInputFilterSensitiveLog, void 0)
   .ser(se_CreatePricingRuleCommand)
   .de(de_CreatePricingRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePricingRuleInput;
+      output: CreatePricingRuleOutput;
+    };
+    sdk: {
+      input: CreatePricingRuleCommandInput;
+      output: CreatePricingRuleCommandOutput;
+    };
+  };
+}

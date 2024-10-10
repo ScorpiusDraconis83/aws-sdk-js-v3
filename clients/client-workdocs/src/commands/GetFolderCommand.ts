@@ -112,9 +112,7 @@ export class GetFolderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class GetFolderCommand extends $Command
   .f(GetFolderRequestFilterSensitiveLog, GetFolderResponseFilterSensitiveLog)
   .ser(se_GetFolderCommand)
   .de(de_GetFolderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFolderRequest;
+      output: GetFolderResponse;
+    };
+    sdk: {
+      input: GetFolderCommandInput;
+      output: GetFolderCommandOutput;
+    };
+  };
+}

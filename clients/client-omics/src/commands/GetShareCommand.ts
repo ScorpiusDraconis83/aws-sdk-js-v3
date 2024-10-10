@@ -97,9 +97,7 @@ export class GetShareCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class GetShareCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetShareCommand)
   .de(de_GetShareCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetShareRequest;
+      output: GetShareResponse;
+    };
+    sdk: {
+      input: GetShareCommandInput;
+      output: GetShareCommandOutput;
+    };
+  };
+}

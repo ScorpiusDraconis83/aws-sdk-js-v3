@@ -205,9 +205,7 @@ export class GetFlowVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -219,4 +217,16 @@ export class GetFlowVersionCommand extends $Command
   .f(void 0, GetFlowVersionResponseFilterSensitiveLog)
   .ser(se_GetFlowVersionCommand)
   .de(de_GetFlowVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFlowVersionRequest;
+      output: GetFlowVersionResponse;
+    };
+    sdk: {
+      input: GetFlowVersionCommandInput;
+      output: GetFlowVersionCommandOutput;
+    };
+  };
+}

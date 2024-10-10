@@ -80,9 +80,7 @@ export class DescribeSecurityConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DescribeSecurityConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSecurityConfigurationCommand)
   .de(de_DescribeSecurityConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSecurityConfigurationInput;
+      output: DescribeSecurityConfigurationOutput;
+    };
+    sdk: {
+      input: DescribeSecurityConfigurationCommandInput;
+      output: DescribeSecurityConfigurationCommandOutput;
+    };
+  };
+}

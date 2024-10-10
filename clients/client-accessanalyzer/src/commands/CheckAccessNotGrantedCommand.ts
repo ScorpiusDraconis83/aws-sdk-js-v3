@@ -188,9 +188,7 @@ export class CheckAccessNotGrantedCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccessAnalyzerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -202,4 +200,16 @@ export class CheckAccessNotGrantedCommand extends $Command
   .f(CheckAccessNotGrantedRequestFilterSensitiveLog, void 0)
   .ser(se_CheckAccessNotGrantedCommand)
   .de(de_CheckAccessNotGrantedCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CheckAccessNotGrantedRequest;
+      output: CheckAccessNotGrantedResponse;
+    };
+    sdk: {
+      input: CheckAccessNotGrantedCommandInput;
+      output: CheckAccessNotGrantedCommandOutput;
+    };
+  };
+}

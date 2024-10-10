@@ -90,9 +90,7 @@ export class CancelInputDeviceTransferCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class CancelInputDeviceTransferCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CancelInputDeviceTransferCommand)
   .de(de_CancelInputDeviceTransferCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelInputDeviceTransferRequest;
+      output: {};
+    };
+    sdk: {
+      input: CancelInputDeviceTransferCommandInput;
+      output: CancelInputDeviceTransferCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class DeleteConfiguredTableAssociationAnalysisRuleCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class DeleteConfiguredTableAssociationAnalysisRuleCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_DeleteConfiguredTableAssociationAnalysisRuleCommand)
   .de(de_DeleteConfiguredTableAssociationAnalysisRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteConfiguredTableAssociationAnalysisRuleInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteConfiguredTableAssociationAnalysisRuleCommandInput;
+      output: DeleteConfiguredTableAssociationAnalysisRuleCommandOutput;
+    };
+  };
+}

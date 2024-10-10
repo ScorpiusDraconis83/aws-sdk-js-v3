@@ -115,9 +115,7 @@ export class GetCurrentUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class GetCurrentUserCommand extends $Command
   .f(GetCurrentUserRequestFilterSensitiveLog, GetCurrentUserResponseFilterSensitiveLog)
   .ser(se_GetCurrentUserCommand)
   .de(de_GetCurrentUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCurrentUserRequest;
+      output: GetCurrentUserResponse;
+    };
+    sdk: {
+      input: GetCurrentUserCommandInput;
+      output: GetCurrentUserCommandOutput;
+    };
+  };
+}

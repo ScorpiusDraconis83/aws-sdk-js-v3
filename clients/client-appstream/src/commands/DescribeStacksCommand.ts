@@ -70,7 +70,7 @@ export interface DescribeStacksCommandOutput extends DescribeStacksResult, __Met
  * //       ],
  * //       UserSettings: [ // UserSettingList
  * //         { // UserSetting
- * //           Action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE" || "CLIPBOARD_COPY_TO_LOCAL_DEVICE" || "FILE_UPLOAD" || "FILE_DOWNLOAD" || "PRINTING_TO_LOCAL_DEVICE" || "DOMAIN_PASSWORD_SIGNIN" || "DOMAIN_SMART_CARD_SIGNIN", // required
+ * //           Action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE" || "CLIPBOARD_COPY_TO_LOCAL_DEVICE" || "FILE_UPLOAD" || "FILE_DOWNLOAD" || "PRINTING_TO_LOCAL_DEVICE" || "DOMAIN_PASSWORD_SIGNIN" || "DOMAIN_SMART_CARD_SIGNIN" || "AUTO_TIME_ZONE_REDIRECTION", // required
  * //           Permission: "ENABLED" || "DISABLED", // required
  * //           MaximumLength: Number("int"),
  * //         },
@@ -121,9 +121,7 @@ export class DescribeStacksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class DescribeStacksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeStacksCommand)
   .de(de_DescribeStacksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStacksRequest;
+      output: DescribeStacksResult;
+    };
+    sdk: {
+      input: DescribeStacksCommandInput;
+      output: DescribeStacksCommandOutput;
+    };
+  };
+}

@@ -107,9 +107,7 @@ export class PutVoiceConnectorProxyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class PutVoiceConnectorProxyCommand extends $Command
   .f(PutVoiceConnectorProxyRequestFilterSensitiveLog, PutVoiceConnectorProxyResponseFilterSensitiveLog)
   .ser(se_PutVoiceConnectorProxyCommand)
   .de(de_PutVoiceConnectorProxyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutVoiceConnectorProxyRequest;
+      output: PutVoiceConnectorProxyResponse;
+    };
+    sdk: {
+      input: PutVoiceConnectorProxyCommandInput;
+      output: PutVoiceConnectorProxyCommandOutput;
+    };
+  };
+}

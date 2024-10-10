@@ -100,9 +100,7 @@ export class GetModelsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class GetModelsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetModelsCommand)
   .de(de_GetModelsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetModelsRequest;
+      output: GetModelsResult;
+    };
+    sdk: {
+      input: GetModelsCommandInput;
+      output: GetModelsCommandOutput;
+    };
+  };
+}

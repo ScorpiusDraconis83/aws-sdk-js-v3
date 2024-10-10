@@ -100,9 +100,7 @@ export class DeleteFirewallRuleGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ResolverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class DeleteFirewallRuleGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteFirewallRuleGroupCommand)
   .de(de_DeleteFirewallRuleGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFirewallRuleGroupRequest;
+      output: DeleteFirewallRuleGroupResponse;
+    };
+    sdk: {
+      input: DeleteFirewallRuleGroupCommandInput;
+      output: DeleteFirewallRuleGroupCommandOutput;
+    };
+  };
+}

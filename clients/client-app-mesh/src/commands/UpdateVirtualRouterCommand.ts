@@ -132,9 +132,7 @@ export class UpdateVirtualRouterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppMeshClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class UpdateVirtualRouterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateVirtualRouterCommand)
   .de(de_UpdateVirtualRouterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateVirtualRouterInput;
+      output: UpdateVirtualRouterOutput;
+    };
+    sdk: {
+      input: UpdateVirtualRouterCommandInput;
+      output: UpdateVirtualRouterCommandOutput;
+    };
+  };
+}

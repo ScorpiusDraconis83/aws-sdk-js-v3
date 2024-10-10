@@ -104,9 +104,7 @@ export class ListProtectedQueriesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class ListProtectedQueriesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListProtectedQueriesCommand)
   .de(de_ListProtectedQueriesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProtectedQueriesInput;
+      output: ListProtectedQueriesOutput;
+    };
+    sdk: {
+      input: ListProtectedQueriesCommandInput;
+      output: ListProtectedQueriesCommandOutput;
+    };
+  };
+}

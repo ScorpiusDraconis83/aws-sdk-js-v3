@@ -91,9 +91,7 @@ export class ListQueueEnvironmentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListQueueEnvironmentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListQueueEnvironmentsCommand)
   .de(de_ListQueueEnvironmentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListQueueEnvironmentsRequest;
+      output: ListQueueEnvironmentsResponse;
+    };
+    sdk: {
+      input: ListQueueEnvironmentsCommandInput;
+      output: ListQueueEnvironmentsCommandOutput;
+    };
+  };
+}

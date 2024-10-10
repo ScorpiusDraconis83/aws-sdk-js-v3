@@ -5,7 +5,8 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { SearchRequest, SearchResponse, SearchResponseFilterSensitiveLog } from "../models/models_4";
+import { SearchResponse, SearchResponseFilterSensitiveLog } from "../models/models_4";
+import { SearchRequest } from "../models/models_5";
 import { de_SearchCommand, se_SearchCommand } from "../protocols/Aws_json1_1";
 import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
 
@@ -1099,6 +1100,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //                   HubAccessConfig: { // InferenceHubAccessConfig
  * //                     HubContentArn: "STRING_VALUE", // required
  * //                   },
+ * //                   ManifestS3Uri: "STRING_VALUE",
  * //                 },
  * //               },
  * //               ProductId: "STRING_VALUE",
@@ -1146,6 +1148,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //                   HubAccessConfig: {
  * //                     HubContentArn: "STRING_VALUE", // required
  * //                   },
+ * //                   ManifestS3Uri: "STRING_VALUE",
  * //                 },
  * //               },
  * //               AlgorithmName: "STRING_VALUE", // required
@@ -1281,6 +1284,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //                     HubAccessConfig: {
  * //                       HubContentArn: "STRING_VALUE", // required
  * //                     },
+ * //                     ManifestS3Uri: "STRING_VALUE",
  * //                   },
  * //                 },
  * //                 ProductId: "STRING_VALUE",
@@ -1844,6 +1848,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //                   HubAccessConfig: {
  * //                     HubContentArn: "STRING_VALUE", // required
  * //                   },
+ * //                   ManifestS3Uri: "STRING_VALUE",
  * //                 },
  * //               },
  * //             ],
@@ -1880,6 +1885,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //                     HubAccessConfig: {
  * //                       HubContentArn: "STRING_VALUE", // required
  * //                     },
+ * //                     ManifestS3Uri: "STRING_VALUE",
  * //                   },
  * //                 },
  * //               ],
@@ -2161,9 +2167,7 @@ export class SearchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -2175,4 +2179,16 @@ export class SearchCommand extends $Command
   .f(void 0, SearchResponseFilterSensitiveLog)
   .ser(se_SearchCommand)
   .de(de_SearchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchRequest;
+      output: SearchResponse;
+    };
+    sdk: {
+      input: SearchCommandInput;
+      output: SearchCommandOutput;
+    };
+  };
+}

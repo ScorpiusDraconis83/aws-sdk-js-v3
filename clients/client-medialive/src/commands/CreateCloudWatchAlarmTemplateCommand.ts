@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { CreateCloudWatchAlarmTemplateRequest, CreateCloudWatchAlarmTemplateResponse } from "../models/models_1";
+import { CreateCloudWatchAlarmTemplateRequest, CreateCloudWatchAlarmTemplateResponse } from "../models/models_2";
 import {
   de_CreateCloudWatchAlarmTemplateCommand,
   se_CreateCloudWatchAlarmTemplateCommand,
@@ -120,9 +120,7 @@ export class CreateCloudWatchAlarmTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class CreateCloudWatchAlarmTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCloudWatchAlarmTemplateCommand)
   .de(de_CreateCloudWatchAlarmTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCloudWatchAlarmTemplateRequest;
+      output: CreateCloudWatchAlarmTemplateResponse;
+    };
+    sdk: {
+      input: CreateCloudWatchAlarmTemplateCommandInput;
+      output: CreateCloudWatchAlarmTemplateCommandOutput;
+    };
+  };
+}

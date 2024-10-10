@@ -97,9 +97,7 @@ export class UpdateNotificationRuleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodestarNotificationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class UpdateNotificationRuleCommand extends $Command
   .f(UpdateNotificationRuleRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateNotificationRuleCommand)
   .de(de_UpdateNotificationRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateNotificationRuleRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateNotificationRuleCommandInput;
+      output: UpdateNotificationRuleCommandOutput;
+    };
+  };
+}

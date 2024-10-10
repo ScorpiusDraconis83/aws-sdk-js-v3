@@ -100,9 +100,7 @@ export class UpdateTrainingJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class UpdateTrainingJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTrainingJobCommand)
   .de(de_UpdateTrainingJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrainingJobRequest;
+      output: UpdateTrainingJobResponse;
+    };
+    sdk: {
+      input: UpdateTrainingJobCommandInput;
+      output: UpdateTrainingJobCommandOutput;
+    };
+  };
+}

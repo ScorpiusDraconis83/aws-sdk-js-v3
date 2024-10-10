@@ -165,9 +165,7 @@ export class GetInstanceTypesFromInstanceRequirementsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class GetInstanceTypesFromInstanceRequirementsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetInstanceTypesFromInstanceRequirementsCommand)
   .de(de_GetInstanceTypesFromInstanceRequirementsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceTypesFromInstanceRequirementsRequest;
+      output: GetInstanceTypesFromInstanceRequirementsResult;
+    };
+    sdk: {
+      input: GetInstanceTypesFromInstanceRequirementsCommandInput;
+      output: GetInstanceTypesFromInstanceRequirementsCommandOutput;
+    };
+  };
+}

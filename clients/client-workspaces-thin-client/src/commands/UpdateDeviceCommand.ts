@@ -108,9 +108,7 @@ export class UpdateDeviceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesThinClientClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class UpdateDeviceCommand extends $Command
   .f(UpdateDeviceRequestFilterSensitiveLog, UpdateDeviceResponseFilterSensitiveLog)
   .ser(se_UpdateDeviceCommand)
   .de(de_UpdateDeviceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDeviceRequest;
+      output: UpdateDeviceResponse;
+    };
+    sdk: {
+      input: UpdateDeviceCommandInput;
+      output: UpdateDeviceCommandOutput;
+    };
+  };
+}

@@ -51,6 +51,7 @@ export interface GetConfigurationSetCommandOutput extends GetConfigurationSetRes
  * //   ConfigurationSetName: "STRING_VALUE",
  * //   TrackingOptions: { // TrackingOptions
  * //     CustomRedirectDomain: "STRING_VALUE", // required
+ * //     HttpsPolicy: "REQUIRE" || "REQUIRE_OPEN_ONLY" || "OPTIONAL",
  * //   },
  * //   DeliveryOptions: { // DeliveryOptions
  * //     TlsPolicy: "REQUIRE" || "OPTIONAL",
@@ -114,9 +115,7 @@ export class GetConfigurationSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +127,16 @@ export class GetConfigurationSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConfigurationSetCommand)
   .de(de_GetConfigurationSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConfigurationSetRequest;
+      output: GetConfigurationSetResponse;
+    };
+    sdk: {
+      input: GetConfigurationSetCommandInput;
+      output: GetConfigurationSetCommandOutput;
+    };
+  };
+}

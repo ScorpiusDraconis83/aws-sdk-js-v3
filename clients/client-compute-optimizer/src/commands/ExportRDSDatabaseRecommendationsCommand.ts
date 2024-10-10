@@ -131,9 +131,7 @@ export class ExportRDSDatabaseRecommendationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComputeOptimizerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class ExportRDSDatabaseRecommendationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExportRDSDatabaseRecommendationsCommand)
   .de(de_ExportRDSDatabaseRecommendationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportRDSDatabaseRecommendationsRequest;
+      output: ExportRDSDatabaseRecommendationsResponse;
+    };
+    sdk: {
+      input: ExportRDSDatabaseRecommendationsCommandInput;
+      output: ExportRDSDatabaseRecommendationsCommandOutput;
+    };
+  };
+}

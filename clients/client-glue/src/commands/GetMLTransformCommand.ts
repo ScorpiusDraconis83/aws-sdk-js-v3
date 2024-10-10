@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetMLTransformRequest, GetMLTransformResponse } from "../models/models_1";
+import { GetMLTransformRequest, GetMLTransformResponse } from "../models/models_2";
 import { de_GetMLTransformCommand, se_GetMLTransformCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -148,9 +148,7 @@ export class GetMLTransformCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -162,4 +160,16 @@ export class GetMLTransformCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMLTransformCommand)
   .de(de_GetMLTransformCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMLTransformRequest;
+      output: GetMLTransformResponse;
+    };
+    sdk: {
+      input: GetMLTransformCommandInput;
+      output: GetMLTransformCommandOutput;
+    };
+  };
+}

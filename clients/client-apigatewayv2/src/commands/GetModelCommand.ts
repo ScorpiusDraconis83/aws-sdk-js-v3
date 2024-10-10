@@ -76,9 +76,7 @@ export class GetModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApiGatewayV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class GetModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetModelCommand)
   .de(de_GetModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetModelRequest;
+      output: GetModelResponse;
+    };
+    sdk: {
+      input: GetModelCommandInput;
+      output: GetModelCommandOutput;
+    };
+  };
+}

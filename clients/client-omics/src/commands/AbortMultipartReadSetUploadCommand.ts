@@ -95,9 +95,7 @@ export class AbortMultipartReadSetUploadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class AbortMultipartReadSetUploadCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AbortMultipartReadSetUploadCommand)
   .de(de_AbortMultipartReadSetUploadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AbortMultipartReadSetUploadRequest;
+      output: {};
+    };
+    sdk: {
+      input: AbortMultipartReadSetUploadCommandInput;
+      output: AbortMultipartReadSetUploadCommandOutput;
+    };
+  };
+}

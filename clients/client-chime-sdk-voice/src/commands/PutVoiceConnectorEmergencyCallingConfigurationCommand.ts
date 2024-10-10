@@ -114,9 +114,7 @@ export class PutVoiceConnectorEmergencyCallingConfigurationCommand extends $Comm
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class PutVoiceConnectorEmergencyCallingConfigurationCommand extends $Comm
   )
   .ser(se_PutVoiceConnectorEmergencyCallingConfigurationCommand)
   .de(de_PutVoiceConnectorEmergencyCallingConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutVoiceConnectorEmergencyCallingConfigurationRequest;
+      output: PutVoiceConnectorEmergencyCallingConfigurationResponse;
+    };
+    sdk: {
+      input: PutVoiceConnectorEmergencyCallingConfigurationCommandInput;
+      output: PutVoiceConnectorEmergencyCallingConfigurationCommandOutput;
+    };
+  };
+}

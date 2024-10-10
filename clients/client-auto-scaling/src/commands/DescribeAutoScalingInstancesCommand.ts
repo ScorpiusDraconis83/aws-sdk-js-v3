@@ -123,9 +123,7 @@ export class DescribeAutoScalingInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class DescribeAutoScalingInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAutoScalingInstancesCommand)
   .de(de_DescribeAutoScalingInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAutoScalingInstancesType;
+      output: AutoScalingInstancesType;
+    };
+    sdk: {
+      input: DescribeAutoScalingInstancesCommandInput;
+      output: DescribeAutoScalingInstancesCommandOutput;
+    };
+  };
+}

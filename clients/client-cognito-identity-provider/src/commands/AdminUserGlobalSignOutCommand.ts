@@ -136,9 +136,7 @@ export class AdminUserGlobalSignOutCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -150,4 +148,16 @@ export class AdminUserGlobalSignOutCommand extends $Command
   .f(AdminUserGlobalSignOutRequestFilterSensitiveLog, void 0)
   .ser(se_AdminUserGlobalSignOutCommand)
   .de(de_AdminUserGlobalSignOutCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminUserGlobalSignOutRequest;
+      output: {};
+    };
+    sdk: {
+      input: AdminUserGlobalSignOutCommandInput;
+      output: AdminUserGlobalSignOutCommandOutput;
+    };
+  };
+}

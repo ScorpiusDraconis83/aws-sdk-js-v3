@@ -93,9 +93,7 @@ export class ListRepositorySyncDefinitionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class ListRepositorySyncDefinitionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRepositorySyncDefinitionsCommand)
   .de(de_ListRepositorySyncDefinitionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRepositorySyncDefinitionsInput;
+      output: ListRepositorySyncDefinitionsOutput;
+    };
+    sdk: {
+      input: ListRepositorySyncDefinitionsCommandInput;
+      output: ListRepositorySyncDefinitionsCommandOutput;
+    };
+  };
+}

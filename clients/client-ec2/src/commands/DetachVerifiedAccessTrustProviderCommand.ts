@@ -131,9 +131,7 @@ export class DetachVerifiedAccessTrustProviderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class DetachVerifiedAccessTrustProviderCommand extends $Command
   .f(void 0, DetachVerifiedAccessTrustProviderResultFilterSensitiveLog)
   .ser(se_DetachVerifiedAccessTrustProviderCommand)
   .de(de_DetachVerifiedAccessTrustProviderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachVerifiedAccessTrustProviderRequest;
+      output: DetachVerifiedAccessTrustProviderResult;
+    };
+    sdk: {
+      input: DetachVerifiedAccessTrustProviderCommandInput;
+      output: DetachVerifiedAccessTrustProviderCommandOutput;
+    };
+  };
+}

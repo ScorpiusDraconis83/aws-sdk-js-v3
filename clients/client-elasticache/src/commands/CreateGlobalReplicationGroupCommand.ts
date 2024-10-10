@@ -30,9 +30,9 @@ export interface CreateGlobalReplicationGroupCommandOutput
     __MetadataBearer {}
 
 /**
- * <p>Global Datastore for Redis OSS offers fully managed, fast, reliable and secure
- *             cross-region replication. Using Global Datastore for Redis OSS, you can create cross-region
- *             read replica clusters for ElastiCache (Redis OSS) to enable low-latency reads and disaster
+ * <p>Global Datastore offers fully managed, fast, reliable and secure
+ *             cross-region replication. Using Global Datastore with Valkey or Redis OSS, you can create cross-region
+ *             read replica clusters for ElastiCache to enable low-latency reads and disaster
  *             recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication
  *                 Across Regions Using Global Datastore</a>. </p>
  *          <ul>
@@ -126,9 +126,7 @@ export class CreateGlobalReplicationGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class CreateGlobalReplicationGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateGlobalReplicationGroupCommand)
   .de(de_CreateGlobalReplicationGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGlobalReplicationGroupMessage;
+      output: CreateGlobalReplicationGroupResult;
+    };
+    sdk: {
+      input: CreateGlobalReplicationGroupCommandInput;
+      output: CreateGlobalReplicationGroupCommandOutput;
+    };
+  };
+}

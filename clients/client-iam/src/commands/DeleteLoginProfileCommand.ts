@@ -104,9 +104,7 @@ export class DeleteLoginProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class DeleteLoginProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteLoginProfileCommand)
   .de(de_DeleteLoginProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLoginProfileRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteLoginProfileCommandInput;
+      output: DeleteLoginProfileCommandOutput;
+    };
+  };
+}

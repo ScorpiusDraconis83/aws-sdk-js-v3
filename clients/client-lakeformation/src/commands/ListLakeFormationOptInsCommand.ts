@@ -200,9 +200,7 @@ export class ListLakeFormationOptInsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LakeFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -214,4 +212,16 @@ export class ListLakeFormationOptInsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLakeFormationOptInsCommand)
   .de(de_ListLakeFormationOptInsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLakeFormationOptInsRequest;
+      output: ListLakeFormationOptInsResponse;
+    };
+    sdk: {
+      input: ListLakeFormationOptInsCommandInput;
+      output: ListLakeFormationOptInsCommandOutput;
+    };
+  };
+}

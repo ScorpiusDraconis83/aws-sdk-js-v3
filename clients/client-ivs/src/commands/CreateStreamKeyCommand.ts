@@ -97,9 +97,7 @@ export class CreateStreamKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IvsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class CreateStreamKeyCommand extends $Command
   .f(void 0, CreateStreamKeyResponseFilterSensitiveLog)
   .ser(se_CreateStreamKeyCommand)
   .de(de_CreateStreamKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStreamKeyRequest;
+      output: CreateStreamKeyResponse;
+    };
+    sdk: {
+      input: CreateStreamKeyCommandInput;
+      output: CreateStreamKeyCommandOutput;
+    };
+  };
+}

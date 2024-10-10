@@ -105,9 +105,7 @@ export class ListQueueTagsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SQSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class ListQueueTagsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListQueueTagsCommand)
   .de(de_ListQueueTagsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListQueueTagsRequest;
+      output: ListQueueTagsResult;
+    };
+    sdk: {
+      input: ListQueueTagsCommandInput;
+      output: ListQueueTagsCommandOutput;
+    };
+  };
+}

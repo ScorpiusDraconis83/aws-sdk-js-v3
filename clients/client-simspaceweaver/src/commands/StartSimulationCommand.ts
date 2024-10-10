@@ -106,9 +106,7 @@ export class StartSimulationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SimSpaceWeaverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class StartSimulationCommand extends $Command
   .f(StartSimulationInputFilterSensitiveLog, void 0)
   .ser(se_StartSimulationCommand)
   .de(de_StartSimulationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSimulationInput;
+      output: StartSimulationOutput;
+    };
+    sdk: {
+      input: StartSimulationCommandInput;
+      output: StartSimulationCommandOutput;
+    };
+  };
+}

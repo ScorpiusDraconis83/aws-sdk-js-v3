@@ -126,9 +126,7 @@ export class CreateTrustAnchorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RolesAnywhereClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class CreateTrustAnchorCommand extends $Command
   .f(CreateTrustAnchorRequestFilterSensitiveLog, void 0)
   .ser(se_CreateTrustAnchorCommand)
   .de(de_CreateTrustAnchorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTrustAnchorRequest;
+      output: TrustAnchorDetailResponse;
+    };
+    sdk: {
+      input: CreateTrustAnchorCommandInput;
+      output: CreateTrustAnchorCommandOutput;
+    };
+  };
+}

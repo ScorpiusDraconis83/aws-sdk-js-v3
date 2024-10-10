@@ -81,9 +81,7 @@ export class StopModelInvocationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class StopModelInvocationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopModelInvocationJobCommand)
   .de(de_StopModelInvocationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopModelInvocationJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopModelInvocationJobCommandInput;
+      output: StopModelInvocationJobCommandOutput;
+    };
+  };
+}

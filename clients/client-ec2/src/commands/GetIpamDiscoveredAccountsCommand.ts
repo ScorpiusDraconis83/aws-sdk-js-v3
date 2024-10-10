@@ -89,9 +89,7 @@ export class GetIpamDiscoveredAccountsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class GetIpamDiscoveredAccountsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetIpamDiscoveredAccountsCommand)
   .de(de_GetIpamDiscoveredAccountsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIpamDiscoveredAccountsRequest;
+      output: GetIpamDiscoveredAccountsResult;
+    };
+    sdk: {
+      input: GetIpamDiscoveredAccountsCommandInput;
+      output: GetIpamDiscoveredAccountsCommandOutput;
+    };
+  };
+}

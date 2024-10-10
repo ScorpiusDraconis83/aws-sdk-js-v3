@@ -101,9 +101,7 @@ export class DescribeUserStackAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class DescribeUserStackAssociationsCommand extends $Command
   .f(DescribeUserStackAssociationsRequestFilterSensitiveLog, DescribeUserStackAssociationsResultFilterSensitiveLog)
   .ser(se_DescribeUserStackAssociationsCommand)
   .de(de_DescribeUserStackAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserStackAssociationsRequest;
+      output: DescribeUserStackAssociationsResult;
+    };
+    sdk: {
+      input: DescribeUserStackAssociationsCommandInput;
+      output: DescribeUserStackAssociationsCommandOutput;
+    };
+  };
+}

@@ -131,9 +131,7 @@ export class CreatePlatformApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SNSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class CreatePlatformApplicationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePlatformApplicationCommand)
   .de(de_CreatePlatformApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePlatformApplicationInput;
+      output: CreatePlatformApplicationResponse;
+    };
+    sdk: {
+      input: CreatePlatformApplicationCommandInput;
+      output: CreatePlatformApplicationCommandOutput;
+    };
+  };
+}

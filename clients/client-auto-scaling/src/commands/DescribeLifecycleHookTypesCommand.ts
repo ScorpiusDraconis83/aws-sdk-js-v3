@@ -99,9 +99,7 @@ export class DescribeLifecycleHookTypesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class DescribeLifecycleHookTypesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLifecycleHookTypesCommand)
   .de(de_DescribeLifecycleHookTypesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeLifecycleHookTypesAnswer;
+    };
+    sdk: {
+      input: DescribeLifecycleHookTypesCommandInput;
+      output: DescribeLifecycleHookTypesCommandOutput;
+    };
+  };
+}

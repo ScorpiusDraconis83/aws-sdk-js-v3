@@ -116,6 +116,7 @@ export interface DescribeImageScanFindingsCommandOutput extends DescribeImageSca
  * //               release: "STRING_VALUE",
  * //               sourceLayerHash: "STRING_VALUE",
  * //               version: "STRING_VALUE",
+ * //               fixedInVersion: "STRING_VALUE",
  * //             },
  * //           ],
  * //         },
@@ -168,6 +169,8 @@ export interface DescribeImageScanFindingsCommandOutput extends DescribeImageSca
  * //         title: "STRING_VALUE",
  * //         type: "STRING_VALUE",
  * //         updatedAt: new Date("TIMESTAMP"),
+ * //         fixAvailable: "STRING_VALUE",
+ * //         exploitAvailable: "STRING_VALUE",
  * //       },
  * //     ],
  * //   },
@@ -216,9 +219,7 @@ export class DescribeImageScanFindingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +231,16 @@ export class DescribeImageScanFindingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeImageScanFindingsCommand)
   .de(de_DescribeImageScanFindingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImageScanFindingsRequest;
+      output: DescribeImageScanFindingsResponse;
+    };
+    sdk: {
+      input: DescribeImageScanFindingsCommandInput;
+      output: DescribeImageScanFindingsCommandOutput;
+    };
+  };
+}

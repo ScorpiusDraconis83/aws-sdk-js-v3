@@ -120,9 +120,7 @@ export class SendSSHPublicKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2InstanceConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class SendSSHPublicKeyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SendSSHPublicKeyCommand)
   .de(de_SendSSHPublicKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendSSHPublicKeyRequest;
+      output: SendSSHPublicKeyResponse;
+    };
+    sdk: {
+      input: SendSSHPublicKeyCommandInput;
+      output: SendSSHPublicKeyCommandOutput;
+    };
+  };
+}

@@ -103,9 +103,7 @@ export class GetListenerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VPCLatticeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class GetListenerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetListenerCommand)
   .de(de_GetListenerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetListenerRequest;
+      output: GetListenerResponse;
+    };
+    sdk: {
+      input: GetListenerCommandInput;
+      output: GetListenerCommandOutput;
+    };
+  };
+}

@@ -79,9 +79,7 @@ export class GetWorldTemplateBodyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class GetWorldTemplateBodyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetWorldTemplateBodyCommand)
   .de(de_GetWorldTemplateBodyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorldTemplateBodyRequest;
+      output: GetWorldTemplateBodyResponse;
+    };
+    sdk: {
+      input: GetWorldTemplateBodyCommandInput;
+      output: GetWorldTemplateBodyCommandOutput;
+    };
+  };
+}

@@ -86,6 +86,18 @@ export interface DeleteFacetCommandOutput extends DeleteFacetResponse, __Metadat
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To delete a facet
+ * ```javascript
+ * //
+ * const input = {
+ *   "Name": "Organization",
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest"
+ * };
+ * const command = new DeleteFacetCommand(input);
+ * await client.send(command);
+ * // example id: to-delete-a-facet-1507573383449
+ * ```
+ *
  */
 export class DeleteFacetCommand extends $Command
   .classBuilder<
@@ -95,9 +107,7 @@ export class DeleteFacetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +119,16 @@ export class DeleteFacetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteFacetCommand)
   .de(de_DeleteFacetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFacetRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteFacetCommandInput;
+      output: DeleteFacetCommandOutput;
+    };
+  };
+}

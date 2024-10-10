@@ -67,6 +67,10 @@ export interface SetUserMFAPreferenceCommandOutput extends SetUserMFAPreferenceR
  *     Enabled: true || false,
  *     PreferredMfa: true || false,
  *   },
+ *   EmailMfaSettings: { // EmailMfaSettingsType
+ *     Enabled: true || false,
+ *     PreferredMfa: true || false,
+ *   },
  *   AccessToken: "STRING_VALUE", // required
  * };
  * const command = new SetUserMFAPreferenceCommand(input);
@@ -121,9 +125,7 @@ export class SetUserMFAPreferenceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +137,16 @@ export class SetUserMFAPreferenceCommand extends $Command
   .f(SetUserMFAPreferenceRequestFilterSensitiveLog, void 0)
   .ser(se_SetUserMFAPreferenceCommand)
   .de(de_SetUserMFAPreferenceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetUserMFAPreferenceRequest;
+      output: {};
+    };
+    sdk: {
+      input: SetUserMFAPreferenceCommandInput;
+      output: SetUserMFAPreferenceCommandOutput;
+    };
+  };
+}

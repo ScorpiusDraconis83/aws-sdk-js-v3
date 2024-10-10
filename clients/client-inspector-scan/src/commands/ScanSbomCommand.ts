@@ -256,9 +256,7 @@ export class ScanSbomCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: InspectorScanClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -270,4 +268,16 @@ export class ScanSbomCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ScanSbomCommand)
   .de(de_ScanSbomCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ScanSbomRequest;
+      output: ScanSbomResponse;
+    };
+    sdk: {
+      input: ScanSbomCommandInput;
+      output: ScanSbomCommandOutput;
+    };
+  };
+}

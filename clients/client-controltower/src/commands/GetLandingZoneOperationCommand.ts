@@ -88,9 +88,7 @@ export class GetLandingZoneOperationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ControlTowerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class GetLandingZoneOperationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetLandingZoneOperationCommand)
   .de(de_GetLandingZoneOperationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLandingZoneOperationInput;
+      output: GetLandingZoneOperationOutput;
+    };
+    sdk: {
+      input: GetLandingZoneOperationCommandInput;
+      output: GetLandingZoneOperationCommandOutput;
+    };
+  };
+}

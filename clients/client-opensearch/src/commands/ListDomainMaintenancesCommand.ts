@@ -96,9 +96,7 @@ export class ListDomainMaintenancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class ListDomainMaintenancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListDomainMaintenancesCommand)
   .de(de_ListDomainMaintenancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDomainMaintenancesRequest;
+      output: ListDomainMaintenancesResponse;
+    };
+    sdk: {
+      input: ListDomainMaintenancesCommandInput;
+      output: ListDomainMaintenancesCommandOutput;
+    };
+  };
+}

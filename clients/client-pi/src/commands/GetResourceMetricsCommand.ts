@@ -121,9 +121,7 @@ export class GetResourceMetricsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PIClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class GetResourceMetricsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetResourceMetricsCommand)
   .de(de_GetResourceMetricsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceMetricsRequest;
+      output: GetResourceMetricsResponse;
+    };
+    sdk: {
+      input: GetResourceMetricsCommandInput;
+      output: GetResourceMetricsCommandOutput;
+    };
+  };
+}

@@ -117,9 +117,7 @@ export class CreateEnvironmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FinspaceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class CreateEnvironmentCommand extends $Command
   .f(CreateEnvironmentRequestFilterSensitiveLog, void 0)
   .ser(se_CreateEnvironmentCommand)
   .de(de_CreateEnvironmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentRequest;
+      output: CreateEnvironmentResponse;
+    };
+    sdk: {
+      input: CreateEnvironmentCommandInput;
+      output: CreateEnvironmentCommandOutput;
+    };
+  };
+}

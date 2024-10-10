@@ -165,9 +165,7 @@ export class GetDistributionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class GetDistributionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDistributionsCommand)
   .de(de_GetDistributionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDistributionsRequest;
+      output: GetDistributionsResult;
+    };
+    sdk: {
+      input: GetDistributionsCommandInput;
+      output: GetDistributionsCommandOutput;
+    };
+  };
+}

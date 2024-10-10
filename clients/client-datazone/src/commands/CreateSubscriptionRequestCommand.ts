@@ -94,6 +94,14 @@ export interface CreateSubscriptionRequestCommandOutput extends CreateSubscripti
  * //               shortDescription: "STRING_VALUE",
  * //             },
  * //           ],
+ * //           assetScope: { // AssetScope
+ * //             assetId: "STRING_VALUE", // required
+ * //             filterIds: [ // FilterIds // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             status: "STRING_VALUE", // required
+ * //             errorMessage: "STRING_VALUE",
+ * //           },
  * //         },
  * //         productListing: { // SubscribedProductListing
  * //           entityId: "STRING_VALUE",
@@ -165,9 +173,7 @@ export class CreateSubscriptionRequestCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +185,16 @@ export class CreateSubscriptionRequestCommand extends $Command
   .f(CreateSubscriptionRequestInputFilterSensitiveLog, CreateSubscriptionRequestOutputFilterSensitiveLog)
   .ser(se_CreateSubscriptionRequestCommand)
   .de(de_CreateSubscriptionRequestCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSubscriptionRequestInput;
+      output: CreateSubscriptionRequestOutput;
+    };
+    sdk: {
+      input: CreateSubscriptionRequestCommandInput;
+      output: CreateSubscriptionRequestCommandOutput;
+    };
+  };
+}

@@ -147,9 +147,7 @@ export class CreateReplicationConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class CreateReplicationConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateReplicationConfigCommand)
   .de(de_CreateReplicationConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReplicationConfigMessage;
+      output: CreateReplicationConfigResponse;
+    };
+    sdk: {
+      input: CreateReplicationConfigCommandInput;
+      output: CreateReplicationConfigCommandOutput;
+    };
+  };
+}

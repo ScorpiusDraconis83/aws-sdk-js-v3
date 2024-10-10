@@ -102,9 +102,7 @@ export class ListTrustAnchorsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RolesAnywhereClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class ListTrustAnchorsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTrustAnchorsCommand)
   .de(de_ListTrustAnchorsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRequest;
+      output: ListTrustAnchorsResponse;
+    };
+    sdk: {
+      input: ListTrustAnchorsCommandInput;
+      output: ListTrustAnchorsCommandOutput;
+    };
+  };
+}

@@ -111,9 +111,7 @@ export class DetectTargetedSentimentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class DetectTargetedSentimentCommand extends $Command
   .f(DetectTargetedSentimentRequestFilterSensitiveLog, DetectTargetedSentimentResponseFilterSensitiveLog)
   .ser(se_DetectTargetedSentimentCommand)
   .de(de_DetectTargetedSentimentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetectTargetedSentimentRequest;
+      output: DetectTargetedSentimentResponse;
+    };
+    sdk: {
+      input: DetectTargetedSentimentCommandInput;
+      output: DetectTargetedSentimentCommandOutput;
+    };
+  };
+}

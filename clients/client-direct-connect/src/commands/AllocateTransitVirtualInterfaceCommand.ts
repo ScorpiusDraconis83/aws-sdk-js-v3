@@ -150,9 +150,7 @@ export class AllocateTransitVirtualInterfaceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -164,4 +162,16 @@ export class AllocateTransitVirtualInterfaceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AllocateTransitVirtualInterfaceCommand)
   .de(de_AllocateTransitVirtualInterfaceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AllocateTransitVirtualInterfaceRequest;
+      output: AllocateTransitVirtualInterfaceResult;
+    };
+    sdk: {
+      input: AllocateTransitVirtualInterfaceCommandInput;
+      output: AllocateTransitVirtualInterfaceCommandOutput;
+    };
+  };
+}

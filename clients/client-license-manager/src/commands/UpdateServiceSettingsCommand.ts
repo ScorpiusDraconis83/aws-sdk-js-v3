@@ -84,9 +84,7 @@ export class UpdateServiceSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class UpdateServiceSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateServiceSettingsCommand)
   .de(de_UpdateServiceSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateServiceSettingsRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateServiceSettingsCommandInput;
+      output: UpdateServiceSettingsCommandOutput;
+    };
+  };
+}

@@ -130,9 +130,7 @@ export class ListRotationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMContactsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class ListRotationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRotationsCommand)
   .de(de_ListRotationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRotationsRequest;
+      output: ListRotationsResult;
+    };
+    sdk: {
+      input: ListRotationsCommandInput;
+      output: ListRotationsCommandOutput;
+    };
+  };
+}

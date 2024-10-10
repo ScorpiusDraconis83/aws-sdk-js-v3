@@ -34,7 +34,7 @@ export interface AttachPolicyCommandOutput extends __MetadataBearer {}
  *          <ul>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+ *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
  *                </p>
  *             </li>
  *             <li>
@@ -44,12 +44,17 @@ export interface AttachPolicyCommandOutput extends __MetadataBearer {}
  *             </li>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+ *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+ *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
  *                </p>
  *             </li>
  *          </ul>
@@ -281,9 +286,8 @@ export interface AttachPolicyCommandOutput extends __MetadataBearer {}
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  *
@@ -463,9 +467,7 @@ export class AttachPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -477,4 +479,16 @@ export class AttachPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AttachPolicyCommand)
   .de(de_AttachPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AttachPolicyRequest;
+      output: {};
+    };
+    sdk: {
+      input: AttachPolicyCommandInput;
+      output: AttachPolicyCommandOutput;
+    };
+  };
+}

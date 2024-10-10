@@ -366,9 +366,7 @@ export class GetLendingAnalysisCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TextractClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -380,4 +378,16 @@ export class GetLendingAnalysisCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetLendingAnalysisCommand)
   .de(de_GetLendingAnalysisCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLendingAnalysisRequest;
+      output: GetLendingAnalysisResponse;
+    };
+    sdk: {
+      input: GetLendingAnalysisCommandInput;
+      output: GetLendingAnalysisCommandOutput;
+    };
+  };
+}

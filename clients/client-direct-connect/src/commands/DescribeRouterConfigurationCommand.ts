@@ -86,9 +86,7 @@ export class DescribeRouterConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class DescribeRouterConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRouterConfigurationCommand)
   .de(de_DescribeRouterConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRouterConfigurationRequest;
+      output: DescribeRouterConfigurationResponse;
+    };
+    sdk: {
+      input: DescribeRouterConfigurationCommandInput;
+      output: DescribeRouterConfigurationCommandOutput;
+    };
+  };
+}

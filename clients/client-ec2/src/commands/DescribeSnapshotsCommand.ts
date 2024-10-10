@@ -82,14 +82,6 @@ export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsResult,
  * // const { EC2Client, DescribeSnapshotsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeSnapshotsRequest
- *   Filters: [ // FilterList
- *     { // Filter
- *       Name: "STRING_VALUE",
- *       Values: [ // ValueStringList
- *         "STRING_VALUE",
- *       ],
- *     },
- *   ],
  *   MaxResults: Number("int"),
  *   NextToken: "STRING_VALUE",
  *   OwnerIds: [ // OwnerStringList
@@ -102,24 +94,21 @@ export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsResult,
  *     "STRING_VALUE",
  *   ],
  *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
  * };
  * const command = new DescribeSnapshotsCommand(input);
  * const response = await client.send(command);
  * // { // DescribeSnapshotsResult
+ * //   NextToken: "STRING_VALUE",
  * //   Snapshots: [ // SnapshotList
  * //     { // Snapshot
- * //       DataEncryptionKeyId: "STRING_VALUE",
- * //       Description: "STRING_VALUE",
- * //       Encrypted: true || false,
- * //       KmsKeyId: "STRING_VALUE",
- * //       OwnerId: "STRING_VALUE",
- * //       Progress: "STRING_VALUE",
- * //       SnapshotId: "STRING_VALUE",
- * //       StartTime: new Date("TIMESTAMP"),
- * //       State: "pending" || "completed" || "error" || "recoverable" || "recovering",
- * //       StateMessage: "STRING_VALUE",
- * //       VolumeId: "STRING_VALUE",
- * //       VolumeSize: Number("int"),
  * //       OwnerAlias: "STRING_VALUE",
  * //       OutpostArn: "STRING_VALUE",
  * //       Tags: [ // TagList
@@ -131,9 +120,20 @@ export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsResult,
  * //       StorageTier: "archive" || "standard",
  * //       RestoreExpiryTime: new Date("TIMESTAMP"),
  * //       SseType: "sse-ebs" || "sse-kms" || "none",
+ * //       SnapshotId: "STRING_VALUE",
+ * //       VolumeId: "STRING_VALUE",
+ * //       State: "pending" || "completed" || "error" || "recoverable" || "recovering",
+ * //       StateMessage: "STRING_VALUE",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       Progress: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       VolumeSize: Number("int"),
+ * //       Encrypted: true || false,
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       DataEncryptionKeyId: "STRING_VALUE",
  * //     },
  * //   ],
- * //   NextToken: "STRING_VALUE",
  * // };
  *
  * ```
@@ -225,9 +225,7 @@ export class DescribeSnapshotsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -239,4 +237,16 @@ export class DescribeSnapshotsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSnapshotsCommand)
   .de(de_DescribeSnapshotsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotsRequest;
+      output: DescribeSnapshotsResult;
+    };
+    sdk: {
+      input: DescribeSnapshotsCommandInput;
+      output: DescribeSnapshotsCommandOutput;
+    };
+  };
+}

@@ -10,7 +10,7 @@ import {
   ServiceOutputTypes,
 } from "../DatabaseMigrationServiceClient";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { ExportMetadataModelAssessmentMessage, ExportMetadataModelAssessmentResponse } from "../models/models_0";
+import { ExportMetadataModelAssessmentMessage, ExportMetadataModelAssessmentResponse } from "../models/models_1";
 import {
   de_ExportMetadataModelAssessmentCommand,
   se_ExportMetadataModelAssessmentCommand,
@@ -118,9 +118,7 @@ export class ExportMetadataModelAssessmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ExportMetadataModelAssessmentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExportMetadataModelAssessmentCommand)
   .de(de_ExportMetadataModelAssessmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportMetadataModelAssessmentMessage;
+      output: ExportMetadataModelAssessmentResponse;
+    };
+    sdk: {
+      input: ExportMetadataModelAssessmentCommandInput;
+      output: ExportMetadataModelAssessmentCommandOutput;
+    };
+  };
+}

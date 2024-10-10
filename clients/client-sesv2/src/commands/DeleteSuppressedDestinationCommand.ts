@@ -77,9 +77,7 @@ export class DeleteSuppressedDestinationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class DeleteSuppressedDestinationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSuppressedDestinationCommand)
   .de(de_DeleteSuppressedDestinationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSuppressedDestinationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteSuppressedDestinationCommandInput;
+      output: DeleteSuppressedDestinationCommandOutput;
+    };
+  };
+}

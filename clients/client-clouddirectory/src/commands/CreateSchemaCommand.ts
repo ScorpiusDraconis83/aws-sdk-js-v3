@@ -99,6 +99,22 @@ export interface CreateSchemaCommandOutput extends CreateSchemaResponse, __Metad
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To create a schema
+ * ```javascript
+ * //
+ * const input = {
+ *   "Name": "Customers"
+ * };
+ * const command = new CreateSchemaCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Customers"
+ * }
+ * *\/
+ * // example id: to-create-a-schema-1506530911949
+ * ```
+ *
  */
 export class CreateSchemaCommand extends $Command
   .classBuilder<
@@ -108,9 +124,7 @@ export class CreateSchemaCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +136,16 @@ export class CreateSchemaCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSchemaCommand)
   .de(de_CreateSchemaCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSchemaRequest;
+      output: CreateSchemaResponse;
+    };
+    sdk: {
+      input: CreateSchemaCommandInput;
+      output: CreateSchemaCommandOutput;
+    };
+  };
+}

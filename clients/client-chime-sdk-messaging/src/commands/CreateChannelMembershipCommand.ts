@@ -143,9 +143,7 @@ export class CreateChannelMembershipCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +155,16 @@ export class CreateChannelMembershipCommand extends $Command
   .f(void 0, CreateChannelMembershipResponseFilterSensitiveLog)
   .ser(se_CreateChannelMembershipCommand)
   .de(de_CreateChannelMembershipCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateChannelMembershipRequest;
+      output: CreateChannelMembershipResponse;
+    };
+    sdk: {
+      input: CreateChannelMembershipCommandInput;
+      output: CreateChannelMembershipCommandOutput;
+    };
+  };
+}

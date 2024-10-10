@@ -1,7 +1,7 @@
 {
   "name": "@aws-sdk/aws-middleware-test",
   "description": "Integration test suite for AWS middleware",
-  "version": "3.641.0",
+  "version": "3.669.0",
   "scripts": {
     "build": "exit 0",
     "build:cjs": "exit 0",
@@ -25,9 +25,9 @@
     "@aws-sdk/client-sagemaker": "*",
     "@aws-sdk/client-sagemaker-runtime": "*",
     "@aws-sdk/client-xray": "*",
-    "@smithy/protocol-http": "^4.1.0",
-    "@smithy/types": "^3.3.0",
-    "@smithy/util-stream": "^3.1.3",
+    "@smithy/protocol-http": "^4.1.4",
+    "@smithy/types": "^3.5.0",
+    "@smithy/util-stream": "^3.1.9",
     "@smithy/util-utf8": "^3.0.0",
     "tslib": "^2.6.2"
   },

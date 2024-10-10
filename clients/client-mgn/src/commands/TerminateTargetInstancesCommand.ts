@@ -133,9 +133,7 @@ export class TerminateTargetInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class TerminateTargetInstancesCommand extends $Command
   .f(TerminateTargetInstancesRequestFilterSensitiveLog, TerminateTargetInstancesResponseFilterSensitiveLog)
   .ser(se_TerminateTargetInstancesCommand)
   .de(de_TerminateTargetInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TerminateTargetInstancesRequest;
+      output: TerminateTargetInstancesResponse;
+    };
+    sdk: {
+      input: TerminateTargetInstancesCommandInput;
+      output: TerminateTargetInstancesCommandOutput;
+    };
+  };
+}

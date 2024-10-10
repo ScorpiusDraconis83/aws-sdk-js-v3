@@ -118,9 +118,7 @@ export class UpdateTrafficPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class UpdateTrafficPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTrafficPolicyCommand)
   .de(de_UpdateTrafficPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrafficPolicyRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateTrafficPolicyCommandInput;
+      output: UpdateTrafficPolicyCommandOutput;
+    };
+  };
+}

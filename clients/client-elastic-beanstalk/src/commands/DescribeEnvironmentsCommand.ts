@@ -159,9 +159,7 @@ export class DescribeEnvironmentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -173,4 +171,16 @@ export class DescribeEnvironmentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEnvironmentsCommand)
   .de(de_DescribeEnvironmentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEnvironmentsMessage;
+      output: EnvironmentDescriptionsMessage;
+    };
+    sdk: {
+      input: DescribeEnvironmentsCommandInput;
+      output: DescribeEnvironmentsCommandOutput;
+    };
+  };
+}

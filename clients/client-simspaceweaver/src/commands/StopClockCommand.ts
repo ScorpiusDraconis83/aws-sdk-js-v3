@@ -78,9 +78,7 @@ export class StopClockCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SimSpaceWeaverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class StopClockCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopClockCommand)
   .de(de_StopClockCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopClockInput;
+      output: {};
+    };
+    sdk: {
+      input: StopClockCommandInput;
+      output: StopClockCommandOutput;
+    };
+  };
+}

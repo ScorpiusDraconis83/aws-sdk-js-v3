@@ -95,9 +95,7 @@ export class DescribeDBClusterParametersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NeptuneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DescribeDBClusterParametersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeDBClusterParametersCommand)
   .de(de_DescribeDBClusterParametersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDBClusterParametersMessage;
+      output: DBClusterParameterGroupDetails;
+    };
+    sdk: {
+      input: DescribeDBClusterParametersCommandInput;
+      output: DescribeDBClusterParametersCommandOutput;
+    };
+  };
+}

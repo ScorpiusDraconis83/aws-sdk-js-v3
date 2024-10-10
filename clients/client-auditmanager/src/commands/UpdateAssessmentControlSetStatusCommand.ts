@@ -140,9 +140,7 @@ export class UpdateAssessmentControlSetStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +155,16 @@ export class UpdateAssessmentControlSetStatusCommand extends $Command
   )
   .ser(se_UpdateAssessmentControlSetStatusCommand)
   .de(de_UpdateAssessmentControlSetStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssessmentControlSetStatusRequest;
+      output: UpdateAssessmentControlSetStatusResponse;
+    };
+    sdk: {
+      input: UpdateAssessmentControlSetStatusCommandInput;
+      output: UpdateAssessmentControlSetStatusCommandOutput;
+    };
+  };
+}

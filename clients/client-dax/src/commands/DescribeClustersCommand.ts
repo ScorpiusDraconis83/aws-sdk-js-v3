@@ -150,9 +150,7 @@ export class DescribeClustersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DAXClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -164,4 +162,16 @@ export class DescribeClustersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeClustersCommand)
   .de(de_DescribeClustersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClustersRequest;
+      output: DescribeClustersResponse;
+    };
+    sdk: {
+      input: DescribeClustersCommandInput;
+      output: DescribeClustersCommandOutput;
+    };
+  };
+}

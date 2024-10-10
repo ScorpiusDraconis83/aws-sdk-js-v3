@@ -98,9 +98,7 @@ export class UpdateConfigurationSetTrackingOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class UpdateConfigurationSetTrackingOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateConfigurationSetTrackingOptionsCommand)
   .de(de_UpdateConfigurationSetTrackingOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfigurationSetTrackingOptionsRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateConfigurationSetTrackingOptionsCommandInput;
+      output: UpdateConfigurationSetTrackingOptionsCommandOutput;
+    };
+  };
+}

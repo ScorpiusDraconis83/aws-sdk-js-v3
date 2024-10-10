@@ -45,13 +45,23 @@ export interface CreateModelInvocationJobCommandOutput extends CreateModelInvoca
  *     s3InputDataConfig: { // ModelInvocationJobS3InputDataConfig
  *       s3InputFormat: "JSONL",
  *       s3Uri: "STRING_VALUE", // required
+ *       s3BucketOwner: "STRING_VALUE",
  *     },
  *   },
  *   outputDataConfig: { // ModelInvocationJobOutputDataConfig Union: only one key present
  *     s3OutputDataConfig: { // ModelInvocationJobS3OutputDataConfig
  *       s3Uri: "STRING_VALUE", // required
  *       s3EncryptionKeyId: "STRING_VALUE",
+ *       s3BucketOwner: "STRING_VALUE",
  *     },
+ *   },
+ *   vpcConfig: { // VpcConfig
+ *     subnetIds: [ // SubnetIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     securityGroupIds: [ // SecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
  *   },
  *   timeoutDurationInHours: Number("int"),
  *   tags: [ // TagList
@@ -109,9 +119,7 @@ export class CreateModelInvocationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +131,16 @@ export class CreateModelInvocationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateModelInvocationJobCommand)
   .de(de_CreateModelInvocationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateModelInvocationJobRequest;
+      output: CreateModelInvocationJobResponse;
+    };
+    sdk: {
+      input: CreateModelInvocationJobCommandInput;
+      output: CreateModelInvocationJobCommandOutput;
+    };
+  };
+}

@@ -57,9 +57,9 @@ export interface ModifyIdentityIdFormatCommandOutput extends __MetadataBearer {}
  * // const { EC2Client, ModifyIdentityIdFormatCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ModifyIdentityIdFormatRequest
- *   PrincipalArn: "STRING_VALUE", // required
  *   Resource: "STRING_VALUE", // required
  *   UseLongIds: true || false, // required
+ *   PrincipalArn: "STRING_VALUE", // required
  * };
  * const command = new ModifyIdentityIdFormatCommand(input);
  * const response = await client.send(command);
@@ -86,9 +86,7 @@ export class ModifyIdentityIdFormatCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class ModifyIdentityIdFormatCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyIdentityIdFormatCommand)
   .de(de_ModifyIdentityIdFormatCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyIdentityIdFormatRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifyIdentityIdFormatCommandInput;
+      output: ModifyIdentityIdFormatCommandOutput;
+    };
+  };
+}

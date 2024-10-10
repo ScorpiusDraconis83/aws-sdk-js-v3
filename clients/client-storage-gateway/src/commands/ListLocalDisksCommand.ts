@@ -129,9 +129,7 @@ export class ListLocalDisksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class ListLocalDisksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLocalDisksCommand)
   .de(de_ListLocalDisksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLocalDisksInput;
+      output: ListLocalDisksOutput;
+    };
+    sdk: {
+      input: ListLocalDisksCommandInput;
+      output: ListLocalDisksCommandOutput;
+    };
+  };
+}

@@ -109,9 +109,7 @@ export class ListChannelBansCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class ListChannelBansCommand extends $Command
   .f(ListChannelBansRequestFilterSensitiveLog, ListChannelBansResponseFilterSensitiveLog)
   .ser(se_ListChannelBansCommand)
   .de(de_ListChannelBansCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChannelBansRequest;
+      output: ListChannelBansResponse;
+    };
+    sdk: {
+      input: ListChannelBansCommandInput;
+      output: ListChannelBansCommandOutput;
+    };
+  };
+}

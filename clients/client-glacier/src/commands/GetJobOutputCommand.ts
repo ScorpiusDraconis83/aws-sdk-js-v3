@@ -147,9 +147,7 @@ export class GetJobOutputCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class GetJobOutputCommand extends $Command
   .f(void 0, GetJobOutputOutputFilterSensitiveLog)
   .ser(se_GetJobOutputCommand)
   .de(de_GetJobOutputCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobOutputInput;
+      output: GetJobOutputOutput;
+    };
+    sdk: {
+      input: GetJobOutputCommandInput;
+      output: GetJobOutputCommandOutput;
+    };
+  };
+}

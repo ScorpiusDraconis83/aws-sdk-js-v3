@@ -169,9 +169,7 @@ export class DescribeTaskExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -183,4 +181,16 @@ export class DescribeTaskExecutionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeTaskExecutionCommand)
   .de(de_DescribeTaskExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTaskExecutionRequest;
+      output: DescribeTaskExecutionResponse;
+    };
+    sdk: {
+      input: DescribeTaskExecutionCommandInput;
+      output: DescribeTaskExecutionCommandOutput;
+    };
+  };
+}

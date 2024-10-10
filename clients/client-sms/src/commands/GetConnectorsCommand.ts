@@ -86,9 +86,7 @@ export class GetConnectorsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class GetConnectorsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConnectorsCommand)
   .de(de_GetConnectorsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConnectorsRequest;
+      output: GetConnectorsResponse;
+    };
+    sdk: {
+      input: GetConnectorsCommandInput;
+      output: GetConnectorsCommandOutput;
+    };
+  };
+}

@@ -767,9 +767,7 @@ export class CopyBackupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -781,4 +779,16 @@ export class CopyBackupCommand extends $Command
   .f(void 0, CopyBackupResponseFilterSensitiveLog)
   .ser(se_CopyBackupCommand)
   .de(de_CopyBackupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyBackupRequest;
+      output: CopyBackupResponse;
+    };
+    sdk: {
+      input: CopyBackupCommandInput;
+      output: CopyBackupCommandOutput;
+    };
+  };
+}

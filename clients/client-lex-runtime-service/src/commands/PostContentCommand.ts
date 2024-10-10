@@ -239,9 +239,7 @@ export class PostContentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexRuntimeServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -253,4 +251,16 @@ export class PostContentCommand extends $Command
   .f(PostContentRequestFilterSensitiveLog, PostContentResponseFilterSensitiveLog)
   .ser(se_PostContentCommand)
   .de(de_PostContentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PostContentRequest;
+      output: PostContentResponse;
+    };
+    sdk: {
+      input: PostContentCommandInput;
+      output: PostContentCommandOutput;
+    };
+  };
+}

@@ -98,9 +98,7 @@ export class DeleteVPCConnectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class DeleteVPCConnectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteVPCConnectionCommand)
   .de(de_DeleteVPCConnectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVPCConnectionRequest;
+      output: DeleteVPCConnectionResponse;
+    };
+    sdk: {
+      input: DeleteVPCConnectionCommandInput;
+      output: DeleteVPCConnectionCommandOutput;
+    };
+  };
+}

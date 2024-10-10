@@ -87,6 +87,22 @@ export interface DeleteDirectoryCommandOutput extends DeleteDirectoryResponse, _
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To delete a directory
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+ * };
+ * const command = new DeleteDirectoryCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+ * }
+ * *\/
+ * // example id: to-delete-a-directory-1507570867859
+ * ```
+ *
  */
 export class DeleteDirectoryCommand extends $Command
   .classBuilder<
@@ -96,9 +112,7 @@ export class DeleteDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +124,16 @@ export class DeleteDirectoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDirectoryCommand)
   .de(de_DeleteDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDirectoryRequest;
+      output: DeleteDirectoryResponse;
+    };
+    sdk: {
+      input: DeleteDirectoryCommandInput;
+      output: DeleteDirectoryCommandOutput;
+    };
+  };
+}

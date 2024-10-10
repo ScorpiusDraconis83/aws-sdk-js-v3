@@ -89,9 +89,7 @@ export class DeletePolicyStatementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EntityResolutionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class DeletePolicyStatementCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeletePolicyStatementCommand)
   .de(de_DeletePolicyStatementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePolicyStatementInput;
+      output: DeletePolicyStatementOutput;
+    };
+    sdk: {
+      input: DeletePolicyStatementCommandInput;
+      output: DeletePolicyStatementCommandOutput;
+    };
+  };
+}

@@ -191,9 +191,7 @@ export class ListRealtimeContactAnalysisSegmentsV2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -205,4 +203,16 @@ export class ListRealtimeContactAnalysisSegmentsV2Command extends $Command
   .f(void 0, void 0)
   .ser(se_ListRealtimeContactAnalysisSegmentsV2Command)
   .de(de_ListRealtimeContactAnalysisSegmentsV2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRealtimeContactAnalysisSegmentsV2Request;
+      output: ListRealtimeContactAnalysisSegmentsV2Response;
+    };
+    sdk: {
+      input: ListRealtimeContactAnalysisSegmentsV2CommandInput;
+      output: ListRealtimeContactAnalysisSegmentsV2CommandOutput;
+    };
+  };
+}

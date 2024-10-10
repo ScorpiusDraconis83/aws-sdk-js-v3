@@ -96,9 +96,7 @@ export class ListWorkersWithQualificationTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MTurkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class ListWorkersWithQualificationTypeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListWorkersWithQualificationTypeCommand)
   .de(de_ListWorkersWithQualificationTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWorkersWithQualificationTypeRequest;
+      output: ListWorkersWithQualificationTypeResponse;
+    };
+    sdk: {
+      input: ListWorkersWithQualificationTypeCommandInput;
+      output: ListWorkersWithQualificationTypeCommandOutput;
+    };
+  };
+}

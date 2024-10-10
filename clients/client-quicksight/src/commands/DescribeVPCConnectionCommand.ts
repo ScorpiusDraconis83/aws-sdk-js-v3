@@ -5,8 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { DescribeVPCConnectionRequest } from "../models/models_3";
-import { DescribeVPCConnectionResponse } from "../models/models_4";
+import { DescribeVPCConnectionRequest, DescribeVPCConnectionResponse } from "../models/models_4";
 import { de_DescribeVPCConnectionCommand, se_DescribeVPCConnectionCommand } from "../protocols/Aws_restJson1";
 import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
 
@@ -118,9 +117,7 @@ export class DescribeVPCConnectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +129,16 @@ export class DescribeVPCConnectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVPCConnectionCommand)
   .de(de_DescribeVPCConnectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVPCConnectionRequest;
+      output: DescribeVPCConnectionResponse;
+    };
+    sdk: {
+      input: DescribeVPCConnectionCommandInput;
+      output: DescribeVPCConnectionCommandOutput;
+    };
+  };
+}

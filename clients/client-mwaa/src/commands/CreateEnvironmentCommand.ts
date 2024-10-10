@@ -131,9 +131,7 @@ export class CreateEnvironmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MWAAClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class CreateEnvironmentCommand extends $Command
   .f(CreateEnvironmentInputFilterSensitiveLog, void 0)
   .ser(se_CreateEnvironmentCommand)
   .de(de_CreateEnvironmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentInput;
+      output: CreateEnvironmentOutput;
+    };
+    sdk: {
+      input: CreateEnvironmentCommandInput;
+      output: CreateEnvironmentCommandOutput;
+    };
+  };
+}

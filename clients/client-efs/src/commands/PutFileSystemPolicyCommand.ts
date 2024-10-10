@@ -98,9 +98,7 @@ export class PutFileSystemPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EFSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class PutFileSystemPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutFileSystemPolicyCommand)
   .de(de_PutFileSystemPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutFileSystemPolicyRequest;
+      output: FileSystemPolicyDescription;
+    };
+    sdk: {
+      input: PutFileSystemPolicyCommandInput;
+      output: PutFileSystemPolicyCommandOutput;
+    };
+  };
+}

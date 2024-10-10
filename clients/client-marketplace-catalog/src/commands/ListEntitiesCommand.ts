@@ -419,9 +419,7 @@ export class ListEntitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MarketplaceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -433,4 +431,16 @@ export class ListEntitiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEntitiesCommand)
   .de(de_ListEntitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEntitiesRequest;
+      output: ListEntitiesResponse;
+    };
+    sdk: {
+      input: ListEntitiesCommandInput;
+      output: ListEntitiesCommandOutput;
+    };
+  };
+}

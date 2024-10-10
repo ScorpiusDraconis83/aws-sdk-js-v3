@@ -83,9 +83,7 @@ export class DescribeImagePermissionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DescribeImagePermissionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeImagePermissionsCommand)
   .de(de_DescribeImagePermissionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImagePermissionsRequest;
+      output: DescribeImagePermissionsResult;
+    };
+    sdk: {
+      input: DescribeImagePermissionsCommandInput;
+      output: DescribeImagePermissionsCommandOutput;
+    };
+  };
+}

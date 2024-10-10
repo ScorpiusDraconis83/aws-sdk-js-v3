@@ -48,7 +48,7 @@ export interface EnablePolicyTypeCommandOutput extends EnablePolicyTypeResponse,
  * const client = new OrganizationsClient(config);
  * const input = { // EnablePolicyTypeRequest
  *   RootId: "STRING_VALUE", // required
- *   PolicyType: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY", // required
+ *   PolicyType: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY", // required
  * };
  * const command = new EnablePolicyTypeCommand(input);
  * const response = await client.send(command);
@@ -59,7 +59,7 @@ export interface EnablePolicyTypeCommandOutput extends EnablePolicyTypeResponse,
  * //     Name: "STRING_VALUE",
  * //     PolicyTypes: [ // PolicyTypes
  * //       { // PolicyTypeSummary
- * //         Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //         Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //         Status: "ENABLED" || "PENDING_ENABLE" || "PENDING_DISABLE",
  * //       },
  * //     ],
@@ -278,9 +278,8 @@ export interface EnablePolicyTypeCommandOutput extends EnablePolicyTypeResponse,
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  *
@@ -457,9 +456,7 @@ export class EnablePolicyTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -471,4 +468,16 @@ export class EnablePolicyTypeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnablePolicyTypeCommand)
   .de(de_EnablePolicyTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnablePolicyTypeRequest;
+      output: EnablePolicyTypeResponse;
+    };
+    sdk: {
+      input: EnablePolicyTypeCommandInput;
+      output: EnablePolicyTypeCommandOutput;
+    };
+  };
+}

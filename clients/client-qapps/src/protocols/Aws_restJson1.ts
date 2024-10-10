@@ -19,6 +19,7 @@ import {
   expectObject as __expectObject,
   expectString as __expectString,
   extendedEncodeURIComponent as __extendedEncodeURIComponent,
+  isSerializableHeaderValue,
   map,
   parseEpochTimestamp as __parseEpochTimestamp,
   parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
@@ -69,6 +70,10 @@ import { StopQAppSessionCommandInput, StopQAppSessionCommandOutput } from "../co
 import { TagResourceCommandInput, TagResourceCommandOutput } from "../commands/TagResourceCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "../commands/UntagResourceCommand";
 import { UpdateLibraryItemCommandInput, UpdateLibraryItemCommandOutput } from "../commands/UpdateLibraryItemCommand";
+import {
+  UpdateLibraryItemMetadataCommandInput,
+  UpdateLibraryItemMetadataCommandOutput,
+} from "../commands/UpdateLibraryItemMetadataCommand";
 import { UpdateQAppCommandInput, UpdateQAppCommandOutput } from "../commands/UpdateQAppCommand";
 import { UpdateQAppSessionCommandInput, UpdateQAppSessionCommandOutput } from "../commands/UpdateQAppSessionCommand";
 import {
@@ -546,10 +551,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{resourceARN}");
   b.p("resourceARN", () => input.resourceARN!, "{resourceARN}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.tagKeys, `tagKeys`) != null,
-      () => (input[_tK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.tagKeys, `tagKeys`) != null, () => input[_tK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -575,6 +577,30 @@ export const se_UpdateLibraryItemCommand = async (
       categories: (_) => _json(_),
       libraryItemId: [],
       status: [],
+    })
+  );
+  b.m("POST").h(headers).b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1UpdateLibraryItemMetadataCommand
+ */
+export const se_UpdateLibraryItemMetadataCommand = async (
+  input: UpdateLibraryItemMetadataCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    "content-type": "application/json",
+    [_ii]: input[_iI]!,
+  });
+  b.bp("/catalog.updateItemMetadata");
+  let body: any;
+  body = JSON.stringify(
+    take(input, {
+      isVerified: [],
+      libraryItemId: [],
     })
   );
   b.m("POST").h(headers).b(body);
@@ -682,6 +708,7 @@ export const de_CreateLibraryItemCommand = async (
   const doc = take(data, {
     createdAt: (_) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     createdBy: __expectString,
+    isVerified: __expectBoolean,
     libraryItemId: __expectString,
     ratingCount: __expectInt32,
     status: __expectString,
@@ -813,6 +840,7 @@ export const de_GetLibraryItemCommand = async (
     createdAt: (_) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     createdBy: __expectString,
     isRatedByUser: __expectBoolean,
+    isVerified: __expectBoolean,
     libraryItemId: __expectString,
     ratingCount: __expectInt32,
     status: __expectString,
@@ -1083,6 +1111,7 @@ export const de_UpdateLibraryItemCommand = async (
     createdAt: (_) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     createdBy: __expectString,
     isRatedByUser: __expectBoolean,
+    isVerified: __expectBoolean,
     libraryItemId: __expectString,
     ratingCount: __expectInt32,
     status: __expectString,
@@ -1091,6 +1120,23 @@ export const de_UpdateLibraryItemCommand = async (
     userCount: __expectInt32,
   });
   Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1UpdateLibraryItemMetadataCommand
+ */
+export const de_UpdateLibraryItemMetadataCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateLibraryItemMetadataCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
   return contents;
 };
 
@@ -1161,6 +1207,9 @@ const de_CommandError = async (output: __HttpResponse, context: __SerdeContext):
     case "AccessDeniedException":
     case "com.amazonaws.qapps#AccessDeniedException":
       throw await de_AccessDeniedExceptionRes(parsedOutput, context);
+    case "ConflictException":
+    case "com.amazonaws.qapps#ConflictException":
+      throw await de_ConflictExceptionRes(parsedOutput, context);
     case "InternalServerException":
     case "com.amazonaws.qapps#InternalServerException":
       throw await de_InternalServerExceptionRes(parsedOutput, context);
@@ -1179,9 +1228,6 @@ const de_CommandError = async (output: __HttpResponse, context: __SerdeContext):
     case "ValidationException":
     case "com.amazonaws.qapps#ValidationException":
       throw await de_ValidationExceptionRes(parsedOutput, context);
-    case "ConflictException":
-    case "com.amazonaws.qapps#ConflictException":
-      throw await de_ConflictExceptionRes(parsedOutput, context);
     case "ContentTooLargeException":
     case "com.amazonaws.qapps#ContentTooLargeException":
       throw await de_ContentTooLargeExceptionRes(parsedOutput, context);
@@ -1710,6 +1756,7 @@ const de_LibraryItemMember = (output: any, context: __SerdeContext): LibraryItem
     createdAt: (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     createdBy: __expectString,
     isRatedByUser: __expectBoolean,
+    isVerified: __expectBoolean,
     libraryItemId: __expectString,
     ratingCount: __expectInt32,
     status: __expectString,
@@ -1779,6 +1826,7 @@ const de_UserAppItem = (output: any, context: __SerdeContext): UserAppItem => {
     canEdit: __expectBoolean,
     createdAt: (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     description: __expectString,
+    isVerified: __expectBoolean,
     status: __expectString,
     title: __expectString,
   }) as any;
@@ -1807,13 +1855,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _aI = "appId";
 const _cI = "categoryId";

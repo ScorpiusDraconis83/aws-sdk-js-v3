@@ -108,9 +108,7 @@ export class CreateWorkteamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class CreateWorkteamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateWorkteamCommand)
   .de(de_CreateWorkteamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkteamRequest;
+      output: CreateWorkteamResponse;
+    };
+    sdk: {
+      input: CreateWorkteamCommandInput;
+      output: CreateWorkteamCommandOutput;
+    };
+  };
+}

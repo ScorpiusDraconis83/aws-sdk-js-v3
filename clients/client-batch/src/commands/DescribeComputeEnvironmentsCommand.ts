@@ -200,9 +200,7 @@ export class DescribeComputeEnvironmentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -214,4 +212,16 @@ export class DescribeComputeEnvironmentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeComputeEnvironmentsCommand)
   .de(de_DescribeComputeEnvironmentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeComputeEnvironmentsRequest;
+      output: DescribeComputeEnvironmentsResponse;
+    };
+    sdk: {
+      input: DescribeComputeEnvironmentsCommandInput;
+      output: DescribeComputeEnvironmentsCommandOutput;
+    };
+  };
+}

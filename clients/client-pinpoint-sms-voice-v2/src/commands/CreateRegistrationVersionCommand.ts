@@ -109,9 +109,7 @@ export class CreateRegistrationVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointSMSVoiceV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class CreateRegistrationVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRegistrationVersionCommand)
   .de(de_CreateRegistrationVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRegistrationVersionRequest;
+      output: CreateRegistrationVersionResult;
+    };
+    sdk: {
+      input: CreateRegistrationVersionCommandInput;
+      output: CreateRegistrationVersionCommandOutput;
+    };
+  };
+}

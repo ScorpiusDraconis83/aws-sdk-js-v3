@@ -48,6 +48,14 @@ export interface CreatePackageVersionCommandOutput extends CreatePackageVersionR
  *   attributes: { // ResourceAttributes
  *     "<keys>": "STRING_VALUE",
  *   },
+ *   artifact: { // PackageVersionArtifact
+ *     s3Location: { // S3Location
+ *       bucket: "STRING_VALUE",
+ *       key: "STRING_VALUE",
+ *       version: "STRING_VALUE",
+ *     },
+ *   },
+ *   recipe: "STRING_VALUE",
  *   tags: { // TagMap
  *     "<keys>": "STRING_VALUE",
  *   },
@@ -104,9 +112,7 @@ export class CreatePackageVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +124,16 @@ export class CreatePackageVersionCommand extends $Command
   .f(CreatePackageVersionRequestFilterSensitiveLog, CreatePackageVersionResponseFilterSensitiveLog)
   .ser(se_CreatePackageVersionCommand)
   .de(de_CreatePackageVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePackageVersionRequest;
+      output: CreatePackageVersionResponse;
+    };
+    sdk: {
+      input: CreatePackageVersionCommandInput;
+      output: CreatePackageVersionCommandOutput;
+    };
+  };
+}

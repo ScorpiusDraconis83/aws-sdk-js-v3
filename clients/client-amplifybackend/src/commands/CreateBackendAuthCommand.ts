@@ -171,9 +171,7 @@ export class CreateBackendAuthCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyBackendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -185,4 +183,16 @@ export class CreateBackendAuthCommand extends $Command
   .f(CreateBackendAuthRequestFilterSensitiveLog, void 0)
   .ser(se_CreateBackendAuthCommand)
   .de(de_CreateBackendAuthCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBackendAuthRequest;
+      output: CreateBackendAuthResponse;
+    };
+    sdk: {
+      input: CreateBackendAuthCommandInput;
+      output: CreateBackendAuthCommandOutput;
+    };
+  };
+}

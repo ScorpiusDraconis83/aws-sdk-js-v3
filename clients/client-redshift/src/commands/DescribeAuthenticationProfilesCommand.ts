@@ -82,9 +82,7 @@ export class DescribeAuthenticationProfilesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DescribeAuthenticationProfilesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAuthenticationProfilesCommand)
   .de(de_DescribeAuthenticationProfilesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAuthenticationProfilesMessage;
+      output: DescribeAuthenticationProfilesResult;
+    };
+    sdk: {
+      input: DescribeAuthenticationProfilesCommandInput;
+      output: DescribeAuthenticationProfilesCommandOutput;
+    };
+  };
+}

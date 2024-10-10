@@ -61,14 +61,14 @@ export interface ModifyInstancePlacementCommandOutput extends ModifyInstancePlac
  * // const { EC2Client, ModifyInstancePlacementCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ModifyInstancePlacementRequest
- *   Affinity: "default" || "host",
  *   GroupName: "STRING_VALUE",
- *   HostId: "STRING_VALUE",
- *   InstanceId: "STRING_VALUE", // required
- *   Tenancy: "default" || "dedicated" || "host",
  *   PartitionNumber: Number("int"),
  *   HostResourceGroupArn: "STRING_VALUE",
  *   GroupId: "STRING_VALUE",
+ *   InstanceId: "STRING_VALUE", // required
+ *   Tenancy: "default" || "dedicated" || "host",
+ *   Affinity: "default" || "host",
+ *   HostId: "STRING_VALUE",
  * };
  * const command = new ModifyInstancePlacementCommand(input);
  * const response = await client.send(command);
@@ -97,9 +97,7 @@ export class ModifyInstancePlacementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ModifyInstancePlacementCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyInstancePlacementCommand)
   .de(de_ModifyInstancePlacementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyInstancePlacementRequest;
+      output: ModifyInstancePlacementResult;
+    };
+    sdk: {
+      input: ModifyInstancePlacementCommandInput;
+      output: ModifyInstancePlacementCommandOutput;
+    };
+  };
+}

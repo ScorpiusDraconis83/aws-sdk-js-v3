@@ -92,9 +92,7 @@ export class ListSubscriptionsByTopicCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SNSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class ListSubscriptionsByTopicCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSubscriptionsByTopicCommand)
   .de(de_ListSubscriptionsByTopicCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSubscriptionsByTopicInput;
+      output: ListSubscriptionsByTopicResponse;
+    };
+    sdk: {
+      input: ListSubscriptionsByTopicCommandInput;
+      output: ListSubscriptionsByTopicCommandOutput;
+    };
+  };
+}

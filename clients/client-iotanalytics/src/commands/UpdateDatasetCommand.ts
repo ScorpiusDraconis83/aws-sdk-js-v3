@@ -163,9 +163,7 @@ export class UpdateDatasetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTAnalyticsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class UpdateDatasetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateDatasetCommand)
   .de(de_UpdateDatasetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDatasetRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateDatasetCommandInput;
+      output: UpdateDatasetCommandOutput;
+    };
+  };
+}

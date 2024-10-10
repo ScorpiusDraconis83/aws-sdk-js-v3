@@ -133,9 +133,7 @@ export class StartConfigurationPolicyAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class StartConfigurationPolicyAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartConfigurationPolicyAssociationCommand)
   .de(de_StartConfigurationPolicyAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartConfigurationPolicyAssociationRequest;
+      output: StartConfigurationPolicyAssociationResponse;
+    };
+    sdk: {
+      input: StartConfigurationPolicyAssociationCommandInput;
+      output: StartConfigurationPolicyAssociationCommandOutput;
+    };
+  };
+}

@@ -124,9 +124,7 @@ export class AssociateSoftwareTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class AssociateSoftwareTokenCommand extends $Command
   .f(AssociateSoftwareTokenRequestFilterSensitiveLog, AssociateSoftwareTokenResponseFilterSensitiveLog)
   .ser(se_AssociateSoftwareTokenCommand)
   .de(de_AssociateSoftwareTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateSoftwareTokenRequest;
+      output: AssociateSoftwareTokenResponse;
+    };
+    sdk: {
+      input: AssociateSoftwareTokenCommandInput;
+      output: AssociateSoftwareTokenCommandOutput;
+    };
+  };
+}

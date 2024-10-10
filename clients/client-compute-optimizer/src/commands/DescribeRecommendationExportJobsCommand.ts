@@ -127,9 +127,7 @@ export class DescribeRecommendationExportJobsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComputeOptimizerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class DescribeRecommendationExportJobsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRecommendationExportJobsCommand)
   .de(de_DescribeRecommendationExportJobsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRecommendationExportJobsRequest;
+      output: DescribeRecommendationExportJobsResponse;
+    };
+    sdk: {
+      input: DescribeRecommendationExportJobsCommandInput;
+      output: DescribeRecommendationExportJobsCommandOutput;
+    };
+  };
+}

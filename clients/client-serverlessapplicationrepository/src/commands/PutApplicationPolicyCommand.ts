@@ -114,9 +114,7 @@ export class PutApplicationPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServerlessApplicationRepositoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class PutApplicationPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutApplicationPolicyCommand)
   .de(de_PutApplicationPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutApplicationPolicyRequest;
+      output: PutApplicationPolicyResponse;
+    };
+    sdk: {
+      input: PutApplicationPolicyCommandInput;
+      output: PutApplicationPolicyCommandOutput;
+    };
+  };
+}

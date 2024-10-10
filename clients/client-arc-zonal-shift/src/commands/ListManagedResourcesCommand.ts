@@ -114,9 +114,7 @@ export class ListManagedResourcesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ARCZonalShiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class ListManagedResourcesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListManagedResourcesCommand)
   .de(de_ListManagedResourcesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListManagedResourcesRequest;
+      output: ListManagedResourcesResponse;
+    };
+    sdk: {
+      input: ListManagedResourcesCommandInput;
+      output: ListManagedResourcesCommandOutput;
+    };
+  };
+}

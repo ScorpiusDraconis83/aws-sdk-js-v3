@@ -104,9 +104,7 @@ export class CreateMeetingDialOutCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class CreateMeetingDialOutCommand extends $Command
   .f(CreateMeetingDialOutRequestFilterSensitiveLog, void 0)
   .ser(se_CreateMeetingDialOutCommand)
   .de(de_CreateMeetingDialOutCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMeetingDialOutRequest;
+      output: CreateMeetingDialOutResponse;
+    };
+    sdk: {
+      input: CreateMeetingDialOutCommandInput;
+      output: CreateMeetingDialOutCommandOutput;
+    };
+  };
+}

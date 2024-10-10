@@ -74,9 +74,7 @@ export class ListFleetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -88,4 +86,16 @@ export class ListFleetsCommand extends $Command
   .f(ListFleetsInputFilterSensitiveLog, void 0)
   .ser(se_ListFleetsCommand)
   .de(de_ListFleetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFleetsInput;
+      output: ListFleetsOutput;
+    };
+    sdk: {
+      input: ListFleetsCommandInput;
+      output: ListFleetsCommandOutput;
+    };
+  };
+}

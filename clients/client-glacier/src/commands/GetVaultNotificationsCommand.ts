@@ -122,9 +122,7 @@ export class GetVaultNotificationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class GetVaultNotificationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetVaultNotificationsCommand)
   .de(de_GetVaultNotificationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVaultNotificationsInput;
+      output: GetVaultNotificationsOutput;
+    };
+    sdk: {
+      input: GetVaultNotificationsCommandInput;
+      output: GetVaultNotificationsCommandOutput;
+    };
+  };
+}

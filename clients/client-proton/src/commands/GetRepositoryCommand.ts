@@ -87,9 +87,7 @@ export class GetRepositoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class GetRepositoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetRepositoryCommand)
   .de(de_GetRepositoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRepositoryInput;
+      output: GetRepositoryOutput;
+    };
+    sdk: {
+      input: GetRepositoryCommandInput;
+      output: GetRepositoryCommandOutput;
+    };
+  };
+}

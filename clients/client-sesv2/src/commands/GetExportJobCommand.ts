@@ -205,9 +205,7 @@ export class GetExportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -219,4 +217,16 @@ export class GetExportJobCommand extends $Command
   .f(void 0, GetExportJobResponseFilterSensitiveLog)
   .ser(se_GetExportJobCommand)
   .de(de_GetExportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExportJobRequest;
+      output: GetExportJobResponse;
+    };
+    sdk: {
+      input: GetExportJobCommandInput;
+      output: GetExportJobCommandOutput;
+    };
+  };
+}

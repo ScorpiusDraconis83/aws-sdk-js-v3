@@ -95,9 +95,7 @@ export class GetUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FinspaceDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class GetUserCommand extends $Command
   .f(void 0, GetUserResponseFilterSensitiveLog)
   .ser(se_GetUserCommand)
   .de(de_GetUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUserRequest;
+      output: GetUserResponse;
+    };
+    sdk: {
+      input: GetUserCommandInput;
+      output: GetUserCommandOutput;
+    };
+  };
+}

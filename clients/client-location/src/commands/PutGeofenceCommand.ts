@@ -107,9 +107,7 @@ export class PutGeofenceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class PutGeofenceCommand extends $Command
   .f(PutGeofenceRequestFilterSensitiveLog, void 0)
   .ser(se_PutGeofenceCommand)
   .de(de_PutGeofenceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutGeofenceRequest;
+      output: PutGeofenceResponse;
+    };
+    sdk: {
+      input: PutGeofenceCommandInput;
+      output: PutGeofenceCommandOutput;
+    };
+  };
+}

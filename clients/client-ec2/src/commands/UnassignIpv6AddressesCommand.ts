@@ -36,13 +36,13 @@ export interface UnassignIpv6AddressesCommandOutput extends UnassignIpv6Addresse
  * // const { EC2Client, UnassignIpv6AddressesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // UnassignIpv6AddressesRequest
- *   Ipv6Addresses: [ // Ipv6AddressList
- *     "STRING_VALUE",
- *   ],
  *   Ipv6Prefixes: [ // IpPrefixList
  *     "STRING_VALUE",
  *   ],
  *   NetworkInterfaceId: "STRING_VALUE", // required
+ *   Ipv6Addresses: [ // Ipv6AddressList
+ *     "STRING_VALUE",
+ *   ],
  * };
  * const command = new UnassignIpv6AddressesCommand(input);
  * const response = await client.send(command);
@@ -77,9 +77,7 @@ export class UnassignIpv6AddressesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class UnassignIpv6AddressesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UnassignIpv6AddressesCommand)
   .de(de_UnassignIpv6AddressesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnassignIpv6AddressesRequest;
+      output: UnassignIpv6AddressesResult;
+    };
+    sdk: {
+      input: UnassignIpv6AddressesCommandInput;
+      output: UnassignIpv6AddressesCommandOutput;
+    };
+  };
+}

@@ -79,9 +79,7 @@ export class DeleteBatchPredictionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MachineLearningClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class DeleteBatchPredictionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteBatchPredictionCommand)
   .de(de_DeleteBatchPredictionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBatchPredictionInput;
+      output: DeleteBatchPredictionOutput;
+    };
+    sdk: {
+      input: DeleteBatchPredictionCommandInput;
+      output: DeleteBatchPredictionCommandOutput;
+    };
+  };
+}

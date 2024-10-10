@@ -95,9 +95,7 @@ export class PutStudioMembersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class PutStudioMembersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutStudioMembersCommand)
   .de(de_PutStudioMembersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutStudioMembersRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutStudioMembersCommandInput;
+      output: PutStudioMembersCommandOutput;
+    };
+  };
+}

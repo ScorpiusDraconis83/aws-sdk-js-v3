@@ -188,9 +188,7 @@ export class ListCertificateAuthoritiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMPCAClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -202,4 +200,16 @@ export class ListCertificateAuthoritiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCertificateAuthoritiesCommand)
   .de(de_ListCertificateAuthoritiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCertificateAuthoritiesRequest;
+      output: ListCertificateAuthoritiesResponse;
+    };
+    sdk: {
+      input: ListCertificateAuthoritiesCommandInput;
+      output: ListCertificateAuthoritiesCommandOutput;
+    };
+  };
+}

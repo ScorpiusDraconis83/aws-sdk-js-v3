@@ -5,7 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { CreatePresignedNotebookInstanceUrlInput, CreatePresignedNotebookInstanceUrlOutput } from "../models/models_1";
+import { CreatePresignedNotebookInstanceUrlInput, CreatePresignedNotebookInstanceUrlOutput } from "../models/models_2";
 import {
   de_CreatePresignedNotebookInstanceUrlCommand,
   se_CreatePresignedNotebookInstanceUrlCommand,
@@ -87,9 +87,7 @@ export class CreatePresignedNotebookInstanceUrlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class CreatePresignedNotebookInstanceUrlCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePresignedNotebookInstanceUrlCommand)
   .de(de_CreatePresignedNotebookInstanceUrlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePresignedNotebookInstanceUrlInput;
+      output: CreatePresignedNotebookInstanceUrlOutput;
+    };
+    sdk: {
+      input: CreatePresignedNotebookInstanceUrlCommandInput;
+      output: CreatePresignedNotebookInstanceUrlCommandOutput;
+    };
+  };
+}

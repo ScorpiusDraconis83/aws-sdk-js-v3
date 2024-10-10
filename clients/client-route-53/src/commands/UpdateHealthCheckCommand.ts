@@ -153,9 +153,7 @@ export class UpdateHealthCheckCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -167,4 +165,16 @@ export class UpdateHealthCheckCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateHealthCheckCommand)
   .de(de_UpdateHealthCheckCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateHealthCheckRequest;
+      output: UpdateHealthCheckResponse;
+    };
+    sdk: {
+      input: UpdateHealthCheckCommandInput;
+      output: UpdateHealthCheckCommandOutput;
+    };
+  };
+}

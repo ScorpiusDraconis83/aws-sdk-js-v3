@@ -97,9 +97,7 @@ export class DeleteServiceNetworkServiceAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VPCLatticeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DeleteServiceNetworkServiceAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteServiceNetworkServiceAssociationCommand)
   .de(de_DeleteServiceNetworkServiceAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceNetworkServiceAssociationRequest;
+      output: DeleteServiceNetworkServiceAssociationResponse;
+    };
+    sdk: {
+      input: DeleteServiceNetworkServiceAssociationCommandInput;
+      output: DeleteServiceNetworkServiceAssociationCommandOutput;
+    };
+  };
+}

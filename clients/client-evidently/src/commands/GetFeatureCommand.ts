@@ -113,9 +113,7 @@ export class GetFeatureCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EvidentlyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class GetFeatureCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFeatureCommand)
   .de(de_GetFeatureCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFeatureRequest;
+      output: GetFeatureResponse;
+    };
+    sdk: {
+      input: GetFeatureCommandInput;
+      output: GetFeatureCommandOutput;
+    };
+  };
+}

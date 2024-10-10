@@ -60,6 +60,7 @@ export interface GetRuleSetCommandOutput extends GetRuleSetResponse, __MetadataB
  * //           StringExpression: { // RuleStringExpression
  * //             Evaluate: { // RuleStringToEvaluate Union: only one key present
  * //               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ * //               MimeHeaderAttribute: "STRING_VALUE",
  * //             },
  * //             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  * //             Values: [ // RuleStringList // required
@@ -114,6 +115,7 @@ export interface GetRuleSetCommandOutput extends GetRuleSetResponse, __MetadataB
  * //           StringExpression: {
  * //             Evaluate: {//  Union: only one key present
  * //               Attribute: "MAIL_FROM" || "HELO" || "RECIPIENT" || "SENDER" || "FROM" || "SUBJECT" || "TO" || "CC",
+ * //               MimeHeaderAttribute: "STRING_VALUE",
  * //             },
  * //             Operator: "EQUALS" || "NOT_EQUALS" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS", // required
  * //             Values: [ // required
@@ -227,9 +229,7 @@ export class GetRuleSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -241,4 +241,16 @@ export class GetRuleSetCommand extends $Command
   .f(void 0, GetRuleSetResponseFilterSensitiveLog)
   .ser(se_GetRuleSetCommand)
   .de(de_GetRuleSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRuleSetRequest;
+      output: GetRuleSetResponse;
+    };
+    sdk: {
+      input: GetRuleSetCommandInput;
+      output: GetRuleSetCommandOutput;
+    };
+  };
+}

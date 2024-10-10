@@ -350,9 +350,7 @@ export class DetectLabelsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -364,4 +362,16 @@ export class DetectLabelsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DetectLabelsCommand)
   .de(de_DetectLabelsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetectLabelsRequest;
+      output: DetectLabelsResponse;
+    };
+    sdk: {
+      input: DetectLabelsCommandInput;
+      output: DetectLabelsCommandOutput;
+    };
+  };
+}

@@ -119,6 +119,7 @@ export interface PutIntegrationCommandOutput extends PutIntegrationResponse, __M
  *   ObjectTypeNames: { // ObjectTypeNames
  *     "<keys>": "STRING_VALUE",
  *   },
+ *   RoleArn: "STRING_VALUE",
  * };
  * const command = new PutIntegrationCommand(input);
  * const response = await client.send(command);
@@ -136,6 +137,7 @@ export interface PutIntegrationCommandOutput extends PutIntegrationResponse, __M
  * //   },
  * //   WorkflowId: "STRING_VALUE",
  * //   IsUnstructured: true || false,
+ * //   RoleArn: "STRING_VALUE",
  * // };
  *
  * ```
@@ -174,9 +176,7 @@ export class PutIntegrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -188,4 +188,16 @@ export class PutIntegrationCommand extends $Command
   .f(PutIntegrationRequestFilterSensitiveLog, void 0)
   .ser(se_PutIntegrationCommand)
   .de(de_PutIntegrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutIntegrationRequest;
+      output: PutIntegrationResponse;
+    };
+    sdk: {
+      input: PutIntegrationCommandInput;
+      output: PutIntegrationCommandOutput;
+    };
+  };
+}

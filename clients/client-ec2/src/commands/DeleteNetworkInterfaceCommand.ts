@@ -75,9 +75,7 @@ export class DeleteNetworkInterfaceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -89,4 +87,16 @@ export class DeleteNetworkInterfaceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteNetworkInterfaceCommand)
   .de(de_DeleteNetworkInterfaceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkInterfaceRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteNetworkInterfaceCommandInput;
+      output: DeleteNetworkInterfaceCommandOutput;
+    };
+  };
+}

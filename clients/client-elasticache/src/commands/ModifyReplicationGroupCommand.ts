@@ -28,11 +28,11 @@ export interface ModifyReplicationGroupCommandInput extends ModifyReplicationGro
 export interface ModifyReplicationGroupCommandOutput extends ModifyReplicationGroupResult, __MetadataBearer {}
 
 /**
- * <p>Modifies the settings for a replication group. This is limited to Redis OSS 7 and newer.</p>
+ * <p>Modifies the settings for a replication group. This is limited to Valkey and Redis OSS 7 and above.</p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache (Redis OSS) (cluster mode enabled)</a> in
+ *                   <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Valkey or Redis OSS (cluster mode enabled)</a> in
  *                     the ElastiCache User Guide</p>
  *             </li>
  *             <li>
@@ -42,7 +42,7 @@ export interface ModifyReplicationGroupCommandOutput extends ModifyReplicationGr
  *             </li>
  *          </ul>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -69,6 +69,7 @@ export interface ModifyReplicationGroupCommandOutput extends ModifyReplicationGr
  *   CacheParameterGroupName: "STRING_VALUE",
  *   NotificationTopicStatus: "STRING_VALUE",
  *   ApplyImmediately: true || false,
+ *   Engine: "STRING_VALUE",
  *   EngineVersion: "STRING_VALUE",
  *   AutoMinorVersionUpgrade: true || false,
  *   SnapshotRetentionLimit: Number("int"),
@@ -226,6 +227,7 @@ export interface ModifyReplicationGroupCommandOutput extends ModifyReplicationGr
  * //     IpDiscovery: "ipv4" || "ipv6",
  * //     TransitEncryptionMode: "preferred" || "required",
  * //     ClusterMode: "enabled" || "disabled" || "compatible",
+ * //     Engine: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -377,9 +379,7 @@ export class ModifyReplicationGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -391,4 +391,16 @@ export class ModifyReplicationGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyReplicationGroupCommand)
   .de(de_ModifyReplicationGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyReplicationGroupMessage;
+      output: ModifyReplicationGroupResult;
+    };
+    sdk: {
+      input: ModifyReplicationGroupCommandInput;
+      output: ModifyReplicationGroupCommandOutput;
+    };
+  };
+}

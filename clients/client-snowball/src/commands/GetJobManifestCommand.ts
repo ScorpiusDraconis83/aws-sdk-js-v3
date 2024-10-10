@@ -110,9 +110,7 @@ export class GetJobManifestCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SnowballClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class GetJobManifestCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetJobManifestCommand)
   .de(de_GetJobManifestCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobManifestRequest;
+      output: GetJobManifestResult;
+    };
+    sdk: {
+      input: GetJobManifestCommandInput;
+      output: GetJobManifestCommandOutput;
+    };
+  };
+}

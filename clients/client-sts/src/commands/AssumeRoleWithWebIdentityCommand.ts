@@ -302,9 +302,7 @@ export class AssumeRoleWithWebIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: STSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -316,4 +314,16 @@ export class AssumeRoleWithWebIdentityCommand extends $Command
   .f(AssumeRoleWithWebIdentityRequestFilterSensitiveLog, AssumeRoleWithWebIdentityResponseFilterSensitiveLog)
   .ser(se_AssumeRoleWithWebIdentityCommand)
   .de(de_AssumeRoleWithWebIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssumeRoleWithWebIdentityRequest;
+      output: AssumeRoleWithWebIdentityResponse;
+    };
+    sdk: {
+      input: AssumeRoleWithWebIdentityCommandInput;
+      output: AssumeRoleWithWebIdentityCommandOutput;
+    };
+  };
+}

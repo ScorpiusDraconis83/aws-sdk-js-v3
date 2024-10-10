@@ -136,9 +136,7 @@ export class CreateChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaTailorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -150,4 +148,16 @@ export class CreateChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateChannelCommand)
   .de(de_CreateChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateChannelRequest;
+      output: CreateChannelResponse;
+    };
+    sdk: {
+      input: CreateChannelCommandInput;
+      output: CreateChannelCommandOutput;
+    };
+  };
+}

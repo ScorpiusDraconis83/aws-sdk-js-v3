@@ -97,9 +97,7 @@ export class ListViewsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ListViewsCommand extends $Command
   .f(void 0, ListViewsResponseFilterSensitiveLog)
   .ser(se_ListViewsCommand)
   .de(de_ListViewsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListViewsRequest;
+      output: ListViewsResponse;
+    };
+    sdk: {
+      input: ListViewsCommandInput;
+      output: ListViewsCommandOutput;
+    };
+  };
+}

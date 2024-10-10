@@ -107,9 +107,7 @@ export class ModifyIpamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class ModifyIpamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyIpamCommand)
   .de(de_ModifyIpamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyIpamRequest;
+      output: ModifyIpamResult;
+    };
+    sdk: {
+      input: ModifyIpamCommandInput;
+      output: ModifyIpamCommandOutput;
+    };
+  };
+}

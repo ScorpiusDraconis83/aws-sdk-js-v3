@@ -154,9 +154,7 @@ export class CreateRecipeJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataBrewClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class CreateRecipeJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRecipeJobCommand)
   .de(de_CreateRecipeJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRecipeJobRequest;
+      output: CreateRecipeJobResponse;
+    };
+    sdk: {
+      input: CreateRecipeJobCommandInput;
+      output: CreateRecipeJobCommandOutput;
+    };
+  };
+}

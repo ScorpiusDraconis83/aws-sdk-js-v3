@@ -166,9 +166,7 @@ export class DeleteFirewallCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkFirewallClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -180,4 +178,16 @@ export class DeleteFirewallCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteFirewallCommand)
   .de(de_DeleteFirewallCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFirewallRequest;
+      output: DeleteFirewallResponse;
+    };
+    sdk: {
+      input: DeleteFirewallCommandInput;
+      output: DeleteFirewallCommandOutput;
+    };
+  };
+}

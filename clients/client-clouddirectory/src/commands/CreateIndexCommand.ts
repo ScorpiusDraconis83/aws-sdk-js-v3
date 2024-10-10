@@ -104,6 +104,26 @@ export interface CreateIndexCommandOutput extends CreateIndexResponse, __Metadat
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To create an index
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8",
+ *   "IsUnique": true,
+ *   "LinkName": "Examplelink",
+ *   "OrderedIndexedAttributeList": [],
+ *   "ParentReference": {}
+ * };
+ * const command = new CreateIndexCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "ObjectIdentifier": "AQF0Fw173YJDlpLUV1eB50WvYsWFtVoUSmOzZjz_BLULIA"
+ * }
+ * *\/
+ * // example id: to-create-an-index-1505339563796
+ * ```
+ *
  */
 export class CreateIndexCommand extends $Command
   .classBuilder<
@@ -113,9 +133,7 @@ export class CreateIndexCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +145,16 @@ export class CreateIndexCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateIndexCommand)
   .de(de_CreateIndexCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIndexRequest;
+      output: CreateIndexResponse;
+    };
+    sdk: {
+      input: CreateIndexCommandInput;
+      output: CreateIndexCommandOutput;
+    };
+  };
+}

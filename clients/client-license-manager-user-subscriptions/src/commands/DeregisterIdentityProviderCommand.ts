@@ -111,9 +111,7 @@ export class DeregisterIdentityProviderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerUserSubscriptionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class DeregisterIdentityProviderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeregisterIdentityProviderCommand)
   .de(de_DeregisterIdentityProviderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterIdentityProviderRequest;
+      output: DeregisterIdentityProviderResponse;
+    };
+    sdk: {
+      input: DeregisterIdentityProviderCommandInput;
+      output: DeregisterIdentityProviderCommandOutput;
+    };
+  };
+}

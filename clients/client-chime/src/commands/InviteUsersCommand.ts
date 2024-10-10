@@ -104,9 +104,7 @@ export class InviteUsersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class InviteUsersCommand extends $Command
   .f(InviteUsersRequestFilterSensitiveLog, InviteUsersResponseFilterSensitiveLog)
   .ser(se_InviteUsersCommand)
   .de(de_InviteUsersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InviteUsersRequest;
+      output: InviteUsersResponse;
+    };
+    sdk: {
+      input: InviteUsersCommandInput;
+      output: InviteUsersCommandOutput;
+    };
+  };
+}

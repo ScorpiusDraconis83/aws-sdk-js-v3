@@ -34,7 +34,7 @@ export interface BeginTransactionCommandOutput extends BeginTransactionResponse,
  *                 hours.</p>
  *             <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's
  *                 committed, it's rolled back automatically.</p>
- *             <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate
+ *             <p>For Aurora MySQL, DDL statements inside a transaction cause an implicit commit. We recommend that you run each MySQL DDL statement in a separate
  *                     <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p>
  *          </note>
  * @example
@@ -127,9 +127,7 @@ export class BeginTransactionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class BeginTransactionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BeginTransactionCommand)
   .de(de_BeginTransactionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BeginTransactionRequest;
+      output: BeginTransactionResponse;
+    };
+    sdk: {
+      input: BeginTransactionCommandInput;
+      output: BeginTransactionCommandOutput;
+    };
+  };
+}

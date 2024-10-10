@@ -46,7 +46,7 @@ export interface CreatePolicyCommandOutput extends CreatePolicyResponse, __Metad
  *   Content: "STRING_VALUE", // required
  *   Description: "STRING_VALUE", // required
  *   Name: "STRING_VALUE", // required
- *   Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY", // required
+ *   Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY", // required
  *   Tags: [ // Tags
  *     { // Tag
  *       Key: "STRING_VALUE", // required
@@ -63,7 +63,7 @@ export interface CreatePolicyCommandOutput extends CreatePolicyResponse, __Metad
  * //       Arn: "STRING_VALUE",
  * //       Name: "STRING_VALUE",
  * //       Description: "STRING_VALUE",
- * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //       Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //       AwsManaged: true || false,
  * //     },
  * //     Content: "STRING_VALUE",
@@ -282,9 +282,8 @@ export interface CreatePolicyCommandOutput extends CreatePolicyResponse, __Metad
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  *
@@ -462,9 +461,7 @@ export class CreatePolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -476,4 +473,16 @@ export class CreatePolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePolicyCommand)
   .de(de_CreatePolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePolicyRequest;
+      output: CreatePolicyResponse;
+    };
+    sdk: {
+      input: CreatePolicyCommandInput;
+      output: CreatePolicyCommandOutput;
+    };
+  };
+}

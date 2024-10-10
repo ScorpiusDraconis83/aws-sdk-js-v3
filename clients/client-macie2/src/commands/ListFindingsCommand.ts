@@ -113,9 +113,7 @@ export class ListFindingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Macie2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class ListFindingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFindingsCommand)
   .de(de_ListFindingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFindingsRequest;
+      output: ListFindingsResponse;
+    };
+    sdk: {
+      input: ListFindingsCommandInput;
+      output: ListFindingsCommandOutput;
+    };
+  };
+}

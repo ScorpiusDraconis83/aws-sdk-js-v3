@@ -72,6 +72,12 @@ export interface GetPromptCommandOutput extends GetPromptResponse, __MetadataBea
  * //           ],
  * //         },
  * //       },
+ * //       metadata: [ // PromptMetadataList
+ * //         { // PromptMetadataEntry
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
  * //     },
  * //   ],
  * //   id: "STRING_VALUE", // required
@@ -117,9 +123,7 @@ export class GetPromptCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +135,16 @@ export class GetPromptCommand extends $Command
   .f(void 0, GetPromptResponseFilterSensitiveLog)
   .ser(se_GetPromptCommand)
   .de(de_GetPromptCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPromptRequest;
+      output: GetPromptResponse;
+    };
+    sdk: {
+      input: GetPromptCommandInput;
+      output: GetPromptCommandOutput;
+    };
+  };
+}

@@ -72,6 +72,7 @@ jest.mock("@aws-sdk/client-sso", () => {
 // This var must be hoisted.
 // eslint-disable-next-line no-var
 var stsSpy: jest.Spied<any> | any | undefined = undefined;
+const assumeRoleArns: string[] = [];
 
 jest.mock("@aws-sdk/client-sts", () => {
   const actual = jest.requireActual("@aws-sdk/client-sts");
@@ -80,6 +81,7 @@ jest.mock("@aws-sdk/client-sts", () => {
 
   stsSpy = jest.spyOn(actual.STSClient.prototype, "send").mockImplementation(async function (this: any, command: any) {
     if (command.constructor.name === "AssumeRoleCommand") {
+      assumeRoleArns.push(command.input.RoleArn);
       return {
         Credentials: {
           AccessKeyId: "STS_AR_ACCESS_KEY_ID",
@@ -91,6 +93,7 @@ jest.mock("@aws-sdk/client-sts", () => {
       };
     }
     if (command.constructor.name === "AssumeRoleWithWebIdentityCommand") {
+      assumeRoleArns.push(command.input.RoleArn);
       return {
         Credentials: {
           AccessKeyId: "STS_ARWI_ACCESS_KEY_ID",
@@ -177,6 +180,22 @@ describe("credential-provider-node integration test", () => {
   let sts: STS = null as any;
   let processSnapshot: typeof process.env = null as any;
 
+  const sink = {
+    data: [] as string[],
+    debug(log: string) {
+      this.data.push(log);
+    },
+    info(log: string) {
+      this.data.push(log);
+    },
+    warn(log: string) {
+      this.data.push(log);
+    },
+    error(log: string) {
+      this.data.push(log);
+    },
+  };
+
   const RESERVED_ENVIRONMENT_VARIABLES = {
     AWS_DEFAULT_REGION: 1,
     AWS_REGION: 1,
@@ -257,6 +276,8 @@ describe("credential-provider-node integration test", () => {
         output: "json",
       },
     };
+    assumeRoleArns.length = 0;
+    sink.data.length = 0;
   });
 
   afterAll(async () => {
@@ -274,6 +295,9 @@ describe("credential-provider-node integration test", () => {
       expect(credentials).toEqual({
         accessKeyId: "ENV_ACCESS_KEY",
         secretAccessKey: "ENV_SECRET_KEY",
+        $source: {
+          CREDENTIALS_ENV_VARS: "g",
+        },
       });
     });
 
@@ -291,6 +315,9 @@ describe("credential-provider-node integration test", () => {
         expiration: new Date("2000-01-01T00:00:00.000Z"),
         sessionToken: "ENV_SESSION_TOKEN",
         credentialScope: "us-env-1",
+        $source: {
+          CREDENTIALS_ENV_VARS: "g",
+        },
       });
     });
 
@@ -310,6 +337,9 @@ describe("credential-provider-node integration test", () => {
       expect(credentials).toEqual({
         accessKeyId: "INI_STATIC_ACCESS_KEY",
         secretAccessKey: "INI_STATIC_SECRET_KEY",
+        $source: {
+          CREDENTIALS_PROFILE: "n",
+        },
       });
     });
   });
@@ -335,6 +365,10 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "SSO_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-sso-1-us-sso-region-1",
+        $source: {
+          CREDENTIALS_CODE: "e",
+          CREDENTIALS_SSO_LEGACY: "u",
+        },
       });
     });
   });
@@ -350,6 +384,9 @@ describe("credential-provider-node integration test", () => {
       expect(credentials).toEqual({
         accessKeyId: "INI_STATIC_ACCESS_KEY",
         secretAccessKey: "INI_STATIC_SECRET_KEY",
+        $source: {
+          CREDENTIALS_PROFILE: "n",
+        },
       });
     });
 
@@ -374,6 +411,10 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_AR_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsar-1__us-west-2",
+        $source: {
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
       });
     });
 
@@ -402,6 +443,10 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_AR_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsar-1__eu-west-1",
+        $source: {
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
       });
     });
 
@@ -430,6 +475,10 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_AR_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsar-1__us-gov-stsar-1",
+        $source: {
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
       });
     });
 
@@ -450,29 +499,41 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_ARWI_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsarwi-1__us-west-2",
+        $source: {
+          CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN: "q",
+          CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: "k",
+        },
       });
     });
 
-    it("should resolve credentials from STS assumeRoleWithWebIdentity if the ini profile is configured for web identity and the client region is not the default AWS partition", async () => {
-      sts = new STS({
-        region: "us-gov-sts-1",
-        requestHandler: mockRequestHandler,
-      });
-      Object.assign(iniProfileData.default, {
-        region: "us-gov-sts-1",
-        web_identity_token_file: "token-filepath",
-        role_arn: "ROLE_ARN",
-      });
-      await sts.getCallerIdentity({});
-      const credentials = await sts.config.credentials();
-      expect(credentials).toEqual({
-        accessKeyId: "STS_ARWI_ACCESS_KEY_ID",
-        secretAccessKey: "STS_ARWI_SECRET_ACCESS_KEY",
-        sessionToken: "STS_ARWI_SESSION_TOKEN",
-        expiration: new Date("3000-01-01T00:00:00.000Z"),
-        credentialScope: "us-stsarwi-1__us-gov-sts-1",
-      });
-    });
+    it(
+      "should resolve credentials from STS assumeRoleWithWebIdentity if the ini profile is" +
+        " configured for web identity and the client region is not the default AWS partition",
+      async () => {
+        sts = new STS({
+          region: "us-gov-sts-1",
+          requestHandler: mockRequestHandler,
+        });
+        Object.assign(iniProfileData.default, {
+          region: "us-gov-sts-1",
+          web_identity_token_file: "token-filepath",
+          role_arn: "ROLE_ARN",
+        });
+        await sts.getCallerIdentity({});
+        const credentials = await sts.config.credentials();
+        expect(credentials).toEqual({
+          accessKeyId: "STS_ARWI_ACCESS_KEY_ID",
+          secretAccessKey: "STS_ARWI_SECRET_ACCESS_KEY",
+          sessionToken: "STS_ARWI_SESSION_TOKEN",
+          expiration: new Date("3000-01-01T00:00:00.000Z"),
+          credentialScope: "us-stsarwi-1__us-gov-sts-1",
+          $source: {
+            CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN: "q",
+            CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: "k",
+          },
+        });
+      }
+    );
 
     it("should resolve process credentials if the profile is a process profile", async () => {
       Object.assign(iniProfileData.default, {
@@ -485,6 +546,10 @@ describe("credential-provider-node integration test", () => {
         secretAccessKey: "PROCESS_SECRET_ACCESS_KEY",
         sessionToken: "PROCESS_SESSION_TOKEN",
         credentialScope: "us-process-1",
+        $source: {
+          CREDENTIALS_PROCESS: "w",
+          CREDENTIALS_PROFILE_PROCESS: "v",
+        },
       });
     });
 
@@ -508,10 +573,14 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "SSO_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-sso-1-us-sso-region-1",
+        $source: {
+          CREDENTIALS_PROFILE_SSO: "r",
+          CREDENTIALS_SSO: "s",
+        },
       });
     });
 
-    it("should be able to combine a source_profile having credential_source with an origin profile having role_arn and source_profile", async () => {
+    it("should be able to combine a source_profile having only credential_source with an origin profile having role_arn and source_profile", async () => {
       process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI = "http://169.254.170.23";
       process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN = "container-authorization";
       iniProfileData.default.source_profile = "credential_source_profile";
@@ -529,6 +598,7 @@ describe("credential-provider-node integration test", () => {
           clientConfig: {
             region: "us-west-2",
           },
+          logger: sink,
         }),
       });
       await sts.getCallerIdentity({});
@@ -539,6 +609,11 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_AR_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsar-1__us-west-2",
+        $source: {
+          CREDENTIALS_CODE: "e",
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
       });
       expect(spy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -546,6 +621,153 @@ describe("credential-provider-node integration test", () => {
           awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
         })
       );
+      expect(assumeRoleArns).toEqual(["ROLE_ARN"]);
+      spy.mockClear();
+    });
+
+    it("should be able to combine a source_profile having web_identity_token_file and role_arn with an origin profile having role_arn and source_profile", async () => {
+      iniProfileData.default.source_profile = "credential_source_profile";
+      iniProfileData.default.role_arn = "ROLE_ARN_2";
+
+      iniProfileData.credential_source_profile = {
+        web_identity_token_file: "token-filepath",
+        role_arn: "ROLE_ARN_1",
+      };
+
+      sts = new STS({
+        region: "us-west-2",
+        requestHandler: mockRequestHandler,
+        credentials: defaultProvider({
+          awsContainerCredentialsFullUri: process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
+          awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
+          clientConfig: {
+            region: "us-west-2",
+          },
+          logger: sink,
+        }),
+      });
+      await sts.getCallerIdentity({});
+      const credentials = await sts.config.credentials();
+      expect(credentials).toEqual({
+        accessKeyId: "STS_AR_ACCESS_KEY_ID",
+        secretAccessKey: "STS_AR_SECRET_ACCESS_KEY",
+        sessionToken: "STS_AR_SESSION_TOKEN",
+        expiration: new Date("3000-01-01T00:00:00.000Z"),
+        credentialScope: "us-stsar-1__us-west-2",
+        $source: {
+          CREDENTIALS_CODE: "e",
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
+      });
+      expect(assumeRoleArns).toEqual(["ROLE_ARN_1", "ROLE_ARN_2"]);
+    });
+
+    it("should complete chained role_arn credentials", async () => {
+      process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI = "http://169.254.170.23";
+      process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN = "container-authorization";
+
+      iniProfileData.default.source_profile = "credential_source_profile_1";
+      iniProfileData.default.role_arn = "ROLE_ARN_3";
+
+      iniProfileData.credential_source_profile_1 = {
+        source_profile: "credential_source_profile_2",
+        role_arn: "ROLE_ARN_2",
+      };
+
+      iniProfileData.credential_source_profile_2 = {
+        credential_source: "EcsContainer",
+        role_arn: "ROLE_ARN_1",
+      };
+
+      const spy = jest.spyOn(credentialProviderHttp, "fromHttp");
+      sts = new STS({
+        region: "us-west-2",
+        requestHandler: mockRequestHandler,
+        credentials: defaultProvider({
+          awsContainerCredentialsFullUri: process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
+          awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
+          clientConfig: {
+            region: "us-west-2",
+          },
+          logger: sink,
+        }),
+      });
+      await sts.getCallerIdentity({});
+      const credentials = await sts.config.credentials();
+      expect(credentials).toEqual({
+        accessKeyId: "STS_AR_ACCESS_KEY_ID",
+        secretAccessKey: "STS_AR_SECRET_ACCESS_KEY",
+        sessionToken: "STS_AR_SESSION_TOKEN",
+        expiration: new Date("3000-01-01T00:00:00.000Z"),
+        credentialScope: "us-stsar-1__us-west-2",
+        $source: {
+          CREDENTIALS_CODE: "e",
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
+      });
+      expect(spy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          awsContainerCredentialsFullUri: process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
+          awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
+        })
+      );
+      expect(assumeRoleArns).toEqual(["ROLE_ARN_1", "ROLE_ARN_2", "ROLE_ARN_3"]);
+      spy.mockClear();
+    });
+
+    it("should complete chained role_arn credentials with optional role_arn in credential_source step", async () => {
+      process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI = "http://169.254.170.23";
+      process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN = "container-authorization";
+
+      iniProfileData.default.source_profile = "credential_source_profile_1";
+      iniProfileData.default.role_arn = "ROLE_ARN_3";
+
+      iniProfileData.credential_source_profile_1 = {
+        source_profile: "credential_source_profile_2",
+        role_arn: "ROLE_ARN_2",
+      };
+
+      iniProfileData.credential_source_profile_2 = {
+        credential_source: "EcsContainer",
+        // This scenario tests the option of having no role_arn in this step of the chain.
+      };
+
+      const spy = jest.spyOn(credentialProviderHttp, "fromHttp");
+      sts = new STS({
+        region: "us-west-2",
+        requestHandler: mockRequestHandler,
+        credentials: defaultProvider({
+          awsContainerCredentialsFullUri: process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
+          awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
+          clientConfig: {
+            region: "us-west-2",
+          },
+          logger: sink,
+        }),
+      });
+      await sts.getCallerIdentity({});
+      const credentials = await sts.config.credentials();
+      expect(credentials).toEqual({
+        accessKeyId: "STS_AR_ACCESS_KEY_ID",
+        secretAccessKey: "STS_AR_SECRET_ACCESS_KEY",
+        sessionToken: "STS_AR_SESSION_TOKEN",
+        expiration: new Date("3000-01-01T00:00:00.000Z"),
+        credentialScope: "us-stsar-1__us-west-2",
+        $source: {
+          CREDENTIALS_CODE: "e",
+          CREDENTIALS_PROFILE_SOURCE_PROFILE: "o",
+          CREDENTIALS_STS_ASSUME_ROLE: "i",
+        },
+      });
+      expect(spy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          awsContainerCredentialsFullUri: process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
+          awsContainerAuthorizationToken: process.env.AWS_CONTAINER_AUTHORIZATION_TOKEN,
+        })
+      );
+      expect(assumeRoleArns).toEqual(["ROLE_ARN_2", "ROLE_ARN_3"]);
       spy.mockClear();
     });
   });
@@ -566,6 +788,10 @@ describe("credential-provider-node integration test", () => {
         secretAccessKey: "PROCESS_SECRET_ACCESS_KEY",
         sessionToken: "PROCESS_SESSION_TOKEN",
         credentialScope: "us-process-1",
+        $source: {
+          CREDENTIALS_PROCESS: "w",
+          CREDENTIALS_PROFILE_PROCESS: "v",
+        },
       });
     });
   });
@@ -582,6 +808,10 @@ describe("credential-provider-node integration test", () => {
         sessionToken: "STS_ARWI_SESSION_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
         credentialScope: "us-stsarwi-1__us-west-2",
+        $source: {
+          CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN: "h",
+          CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: "k",
+        },
       });
     });
   });
@@ -597,6 +827,9 @@ describe("credential-provider-node integration test", () => {
         secretAccessKey: "CONTAINER_SECRET_ACCESS_KEY",
         sessionToken: "CONTAINER_TOKEN",
         expiration: new Date("3000-01-01T00:00:00.000Z"),
+        $source: {
+          CREDENTIALS_HTTP: "z",
+        },
       });
     });
 

@@ -82,6 +82,10 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  *       ScteHls: { // ScteHls
  *         AdMarkerHls: "DATERANGE",
  *       },
+ *       StartTag: { // StartTag
+ *         TimeOffset: Number("float"), // required
+ *         Precise: true || false,
+ *       },
  *       ManifestWindowSeconds: Number("int"),
  *       ProgramDateTimeIntervalSeconds: Number("int"),
  *       FilterConfiguration: { // FilterConfiguration
@@ -89,6 +93,7 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  *         Start: new Date("TIMESTAMP"),
  *         End: new Date("TIMESTAMP"),
  *         TimeDelaySeconds: Number("int"),
+ *         ClipStartTime: new Date("TIMESTAMP"),
  *       },
  *     },
  *   ],
@@ -99,6 +104,10 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  *       ScteHls: {
  *         AdMarkerHls: "DATERANGE",
  *       },
+ *       StartTag: {
+ *         TimeOffset: Number("float"), // required
+ *         Precise: true || false,
+ *       },
  *       ManifestWindowSeconds: Number("int"),
  *       ProgramDateTimeIntervalSeconds: Number("int"),
  *       FilterConfiguration: {
@@ -106,6 +115,7 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  *         Start: new Date("TIMESTAMP"),
  *         End: new Date("TIMESTAMP"),
  *         TimeDelaySeconds: Number("int"),
+ *         ClipStartTime: new Date("TIMESTAMP"),
  *       },
  *     },
  *   ],
@@ -118,6 +128,7 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  *         Start: new Date("TIMESTAMP"),
  *         End: new Date("TIMESTAMP"),
  *         TimeDelaySeconds: Number("int"),
+ *         ClipStartTime: new Date("TIMESTAMP"),
  *       },
  *       MinUpdatePeriodSeconds: Number("int"),
  *       MinBufferTimeSeconds: Number("int"),
@@ -204,6 +215,11 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  * //         Start: new Date("TIMESTAMP"),
  * //         End: new Date("TIMESTAMP"),
  * //         TimeDelaySeconds: Number("int"),
+ * //         ClipStartTime: new Date("TIMESTAMP"),
+ * //       },
+ * //       StartTag: { // StartTag
+ * //         TimeOffset: Number("float"), // required
+ * //         Precise: true || false,
  * //       },
  * //     },
  * //   ],
@@ -222,6 +238,11 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  * //         Start: new Date("TIMESTAMP"),
  * //         End: new Date("TIMESTAMP"),
  * //         TimeDelaySeconds: Number("int"),
+ * //         ClipStartTime: new Date("TIMESTAMP"),
+ * //       },
+ * //       StartTag: {
+ * //         TimeOffset: Number("float"), // required
+ * //         Precise: true || false,
  * //       },
  * //     },
  * //   ],
@@ -235,6 +256,7 @@ export interface CreateOriginEndpointCommandOutput extends CreateOriginEndpointR
  * //         Start: new Date("TIMESTAMP"),
  * //         End: new Date("TIMESTAMP"),
  * //         TimeDelaySeconds: Number("int"),
+ * //         ClipStartTime: new Date("TIMESTAMP"),
  * //       },
  * //       MinUpdatePeriodSeconds: Number("int"),
  * //       MinBufferTimeSeconds: Number("int"),
@@ -778,9 +800,7 @@ export class CreateOriginEndpointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaPackageV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -792,4 +812,16 @@ export class CreateOriginEndpointCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateOriginEndpointCommand)
   .de(de_CreateOriginEndpointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateOriginEndpointRequest;
+      output: CreateOriginEndpointResponse;
+    };
+    sdk: {
+      input: CreateOriginEndpointCommandInput;
+      output: CreateOriginEndpointCommandOutput;
+    };
+  };
+}

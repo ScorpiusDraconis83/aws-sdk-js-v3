@@ -81,9 +81,7 @@ export class DeleteServiceProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DeleteServiceProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteServiceProfileCommand)
   .de(de_DeleteServiceProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceProfileRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteServiceProfileCommandInput;
+      output: DeleteServiceProfileCommandOutput;
+    };
+  };
+}

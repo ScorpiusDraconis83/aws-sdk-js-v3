@@ -167,9 +167,7 @@ export class InitiateDocumentVersionUploadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class InitiateDocumentVersionUploadCommand extends $Command
   .f(InitiateDocumentVersionUploadRequestFilterSensitiveLog, InitiateDocumentVersionUploadResponseFilterSensitiveLog)
   .ser(se_InitiateDocumentVersionUploadCommand)
   .de(de_InitiateDocumentVersionUploadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InitiateDocumentVersionUploadRequest;
+      output: InitiateDocumentVersionUploadResponse;
+    };
+    sdk: {
+      input: InitiateDocumentVersionUploadCommandInput;
+      output: InitiateDocumentVersionUploadCommandOutput;
+    };
+  };
+}

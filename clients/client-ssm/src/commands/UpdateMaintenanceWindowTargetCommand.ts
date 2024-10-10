@@ -134,9 +134,7 @@ export class UpdateMaintenanceWindowTargetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +146,16 @@ export class UpdateMaintenanceWindowTargetCommand extends $Command
   .f(UpdateMaintenanceWindowTargetRequestFilterSensitiveLog, UpdateMaintenanceWindowTargetResultFilterSensitiveLog)
   .ser(se_UpdateMaintenanceWindowTargetCommand)
   .de(de_UpdateMaintenanceWindowTargetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMaintenanceWindowTargetRequest;
+      output: UpdateMaintenanceWindowTargetResult;
+    };
+    sdk: {
+      input: UpdateMaintenanceWindowTargetCommandInput;
+      output: UpdateMaintenanceWindowTargetCommandOutput;
+    };
+  };
+}

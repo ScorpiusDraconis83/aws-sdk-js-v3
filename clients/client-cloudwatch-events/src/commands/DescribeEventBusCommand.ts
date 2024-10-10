@@ -79,9 +79,7 @@ export class DescribeEventBusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchEventsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class DescribeEventBusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEventBusCommand)
   .de(de_DescribeEventBusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventBusRequest;
+      output: DescribeEventBusResponse;
+    };
+    sdk: {
+      input: DescribeEventBusCommandInput;
+      output: DescribeEventBusCommandOutput;
+    };
+  };
+}

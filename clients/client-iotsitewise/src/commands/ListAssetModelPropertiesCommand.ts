@@ -167,9 +167,7 @@ export class ListAssetModelPropertiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -181,4 +179,16 @@ export class ListAssetModelPropertiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAssetModelPropertiesCommand)
   .de(de_ListAssetModelPropertiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssetModelPropertiesRequest;
+      output: ListAssetModelPropertiesResponse;
+    };
+    sdk: {
+      input: ListAssetModelPropertiesCommandInput;
+      output: ListAssetModelPropertiesCommandOutput;
+    };
+  };
+}

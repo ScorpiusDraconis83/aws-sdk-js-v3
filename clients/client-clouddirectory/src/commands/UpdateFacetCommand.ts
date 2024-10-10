@@ -144,9 +144,7 @@ export class UpdateFacetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -158,4 +156,16 @@ export class UpdateFacetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateFacetCommand)
   .de(de_UpdateFacetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFacetRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateFacetCommandInput;
+      output: UpdateFacetCommandOutput;
+    };
+  };
+}

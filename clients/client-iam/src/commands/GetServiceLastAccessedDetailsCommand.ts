@@ -191,9 +191,7 @@ export class GetServiceLastAccessedDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -205,4 +203,16 @@ export class GetServiceLastAccessedDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetServiceLastAccessedDetailsCommand)
   .de(de_GetServiceLastAccessedDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceLastAccessedDetailsRequest;
+      output: GetServiceLastAccessedDetailsResponse;
+    };
+    sdk: {
+      input: GetServiceLastAccessedDetailsCommandInput;
+      output: GetServiceLastAccessedDetailsCommandOutput;
+    };
+  };
+}

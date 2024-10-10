@@ -108,9 +108,7 @@ export class CreateDetectorVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +120,16 @@ export class CreateDetectorVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDetectorVersionCommand)
   .de(de_CreateDetectorVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDetectorVersionRequest;
+      output: CreateDetectorVersionResult;
+    };
+    sdk: {
+      input: CreateDetectorVersionCommandInput;
+      output: CreateDetectorVersionCommandOutput;
+    };
+  };
+}

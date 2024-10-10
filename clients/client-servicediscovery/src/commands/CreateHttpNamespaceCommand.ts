@@ -111,9 +111,7 @@ export class CreateHttpNamespaceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceDiscoveryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class CreateHttpNamespaceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateHttpNamespaceCommand)
   .de(de_CreateHttpNamespaceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHttpNamespaceRequest;
+      output: CreateHttpNamespaceResponse;
+    };
+    sdk: {
+      input: CreateHttpNamespaceCommandInput;
+      output: CreateHttpNamespaceCommandOutput;
+    };
+  };
+}

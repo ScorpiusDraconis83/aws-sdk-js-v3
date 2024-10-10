@@ -86,6 +86,12 @@ export interface DescribeGlobalClustersCommandOutput extends GlobalClustersMessa
  * //         ToDbClusterArn: "STRING_VALUE",
  * //         IsDataLossAllowed: true || false,
  * //       },
+ * //       TagList: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
  * //     },
  * //   ],
  * // };
@@ -140,9 +146,7 @@ export class DescribeGlobalClustersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +158,16 @@ export class DescribeGlobalClustersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeGlobalClustersCommand)
   .de(de_DescribeGlobalClustersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGlobalClustersMessage;
+      output: GlobalClustersMessage;
+    };
+    sdk: {
+      input: DescribeGlobalClustersCommandInput;
+      output: DescribeGlobalClustersCommandOutput;
+    };
+  };
+}

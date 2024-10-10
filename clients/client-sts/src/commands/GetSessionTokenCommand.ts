@@ -164,9 +164,7 @@ export class GetSessionTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: STSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -178,4 +176,16 @@ export class GetSessionTokenCommand extends $Command
   .f(void 0, GetSessionTokenResponseFilterSensitiveLog)
   .ser(se_GetSessionTokenCommand)
   .de(de_GetSessionTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSessionTokenRequest;
+      output: GetSessionTokenResponse;
+    };
+    sdk: {
+      input: GetSessionTokenCommandInput;
+      output: GetSessionTokenCommandOutput;
+    };
+  };
+}

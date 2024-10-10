@@ -1113,9 +1113,8 @@ export type ConstraintViolationExceptionReason =
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  * @public
@@ -1893,6 +1892,7 @@ export type PolicyTypeStatus = (typeof PolicyTypeStatus)[keyof typeof PolicyType
 export const PolicyType = {
   AISERVICES_OPT_OUT_POLICY: "AISERVICES_OPT_OUT_POLICY",
   BACKUP_POLICY: "BACKUP_POLICY",
+  CHATBOT_POLICY: "CHATBOT_POLICY",
   SERVICE_CONTROL_POLICY: "SERVICE_CONTROL_POLICY",
   TAG_POLICY: "TAG_POLICY",
 } as const;
@@ -2173,7 +2173,7 @@ export interface CreatePolicyRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
@@ -2183,12 +2183,17 @@ export interface CreatePolicyRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -2629,6 +2634,7 @@ export interface DescribeCreateAccountStatusResponse {
 export const EffectivePolicyType = {
   AISERVICES_OPT_OUT_POLICY: "AISERVICES_OPT_OUT_POLICY",
   BACKUP_POLICY: "BACKUP_POLICY",
+  CHATBOT_POLICY: "CHATBOT_POLICY",
   TAG_POLICY: "TAG_POLICY",
 } as const;
 
@@ -2647,17 +2653,22 @@ export interface DescribeEffectivePolicyRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
    *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html">BACKUP_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
    *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -2766,7 +2777,8 @@ export interface DescribeOrganizationResponse {
    *          <important>
    *             <p>The <code>AvailablePolicyTypes</code> part of the response is deprecated, and you
    *                 shouldn't use it in your apps. It doesn't include any policy type supported by Organizations
-   *                 other than SCPs. To determine which policy types are enabled in your organization,
+   *                 other than SCPs. In the China (Ningxia) Region, no policy type is included.
+   *                 To determine which policy types are enabled in your organization,
    *                 use the <code>
    *                   <a>ListRoots</a>
    *                </code> operation.</p>
@@ -2974,7 +2986,7 @@ export interface DisablePolicyTypeRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
@@ -2984,12 +2996,17 @@ export interface DisablePolicyTypeRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -3115,7 +3132,7 @@ export interface EnablePolicyTypeRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
@@ -3125,12 +3142,17 @@ export interface EnablePolicyTypeRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -4153,7 +4175,7 @@ export interface ListPoliciesRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
@@ -4163,12 +4185,17 @@ export interface ListPoliciesRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -4257,7 +4284,7 @@ export interface ListPoliciesForTargetRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
@@ -4267,12 +4294,17 @@ export interface ListPoliciesForTargetRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">SERVICE_CONTROL_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
    *                </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">TAG_POLICY</a>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html">CHATBOT_POLICY</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a>
    *                </p>
    *             </li>
    *          </ul>

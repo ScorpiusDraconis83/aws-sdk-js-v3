@@ -249,6 +249,13 @@ export interface StartAssetBundleImportJobCommandOutput extends StartAssetBundle
  *         Name: "STRING_VALUE",
  *       },
  *     ],
+ *     Folders: [ // AssetBundleImportJobFolderOverrideParametersList
+ *       { // AssetBundleImportJobFolderOverrideParameters
+ *         FolderId: "STRING_VALUE", // required
+ *         Name: "STRING_VALUE",
+ *         ParentFolderArn: "STRING_VALUE",
+ *       },
+ *     ],
  *   },
  *   FailureAction: "DO_NOTHING" || "ROLLBACK",
  *   OverridePermissions: { // AssetBundleImportJobOverridePermissions
@@ -330,6 +337,12 @@ export interface StartAssetBundleImportJobCommandOutput extends StartAssetBundle
  *         },
  *       },
  *     ],
+ *     Folders: [ // AssetBundleImportJobFolderOverridePermissionsList
+ *       { // AssetBundleImportJobFolderOverridePermissions
+ *         FolderIds: "<AssetBundleRestrictiveResourceIdList>", // required
+ *         Permissions: "<AssetBundleResourcePermissions>",
+ *       },
+ *     ],
  *   },
  *   OverrideTags: { // AssetBundleImportJobOverrideTags
  *     VPCConnections: [ // AssetBundleImportJobVPCConnectionOverrideTagsList
@@ -390,6 +403,12 @@ export interface StartAssetBundleImportJobCommandOutput extends StartAssetBundle
  *     Dashboards: [ // AssetBundleImportJobDashboardOverrideTagsList
  *       { // AssetBundleImportJobDashboardOverrideTags
  *         DashboardIds: "<AssetBundleRestrictiveResourceIdList>", // required
+ *         Tags: "<TagList>", // required
+ *       },
+ *     ],
+ *     Folders: [ // AssetBundleImportJobFolderOverrideTagsList
+ *       { // AssetBundleImportJobFolderOverrideTags
+ *         FolderIds: "<AssetBundleRestrictiveResourceIdList>", // required
  *         Tags: "<TagList>", // required
  *       },
  *     ],
@@ -455,9 +474,7 @@ export class StartAssetBundleImportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -469,4 +486,16 @@ export class StartAssetBundleImportJobCommand extends $Command
   .f(StartAssetBundleImportJobRequestFilterSensitiveLog, void 0)
   .ser(se_StartAssetBundleImportJobCommand)
   .de(de_StartAssetBundleImportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartAssetBundleImportJobRequest;
+      output: StartAssetBundleImportJobResponse;
+    };
+    sdk: {
+      input: StartAssetBundleImportJobCommandInput;
+      output: StartAssetBundleImportJobCommandOutput;
+    };
+  };
+}

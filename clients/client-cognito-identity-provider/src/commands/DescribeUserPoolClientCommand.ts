@@ -166,9 +166,7 @@ export class DescribeUserPoolClientCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -180,4 +178,16 @@ export class DescribeUserPoolClientCommand extends $Command
   .f(DescribeUserPoolClientRequestFilterSensitiveLog, DescribeUserPoolClientResponseFilterSensitiveLog)
   .ser(se_DescribeUserPoolClientCommand)
   .de(de_DescribeUserPoolClientCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserPoolClientRequest;
+      output: DescribeUserPoolClientResponse;
+    };
+    sdk: {
+      input: DescribeUserPoolClientCommandInput;
+      output: DescribeUserPoolClientCommandOutput;
+    };
+  };
+}

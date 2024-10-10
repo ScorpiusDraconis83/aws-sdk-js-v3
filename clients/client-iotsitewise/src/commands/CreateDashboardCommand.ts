@@ -95,9 +95,7 @@ export class CreateDashboardCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class CreateDashboardCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDashboardCommand)
   .de(de_CreateDashboardCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDashboardRequest;
+      output: CreateDashboardResponse;
+    };
+    sdk: {
+      input: CreateDashboardCommandInput;
+      output: CreateDashboardCommandOutput;
+    };
+  };
+}

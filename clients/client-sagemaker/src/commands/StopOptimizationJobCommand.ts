@@ -66,9 +66,7 @@ export class StopOptimizationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -80,4 +78,16 @@ export class StopOptimizationJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopOptimizationJobCommand)
   .de(de_StopOptimizationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopOptimizationJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopOptimizationJobCommandInput;
+      output: StopOptimizationJobCommandOutput;
+    };
+  };
+}

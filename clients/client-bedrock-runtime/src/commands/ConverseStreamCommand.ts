@@ -232,6 +232,7 @@ export interface ConverseStreamCommandOutput extends ConverseStreamResponse, __M
  * //                   { // GuardrailContentFilter
  * //                     type: "INSULTS" || "HATE" || "SEXUAL" || "VIOLENCE" || "MISCONDUCT" || "PROMPT_ATTACK", // required
  * //                     confidence: "NONE" || "LOW" || "MEDIUM" || "HIGH", // required
+ * //                     filterStrength: "NONE" || "LOW" || "MEDIUM" || "HIGH",
  * //                     action: "BLOCKED", // required
  * //                   },
  * //                 ],
@@ -278,6 +279,23 @@ export interface ConverseStreamCommandOutput extends ConverseStreamResponse, __M
  * //                   },
  * //                 ],
  * //               },
+ * //               invocationMetrics: { // GuardrailInvocationMetrics
+ * //                 guardrailProcessingLatency: Number("long"),
+ * //                 usage: { // GuardrailUsage
+ * //                   topicPolicyUnits: Number("int"), // required
+ * //                   contentPolicyUnits: Number("int"), // required
+ * //                   wordPolicyUnits: Number("int"), // required
+ * //                   sensitiveInformationPolicyUnits: Number("int"), // required
+ * //                   sensitiveInformationPolicyFreeUnits: Number("int"), // required
+ * //                   contextualGroundingPolicyUnits: Number("int"), // required
+ * //                 },
+ * //                 guardrailCoverage: { // GuardrailCoverage
+ * //                   textCharacters: { // GuardrailTextCharactersCoverage
+ * //                     guarded: Number("int"),
+ * //                     total: Number("int"),
+ * //                   },
+ * //                 },
+ * //               },
  * //             },
  * //           },
  * //           outputAssessments: { // GuardrailAssessmentListMap
@@ -297,6 +315,7 @@ export interface ConverseStreamCommandOutput extends ConverseStreamResponse, __M
  * //                     {
  * //                       type: "INSULTS" || "HATE" || "SEXUAL" || "VIOLENCE" || "MISCONDUCT" || "PROMPT_ATTACK", // required
  * //                       confidence: "NONE" || "LOW" || "MEDIUM" || "HIGH", // required
+ * //                       filterStrength: "NONE" || "LOW" || "MEDIUM" || "HIGH",
  * //                       action: "BLOCKED", // required
  * //                     },
  * //                   ],
@@ -342,6 +361,23 @@ export interface ConverseStreamCommandOutput extends ConverseStreamResponse, __M
  * //                       action: "BLOCKED" || "NONE", // required
  * //                     },
  * //                   ],
+ * //                 },
+ * //                 invocationMetrics: {
+ * //                   guardrailProcessingLatency: Number("long"),
+ * //                   usage: {
+ * //                     topicPolicyUnits: Number("int"), // required
+ * //                     contentPolicyUnits: Number("int"), // required
+ * //                     wordPolicyUnits: Number("int"), // required
+ * //                     sensitiveInformationPolicyUnits: Number("int"), // required
+ * //                     sensitiveInformationPolicyFreeUnits: Number("int"), // required
+ * //                     contextualGroundingPolicyUnits: Number("int"), // required
+ * //                   },
+ * //                   guardrailCoverage: {
+ * //                     textCharacters: {
+ * //                       guarded: Number("int"),
+ * //                       total: Number("int"),
+ * //                     },
+ * //                   },
  * //                 },
  * //               },
  * //             ],
@@ -420,9 +456,7 @@ export class ConverseStreamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockRuntimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -441,4 +475,16 @@ export class ConverseStreamCommand extends $Command
   .f(void 0, ConverseStreamResponseFilterSensitiveLog)
   .ser(se_ConverseStreamCommand)
   .de(de_ConverseStreamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConverseStreamRequest;
+      output: ConverseStreamResponse;
+    };
+    sdk: {
+      input: ConverseStreamCommandInput;
+      output: ConverseStreamCommandOutput;
+    };
+  };
+}

@@ -274,9 +274,7 @@ export class GetTestSuiteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppTestClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -288,4 +286,16 @@ export class GetTestSuiteCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTestSuiteCommand)
   .de(de_GetTestSuiteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTestSuiteRequest;
+      output: GetTestSuiteResponse;
+    };
+    sdk: {
+      input: GetTestSuiteCommandInput;
+      output: GetTestSuiteCommandOutput;
+    };
+  };
+}

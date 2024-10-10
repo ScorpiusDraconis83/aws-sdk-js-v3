@@ -85,9 +85,7 @@ export class AssociateUserSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class AssociateUserSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateUserSettingsCommand)
   .de(de_AssociateUserSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateUserSettingsRequest;
+      output: AssociateUserSettingsResponse;
+    };
+    sdk: {
+      input: AssociateUserSettingsCommandInput;
+      output: AssociateUserSettingsCommandOutput;
+    };
+  };
+}

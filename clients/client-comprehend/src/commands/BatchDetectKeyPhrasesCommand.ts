@@ -110,9 +110,7 @@ export class BatchDetectKeyPhrasesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class BatchDetectKeyPhrasesCommand extends $Command
   .f(BatchDetectKeyPhrasesRequestFilterSensitiveLog, BatchDetectKeyPhrasesResponseFilterSensitiveLog)
   .ser(se_BatchDetectKeyPhrasesCommand)
   .de(de_BatchDetectKeyPhrasesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectKeyPhrasesRequest;
+      output: BatchDetectKeyPhrasesResponse;
+    };
+    sdk: {
+      input: BatchDetectKeyPhrasesCommandInput;
+      output: BatchDetectKeyPhrasesCommandOutput;
+    };
+  };
+}

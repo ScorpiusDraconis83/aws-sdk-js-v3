@@ -82,9 +82,7 @@ export class DisassociateLexBotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DisassociateLexBotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateLexBotCommand)
   .de(de_DisassociateLexBotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateLexBotRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateLexBotCommandInput;
+      output: DisassociateLexBotCommandOutput;
+    };
+  };
+}

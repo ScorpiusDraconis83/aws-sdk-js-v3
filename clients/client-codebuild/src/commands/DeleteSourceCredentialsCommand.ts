@@ -71,9 +71,7 @@ export class DeleteSourceCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -85,4 +83,16 @@ export class DeleteSourceCredentialsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSourceCredentialsCommand)
   .de(de_DeleteSourceCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSourceCredentialsInput;
+      output: DeleteSourceCredentialsOutput;
+    };
+    sdk: {
+      input: DeleteSourceCredentialsCommandInput;
+      output: DeleteSourceCredentialsCommandOutput;
+    };
+  };
+}

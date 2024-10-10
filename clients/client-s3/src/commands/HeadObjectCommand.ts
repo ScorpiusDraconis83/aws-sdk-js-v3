@@ -58,7 +58,7 @@ export interface HeadObjectCommandOutput extends HeadObjectOutput, __MetadataBea
  *                         use <code>HEAD</code>, you must have the <code>s3:GetObject</code> permission. You need the relevant read object (or version) permission for this operation.
  *                         For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html">Actions, resources, and condition
  *                            keys for Amazon S3</a> in the <i>Amazon S3
- *                               User Guide</i>.</p>
+ *                               User Guide</i>. For more information about the permissions to S3 API operations by S3 resource types, see <a href="/AmazonS3/latest/userguide/using-with-s3-policy-actions.html">Required permissions for Amazon S3 API operations</a> in the <i>Amazon S3 User Guide</i>.</p>
  *                      <p>If the object you request doesn't exist, the error that
  *                         Amazon S3 returns depends on whether you also have the <code>s3:ListBucket</code> permission.</p>
  *                      <ul>
@@ -80,6 +80,9 @@ export interface HeadObjectCommandOutput extends HeadObjectOutput, __MetadataBea
  * Amazon Web Services CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html">
  *                            <code>CreateSession</code>
  *                         </a>.</p>
+ *                      <p>If you enable <code>x-amz-checksum-mode</code> in the request and the object is encrypted with
+ *                         Amazon Web Services Key Management Service (Amazon Web Services KMS), you must also have the
+ *                         <code>kms:GenerateDataKey</code> and <code>kms:Decrypt</code> permissions in IAM identity-based policies and KMS key policies for the KMS key to retrieve the checksum of the object.</p>
  *                   </li>
  *                </ul>
  *             </dd>
@@ -119,7 +122,8 @@ export interface HeadObjectCommandOutput extends HeadObjectOutput, __MetadataBea
  *                   User Guide</i>.</p>
  *                <note>
  *                   <p>
- *                      <b>Directory bucket permissions</b> - For directory buckets, only server-side encryption with Amazon S3 managed keys (SSE-S3) (<code>AES256</code>) is supported.</p>
+ *                      <b>Directory bucket </b> - For directory buckets, there are only two supported options for server-side encryption: SSE-S3 and SSE-KMS. SSE-C isn't supported. For more
+ *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>. </p>
  *                </note>
  *             </dd>
  *             <dt>Versioning</dt>
@@ -308,4 +312,16 @@ export class HeadObjectCommand extends $Command
   .f(HeadObjectRequestFilterSensitiveLog, HeadObjectOutputFilterSensitiveLog)
   .ser(se_HeadObjectCommand)
   .de(de_HeadObjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HeadObjectRequest;
+      output: HeadObjectOutput;
+    };
+    sdk: {
+      input: HeadObjectCommandInput;
+      output: HeadObjectCommandOutput;
+    };
+  };
+}

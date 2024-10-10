@@ -111,9 +111,7 @@ export class ListWorkflowExecutionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ImagebuilderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class ListWorkflowExecutionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListWorkflowExecutionsCommand)
   .de(de_ListWorkflowExecutionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWorkflowExecutionsRequest;
+      output: ListWorkflowExecutionsResponse;
+    };
+    sdk: {
+      input: ListWorkflowExecutionsCommandInput;
+      output: ListWorkflowExecutionsCommandOutput;
+    };
+  };
+}

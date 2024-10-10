@@ -132,9 +132,7 @@ export class VerifySoftwareTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class VerifySoftwareTokenCommand extends $Command
   .f(VerifySoftwareTokenRequestFilterSensitiveLog, VerifySoftwareTokenResponseFilterSensitiveLog)
   .ser(se_VerifySoftwareTokenCommand)
   .de(de_VerifySoftwareTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifySoftwareTokenRequest;
+      output: VerifySoftwareTokenResponse;
+    };
+    sdk: {
+      input: VerifySoftwareTokenCommandInput;
+      output: VerifySoftwareTokenCommandOutput;
+    };
+  };
+}

@@ -140,9 +140,7 @@ export class DescribeApplicationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class DescribeApplicationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeApplicationsCommand)
   .de(de_DescribeApplicationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeApplicationsMessage;
+      output: ApplicationDescriptionsMessage;
+    };
+    sdk: {
+      input: DescribeApplicationsCommandInput;
+      output: DescribeApplicationsCommandOutput;
+    };
+  };
+}

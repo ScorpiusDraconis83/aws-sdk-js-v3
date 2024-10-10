@@ -198,9 +198,7 @@ export class DescribeBrokerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MqClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -212,4 +210,16 @@ export class DescribeBrokerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeBrokerCommand)
   .de(de_DescribeBrokerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBrokerRequest;
+      output: DescribeBrokerResponse;
+    };
+    sdk: {
+      input: DescribeBrokerCommandInput;
+      output: DescribeBrokerCommandOutput;
+    };
+  };
+}

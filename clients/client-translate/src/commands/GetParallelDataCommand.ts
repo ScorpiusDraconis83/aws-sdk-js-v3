@@ -119,9 +119,7 @@ export class GetParallelDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TranslateClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class GetParallelDataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetParallelDataCommand)
   .de(de_GetParallelDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetParallelDataRequest;
+      output: GetParallelDataResponse;
+    };
+    sdk: {
+      input: GetParallelDataCommandInput;
+      output: GetParallelDataCommandOutput;
+    };
+  };
+}

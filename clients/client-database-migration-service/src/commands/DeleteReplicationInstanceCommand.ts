@@ -206,9 +206,7 @@ export class DeleteReplicationInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -220,4 +218,16 @@ export class DeleteReplicationInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteReplicationInstanceCommand)
   .de(de_DeleteReplicationInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReplicationInstanceMessage;
+      output: DeleteReplicationInstanceResponse;
+    };
+    sdk: {
+      input: DeleteReplicationInstanceCommandInput;
+      output: DeleteReplicationInstanceCommandOutput;
+    };
+  };
+}

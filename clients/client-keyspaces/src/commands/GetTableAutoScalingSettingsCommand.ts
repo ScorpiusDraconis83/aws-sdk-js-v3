@@ -169,9 +169,7 @@ export class GetTableAutoScalingSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KeyspacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -183,4 +181,16 @@ export class GetTableAutoScalingSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTableAutoScalingSettingsCommand)
   .de(de_GetTableAutoScalingSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTableAutoScalingSettingsRequest;
+      output: GetTableAutoScalingSettingsResponse;
+    };
+    sdk: {
+      input: GetTableAutoScalingSettingsCommandInput;
+      output: GetTableAutoScalingSettingsCommandOutput;
+    };
+  };
+}

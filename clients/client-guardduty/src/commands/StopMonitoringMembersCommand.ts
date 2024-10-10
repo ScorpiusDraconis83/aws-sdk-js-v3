@@ -84,9 +84,7 @@ export class StopMonitoringMembersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class StopMonitoringMembersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopMonitoringMembersCommand)
   .de(de_StopMonitoringMembersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopMonitoringMembersRequest;
+      output: StopMonitoringMembersResponse;
+    };
+    sdk: {
+      input: StopMonitoringMembersCommandInput;
+      output: StopMonitoringMembersCommandOutput;
+    };
+  };
+}

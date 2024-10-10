@@ -132,9 +132,7 @@ export class AdminListDevicesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -146,4 +144,16 @@ export class AdminListDevicesCommand extends $Command
   .f(AdminListDevicesRequestFilterSensitiveLog, AdminListDevicesResponseFilterSensitiveLog)
   .ser(se_AdminListDevicesCommand)
   .de(de_AdminListDevicesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminListDevicesRequest;
+      output: AdminListDevicesResponse;
+    };
+    sdk: {
+      input: AdminListDevicesCommandInput;
+      output: AdminListDevicesCommandOutput;
+    };
+  };
+}

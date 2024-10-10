@@ -52,12 +52,12 @@ export interface PurchaseReservedInstancesOfferingCommandOutput
  * const input = { // PurchaseReservedInstancesOfferingRequest
  *   InstanceCount: Number("int"), // required
  *   ReservedInstancesOfferingId: "STRING_VALUE", // required
+ *   PurchaseTime: new Date("TIMESTAMP"),
  *   DryRun: true || false,
  *   LimitPrice: { // ReservedInstanceLimitPrice
  *     Amount: Number("double"),
  *     CurrencyCode: "USD",
  *   },
- *   PurchaseTime: new Date("TIMESTAMP"),
  * };
  * const command = new PurchaseReservedInstancesOfferingCommand(input);
  * const response = await client.send(command);
@@ -86,9 +86,7 @@ export class PurchaseReservedInstancesOfferingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class PurchaseReservedInstancesOfferingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PurchaseReservedInstancesOfferingCommand)
   .de(de_PurchaseReservedInstancesOfferingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseReservedInstancesOfferingRequest;
+      output: PurchaseReservedInstancesOfferingResult;
+    };
+    sdk: {
+      input: PurchaseReservedInstancesOfferingCommandInput;
+      output: PurchaseReservedInstancesOfferingCommandOutput;
+    };
+  };
+}

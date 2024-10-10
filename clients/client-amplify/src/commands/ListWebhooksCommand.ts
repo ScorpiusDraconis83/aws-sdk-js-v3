@@ -90,9 +90,7 @@ export class ListWebhooksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ListWebhooksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListWebhooksCommand)
   .de(de_ListWebhooksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWebhooksRequest;
+      output: ListWebhooksResult;
+    };
+    sdk: {
+      input: ListWebhooksCommandInput;
+      output: ListWebhooksCommandOutput;
+    };
+  };
+}

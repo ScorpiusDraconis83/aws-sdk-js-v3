@@ -594,9 +594,7 @@ export class DescribeDeliveryStreamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FirehoseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -608,4 +606,16 @@ export class DescribeDeliveryStreamCommand extends $Command
   .f(void 0, DescribeDeliveryStreamOutputFilterSensitiveLog)
   .ser(se_DescribeDeliveryStreamCommand)
   .de(de_DescribeDeliveryStreamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDeliveryStreamInput;
+      output: DescribeDeliveryStreamOutput;
+    };
+    sdk: {
+      input: DescribeDeliveryStreamCommandInput;
+      output: DescribeDeliveryStreamCommandOutput;
+    };
+  };
+}

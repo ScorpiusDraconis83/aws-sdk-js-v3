@@ -246,9 +246,19 @@ export interface UpdateGlobalTableSettingsCommandOutput extends UpdateGlobalTabl
  *  <p>The specified replica is no longer part of the global table.</p>
  *
  * @throws {@link ResourceInUseException} (client fault)
- *  <p>The operation conflicts with the resource's availability. For example, you
- *             attempted to recreate an existing table, or tried to delete a table currently in the
- *                 <code>CREATING</code> state.</p>
+ *  <p>The operation conflicts with the resource's availability. For example:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You attempted to recreate an existing table.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a table currently in the <code>CREATING</code> state.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a resource that was already being updated.</p>
+ *             </li>
+ *          </ul>
+ *          <p>When appropriate, wait for the ongoing update to complete and attempt the request again.</p>
  *
  * @throws {@link DynamoDBServiceException}
  * <p>Base exception class for all service exceptions from DynamoDB service.</p>
@@ -263,9 +273,7 @@ export class UpdateGlobalTableSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DynamoDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -277,4 +285,16 @@ export class UpdateGlobalTableSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateGlobalTableSettingsCommand)
   .de(de_UpdateGlobalTableSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGlobalTableSettingsInput;
+      output: UpdateGlobalTableSettingsOutput;
+    };
+    sdk: {
+      input: UpdateGlobalTableSettingsCommandInput;
+      output: UpdateGlobalTableSettingsCommandOutput;
+    };
+  };
+}

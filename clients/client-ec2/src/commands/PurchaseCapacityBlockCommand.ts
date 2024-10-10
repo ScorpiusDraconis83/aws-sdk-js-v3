@@ -90,6 +90,7 @@ export interface PurchaseCapacityBlockCommandOutput extends PurchaseCapacityBloc
  * //       },
  * //     ],
  * //     ReservationType: "default" || "capacity-block",
+ * //     UnusedReservationBillingOwnerId: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -114,9 +115,7 @@ export class PurchaseCapacityBlockCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +127,16 @@ export class PurchaseCapacityBlockCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PurchaseCapacityBlockCommand)
   .de(de_PurchaseCapacityBlockCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseCapacityBlockRequest;
+      output: PurchaseCapacityBlockResult;
+    };
+    sdk: {
+      input: PurchaseCapacityBlockCommandInput;
+      output: PurchaseCapacityBlockCommandOutput;
+    };
+  };
+}

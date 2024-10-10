@@ -398,9 +398,7 @@ export class UpdateElasticsearchDomainConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -412,4 +410,16 @@ export class UpdateElasticsearchDomainConfigCommand extends $Command
   .f(UpdateElasticsearchDomainConfigRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateElasticsearchDomainConfigCommand)
   .de(de_UpdateElasticsearchDomainConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateElasticsearchDomainConfigRequest;
+      output: UpdateElasticsearchDomainConfigResponse;
+    };
+    sdk: {
+      input: UpdateElasticsearchDomainConfigCommandInput;
+      output: UpdateElasticsearchDomainConfigCommandOutput;
+    };
+  };
+}

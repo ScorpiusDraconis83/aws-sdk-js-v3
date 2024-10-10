@@ -37,22 +37,22 @@ export interface ReplaceNetworkAclEntryCommandOutput extends __MetadataBearer {}
  * // const { EC2Client, ReplaceNetworkAclEntryCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ReplaceNetworkAclEntryRequest
- *   CidrBlock: "STRING_VALUE",
  *   DryRun: true || false,
+ *   NetworkAclId: "STRING_VALUE", // required
+ *   RuleNumber: Number("int"), // required
+ *   Protocol: "STRING_VALUE", // required
+ *   RuleAction: "allow" || "deny", // required
  *   Egress: true || false, // required
+ *   CidrBlock: "STRING_VALUE",
+ *   Ipv6CidrBlock: "STRING_VALUE",
  *   IcmpTypeCode: { // IcmpTypeCode
  *     Code: Number("int"),
  *     Type: Number("int"),
  *   },
- *   Ipv6CidrBlock: "STRING_VALUE",
- *   NetworkAclId: "STRING_VALUE", // required
  *   PortRange: { // PortRange
  *     From: Number("int"),
  *     To: Number("int"),
  *   },
- *   Protocol: "STRING_VALUE", // required
- *   RuleAction: "allow" || "deny", // required
- *   RuleNumber: Number("int"), // required
  * };
  * const command = new ReplaceNetworkAclEntryCommand(input);
  * const response = await client.send(command);
@@ -99,9 +99,7 @@ export class ReplaceNetworkAclEntryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class ReplaceNetworkAclEntryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ReplaceNetworkAclEntryCommand)
   .de(de_ReplaceNetworkAclEntryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReplaceNetworkAclEntryRequest;
+      output: {};
+    };
+    sdk: {
+      input: ReplaceNetworkAclEntryCommandInput;
+      output: ReplaceNetworkAclEntryCommandOutput;
+    };
+  };
+}

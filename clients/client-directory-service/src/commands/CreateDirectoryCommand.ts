@@ -104,9 +104,7 @@ export class CreateDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectoryServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class CreateDirectoryCommand extends $Command
   .f(CreateDirectoryRequestFilterSensitiveLog, void 0)
   .ser(se_CreateDirectoryCommand)
   .de(de_CreateDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDirectoryRequest;
+      output: CreateDirectoryResult;
+    };
+    sdk: {
+      input: CreateDirectoryCommandInput;
+      output: CreateDirectoryCommandOutput;
+    };
+  };
+}

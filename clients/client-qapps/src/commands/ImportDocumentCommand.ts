@@ -145,9 +145,7 @@ export class ImportDocumentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +157,16 @@ export class ImportDocumentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ImportDocumentCommand)
   .de(de_ImportDocumentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportDocumentInput;
+      output: ImportDocumentOutput;
+    };
+    sdk: {
+      input: ImportDocumentCommandInput;
+      output: ImportDocumentCommandOutput;
+    };
+  };
+}

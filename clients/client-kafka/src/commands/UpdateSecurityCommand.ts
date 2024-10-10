@@ -116,9 +116,7 @@ export class UpdateSecurityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KafkaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class UpdateSecurityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateSecurityCommand)
   .de(de_UpdateSecurityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSecurityRequest;
+      output: UpdateSecurityResponse;
+    };
+    sdk: {
+      input: UpdateSecurityCommandInput;
+      output: UpdateSecurityCommandOutput;
+    };
+  };
+}

@@ -81,9 +81,7 @@ export class DeleteTargetAccountConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FisClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DeleteTargetAccountConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteTargetAccountConfigurationCommand)
   .de(de_DeleteTargetAccountConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTargetAccountConfigurationRequest;
+      output: DeleteTargetAccountConfigurationResponse;
+    };
+    sdk: {
+      input: DeleteTargetAccountConfigurationCommandInput;
+      output: DeleteTargetAccountConfigurationCommandOutput;
+    };
+  };
+}

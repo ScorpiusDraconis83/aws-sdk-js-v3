@@ -97,9 +97,7 @@ export class ListResourceDelegatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkMailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ListResourceDelegatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListResourceDelegatesCommand)
   .de(de_ListResourceDelegatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResourceDelegatesRequest;
+      output: ListResourceDelegatesResponse;
+    };
+    sdk: {
+      input: ListResourceDelegatesCommandInput;
+      output: ListResourceDelegatesCommandOutput;
+    };
+  };
+}

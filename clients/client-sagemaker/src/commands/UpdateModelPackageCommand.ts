@@ -70,6 +70,7 @@ export interface UpdateModelPackageCommandOutput extends UpdateModelPackageOutpu
  *               HubAccessConfig: { // InferenceHubAccessConfig
  *                 HubContentArn: "STRING_VALUE", // required
  *               },
+ *               ManifestS3Uri: "STRING_VALUE",
  *             },
  *           },
  *           ProductId: "STRING_VALUE",
@@ -121,6 +122,7 @@ export interface UpdateModelPackageCommandOutput extends UpdateModelPackageOutpu
  *             HubAccessConfig: {
  *               HubContentArn: "STRING_VALUE", // required
  *             },
+ *             ManifestS3Uri: "STRING_VALUE",
  *           },
  *         },
  *         ProductId: "STRING_VALUE",
@@ -190,9 +192,7 @@ export class UpdateModelPackageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -204,4 +204,16 @@ export class UpdateModelPackageCommand extends $Command
   .f(UpdateModelPackageInputFilterSensitiveLog, void 0)
   .ser(se_UpdateModelPackageCommand)
   .de(de_UpdateModelPackageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateModelPackageInput;
+      output: UpdateModelPackageOutput;
+    };
+    sdk: {
+      input: UpdateModelPackageCommandInput;
+      output: UpdateModelPackageCommandOutput;
+    };
+  };
+}

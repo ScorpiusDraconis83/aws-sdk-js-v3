@@ -109,9 +109,7 @@ export class ListMeetingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class ListMeetingsCommand extends $Command
   .f(void 0, ListMeetingsResponseFilterSensitiveLog)
   .ser(se_ListMeetingsCommand)
   .de(de_ListMeetingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMeetingsRequest;
+      output: ListMeetingsResponse;
+    };
+    sdk: {
+      input: ListMeetingsCommandInput;
+      output: ListMeetingsCommandOutput;
+    };
+  };
+}

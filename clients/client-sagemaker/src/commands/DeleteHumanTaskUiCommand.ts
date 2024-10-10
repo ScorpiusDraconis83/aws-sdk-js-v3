@@ -70,9 +70,7 @@ export class DeleteHumanTaskUiCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -84,4 +82,16 @@ export class DeleteHumanTaskUiCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteHumanTaskUiCommand)
   .de(de_DeleteHumanTaskUiCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteHumanTaskUiRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteHumanTaskUiCommandInput;
+      output: DeleteHumanTaskUiCommandOutput;
+    };
+  };
+}

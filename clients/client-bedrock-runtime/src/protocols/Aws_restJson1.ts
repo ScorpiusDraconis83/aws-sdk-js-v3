@@ -15,6 +15,7 @@ import {
   expectNonNull as __expectNonNull,
   expectObject as __expectObject,
   expectString as __expectString,
+  isSerializableHeaderValue,
   limitedParseDouble as __limitedParseDouble,
   map,
   resolvedPath as __resolvedPath,
@@ -246,6 +247,7 @@ export const de_ApplyGuardrailCommand = async (
   const doc = take(data, {
     action: __expectString,
     assessments: (_) => de_GuardrailAssessmentList(_, context),
+    guardrailCoverage: _json,
     outputs: _json,
     usage: _json,
   });
@@ -1201,6 +1203,7 @@ const de_GuardrailAssessment = (output: any, context: __SerdeContext): Guardrail
   return take(output, {
     contentPolicy: _json,
     contextualGroundingPolicy: (_: any) => de_GuardrailContextualGroundingPolicyAssessment(_, context),
+    invocationMetrics: _json,
     sensitiveInformationPolicy: _json,
     topicPolicy: _json,
     wordPolicy: _json,
@@ -1299,9 +1302,13 @@ const de_GuardrailContextualGroundingPolicyAssessment = (
 
 // de_GuardrailConverseTextBlock omitted.
 
+// de_GuardrailCoverage omitted.
+
 // de_GuardrailCustomWord omitted.
 
 // de_GuardrailCustomWordList omitted.
+
+// de_GuardrailInvocationMetrics omitted.
 
 // de_GuardrailManagedWord omitted.
 
@@ -1320,6 +1327,8 @@ const de_GuardrailContextualGroundingPolicyAssessment = (
 // de_GuardrailRegexFilterList omitted.
 
 // de_GuardrailSensitiveInformationPolicyAssessment omitted.
+
+// de_GuardrailTextCharactersCoverage omitted.
 
 // de_GuardrailTopic omitted.
 
@@ -1480,13 +1489,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _a = "accept";
 const _cT = "contentType";

@@ -149,9 +149,7 @@ export class StopPipelineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OSISClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +161,16 @@ export class StopPipelineCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopPipelineCommand)
   .de(de_StopPipelineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopPipelineRequest;
+      output: StopPipelineResponse;
+    };
+    sdk: {
+      input: StopPipelineCommandInput;
+      output: StopPipelineCommandOutput;
+    };
+  };
+}

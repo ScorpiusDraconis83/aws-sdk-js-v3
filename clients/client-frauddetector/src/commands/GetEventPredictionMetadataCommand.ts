@@ -163,9 +163,7 @@ export class GetEventPredictionMetadataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class GetEventPredictionMetadataCommand extends $Command
   .f(void 0, GetEventPredictionMetadataResultFilterSensitiveLog)
   .ser(se_GetEventPredictionMetadataCommand)
   .de(de_GetEventPredictionMetadataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEventPredictionMetadataRequest;
+      output: GetEventPredictionMetadataResult;
+    };
+    sdk: {
+      input: GetEventPredictionMetadataCommandInput;
+      output: GetEventPredictionMetadataCommandOutput;
+    };
+  };
+}

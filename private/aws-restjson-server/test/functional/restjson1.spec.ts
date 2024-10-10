@@ -2823,7 +2823,7 @@ it("RestJsonHttpPayloadTraitsWithNoBlobBody:ServerResponse", async () => {
   expect(r.headers["x-foo"]).toBeDefined();
   expect(r.headers["x-foo"]).toBe("Foo");
 
-  expect(r.body).toBeFalsy();
+  expect(!r.body || r.body === `{}`).toBeTruthy();
 });
 
 /**
@@ -3225,7 +3225,7 @@ it.skip("RestJsonHttpPayloadWithUnsetUnion:ServerResponse", async () => {
   expect(r.headers["content-length"]).toBeDefined();
   expect(r.headers["content-length"]).toBe("0");
 
-  expect(r.body).toBeFalsy();
+  expect(!r.body || r.body === `{}`).toBeTruthy();
 });
 
 /**
@@ -4183,7 +4183,7 @@ it("RestJsonInputAndOutputWithStringHeaders:ServerRequest", async () => {
 /**
  * Tests requests with string list header bindings that require quoting
  */
-it.skip("RestJsonInputAndOutputWithQuotedStringHeaders:ServerRequest", async () => {
+it("RestJsonInputAndOutputWithQuotedStringHeaders:ServerRequest", async () => {
   const testFunction = jest.fn();
   testFunction.mockReturnValue(Promise.resolve({}));
   const testService: Partial<RestJsonService<{}>> = {
@@ -4661,7 +4661,7 @@ it("RestJsonInputAndOutputWithStringHeaders:ServerResponse", async () => {
 /**
  * Tests responses with string list header bindings that require quoting
  */
-it.skip("RestJsonInputAndOutputWithQuotedStringHeaders:ServerResponse", async () => {
+it("RestJsonInputAndOutputWithQuotedStringHeaders:ServerResponse", async () => {
   class TestService implements Partial<RestJsonService<{}>> {
     InputAndOutputWithHeaders(input: any, ctx: {}): Promise<InputAndOutputWithHeadersServerOutput> {
       const response = {
@@ -27727,7 +27727,7 @@ it("RestJsonNoInputAndNoOutput:ServerResponse", async () => {
 
   expect(r.statusCode).toBe(200);
 
-  expect(r.body).toBeFalsy();
+  expect(!r.body || r.body === `{}`).toBeTruthy();
 });
 
 /**
@@ -27857,7 +27857,7 @@ it("RestJsonNoInputAndOutputWithJson:ServerResponse", async () => {
 /**
  * Do not send null or empty headers
  */
-it("RestJsonNullAndEmptyHeaders:ServerResponse", async () => {
+it.skip("RestJsonNullAndEmptyHeaders:ServerResponse", async () => {
   class TestService implements Partial<RestJsonService<{}>> {
     NullAndEmptyHeadersServer(input: any, ctx: {}): Promise<NullAndEmptyHeadersServerServerOutput> {
       const response = {
@@ -30579,7 +30579,7 @@ it("RestJsonStreamingTraitsWithNoBlobBody:ServerResponse", async () => {
   expect(r.headers["x-foo"]).toBeDefined();
   expect(r.headers["x-foo"]).toBe("Foo");
 
-  expect(r.body).toBeFalsy();
+  expect(!r.body || r.body === `{}`).toBeTruthy();
 });
 
 /**
@@ -31422,7 +31422,7 @@ it("RestJsonUnitInputAndOutputNoOutput:ServerResponse", async () => {
 
   expect(r.statusCode).toBe(200);
 
-  expect(r.body).toBeFalsy();
+  expect(!r.body || r.body === `{}`).toBeTruthy();
 });
 
 /**

@@ -88,9 +88,7 @@ export class GetFarmCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class GetFarmCommand extends $Command
   .f(void 0, GetFarmResponseFilterSensitiveLog)
   .ser(se_GetFarmCommand)
   .de(de_GetFarmCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFarmRequest;
+      output: GetFarmResponse;
+    };
+    sdk: {
+      input: GetFarmCommandInput;
+      output: GetFarmCommandOutput;
+    };
+  };
+}

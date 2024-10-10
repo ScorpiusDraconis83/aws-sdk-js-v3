@@ -100,9 +100,7 @@ export class ModifyVpcAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ModifyVpcAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyVpcAttributeCommand)
   .de(de_ModifyVpcAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifyVpcAttributeCommandInput;
+      output: ModifyVpcAttributeCommandOutput;
+    };
+  };
+}

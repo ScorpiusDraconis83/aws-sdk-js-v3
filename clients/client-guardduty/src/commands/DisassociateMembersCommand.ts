@@ -97,9 +97,7 @@ export class DisassociateMembersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class DisassociateMembersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateMembersCommand)
   .de(de_DisassociateMembersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateMembersRequest;
+      output: DisassociateMembersResponse;
+    };
+    sdk: {
+      input: DisassociateMembersCommandInput;
+      output: DisassociateMembersCommandOutput;
+    };
+  };
+}

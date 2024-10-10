@@ -105,9 +105,7 @@ export class GetRestoreTestingSelectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class GetRestoreTestingSelectionCommand extends $Command
   .f(void 0, GetRestoreTestingSelectionOutputFilterSensitiveLog)
   .ser(se_GetRestoreTestingSelectionCommand)
   .de(de_GetRestoreTestingSelectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRestoreTestingSelectionInput;
+      output: GetRestoreTestingSelectionOutput;
+    };
+    sdk: {
+      input: GetRestoreTestingSelectionCommandInput;
+      output: GetRestoreTestingSelectionCommandOutput;
+    };
+  };
+}

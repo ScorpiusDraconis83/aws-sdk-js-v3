@@ -165,9 +165,7 @@ export class GetCurrentUserDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class GetCurrentUserDataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetCurrentUserDataCommand)
   .de(de_GetCurrentUserDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCurrentUserDataRequest;
+      output: GetCurrentUserDataResponse;
+    };
+    sdk: {
+      input: GetCurrentUserDataCommandInput;
+      output: GetCurrentUserDataCommandOutput;
+    };
+  };
+}

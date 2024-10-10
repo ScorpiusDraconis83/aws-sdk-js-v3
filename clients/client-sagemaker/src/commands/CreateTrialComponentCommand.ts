@@ -115,9 +115,7 @@ export class CreateTrialComponentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class CreateTrialComponentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTrialComponentCommand)
   .de(de_CreateTrialComponentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTrialComponentRequest;
+      output: CreateTrialComponentResponse;
+    };
+    sdk: {
+      input: CreateTrialComponentCommandInput;
+      output: CreateTrialComponentCommandOutput;
+    };
+  };
+}

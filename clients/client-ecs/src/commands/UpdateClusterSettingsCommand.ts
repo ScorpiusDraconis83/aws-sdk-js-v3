@@ -166,9 +166,7 @@ export class UpdateClusterSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -180,4 +178,16 @@ export class UpdateClusterSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateClusterSettingsCommand)
   .de(de_UpdateClusterSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateClusterSettingsRequest;
+      output: UpdateClusterSettingsResponse;
+    };
+    sdk: {
+      input: UpdateClusterSettingsCommandInput;
+      output: UpdateClusterSettingsCommandOutput;
+    };
+  };
+}

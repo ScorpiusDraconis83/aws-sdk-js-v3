@@ -280,6 +280,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                   },
  *                 ],
  *               },
+ *               CommitMode: "AUTO" || "MANUAL",
  *             },
  *             TextField: { // ParameterTextFieldControl
  *               ParameterControlId: "STRING_VALUE", // required
@@ -368,6 +369,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                 DateIconVisibility: "HIDDEN" || "VISIBLE",
  *               },
  *               Type: "SINGLE_VALUED" || "DATE_RANGE",
+ *               CommitMode: "AUTO" || "MANUAL",
  *             },
  *             List: { // FilterListControl
  *               FilterControlId: "STRING_VALUE", // required
@@ -426,6 +428,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                   },
  *                 ],
  *               },
+ *               CommitMode: "AUTO" || "MANUAL",
  *             },
  *             TextField: { // FilterTextFieldControl
  *               FilterControlId: "STRING_VALUE", // required
@@ -474,6 +477,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                 DateTimeFormat: "STRING_VALUE",
  *                 InfoIconLabelOptions: "<SheetControlInfoIconLabelOptions>",
  *               },
+ *               CommitMode: "AUTO" || "MANUAL",
  *             },
  *             CrossSheet: { // FilterCrossSheetControl
  *               FilterControlId: "STRING_VALUE", // required
@@ -4573,6 +4577,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       HelperTextVisibility: "HIDDEN" || "VISIBLE",
  *                       DateIconVisibility: "HIDDEN" || "VISIBLE",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultListOptions: { // DefaultFilterListControlOptions
  *                     DisplayOptions: {
@@ -4602,6 +4607,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                     SelectableValues: {
  *                       Values: "<ParameterSelectableValueList>",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultTextFieldOptions: { // DefaultTextFieldControlOptions
  *                     DisplayOptions: {
@@ -4636,6 +4642,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       DateTimeFormat: "STRING_VALUE",
  *                       InfoIconLabelOptions: "<SheetControlInfoIconLabelOptions>",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                 },
  *               },
@@ -4668,6 +4675,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       HelperTextVisibility: "HIDDEN" || "VISIBLE",
  *                       DateIconVisibility: "HIDDEN" || "VISIBLE",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultListOptions: {
  *                     DisplayOptions: {
@@ -4691,6 +4699,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                     },
  *                     Type: "MULTI_SELECT" || "SINGLE_SELECT",
  *                     SelectableValues: "<FilterSelectableValues>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultTextFieldOptions: {
  *                     DisplayOptions: {
@@ -4723,6 +4732,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       DateTimeFormat: "STRING_VALUE",
  *                       InfoIconLabelOptions: "<SheetControlInfoIconLabelOptions>",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                 },
  *               },
@@ -4748,6 +4758,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       HelperTextVisibility: "HIDDEN" || "VISIBLE",
  *                       DateIconVisibility: "HIDDEN" || "VISIBLE",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultListOptions: {
  *                     DisplayOptions: {
@@ -4769,6 +4780,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                     },
  *                     Type: "MULTI_SELECT" || "SINGLE_SELECT",
  *                     SelectableValues: "<FilterSelectableValues>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultTextFieldOptions: {
  *                     DisplayOptions: {
@@ -4801,6 +4813,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       DateTimeFormat: "STRING_VALUE",
  *                       InfoIconLabelOptions: "<SheetControlInfoIconLabelOptions>",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                 },
  *               },
@@ -4821,6 +4834,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                   DefaultDateTimePickerOptions: {
  *                     Type: "SINGLE_VALUED" || "DATE_RANGE",
  *                     DisplayOptions: "<DateTimePickerControlDisplayOptions>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultListOptions: {
  *                     DisplayOptions: "<ListControlDisplayOptions>",
@@ -4831,6 +4845,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                     DisplayOptions: "<DropDownControlDisplayOptions>",
  *                     Type: "MULTI_SELECT" || "SINGLE_SELECT",
  *                     SelectableValues: "<FilterSelectableValues>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultTextFieldOptions: {
  *                     DisplayOptions: "<TextFieldControlDisplayOptions>",
@@ -4852,6 +4867,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                       DateTimeFormat: "STRING_VALUE",
  *                       InfoIconLabelOptions: "<SheetControlInfoIconLabelOptions>",
  *                     },
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                 },
  *               },
@@ -4884,6 +4900,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                   DefaultDateTimePickerOptions: {
  *                     Type: "SINGLE_VALUED" || "DATE_RANGE",
  *                     DisplayOptions: "<DateTimePickerControlDisplayOptions>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultListOptions: {
  *                     DisplayOptions: "<ListControlDisplayOptions>",
@@ -4894,6 +4911,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                     DisplayOptions: "<DropDownControlDisplayOptions>",
  *                     Type: "MULTI_SELECT" || "SINGLE_SELECT",
  *                     SelectableValues: "<FilterSelectableValues>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                   DefaultTextFieldOptions: {
  *                     DisplayOptions: "<TextFieldControlDisplayOptions>",
@@ -4911,6 +4929,7 @@ export interface UpdateDashboardCommandOutput extends UpdateDashboardResponse, _
  *                   },
  *                   DefaultRelativeDateTimeOptions: {
  *                     DisplayOptions: "<RelativeDateTimeControlDisplayOptions>",
+ *                     CommitMode: "AUTO" || "MANUAL",
  *                   },
  *                 },
  *               },
@@ -5120,9 +5139,7 @@ export class UpdateDashboardCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -5134,4 +5151,16 @@ export class UpdateDashboardCommand extends $Command
   .f(UpdateDashboardRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateDashboardCommand)
   .de(de_UpdateDashboardCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDashboardRequest;
+      output: UpdateDashboardResponse;
+    };
+    sdk: {
+      input: UpdateDashboardCommandInput;
+      output: UpdateDashboardCommandOutput;
+    };
+  };
+}

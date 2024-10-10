@@ -95,9 +95,7 @@ export class DeleteQAppCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QAppsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DeleteQAppCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteQAppCommand)
   .de(de_DeleteQAppCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteQAppInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteQAppCommandInput;
+      output: DeleteQAppCommandOutput;
+    };
+  };
+}

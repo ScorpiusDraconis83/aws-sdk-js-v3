@@ -112,9 +112,7 @@ export class UpdateDomainUnitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class UpdateDomainUnitCommand extends $Command
   .f(UpdateDomainUnitInputFilterSensitiveLog, UpdateDomainUnitOutputFilterSensitiveLog)
   .ser(se_UpdateDomainUnitCommand)
   .de(de_UpdateDomainUnitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDomainUnitInput;
+      output: UpdateDomainUnitOutput;
+    };
+    sdk: {
+      input: UpdateDomainUnitCommandInput;
+      output: UpdateDomainUnitCommandOutput;
+    };
+  };
+}

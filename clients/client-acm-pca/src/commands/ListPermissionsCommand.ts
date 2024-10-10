@@ -124,9 +124,7 @@ export class ListPermissionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMPCAClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class ListPermissionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListPermissionsCommand)
   .de(de_ListPermissionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPermissionsRequest;
+      output: ListPermissionsResponse;
+    };
+    sdk: {
+      input: ListPermissionsCommandInput;
+      output: ListPermissionsCommandOutput;
+    };
+  };
+}

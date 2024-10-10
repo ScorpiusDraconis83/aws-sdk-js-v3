@@ -138,9 +138,7 @@ export class GetMediaForFragmentListCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisVideoArchivedMediaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class GetMediaForFragmentListCommand extends $Command
   .f(void 0, GetMediaForFragmentListOutputFilterSensitiveLog)
   .ser(se_GetMediaForFragmentListCommand)
   .de(de_GetMediaForFragmentListCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMediaForFragmentListInput;
+      output: GetMediaForFragmentListOutput;
+    };
+    sdk: {
+      input: GetMediaForFragmentListCommandInput;
+      output: GetMediaForFragmentListCommandOutput;
+    };
+  };
+}

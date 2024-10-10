@@ -107,9 +107,7 @@ export class UpdateImageSetMetadataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MedicalImagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class UpdateImageSetMetadataCommand extends $Command
   .f(UpdateImageSetMetadataRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateImageSetMetadataCommand)
   .de(de_UpdateImageSetMetadataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateImageSetMetadataRequest;
+      output: UpdateImageSetMetadataResponse;
+    };
+    sdk: {
+      input: UpdateImageSetMetadataCommandInput;
+      output: UpdateImageSetMetadataCommandOutput;
+    };
+  };
+}

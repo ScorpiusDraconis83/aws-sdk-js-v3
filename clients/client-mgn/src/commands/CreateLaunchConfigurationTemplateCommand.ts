@@ -187,9 +187,7 @@ export class CreateLaunchConfigurationTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -201,4 +199,16 @@ export class CreateLaunchConfigurationTemplateCommand extends $Command
   .f(CreateLaunchConfigurationTemplateRequestFilterSensitiveLog, LaunchConfigurationTemplateFilterSensitiveLog)
   .ser(se_CreateLaunchConfigurationTemplateCommand)
   .de(de_CreateLaunchConfigurationTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLaunchConfigurationTemplateRequest;
+      output: LaunchConfigurationTemplate;
+    };
+    sdk: {
+      input: CreateLaunchConfigurationTemplateCommandInput;
+      output: CreateLaunchConfigurationTemplateCommandOutput;
+    };
+  };
+}

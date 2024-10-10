@@ -100,9 +100,7 @@ export class GetVariablesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class GetVariablesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetVariablesCommand)
   .de(de_GetVariablesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVariablesRequest;
+      output: GetVariablesResult;
+    };
+    sdk: {
+      input: GetVariablesCommandInput;
+      output: GetVariablesCommandOutput;
+    };
+  };
+}

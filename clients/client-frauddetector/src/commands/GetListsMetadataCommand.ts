@@ -94,9 +94,7 @@ export class GetListsMetadataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FraudDetectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetListsMetadataCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetListsMetadataCommand)
   .de(de_GetListsMetadataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetListsMetadataRequest;
+      output: GetListsMetadataResult;
+    };
+    sdk: {
+      input: GetListsMetadataCommandInput;
+      output: GetListsMetadataCommandOutput;
+    };
+  };
+}

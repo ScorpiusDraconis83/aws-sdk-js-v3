@@ -103,6 +103,20 @@ export interface CreateAssociationCommandOutput extends CreateAssociationResult,
  *           },
  *         ],
  *       },
+ *       IncludeChildOrganizationUnits: true || false,
+ *       ExcludeAccounts: [ // ExcludeAccounts
+ *         "STRING_VALUE",
+ *       ],
+ *       Targets: [
+ *         {
+ *           Key: "STRING_VALUE",
+ *           Values: [
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       TargetsMaxConcurrency: "STRING_VALUE",
+ *       TargetsMaxErrors: "STRING_VALUE",
  *     },
  *   ],
  *   ScheduleOffset: Number("int"),
@@ -205,6 +219,20 @@ export interface CreateAssociationCommandOutput extends CreateAssociationResult,
  * //             },
  * //           ],
  * //         },
+ * //         IncludeChildOrganizationUnits: true || false,
+ * //         ExcludeAccounts: [ // ExcludeAccounts
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Targets: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         TargetsMaxConcurrency: "STRING_VALUE",
+ * //         TargetsMaxErrors: "STRING_VALUE",
  * //       },
  * //     ],
  * //     ScheduleOffset: Number("int"),
@@ -313,9 +341,7 @@ export class CreateAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -327,4 +353,16 @@ export class CreateAssociationCommand extends $Command
   .f(CreateAssociationRequestFilterSensitiveLog, CreateAssociationResultFilterSensitiveLog)
   .ser(se_CreateAssociationCommand)
   .de(de_CreateAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAssociationRequest;
+      output: CreateAssociationResult;
+    };
+    sdk: {
+      input: CreateAssociationCommandInput;
+      output: CreateAssociationCommandOutput;
+    };
+  };
+}

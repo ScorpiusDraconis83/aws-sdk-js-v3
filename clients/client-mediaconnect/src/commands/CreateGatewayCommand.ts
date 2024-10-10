@@ -115,9 +115,7 @@ export class CreateGatewayCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class CreateGatewayCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateGatewayCommand)
   .de(de_CreateGatewayCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGatewayRequest;
+      output: CreateGatewayResponse;
+    };
+    sdk: {
+      input: CreateGatewayCommandInput;
+      output: CreateGatewayCommandOutput;
+    };
+  };
+}

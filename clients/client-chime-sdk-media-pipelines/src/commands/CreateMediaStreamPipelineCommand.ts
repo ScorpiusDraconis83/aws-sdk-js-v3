@@ -138,9 +138,7 @@ export class CreateMediaStreamPipelineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMediaPipelinesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class CreateMediaStreamPipelineCommand extends $Command
   .f(CreateMediaStreamPipelineRequestFilterSensitiveLog, CreateMediaStreamPipelineResponseFilterSensitiveLog)
   .ser(se_CreateMediaStreamPipelineCommand)
   .de(de_CreateMediaStreamPipelineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMediaStreamPipelineRequest;
+      output: CreateMediaStreamPipelineResponse;
+    };
+    sdk: {
+      input: CreateMediaStreamPipelineCommandInput;
+      output: CreateMediaStreamPipelineCommandOutput;
+    };
+  };
+}

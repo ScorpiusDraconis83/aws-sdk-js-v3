@@ -98,9 +98,7 @@ export class DescribeFraudsterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VoiceIDClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class DescribeFraudsterCommand extends $Command
   .f(DescribeFraudsterRequestFilterSensitiveLog, void 0)
   .ser(se_DescribeFraudsterCommand)
   .de(de_DescribeFraudsterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFraudsterRequest;
+      output: DescribeFraudsterResponse;
+    };
+    sdk: {
+      input: DescribeFraudsterCommandInput;
+      output: DescribeFraudsterCommandOutput;
+    };
+  };
+}

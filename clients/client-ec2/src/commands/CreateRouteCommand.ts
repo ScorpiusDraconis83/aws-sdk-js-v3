@@ -56,22 +56,22 @@ export interface CreateRouteCommandOutput extends CreateRouteResult, __MetadataB
  * // const { EC2Client, CreateRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // CreateRouteRequest
- *   DestinationCidrBlock: "STRING_VALUE",
- *   DestinationIpv6CidrBlock: "STRING_VALUE",
  *   DestinationPrefixListId: "STRING_VALUE",
- *   DryRun: true || false,
  *   VpcEndpointId: "STRING_VALUE",
- *   EgressOnlyInternetGatewayId: "STRING_VALUE",
- *   GatewayId: "STRING_VALUE",
- *   InstanceId: "STRING_VALUE",
- *   NatGatewayId: "STRING_VALUE",
  *   TransitGatewayId: "STRING_VALUE",
  *   LocalGatewayId: "STRING_VALUE",
  *   CarrierGatewayId: "STRING_VALUE",
- *   NetworkInterfaceId: "STRING_VALUE",
- *   RouteTableId: "STRING_VALUE", // required
- *   VpcPeeringConnectionId: "STRING_VALUE",
  *   CoreNetworkArn: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   RouteTableId: "STRING_VALUE", // required
+ *   DestinationCidrBlock: "STRING_VALUE",
+ *   GatewayId: "STRING_VALUE",
+ *   DestinationIpv6CidrBlock: "STRING_VALUE",
+ *   EgressOnlyInternetGatewayId: "STRING_VALUE",
+ *   InstanceId: "STRING_VALUE",
+ *   NetworkInterfaceId: "STRING_VALUE",
+ *   VpcPeeringConnectionId: "STRING_VALUE",
+ *   NatGatewayId: "STRING_VALUE",
  * };
  * const command = new CreateRouteCommand(input);
  * const response = await client.send(command);
@@ -113,9 +113,7 @@ export class CreateRouteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class CreateRouteCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRouteCommand)
   .de(de_CreateRouteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRouteRequest;
+      output: CreateRouteResult;
+    };
+    sdk: {
+      input: CreateRouteCommandInput;
+      output: CreateRouteCommandOutput;
+    };
+  };
+}

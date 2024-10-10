@@ -78,9 +78,7 @@ export class DeleteDatastoreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTAnalyticsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class DeleteDatastoreCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDatastoreCommand)
   .de(de_DeleteDatastoreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDatastoreRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDatastoreCommandInput;
+      output: DeleteDatastoreCommandOutput;
+    };
+  };
+}

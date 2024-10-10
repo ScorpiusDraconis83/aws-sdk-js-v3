@@ -117,9 +117,7 @@ export class UpdateApplicationVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class UpdateApplicationVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateApplicationVersionCommand)
   .de(de_UpdateApplicationVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationVersionMessage;
+      output: ApplicationVersionDescriptionMessage;
+    };
+    sdk: {
+      input: UpdateApplicationVersionCommandInput;
+      output: UpdateApplicationVersionCommandOutput;
+    };
+  };
+}

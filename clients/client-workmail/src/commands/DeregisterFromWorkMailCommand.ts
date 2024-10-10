@@ -86,9 +86,7 @@ export class DeregisterFromWorkMailCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkMailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class DeregisterFromWorkMailCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeregisterFromWorkMailCommand)
   .de(de_DeregisterFromWorkMailCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterFromWorkMailRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeregisterFromWorkMailCommandInput;
+      output: DeregisterFromWorkMailCommandOutput;
+    };
+  };
+}

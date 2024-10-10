@@ -175,9 +175,7 @@ export class CreateStorageVirtualMachineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -189,4 +187,16 @@ export class CreateStorageVirtualMachineCommand extends $Command
   .f(CreateStorageVirtualMachineRequestFilterSensitiveLog, void 0)
   .ser(se_CreateStorageVirtualMachineCommand)
   .de(de_CreateStorageVirtualMachineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStorageVirtualMachineRequest;
+      output: CreateStorageVirtualMachineResponse;
+    };
+    sdk: {
+      input: CreateStorageVirtualMachineCommandInput;
+      output: CreateStorageVirtualMachineCommandOutput;
+    };
+  };
+}

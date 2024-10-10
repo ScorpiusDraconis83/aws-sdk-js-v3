@@ -99,9 +99,7 @@ export class GetDataQualityMetricsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutMetricsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetDataQualityMetricsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDataQualityMetricsCommand)
   .de(de_GetDataQualityMetricsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataQualityMetricsRequest;
+      output: GetDataQualityMetricsResponse;
+    };
+    sdk: {
+      input: GetDataQualityMetricsCommandInput;
+      output: GetDataQualityMetricsCommandOutput;
+    };
+  };
+}

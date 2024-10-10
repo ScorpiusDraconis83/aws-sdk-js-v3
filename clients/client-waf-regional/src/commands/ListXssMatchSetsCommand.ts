@@ -107,9 +107,7 @@ export class ListXssMatchSetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFRegionalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class ListXssMatchSetsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListXssMatchSetsCommand)
   .de(de_ListXssMatchSetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListXssMatchSetsRequest;
+      output: ListXssMatchSetsResponse;
+    };
+    sdk: {
+      input: ListXssMatchSetsCommandInput;
+      output: ListXssMatchSetsCommandOutput;
+    };
+  };
+}

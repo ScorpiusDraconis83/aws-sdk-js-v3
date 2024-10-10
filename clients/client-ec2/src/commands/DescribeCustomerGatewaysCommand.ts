@@ -56,12 +56,7 @@ export interface DescribeCustomerGatewaysCommandOutput extends DescribeCustomerG
  * // { // DescribeCustomerGatewaysResult
  * //   CustomerGateways: [ // CustomerGatewayList
  * //     { // CustomerGateway
- * //       BgpAsn: "STRING_VALUE",
- * //       CustomerGatewayId: "STRING_VALUE",
- * //       IpAddress: "STRING_VALUE",
  * //       CertificateArn: "STRING_VALUE",
- * //       State: "STRING_VALUE",
- * //       Type: "STRING_VALUE",
  * //       DeviceName: "STRING_VALUE",
  * //       Tags: [ // TagList
  * //         { // Tag
@@ -70,6 +65,11 @@ export interface DescribeCustomerGatewaysCommandOutput extends DescribeCustomerG
  * //         },
  * //       ],
  * //       BgpAsnExtended: "STRING_VALUE",
+ * //       CustomerGatewayId: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //       Type: "STRING_VALUE",
+ * //       IpAddress: "STRING_VALUE",
+ * //       BgpAsn: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -121,9 +121,7 @@ export class DescribeCustomerGatewaysCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class DescribeCustomerGatewaysCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeCustomerGatewaysCommand)
   .de(de_DescribeCustomerGatewaysCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCustomerGatewaysRequest;
+      output: DescribeCustomerGatewaysResult;
+    };
+    sdk: {
+      input: DescribeCustomerGatewaysCommandInput;
+      output: DescribeCustomerGatewaysCommandOutput;
+    };
+  };
+}

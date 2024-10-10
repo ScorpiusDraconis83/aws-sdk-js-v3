@@ -42,10 +42,10 @@ export interface DescribeConversionTasksCommandOutput extends DescribeConversion
  * // const { EC2Client, DescribeConversionTasksCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeConversionTasksRequest
+ *   DryRun: true || false,
  *   ConversionTaskIds: [ // ConversionIdStringList
  *     "STRING_VALUE",
  *   ],
- *   DryRun: true || false,
  * };
  * const command = new DescribeConversionTasksCommand(input);
  * const response = await client.send(command);
@@ -126,9 +126,7 @@ export class DescribeConversionTasksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class DescribeConversionTasksCommand extends $Command
   .f(void 0, DescribeConversionTasksResultFilterSensitiveLog)
   .ser(se_DescribeConversionTasksCommand)
   .de(de_DescribeConversionTasksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConversionTasksRequest;
+      output: DescribeConversionTasksResult;
+    };
+    sdk: {
+      input: DescribeConversionTasksCommandInput;
+      output: DescribeConversionTasksCommandOutput;
+    };
+  };
+}

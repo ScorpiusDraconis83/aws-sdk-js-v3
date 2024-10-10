@@ -154,9 +154,7 @@ export class DescribeProjectsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class DescribeProjectsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeProjectsCommand)
   .de(de_DescribeProjectsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProjectsRequest;
+      output: DescribeProjectsResponse;
+    };
+    sdk: {
+      input: DescribeProjectsCommandInput;
+      output: DescribeProjectsCommandOutput;
+    };
+  };
+}

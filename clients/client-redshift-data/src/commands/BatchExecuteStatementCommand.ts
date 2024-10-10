@@ -138,9 +138,7 @@ export class BatchExecuteStatementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class BatchExecuteStatementCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchExecuteStatementCommand)
   .de(de_BatchExecuteStatementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchExecuteStatementInput;
+      output: BatchExecuteStatementOutput;
+    };
+    sdk: {
+      input: BatchExecuteStatementCommandInput;
+      output: BatchExecuteStatementCommandOutput;
+    };
+  };
+}

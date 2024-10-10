@@ -113,9 +113,7 @@ export class ListChannelFlowsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class ListChannelFlowsCommand extends $Command
   .f(ListChannelFlowsRequestFilterSensitiveLog, ListChannelFlowsResponseFilterSensitiveLog)
   .ser(se_ListChannelFlowsCommand)
   .de(de_ListChannelFlowsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChannelFlowsRequest;
+      output: ListChannelFlowsResponse;
+    };
+    sdk: {
+      input: ListChannelFlowsCommandInput;
+      output: ListChannelFlowsCommandOutput;
+    };
+  };
+}

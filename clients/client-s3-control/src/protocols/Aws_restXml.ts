@@ -16,6 +16,7 @@ import {
   expectUnion as __expectUnion,
   extendedEncodeURIComponent as __extendedEncodeURIComponent,
   getArrayIfSingleItem as __getArrayIfSingleItem,
+  isSerializableHeaderValue,
   map,
   parseBoolean as __parseBoolean,
   parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
@@ -236,6 +237,10 @@ import {
   ListAccessPointsForObjectLambdaCommandInput,
   ListAccessPointsForObjectLambdaCommandOutput,
 } from "../commands/ListAccessPointsForObjectLambdaCommand";
+import {
+  ListCallerAccessGrantsCommandInput,
+  ListCallerAccessGrantsCommandOutput,
+} from "../commands/ListCallerAccessGrantsCommand";
 import { ListJobsCommandInput, ListJobsCommandOutput } from "../commands/ListJobsCommand";
 import {
   ListMultiRegionAccessPointsCommandInput,
@@ -379,7 +384,7 @@ import {
   ListAccessGrantEntry,
   ListAccessGrantsInstanceEntry,
   ListAccessGrantsLocationsEntry,
-  ListStorageLensConfigurationEntry,
+  ListCallerAccessGrantsEntry,
   MatchObjectAge,
   MatchObjectSize,
   Metrics,
@@ -464,6 +469,7 @@ import {
 import {
   JobStatusException,
   LifecycleConfiguration,
+  ListStorageLensConfigurationEntry,
   ListStorageLensGroupEntry,
   Tagging,
   TooManyTagsException,
@@ -2579,6 +2585,41 @@ export const se_ListAccessPointsForObjectLambdaCommand = async (
 };
 
 /**
+ * serializeAws_restXmlListCallerAccessGrantsCommand
+ */
+export const se_ListCallerAccessGrantsCommand = async (
+  input: ListCallerAccessGrantsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xaai]: input[_AI]!,
+  });
+  b.bp("/v20180820/accessgrantsinstance/caller/grants");
+  const query: any = map({
+    [_gra]: [, input[_GS]!],
+    [_nT]: [, input[_NT]!],
+    [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
+    [_aBA]: [() => input.AllowedByApplication !== void 0, () => input[_ABA]!.toString()],
+  });
+  let body: any;
+  let { hostname: resolvedHostname } = await context.endpoint();
+  if (context.disableHostPrefix !== true) {
+    resolvedHostname = "{AccountId}." + resolvedHostname;
+    if (input.AccountId === undefined) {
+      throw new Error("Empty value provided for input host prefix: AccountId.");
+    }
+    resolvedHostname = resolvedHostname.replace("{AccountId}", input.AccountId!);
+    if (!__isValidHostname(resolvedHostname)) {
+      throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
+    }
+  }
+  b.hn(resolvedHostname);
+  b.m("GET").h(headers).q(query).b(body);
+  return b.build();
+};
+
+/**
  * serializeAws_restXmlListJobsCommand
  */
 export const se_ListJobsCommand = async (
@@ -2591,7 +2632,7 @@ export const se_ListJobsCommand = async (
   });
   b.bp("/v20180820/jobs");
   const query: any = map({
-    [_jS]: [() => input.JobStatuses !== void 0, () => (input[_JS]! || []).map((_entry) => _entry as any)],
+    [_jS]: [() => input.JobStatuses !== void 0, () => input[_JS]! || []],
     [_nT]: [, input[_NT]!],
     [_mR]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
   });
@@ -3390,10 +3431,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/v20180820/tags/{ResourceArn+}");
   b.p("ResourceArn", () => input.ResourceArn!, "{ResourceArn+}", true);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.TagKeys, `TagKeys`) != null,
-      () => (input[_TK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => input[_TK]! || []],
   });
   let body: any;
   let { hostname: resolvedHostname } = await context.endpoint();
@@ -3637,8 +3675,14 @@ export const de_CreateAccessGrantsInstanceCommand = async (
   if (data[_CA] != null) {
     contents[_CA] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_CA]));
   }
+  if (data[_ICAA] != null) {
+    contents[_ICAA] = __expectString(data[_ICAA]);
+  }
   if (data[_ICA] != null) {
     contents[_ICA] = __expectString(data[_ICA]);
+  }
+  if (data[_ICIA] != null) {
+    contents[_ICIA] = __expectString(data[_ICIA]);
   }
   return contents;
 };
@@ -4249,8 +4293,14 @@ export const de_GetAccessGrantsInstanceCommand = async (
   if (data[_CA] != null) {
     contents[_CA] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_CA]));
   }
+  if (data[_ICAA] != null) {
+    contents[_ICAA] = __expectString(data[_ICAA]);
+  }
   if (data[_ICA] != null) {
     contents[_ICA] = __expectString(data[_ICA]);
+  }
+  if (data[_ICIA] != null) {
+    contents[_ICIA] = __expectString(data[_ICIA]);
   }
   return contents;
 };
@@ -4974,6 +5024,31 @@ export const de_ListAccessPointsForObjectLambdaCommand = async (
     contents[_OLAPL] = [];
   } else if (data[_OLAPL] != null && data[_OLAPL][_OLAP] != null) {
     contents[_OLAPL] = de_ObjectLambdaAccessPointList(__getArrayIfSingleItem(data[_OLAPL][_OLAP]), context);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_restXmlListCallerAccessGrantsCommand
+ */
+export const de_ListCallerAccessGrantsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListCallerAccessGrantsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  if (data.CallerAccessGrantsList === "") {
+    contents[_CAGL] = [];
+  } else if (data[_CAGL] != null && data[_CAGL][_AG] != null) {
+    contents[_CAGL] = de_CallerAccessGrantsList(__getArrayIfSingleItem(data[_CAGL][_AG]), context);
+  }
+  if (data[_NT] != null) {
+    contents[_NT] = __expectString(data[_NT]);
   }
   return contents;
 };
@@ -7978,6 +8053,17 @@ const de_Buckets = (output: any, context: __SerdeContext): string[] => {
 };
 
 /**
+ * deserializeAws_restXmlCallerAccessGrantsList
+ */
+const de_CallerAccessGrantsList = (output: any, context: __SerdeContext): ListCallerAccessGrantsEntry[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      return de_ListCallerAccessGrantsEntry(entry, context);
+    });
+};
+
+/**
  * deserializeAws_restXmlCloudWatchMetrics
  */
 const de_CloudWatchMetrics = (output: any, context: __SerdeContext): CloudWatchMetrics => {
@@ -8743,6 +8829,12 @@ const de_ListAccessGrantsInstanceEntry = (output: any, context: __SerdeContext):
   if (output[_ICA] != null) {
     contents[_ICA] = __expectString(output[_ICA]);
   }
+  if (output[_ICIA] != null) {
+    contents[_ICIA] = __expectString(output[_ICIA]);
+  }
+  if (output[_ICAA] != null) {
+    contents[_ICAA] = __expectString(output[_ICAA]);
+  }
   return contents;
 };
 
@@ -8765,6 +8857,23 @@ const de_ListAccessGrantsLocationsEntry = (output: any, context: __SerdeContext)
   }
   if (output[_IAMRA] != null) {
     contents[_IAMRA] = __expectString(output[_IAMRA]);
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_restXmlListCallerAccessGrantsEntry
+ */
+const de_ListCallerAccessGrantsEntry = (output: any, context: __SerdeContext): ListCallerAccessGrantsEntry => {
+  const contents: any = {};
+  if (output[_P] != null) {
+    contents[_P] = __expectString(output[_P]);
+  }
+  if (output[_GS] != null) {
+    contents[_GS] = __expectString(output[_GS]);
+  }
+  if (output[_AA] != null) {
+    contents[_AA] = __expectString(output[_AA]);
   }
   return contents;
 };
@@ -10427,16 +10536,10 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
 
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
-
 const _A = "Alias";
 const _AA = "ApplicationArn";
 const _AAGICR = "AssociateAccessGrantsIdentityCenterRequest";
+const _ABA = "AllowedByApplication";
 const _ACG = "AccessControlGrants";
 const _ACL = "ACL";
 const _ACLc = "AccessControlList";
@@ -10499,6 +10602,7 @@ const _C = "Configuration";
 const _CA = "CreatedAt";
 const _CACL = "CannedAccessControlList";
 const _CAGIR = "CreateAccessGrantsInstanceRequest";
+const _CAGL = "CallerAccessGrantsList";
 const _CAGLR = "CreateAccessGrantsLocationRequest";
 const _CAGR = "CreateAccessGrantRequest";
 const _CAPFOLR = "CreateAccessPointForObjectLambdaRequest";
@@ -10596,6 +10700,7 @@ const _I = "Include";
 const _IAMRA = "IAMRoleArn";
 const _ICA = "IdentityCenterArn";
 const _ICAA = "IdentityCenterApplicationArn";
+const _ICIA = "IdentityCenterInstanceArn";
 const _ID = "ID";
 const _IE = "IsEnabled";
 const _IP = "IsPublic";
@@ -10907,6 +11012,7 @@ const _V = "Value";
 const _VC = "VpcConfiguration";
 const _VCe = "VersioningConfiguration";
 const _VI = "VpcId";
+const _aBA = "allowedByApplication";
 const _aa = "application_arn";
 const _b = "bucket";
 const _dS = "durationSeconds";

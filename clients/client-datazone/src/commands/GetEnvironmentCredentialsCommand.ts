@@ -91,9 +91,7 @@ export class GetEnvironmentCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetEnvironmentCredentialsCommand extends $Command
   .f(void 0, GetEnvironmentCredentialsOutputFilterSensitiveLog)
   .ser(se_GetEnvironmentCredentialsCommand)
   .de(de_GetEnvironmentCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEnvironmentCredentialsInput;
+      output: GetEnvironmentCredentialsOutput;
+    };
+    sdk: {
+      input: GetEnvironmentCredentialsCommandInput;
+      output: GetEnvironmentCredentialsCommandOutput;
+    };
+  };
+}

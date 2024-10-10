@@ -129,9 +129,7 @@ export class ModifyClusterSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class ModifyClusterSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyClusterSnapshotCommand)
   .de(de_ModifyClusterSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClusterSnapshotMessage;
+      output: ModifyClusterSnapshotResult;
+    };
+    sdk: {
+      input: ModifyClusterSnapshotCommandInput;
+      output: ModifyClusterSnapshotCommandOutput;
+    };
+  };
+}

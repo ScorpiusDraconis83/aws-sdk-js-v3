@@ -87,9 +87,7 @@ export class PutFunctionRecursionConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class PutFunctionRecursionConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutFunctionRecursionConfigCommand)
   .de(de_PutFunctionRecursionConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutFunctionRecursionConfigRequest;
+      output: PutFunctionRecursionConfigResponse;
+    };
+    sdk: {
+      input: PutFunctionRecursionConfigCommandInput;
+      output: PutFunctionRecursionConfigCommandOutput;
+    };
+  };
+}

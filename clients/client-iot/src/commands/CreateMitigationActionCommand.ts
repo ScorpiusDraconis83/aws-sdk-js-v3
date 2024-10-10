@@ -114,9 +114,7 @@ export class CreateMitigationActionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateMitigationActionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateMitigationActionCommand)
   .de(de_CreateMitigationActionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMitigationActionRequest;
+      output: CreateMitigationActionResponse;
+    };
+    sdk: {
+      input: CreateMitigationActionCommandInput;
+      output: CreateMitigationActionCommandOutput;
+    };
+  };
+}

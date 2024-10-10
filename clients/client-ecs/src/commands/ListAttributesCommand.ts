@@ -91,9 +91,7 @@ export class ListAttributesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListAttributesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAttributesCommand)
   .de(de_ListAttributesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAttributesRequest;
+      output: ListAttributesResponse;
+    };
+    sdk: {
+      input: ListAttributesCommandInput;
+      output: ListAttributesCommandOutput;
+    };
+  };
+}

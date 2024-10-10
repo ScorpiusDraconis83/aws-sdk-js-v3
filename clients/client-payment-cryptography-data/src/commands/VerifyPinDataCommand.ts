@@ -130,9 +130,7 @@ export class VerifyPinDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class VerifyPinDataCommand extends $Command
   .f(VerifyPinDataInputFilterSensitiveLog, void 0)
   .ser(se_VerifyPinDataCommand)
   .de(de_VerifyPinDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifyPinDataInput;
+      output: VerifyPinDataOutput;
+    };
+    sdk: {
+      input: VerifyPinDataCommandInput;
+      output: VerifyPinDataCommandOutput;
+    };
+  };
+}

@@ -121,9 +121,7 @@ export class DecodeAuthorizationMessageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: STSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class DecodeAuthorizationMessageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DecodeAuthorizationMessageCommand)
   .de(de_DecodeAuthorizationMessageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DecodeAuthorizationMessageRequest;
+      output: DecodeAuthorizationMessageResponse;
+    };
+    sdk: {
+      input: DecodeAuthorizationMessageCommandInput;
+      output: DecodeAuthorizationMessageCommandOutput;
+    };
+  };
+}

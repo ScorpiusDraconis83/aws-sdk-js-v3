@@ -92,9 +92,7 @@ export class StartMatchingJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EntityResolutionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class StartMatchingJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartMatchingJobCommand)
   .de(de_StartMatchingJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMatchingJobInput;
+      output: StartMatchingJobOutput;
+    };
+    sdk: {
+      input: StartMatchingJobCommandInput;
+      output: StartMatchingJobCommandOutput;
+    };
+  };
+}

@@ -80,9 +80,7 @@ export class GetGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: XRayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class GetGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetGroupCommand)
   .de(de_GetGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGroupRequest;
+      output: GetGroupResult;
+    };
+    sdk: {
+      input: GetGroupCommandInput;
+      output: GetGroupCommandOutput;
+    };
+  };
+}

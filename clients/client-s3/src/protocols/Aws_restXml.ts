@@ -17,10 +17,12 @@ import {
   expectUnion as __expectUnion,
   extendedEncodeURIComponent as __extendedEncodeURIComponent,
   getArrayIfSingleItem as __getArrayIfSingleItem,
+  isSerializableHeaderValue,
   map,
   parseBoolean as __parseBoolean,
   parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
   parseRfc7231DateTime as __parseRfc7231DateTime,
+  quoteHeader as __quoteHeader,
   resolvedPath as __resolvedPath,
   serializeDateTime as __serializeDateTime,
   strictParseInt32 as __strictParseInt32,
@@ -669,6 +671,10 @@ export const se_CreateSessionCommand = async (
   const b = rb(input, context);
   const headers: any = map({}, isSerializableHeaderValue, {
     [_xacsm]: input[_SM]!,
+    [_xasse]: input[_SSE]!,
+    [_xasseakki]: input[_SSEKMSKI]!,
+    [_xassec]: input[_SSEKMSEC]!,
+    [_xassebke]: [() => isSerializableHeaderValue(input[_BKE]), () => input[_BKE]!.toString()],
   });
   b.bp("/");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -1562,10 +1568,7 @@ export const se_GetObjectAttributesCommand = async (
     [_xasseckm]: input[_SSECKMD]!,
     [_xarp]: input[_RP]!,
     [_xaebo]: input[_EBO]!,
-    [_xaoa]: [
-      () => isSerializableHeaderValue(input[_OA]),
-      () => (input[_OA]! || []).map((_entry) => _entry as any).join(", "),
-    ],
+    [_xaoa]: [() => isSerializableHeaderValue(input[_OA]), () => (input[_OA]! || []).map(__quoteHeader).join(", ")],
   });
   b.bp("/{Key+}");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -1942,10 +1945,7 @@ export const se_ListObjectsCommand = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     [_xarp]: input[_RP]!,
     [_xaebo]: input[_EBO]!,
-    [_xaooa]: [
-      () => isSerializableHeaderValue(input[_OOA]),
-      () => (input[_OOA]! || []).map((_entry) => _entry as any).join(", "),
-    ],
+    [_xaooa]: [() => isSerializableHeaderValue(input[_OOA]), () => (input[_OOA]! || []).map(__quoteHeader).join(", ")],
   });
   b.bp("/");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -1972,10 +1972,7 @@ export const se_ListObjectsV2Command = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     [_xarp]: input[_RP]!,
     [_xaebo]: input[_EBO]!,
-    [_xaooa]: [
-      () => isSerializableHeaderValue(input[_OOA]),
-      () => (input[_OOA]! || []).map((_entry) => _entry as any).join(", "),
-    ],
+    [_xaooa]: [() => isSerializableHeaderValue(input[_OOA]), () => (input[_OOA]! || []).map(__quoteHeader).join(", ")],
   });
   b.bp("/");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -2005,10 +2002,7 @@ export const se_ListObjectVersionsCommand = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     [_xaebo]: input[_EBO]!,
     [_xarp]: input[_RP]!,
-    [_xaooa]: [
-      () => isSerializableHeaderValue(input[_OOA]),
-      () => (input[_OOA]! || []).map((_entry) => _entry as any).join(", "),
-    ],
+    [_xaooa]: [() => isSerializableHeaderValue(input[_OOA]), () => (input[_OOA]! || []).map(__quoteHeader).join(", ")],
   });
   b.bp("/");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -2285,6 +2279,7 @@ export const se_PutBucketLifecycleConfigurationCommand = async (
     "content-type": "application/xml",
     [_xasca]: input[_CA]!,
     [_xaebo]: input[_EBO]!,
+    [_xatdmos]: input[_TDMOS]!,
   });
   b.bp("/");
   b.p("Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -3286,6 +3281,10 @@ export const de_CreateSessionCommand = async (
   }
   const contents: any = map({
     $metadata: deserializeMetadata(output),
+    [_SSE]: [, output.headers[_xasse]],
+    [_SSEKMSKI]: [, output.headers[_xasseakki]],
+    [_SSEKMSEC]: [, output.headers[_xassec]],
+    [_BKE]: [() => void 0 !== output.headers[_xassebke], () => __parseBoolean(output.headers[_xassebke])],
   });
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   if (data[_C] != null) {
@@ -3750,6 +3749,7 @@ export const de_GetBucketLifecycleConfigurationCommand = async (
   }
   const contents: any = map({
     $metadata: deserializeMetadata(output),
+    [_TDMOS]: [, output.headers[_xatdmos]],
   });
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   if (data.Rule === "") {
@@ -4948,6 +4948,7 @@ export const de_PutBucketLifecycleConfigurationCommand = async (
   }
   const contents: any = map({
     $metadata: deserializeMetadata(output),
+    [_TDMOS]: [, output.headers[_xatdmos]],
   });
   await collectBody(output.body, context);
   return contents;
@@ -9690,13 +9691,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
 
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
-
 const _A = "And";
 const _AAO = "AnalyticsAndOperator";
 const _AC = "AnalyticsConfiguration";
@@ -10121,6 +10115,7 @@ const _TC = "TagCount";
 const _TCo = "TopicConfiguration";
 const _TCop = "TopicConfigurations";
 const _TD = "TaggingDirective";
+const _TDMOS = "TransitionDefaultMinimumObjectSize";
 const _TG = "TargetGrants";
 const _TGa = "TargetGrant";
 const _TOKF = "TargetObjectKeyFormat";
@@ -10341,6 +10336,7 @@ const _xasseckm = "x-amz-server-side-encryption-customer-key-md5";
 const _xat = "x-amz-tagging";
 const _xatc = "x-amz-tagging-count";
 const _xatd = "x-amz-tagging-directive";
+const _xatdmos = "x-amz-transition-default-minimum-object-size";
 const _xavi = "x-amz-version-id";
 const _xawrl = "x-amz-website-redirect-location";
 const _xi = "x-id";

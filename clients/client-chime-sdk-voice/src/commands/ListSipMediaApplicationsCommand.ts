@@ -103,9 +103,7 @@ export class ListSipMediaApplicationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class ListSipMediaApplicationsCommand extends $Command
   .f(void 0, ListSipMediaApplicationsResponseFilterSensitiveLog)
   .ser(se_ListSipMediaApplicationsCommand)
   .de(de_ListSipMediaApplicationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSipMediaApplicationsRequest;
+      output: ListSipMediaApplicationsResponse;
+    };
+    sdk: {
+      input: ListSipMediaApplicationsCommandInput;
+      output: ListSipMediaApplicationsCommandOutput;
+    };
+  };
+}

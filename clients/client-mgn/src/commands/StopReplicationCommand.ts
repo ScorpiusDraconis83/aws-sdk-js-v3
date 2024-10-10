@@ -196,9 +196,7 @@ export class StopReplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -210,4 +208,16 @@ export class StopReplicationCommand extends $Command
   .f(void 0, SourceServerFilterSensitiveLog)
   .ser(se_StopReplicationCommand)
   .de(de_StopReplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopReplicationRequest;
+      output: SourceServer;
+    };
+    sdk: {
+      input: StopReplicationCommandInput;
+      output: StopReplicationCommandOutput;
+    };
+  };
+}

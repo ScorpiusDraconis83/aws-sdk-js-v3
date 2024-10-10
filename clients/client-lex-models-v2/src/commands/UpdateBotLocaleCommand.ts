@@ -43,7 +43,7 @@ export interface UpdateBotLocaleCommandOutput extends UpdateBotLocaleResponse, _
  *   nluIntentConfidenceThreshold: Number("double"), // required
  *   voiceSettings: { // VoiceSettings
  *     voiceId: "STRING_VALUE", // required
- *     engine: "standard" || "neural",
+ *     engine: "standard" || "neural" || "long-form" || "generative",
  *   },
  *   generativeAISettings: { // GenerativeAISettings
  *     runtimeSettings: { // RuntimeSettings
@@ -99,7 +99,7 @@ export interface UpdateBotLocaleCommandOutput extends UpdateBotLocaleResponse, _
  * //   nluIntentConfidenceThreshold: Number("double"),
  * //   voiceSettings: { // VoiceSettings
  * //     voiceId: "STRING_VALUE", // required
- * //     engine: "standard" || "neural",
+ * //     engine: "standard" || "neural" || "long-form" || "generative",
  * //   },
  * //   botLocaleStatus: "Creating" || "Building" || "Built" || "ReadyExpressTesting" || "Failed" || "Deleting" || "NotBuilt" || "Importing" || "Processing",
  * //   failureReasons: [ // FailureReasons
@@ -200,9 +200,7 @@ export class UpdateBotLocaleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexModelsV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -214,4 +212,16 @@ export class UpdateBotLocaleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateBotLocaleCommand)
   .de(de_UpdateBotLocaleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBotLocaleRequest;
+      output: UpdateBotLocaleResponse;
+    };
+    sdk: {
+      input: UpdateBotLocaleCommandInput;
+      output: UpdateBotLocaleCommandOutput;
+    };
+  };
+}

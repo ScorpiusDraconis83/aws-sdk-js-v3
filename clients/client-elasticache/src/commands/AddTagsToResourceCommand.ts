@@ -97,7 +97,7 @@ export interface AddTagsToResourceCommandOutput extends TagListMessage, __Metada
  *  <p>The requested replication group is not in the <code>available</code> state.</p>
  *
  * @throws {@link InvalidServerlessCacheSnapshotStateFault} (client fault)
- *  <p>The state of the serverless cache snapshot was not received. Available for Redis OSS and Serverless Memcached only.</p>
+ *  <p>The state of the serverless cache snapshot was not received. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
  *
  * @throws {@link InvalidServerlessCacheStateFault} (client fault)
  *  <p>The account for these credentials is not currently active.</p>
@@ -112,7 +112,7 @@ export interface AddTagsToResourceCommandOutput extends TagListMessage, __Metada
  *  <p>The serverless cache was not found or does not exist.</p>
  *
  * @throws {@link ServerlessCacheSnapshotNotFoundFault} (client fault)
- *  <p>This serverless cache snapshot could not be found or does not exist. Available for Redis OSS and Serverless Memcached only.</p>
+ *  <p>This serverless cache snapshot could not be found or does not exist. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
  *
  * @throws {@link SnapshotNotFoundFault} (client fault)
  *  <p>The requested snapshot name does not refer to an existing snapshot.</p>
@@ -176,9 +176,7 @@ export class AddTagsToResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -190,4 +188,16 @@ export class AddTagsToResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddTagsToResourceCommand)
   .de(de_AddTagsToResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddTagsToResourceMessage;
+      output: TagListMessage;
+    };
+    sdk: {
+      input: AddTagsToResourceCommandInput;
+      output: AddTagsToResourceCommandOutput;
+    };
+  };
+}

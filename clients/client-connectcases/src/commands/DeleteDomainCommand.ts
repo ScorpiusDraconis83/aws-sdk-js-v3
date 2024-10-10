@@ -91,9 +91,7 @@ export class DeleteDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectCasesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class DeleteDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDomainCommand)
   .de(de_DeleteDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDomainRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDomainCommandInput;
+      output: DeleteDomainCommandOutput;
+    };
+  };
+}

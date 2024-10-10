@@ -106,9 +106,7 @@ export class ListEffectiveDeploymentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class ListEffectiveDeploymentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEffectiveDeploymentsCommand)
   .de(de_ListEffectiveDeploymentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEffectiveDeploymentsRequest;
+      output: ListEffectiveDeploymentsResponse;
+    };
+    sdk: {
+      input: ListEffectiveDeploymentsCommandInput;
+      output: ListEffectiveDeploymentsCommandOutput;
+    };
+  };
+}

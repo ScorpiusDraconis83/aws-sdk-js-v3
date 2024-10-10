@@ -133,9 +133,7 @@ export class CreateCollaborationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class CreateCollaborationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCollaborationCommand)
   .de(de_CreateCollaborationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCollaborationInput;
+      output: CreateCollaborationOutput;
+    };
+    sdk: {
+      input: CreateCollaborationCommandInput;
+      output: CreateCollaborationCommandOutput;
+    };
+  };
+}

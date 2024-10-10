@@ -120,9 +120,7 @@ export class GetParametersForImportCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class GetParametersForImportCommand extends $Command
   .f(void 0, GetParametersForImportOutputFilterSensitiveLog)
   .ser(se_GetParametersForImportCommand)
   .de(de_GetParametersForImportCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetParametersForImportInput;
+      output: GetParametersForImportOutput;
+    };
+    sdk: {
+      input: GetParametersForImportCommandInput;
+      output: GetParametersForImportCommandOutput;
+    };
+  };
+}

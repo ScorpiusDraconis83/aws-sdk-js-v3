@@ -235,9 +235,7 @@ export class UpdateContainerInstancesStateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -249,4 +247,16 @@ export class UpdateContainerInstancesStateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateContainerInstancesStateCommand)
   .de(de_UpdateContainerInstancesStateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateContainerInstancesStateRequest;
+      output: UpdateContainerInstancesStateResponse;
+    };
+    sdk: {
+      input: UpdateContainerInstancesStateCommandInput;
+      output: UpdateContainerInstancesStateCommandOutput;
+    };
+  };
+}

@@ -227,9 +227,7 @@ export class UpdateBudgetActionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BudgetsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -241,4 +239,16 @@ export class UpdateBudgetActionCommand extends $Command
   .f(UpdateBudgetActionRequestFilterSensitiveLog, UpdateBudgetActionResponseFilterSensitiveLog)
   .ser(se_UpdateBudgetActionCommand)
   .de(de_UpdateBudgetActionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBudgetActionRequest;
+      output: UpdateBudgetActionResponse;
+    };
+    sdk: {
+      input: UpdateBudgetActionCommandInput;
+      output: UpdateBudgetActionCommandOutput;
+    };
+  };
+}

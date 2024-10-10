@@ -144,9 +144,7 @@ export class ReplicateSecretToRegionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecretsManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -158,4 +156,16 @@ export class ReplicateSecretToRegionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ReplicateSecretToRegionsCommand)
   .de(de_ReplicateSecretToRegionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReplicateSecretToRegionsRequest;
+      output: ReplicateSecretToRegionsResponse;
+    };
+    sdk: {
+      input: ReplicateSecretToRegionsCommandInput;
+      output: ReplicateSecretToRegionsCommandOutput;
+    };
+  };
+}

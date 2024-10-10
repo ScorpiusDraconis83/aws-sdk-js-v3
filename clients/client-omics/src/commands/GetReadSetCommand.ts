@@ -94,9 +94,7 @@ export class GetReadSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetReadSetCommand extends $Command
   .f(void 0, GetReadSetResponseFilterSensitiveLog)
   .ser(se_GetReadSetCommand)
   .de(de_GetReadSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReadSetRequest;
+      output: GetReadSetResponse;
+    };
+    sdk: {
+      input: GetReadSetCommandInput;
+      output: GetReadSetCommandOutput;
+    };
+  };
+}

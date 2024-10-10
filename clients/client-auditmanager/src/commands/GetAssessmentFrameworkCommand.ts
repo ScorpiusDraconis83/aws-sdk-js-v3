@@ -141,9 +141,7 @@ export class GetAssessmentFrameworkCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +153,16 @@ export class GetAssessmentFrameworkCommand extends $Command
   .f(void 0, GetAssessmentFrameworkResponseFilterSensitiveLog)
   .ser(se_GetAssessmentFrameworkCommand)
   .de(de_GetAssessmentFrameworkCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAssessmentFrameworkRequest;
+      output: GetAssessmentFrameworkResponse;
+    };
+    sdk: {
+      input: GetAssessmentFrameworkCommandInput;
+      output: GetAssessmentFrameworkCommandOutput;
+    };
+  };
+}

@@ -53,8 +53,11 @@ export interface CreateFleetLocationsCommandOutput extends CreateFleetLocationsO
  *             fleets</a>
  *          </p>
  *          <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Multi-location fleets</a>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations">Update fleet locations</a>
  *          </p>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html">
+ *                 Amazon GameLift service locations</a> for managed hosting.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -114,7 +117,7 @@ export interface CreateFleetLocationsCommandOutput extends CreateFleetLocationsO
  *             Resolve the issue before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link NotReadyException} (client fault)
  *  <p> The operation failed because Amazon GameLift has not yet finished validating this compute. We
@@ -140,9 +143,7 @@ export class CreateFleetLocationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +155,16 @@ export class CreateFleetLocationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFleetLocationsCommand)
   .de(de_CreateFleetLocationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFleetLocationsInput;
+      output: CreateFleetLocationsOutput;
+    };
+    sdk: {
+      input: CreateFleetLocationsCommandInput;
+      output: CreateFleetLocationsCommandOutput;
+    };
+  };
+}

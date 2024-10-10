@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { UpdateUsageProfileRequest, UpdateUsageProfileResponse } from "../models/models_2";
+import { UpdateUsageProfileRequest, UpdateUsageProfileResponse } from "../models/models_3";
 import { de_UpdateUsageProfileCommand, se_UpdateUsageProfileCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -106,9 +106,7 @@ export class UpdateUsageProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class UpdateUsageProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateUsageProfileCommand)
   .de(de_UpdateUsageProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateUsageProfileRequest;
+      output: UpdateUsageProfileResponse;
+    };
+    sdk: {
+      input: UpdateUsageProfileCommandInput;
+      output: UpdateUsageProfileCommandOutput;
+    };
+  };
+}

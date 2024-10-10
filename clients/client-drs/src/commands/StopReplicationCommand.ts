@@ -189,9 +189,7 @@ export class StopReplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DrsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -203,4 +201,16 @@ export class StopReplicationCommand extends $Command
   .f(void 0, StopReplicationResponseFilterSensitiveLog)
   .ser(se_StopReplicationCommand)
   .de(de_StopReplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopReplicationRequest;
+      output: StopReplicationResponse;
+    };
+    sdk: {
+      input: StopReplicationCommandInput;
+      output: StopReplicationCommandOutput;
+    };
+  };
+}

@@ -87,9 +87,7 @@ export class AssociateLambdaFunctionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class AssociateLambdaFunctionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateLambdaFunctionCommand)
   .de(de_AssociateLambdaFunctionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateLambdaFunctionRequest;
+      output: {};
+    };
+    sdk: {
+      input: AssociateLambdaFunctionCommandInput;
+      output: AssociateLambdaFunctionCommandOutput;
+    };
+  };
+}

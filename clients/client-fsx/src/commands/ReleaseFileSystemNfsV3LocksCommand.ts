@@ -655,9 +655,7 @@ export class ReleaseFileSystemNfsV3LocksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -669,4 +667,16 @@ export class ReleaseFileSystemNfsV3LocksCommand extends $Command
   .f(void 0, ReleaseFileSystemNfsV3LocksResponseFilterSensitiveLog)
   .ser(se_ReleaseFileSystemNfsV3LocksCommand)
   .de(de_ReleaseFileSystemNfsV3LocksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReleaseFileSystemNfsV3LocksRequest;
+      output: ReleaseFileSystemNfsV3LocksResponse;
+    };
+    sdk: {
+      input: ReleaseFileSystemNfsV3LocksCommandInput;
+      output: ReleaseFileSystemNfsV3LocksCommandOutput;
+    };
+  };
+}

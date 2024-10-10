@@ -110,9 +110,7 @@ export class GetExternalDataViewAccessDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FinspaceDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class GetExternalDataViewAccessDetailsCommand extends $Command
   .f(void 0, GetExternalDataViewAccessDetailsResponseFilterSensitiveLog)
   .ser(se_GetExternalDataViewAccessDetailsCommand)
   .de(de_GetExternalDataViewAccessDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExternalDataViewAccessDetailsRequest;
+      output: GetExternalDataViewAccessDetailsResponse;
+    };
+    sdk: {
+      input: GetExternalDataViewAccessDetailsCommandInput;
+      output: GetExternalDataViewAccessDetailsCommandOutput;
+    };
+  };
+}

@@ -130,9 +130,7 @@ export class GetKeyPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class GetKeyPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetKeyPolicyCommand)
   .de(de_GetKeyPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetKeyPolicyRequest;
+      output: GetKeyPolicyResponse;
+    };
+    sdk: {
+      input: GetKeyPolicyCommandInput;
+      output: GetKeyPolicyCommandOutput;
+    };
+  };
+}

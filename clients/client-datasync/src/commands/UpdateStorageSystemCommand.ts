@@ -88,9 +88,7 @@ export class UpdateStorageSystemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class UpdateStorageSystemCommand extends $Command
   .f(UpdateStorageSystemRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateStorageSystemCommand)
   .de(de_UpdateStorageSystemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateStorageSystemRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateStorageSystemCommandInput;
+      output: UpdateStorageSystemCommandOutput;
+    };
+  };
+}

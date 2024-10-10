@@ -109,7 +109,7 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //             },
  * //             AudioSelectors: { // __mapOfAudioSelector
  * //               "<keys>": { // AudioSelector
- * //                 AudioDurationCorrection: "DISABLED" || "AUTO" || "TRACK" || "FRAME",
+ * //                 AudioDurationCorrection: "DISABLED" || "AUTO" || "TRACK" || "FRAME" || "FORCE",
  * //                 CustomLanguageCode: "STRING_VALUE",
  * //                 DefaultSelection: "DEFAULT" || "NOT_DEFAULT",
  * //                 ExternalAudioFileInput: "STRING_VALUE",
@@ -168,6 +168,7 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                     TerminateCaptions: "END_OF_INPUT" || "DISABLED",
  * //                   },
  * //                   FileSourceSettings: { // FileSourceSettings
+ * //                     ByteRateLimit: "ENABLED" || "DISABLED",
  * //                     Convert608To708: "UPCONVERT" || "DISABLED",
  * //                     ConvertPaintToPop: "ENABLED" || "DISABLED",
  * //                     Framerate: { // CaptionSourceFramerate
@@ -242,6 +243,13 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //             VideoOverlays: [ // __listOfVideoOverlay
  * //               { // VideoOverlay
  * //                 EndTimecode: "STRING_VALUE",
+ * //                 InitialPosition: { // VideoOverlayPosition
+ * //                   Height: Number("int"),
+ * //                   Unit: "PIXELS" || "PERCENTAGE",
+ * //                   Width: Number("int"),
+ * //                   XPosition: Number("int"),
+ * //                   YPosition: Number("int"),
+ * //                 },
  * //                 Input: { // VideoOverlayInput
  * //                   FileInput: "STRING_VALUE",
  * //                   InputClippings: [ // __listOfVideoOverlayInputClipping
@@ -253,7 +261,21 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                   TimecodeSource: "EMBEDDED" || "ZEROBASED" || "SPECIFIEDSTART",
  * //                   TimecodeStart: "STRING_VALUE",
  * //                 },
+ * //                 Playback: "ONCE" || "REPEAT",
  * //                 StartTimecode: "STRING_VALUE",
+ * //                 Transitions: [ // __listOfVideoOverlayTransition
+ * //                   { // VideoOverlayTransition
+ * //                     EndPosition: {
+ * //                       Height: Number("int"),
+ * //                       Unit: "PIXELS" || "PERCENTAGE",
+ * //                       Width: Number("int"),
+ * //                       XPosition: Number("int"),
+ * //                       YPosition: Number("int"),
+ * //                     },
+ * //                     EndTimecode: "STRING_VALUE",
+ * //                     StartTimecode: "STRING_VALUE",
+ * //                   },
+ * //                 ],
  * //               },
  * //             ],
  * //             VideoSelector: { // VideoSelector
@@ -405,6 +427,10 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                     DashSignaledSystemIds: [ // __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12
  * //                       "STRING_VALUE",
  * //                     ],
+ * //                     EncryptionContractConfiguration: { // EncryptionContractConfiguration
+ * //                       SpekeAudioPreset: "PRESET_AUDIO_1" || "PRESET_AUDIO_2" || "PRESET_AUDIO_3" || "SHARED" || "UNENCRYPTED",
+ * //                       SpekeVideoPreset: "PRESET_VIDEO_1" || "PRESET_VIDEO_2" || "PRESET_VIDEO_3" || "PRESET_VIDEO_4" || "PRESET_VIDEO_5" || "PRESET_VIDEO_6" || "PRESET_VIDEO_7" || "PRESET_VIDEO_8" || "SHARED" || "UNENCRYPTED",
+ * //                     },
  * //                     HlsSignaledSystemIds: [
  * //                       "STRING_VALUE",
  * //                     ],
@@ -477,6 +503,10 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                   PlaybackDeviceCompatibility: "CENC_V1" || "UNENCRYPTED_SEI",
  * //                   SpekeKeyProvider: { // SpekeKeyProvider
  * //                     CertificateArn: "STRING_VALUE",
+ * //                     EncryptionContractConfiguration: {
+ * //                       SpekeAudioPreset: "PRESET_AUDIO_1" || "PRESET_AUDIO_2" || "PRESET_AUDIO_3" || "SHARED" || "UNENCRYPTED",
+ * //                       SpekeVideoPreset: "PRESET_VIDEO_1" || "PRESET_VIDEO_2" || "PRESET_VIDEO_3" || "PRESET_VIDEO_4" || "PRESET_VIDEO_5" || "PRESET_VIDEO_6" || "PRESET_VIDEO_7" || "PRESET_VIDEO_8" || "SHARED" || "UNENCRYPTED",
+ * //                     },
  * //                     ResourceId: "STRING_VALUE",
  * //                     SystemIds: [ // __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12
  * //                       "STRING_VALUE",
@@ -570,6 +600,10 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                   OfflineEncrypted: "ENABLED" || "DISABLED",
  * //                   SpekeKeyProvider: {
  * //                     CertificateArn: "STRING_VALUE",
+ * //                     EncryptionContractConfiguration: {
+ * //                       SpekeAudioPreset: "PRESET_AUDIO_1" || "PRESET_AUDIO_2" || "PRESET_AUDIO_3" || "SHARED" || "UNENCRYPTED",
+ * //                       SpekeVideoPreset: "PRESET_VIDEO_1" || "PRESET_VIDEO_2" || "PRESET_VIDEO_3" || "PRESET_VIDEO_4" || "PRESET_VIDEO_5" || "PRESET_VIDEO_6" || "PRESET_VIDEO_7" || "PRESET_VIDEO_8" || "SHARED" || "UNENCRYPTED",
+ * //                     },
  * //                     ResourceId: "STRING_VALUE",
  * //                     SystemIds: [
  * //                       "STRING_VALUE",
@@ -638,6 +672,10 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                 Encryption: { // MsSmoothEncryptionSettings
  * //                   SpekeKeyProvider: {
  * //                     CertificateArn: "STRING_VALUE",
+ * //                     EncryptionContractConfiguration: {
+ * //                       SpekeAudioPreset: "PRESET_AUDIO_1" || "PRESET_AUDIO_2" || "PRESET_AUDIO_3" || "SHARED" || "UNENCRYPTED",
+ * //                       SpekeVideoPreset: "PRESET_VIDEO_1" || "PRESET_VIDEO_2" || "PRESET_VIDEO_3" || "PRESET_VIDEO_4" || "PRESET_VIDEO_5" || "PRESET_VIDEO_6" || "PRESET_VIDEO_7" || "PRESET_VIDEO_8" || "SHARED" || "UNENCRYPTED",
+ * //                     },
  * //                     ResourceId: "STRING_VALUE",
  * //                     SystemIds: [
  * //                       "STRING_VALUE",
@@ -918,7 +956,7 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                     TimedMetadataSchemeIdUri: "STRING_VALUE",
  * //                     TimedMetadataValue: "STRING_VALUE",
  * //                   },
- * //                   Container: "F4V" || "ISMV" || "M2TS" || "M3U8" || "CMFC" || "MOV" || "MP4" || "MPD" || "MXF" || "WEBM" || "RAW" || "Y4M",
+ * //                   Container: "F4V" || "ISMV" || "M2TS" || "M3U8" || "CMFC" || "MOV" || "MP4" || "MPD" || "MXF" || "OGG" || "WEBM" || "RAW" || "Y4M",
  * //                   F4vSettings: { // F4vSettings
  * //                     MoovPlacement: "PROGRESSIVE_DOWNLOAD" || "NORMAL",
  * //                   },
@@ -1144,6 +1182,7 @@ export interface ListJobTemplatesCommandOutput extends ListJobTemplatesResponse,
  * //                       },
  * //                       RateControlMode: "VBR" || "CBR" || "QVBR",
  * //                       RepeatPps: "DISABLED" || "ENABLED",
+ * //                       SaliencyAwareEncoding: "DISABLED" || "PREFERRED",
  * //                       ScanTypeConversionMode: "INTERLACED" || "INTERLACED_OPTIMIZE",
  * //                       SceneChangeDetect: "DISABLED" || "ENABLED" || "TRANSITION_DETECTION",
  * //                       Slices: Number("int"),
@@ -1540,9 +1579,7 @@ export class ListJobTemplatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConvertClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -1554,4 +1591,16 @@ export class ListJobTemplatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListJobTemplatesCommand)
   .de(de_ListJobTemplatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobTemplatesRequest;
+      output: ListJobTemplatesResponse;
+    };
+    sdk: {
+      input: ListJobTemplatesCommandInput;
+      output: ListJobTemplatesCommandOutput;
+    };
+  };
+}

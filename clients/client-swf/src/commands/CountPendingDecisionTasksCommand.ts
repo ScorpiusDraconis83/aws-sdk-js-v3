@@ -102,9 +102,7 @@ export class CountPendingDecisionTasksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SWFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class CountPendingDecisionTasksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CountPendingDecisionTasksCommand)
   .de(de_CountPendingDecisionTasksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CountPendingDecisionTasksInput;
+      output: PendingTaskCount;
+    };
+    sdk: {
+      input: CountPendingDecisionTasksCommandInput;
+      output: CountPendingDecisionTasksCommandOutput;
+    };
+  };
+}

@@ -206,9 +206,7 @@ export class CreateTableCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -220,4 +218,16 @@ export class CreateTableCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTableCommand)
   .de(de_CreateTableCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTableRequest;
+      output: {};
+    };
+    sdk: {
+      input: CreateTableCommandInput;
+      output: CreateTableCommandOutput;
+    };
+  };
+}

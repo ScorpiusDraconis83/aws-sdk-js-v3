@@ -71,6 +71,12 @@ export interface UpdatePromptCommandOutput extends UpdatePromptResponse, __Metad
  *           ],
  *         },
  *       },
+ *       metadata: [ // PromptMetadataList
+ *         { // PromptMetadataEntry
+ *           key: "STRING_VALUE", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *       ],
  *     },
  *   ],
  *   promptIdentifier: "STRING_VALUE", // required
@@ -108,6 +114,12 @@ export interface UpdatePromptCommandOutput extends UpdatePromptResponse, __Metad
  * //           ],
  * //         },
  * //       },
+ * //       metadata: [ // PromptMetadataList
+ * //         { // PromptMetadataEntry
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
  * //     },
  * //   ],
  * //   id: "STRING_VALUE", // required
@@ -159,9 +171,7 @@ export class UpdatePromptCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -173,4 +183,16 @@ export class UpdatePromptCommand extends $Command
   .f(UpdatePromptRequestFilterSensitiveLog, UpdatePromptResponseFilterSensitiveLog)
   .ser(se_UpdatePromptCommand)
   .de(de_UpdatePromptCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePromptRequest;
+      output: UpdatePromptResponse;
+    };
+    sdk: {
+      input: UpdatePromptCommandInput;
+      output: UpdatePromptCommandOutput;
+    };
+  };
+}

@@ -133,9 +133,7 @@ export class SubmitTaskStateChangeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class SubmitTaskStateChangeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SubmitTaskStateChangeCommand)
   .de(de_SubmitTaskStateChangeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SubmitTaskStateChangeRequest;
+      output: SubmitTaskStateChangeResponse;
+    };
+    sdk: {
+      input: SubmitTaskStateChangeCommandInput;
+      output: SubmitTaskStateChangeCommandOutput;
+    };
+  };
+}

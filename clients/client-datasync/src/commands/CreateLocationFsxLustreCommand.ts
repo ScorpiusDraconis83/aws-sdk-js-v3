@@ -86,9 +86,7 @@ export class CreateLocationFsxLustreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class CreateLocationFsxLustreCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateLocationFsxLustreCommand)
   .de(de_CreateLocationFsxLustreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLocationFsxLustreRequest;
+      output: CreateLocationFsxLustreResponse;
+    };
+    sdk: {
+      input: CreateLocationFsxLustreCommandInput;
+      output: CreateLocationFsxLustreCommandOutput;
+    };
+  };
+}

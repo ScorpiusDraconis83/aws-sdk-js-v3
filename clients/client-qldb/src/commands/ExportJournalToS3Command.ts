@@ -92,9 +92,7 @@ export class ExportJournalToS3Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QLDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class ExportJournalToS3Command extends $Command
   .f(void 0, void 0)
   .ser(se_ExportJournalToS3Command)
   .de(de_ExportJournalToS3Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportJournalToS3Request;
+      output: ExportJournalToS3Response;
+    };
+    sdk: {
+      input: ExportJournalToS3CommandInput;
+      output: ExportJournalToS3CommandOutput;
+    };
+  };
+}

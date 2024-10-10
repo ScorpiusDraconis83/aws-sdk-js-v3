@@ -113,9 +113,7 @@ export class GetCollaborationIdNamespaceAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class GetCollaborationIdNamespaceAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetCollaborationIdNamespaceAssociationCommand)
   .de(de_GetCollaborationIdNamespaceAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCollaborationIdNamespaceAssociationInput;
+      output: GetCollaborationIdNamespaceAssociationOutput;
+    };
+    sdk: {
+      input: GetCollaborationIdNamespaceAssociationCommandInput;
+      output: GetCollaborationIdNamespaceAssociationCommandOutput;
+    };
+  };
+}

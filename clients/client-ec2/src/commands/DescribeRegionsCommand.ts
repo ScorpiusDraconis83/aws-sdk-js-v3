@@ -43,6 +43,11 @@ export interface DescribeRegionsCommandOutput extends DescribeRegionsResult, __M
  * // const { EC2Client, DescribeRegionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeRegionsRequest
+ *   RegionNames: [ // RegionNameStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   AllRegions: true || false,
+ *   DryRun: true || false,
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -51,20 +56,15 @@ export interface DescribeRegionsCommandOutput extends DescribeRegionsResult, __M
  *       ],
  *     },
  *   ],
- *   RegionNames: [ // RegionNameStringList
- *     "STRING_VALUE",
- *   ],
- *   DryRun: true || false,
- *   AllRegions: true || false,
  * };
  * const command = new DescribeRegionsCommand(input);
  * const response = await client.send(command);
  * // { // DescribeRegionsResult
  * //   Regions: [ // RegionList
  * //     { // Region
- * //       Endpoint: "STRING_VALUE",
- * //       RegionName: "STRING_VALUE",
  * //       OptInStatus: "STRING_VALUE",
+ * //       RegionName: "STRING_VALUE",
+ * //       Endpoint: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -149,9 +149,7 @@ export class DescribeRegionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -163,4 +161,16 @@ export class DescribeRegionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRegionsCommand)
   .de(de_DescribeRegionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRegionsRequest;
+      output: DescribeRegionsResult;
+    };
+    sdk: {
+      input: DescribeRegionsCommandInput;
+      output: DescribeRegionsCommandOutput;
+    };
+  };
+}

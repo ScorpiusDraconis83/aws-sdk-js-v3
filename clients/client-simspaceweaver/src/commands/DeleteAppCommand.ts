@@ -80,9 +80,7 @@ export class DeleteAppCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SimSpaceWeaverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DeleteAppCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAppCommand)
   .de(de_DeleteAppCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAppInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteAppCommandInput;
+      output: DeleteAppCommandOutput;
+    };
+  };
+}

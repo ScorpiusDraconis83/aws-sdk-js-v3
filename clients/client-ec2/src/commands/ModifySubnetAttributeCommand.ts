@@ -124,9 +124,7 @@ export class ModifySubnetAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class ModifySubnetAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifySubnetAttributeCommand)
   .de(de_ModifySubnetAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySubnetAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifySubnetAttributeCommandInput;
+      output: ModifySubnetAttributeCommandOutput;
+    };
+  };
+}

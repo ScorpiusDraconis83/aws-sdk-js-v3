@@ -140,9 +140,7 @@ export class InferICD10CMCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendMedicalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class InferICD10CMCommand extends $Command
   .f(void 0, void 0)
   .ser(se_InferICD10CMCommand)
   .de(de_InferICD10CMCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InferICD10CMRequest;
+      output: InferICD10CMResponse;
+    };
+    sdk: {
+      input: InferICD10CMCommandInput;
+      output: InferICD10CMCommandOutput;
+    };
+  };
+}

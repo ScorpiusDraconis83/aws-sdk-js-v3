@@ -114,9 +114,7 @@ export class RevokeCertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMPCAClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class RevokeCertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RevokeCertificateCommand)
   .de(de_RevokeCertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeCertificateRequest;
+      output: {};
+    };
+    sdk: {
+      input: RevokeCertificateCommandInput;
+      output: RevokeCertificateCommandOutput;
+    };
+  };
+}

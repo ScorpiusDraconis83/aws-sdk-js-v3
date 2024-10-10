@@ -80,6 +80,27 @@ export interface GetDirectoryCommandOutput extends GetDirectoryResponse, __Metad
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To get information about a directory
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY"
+ * };
+ * const command = new GetDirectoryCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "Directory": {
+ *     "CreationDateTime": 1506115781.186,
+ *     "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *     "Name": "ExampleCD",
+ *     "State": "ENABLED"
+ *   }
+ * }
+ * *\/
+ * // example id: to-get-information-about-a-directory-1507235667410
+ * ```
+ *
  */
 export class GetDirectoryCommand extends $Command
   .classBuilder<
@@ -89,9 +110,7 @@ export class GetDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +122,16 @@ export class GetDirectoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDirectoryCommand)
   .de(de_GetDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDirectoryRequest;
+      output: GetDirectoryResponse;
+    };
+    sdk: {
+      input: GetDirectoryCommandInput;
+      output: GetDirectoryCommandOutput;
+    };
+  };
+}

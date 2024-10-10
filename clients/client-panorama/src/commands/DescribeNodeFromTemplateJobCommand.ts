@@ -106,9 +106,7 @@ export class DescribeNodeFromTemplateJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PanoramaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class DescribeNodeFromTemplateJobCommand extends $Command
   .f(void 0, DescribeNodeFromTemplateJobResponseFilterSensitiveLog)
   .ser(se_DescribeNodeFromTemplateJobCommand)
   .de(de_DescribeNodeFromTemplateJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNodeFromTemplateJobRequest;
+      output: DescribeNodeFromTemplateJobResponse;
+    };
+    sdk: {
+      input: DescribeNodeFromTemplateJobCommandInput;
+      output: DescribeNodeFromTemplateJobCommandOutput;
+    };
+  };
+}

@@ -120,9 +120,7 @@ export class CreateLegalHoldCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class CreateLegalHoldCommand extends $Command
   .f(CreateLegalHoldInputFilterSensitiveLog, void 0)
   .ser(se_CreateLegalHoldCommand)
   .de(de_CreateLegalHoldCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLegalHoldInput;
+      output: CreateLegalHoldOutput;
+    };
+    sdk: {
+      input: CreateLegalHoldCommandInput;
+      output: CreateLegalHoldCommandOutput;
+    };
+  };
+}

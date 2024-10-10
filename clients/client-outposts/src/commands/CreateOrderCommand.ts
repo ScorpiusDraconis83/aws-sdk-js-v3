@@ -52,7 +52,7 @@ export interface CreateOrderCommandOutput extends CreateOrderOutput, __MetadataB
  * //   Order: { // Order
  * //     OutpostId: "STRING_VALUE",
  * //     OrderId: "STRING_VALUE",
- * //     Status: "RECEIVED" || "PENDING" || "PROCESSING" || "INSTALLING" || "FULFILLED" || "CANCELLED" || "PREPARING" || "IN_PROGRESS" || "COMPLETED" || "ERROR",
+ * //     Status: "RECEIVED" || "PENDING" || "PROCESSING" || "INSTALLING" || "FULFILLED" || "CANCELLED" || "PREPARING" || "IN_PROGRESS" || "DELIVERED" || "COMPLETED" || "ERROR",
  * //     LineItems: [ // LineItemListDefinition
  * //       { // LineItem
  * //         CatalogItemId: "STRING_VALUE",
@@ -122,9 +122,7 @@ export class CreateOrderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OutpostsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class CreateOrderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateOrderCommand)
   .de(de_CreateOrderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateOrderInput;
+      output: CreateOrderOutput;
+    };
+    sdk: {
+      input: CreateOrderCommandInput;
+      output: CreateOrderCommandOutput;
+    };
+  };
+}

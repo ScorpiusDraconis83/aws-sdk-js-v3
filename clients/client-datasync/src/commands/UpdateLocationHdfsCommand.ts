@@ -93,9 +93,7 @@ export class UpdateLocationHdfsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UpdateLocationHdfsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateLocationHdfsCommand)
   .de(de_UpdateLocationHdfsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLocationHdfsRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLocationHdfsCommandInput;
+      output: UpdateLocationHdfsCommandOutput;
+    };
+  };
+}

@@ -4244,6 +4244,20 @@ export class Ec2ImagePropertiesNotSupportedFault extends __BaseException {
  * @public
  * @enum
  */
+export const ClusterScalabilityType = {
+  LIMITLESS: "limitless",
+  STANDARD: "standard",
+} as const;
+
+/**
+ * @public
+ */
+export type ClusterScalabilityType = (typeof ClusterScalabilityType)[keyof typeof ClusterScalabilityType];
+
+/**
+ * @public
+ * @enum
+ */
 export const ReplicaMode = {
   MOUNTED: "mounted",
   OPEN_READ_ONLY: "open-read-only",
@@ -5164,6 +5178,17 @@ export interface CreateDBClusterMessage {
    * @public
    */
   NetworkType?: string;
+
+  /**
+   * <p>Specifies the scalability mode of the Aurora DB cluster. When set to <code>limitless</code>, the cluster operates as an Aurora Limitless Database.
+   *             When set to <code>standard</code> (the default), the cluster uses normal DB instance creation.</p>
+   *          <p>Valid for: Aurora DB clusters only</p>
+   *          <note>
+   *             <p>You can't modify this setting after you create the DB cluster.</p>
+   *          </note>
+   * @public
+   */
+  ClusterScalabilityType?: ClusterScalabilityType;
 
   /**
    * <p>Reserved for future use.</p>
@@ -6340,6 +6365,13 @@ export interface DBCluster {
   StorageThroughput?: number;
 
   /**
+   * <p>The scalability mode of the Aurora DB cluster. When set to <code>limitless</code>, the cluster operates as an Aurora Limitless Database.
+   *             When set to <code>standard</code> (the default), the cluster uses normal DB instance creation.</p>
+   * @public
+   */
+  ClusterScalabilityType?: ClusterScalabilityType;
+
+  /**
    * <p>The details of the DB instance’s server certificate.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB
    *             instance</a> in the <i>Amazon RDS User Guide</i> and
@@ -7430,6 +7462,10 @@ export interface CreateDBInstanceMessage {
    *             </li>
    *             <li>
    *                <p>
+   *                   <code>custom-sqlserver-dev</code> (for RDS Custom for SQL Server DB instances)</p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>db2-ae</code>
    *                </p>
    *             </li>
@@ -7602,9 +7638,6 @@ export interface CreateDBInstanceMessage {
    *          <ul>
    *             <li>
    *                <p>Must match the name of an existing DB subnet group.</p>
-   *             </li>
-   *             <li>
-   *                <p>Must not be <code>default</code>.</p>
    *             </li>
    *          </ul>
    *          <p>Example: <code>mydbsubnetgroup</code>
@@ -7841,9 +7874,9 @@ export interface CreateDBInstanceMessage {
    * <p>The license model information for this DB instance.</p>
    *          <note>
    *             <p>License models for RDS for Db2 require additional configuration. The Bring Your
-   *                 Own License (BYOL) model requires a custom parameter group. The Db2 license through
+   *                 Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
    *                 Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">RDS for Db2 licensing
+   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
    *                     options</a> in the <i>Amazon RDS User Guide</i>.</p>
    *             <p>The default for RDS for Db2 is <code>bring-your-own-license</code>.</p>
    *          </note>
@@ -8613,7 +8646,34 @@ export interface DBParameterGroupStatus {
   DBParameterGroupName?: string;
 
   /**
-   * <p>The status of parameter updates.</p>
+   * <p>The status of parameter updates. Valid values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>applying</code>: The parameter group change is being applied to the
+   *                     database.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>failed-to-apply</code>: The parameter group is in an invalid
+   *                     state.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>in-sync</code>: The parameter group change is synchronized with the
+   *                     database.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>pending-database-upgrade</code>: The parameter group change will be
+   *                     applied after the DB instance is upgraded.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>pending-reboot</code>: The parameter group change will be applied after
+   *                     the DB instance reboots.</p>
+   *             </li>
+   *          </ul>
    * @public
    */
   ParameterApplyStatus?: string;
@@ -9908,12 +9968,20 @@ export interface CreateDBInstanceReadReplicaMessage {
   OptionGroupName?: string;
 
   /**
-   * <p>The name of the DB parameter group to associate with this DB instance.</p>
-   *          <p>If you don't specify a value for <code>DBParameterGroupName</code>, then Amazon RDS
-   *             uses the <code>DBParameterGroup</code> of the source DB instance for a same Region read
+   * <p>The name of the DB parameter group to associate with this read replica DB
+   *             instance.</p>
+   *          <p>For Single-AZ or Multi-AZ DB instance read replica instances, if you don't specify a
+   *             value for <code>DBParameterGroupName</code>, then Amazon RDS uses the
+   *                 <code>DBParameterGroup</code> of the source DB instance for a same Region read
    *             replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a
    *             cross-Region read replica.</p>
-   *          <p>Specifying a parameter group for this operation is only supported for MySQL DB instances for cross-Region read replicas and for Oracle DB instances. It isn't supported for MySQL DB instances for same Region read replicas or for RDS Custom.</p>
+   *          <p>For Multi-AZ DB cluster same Region read replica instances, if you don't specify a
+   *             value for <code>DBParameterGroupName</code>, then Amazon RDS uses the default
+   *                 <code>DBParameterGroup</code>.</p>
+   *          <p>Specifying a parameter group for this operation is only supported for MySQL DB
+   *             instances for cross-Region read replicas, for Multi-AZ DB cluster read replica
+   *             instances, and for Oracle DB instances. It isn't supported for MySQL DB instances for
+   *             same Region read replicas or for RDS Custom.</p>
    *          <p>Constraints:</p>
    *          <ul>
    *             <li>
@@ -10118,9 +10186,6 @@ export interface CreateDBInstanceReadReplicaMessage {
    *                 instead of specifying <code>PreSignedUrl</code> manually. Specifying
    *                     <code>SourceRegion</code> autogenerates a presigned URL that is a valid request
    *                 for the operation that can run in the source Amazon Web Services Region.</p>
-   *             <p>
-   *                <code>SourceRegion</code> isn't supported for SQL Server, because Amazon RDS for SQL Server
-   *                 doesn't support cross-Region read replicas.</p>
    *          </note>
    *          <p>This setting doesn't apply to RDS Custom DB instances.</p>
    * @public
@@ -11408,16 +11473,16 @@ export interface CreateDBShardGroupMessage {
   DBClusterIdentifier: string | undefined;
 
   /**
-   * <p>Specifies whether to create standby instances for the DB shard group. Valid values are the following:</p>
+   * <p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>
    *          <ul>
    *             <li>
-   *                <p>0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.</p>
+   *                <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>
    *             </li>
    *             <li>
-   *                <p>1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.</p>
+   *                <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>
    *             </li>
    *             <li>
-   *                <p>2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.</p>
+   *                <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>
    *             </li>
    *          </ul>
    * @public
@@ -11465,6 +11530,16 @@ export interface CreateDBShardGroupMessage {
    * @public
    */
   PubliclyAccessible?: boolean;
+
+  /**
+   * <p>A list of tags.</p>
+   *          <p>For more information, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
+   *             </p>
+   * @public
+   */
+  Tags?: Tag[];
 }
 
 /**
@@ -11502,16 +11577,16 @@ export interface DBShardGroup {
   MinACU?: number;
 
   /**
-   * <p>Specifies whether to create standby instances for the DB shard group. Valid values are the following:</p>
+   * <p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>
    *          <ul>
    *             <li>
-   *                <p>0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.</p>
+   *                <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>
    *             </li>
    *             <li>
-   *                <p>1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.</p>
+   *                <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>
    *             </li>
    *             <li>
-   *                <p>2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.</p>
+   *                <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>
    *             </li>
    *          </ul>
    * @public
@@ -11544,6 +11619,22 @@ export interface DBShardGroup {
    * @public
    */
   Endpoint?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the DB shard group.</p>
+   * @public
+   */
+  DBShardGroupArn?: string;
+
+  /**
+   * <p>A list of tags.</p>
+   *          <p>For more information, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
+   *             </p>
+   * @public
+   */
+  TagList?: Tag[];
 }
 
 /**
@@ -11563,26 +11654,6 @@ export class DBShardGroupAlreadyExistsFault extends __BaseException {
       ...opts,
     });
     Object.setPrototypeOf(this, DBShardGroupAlreadyExistsFault.prototype);
-  }
-}
-
-/**
- * <p>The maximum capacity of the DB shard group must be 48-7168 Aurora capacity units (ACUs).</p>
- * @public
- */
-export class InvalidMaxAcuFault extends __BaseException {
-  readonly name: "InvalidMaxAcuFault" = "InvalidMaxAcuFault";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidMaxAcuFault, __BaseException>) {
-    super({
-      name: "InvalidMaxAcuFault",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidMaxAcuFault.prototype);
   }
 }
 
@@ -12155,6 +12226,12 @@ export interface CreateGlobalClusterMessage {
    * @public
    */
   StorageEncrypted?: boolean;
+
+  /**
+   * <p>Tags to assign to the global cluster.</p>
+   * @public
+   */
+  Tags?: Tag[];
 }
 
 /**
@@ -12360,6 +12437,16 @@ export interface GlobalCluster {
    * @public
    */
   FailoverState?: FailoverState;
+
+  /**
+   * <p>A list of tags.</p>
+   *          <p>For more information, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
+   *             </p>
+   * @public
+   */
+  TagList?: Tag[];
 }
 
 /**

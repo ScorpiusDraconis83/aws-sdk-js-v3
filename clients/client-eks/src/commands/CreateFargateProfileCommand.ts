@@ -165,9 +165,7 @@ export class CreateFargateProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EKSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class CreateFargateProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFargateProfileCommand)
   .de(de_CreateFargateProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFargateProfileRequest;
+      output: CreateFargateProfileResponse;
+    };
+    sdk: {
+      input: CreateFargateProfileCommandInput;
+      output: CreateFargateProfileCommandOutput;
+    };
+  };
+}

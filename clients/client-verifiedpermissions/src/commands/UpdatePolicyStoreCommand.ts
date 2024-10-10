@@ -177,6 +177,28 @@ export interface UpdatePolicyStoreCommandOutput extends UpdatePolicyStoreOutput,
  * <p>Base exception class for all service exceptions from VerifiedPermissions service.</p>
  *
  * @public
+ * @example UpdatePolicyStore
+ * ```javascript
+ * // The following example turns off the validation settings for a policy store.
+ * const input = {
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+ *   "validationSettings": {
+ *     "mode": "OFF"
+ *   }
+ * };
+ * const command = new UpdatePolicyStoreCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "arn": "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a",
+ *   "createdDate": "2023-05-17T18:36:10.134448Z",
+ *   "lastUpdatedDate": "2023-05-23T18:18:12.443083Z",
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+ * }
+ * *\/
+ * // example id: example-1
+ * ```
+ *
  */
 export class UpdatePolicyStoreCommand extends $Command
   .classBuilder<
@@ -186,9 +208,7 @@ export class UpdatePolicyStoreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VerifiedPermissionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -200,4 +220,16 @@ export class UpdatePolicyStoreCommand extends $Command
   .f(UpdatePolicyStoreInputFilterSensitiveLog, void 0)
   .ser(se_UpdatePolicyStoreCommand)
   .de(de_UpdatePolicyStoreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePolicyStoreInput;
+      output: UpdatePolicyStoreOutput;
+    };
+    sdk: {
+      input: UpdatePolicyStoreCommandInput;
+      output: UpdatePolicyStoreCommandOutput;
+    };
+  };
+}

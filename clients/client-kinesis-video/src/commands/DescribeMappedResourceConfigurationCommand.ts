@@ -96,9 +96,7 @@ export class DescribeMappedResourceConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisVideoClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class DescribeMappedResourceConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeMappedResourceConfigurationCommand)
   .de(de_DescribeMappedResourceConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeMappedResourceConfigurationInput;
+      output: DescribeMappedResourceConfigurationOutput;
+    };
+    sdk: {
+      input: DescribeMappedResourceConfigurationCommandInput;
+      output: DescribeMappedResourceConfigurationCommandOutput;
+    };
+  };
+}

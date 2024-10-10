@@ -340,9 +340,7 @@ export class DescribeDataSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -354,4 +352,16 @@ export class DescribeDataSetCommand extends $Command
   .f(void 0, DescribeDataSetResponseFilterSensitiveLog)
   .ser(se_DescribeDataSetCommand)
   .de(de_DescribeDataSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDataSetRequest;
+      output: DescribeDataSetResponse;
+    };
+    sdk: {
+      input: DescribeDataSetCommandInput;
+      output: DescribeDataSetCommandOutput;
+    };
+  };
+}

@@ -81,9 +81,7 @@ export class PutObjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaStoreDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class PutObjectCommand extends $Command
   .f(PutObjectRequestFilterSensitiveLog, void 0)
   .ser(se_PutObjectCommand)
   .de(de_PutObjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutObjectRequest;
+      output: PutObjectResponse;
+    };
+    sdk: {
+      input: PutObjectCommandInput;
+      output: PutObjectCommandOutput;
+    };
+  };
+}

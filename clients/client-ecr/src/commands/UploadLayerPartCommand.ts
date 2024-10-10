@@ -107,9 +107,7 @@ export class UploadLayerPartCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class UploadLayerPartCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UploadLayerPartCommand)
   .de(de_UploadLayerPartCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadLayerPartRequest;
+      output: UploadLayerPartResponse;
+    };
+    sdk: {
+      input: UploadLayerPartCommandInput;
+      output: UploadLayerPartCommandOutput;
+    };
+  };
+}

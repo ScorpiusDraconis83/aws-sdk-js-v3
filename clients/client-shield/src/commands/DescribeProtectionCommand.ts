@@ -90,9 +90,7 @@ export class DescribeProtectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ShieldClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DescribeProtectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeProtectionCommand)
   .de(de_DescribeProtectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProtectionRequest;
+      output: DescribeProtectionResponse;
+    };
+    sdk: {
+      input: DescribeProtectionCommandInput;
+      output: DescribeProtectionCommandOutput;
+    };
+  };
+}

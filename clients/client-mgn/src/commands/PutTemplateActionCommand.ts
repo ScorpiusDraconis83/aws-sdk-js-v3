@@ -124,9 +124,7 @@ export class PutTemplateActionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class PutTemplateActionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutTemplateActionCommand)
   .de(de_PutTemplateActionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutTemplateActionRequest;
+      output: TemplateActionDocument;
+    };
+    sdk: {
+      input: PutTemplateActionCommandInput;
+      output: PutTemplateActionCommandOutput;
+    };
+  };
+}

@@ -117,9 +117,7 @@ export class UpdateExportCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexModelsV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class UpdateExportCommand extends $Command
   .f(UpdateExportRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateExportCommand)
   .de(de_UpdateExportCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateExportRequest;
+      output: UpdateExportResponse;
+    };
+    sdk: {
+      input: UpdateExportCommandInput;
+      output: UpdateExportCommandOutput;
+    };
+  };
+}

@@ -139,9 +139,7 @@ export class ListCustomLineItemsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BillingconductorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class ListCustomLineItemsCommand extends $Command
   .f(ListCustomLineItemsInputFilterSensitiveLog, ListCustomLineItemsOutputFilterSensitiveLog)
   .ser(se_ListCustomLineItemsCommand)
   .de(de_ListCustomLineItemsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomLineItemsInput;
+      output: ListCustomLineItemsOutput;
+    };
+    sdk: {
+      input: ListCustomLineItemsCommandInput;
+      output: ListCustomLineItemsCommandOutput;
+    };
+  };
+}

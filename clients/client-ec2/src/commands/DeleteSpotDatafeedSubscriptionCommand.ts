@@ -75,9 +75,7 @@ export class DeleteSpotDatafeedSubscriptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -89,4 +87,16 @@ export class DeleteSpotDatafeedSubscriptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSpotDatafeedSubscriptionCommand)
   .de(de_DeleteSpotDatafeedSubscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSpotDatafeedSubscriptionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteSpotDatafeedSubscriptionCommandInput;
+      output: DeleteSpotDatafeedSubscriptionCommandOutput;
+    };
+  };
+}

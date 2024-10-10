@@ -29,7 +29,7 @@ export interface GetFindingsCommandOutput extends GetFindingsResponse, __Metadat
 
 /**
  * <p>Returns a list of findings that match the specified criteria.</p>
- *          <p>If finding aggregation is enabled, then when you call <code>GetFindings</code> from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.</p>
+ *          <p>If cross-Region aggregation is enabled, then when you call <code>GetFindings</code> from the home Region, the results include all of the matching findings from both the home Region and linked Regions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -4649,9 +4649,7 @@ export class GetFindingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -4663,4 +4661,16 @@ export class GetFindingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFindingsCommand)
   .de(de_GetFindingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingsRequest;
+      output: GetFindingsResponse;
+    };
+    sdk: {
+      input: GetFindingsCommandInput;
+      output: GetFindingsCommandOutput;
+    };
+  };
+}

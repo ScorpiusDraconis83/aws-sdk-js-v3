@@ -136,9 +136,7 @@ export class UpdateAttendeeCapabilitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMeetingsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -150,4 +148,16 @@ export class UpdateAttendeeCapabilitiesCommand extends $Command
   .f(void 0, UpdateAttendeeCapabilitiesResponseFilterSensitiveLog)
   .ser(se_UpdateAttendeeCapabilitiesCommand)
   .de(de_UpdateAttendeeCapabilitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAttendeeCapabilitiesRequest;
+      output: UpdateAttendeeCapabilitiesResponse;
+    };
+    sdk: {
+      input: UpdateAttendeeCapabilitiesCommandInput;
+      output: UpdateAttendeeCapabilitiesCommandOutput;
+    };
+  };
+}

@@ -120,9 +120,7 @@ export class CreateFunctionDefinitionVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class CreateFunctionDefinitionVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFunctionDefinitionVersionCommand)
   .de(de_CreateFunctionDefinitionVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFunctionDefinitionVersionRequest;
+      output: CreateFunctionDefinitionVersionResponse;
+    };
+    sdk: {
+      input: CreateFunctionDefinitionVersionCommandInput;
+      output: CreateFunctionDefinitionVersionCommandOutput;
+    };
+  };
+}

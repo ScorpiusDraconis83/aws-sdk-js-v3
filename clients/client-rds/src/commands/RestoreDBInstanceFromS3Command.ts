@@ -432,9 +432,7 @@ export class RestoreDBInstanceFromS3Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -446,4 +444,16 @@ export class RestoreDBInstanceFromS3Command extends $Command
   .f(void 0, void 0)
   .ser(se_RestoreDBInstanceFromS3Command)
   .de(de_RestoreDBInstanceFromS3Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreDBInstanceFromS3Message;
+      output: RestoreDBInstanceFromS3Result;
+    };
+    sdk: {
+      input: RestoreDBInstanceFromS3CommandInput;
+      output: RestoreDBInstanceFromS3CommandOutput;
+    };
+  };
+}

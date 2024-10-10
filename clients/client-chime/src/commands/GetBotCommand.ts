@@ -97,9 +97,7 @@ export class GetBotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class GetBotCommand extends $Command
   .f(void 0, GetBotResponseFilterSensitiveLog)
   .ser(se_GetBotCommand)
   .de(de_GetBotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBotRequest;
+      output: GetBotResponse;
+    };
+    sdk: {
+      input: GetBotCommandInput;
+      output: GetBotCommandOutput;
+    };
+  };
+}

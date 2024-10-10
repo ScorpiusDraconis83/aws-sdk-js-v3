@@ -293,9 +293,7 @@ export class CompareFacesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -307,4 +305,16 @@ export class CompareFacesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CompareFacesCommand)
   .de(de_CompareFacesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CompareFacesRequest;
+      output: CompareFacesResponse;
+    };
+    sdk: {
+      input: CompareFacesCommandInput;
+      output: CompareFacesCommandOutput;
+    };
+  };
+}

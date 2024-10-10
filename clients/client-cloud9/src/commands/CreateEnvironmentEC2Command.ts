@@ -128,9 +128,7 @@ export class CreateEnvironmentEC2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Cloud9ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class CreateEnvironmentEC2Command extends $Command
   .f(CreateEnvironmentEC2RequestFilterSensitiveLog, void 0)
   .ser(se_CreateEnvironmentEC2Command)
   .de(de_CreateEnvironmentEC2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentEC2Request;
+      output: CreateEnvironmentEC2Result;
+    };
+    sdk: {
+      input: CreateEnvironmentEC2CommandInput;
+      output: CreateEnvironmentEC2CommandOutput;
+    };
+  };
+}

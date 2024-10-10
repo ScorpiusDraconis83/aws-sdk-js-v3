@@ -37,9 +37,9 @@ export interface DeleteNetworkAclEntryCommandOutput extends __MetadataBearer {}
  * const client = new EC2Client(config);
  * const input = { // DeleteNetworkAclEntryRequest
  *   DryRun: true || false,
- *   Egress: true || false, // required
  *   NetworkAclId: "STRING_VALUE", // required
  *   RuleNumber: Number("int"), // required
+ *   Egress: true || false, // required
  * };
  * const command = new DeleteNetworkAclEntryCommand(input);
  * const response = await client.send(command);
@@ -79,9 +79,7 @@ export class DeleteNetworkAclEntryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class DeleteNetworkAclEntryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteNetworkAclEntryCommand)
   .de(de_DeleteNetworkAclEntryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkAclEntryRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteNetworkAclEntryCommandInput;
+      output: DeleteNetworkAclEntryCommandOutput;
+    };
+  };
+}

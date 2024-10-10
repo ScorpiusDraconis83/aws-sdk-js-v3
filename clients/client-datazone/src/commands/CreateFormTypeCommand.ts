@@ -104,9 +104,7 @@ export class CreateFormTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class CreateFormTypeCommand extends $Command
   .f(CreateFormTypeInputFilterSensitiveLog, CreateFormTypeOutputFilterSensitiveLog)
   .ser(se_CreateFormTypeCommand)
   .de(de_CreateFormTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFormTypeInput;
+      output: CreateFormTypeOutput;
+    };
+    sdk: {
+      input: CreateFormTypeCommandInput;
+      output: CreateFormTypeCommandOutput;
+    };
+  };
+}

@@ -82,9 +82,7 @@ export class RemoveAllBackendsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyBackendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class RemoveAllBackendsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemoveAllBackendsCommand)
   .de(de_RemoveAllBackendsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveAllBackendsRequest;
+      output: RemoveAllBackendsResponse;
+    };
+    sdk: {
+      input: RemoveAllBackendsCommandInput;
+      output: RemoveAllBackendsCommandOutput;
+    };
+  };
+}

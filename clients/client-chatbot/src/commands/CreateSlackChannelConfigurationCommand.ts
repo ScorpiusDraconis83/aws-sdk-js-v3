@@ -91,6 +91,8 @@ export interface CreateSlackChannelConfigurationCommandOutput
  * //         TagValue: "STRING_VALUE", // required
  * //       },
  * //     ],
+ * //     State: "STRING_VALUE",
+ * //     StateReason: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -130,9 +132,7 @@ export class CreateSlackChannelConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChatbotClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +144,16 @@ export class CreateSlackChannelConfigurationCommand extends $Command
   .f(CreateSlackChannelConfigurationRequestFilterSensitiveLog, CreateSlackChannelConfigurationResultFilterSensitiveLog)
   .ser(se_CreateSlackChannelConfigurationCommand)
   .de(de_CreateSlackChannelConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSlackChannelConfigurationRequest;
+      output: CreateSlackChannelConfigurationResult;
+    };
+    sdk: {
+      input: CreateSlackChannelConfigurationCommandInput;
+      output: CreateSlackChannelConfigurationCommandOutput;
+    };
+  };
+}

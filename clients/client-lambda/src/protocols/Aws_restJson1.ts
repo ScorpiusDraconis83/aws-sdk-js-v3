@@ -14,6 +14,7 @@ import {
   expectObject as __expectObject,
   expectString as __expectString,
   extendedEncodeURIComponent as __extendedEncodeURIComponent,
+  isSerializableHeaderValue,
   limitedParseDouble as __limitedParseDouble,
   map,
   parseEpochTimestamp as __parseEpochTimestamp,
@@ -415,6 +416,7 @@ export const se_CreateCodeSigningConfigCommand = async (
       AllowedPublishers: (_) => _json(_),
       CodeSigningPolicies: (_) => _json(_),
       Description: [],
+      Tags: (_) => _json(_),
     })
   );
   b.m("POST").h(headers).b(body);
@@ -458,6 +460,7 @@ export const se_CreateEventSourceMappingCommand = async (
       SourceAccessConfigurations: (_) => _json(_),
       StartingPosition: [],
       StartingPositionTimestamp: (_) => _.getTime() / 1_000,
+      Tags: (_) => _json(_),
       Topics: (_) => _json(_),
       TumblingWindowInSeconds: [],
     })
@@ -1604,10 +1607,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/2017-03-31/tags/{Resource}");
   b.p("Resource", () => input.Resource!, "{Resource}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.TagKeys, `TagKeys`) != null,
-      () => (input[_TK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => input[_TK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -1942,6 +1942,7 @@ export const de_CreateEventSourceMappingCommand = async (
     DestinationConfig: _json,
     DocumentDBEventSourceConfig: _json,
     EventSourceArn: __expectString,
+    EventSourceMappingArn: __expectString,
     FilterCriteria: _json,
     FilterCriteriaError: _json,
     FunctionArn: __expectString,
@@ -2107,6 +2108,7 @@ export const de_DeleteEventSourceMappingCommand = async (
     DestinationConfig: _json,
     DocumentDBEventSourceConfig: _json,
     EventSourceArn: __expectString,
+    EventSourceMappingArn: __expectString,
     FilterCriteria: _json,
     FilterCriteriaError: _json,
     FunctionArn: __expectString,
@@ -2344,6 +2346,7 @@ export const de_GetEventSourceMappingCommand = async (
     DestinationConfig: _json,
     DocumentDBEventSourceConfig: _json,
     EventSourceArn: __expectString,
+    EventSourceMappingArn: __expectString,
     FilterCriteria: _json,
     FilterCriteriaError: _json,
     FunctionArn: __expectString,
@@ -3408,6 +3411,7 @@ export const de_UpdateEventSourceMappingCommand = async (
     DestinationConfig: _json,
     DocumentDBEventSourceConfig: _json,
     EventSourceArn: __expectString,
+    EventSourceMappingArn: __expectString,
     FilterCriteria: _json,
     FilterCriteriaError: _json,
     FunctionArn: __expectString,
@@ -4806,6 +4810,7 @@ const de_EventSourceMappingConfiguration = (output: any, context: __SerdeContext
     DestinationConfig: _json,
     DocumentDBEventSourceConfig: _json,
     EventSourceArn: __expectString,
+    EventSourceMappingArn: __expectString,
     FilterCriteria: _json,
     FilterCriteriaError: _json,
     FunctionArn: __expectString,
@@ -4974,13 +4979,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _A = "Arn";
 const _CA = "CompatibleArchitecture";

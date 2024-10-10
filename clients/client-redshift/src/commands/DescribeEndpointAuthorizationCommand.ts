@@ -94,9 +94,7 @@ export class DescribeEndpointAuthorizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class DescribeEndpointAuthorizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEndpointAuthorizationCommand)
   .de(de_DescribeEndpointAuthorizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndpointAuthorizationMessage;
+      output: EndpointAuthorizationList;
+    };
+    sdk: {
+      input: DescribeEndpointAuthorizationCommandInput;
+      output: DescribeEndpointAuthorizationCommandOutput;
+    };
+  };
+}

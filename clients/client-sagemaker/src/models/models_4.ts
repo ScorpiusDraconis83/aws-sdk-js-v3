@@ -13,13 +13,13 @@ import {
   BatchDataCaptureConfig,
   BatchStrategy,
   BatchTransformInput,
-  BooleanOperator,
   CacheHitResult,
   CallbackStepMetadata,
   Channel,
   CheckpointConfig,
   ClarifyCheckStepMetadata,
   ClusterInstanceGroupSpecification,
+  ClusterNodeRecovery,
   CodeEditorAppImageConfig,
   ConditionStepMetadata,
   ContainerDefinition,
@@ -47,7 +47,6 @@ import {
   DeploymentConfig,
   DriftCheckBaselines,
   EdgeOutputConfig,
-  ExperimentConfig,
   FeatureDefinition,
   InferenceComponentRuntimeConfig,
   InferenceComponentSpecification,
@@ -78,6 +77,7 @@ import {
   ShadowModeConfig,
   SkipModelValidation,
   SourceAlgorithmSpecification,
+  TagPropagation,
   ThroughputMode,
   TrackingServerSize,
   TtlDuration,
@@ -94,6 +94,7 @@ import {
   DebugRuleEvaluationStatus,
   DeploymentRecommendation,
   EndpointStatus,
+  ExperimentConfig,
   FeatureParameter,
   HyperParameterTrainingJobSummary,
   MemberDefinition,
@@ -147,6 +148,7 @@ import {
   LambdaStepMetadata,
   LineageType,
   MetricData,
+  ModelCardExportJobStatus,
   ModelPackageGroupStatus,
   ModelPackageStatusDetails,
   MonitoringExecutionSummary,
@@ -160,7 +162,6 @@ import {
   PipelineStatus,
   ProcessingJobStatus,
   ProjectStatus,
-  ResourceType,
   ScheduleStatus,
   SecondaryStatus,
   SecondaryStatusTransition,
@@ -180,6 +181,411 @@ import {
   Workforce,
   Workteam,
 } from "./models_3";
+
+/**
+ * @public
+ */
+export interface ListModelBiasJobDefinitionsResponse {
+  /**
+   * <p>A JSON array in which each element is a summary for a model bias jobs.</p>
+   * @public
+   */
+  JobDefinitionSummaries: MonitoringJobDefinitionSummary[] | undefined;
+
+  /**
+   * <p>The token returned if the response is truncated. To retrieve the next set of job executions, use
+   *    it in the next request.</p>
+   * @public
+   */
+  NextToken?: string;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardExportJobSortBy = {
+  CREATION_TIME: "CreationTime",
+  NAME: "Name",
+  STATUS: "Status",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardExportJobSortBy = (typeof ModelCardExportJobSortBy)[keyof typeof ModelCardExportJobSortBy];
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardExportJobSortOrder = {
+  ASCENDING: "Ascending",
+  DESCENDING: "Descending",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardExportJobSortOrder =
+  (typeof ModelCardExportJobSortOrder)[keyof typeof ModelCardExportJobSortOrder];
+
+/**
+ * @public
+ */
+export interface ListModelCardExportJobsRequest {
+  /**
+   * <p>List export jobs for the model card with the specified name.</p>
+   * @public
+   */
+  ModelCardName: string | undefined;
+
+  /**
+   * <p>List export jobs for the model card with the specified version.</p>
+   * @public
+   */
+  ModelCardVersion?: number;
+
+  /**
+   * <p>Only list model card export jobs that were created after the time specified.</p>
+   * @public
+   */
+  CreationTimeAfter?: Date;
+
+  /**
+   * <p>Only list model card export jobs that were created before the time specified.</p>
+   * @public
+   */
+  CreationTimeBefore?: Date;
+
+  /**
+   * <p>Only list model card export jobs with names that contain the specified string.</p>
+   * @public
+   */
+  ModelCardExportJobNameContains?: string;
+
+  /**
+   * <p>Only list model card export jobs with the specified status.</p>
+   * @public
+   */
+  StatusEquals?: ModelCardExportJobStatus;
+
+  /**
+   * <p>Sort model card export jobs by either name or creation time. Sorts by creation time by default.</p>
+   * @public
+   */
+  SortBy?: ModelCardExportJobSortBy;
+
+  /**
+   * <p>Sort model card export jobs by ascending or descending order.</p>
+   * @public
+   */
+  SortOrder?: ModelCardExportJobSortOrder;
+
+  /**
+   * <p>If the response to a previous <code>ListModelCardExportJobs</code> request was
+   *          truncated, the response includes a <code>NextToken</code>. To retrieve the next set of
+   *          model card export jobs, use the token in the next request.</p>
+   * @public
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of model card export jobs to list.</p>
+   * @public
+   */
+  MaxResults?: number;
+}
+
+/**
+ * <p>The summary of the Amazon SageMaker Model Card export job.</p>
+ * @public
+ */
+export interface ModelCardExportJobSummary {
+  /**
+   * <p>The name of the model card export job.</p>
+   * @public
+   */
+  ModelCardExportJobName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the model card export job.</p>
+   * @public
+   */
+  ModelCardExportJobArn: string | undefined;
+
+  /**
+   * <p>The completion status of the model card export job.</p>
+   * @public
+   */
+  Status: ModelCardExportJobStatus | undefined;
+
+  /**
+   * <p>The name of the model card that the export job exports.</p>
+   * @public
+   */
+  ModelCardName: string | undefined;
+
+  /**
+   * <p>The version of the model card that the export job exports.</p>
+   * @public
+   */
+  ModelCardVersion: number | undefined;
+
+  /**
+   * <p>The date and time that the model card export job was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time that the model card export job was last modified..</p>
+   * @public
+   */
+  LastModifiedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListModelCardExportJobsResponse {
+  /**
+   * <p>The summaries of the listed model card export jobs.</p>
+   * @public
+   */
+  ModelCardExportJobSummaries: ModelCardExportJobSummary[] | undefined;
+
+  /**
+   * <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model
+   *          card export jobs, use it in the subsequent request.</p>
+   * @public
+   */
+  NextToken?: string;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardSortBy = {
+  CREATION_TIME: "CreationTime",
+  NAME: "Name",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardSortBy = (typeof ModelCardSortBy)[keyof typeof ModelCardSortBy];
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardSortOrder = {
+  ASCENDING: "Ascending",
+  DESCENDING: "Descending",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardSortOrder = (typeof ModelCardSortOrder)[keyof typeof ModelCardSortOrder];
+
+/**
+ * @public
+ */
+export interface ListModelCardsRequest {
+  /**
+   * <p>Only list model cards that were created after the time specified.</p>
+   * @public
+   */
+  CreationTimeAfter?: Date;
+
+  /**
+   * <p>Only list model cards that were created before the time specified.</p>
+   * @public
+   */
+  CreationTimeBefore?: Date;
+
+  /**
+   * <p>The maximum number of model cards to list.</p>
+   * @public
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>Only list model cards with names that contain the specified string.</p>
+   * @public
+   */
+  NameContains?: string;
+
+  /**
+   * <p>Only list model cards with the specified approval status.</p>
+   * @public
+   */
+  ModelCardStatus?: ModelCardStatus;
+
+  /**
+   * <p>If the response to a previous <code>ListModelCards</code> request was truncated, the
+   *          response includes a <code>NextToken</code>. To retrieve the next set of model cards, use
+   *          the token in the next request.</p>
+   * @public
+   */
+  NextToken?: string;
+
+  /**
+   * <p>Sort model cards by either name or creation time. Sorts by creation time by default.</p>
+   * @public
+   */
+  SortBy?: ModelCardSortBy;
+
+  /**
+   * <p>Sort model cards by ascending or descending order.</p>
+   * @public
+   */
+  SortOrder?: ModelCardSortOrder;
+}
+
+/**
+ * <p>A summary of the model card.</p>
+ * @public
+ */
+export interface ModelCardSummary {
+  /**
+   * <p>The name of the model card.</p>
+   * @public
+   */
+  ModelCardName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the model card.</p>
+   * @public
+   */
+  ModelCardArn: string | undefined;
+
+  /**
+   * <p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Draft</code>: The model card is a work in progress.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PendingReview</code>: The model card is pending review.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Approved</code>: The model card is approved.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Archived</code>: The model card is archived. No more updates should be made to the model
+   *                card, but it can still be exported.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ModelCardStatus: ModelCardStatus | undefined;
+
+  /**
+   * <p>The date and time that the model card was created.</p>
+   * @public
+   */
+  CreationTime: Date | undefined;
+
+  /**
+   * <p>The date and time that the model card was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date;
+}
+
+/**
+ * @public
+ */
+export interface ListModelCardsResponse {
+  /**
+   * <p>The summaries of the listed model cards.</p>
+   * @public
+   */
+  ModelCardSummaries: ModelCardSummary[] | undefined;
+
+  /**
+   * <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model
+   *          cards, use it in the subsequent request.</p>
+   * @public
+   */
+  NextToken?: string;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardVersionSortBy = {
+  VERSION: "Version",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardVersionSortBy = (typeof ModelCardVersionSortBy)[keyof typeof ModelCardVersionSortBy];
+
+/**
+ * @public
+ */
+export interface ListModelCardVersionsRequest {
+  /**
+   * <p>Only list model card versions that were created after the time specified.</p>
+   * @public
+   */
+  CreationTimeAfter?: Date;
+
+  /**
+   * <p>Only list model card versions that were created before the time specified.</p>
+   * @public
+   */
+  CreationTimeBefore?: Date;
+
+  /**
+   * <p>The maximum number of model card versions to list.</p>
+   * @public
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>List model card versions for the model card with the specified name or Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  ModelCardName: string | undefined;
+
+  /**
+   * <p>Only list model card versions with the specified approval status.</p>
+   * @public
+   */
+  ModelCardStatus?: ModelCardStatus;
+
+  /**
+   * <p>If the response to a previous <code>ListModelCardVersions</code> request was truncated,
+   *          the response includes a <code>NextToken</code>. To retrieve the next set of model card
+   *          versions, use the token in the next request.</p>
+   * @public
+   */
+  NextToken?: string;
+
+  /**
+   * <p>Sort listed model card versions by version. Sorts by version by default.</p>
+   * @public
+   */
+  SortBy?: ModelCardVersionSortBy;
+
+  /**
+   * <p>Sort model card versions by ascending or descending order.</p>
+   * @public
+   */
+  SortOrder?: ModelCardSortOrder;
+}
 
 /**
  * <p>A summary of a specific version of the model card.</p>
@@ -8074,6 +8480,12 @@ export interface UpdateClusterRequest {
    * @public
    */
   InstanceGroups: ClusterInstanceGroupSpecification[] | undefined;
+
+  /**
+   * <p>The node recovery mode to be applied to the SageMaker HyperPod cluster.</p>
+   * @public
+   */
+  NodeRecovery?: ClusterNodeRecovery;
 }
 
 /**
@@ -8310,6 +8722,12 @@ export interface UpdateDomainRequest {
    * @public
    */
   AppNetworkAccessType?: AppNetworkAccessType;
+
+  /**
+   * <p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>
+   * @public
+   */
+  TagPropagation?: TagPropagation;
 }
 
 /**
@@ -9913,148 +10331,6 @@ export interface UpdateWorkteamRequest {
    * @public
    */
   WorkerAccessConfiguration?: WorkerAccessConfiguration;
-}
-
-/**
- * @public
- */
-export interface UpdateWorkteamResponse {
-  /**
-   * <p>A <code>Workteam</code> object that describes the updated work team.</p>
-   * @public
-   */
-  Workteam: Workteam | undefined;
-}
-
-/**
- * <p>A multi-expression that searches for the specified resource or resources in a search. All resource
- *       objects that satisfy the expression's condition are included in the search results. You must specify at
- *       least one subexpression, filter, or nested filter. A <code>SearchExpression</code> can contain up to
- *       twenty elements.</p>
- *          <p>A <code>SearchExpression</code> contains the following components:</p>
- *          <ul>
- *             <li>
- *                <p>A list of <code>Filter</code> objects. Each filter defines a simple Boolean
- *           expression comprised of a resource property name, Boolean operator, and
- *           value.</p>
- *             </li>
- *             <li>
- *                <p>A list of <code>NestedFilter</code> objects. Each nested filter defines a list
- *           of Boolean expressions using a list of resource properties. A nested filter is
- *           satisfied if a single object in the list satisfies all Boolean
- *           expressions.</p>
- *             </li>
- *             <li>
- *                <p>A list of <code>SearchExpression</code> objects. A search expression object
- *           can be nested in a list of search expression objects.</p>
- *             </li>
- *             <li>
- *                <p>A Boolean operator: <code>And</code> or <code>Or</code>.</p>
- *             </li>
- *          </ul>
- * @public
- */
-export interface SearchExpression {
-  /**
-   * <p>A list of filter objects.</p>
-   * @public
-   */
-  Filters?: Filter[];
-
-  /**
-   * <p>A list of nested filter objects.</p>
-   * @public
-   */
-  NestedFilters?: NestedFilters[];
-
-  /**
-   * <p>A list of search expression objects.</p>
-   * @public
-   */
-  SubExpressions?: SearchExpression[];
-
-  /**
-   * <p>A Boolean operator used to evaluate the search expression. If you want every
-   *       conditional statement in all lists to be satisfied for the entire search expression to
-   *       be true, specify <code>And</code>. If only a single conditional statement needs to be
-   *       true for the entire search expression to be true, specify <code>Or</code>. The default
-   *       value is <code>And</code>.</p>
-   * @public
-   */
-  Operator?: BooleanOperator;
-}
-
-/**
- * @public
- */
-export interface SearchRequest {
-  /**
-   * <p>The name of the SageMaker resource to search for.</p>
-   * @public
-   */
-  Resource: ResourceType | undefined;
-
-  /**
-   * <p>A Boolean conditional statement. Resources must satisfy this condition to be
-   *       included in search results. You must provide at least one subexpression, filter, or
-   *       nested filter. The maximum number of recursive <code>SubExpressions</code>,
-   *       <code>NestedFilters</code>, and <code>Filters</code> that can be included in a
-   *       <code>SearchExpression</code> object is 50.</p>
-   * @public
-   */
-  SearchExpression?: SearchExpression;
-
-  /**
-   * <p>The name of the resource property used to sort the <code>SearchResults</code>. The
-   *       default is <code>LastModifiedTime</code>.</p>
-   * @public
-   */
-  SortBy?: string;
-
-  /**
-   * <p>How <code>SearchResults</code> are ordered. Valid values are <code>Ascending</code> or
-   *       <code>Descending</code>. The default is <code>Descending</code>.</p>
-   * @public
-   */
-  SortOrder?: SearchSortOrder;
-
-  /**
-   * <p>If more than <code>MaxResults</code> resources match the specified
-   *       <code>SearchExpression</code>, the response includes a
-   *       <code>NextToken</code>. The <code>NextToken</code> can be passed to the next
-   *       <code>SearchRequest</code> to continue retrieving results.</p>
-   * @public
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return.</p>
-   * @public
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>
-   *       A cross account filter option. When the value is <code>"CrossAccount"</code> the
-   *       search results will only include resources made discoverable to you from other
-   *       accounts. When the value is <code>"SameAccount"</code> or <code>null</code> the
-   *       search results will only include resources from your account. Default is
-   *       <code>null</code>. For more information on searching for resources made
-   *       discoverable to your account, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html">
-   *         Search discoverable resources</a> in the SageMaker Developer Guide.
-   *       The maximum number of <code>ResourceCatalog</code>s viewable is 1000.
-   *     </p>
-   * @public
-   */
-  CrossAccountFilterOption?: CrossAccountFilterOption;
-
-  /**
-   * <p>
-   *       Limits the results of your search request to the resources that you can access.
-   *     </p>
-   * @public
-   */
-  VisibilityConditions?: VisibilityConditions[];
 }
 
 /**

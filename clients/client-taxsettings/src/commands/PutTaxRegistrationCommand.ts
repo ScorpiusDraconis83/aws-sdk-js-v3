@@ -346,9 +346,7 @@ export class PutTaxRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TaxSettingsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -360,4 +358,16 @@ export class PutTaxRegistrationCommand extends $Command
   .f(PutTaxRegistrationRequestFilterSensitiveLog, void 0)
   .ser(se_PutTaxRegistrationCommand)
   .de(de_PutTaxRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutTaxRegistrationRequest;
+      output: PutTaxRegistrationResponse;
+    };
+    sdk: {
+      input: PutTaxRegistrationCommandInput;
+      output: PutTaxRegistrationCommandOutput;
+    };
+  };
+}

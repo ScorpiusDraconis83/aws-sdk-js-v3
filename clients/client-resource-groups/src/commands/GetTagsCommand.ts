@@ -29,7 +29,7 @@ export interface GetTagsCommandOutput extends GetTagsOutput, __MetadataBearer {}
 
 /**
  * <p>Returns a list of tags that are associated with a resource group, specified by an
- *             ARN.</p>
+ *             Amazon resource name (ARN).</p>
  *          <p>
  *             <b>Minimum permissions</b>
  *          </p>
@@ -99,9 +99,7 @@ export class GetTagsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResourceGroupsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetTagsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetTagsCommand)
   .de(de_GetTagsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTagsInput;
+      output: GetTagsOutput;
+    };
+    sdk: {
+      input: GetTagsCommandInput;
+      output: GetTagsCommandOutput;
+    };
+  };
+}

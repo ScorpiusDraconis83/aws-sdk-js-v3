@@ -99,9 +99,7 @@ export class ListKnowledgeBasesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WisdomClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class ListKnowledgeBasesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListKnowledgeBasesCommand)
   .de(de_ListKnowledgeBasesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListKnowledgeBasesRequest;
+      output: ListKnowledgeBasesResponse;
+    };
+    sdk: {
+      input: ListKnowledgeBasesCommandInput;
+      output: ListKnowledgeBasesCommandOutput;
+    };
+  };
+}

@@ -94,9 +94,7 @@ export class ArchiveWaveCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class ArchiveWaveCommand extends $Command
   .f(void 0, WaveFilterSensitiveLog)
   .ser(se_ArchiveWaveCommand)
   .de(de_ArchiveWaveCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ArchiveWaveRequest;
+      output: Wave;
+    };
+    sdk: {
+      input: ArchiveWaveCommandInput;
+      output: ArchiveWaveCommandOutput;
+    };
+  };
+}

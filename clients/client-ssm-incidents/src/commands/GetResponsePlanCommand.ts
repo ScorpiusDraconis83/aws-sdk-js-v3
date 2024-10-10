@@ -138,9 +138,7 @@ export class GetResponsePlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMIncidentsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class GetResponsePlanCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetResponsePlanCommand)
   .de(de_GetResponsePlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResponsePlanInput;
+      output: GetResponsePlanOutput;
+    };
+    sdk: {
+      input: GetResponsePlanCommandInput;
+      output: GetResponsePlanCommandOutput;
+    };
+  };
+}

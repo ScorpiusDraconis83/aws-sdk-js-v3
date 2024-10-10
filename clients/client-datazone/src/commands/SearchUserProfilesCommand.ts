@@ -110,9 +110,7 @@ export class SearchUserProfilesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class SearchUserProfilesCommand extends $Command
   .f(SearchUserProfilesInputFilterSensitiveLog, SearchUserProfilesOutputFilterSensitiveLog)
   .ser(se_SearchUserProfilesCommand)
   .de(de_SearchUserProfilesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchUserProfilesInput;
+      output: SearchUserProfilesOutput;
+    };
+    sdk: {
+      input: SearchUserProfilesCommandInput;
+      output: SearchUserProfilesCommandOutput;
+    };
+  };
+}

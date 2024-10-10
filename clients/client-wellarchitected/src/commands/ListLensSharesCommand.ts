@@ -92,9 +92,7 @@ export class ListLensSharesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WellArchitectedClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class ListLensSharesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLensSharesCommand)
   .de(de_ListLensSharesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLensSharesInput;
+      output: ListLensSharesOutput;
+    };
+    sdk: {
+      input: ListLensSharesCommandInput;
+      output: ListLensSharesCommandOutput;
+    };
+  };
+}

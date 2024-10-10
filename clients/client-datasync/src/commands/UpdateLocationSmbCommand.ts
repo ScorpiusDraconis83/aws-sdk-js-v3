@@ -85,9 +85,7 @@ export class UpdateLocationSmbCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class UpdateLocationSmbCommand extends $Command
   .f(UpdateLocationSmbRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateLocationSmbCommand)
   .de(de_UpdateLocationSmbCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLocationSmbRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLocationSmbCommandInput;
+      output: UpdateLocationSmbCommandOutput;
+    };
+  };
+}

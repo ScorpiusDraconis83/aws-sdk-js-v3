@@ -278,9 +278,7 @@ export class CreateContainerGroupDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -292,4 +290,16 @@ export class CreateContainerGroupDefinitionCommand extends $Command
   .f(CreateContainerGroupDefinitionInputFilterSensitiveLog, CreateContainerGroupDefinitionOutputFilterSensitiveLog)
   .ser(se_CreateContainerGroupDefinitionCommand)
   .de(de_CreateContainerGroupDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateContainerGroupDefinitionInput;
+      output: CreateContainerGroupDefinitionOutput;
+    };
+    sdk: {
+      input: CreateContainerGroupDefinitionCommandInput;
+      output: CreateContainerGroupDefinitionCommandOutput;
+    };
+  };
+}

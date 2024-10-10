@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { ModifyVpcTenancyRequest, ModifyVpcTenancyResult } from "../models/models_6";
+import { ModifyVpcTenancyRequest, ModifyVpcTenancyResult } from "../models/models_7";
 import { de_ModifyVpcTenancyCommand, se_ModifyVpcTenancyCommand } from "../protocols/Aws_ec2";
 
 /**
@@ -74,9 +74,7 @@ export class ModifyVpcTenancyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -88,4 +86,16 @@ export class ModifyVpcTenancyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyVpcTenancyCommand)
   .de(de_ModifyVpcTenancyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcTenancyRequest;
+      output: ModifyVpcTenancyResult;
+    };
+    sdk: {
+      input: ModifyVpcTenancyCommandInput;
+      output: ModifyVpcTenancyCommandOutput;
+    };
+  };
+}

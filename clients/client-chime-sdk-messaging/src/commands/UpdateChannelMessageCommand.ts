@@ -112,9 +112,7 @@ export class UpdateChannelMessageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class UpdateChannelMessageCommand extends $Command
   .f(UpdateChannelMessageRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateChannelMessageCommand)
   .de(de_UpdateChannelMessageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChannelMessageRequest;
+      output: UpdateChannelMessageResponse;
+    };
+    sdk: {
+      input: UpdateChannelMessageCommandInput;
+      output: UpdateChannelMessageCommandOutput;
+    };
+  };
+}

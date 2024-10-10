@@ -31,7 +31,7 @@ export interface CreateSnapshotCommandOutput extends CreateSnapshotResult, __Met
  * <p>Creates a copy of an entire cluster or replication group at a specific moment in
  *             time.</p>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -141,12 +141,12 @@ export interface CreateSnapshotCommandOutput extends CreateSnapshotResult, __Met
  *  <p>You attempted one of the following operations:</p>
  *          <ul>
  *             <li>
- *                <p>Creating a snapshot of a Redis OSS cluster running on a
+ *                <p>Creating a snapshot of a Valkey or Redis OSS cluster running on a
  *                         <code>cache.t1.micro</code> cache node.</p>
  *             </li>
  *             <li>
  *                <p>Creating a snapshot of a cluster that is running Memcached rather than
- *                     Redis OSS.</p>
+ *                     Valkey or Redis OSS.</p>
  *             </li>
  *          </ul>
  *          <p>Neither of these are supported by ElastiCache.</p>
@@ -262,9 +262,7 @@ export class CreateSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -276,4 +274,16 @@ export class CreateSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateSnapshotCommand)
   .de(de_CreateSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSnapshotMessage;
+      output: CreateSnapshotResult;
+    };
+    sdk: {
+      input: CreateSnapshotCommandInput;
+      output: CreateSnapshotCommandOutput;
+    };
+  };
+}

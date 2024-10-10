@@ -380,9 +380,7 @@ export class DescribeFlowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppflowClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -394,4 +392,16 @@ export class DescribeFlowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeFlowCommand)
   .de(de_DescribeFlowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFlowRequest;
+      output: DescribeFlowResponse;
+    };
+    sdk: {
+      input: DescribeFlowCommandInput;
+      output: DescribeFlowCommandOutput;
+    };
+  };
+}

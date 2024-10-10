@@ -144,9 +144,7 @@ export class UploadArchiveCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -158,4 +156,16 @@ export class UploadArchiveCommand extends $Command
   .f(UploadArchiveInputFilterSensitiveLog, void 0)
   .ser(se_UploadArchiveCommand)
   .de(de_UploadArchiveCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadArchiveInput;
+      output: ArchiveCreationOutput;
+    };
+    sdk: {
+      input: UploadArchiveCommandInput;
+      output: UploadArchiveCommandOutput;
+    };
+  };
+}

@@ -187,9 +187,7 @@ export class CalculateRouteMatrixCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -201,4 +199,16 @@ export class CalculateRouteMatrixCommand extends $Command
   .f(CalculateRouteMatrixRequestFilterSensitiveLog, CalculateRouteMatrixResponseFilterSensitiveLog)
   .ser(se_CalculateRouteMatrixCommand)
   .de(de_CalculateRouteMatrixCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CalculateRouteMatrixRequest;
+      output: CalculateRouteMatrixResponse;
+    };
+    sdk: {
+      input: CalculateRouteMatrixCommandInput;
+      output: CalculateRouteMatrixCommandOutput;
+    };
+  };
+}

@@ -152,9 +152,7 @@ export class UpdateNetworkSitePlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PrivateNetworksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -166,4 +164,16 @@ export class UpdateNetworkSitePlanCommand extends $Command
   .f(void 0, UpdateNetworkSiteResponseFilterSensitiveLog)
   .ser(se_UpdateNetworkSitePlanCommand)
   .de(de_UpdateNetworkSitePlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateNetworkSitePlanRequest;
+      output: UpdateNetworkSiteResponse;
+    };
+    sdk: {
+      input: UpdateNetworkSitePlanCommandInput;
+      output: UpdateNetworkSitePlanCommandOutput;
+    };
+  };
+}

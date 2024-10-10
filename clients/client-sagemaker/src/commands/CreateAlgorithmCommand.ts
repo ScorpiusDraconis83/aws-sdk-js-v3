@@ -122,6 +122,7 @@ export interface CreateAlgorithmCommandOutput extends CreateAlgorithmOutput, __M
  *             HubAccessConfig: { // InferenceHubAccessConfig
  *               HubContentArn: "STRING_VALUE", // required
  *             },
+ *             ManifestS3Uri: "STRING_VALUE",
  *           },
  *         },
  *         ProductId: "STRING_VALUE",
@@ -288,9 +289,7 @@ export class CreateAlgorithmCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -302,4 +301,16 @@ export class CreateAlgorithmCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAlgorithmCommand)
   .de(de_CreateAlgorithmCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAlgorithmInput;
+      output: CreateAlgorithmOutput;
+    };
+    sdk: {
+      input: CreateAlgorithmCommandInput;
+      output: CreateAlgorithmCommandOutput;
+    };
+  };
+}

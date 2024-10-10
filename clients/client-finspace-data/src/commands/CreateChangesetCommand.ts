@@ -98,9 +98,7 @@ export class CreateChangesetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FinspaceDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class CreateChangesetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateChangesetCommand)
   .de(de_CreateChangesetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateChangesetRequest;
+      output: CreateChangesetResponse;
+    };
+    sdk: {
+      input: CreateChangesetCommandInput;
+      output: CreateChangesetCommandOutput;
+    };
+  };
+}

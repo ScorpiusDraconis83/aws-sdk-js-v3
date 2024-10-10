@@ -118,9 +118,7 @@ export class CreateLicenseManagerReportGeneratorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class CreateLicenseManagerReportGeneratorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateLicenseManagerReportGeneratorCommand)
   .de(de_CreateLicenseManagerReportGeneratorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLicenseManagerReportGeneratorRequest;
+      output: CreateLicenseManagerReportGeneratorResponse;
+    };
+    sdk: {
+      input: CreateLicenseManagerReportGeneratorCommandInput;
+      output: CreateLicenseManagerReportGeneratorCommandOutput;
+    };
+  };
+}

@@ -288,9 +288,7 @@ export class ChatCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QBusinessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -311,4 +309,16 @@ export class ChatCommand extends $Command
   .f(ChatInputFilterSensitiveLog, ChatOutputFilterSensitiveLog)
   .ser(se_ChatCommand)
   .de(de_ChatCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ChatInput;
+      output: ChatOutput;
+    };
+    sdk: {
+      input: ChatCommandInput;
+      output: ChatCommandOutput;
+    };
+  };
+}

@@ -95,9 +95,7 @@ export class CreatePermissionGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FinspaceDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class CreatePermissionGroupCommand extends $Command
   .f(CreatePermissionGroupRequestFilterSensitiveLog, void 0)
   .ser(se_CreatePermissionGroupCommand)
   .de(de_CreatePermissionGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePermissionGroupRequest;
+      output: CreatePermissionGroupResponse;
+    };
+    sdk: {
+      input: CreatePermissionGroupCommandInput;
+      output: CreatePermissionGroupCommandOutput;
+    };
+  };
+}

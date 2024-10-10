@@ -109,9 +109,7 @@ export class UpdateJobQueueCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class UpdateJobQueueCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateJobQueueCommand)
   .de(de_UpdateJobQueueCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobQueueRequest;
+      output: UpdateJobQueueResponse;
+    };
+    sdk: {
+      input: UpdateJobQueueCommandInput;
+      output: UpdateJobQueueCommandOutput;
+    };
+  };
+}

@@ -132,6 +132,10 @@ export interface UpdateApplicationCommandOutput extends UpdateApplicationRespons
  *       remoteWriteUrl: "STRING_VALUE",
  *     },
  *   },
+ *   schedulerConfiguration: { // SchedulerConfiguration
+ *     queueTimeoutMinutes: Number("int"),
+ *     maxConcurrentRuns: Number("int"),
+ *   },
  * };
  * const command = new UpdateApplicationCommand(input);
  * const response = await client.send(command);
@@ -238,6 +242,10 @@ export interface UpdateApplicationCommandOutput extends UpdateApplicationRespons
  * //       studioEnabled: true || false,
  * //       livyEndpointEnabled: true || false,
  * //     },
+ * //     schedulerConfiguration: { // SchedulerConfiguration
+ * //       queueTimeoutMinutes: Number("int"),
+ * //       maxConcurrentRuns: Number("int"),
+ * //     },
  * //   },
  * // };
  *
@@ -272,9 +280,7 @@ export class UpdateApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRServerlessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -286,4 +292,16 @@ export class UpdateApplicationCommand extends $Command
   .f(UpdateApplicationRequestFilterSensitiveLog, UpdateApplicationResponseFilterSensitiveLog)
   .ser(se_UpdateApplicationCommand)
   .de(de_UpdateApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationRequest;
+      output: UpdateApplicationResponse;
+    };
+    sdk: {
+      input: UpdateApplicationCommandInput;
+      output: UpdateApplicationCommandOutput;
+    };
+  };
+}

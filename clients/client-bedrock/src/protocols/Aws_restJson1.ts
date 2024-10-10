@@ -445,6 +445,7 @@ export const se_CreateModelInvocationJobCommand = async (
       roleArn: [],
       tags: (_) => _json(_),
       timeoutDurationInHours: [],
+      vpcConfig: (_) => _json(_),
     })
   );
   b.m("POST").h(headers).b(body);
@@ -1808,6 +1809,7 @@ export const de_GetModelInvocationJobCommand = async (
     status: __expectString,
     submitTime: (_) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     timeoutDurationInHours: __expectInt32,
+    vpcConfig: _json,
   });
   Object.assign(contents, doc);
   return contents;
@@ -3028,6 +3030,7 @@ const de_ModelInvocationJobSummary = (output: any, context: __SerdeContext): Mod
     status: __expectString,
     submitTime: (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     timeoutDurationInHours: __expectInt32,
+    vpcConfig: _json,
   }) as any;
 };
 
@@ -3130,13 +3133,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _bCT = "byCustomizationType";
 const _bIT = "byInferenceType";

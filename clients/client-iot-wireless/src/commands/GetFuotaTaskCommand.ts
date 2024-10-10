@@ -94,9 +94,7 @@ export class GetFuotaTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class GetFuotaTaskCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFuotaTaskCommand)
   .de(de_GetFuotaTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFuotaTaskRequest;
+      output: GetFuotaTaskResponse;
+    };
+    sdk: {
+      input: GetFuotaTaskCommandInput;
+      output: GetFuotaTaskCommandOutput;
+    };
+  };
+}

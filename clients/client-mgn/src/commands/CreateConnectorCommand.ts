@@ -98,9 +98,7 @@ export class CreateConnectorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MgnClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class CreateConnectorCommand extends $Command
   .f(CreateConnectorRequestFilterSensitiveLog, ConnectorFilterSensitiveLog)
   .ser(se_CreateConnectorCommand)
   .de(de_CreateConnectorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConnectorRequest;
+      output: Connector;
+    };
+    sdk: {
+      input: CreateConnectorCommandInput;
+      output: CreateConnectorCommandOutput;
+    };
+  };
+}

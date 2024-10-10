@@ -78,7 +78,7 @@ export interface GetPipelineCommandOutput extends GetPipelineOutput, __MetadataB
  * //           { // ActionDeclaration
  * //             name: "STRING_VALUE", // required
  * //             actionTypeId: { // ActionTypeId
- * //               category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval", // required
+ * //               category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval" || "Compute", // required
  * //               owner: "AWS" || "ThirdParty" || "Custom", // required
  * //               provider: "STRING_VALUE", // required
  * //               version: "STRING_VALUE", // required
@@ -87,15 +87,24 @@ export interface GetPipelineCommandOutput extends GetPipelineOutput, __MetadataB
  * //             configuration: { // ActionConfigurationMap
  * //               "<keys>": "STRING_VALUE",
  * //             },
+ * //             commands: [ // CommandList
+ * //               "STRING_VALUE",
+ * //             ],
  * //             outputArtifacts: [ // OutputArtifactList
  * //               { // OutputArtifact
  * //                 name: "STRING_VALUE", // required
+ * //                 files: [ // FilePathList
+ * //                   "STRING_VALUE",
+ * //                 ],
  * //               },
  * //             ],
  * //             inputArtifacts: [ // InputArtifactList
  * //               { // InputArtifact
  * //                 name: "STRING_VALUE", // required
  * //               },
+ * //             ],
+ * //             outputVariables: [ // OutputVariableList
+ * //               "STRING_VALUE",
  * //             ],
  * //             roleArn: "STRING_VALUE",
  * //             region: "STRING_VALUE",
@@ -302,9 +311,7 @@ export class GetPipelineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodePipelineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -316,4 +323,16 @@ export class GetPipelineCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetPipelineCommand)
   .de(de_GetPipelineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPipelineInput;
+      output: GetPipelineOutput;
+    };
+    sdk: {
+      input: GetPipelineCommandInput;
+      output: GetPipelineCommandOutput;
+    };
+  };
+}

@@ -251,9 +251,7 @@ export class ListGrantsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -265,4 +263,16 @@ export class ListGrantsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGrantsCommand)
   .de(de_ListGrantsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGrantsRequest;
+      output: ListGrantsResponse;
+    };
+    sdk: {
+      input: ListGrantsCommandInput;
+      output: ListGrantsCommandOutput;
+    };
+  };
+}

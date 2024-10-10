@@ -91,9 +91,7 @@ export class DescribeAffectedAccountsForOrganizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class DescribeAffectedAccountsForOrganizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAffectedAccountsForOrganizationCommand)
   .de(de_DescribeAffectedAccountsForOrganizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAffectedAccountsForOrganizationRequest;
+      output: DescribeAffectedAccountsForOrganizationResponse;
+    };
+    sdk: {
+      input: DescribeAffectedAccountsForOrganizationCommandInput;
+      output: DescribeAffectedAccountsForOrganizationCommandOutput;
+    };
+  };
+}

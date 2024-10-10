@@ -90,9 +90,7 @@ export class ListFirewallConfigsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ResolverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ListFirewallConfigsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFirewallConfigsCommand)
   .de(de_ListFirewallConfigsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFirewallConfigsRequest;
+      output: ListFirewallConfigsResponse;
+    };
+    sdk: {
+      input: ListFirewallConfigsCommandInput;
+      output: ListFirewallConfigsCommandOutput;
+    };
+  };
+}

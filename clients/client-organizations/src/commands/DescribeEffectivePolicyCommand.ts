@@ -45,7 +45,7 @@ export interface DescribeEffectivePolicyCommandOutput extends DescribeEffectiveP
  * // const { OrganizationsClient, DescribeEffectivePolicyCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
  * const client = new OrganizationsClient(config);
  * const input = { // DescribeEffectivePolicyRequest
- *   PolicyType: "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY", // required
+ *   PolicyType: "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY", // required
  *   TargetId: "STRING_VALUE",
  * };
  * const command = new DescribeEffectivePolicyCommand(input);
@@ -55,7 +55,7 @@ export interface DescribeEffectivePolicyCommandOutput extends DescribeEffectiveP
  * //     PolicyContent: "STRING_VALUE",
  * //     LastUpdatedTimestamp: new Date("TIMESTAMP"),
  * //     TargetId: "STRING_VALUE",
- * //     PolicyType: "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //     PolicyType: "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //   },
  * // };
  *
@@ -267,9 +267,8 @@ export interface DescribeEffectivePolicyCommandOutput extends DescribeEffectiveP
  *                     that are not compliant with the tag policy requirements for this account.</p>
  *             </li>
  *             <li>
- *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting
- *                     period before you can remove it from the organization. If you get an error that
- *                     indicates that a wait period is required, try again in a few days.</p>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at least seven days after the account was created.
+ *                     Invited accounts aren't subject to this waiting period.</p>
  *             </li>
  *          </ul>
  *
@@ -413,9 +412,7 @@ export class DescribeEffectivePolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -427,4 +424,16 @@ export class DescribeEffectivePolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEffectivePolicyCommand)
   .de(de_DescribeEffectivePolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEffectivePolicyRequest;
+      output: DescribeEffectivePolicyResponse;
+    };
+    sdk: {
+      input: DescribeEffectivePolicyCommandInput;
+      output: DescribeEffectivePolicyCommandOutput;
+    };
+  };
+}

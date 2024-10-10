@@ -166,6 +166,28 @@ export interface GetPolicyTemplateCommandOutput extends GetPolicyTemplateOutput,
  * <p>Base exception class for all service exceptions from VerifiedPermissions service.</p>
  *
  * @public
+ * @example GetPolicyTemplate
+ * ```javascript
+ * // The following example displays the details of the specified policy template.
+ * const input = {
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+ *   "policyTemplateId": "PTEXAMPLEabcdefg111111"
+ * };
+ * const command = new GetPolicyTemplateCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "createdDate": "2024-08-12T18:20:50.99Z",
+ *   "description": "Template for research dept",
+ *   "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+ *   "policyTemplateId": "PTEXAMPLEabcdefg111111",
+ *   "statement": "permit(\n  principal ?principal,\n  action == Action::\"view\",\n  resource in ?resource\n) when {\n  principal has department && principal.department == \"research\" \n};"
+ * }
+ * *\/
+ * // example id: example-1
+ * ```
+ *
  */
 export class GetPolicyTemplateCommand extends $Command
   .classBuilder<
@@ -175,9 +197,7 @@ export class GetPolicyTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VerifiedPermissionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -189,4 +209,16 @@ export class GetPolicyTemplateCommand extends $Command
   .f(void 0, GetPolicyTemplateOutputFilterSensitiveLog)
   .ser(se_GetPolicyTemplateCommand)
   .de(de_GetPolicyTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPolicyTemplateInput;
+      output: GetPolicyTemplateOutput;
+    };
+    sdk: {
+      input: GetPolicyTemplateCommandInput;
+      output: GetPolicyTemplateCommandOutput;
+    };
+  };
+}

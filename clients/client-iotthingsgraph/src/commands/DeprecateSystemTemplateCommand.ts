@@ -77,9 +77,7 @@ export class DeprecateSystemTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTThingsGraphClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class DeprecateSystemTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeprecateSystemTemplateCommand)
   .de(de_DeprecateSystemTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeprecateSystemTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeprecateSystemTemplateCommandInput;
+      output: DeprecateSystemTemplateCommandOutput;
+    };
+  };
+}

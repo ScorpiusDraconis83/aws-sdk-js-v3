@@ -106,9 +106,7 @@ export class RestoreFromRecoveryPointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftServerlessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class RestoreFromRecoveryPointCommand extends $Command
   .f(void 0, RestoreFromRecoveryPointResponseFilterSensitiveLog)
   .ser(se_RestoreFromRecoveryPointCommand)
   .de(de_RestoreFromRecoveryPointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreFromRecoveryPointRequest;
+      output: RestoreFromRecoveryPointResponse;
+    };
+    sdk: {
+      input: RestoreFromRecoveryPointCommandInput;
+      output: RestoreFromRecoveryPointCommandOutput;
+    };
+  };
+}

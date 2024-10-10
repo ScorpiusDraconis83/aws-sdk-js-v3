@@ -89,9 +89,7 @@ export class ListScansCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeGuruSecurityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ListScansCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListScansCommand)
   .de(de_ListScansCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListScansRequest;
+      output: ListScansResponse;
+    };
+    sdk: {
+      input: ListScansCommandInput;
+      output: ListScansCommandOutput;
+    };
+  };
+}

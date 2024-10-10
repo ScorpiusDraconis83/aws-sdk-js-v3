@@ -170,9 +170,7 @@ export class UpdateResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudControlClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -184,4 +182,16 @@ export class UpdateResourceCommand extends $Command
   .f(UpdateResourceInputFilterSensitiveLog, UpdateResourceOutputFilterSensitiveLog)
   .ser(se_UpdateResourceCommand)
   .de(de_UpdateResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateResourceInput;
+      output: UpdateResourceOutput;
+    };
+    sdk: {
+      input: UpdateResourceCommandInput;
+      output: UpdateResourceCommandOutput;
+    };
+  };
+}

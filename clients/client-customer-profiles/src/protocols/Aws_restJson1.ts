@@ -1170,6 +1170,7 @@ export const se_PutIntegrationCommand = async (
       FlowDefinition: (_) => se_FlowDefinition(_, context),
       ObjectTypeName: [],
       ObjectTypeNames: (_) => _json(_),
+      RoleArn: [],
       Tags: (_) => _json(_),
       Uri: [],
     })
@@ -1300,10 +1301,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{resourceArn}");
   b.p("resourceArn", () => input.resourceArn!, "{resourceArn}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.tagKeys, `tagKeys`) != null,
-      () => (input[_tK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.tagKeys, `tagKeys`) != null, () => input[_tK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -1939,6 +1937,7 @@ export const de_GetIntegrationCommand = async (
     LastUpdatedAt: (_) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     ObjectTypeName: __expectString,
     ObjectTypeNames: _json,
+    RoleArn: __expectString,
     Tags: _json,
     Uri: __expectString,
     WorkflowId: __expectString,
@@ -2437,6 +2436,7 @@ export const de_PutIntegrationCommand = async (
     LastUpdatedAt: (_) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     ObjectTypeName: __expectString,
     ObjectTypeNames: _json,
+    RoleArn: __expectString,
     Tags: _json,
     Uri: __expectString,
     WorkflowId: __expectString,
@@ -3226,6 +3226,7 @@ const de_ListIntegrationItem = (output: any, context: __SerdeContext): ListInteg
     LastUpdatedAt: (_: any) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     ObjectTypeName: __expectString,
     ObjectTypeNames: _json,
+    RoleArn: __expectString,
     Tags: _json,
     Uri: __expectString,
     WorkflowId: __expectString,
@@ -3408,13 +3409,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _IH = "IncludeHidden";
 const _MR = "MaxResults";

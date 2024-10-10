@@ -93,6 +93,28 @@ export interface DetachFromIndexCommandOutput extends DetachFromIndexResponse, _
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To detach an object from an index
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *   "IndexReference": {
+ *     "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+ *   },
+ *   "TargetReference": {
+ *     "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+ *   }
+ * };
+ * const command = new DetachFromIndexCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "DetachedObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+ * }
+ * *\/
+ * // example id: to-detach-an-object-from-an-index-1507579662964
+ * ```
+ *
  */
 export class DetachFromIndexCommand extends $Command
   .classBuilder<
@@ -102,9 +124,7 @@ export class DetachFromIndexCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +136,16 @@ export class DetachFromIndexCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DetachFromIndexCommand)
   .de(de_DetachFromIndexCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachFromIndexRequest;
+      output: DetachFromIndexResponse;
+    };
+    sdk: {
+      input: DetachFromIndexCommandInput;
+      output: DetachFromIndexCommandOutput;
+    };
+  };
+}

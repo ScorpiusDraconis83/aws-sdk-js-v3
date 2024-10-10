@@ -104,9 +104,7 @@ export class LockRuleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RbinClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class LockRuleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_LockRuleCommand)
   .de(de_LockRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: LockRuleRequest;
+      output: LockRuleResponse;
+    };
+    sdk: {
+      input: LockRuleCommandInput;
+      output: LockRuleCommandOutput;
+    };
+  };
+}

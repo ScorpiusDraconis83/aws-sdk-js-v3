@@ -195,9 +195,7 @@ export class SearchInsightsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DevOpsGuruClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -209,4 +207,16 @@ export class SearchInsightsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchInsightsCommand)
   .de(de_SearchInsightsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchInsightsRequest;
+      output: SearchInsightsResponse;
+    };
+    sdk: {
+      input: SearchInsightsCommandInput;
+      output: SearchInsightsCommandOutput;
+    };
+  };
+}

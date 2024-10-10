@@ -143,9 +143,7 @@ export class DiscoverInputSchemaCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisAnalyticsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +155,16 @@ export class DiscoverInputSchemaCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DiscoverInputSchemaCommand)
   .de(de_DiscoverInputSchemaCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DiscoverInputSchemaRequest;
+      output: DiscoverInputSchemaResponse;
+    };
+    sdk: {
+      input: DiscoverInputSchemaCommandInput;
+      output: DiscoverInputSchemaCommandOutput;
+    };
+  };
+}

@@ -1,6 +1,25 @@
 # Smithy AWS Typescript Codegen Changelog
 
-## 0.22.0 (2024-07-06)
+## 0.24.0 (2024-09-30)
+
+### Features
+
+* Populates and resolves flexible checksums client config values ([#6471](https://github.com/aws/aws-sdk-js-v3/pull/6471))
+
+### Bug Fixes
+
+* Allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/pull/6511))
+* Fix setting the defualt signing name ([#6487](https://github.com/aws/aws-sdk-js-v3/pull/6487))
+* Fix how waiters are generated using error types when using `awsQuery` ([#6501](https://github.com/aws/aws-sdk-js-v3/pull/6501))
+
+## 0.23.0 (2024-09-10)
+
+### Features
+* Added support for SigV4a and sigining region sets ([#6368](https://github.com/aws/aws-sdk-js-v3/pull/6368))
+* Added support for Smithy RPCv2 CBOR protocol ([#6096](https://github.com/aws/aws-sdk-js-v3/pull/6096))
+
+
+## 0.22.0 (2024-08-06)
 
 ### Features
 * Added support for `AccountIdEndpointMode` when configuring client endpoint parameters ([#6036](https://github.com/aws/aws-sdk-js-v3/pull/6036))

@@ -56,6 +56,7 @@ export interface DescribeNFSFileSharesCommandOutput extends DescribeNFSFileShare
  * //       FileShareId: "STRING_VALUE",
  * //       FileShareStatus: "STRING_VALUE",
  * //       GatewayARN: "STRING_VALUE",
+ * //       EncryptionType: "SseS3" || "SseKms" || "DsseKms",
  * //       KMSEncrypted: true || false,
  * //       KMSKey: "STRING_VALUE",
  * //       Path: "STRING_VALUE",
@@ -117,9 +118,7 @@ export class DescribeNFSFileSharesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +130,16 @@ export class DescribeNFSFileSharesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeNFSFileSharesCommand)
   .de(de_DescribeNFSFileSharesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNFSFileSharesInput;
+      output: DescribeNFSFileSharesOutput;
+    };
+    sdk: {
+      input: DescribeNFSFileSharesCommandInput;
+      output: DescribeNFSFileSharesCommandOutput;
+    };
+  };
+}

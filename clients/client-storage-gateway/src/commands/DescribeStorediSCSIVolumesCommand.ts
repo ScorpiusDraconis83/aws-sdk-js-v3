@@ -135,9 +135,7 @@ export class DescribeStorediSCSIVolumesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class DescribeStorediSCSIVolumesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeStorediSCSIVolumesCommand)
   .de(de_DescribeStorediSCSIVolumesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStorediSCSIVolumesInput;
+      output: DescribeStorediSCSIVolumesOutput;
+    };
+    sdk: {
+      input: DescribeStorediSCSIVolumesCommandInput;
+      output: DescribeStorediSCSIVolumesCommandOutput;
+    };
+  };
+}

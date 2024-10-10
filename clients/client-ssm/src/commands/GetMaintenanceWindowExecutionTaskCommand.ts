@@ -119,9 +119,7 @@ export class GetMaintenanceWindowExecutionTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class GetMaintenanceWindowExecutionTaskCommand extends $Command
   .f(void 0, GetMaintenanceWindowExecutionTaskResultFilterSensitiveLog)
   .ser(se_GetMaintenanceWindowExecutionTaskCommand)
   .de(de_GetMaintenanceWindowExecutionTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMaintenanceWindowExecutionTaskRequest;
+      output: GetMaintenanceWindowExecutionTaskResult;
+    };
+    sdk: {
+      input: GetMaintenanceWindowExecutionTaskCommandInput;
+      output: GetMaintenanceWindowExecutionTaskCommandOutput;
+    };
+  };
+}

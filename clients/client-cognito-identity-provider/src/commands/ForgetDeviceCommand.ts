@@ -110,9 +110,7 @@ export class ForgetDeviceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class ForgetDeviceCommand extends $Command
   .f(ForgetDeviceRequestFilterSensitiveLog, void 0)
   .ser(se_ForgetDeviceCommand)
   .de(de_ForgetDeviceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ForgetDeviceRequest;
+      output: {};
+    };
+    sdk: {
+      input: ForgetDeviceCommandInput;
+      output: ForgetDeviceCommandOutput;
+    };
+  };
+}

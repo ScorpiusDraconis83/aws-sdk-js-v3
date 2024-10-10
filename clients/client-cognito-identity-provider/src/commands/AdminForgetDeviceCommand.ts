@@ -113,9 +113,7 @@ export class AdminForgetDeviceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class AdminForgetDeviceCommand extends $Command
   .f(AdminForgetDeviceRequestFilterSensitiveLog, void 0)
   .ser(se_AdminForgetDeviceCommand)
   .de(de_AdminForgetDeviceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminForgetDeviceRequest;
+      output: {};
+    };
+    sdk: {
+      input: AdminForgetDeviceCommandInput;
+      output: AdminForgetDeviceCommandOutput;
+    };
+  };
+}

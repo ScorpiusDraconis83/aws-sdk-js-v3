@@ -47,7 +47,7 @@ export interface StopExperimentCommandOutput extends StopExperimentResponse, __M
  * //     experimentTemplateId: "STRING_VALUE",
  * //     roleArn: "STRING_VALUE",
  * //     state: { // ExperimentState
- * //       status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed",
+ * //       status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed" || "cancelled",
  * //       reason: "STRING_VALUE",
  * //       error: { // ExperimentError
  * //         accountId: "STRING_VALUE",
@@ -157,9 +157,7 @@ export class StopExperimentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FisClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -171,4 +169,16 @@ export class StopExperimentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopExperimentCommand)
   .de(de_StopExperimentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopExperimentRequest;
+      output: StopExperimentResponse;
+    };
+    sdk: {
+      input: StopExperimentCommandInput;
+      output: StopExperimentCommandOutput;
+    };
+  };
+}

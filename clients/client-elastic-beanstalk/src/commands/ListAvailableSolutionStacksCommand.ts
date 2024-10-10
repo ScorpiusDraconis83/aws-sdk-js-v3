@@ -127,9 +127,7 @@ export class ListAvailableSolutionStacksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class ListAvailableSolutionStacksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAvailableSolutionStacksCommand)
   .de(de_ListAvailableSolutionStacksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: ListAvailableSolutionStacksResultMessage;
+    };
+    sdk: {
+      input: ListAvailableSolutionStacksCommandInput;
+      output: ListAvailableSolutionStacksCommandOutput;
+    };
+  };
+}

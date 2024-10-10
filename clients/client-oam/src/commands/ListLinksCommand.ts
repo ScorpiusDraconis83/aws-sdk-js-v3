@@ -88,9 +88,7 @@ export class ListLinksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class ListLinksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLinksCommand)
   .de(de_ListLinksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLinksInput;
+      output: ListLinksOutput;
+    };
+    sdk: {
+      input: ListLinksCommandInput;
+      output: ListLinksCommandOutput;
+    };
+  };
+}

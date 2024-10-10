@@ -271,6 +271,10 @@ import {
 } from "./commands/DescribeKeyRegistrationCommand";
 import { DescribeNamespaceCommandInput, DescribeNamespaceCommandOutput } from "./commands/DescribeNamespaceCommand";
 import {
+  DescribeQPersonalizationConfigurationCommandInput,
+  DescribeQPersonalizationConfigurationCommandOutput,
+} from "./commands/DescribeQPersonalizationConfigurationCommand";
+import {
   DescribeRefreshScheduleCommandInput,
   DescribeRefreshScheduleCommandOutput,
 } from "./commands/DescribeRefreshScheduleCommand";
@@ -346,6 +350,10 @@ import { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/
 import { ListDataSourcesCommandInput, ListDataSourcesCommandOutput } from "./commands/ListDataSourcesCommand";
 import { ListFolderMembersCommandInput, ListFolderMembersCommandOutput } from "./commands/ListFolderMembersCommand";
 import { ListFoldersCommandInput, ListFoldersCommandOutput } from "./commands/ListFoldersCommand";
+import {
+  ListFoldersForResourceCommandInput,
+  ListFoldersForResourceCommandOutput,
+} from "./commands/ListFoldersForResourceCommand";
 import {
   ListGroupMembershipsCommandInput,
   ListGroupMembershipsCommandOutput,
@@ -490,6 +498,10 @@ import {
   UpdatePublicSharingSettingsCommandOutput,
 } from "./commands/UpdatePublicSharingSettingsCommand";
 import {
+  UpdateQPersonalizationConfigurationCommandInput,
+  UpdateQPersonalizationConfigurationCommandOutput,
+} from "./commands/UpdateQPersonalizationConfigurationCommand";
+import {
   UpdateRefreshScheduleCommandInput,
   UpdateRefreshScheduleCommandOutput,
 } from "./commands/UpdateRefreshScheduleCommand";
@@ -624,6 +636,7 @@ export type ServiceInputTypes =
   | DescribeIpRestrictionCommandInput
   | DescribeKeyRegistrationCommandInput
   | DescribeNamespaceCommandInput
+  | DescribeQPersonalizationConfigurationCommandInput
   | DescribeRefreshScheduleCommandInput
   | DescribeRoleCustomPermissionCommandInput
   | DescribeTemplateAliasCommandInput
@@ -652,6 +665,7 @@ export type ServiceInputTypes =
   | ListDataSourcesCommandInput
   | ListFolderMembersCommandInput
   | ListFoldersCommandInput
+  | ListFoldersForResourceCommandInput
   | ListGroupMembershipsCommandInput
   | ListGroupsCommandInput
   | ListIAMPolicyAssignmentsCommandInput
@@ -708,6 +722,7 @@ export type ServiceInputTypes =
   | UpdateIpRestrictionCommandInput
   | UpdateKeyRegistrationCommandInput
   | UpdatePublicSharingSettingsCommandInput
+  | UpdateQPersonalizationConfigurationCommandInput
   | UpdateRefreshScheduleCommandInput
   | UpdateRoleCustomPermissionCommandInput
   | UpdateSPICECapacityConfigurationCommandInput
@@ -806,6 +821,7 @@ export type ServiceOutputTypes =
   | DescribeIpRestrictionCommandOutput
   | DescribeKeyRegistrationCommandOutput
   | DescribeNamespaceCommandOutput
+  | DescribeQPersonalizationConfigurationCommandOutput
   | DescribeRefreshScheduleCommandOutput
   | DescribeRoleCustomPermissionCommandOutput
   | DescribeTemplateAliasCommandOutput
@@ -834,6 +850,7 @@ export type ServiceOutputTypes =
   | ListDataSourcesCommandOutput
   | ListFolderMembersCommandOutput
   | ListFoldersCommandOutput
+  | ListFoldersForResourceCommandOutput
   | ListGroupMembershipsCommandOutput
   | ListGroupsCommandOutput
   | ListIAMPolicyAssignmentsCommandOutput
@@ -890,6 +907,7 @@ export type ServiceOutputTypes =
   | UpdateIpRestrictionCommandOutput
   | UpdateKeyRegistrationCommandOutput
   | UpdatePublicSharingSettingsCommandOutput
+  | UpdateQPersonalizationConfigurationCommandOutput
   | UpdateRefreshScheduleCommandOutput
   | UpdateRoleCustomPermissionCommandOutput
   | UpdateSPICECapacityConfigurationCommandOutput

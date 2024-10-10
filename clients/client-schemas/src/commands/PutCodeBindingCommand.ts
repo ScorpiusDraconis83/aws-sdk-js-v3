@@ -85,9 +85,7 @@ export class PutCodeBindingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SchemasClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class PutCodeBindingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutCodeBindingCommand)
   .de(de_PutCodeBindingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutCodeBindingRequest;
+      output: PutCodeBindingResponse;
+    };
+    sdk: {
+      input: PutCodeBindingCommandInput;
+      output: PutCodeBindingCommandOutput;
+    };
+  };
+}

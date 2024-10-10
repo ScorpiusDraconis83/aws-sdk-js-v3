@@ -112,9 +112,7 @@ export class GetDeliverabilityDashboardOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class GetDeliverabilityDashboardOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDeliverabilityDashboardOptionsCommand)
   .de(de_GetDeliverabilityDashboardOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetDeliverabilityDashboardOptionsResponse;
+    };
+    sdk: {
+      input: GetDeliverabilityDashboardOptionsCommandInput;
+      output: GetDeliverabilityDashboardOptionsCommandOutput;
+    };
+  };
+}

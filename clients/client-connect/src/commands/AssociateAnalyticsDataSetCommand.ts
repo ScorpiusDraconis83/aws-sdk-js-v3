@@ -28,8 +28,7 @@ export interface AssociateAnalyticsDataSetCommandInput extends AssociateAnalytic
 export interface AssociateAnalyticsDataSetCommandOutput extends AssociateAnalyticsDataSetResponse, __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>Associates the specified dataset for a Amazon Connect instance with the target account.
+ * <p>Associates the specified dataset for a Amazon Connect instance with the target account.
  *    You can associate only one dataset in a single call.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -87,9 +86,7 @@ export class AssociateAnalyticsDataSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +98,16 @@ export class AssociateAnalyticsDataSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateAnalyticsDataSetCommand)
   .de(de_AssociateAnalyticsDataSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateAnalyticsDataSetRequest;
+      output: AssociateAnalyticsDataSetResponse;
+    };
+    sdk: {
+      input: AssociateAnalyticsDataSetCommandInput;
+      output: AssociateAnalyticsDataSetCommandOutput;
+    };
+  };
+}

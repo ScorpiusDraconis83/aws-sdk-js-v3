@@ -80,6 +80,12 @@ export interface SwitchoverGlobalClusterCommandOutput extends SwitchoverGlobalCl
  * //       ToDbClusterArn: "STRING_VALUE",
  * //       IsDataLossAllowed: true || false,
  * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
  * //   },
  * // };
  *
@@ -117,9 +123,7 @@ export class SwitchoverGlobalClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +135,16 @@ export class SwitchoverGlobalClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SwitchoverGlobalClusterCommand)
   .de(de_SwitchoverGlobalClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SwitchoverGlobalClusterMessage;
+      output: SwitchoverGlobalClusterResult;
+    };
+    sdk: {
+      input: SwitchoverGlobalClusterCommandInput;
+      output: SwitchoverGlobalClusterCommandOutput;
+    };
+  };
+}

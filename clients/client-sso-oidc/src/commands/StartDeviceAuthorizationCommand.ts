@@ -121,9 +121,7 @@ export class StartDeviceAuthorizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOOIDCClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class StartDeviceAuthorizationCommand extends $Command
   .f(StartDeviceAuthorizationRequestFilterSensitiveLog, void 0)
   .ser(se_StartDeviceAuthorizationCommand)
   .de(de_StartDeviceAuthorizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDeviceAuthorizationRequest;
+      output: StartDeviceAuthorizationResponse;
+    };
+    sdk: {
+      input: StartDeviceAuthorizationCommandInput;
+      output: StartDeviceAuthorizationCommandOutput;
+    };
+  };
+}

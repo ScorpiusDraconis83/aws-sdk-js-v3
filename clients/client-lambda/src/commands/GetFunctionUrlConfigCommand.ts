@@ -99,9 +99,7 @@ export class GetFunctionUrlConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class GetFunctionUrlConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFunctionUrlConfigCommand)
   .de(de_GetFunctionUrlConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionUrlConfigRequest;
+      output: GetFunctionUrlConfigResponse;
+    };
+    sdk: {
+      input: GetFunctionUrlConfigCommandInput;
+      output: GetFunctionUrlConfigCommandOutput;
+    };
+  };
+}

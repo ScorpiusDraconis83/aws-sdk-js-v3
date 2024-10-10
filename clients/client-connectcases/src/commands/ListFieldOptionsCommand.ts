@@ -95,9 +95,7 @@ export class ListFieldOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectCasesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class ListFieldOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFieldOptionsCommand)
   .de(de_ListFieldOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFieldOptionsRequest;
+      output: ListFieldOptionsResponse;
+    };
+    sdk: {
+      input: ListFieldOptionsCommandInput;
+      output: ListFieldOptionsCommandOutput;
+    };
+  };
+}

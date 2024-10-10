@@ -122,9 +122,7 @@ export class ListRequestedServiceQuotaChangeHistoryByQuotaCommand extends $Comma
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceQuotasClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class ListRequestedServiceQuotaChangeHistoryByQuotaCommand extends $Comma
   .f(void 0, void 0)
   .ser(se_ListRequestedServiceQuotaChangeHistoryByQuotaCommand)
   .de(de_ListRequestedServiceQuotaChangeHistoryByQuotaCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRequestedServiceQuotaChangeHistoryByQuotaRequest;
+      output: ListRequestedServiceQuotaChangeHistoryByQuotaResponse;
+    };
+    sdk: {
+      input: ListRequestedServiceQuotaChangeHistoryByQuotaCommandInput;
+      output: ListRequestedServiceQuotaChangeHistoryByQuotaCommandOutput;
+    };
+  };
+}

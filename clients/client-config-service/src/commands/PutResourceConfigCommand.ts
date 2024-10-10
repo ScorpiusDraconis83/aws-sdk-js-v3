@@ -117,9 +117,7 @@ export class PutResourceConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConfigServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class PutResourceConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutResourceConfigCommand)
   .de(de_PutResourceConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutResourceConfigRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutResourceConfigCommandInput;
+      output: PutResourceConfigCommandOutput;
+    };
+  };
+}

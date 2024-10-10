@@ -37,9 +37,9 @@ export interface DescribeSpotFleetInstancesCommandOutput extends DescribeSpotFle
  * const client = new EC2Client(config);
  * const input = { // DescribeSpotFleetInstancesRequest
  *   DryRun: true || false,
- *   MaxResults: Number("int"),
- *   NextToken: "STRING_VALUE",
  *   SpotFleetRequestId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
  * };
  * const command = new DescribeSpotFleetInstancesCommand(input);
  * const response = await client.send(command);
@@ -100,9 +100,7 @@ export class DescribeSpotFleetInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class DescribeSpotFleetInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeSpotFleetInstancesCommand)
   .de(de_DescribeSpotFleetInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSpotFleetInstancesRequest;
+      output: DescribeSpotFleetInstancesResponse;
+    };
+    sdk: {
+      input: DescribeSpotFleetInstancesCommandInput;
+      output: DescribeSpotFleetInstancesCommandOutput;
+    };
+  };
+}

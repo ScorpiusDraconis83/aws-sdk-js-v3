@@ -45,15 +45,15 @@ export interface AssignIpv6AddressesCommandOutput extends AssignIpv6AddressesRes
  * // const { EC2Client, AssignIpv6AddressesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // AssignIpv6AddressesRequest
- *   Ipv6AddressCount: Number("int"),
- *   Ipv6Addresses: [ // Ipv6AddressList
- *     "STRING_VALUE",
- *   ],
  *   Ipv6PrefixCount: Number("int"),
  *   Ipv6Prefixes: [ // IpPrefixList
  *     "STRING_VALUE",
  *   ],
  *   NetworkInterfaceId: "STRING_VALUE", // required
+ *   Ipv6Addresses: [ // Ipv6AddressList
+ *     "STRING_VALUE",
+ *   ],
+ *   Ipv6AddressCount: Number("int"),
  * };
  * const command = new AssignIpv6AddressesCommand(input);
  * const response = await client.send(command);
@@ -88,9 +88,7 @@ export class AssignIpv6AddressesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class AssignIpv6AddressesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssignIpv6AddressesCommand)
   .de(de_AssignIpv6AddressesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssignIpv6AddressesRequest;
+      output: AssignIpv6AddressesResult;
+    };
+    sdk: {
+      input: AssignIpv6AddressesCommandInput;
+      output: AssignIpv6AddressesCommandOutput;
+    };
+  };
+}

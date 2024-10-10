@@ -32,10 +32,9 @@ export interface DescribeContactCommandOutput extends DescribeContactResponse, _
  * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
  *          <p>Describes the specified contact. </p>
  *          <important>
- *             <p>Contact information remains available in Amazon Connect for 24 months, and then it is
- *     deleted.</p>
- *             <p>Only data from November 12, 2021, and later is returned by this
- *     API.</p>
+ *             <p>Contact information remains available in Amazon Connect for 24 months from the
+ *     InitiationTimestamp, and then it is deleted. Only contact information that is available in
+ *      Amazon Connect is returned by this API</p>
  *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -248,9 +247,7 @@ export class DescribeContactCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -262,4 +259,16 @@ export class DescribeContactCommand extends $Command
   .f(void 0, DescribeContactResponseFilterSensitiveLog)
   .ser(se_DescribeContactCommand)
   .de(de_DescribeContactCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContactRequest;
+      output: DescribeContactResponse;
+    };
+    sdk: {
+      input: DescribeContactCommandInput;
+      output: DescribeContactCommandOutput;
+    };
+  };
+}

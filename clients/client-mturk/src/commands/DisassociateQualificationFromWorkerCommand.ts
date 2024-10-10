@@ -86,9 +86,7 @@ export class DisassociateQualificationFromWorkerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MTurkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class DisassociateQualificationFromWorkerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateQualificationFromWorkerCommand)
   .de(de_DisassociateQualificationFromWorkerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateQualificationFromWorkerRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateQualificationFromWorkerCommandInput;
+      output: DisassociateQualificationFromWorkerCommandOutput;
+    };
+  };
+}

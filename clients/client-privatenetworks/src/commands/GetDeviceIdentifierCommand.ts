@@ -91,9 +91,7 @@ export class GetDeviceIdentifierCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PrivateNetworksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetDeviceIdentifierCommand extends $Command
   .f(void 0, GetDeviceIdentifierResponseFilterSensitiveLog)
   .ser(se_GetDeviceIdentifierCommand)
   .de(de_GetDeviceIdentifierCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeviceIdentifierRequest;
+      output: GetDeviceIdentifierResponse;
+    };
+    sdk: {
+      input: GetDeviceIdentifierCommandInput;
+      output: GetDeviceIdentifierCommandOutput;
+    };
+  };
+}

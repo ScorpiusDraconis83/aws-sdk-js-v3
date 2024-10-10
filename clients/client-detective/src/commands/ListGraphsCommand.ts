@@ -85,9 +85,7 @@ export class ListGraphsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DetectiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class ListGraphsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGraphsCommand)
   .de(de_ListGraphsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGraphsRequest;
+      output: ListGraphsResponse;
+    };
+    sdk: {
+      input: ListGraphsCommandInput;
+      output: ListGraphsCommandOutput;
+    };
+  };
+}

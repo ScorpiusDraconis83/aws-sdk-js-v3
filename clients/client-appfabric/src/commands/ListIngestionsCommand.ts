@@ -91,9 +91,7 @@ export class ListIngestionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppFabricClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListIngestionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListIngestionsCommand)
   .de(de_ListIngestionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIngestionsRequest;
+      output: ListIngestionsResponse;
+    };
+    sdk: {
+      input: ListIngestionsCommandInput;
+      output: ListIngestionsCommandOutput;
+    };
+  };
+}

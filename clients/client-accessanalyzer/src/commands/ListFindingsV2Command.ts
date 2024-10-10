@@ -118,9 +118,7 @@ export class ListFindingsV2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccessAnalyzerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ListFindingsV2Command extends $Command
   .f(void 0, void 0)
   .ser(se_ListFindingsV2Command)
   .de(de_ListFindingsV2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFindingsV2Request;
+      output: ListFindingsV2Response;
+    };
+    sdk: {
+      input: ListFindingsV2CommandInput;
+      output: ListFindingsV2CommandOutput;
+    };
+  };
+}

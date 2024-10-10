@@ -135,9 +135,7 @@ export class ExecuteCommandCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class ExecuteCommandCommand extends $Command
   .f(void 0, ExecuteCommandResponseFilterSensitiveLog)
   .ser(se_ExecuteCommandCommand)
   .de(de_ExecuteCommandCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExecuteCommandRequest;
+      output: ExecuteCommandResponse;
+    };
+    sdk: {
+      input: ExecuteCommandCommandInput;
+      output: ExecuteCommandCommandOutput;
+    };
+  };
+}

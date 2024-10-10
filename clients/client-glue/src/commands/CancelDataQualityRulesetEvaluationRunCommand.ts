@@ -9,7 +9,7 @@ import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from 
 import {
   CancelDataQualityRulesetEvaluationRunRequest,
   CancelDataQualityRulesetEvaluationRunResponse,
-} from "../models/models_0";
+} from "../models/models_1";
 import {
   de_CancelDataQualityRulesetEvaluationRunCommand,
   se_CancelDataQualityRulesetEvaluationRunCommand,
@@ -84,9 +84,7 @@ export class CancelDataQualityRulesetEvaluationRunCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class CancelDataQualityRulesetEvaluationRunCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CancelDataQualityRulesetEvaluationRunCommand)
   .de(de_CancelDataQualityRulesetEvaluationRunCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelDataQualityRulesetEvaluationRunRequest;
+      output: {};
+    };
+    sdk: {
+      input: CancelDataQualityRulesetEvaluationRunCommandInput;
+      output: CancelDataQualityRulesetEvaluationRunCommandOutput;
+    };
+  };
+}

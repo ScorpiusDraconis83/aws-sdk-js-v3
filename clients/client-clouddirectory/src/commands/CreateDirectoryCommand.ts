@@ -89,6 +89,26 @@ export interface CreateDirectoryCommandOutput extends CreateDirectoryResponse, _
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To create a new Cloud Directory
+ * ```javascript
+ * //
+ * const input = {
+ *   "Name": "ExampleCD",
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/published/person/1"
+ * };
+ * const command = new CreateDirectoryCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "AppliedSchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI/schema/person/1",
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI",
+ *   "Name": "ExampleCD",
+ *   "ObjectIdentifier": "AQHzK-KsptZGU78KjmnwGH6i-4guCM3uQFOTA9_NjeHDrg"
+ * }
+ * *\/
+ * // example id: to-create-a-new-cloud-directory-1506119878996
+ * ```
+ *
  */
 export class CreateDirectoryCommand extends $Command
   .classBuilder<
@@ -98,9 +118,7 @@ export class CreateDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +130,16 @@ export class CreateDirectoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDirectoryCommand)
   .de(de_CreateDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDirectoryRequest;
+      output: CreateDirectoryResponse;
+    };
+    sdk: {
+      input: CreateDirectoryCommandInput;
+      output: CreateDirectoryCommandOutput;
+    };
+  };
+}

@@ -154,9 +154,7 @@ export class VerifyAuthRequestCryptogramCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class VerifyAuthRequestCryptogramCommand extends $Command
   .f(VerifyAuthRequestCryptogramInputFilterSensitiveLog, VerifyAuthRequestCryptogramOutputFilterSensitiveLog)
   .ser(se_VerifyAuthRequestCryptogramCommand)
   .de(de_VerifyAuthRequestCryptogramCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifyAuthRequestCryptogramInput;
+      output: VerifyAuthRequestCryptogramOutput;
+    };
+    sdk: {
+      input: VerifyAuthRequestCryptogramCommandInput;
+      output: VerifyAuthRequestCryptogramCommandOutput;
+    };
+  };
+}

@@ -131,9 +131,7 @@ export class StartLoaderJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NeptunedataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class StartLoaderJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartLoaderJobCommand)
   .de(de_StartLoaderJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartLoaderJobInput;
+      output: StartLoaderJobOutput;
+    };
+    sdk: {
+      input: StartLoaderJobCommandInput;
+      output: StartLoaderJobCommandOutput;
+    };
+  };
+}

@@ -105,9 +105,7 @@ export class GetUICustomizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class GetUICustomizationCommand extends $Command
   .f(GetUICustomizationRequestFilterSensitiveLog, GetUICustomizationResponseFilterSensitiveLog)
   .ser(se_GetUICustomizationCommand)
   .de(de_GetUICustomizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUICustomizationRequest;
+      output: GetUICustomizationResponse;
+    };
+    sdk: {
+      input: GetUICustomizationCommandInput;
+      output: GetUICustomizationCommandOutput;
+    };
+  };
+}

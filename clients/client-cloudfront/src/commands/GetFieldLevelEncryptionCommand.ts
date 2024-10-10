@@ -104,9 +104,7 @@ export class GetFieldLevelEncryptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFrontClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class GetFieldLevelEncryptionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFieldLevelEncryptionCommand)
   .de(de_GetFieldLevelEncryptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFieldLevelEncryptionRequest;
+      output: GetFieldLevelEncryptionResult;
+    };
+    sdk: {
+      input: GetFieldLevelEncryptionCommandInput;
+      output: GetFieldLevelEncryptionCommandOutput;
+    };
+  };
+}

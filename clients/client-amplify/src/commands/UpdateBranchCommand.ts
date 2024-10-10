@@ -145,9 +145,7 @@ export class UpdateBranchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +157,16 @@ export class UpdateBranchCommand extends $Command
   .f(UpdateBranchRequestFilterSensitiveLog, UpdateBranchResultFilterSensitiveLog)
   .ser(se_UpdateBranchCommand)
   .de(de_UpdateBranchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBranchRequest;
+      output: UpdateBranchResult;
+    };
+    sdk: {
+      input: UpdateBranchCommandInput;
+      output: UpdateBranchCommandOutput;
+    };
+  };
+}

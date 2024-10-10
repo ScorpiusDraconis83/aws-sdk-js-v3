@@ -61,7 +61,7 @@ export interface DescribeRepositoryCreationTemplatesCommandOutput
  * //       prefix: "STRING_VALUE",
  * //       description: "STRING_VALUE",
  * //       encryptionConfiguration: { // EncryptionConfigurationForRepositoryCreationTemplate
- * //         encryptionType: "AES256" || "KMS", // required
+ * //         encryptionType: "AES256" || "KMS" || "KMS_DSSE", // required
  * //         kmsKey: "STRING_VALUE",
  * //       },
  * //       resourceTags: [ // TagList
@@ -163,9 +163,7 @@ export class DescribeRepositoryCreationTemplatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class DescribeRepositoryCreationTemplatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRepositoryCreationTemplatesCommand)
   .de(de_DescribeRepositoryCreationTemplatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRepositoryCreationTemplatesRequest;
+      output: DescribeRepositoryCreationTemplatesResponse;
+    };
+    sdk: {
+      input: DescribeRepositoryCreationTemplatesCommandInput;
+      output: DescribeRepositoryCreationTemplatesCommandOutput;
+    };
+  };
+}

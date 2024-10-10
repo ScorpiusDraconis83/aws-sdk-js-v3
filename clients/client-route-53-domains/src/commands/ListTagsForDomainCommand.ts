@@ -86,9 +86,7 @@ export class ListTagsForDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53DomainsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class ListTagsForDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTagsForDomainCommand)
   .de(de_ListTagsForDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForDomainRequest;
+      output: ListTagsForDomainResponse;
+    };
+    sdk: {
+      input: ListTagsForDomainCommandInput;
+      output: ListTagsForDomainCommandOutput;
+    };
+  };
+}

@@ -63,6 +63,18 @@ export interface DeleteLayerVersionCommandOutput extends __MetadataBearer {}
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To delete a version of a Lambda layer
+ * ```javascript
+ * // The following example deletes version 2 of a layer named my-layer.
+ * const input = {
+ *   "LayerName": "my-layer",
+ *   "VersionNumber": 2
+ * };
+ * const command = new DeleteLayerVersionCommand(input);
+ * await client.send(command);
+ * // example id: to-delete-a-version-of-a-lambda-layer-1586481157547
+ * ```
+ *
  */
 export class DeleteLayerVersionCommand extends $Command
   .classBuilder<
@@ -72,9 +84,7 @@ export class DeleteLayerVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -86,4 +96,16 @@ export class DeleteLayerVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteLayerVersionCommand)
   .de(de_DeleteLayerVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLayerVersionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteLayerVersionCommandInput;
+      output: DeleteLayerVersionCommandOutput;
+    };
+  };
+}

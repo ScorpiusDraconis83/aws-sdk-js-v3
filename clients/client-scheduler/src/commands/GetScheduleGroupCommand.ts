@@ -81,9 +81,7 @@ export class GetScheduleGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SchedulerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class GetScheduleGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetScheduleGroupCommand)
   .de(de_GetScheduleGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetScheduleGroupInput;
+      output: GetScheduleGroupOutput;
+    };
+    sdk: {
+      input: GetScheduleGroupCommandInput;
+      output: GetScheduleGroupCommandOutput;
+    };
+  };
+}

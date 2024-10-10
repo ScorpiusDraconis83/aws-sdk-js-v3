@@ -116,9 +116,7 @@ export class DescribeAssessmentTargetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: InspectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class DescribeAssessmentTargetsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeAssessmentTargetsCommand)
   .de(de_DescribeAssessmentTargetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAssessmentTargetsRequest;
+      output: DescribeAssessmentTargetsResponse;
+    };
+    sdk: {
+      input: DescribeAssessmentTargetsCommandInput;
+      output: DescribeAssessmentTargetsCommandOutput;
+    };
+  };
+}

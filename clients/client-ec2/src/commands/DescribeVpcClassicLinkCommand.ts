@@ -39,6 +39,10 @@ export interface DescribeVpcClassicLinkCommandOutput extends DescribeVpcClassicL
  * // const { EC2Client, DescribeVpcClassicLinkCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeVpcClassicLinkRequest
+ *   DryRun: true || false,
+ *   VpcIds: [ // VpcClassicLinkIdList
+ *     "STRING_VALUE",
+ *   ],
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -46,10 +50,6 @@ export interface DescribeVpcClassicLinkCommandOutput extends DescribeVpcClassicL
  *         "STRING_VALUE",
  *       ],
  *     },
- *   ],
- *   DryRun: true || false,
- *   VpcIds: [ // VpcClassicLinkIdList
- *     "STRING_VALUE",
  *   ],
  * };
  * const command = new DescribeVpcClassicLinkCommand(input);
@@ -90,9 +90,7 @@ export class DescribeVpcClassicLinkCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DescribeVpcClassicLinkCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVpcClassicLinkCommand)
   .de(de_DescribeVpcClassicLinkCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcClassicLinkRequest;
+      output: DescribeVpcClassicLinkResult;
+    };
+    sdk: {
+      input: DescribeVpcClassicLinkCommandInput;
+      output: DescribeVpcClassicLinkCommandOutput;
+    };
+  };
+}

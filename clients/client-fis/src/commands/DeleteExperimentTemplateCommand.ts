@@ -140,9 +140,7 @@ export class DeleteExperimentTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FisClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class DeleteExperimentTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteExperimentTemplateCommand)
   .de(de_DeleteExperimentTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteExperimentTemplateRequest;
+      output: DeleteExperimentTemplateResponse;
+    };
+    sdk: {
+      input: DeleteExperimentTemplateCommandInput;
+      output: DeleteExperimentTemplateCommandOutput;
+    };
+  };
+}

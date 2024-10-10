@@ -154,9 +154,7 @@ export class DescribeObjectsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataPipelineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class DescribeObjectsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeObjectsCommand)
   .de(de_DescribeObjectsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeObjectsInput;
+      output: DescribeObjectsOutput;
+    };
+    sdk: {
+      input: DescribeObjectsCommandInput;
+      output: DescribeObjectsCommandOutput;
+    };
+  };
+}

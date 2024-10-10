@@ -133,9 +133,7 @@ export class PutStorageConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class PutStorageConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutStorageConfigurationCommand)
   .de(de_PutStorageConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutStorageConfigurationRequest;
+      output: PutStorageConfigurationResponse;
+    };
+    sdk: {
+      input: PutStorageConfigurationCommandInput;
+      output: PutStorageConfigurationCommandOutput;
+    };
+  };
+}

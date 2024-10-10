@@ -95,9 +95,7 @@ export class PutDestinationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchLogsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class PutDestinationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutDestinationCommand)
   .de(de_PutDestinationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutDestinationRequest;
+      output: PutDestinationResponse;
+    };
+    sdk: {
+      input: PutDestinationCommandInput;
+      output: PutDestinationCommandOutput;
+    };
+  };
+}

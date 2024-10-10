@@ -176,7 +176,6 @@ export interface GetRunCommandOutput extends GetRunResult, __MetadataBearer {}
  * {
  *   "run": {
  *     "name": "My Test Run",
- *     "type": "BUILTIN_EXPLORER",
  *     "arn": "arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE",
  *     "billingMethod": "METERED",
  *     "completedJobs": 0,
@@ -214,9 +213,7 @@ export class GetRunCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeviceFarmClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -228,4 +225,16 @@ export class GetRunCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetRunCommand)
   .de(de_GetRunCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRunRequest;
+      output: GetRunResult;
+    };
+    sdk: {
+      input: GetRunCommandInput;
+      output: GetRunCommandOutput;
+    };
+  };
+}

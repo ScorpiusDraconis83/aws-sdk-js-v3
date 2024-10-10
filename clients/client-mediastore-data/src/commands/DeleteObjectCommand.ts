@@ -72,9 +72,7 @@ export class DeleteObjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaStoreDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -86,4 +84,16 @@ export class DeleteObjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteObjectCommand)
   .de(de_DeleteObjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteObjectRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteObjectCommandInput;
+      output: DeleteObjectCommandOutput;
+    };
+  };
+}

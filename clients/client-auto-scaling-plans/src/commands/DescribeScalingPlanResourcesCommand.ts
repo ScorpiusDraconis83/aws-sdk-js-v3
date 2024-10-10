@@ -126,9 +126,7 @@ export class DescribeScalingPlanResourcesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingPlansClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class DescribeScalingPlanResourcesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeScalingPlanResourcesCommand)
   .de(de_DescribeScalingPlanResourcesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScalingPlanResourcesRequest;
+      output: DescribeScalingPlanResourcesResponse;
+    };
+    sdk: {
+      input: DescribeScalingPlanResourcesCommandInput;
+      output: DescribeScalingPlanResourcesCommandOutput;
+    };
+  };
+}

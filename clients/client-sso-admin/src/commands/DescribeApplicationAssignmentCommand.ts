@@ -93,9 +93,7 @@ export class DescribeApplicationAssignmentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOAdminClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class DescribeApplicationAssignmentCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeApplicationAssignmentCommand)
   .de(de_DescribeApplicationAssignmentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeApplicationAssignmentRequest;
+      output: DescribeApplicationAssignmentResponse;
+    };
+    sdk: {
+      input: DescribeApplicationAssignmentCommandInput;
+      output: DescribeApplicationAssignmentCommandOutput;
+    };
+  };
+}

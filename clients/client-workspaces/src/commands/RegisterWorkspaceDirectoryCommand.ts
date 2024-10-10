@@ -126,9 +126,7 @@ export class RegisterWorkspaceDirectoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -140,4 +138,16 @@ export class RegisterWorkspaceDirectoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RegisterWorkspaceDirectoryCommand)
   .de(de_RegisterWorkspaceDirectoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterWorkspaceDirectoryRequest;
+      output: RegisterWorkspaceDirectoryResult;
+    };
+    sdk: {
+      input: RegisterWorkspaceDirectoryCommandInput;
+      output: RegisterWorkspaceDirectoryCommandOutput;
+    };
+  };
+}

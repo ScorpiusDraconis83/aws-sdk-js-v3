@@ -146,9 +146,7 @@ export class PutProjectPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RekognitionClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -160,4 +158,16 @@ export class PutProjectPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutProjectPolicyCommand)
   .de(de_PutProjectPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutProjectPolicyRequest;
+      output: PutProjectPolicyResponse;
+    };
+    sdk: {
+      input: PutProjectPolicyCommandInput;
+      output: PutProjectPolicyCommandOutput;
+    };
+  };
+}

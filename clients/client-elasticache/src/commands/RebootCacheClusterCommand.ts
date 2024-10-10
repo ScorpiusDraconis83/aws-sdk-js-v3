@@ -35,10 +35,10 @@ export interface RebootCacheClusterCommandOutput extends RebootCacheClusterResul
  *          <p>The reboot causes the contents of the cache (for each cache node being rebooted) to be
  *             lost.</p>
  *          <p>When the reboot is complete, a cluster event is created.</p>
- *          <p>Rebooting a cluster is currently supported on Memcached and Redis OSS (cluster mode
- *             disabled) clusters. Rebooting is not supported on Redis OSS (cluster mode enabled)
+ *          <p>Rebooting a cluster is currently supported on Memcached, Valkey and Redis OSS (cluster mode
+ *             disabled) clusters. Rebooting is not supported on Valkey or Redis OSS (cluster mode enabled)
  *             clusters.</p>
- *          <p>If you make changes to parameters that require a Redis OSS (cluster mode enabled) cluster
+ *          <p>If you make changes to parameters that require a Valkey or Redis OSS (cluster mode enabled) cluster
  *             reboot for the changes to be applied, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html">Rebooting a Cluster</a> for an alternate process.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -240,9 +240,7 @@ export class RebootCacheClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -254,4 +252,16 @@ export class RebootCacheClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RebootCacheClusterCommand)
   .de(de_RebootCacheClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RebootCacheClusterMessage;
+      output: RebootCacheClusterResult;
+    };
+    sdk: {
+      input: RebootCacheClusterCommandInput;
+      output: RebootCacheClusterCommandOutput;
+    };
+  };
+}

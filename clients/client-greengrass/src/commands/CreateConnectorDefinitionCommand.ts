@@ -89,9 +89,7 @@ export class CreateConnectorDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class CreateConnectorDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateConnectorDefinitionCommand)
   .de(de_CreateConnectorDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConnectorDefinitionRequest;
+      output: CreateConnectorDefinitionResponse;
+    };
+    sdk: {
+      input: CreateConnectorDefinitionCommandInput;
+      output: CreateConnectorDefinitionCommandOutput;
+    };
+  };
+}

@@ -200,6 +200,9 @@ export interface CreateDataProviderCommandOutput extends CreateDataProviderRespo
  *  <p>DMS was denied access to the endpoint. Check that the
  *             role is correctly configured.</p>
  *
+ * @throws {@link FailedDependencyFault} (client fault)
+ *  <p>A dependency threw an exception.</p>
+ *
  * @throws {@link ResourceAlreadyExistsFault} (client fault)
  *  <p>The resource you are attempting to create already exists.</p>
  *
@@ -264,9 +267,7 @@ export class CreateDataProviderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -278,4 +279,16 @@ export class CreateDataProviderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDataProviderCommand)
   .de(de_CreateDataProviderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataProviderMessage;
+      output: CreateDataProviderResponse;
+    };
+    sdk: {
+      input: CreateDataProviderCommandInput;
+      output: CreateDataProviderCommandOutput;
+    };
+  };
+}

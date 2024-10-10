@@ -95,9 +95,7 @@ export class DeleteVaultAccessPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DeleteVaultAccessPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteVaultAccessPolicyCommand)
   .de(de_DeleteVaultAccessPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVaultAccessPolicyInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteVaultAccessPolicyCommandInput;
+      output: DeleteVaultAccessPolicyCommandOutput;
+    };
+  };
+}

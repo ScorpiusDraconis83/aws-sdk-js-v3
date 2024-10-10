@@ -76,9 +76,7 @@ export class UpdateEvaluationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MachineLearningClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class UpdateEvaluationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateEvaluationCommand)
   .de(de_UpdateEvaluationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEvaluationInput;
+      output: UpdateEvaluationOutput;
+    };
+    sdk: {
+      input: UpdateEvaluationCommandInput;
+      output: UpdateEvaluationCommandOutput;
+    };
+  };
+}

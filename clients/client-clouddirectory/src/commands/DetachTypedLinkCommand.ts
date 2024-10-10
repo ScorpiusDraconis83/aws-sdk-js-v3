@@ -107,6 +107,37 @@ export interface DetachTypedLinkCommandOutput extends __MetadataBearer {}
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To detach a typed link from an object
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *   "TypedLinkSpecifier": {
+ *     "IdentityAttributeValues": [
+ *       {
+ *         "AttributeName": "22",
+ *         "Value": {
+ *           "BinaryValue": "c3Ry"
+ *         }
+ *       }
+ *     ],
+ *     "SourceObjectReference": {
+ *       "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+ *     },
+ *     "TargetObjectReference": {
+ *       "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+ *     },
+ *     "TypedLinkFacet": {
+ *       "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+ *       "TypedLinkName": "exampletypedlink8"
+ *     }
+ *   }
+ * };
+ * const command = new DetachTypedLinkCommand(input);
+ * await client.send(command);
+ * // example id: to-detach-a-typed-link-from-an-object-1506540145856
+ * ```
+ *
  */
 export class DetachTypedLinkCommand extends $Command
   .classBuilder<
@@ -116,9 +147,7 @@ export class DetachTypedLinkCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +159,16 @@ export class DetachTypedLinkCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DetachTypedLinkCommand)
   .de(de_DetachTypedLinkCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachTypedLinkRequest;
+      output: {};
+    };
+    sdk: {
+      input: DetachTypedLinkCommandInput;
+      output: DetachTypedLinkCommandOutput;
+    };
+  };
+}

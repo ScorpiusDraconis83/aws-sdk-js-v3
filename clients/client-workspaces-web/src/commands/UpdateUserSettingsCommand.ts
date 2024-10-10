@@ -143,9 +143,7 @@ export class UpdateUserSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -157,4 +155,16 @@ export class UpdateUserSettingsCommand extends $Command
   .f(UpdateUserSettingsRequestFilterSensitiveLog, UpdateUserSettingsResponseFilterSensitiveLog)
   .ser(se_UpdateUserSettingsCommand)
   .de(de_UpdateUserSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateUserSettingsRequest;
+      output: UpdateUserSettingsResponse;
+    };
+    sdk: {
+      input: UpdateUserSettingsCommandInput;
+      output: UpdateUserSettingsCommandOutput;
+    };
+  };
+}

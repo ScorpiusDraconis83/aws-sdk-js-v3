@@ -357,9 +357,7 @@ export class BatchPutTaxRegistrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TaxSettingsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -371,4 +369,16 @@ export class BatchPutTaxRegistrationCommand extends $Command
   .f(BatchPutTaxRegistrationRequestFilterSensitiveLog, BatchPutTaxRegistrationResponseFilterSensitiveLog)
   .ser(se_BatchPutTaxRegistrationCommand)
   .de(de_BatchPutTaxRegistrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchPutTaxRegistrationRequest;
+      output: BatchPutTaxRegistrationResponse;
+    };
+    sdk: {
+      input: BatchPutTaxRegistrationCommandInput;
+      output: BatchPutTaxRegistrationCommandOutput;
+    };
+  };
+}

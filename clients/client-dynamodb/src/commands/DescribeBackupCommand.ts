@@ -166,9 +166,7 @@ export class DescribeBackupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DynamoDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -180,4 +178,16 @@ export class DescribeBackupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeBackupCommand)
   .de(de_DescribeBackupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBackupInput;
+      output: DescribeBackupOutput;
+    };
+    sdk: {
+      input: DescribeBackupCommandInput;
+      output: DescribeBackupCommandOutput;
+    };
+  };
+}

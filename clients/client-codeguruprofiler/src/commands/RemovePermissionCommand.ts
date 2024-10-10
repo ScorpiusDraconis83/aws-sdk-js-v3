@@ -94,9 +94,7 @@ export class RemovePermissionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeGuruProfilerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class RemovePermissionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemovePermissionCommand)
   .de(de_RemovePermissionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemovePermissionRequest;
+      output: RemovePermissionResponse;
+    };
+    sdk: {
+      input: RemovePermissionCommandInput;
+      output: RemovePermissionCommandOutput;
+    };
+  };
+}

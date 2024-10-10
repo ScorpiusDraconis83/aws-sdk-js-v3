@@ -37,6 +37,7 @@ import {
   CognitoConfig,
   CompilationJobStatus,
   CompilationJobSummary,
+  ContainerDefinition,
   ContextSummary,
   InferenceSpecification,
   MetadataProperties,
@@ -62,17 +63,24 @@ import {
   DriftCheckBaselines,
   EdgeOutputConfig,
   ExecutionRoleIdentityConfig,
-  ExperimentConfig,
   FeatureDefinition,
   FeatureType,
+  HumanTaskConfig,
   HyperParameterTrainingJobDefinition,
   HyperParameterTuningJobConfig,
   HyperParameterTuningJobStrategyType,
   HyperParameterTuningJobWarmStartConfig,
+  InferenceExecutionConfig,
   InferenceExperimentSchedule,
   InferenceExperimentType,
   InstanceMetadataServiceConfiguration,
+  LabelingJobAlgorithmsConfig,
   LabelingJobInputConfig,
+  LabelingJobOutputConfig,
+  LabelingJobStoppingConditions,
+  ModelBiasAppSpecification,
+  ModelBiasBaselineConfig,
+  ModelBiasJobInput,
   ModelCardExportOutputConfig,
   ModelCardSecurityConfig,
   ModelCardStatus,
@@ -110,6 +118,7 @@ import {
   RootAccess,
   SkipModelValidation,
   SourceAlgorithmSpecification,
+  TrackingServerSize,
   UserSettings,
 } from "./models_1";
 
@@ -120,10 +129,12 @@ import {
   DebugHookConfig,
   DebugRuleConfiguration,
   DebugRuleEvaluationStatus,
+  DeploymentRecommendation,
   DomainStatus,
   EdgePackagingJobStatus,
   EndpointOutputConfiguration,
   EndpointStatus,
+  ExperimentConfig,
   ExperimentSource,
   FeatureGroupStatus,
   FeatureParameter,
@@ -142,14 +153,12 @@ import {
   InferenceExperimentStatus,
   InferenceMetrics,
   InfraCheckConfig,
-  IsTrackingServerActive,
   LabelCounters,
   LabelingJobOutput,
   LabelingJobStatus,
   LastUpdateStatus,
   MemberDefinition,
   ModelArtifacts,
-  ModelCardProcessingStatus,
   ModelClientConfig,
   ModelConfiguration,
   NotificationConfiguration,
@@ -174,7 +183,6 @@ import {
   SpaceSharingSettings,
   StudioLifecycleConfigAppType,
   TensorBoardOutputConfig,
-  TrackingServerStatus,
   TrainingJobStatus,
   TrainingJobStatusCounters,
   TrialComponentArtifact,
@@ -182,6 +190,605 @@ import {
   TrialComponentStatus,
   WorkerAccessConfiguration,
 } from "./models_2";
+
+/**
+ * @public
+ */
+export interface DescribeLabelingJobResponse {
+  /**
+   * <p>The processing status of the labeling job. </p>
+   * @public
+   */
+  LabelingJobStatus: LabelingJobStatus | undefined;
+
+  /**
+   * <p>Provides a breakdown of the number of data objects labeled by humans, the number of
+   *             objects labeled by machine, the number of objects than couldn't be labeled, and the
+   *             total number of objects labeled. </p>
+   * @public
+   */
+  LabelCounters: LabelCounters | undefined;
+
+  /**
+   * <p>If the job failed, the reason that it failed. </p>
+   * @public
+   */
+  FailureReason?: string;
+
+  /**
+   * <p>The date and time that the labeling job was created.</p>
+   * @public
+   */
+  CreationTime: Date | undefined;
+
+  /**
+   * <p>The date and time that the labeling job was last updated.</p>
+   * @public
+   */
+  LastModifiedTime: Date | undefined;
+
+  /**
+   * <p>A unique identifier for work done as part of a labeling job.</p>
+   * @public
+   */
+  JobReferenceCode: string | undefined;
+
+  /**
+   * <p>The name assigned to the labeling job when it was created.</p>
+   * @public
+   */
+  LabelingJobName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the labeling job.</p>
+   * @public
+   */
+  LabelingJobArn: string | undefined;
+
+  /**
+   * <p>The attribute used as the label in the output manifest file.</p>
+   * @public
+   */
+  LabelAttributeName?: string;
+
+  /**
+   * <p>Input configuration information for the labeling job, such as the Amazon S3 location of the
+   *             data objects and the location of the manifest file that describes the data
+   *             objects.</p>
+   * @public
+   */
+  InputConfig: LabelingJobInputConfig | undefined;
+
+  /**
+   * <p>The location of the job's output data and the Amazon Web Services Key Management
+   *             Service key ID for the key used to encrypt the output data, if any.</p>
+   * @public
+   */
+  OutputConfig: LabelingJobOutputConfig | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on your behalf
+   *             during data labeling.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>The S3 location of the JSON file that defines the categories used to label data
+   *             objects. Please note the following label-category limits:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Semantic segmentation labeling jobs using automated labeling: 20 labels</p>
+   *             </li>
+   *             <li>
+   *                <p>Box bounding labeling jobs (all): 10 labels</p>
+   *             </li>
+   *          </ul>
+   *          <p>The file is a JSON structure in the following format:</p>
+   *          <p>
+   *             <code>\{</code>
+   *          </p>
+   *          <p>
+   *             <code> "document-version": "2018-11-28"</code>
+   *          </p>
+   *          <p>
+   *             <code> "labels": [</code>
+   *          </p>
+   *          <p>
+   *             <code> \{</code>
+   *          </p>
+   *          <p>
+   *             <code> "label": "<i>label 1</i>"</code>
+   *          </p>
+   *          <p>
+   *             <code> \},</code>
+   *          </p>
+   *          <p>
+   *             <code> \{</code>
+   *          </p>
+   *          <p>
+   *             <code> "label": "<i>label 2</i>"</code>
+   *          </p>
+   *          <p>
+   *             <code> \},</code>
+   *          </p>
+   *          <p>
+   *             <code> ...</code>
+   *          </p>
+   *          <p>
+   *             <code> \{</code>
+   *          </p>
+   *          <p>
+   *             <code> "label": "<i>label n</i>"</code>
+   *          </p>
+   *          <p>
+   *             <code> \}</code>
+   *          </p>
+   *          <p>
+   *             <code> ]</code>
+   *          </p>
+   *          <p>
+   *             <code>\}</code>
+   *          </p>
+   * @public
+   */
+  LabelCategoryConfigS3Uri?: string;
+
+  /**
+   * <p>A set of conditions for stopping a labeling job. If any of the conditions are met, the
+   *             job is automatically stopped.</p>
+   * @public
+   */
+  StoppingConditions?: LabelingJobStoppingConditions;
+
+  /**
+   * <p>Configuration information for automated data labeling.</p>
+   * @public
+   */
+  LabelingJobAlgorithmsConfig?: LabelingJobAlgorithmsConfig;
+
+  /**
+   * <p>Configuration information required for human workers to complete a labeling
+   *             task.</p>
+   * @public
+   */
+  HumanTaskConfig: HumanTaskConfig | undefined;
+
+  /**
+   * <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services
+   *             resources in different ways, for example, by purpose, owner, or environment. For more
+   *             information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
+   * @public
+   */
+  Tags?: Tag[];
+
+  /**
+   * <p>The location of the output produced by the labeling job.</p>
+   * @public
+   */
+  LabelingJobOutput?: LabelingJobOutput;
+}
+
+/**
+ * @public
+ */
+export interface DescribeLineageGroupRequest {
+  /**
+   * <p>The name of the lineage group.</p>
+   * @public
+   */
+  LineageGroupName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeLineageGroupResponse {
+  /**
+   * <p>The name of the lineage group.</p>
+   * @public
+   */
+  LineageGroupName?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the lineage group.</p>
+   * @public
+   */
+  LineageGroupArn?: string;
+
+  /**
+   * <p>The display name of the lineage group.</p>
+   * @public
+   */
+  DisplayName?: string;
+
+  /**
+   * <p>The description of the lineage group.</p>
+   * @public
+   */
+  Description?: string;
+
+  /**
+   * <p>The creation time of lineage group.</p>
+   * @public
+   */
+  CreationTime?: Date;
+
+  /**
+   * <p>Information about the user who created or modified an experiment, trial, trial
+   *       component, lineage group, project, or model card.</p>
+   * @public
+   */
+  CreatedBy?: UserContext;
+
+  /**
+   * <p>The last modified time of the lineage group.</p>
+   * @public
+   */
+  LastModifiedTime?: Date;
+
+  /**
+   * <p>Information about the user who created or modified an experiment, trial, trial
+   *       component, lineage group, project, or model card.</p>
+   * @public
+   */
+  LastModifiedBy?: UserContext;
+}
+
+/**
+ * @public
+ */
+export interface DescribeMlflowTrackingServerRequest {
+  /**
+   * <p>The name of the MLflow Tracking Server to describe.</p>
+   * @public
+   */
+  TrackingServerName: string | undefined;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const IsTrackingServerActive = {
+  ACTIVE: "Active",
+  INACTIVE: "Inactive",
+} as const;
+
+/**
+ * @public
+ */
+export type IsTrackingServerActive = (typeof IsTrackingServerActive)[keyof typeof IsTrackingServerActive];
+
+/**
+ * @public
+ * @enum
+ */
+export const TrackingServerStatus = {
+  CREATED: "Created",
+  CREATE_FAILED: "CreateFailed",
+  CREATING: "Creating",
+  DELETE_FAILED: "DeleteFailed",
+  DELETING: "Deleting",
+  MAINTENANCE_COMPLETE: "MaintenanceComplete",
+  MAINTENANCE_FAILED: "MaintenanceFailed",
+  MAINTENANCE_IN_PROGRESS: "MaintenanceInProgress",
+  STARTED: "Started",
+  STARTING: "Starting",
+  START_FAILED: "StartFailed",
+  STOPPED: "Stopped",
+  STOPPING: "Stopping",
+  STOP_FAILED: "StopFailed",
+  UPDATED: "Updated",
+  UPDATE_FAILED: "UpdateFailed",
+  UPDATING: "Updating",
+} as const;
+
+/**
+ * @public
+ */
+export type TrackingServerStatus = (typeof TrackingServerStatus)[keyof typeof TrackingServerStatus];
+
+/**
+ * @public
+ */
+export interface DescribeMlflowTrackingServerResponse {
+  /**
+   * <p>The ARN of the described tracking server.</p>
+   * @public
+   */
+  TrackingServerArn?: string;
+
+  /**
+   * <p>The name of the described tracking server.</p>
+   * @public
+   */
+  TrackingServerName?: string;
+
+  /**
+   * <p>The S3 URI of the general purpose bucket used as the MLflow Tracking Server
+   *       artifact store.</p>
+   * @public
+   */
+  ArtifactStoreUri?: string;
+
+  /**
+   * <p>The size of the described tracking server.</p>
+   * @public
+   */
+  TrackingServerSize?: TrackingServerSize;
+
+  /**
+   * <p>The MLflow version used for the described tracking server.</p>
+   * @public
+   */
+  MlflowVersion?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for an IAM role in your account that the described MLflow Tracking Server
+   *       uses to access the artifact store in Amazon S3.</p>
+   * @public
+   */
+  RoleArn?: string;
+
+  /**
+   * <p>The current creation status of the described MLflow Tracking Server.</p>
+   * @public
+   */
+  TrackingServerStatus?: TrackingServerStatus;
+
+  /**
+   * <p>Whether the described MLflow Tracking Server is currently active.</p>
+   * @public
+   */
+  IsActive?: IsTrackingServerActive;
+
+  /**
+   * <p>The URL to connect to the MLflow user interface for the described tracking server.</p>
+   * @public
+   */
+  TrackingServerUrl?: string;
+
+  /**
+   * <p>The day and time of the week when weekly maintenance occurs on the described tracking server.</p>
+   * @public
+   */
+  WeeklyMaintenanceWindowStart?: string;
+
+  /**
+   * <p>Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.</p>
+   * @public
+   */
+  AutomaticModelRegistration?: boolean;
+
+  /**
+   * <p>The timestamp of when the described MLflow Tracking Server was created.</p>
+   * @public
+   */
+  CreationTime?: Date;
+
+  /**
+   * <p>Information about the user who created or modified an experiment, trial, trial
+   *       component, lineage group, project, or model card.</p>
+   * @public
+   */
+  CreatedBy?: UserContext;
+
+  /**
+   * <p>The timestamp of when the described MLflow Tracking Server was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date;
+
+  /**
+   * <p>Information about the user who created or modified an experiment, trial, trial
+   *       component, lineage group, project, or model card.</p>
+   * @public
+   */
+  LastModifiedBy?: UserContext;
+}
+
+/**
+ * @public
+ */
+export interface DescribeModelInput {
+  /**
+   * <p>The name of the model.</p>
+   * @public
+   */
+  ModelName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeModelOutput {
+  /**
+   * <p>Name of the SageMaker model.</p>
+   * @public
+   */
+  ModelName: string | undefined;
+
+  /**
+   * <p>The location of the primary inference code, associated artifacts, and custom
+   *             environment map that the inference code uses when it is deployed in production.
+   *         </p>
+   * @public
+   */
+  PrimaryContainer?: ContainerDefinition;
+
+  /**
+   * <p>The containers in the inference pipeline.</p>
+   * @public
+   */
+  Containers?: ContainerDefinition[];
+
+  /**
+   * <p>Specifies details of how containers in a multi-container endpoint are called.</p>
+   * @public
+   */
+  InferenceExecutionConfig?: InferenceExecutionConfig;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role that you specified for the
+   *             model.</p>
+   * @public
+   */
+  ExecutionRoleArn?: string;
+
+  /**
+   * <p>A <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html">VpcConfig</a> object that specifies the VPC that this model has access to. For
+   *             more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html">Protect Endpoints by Using an Amazon Virtual
+   *                 Private Cloud</a>
+   *          </p>
+   * @public
+   */
+  VpcConfig?: VpcConfig;
+
+  /**
+   * <p>A timestamp that shows when the model was created.</p>
+   * @public
+   */
+  CreationTime: Date | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the model.</p>
+   * @public
+   */
+  ModelArn: string | undefined;
+
+  /**
+   * <p>If <code>True</code>, no inbound or outbound network calls can be made to or from the
+   *             model container.</p>
+   * @public
+   */
+  EnableNetworkIsolation?: boolean;
+
+  /**
+   * <p>A set of recommended deployment configurations for the model.</p>
+   * @public
+   */
+  DeploymentRecommendation?: DeploymentRecommendation;
+}
+
+/**
+ * @public
+ */
+export interface DescribeModelBiasJobDefinitionRequest {
+  /**
+   * <p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
+   * @public
+   */
+  JobDefinitionName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeModelBiasJobDefinitionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the model bias job.</p>
+   * @public
+   */
+  JobDefinitionArn: string | undefined;
+
+  /**
+   * <p>The name of the bias job definition. The name must be unique within an Amazon Web Services
+   *    Region in the Amazon Web Services account.</p>
+   * @public
+   */
+  JobDefinitionName: string | undefined;
+
+  /**
+   * <p>The time at which the model bias job was created.</p>
+   * @public
+   */
+  CreationTime: Date | undefined;
+
+  /**
+   * <p>The baseline configuration for a model bias job.</p>
+   * @public
+   */
+  ModelBiasBaselineConfig?: ModelBiasBaselineConfig;
+
+  /**
+   * <p>Configures the model bias job to run a specified Docker container image.</p>
+   * @public
+   */
+  ModelBiasAppSpecification: ModelBiasAppSpecification | undefined;
+
+  /**
+   * <p>Inputs for the model bias job.</p>
+   * @public
+   */
+  ModelBiasJobInput: ModelBiasJobInput | undefined;
+
+  /**
+   * <p>The output configuration for monitoring jobs.</p>
+   * @public
+   */
+  ModelBiasJobOutputConfig: MonitoringOutputConfig | undefined;
+
+  /**
+   * <p>Identifies the resources to deploy for a monitoring job.</p>
+   * @public
+   */
+  JobResources: MonitoringResources | undefined;
+
+  /**
+   * <p>Networking options for a model bias job.</p>
+   * @public
+   */
+  NetworkConfig?: MonitoringNetworkConfig;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role that has read permission to the
+   *    input data location and write permission to the output data location in Amazon S3.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
+   * @public
+   */
+  StoppingCondition?: MonitoringStoppingCondition;
+}
+
+/**
+ * @public
+ */
+export interface DescribeModelCardRequest {
+  /**
+   * <p>The name or Amazon Resource Name (ARN) of the model card to describe.</p>
+   * @public
+   */
+  ModelCardName: string | undefined;
+
+  /**
+   * <p>The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.</p>
+   * @public
+   */
+  ModelCardVersion?: number;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const ModelCardProcessingStatus = {
+  CONTENT_DELETED: "ContentDeleted",
+  DELETE_COMPLETED: "DeleteCompleted",
+  DELETE_FAILED: "DeleteFailed",
+  DELETE_INPROGRESS: "DeleteInProgress",
+  DELETE_PENDING: "DeletePending",
+  EXPORTJOBS_DELETED: "ExportJobsDeleted",
+} as const;
+
+/**
+ * @public
+ */
+export type ModelCardProcessingStatus = (typeof ModelCardProcessingStatus)[keyof typeof ModelCardProcessingStatus];
 
 /**
  * @public
@@ -7560,7 +8167,7 @@ export interface LabelingJobSummary {
    *             data object is sent to a worker.</p>
    * @public
    */
-  PreHumanTaskLambdaArn: string | undefined;
+  PreHumanTaskLambdaArn?: string;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Lambda function used to consolidate the
@@ -11178,411 +11785,6 @@ export interface ListModelBiasJobDefinitionsRequest {
    * @public
    */
   CreationTimeAfter?: Date;
-}
-
-/**
- * @public
- */
-export interface ListModelBiasJobDefinitionsResponse {
-  /**
-   * <p>A JSON array in which each element is a summary for a model bias jobs.</p>
-   * @public
-   */
-  JobDefinitionSummaries: MonitoringJobDefinitionSummary[] | undefined;
-
-  /**
-   * <p>The token returned if the response is truncated. To retrieve the next set of job executions, use
-   *    it in the next request.</p>
-   * @public
-   */
-  NextToken?: string;
-}
-
-/**
- * @public
- * @enum
- */
-export const ModelCardExportJobSortBy = {
-  CREATION_TIME: "CreationTime",
-  NAME: "Name",
-  STATUS: "Status",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardExportJobSortBy = (typeof ModelCardExportJobSortBy)[keyof typeof ModelCardExportJobSortBy];
-
-/**
- * @public
- * @enum
- */
-export const ModelCardExportJobSortOrder = {
-  ASCENDING: "Ascending",
-  DESCENDING: "Descending",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardExportJobSortOrder =
-  (typeof ModelCardExportJobSortOrder)[keyof typeof ModelCardExportJobSortOrder];
-
-/**
- * @public
- */
-export interface ListModelCardExportJobsRequest {
-  /**
-   * <p>List export jobs for the model card with the specified name.</p>
-   * @public
-   */
-  ModelCardName: string | undefined;
-
-  /**
-   * <p>List export jobs for the model card with the specified version.</p>
-   * @public
-   */
-  ModelCardVersion?: number;
-
-  /**
-   * <p>Only list model card export jobs that were created after the time specified.</p>
-   * @public
-   */
-  CreationTimeAfter?: Date;
-
-  /**
-   * <p>Only list model card export jobs that were created before the time specified.</p>
-   * @public
-   */
-  CreationTimeBefore?: Date;
-
-  /**
-   * <p>Only list model card export jobs with names that contain the specified string.</p>
-   * @public
-   */
-  ModelCardExportJobNameContains?: string;
-
-  /**
-   * <p>Only list model card export jobs with the specified status.</p>
-   * @public
-   */
-  StatusEquals?: ModelCardExportJobStatus;
-
-  /**
-   * <p>Sort model card export jobs by either name or creation time. Sorts by creation time by default.</p>
-   * @public
-   */
-  SortBy?: ModelCardExportJobSortBy;
-
-  /**
-   * <p>Sort model card export jobs by ascending or descending order.</p>
-   * @public
-   */
-  SortOrder?: ModelCardExportJobSortOrder;
-
-  /**
-   * <p>If the response to a previous <code>ListModelCardExportJobs</code> request was
-   *          truncated, the response includes a <code>NextToken</code>. To retrieve the next set of
-   *          model card export jobs, use the token in the next request.</p>
-   * @public
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of model card export jobs to list.</p>
-   * @public
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>The summary of the Amazon SageMaker Model Card export job.</p>
- * @public
- */
-export interface ModelCardExportJobSummary {
-  /**
-   * <p>The name of the model card export job.</p>
-   * @public
-   */
-  ModelCardExportJobName: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the model card export job.</p>
-   * @public
-   */
-  ModelCardExportJobArn: string | undefined;
-
-  /**
-   * <p>The completion status of the model card export job.</p>
-   * @public
-   */
-  Status: ModelCardExportJobStatus | undefined;
-
-  /**
-   * <p>The name of the model card that the export job exports.</p>
-   * @public
-   */
-  ModelCardName: string | undefined;
-
-  /**
-   * <p>The version of the model card that the export job exports.</p>
-   * @public
-   */
-  ModelCardVersion: number | undefined;
-
-  /**
-   * <p>The date and time that the model card export job was created.</p>
-   * @public
-   */
-  CreatedAt: Date | undefined;
-
-  /**
-   * <p>The date and time that the model card export job was last modified..</p>
-   * @public
-   */
-  LastModifiedAt: Date | undefined;
-}
-
-/**
- * @public
- */
-export interface ListModelCardExportJobsResponse {
-  /**
-   * <p>The summaries of the listed model card export jobs.</p>
-   * @public
-   */
-  ModelCardExportJobSummaries: ModelCardExportJobSummary[] | undefined;
-
-  /**
-   * <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model
-   *          card export jobs, use it in the subsequent request.</p>
-   * @public
-   */
-  NextToken?: string;
-}
-
-/**
- * @public
- * @enum
- */
-export const ModelCardSortBy = {
-  CREATION_TIME: "CreationTime",
-  NAME: "Name",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardSortBy = (typeof ModelCardSortBy)[keyof typeof ModelCardSortBy];
-
-/**
- * @public
- * @enum
- */
-export const ModelCardSortOrder = {
-  ASCENDING: "Ascending",
-  DESCENDING: "Descending",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardSortOrder = (typeof ModelCardSortOrder)[keyof typeof ModelCardSortOrder];
-
-/**
- * @public
- */
-export interface ListModelCardsRequest {
-  /**
-   * <p>Only list model cards that were created after the time specified.</p>
-   * @public
-   */
-  CreationTimeAfter?: Date;
-
-  /**
-   * <p>Only list model cards that were created before the time specified.</p>
-   * @public
-   */
-  CreationTimeBefore?: Date;
-
-  /**
-   * <p>The maximum number of model cards to list.</p>
-   * @public
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>Only list model cards with names that contain the specified string.</p>
-   * @public
-   */
-  NameContains?: string;
-
-  /**
-   * <p>Only list model cards with the specified approval status.</p>
-   * @public
-   */
-  ModelCardStatus?: ModelCardStatus;
-
-  /**
-   * <p>If the response to a previous <code>ListModelCards</code> request was truncated, the
-   *          response includes a <code>NextToken</code>. To retrieve the next set of model cards, use
-   *          the token in the next request.</p>
-   * @public
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Sort model cards by either name or creation time. Sorts by creation time by default.</p>
-   * @public
-   */
-  SortBy?: ModelCardSortBy;
-
-  /**
-   * <p>Sort model cards by ascending or descending order.</p>
-   * @public
-   */
-  SortOrder?: ModelCardSortOrder;
-}
-
-/**
- * <p>A summary of the model card.</p>
- * @public
- */
-export interface ModelCardSummary {
-  /**
-   * <p>The name of the model card.</p>
-   * @public
-   */
-  ModelCardName: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the model card.</p>
-   * @public
-   */
-  ModelCardArn: string | undefined;
-
-  /**
-   * <p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>Draft</code>: The model card is a work in progress.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>PendingReview</code>: The model card is pending review.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Approved</code>: The model card is approved.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Archived</code>: The model card is archived. No more updates should be made to the model
-   *                card, but it can still be exported.</p>
-   *             </li>
-   *          </ul>
-   * @public
-   */
-  ModelCardStatus: ModelCardStatus | undefined;
-
-  /**
-   * <p>The date and time that the model card was created.</p>
-   * @public
-   */
-  CreationTime: Date | undefined;
-
-  /**
-   * <p>The date and time that the model card was last modified.</p>
-   * @public
-   */
-  LastModifiedTime?: Date;
-}
-
-/**
- * @public
- */
-export interface ListModelCardsResponse {
-  /**
-   * <p>The summaries of the listed model cards.</p>
-   * @public
-   */
-  ModelCardSummaries: ModelCardSummary[] | undefined;
-
-  /**
-   * <p>If the response is truncated, SageMaker returns this token. To retrieve the next set of model
-   *          cards, use it in the subsequent request.</p>
-   * @public
-   */
-  NextToken?: string;
-}
-
-/**
- * @public
- * @enum
- */
-export const ModelCardVersionSortBy = {
-  VERSION: "Version",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardVersionSortBy = (typeof ModelCardVersionSortBy)[keyof typeof ModelCardVersionSortBy];
-
-/**
- * @public
- */
-export interface ListModelCardVersionsRequest {
-  /**
-   * <p>Only list model card versions that were created after the time specified.</p>
-   * @public
-   */
-  CreationTimeAfter?: Date;
-
-  /**
-   * <p>Only list model card versions that were created before the time specified.</p>
-   * @public
-   */
-  CreationTimeBefore?: Date;
-
-  /**
-   * <p>The maximum number of model card versions to list.</p>
-   * @public
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>List model card versions for the model card with the specified name or Amazon Resource Name (ARN).</p>
-   * @public
-   */
-  ModelCardName: string | undefined;
-
-  /**
-   * <p>Only list model card versions with the specified approval status.</p>
-   * @public
-   */
-  ModelCardStatus?: ModelCardStatus;
-
-  /**
-   * <p>If the response to a previous <code>ListModelCardVersions</code> request was truncated,
-   *          the response includes a <code>NextToken</code>. To retrieve the next set of model card
-   *          versions, use the token in the next request.</p>
-   * @public
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Sort listed model card versions by version. Sorts by version by default.</p>
-   * @public
-   */
-  SortBy?: ModelCardVersionSortBy;
-
-  /**
-   * <p>Sort model card versions by ascending or descending order.</p>
-   * @public
-   */
-  SortOrder?: ModelCardSortOrder;
 }
 
 /**

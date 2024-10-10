@@ -91,9 +91,7 @@ export class GetAutoshiftObserverNotificationStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ARCZonalShiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetAutoshiftObserverNotificationStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAutoshiftObserverNotificationStatusCommand)
   .de(de_GetAutoshiftObserverNotificationStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAutoshiftObserverNotificationStatusResponse;
+    };
+    sdk: {
+      input: GetAutoshiftObserverNotificationStatusCommandInput;
+      output: GetAutoshiftObserverNotificationStatusCommandOutput;
+    };
+  };
+}

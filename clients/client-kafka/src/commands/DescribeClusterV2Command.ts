@@ -222,9 +222,7 @@ export class DescribeClusterV2Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KafkaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -236,4 +234,16 @@ export class DescribeClusterV2Command extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeClusterV2Command)
   .de(de_DescribeClusterV2Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterV2Request;
+      output: DescribeClusterV2Response;
+    };
+    sdk: {
+      input: DescribeClusterV2CommandInput;
+      output: DescribeClusterV2CommandOutput;
+    };
+  };
+}

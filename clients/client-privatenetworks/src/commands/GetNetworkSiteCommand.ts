@@ -131,9 +131,7 @@ export class GetNetworkSiteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PrivateNetworksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class GetNetworkSiteCommand extends $Command
   .f(void 0, GetNetworkSiteResponseFilterSensitiveLog)
   .ser(se_GetNetworkSiteCommand)
   .de(de_GetNetworkSiteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetNetworkSiteRequest;
+      output: GetNetworkSiteResponse;
+    };
+    sdk: {
+      input: GetNetworkSiteCommandInput;
+      output: GetNetworkSiteCommandOutput;
+    };
+  };
+}

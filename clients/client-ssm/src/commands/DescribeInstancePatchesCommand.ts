@@ -116,9 +116,7 @@ export class DescribeInstancePatchesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class DescribeInstancePatchesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInstancePatchesCommand)
   .de(de_DescribeInstancePatchesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstancePatchesRequest;
+      output: DescribeInstancePatchesResult;
+    };
+    sdk: {
+      input: DescribeInstancePatchesCommandInput;
+      output: DescribeInstancePatchesCommandOutput;
+    };
+  };
+}

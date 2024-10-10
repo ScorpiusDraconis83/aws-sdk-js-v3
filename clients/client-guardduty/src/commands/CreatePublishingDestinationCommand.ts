@@ -33,8 +33,8 @@ export interface CreatePublishingDestinationCommandOutput
     __MetadataBearer {}
 
 /**
- * <p>Creates a publishing destination to export findings to. The resource to export findings to
- *       must exist before you use this operation.</p>
+ * <p>Creates a publishing destination where you can export your GuardDuty findings. Before you start exporting the
+ *       findings, the destination resource must exist.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -83,9 +83,7 @@ export class CreatePublishingDestinationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class CreatePublishingDestinationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePublishingDestinationCommand)
   .de(de_CreatePublishingDestinationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePublishingDestinationRequest;
+      output: CreatePublishingDestinationResponse;
+    };
+    sdk: {
+      input: CreatePublishingDestinationCommandInput;
+      output: CreatePublishingDestinationCommandOutput;
+    };
+  };
+}

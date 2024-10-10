@@ -120,9 +120,7 @@ export class ForecastGeofenceEventsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class ForecastGeofenceEventsCommand extends $Command
   .f(ForecastGeofenceEventsRequestFilterSensitiveLog, ForecastGeofenceEventsResponseFilterSensitiveLog)
   .ser(se_ForecastGeofenceEventsCommand)
   .de(de_ForecastGeofenceEventsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ForecastGeofenceEventsRequest;
+      output: ForecastGeofenceEventsResponse;
+    };
+    sdk: {
+      input: ForecastGeofenceEventsCommandInput;
+      output: ForecastGeofenceEventsCommandOutput;
+    };
+  };
+}

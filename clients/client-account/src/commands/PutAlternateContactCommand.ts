@@ -91,9 +91,7 @@ export class PutAlternateContactCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccountClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class PutAlternateContactCommand extends $Command
   .f(PutAlternateContactRequestFilterSensitiveLog, void 0)
   .ser(se_PutAlternateContactCommand)
   .de(de_PutAlternateContactCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAlternateContactRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutAlternateContactCommandInput;
+      output: PutAlternateContactCommandOutput;
+    };
+  };
+}

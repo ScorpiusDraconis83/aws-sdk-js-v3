@@ -95,9 +95,7 @@ export class DescribeIpRestrictionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class DescribeIpRestrictionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeIpRestrictionCommand)
   .de(de_DescribeIpRestrictionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIpRestrictionRequest;
+      output: DescribeIpRestrictionResponse;
+    };
+    sdk: {
+      input: DescribeIpRestrictionCommandInput;
+      output: DescribeIpRestrictionCommandOutput;
+    };
+  };
+}

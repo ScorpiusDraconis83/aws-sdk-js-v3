@@ -192,7 +192,7 @@ export interface DescribeOrganizationalUnitCommandOutput extends DescribeOrganiz
  * @public
  * @example To get information about an organizational unit
  * ```javascript
- * // The following example shows how to request details about an OU:/n/n
+ * // The following example shows how to request details about an OU:
  * const input = {
  *   "OrganizationalUnitId": "ou-examplerootid111-exampleouid111"
  * };
@@ -219,9 +219,7 @@ export class DescribeOrganizationalUnitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -233,4 +231,16 @@ export class DescribeOrganizationalUnitCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeOrganizationalUnitCommand)
   .de(de_DescribeOrganizationalUnitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOrganizationalUnitRequest;
+      output: DescribeOrganizationalUnitResponse;
+    };
+    sdk: {
+      input: DescribeOrganizationalUnitCommandInput;
+      output: DescribeOrganizationalUnitCommandOutput;
+    };
+  };
+}

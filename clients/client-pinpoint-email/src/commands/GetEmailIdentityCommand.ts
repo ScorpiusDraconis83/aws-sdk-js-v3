@@ -96,9 +96,7 @@ export class GetEmailIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointEmailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class GetEmailIdentityCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetEmailIdentityCommand)
   .de(de_GetEmailIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEmailIdentityRequest;
+      output: GetEmailIdentityResponse;
+    };
+    sdk: {
+      input: GetEmailIdentityCommandInput;
+      output: GetEmailIdentityCommandOutput;
+    };
+  };
+}

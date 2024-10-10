@@ -84,6 +84,32 @@ export interface GetFunctionEventInvokeConfigCommandOutput extends FunctionEvent
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To get an asynchronous invocation configuration
+ * ```javascript
+ * // The following example returns the asynchronous invocation configuration for the BLUE alias of a function named my-function.
+ * const input = {
+ *   "FunctionName": "my-function",
+ *   "Qualifier": "BLUE"
+ * };
+ * const command = new GetFunctionEventInvokeConfigCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "DestinationConfig": {
+ *     "OnFailure": {
+ *       "Destination": "arn:aws:sqs:us-east-2:123456789012:failed-invocations"
+ *     },
+ *     "OnSuccess": {}
+ *   },
+ *   "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE",
+ *   "LastModified": "${timestamp}",
+ *   "MaximumEventAgeInSeconds": 3600,
+ *   "MaximumRetryAttempts": 0
+ * }
+ * *\/
+ * // example id: to-get-an-asynchronous-invocation-configuration-1586481338463
+ * ```
+ *
  */
 export class GetFunctionEventInvokeConfigCommand extends $Command
   .classBuilder<
@@ -93,9 +119,7 @@ export class GetFunctionEventInvokeConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +131,16 @@ export class GetFunctionEventInvokeConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFunctionEventInvokeConfigCommand)
   .de(de_GetFunctionEventInvokeConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionEventInvokeConfigRequest;
+      output: FunctionEventInvokeConfig;
+    };
+    sdk: {
+      input: GetFunctionEventInvokeConfigCommandInput;
+      output: GetFunctionEventInvokeConfigCommandOutput;
+    };
+  };
+}

@@ -90,9 +90,7 @@ export class DescribeCrossAccountAccessRoleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: InspectorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DescribeCrossAccountAccessRoleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeCrossAccountAccessRoleCommand)
   .de(de_DescribeCrossAccountAccessRoleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeCrossAccountAccessRoleResponse;
+    };
+    sdk: {
+      input: DescribeCrossAccountAccessRoleCommandInput;
+      output: DescribeCrossAccountAccessRoleCommandOutput;
+    };
+  };
+}

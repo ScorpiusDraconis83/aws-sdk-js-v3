@@ -130,9 +130,7 @@ export class SendDataSetNotificationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataExchangeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class SendDataSetNotificationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SendDataSetNotificationCommand)
   .de(de_SendDataSetNotificationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendDataSetNotificationRequest;
+      output: {};
+    };
+    sdk: {
+      input: SendDataSetNotificationCommandInput;
+      output: SendDataSetNotificationCommandOutput;
+    };
+  };
+}

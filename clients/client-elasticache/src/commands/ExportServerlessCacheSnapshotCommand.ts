@@ -33,7 +33,7 @@ export interface ExportServerlessCacheSnapshotCommandOutput
     __MetadataBearer {}
 
 /**
- * <p>Provides the functionality to export the serverless cache snapshot data to Amazon S3. Available for Redis OSS only.</p>
+ * <p>Provides the functionality to export the serverless cache snapshot data to Amazon S3. Available for Valkey and Redis OSS only.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -76,10 +76,10 @@ export interface ExportServerlessCacheSnapshotCommandOutput
  *  <p>The value for a parameter is invalid.</p>
  *
  * @throws {@link InvalidServerlessCacheSnapshotStateFault} (client fault)
- *  <p>The state of the serverless cache snapshot was not received. Available for Redis OSS and Serverless Memcached only.</p>
+ *  <p>The state of the serverless cache snapshot was not received. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
  *
  * @throws {@link ServerlessCacheSnapshotNotFoundFault} (client fault)
- *  <p>This serverless cache snapshot could not be found or does not exist. Available for Redis OSS and Serverless Memcached only.</p>
+ *  <p>This serverless cache snapshot could not be found or does not exist. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
  *
  * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
  *  <p>The specified service linked role (SLR) was not found.</p>
@@ -97,9 +97,7 @@ export class ExportServerlessCacheSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class ExportServerlessCacheSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExportServerlessCacheSnapshotCommand)
   .de(de_ExportServerlessCacheSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportServerlessCacheSnapshotRequest;
+      output: ExportServerlessCacheSnapshotResponse;
+    };
+    sdk: {
+      input: ExportServerlessCacheSnapshotCommandInput;
+      output: ExportServerlessCacheSnapshotCommandOutput;
+    };
+  };
+}

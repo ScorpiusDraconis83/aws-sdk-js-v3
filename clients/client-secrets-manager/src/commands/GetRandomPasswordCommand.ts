@@ -128,9 +128,7 @@ export class GetRandomPasswordCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecretsManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class GetRandomPasswordCommand extends $Command
   .f(void 0, GetRandomPasswordResponseFilterSensitiveLog)
   .ser(se_GetRandomPasswordCommand)
   .de(de_GetRandomPasswordCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRandomPasswordRequest;
+      output: GetRandomPasswordResponse;
+    };
+    sdk: {
+      input: GetRandomPasswordCommandInput;
+      output: GetRandomPasswordCommandOutput;
+    };
+  };
+}

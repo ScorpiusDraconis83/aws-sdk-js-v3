@@ -84,9 +84,7 @@ export class PutActionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PersonalizeEventsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class PutActionsCommand extends $Command
   .f(PutActionsRequestFilterSensitiveLog, void 0)
   .ser(se_PutActionsCommand)
   .de(de_PutActionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutActionsRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutActionsCommandInput;
+      output: PutActionsCommandOutput;
+    };
+  };
+}

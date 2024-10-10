@@ -58,6 +58,7 @@ export interface DescribeServiceUpdatesCommandOutput extends DescribeServiceUpda
  * //       Description: "STRING_VALUE",
  * //       Status: "available" || "in-progress" || "complete" || "scheduled",
  * //       Type: "security-update",
+ * //       Engine: "STRING_VALUE",
  * //       NodesUpdated: "STRING_VALUE",
  * //       AutoUpdateStartDate: new Date("TIMESTAMP"),
  * //     },
@@ -91,9 +92,7 @@ export class DescribeServiceUpdatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MemoryDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +104,16 @@ export class DescribeServiceUpdatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeServiceUpdatesCommand)
   .de(de_DescribeServiceUpdatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeServiceUpdatesRequest;
+      output: DescribeServiceUpdatesResponse;
+    };
+    sdk: {
+      input: DescribeServiceUpdatesCommandInput;
+      output: DescribeServiceUpdatesCommandOutput;
+    };
+  };
+}

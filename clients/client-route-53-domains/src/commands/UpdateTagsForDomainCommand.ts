@@ -84,9 +84,7 @@ export class UpdateTagsForDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53DomainsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class UpdateTagsForDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTagsForDomainCommand)
   .de(de_UpdateTagsForDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTagsForDomainRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateTagsForDomainCommandInput;
+      output: UpdateTagsForDomainCommandOutput;
+    };
+  };
+}

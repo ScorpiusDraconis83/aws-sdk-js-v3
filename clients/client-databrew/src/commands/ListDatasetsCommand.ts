@@ -164,9 +164,7 @@ export class ListDatasetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataBrewClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -178,4 +176,16 @@ export class ListDatasetsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListDatasetsCommand)
   .de(de_ListDatasetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDatasetsRequest;
+      output: ListDatasetsResponse;
+    };
+    sdk: {
+      input: ListDatasetsCommandInput;
+      output: ListDatasetsCommandOutput;
+    };
+  };
+}

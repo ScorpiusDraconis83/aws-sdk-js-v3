@@ -49,6 +49,7 @@ import {
   ListIndexesForMembersCommandInput,
   ListIndexesForMembersCommandOutput,
 } from "../commands/ListIndexesForMembersCommand";
+import { ListResourcesCommandInput, ListResourcesCommandOutput } from "../commands/ListResourcesCommand";
 import {
   ListSupportedResourceTypesCommandInput,
   ListSupportedResourceTypesCommandOutput,
@@ -350,6 +351,31 @@ export const se_ListIndexesForMembersCommand = async (
 };
 
 /**
+ * serializeAws_restJson1ListResourcesCommand
+ */
+export const se_ListResourcesCommand = async (
+  input: ListResourcesCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    "content-type": "application/json",
+  };
+  b.bp("/ListResources");
+  let body: any;
+  body = JSON.stringify(
+    take(input, {
+      Filters: (_) => _json(_),
+      MaxResults: [],
+      NextToken: [],
+      ViewArn: [],
+    })
+  );
+  b.m("POST").h(headers).b(body);
+  return b.build();
+};
+
+/**
  * serializeAws_restJson1ListSupportedResourceTypesCommand
  */
 export const se_ListSupportedResourceTypesCommand = async (
@@ -468,10 +494,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{resourceArn}");
   b.p("resourceArn", () => input.resourceArn!, "{resourceArn}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.tagKeys, `tagKeys`) != null,
-      () => (input[_tK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.tagKeys, `tagKeys`) != null, () => input[_tK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -804,6 +827,29 @@ export const de_ListIndexesForMembersCommand = async (
   const doc = take(data, {
     Indexes: _json,
     NextToken: __expectString,
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1ListResourcesCommand
+ */
+export const de_ListResourcesCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListResourcesCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    NextToken: __expectString,
+    Resources: (_) => de_ResourceList(_, context),
+    ViewArn: __expectString,
   });
   Object.assign(contents, doc);
   return contents;
@@ -1320,12 +1366,5 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _tK = "tagKeys";

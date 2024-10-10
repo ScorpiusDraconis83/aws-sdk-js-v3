@@ -153,6 +153,17 @@ export interface DeletePolicyStoreCommandOutput extends DeletePolicyStoreOutput,
  * <p>Base exception class for all service exceptions from VerifiedPermissions service.</p>
  *
  * @public
+ * @example To delete a policy store
+ * ```javascript
+ * // The following example deletes the specified policy store.
+ * const input = {
+ *   "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+ * };
+ * const command = new DeletePolicyStoreCommand(input);
+ * await client.send(command);
+ * // example id: example-1
+ * ```
+ *
  */
 export class DeletePolicyStoreCommand extends $Command
   .classBuilder<
@@ -162,9 +173,7 @@ export class DeletePolicyStoreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VerifiedPermissionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +185,16 @@ export class DeletePolicyStoreCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeletePolicyStoreCommand)
   .de(de_DeletePolicyStoreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePolicyStoreInput;
+      output: {};
+    };
+    sdk: {
+      input: DeletePolicyStoreCommandInput;
+      output: DeletePolicyStoreCommandOutput;
+    };
+  };
+}

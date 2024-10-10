@@ -90,9 +90,7 @@ export class ListEventTypesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodestarNotificationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ListEventTypesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEventTypesCommand)
   .de(de_ListEventTypesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventTypesRequest;
+      output: ListEventTypesResult;
+    };
+    sdk: {
+      input: ListEventTypesCommandInput;
+      output: ListEventTypesCommandOutput;
+    };
+  };
+}

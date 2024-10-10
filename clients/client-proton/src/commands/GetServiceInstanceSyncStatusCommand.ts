@@ -146,9 +146,7 @@ export class GetServiceInstanceSyncStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -160,4 +158,16 @@ export class GetServiceInstanceSyncStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetServiceInstanceSyncStatusCommand)
   .de(de_GetServiceInstanceSyncStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceInstanceSyncStatusInput;
+      output: GetServiceInstanceSyncStatusOutput;
+    };
+    sdk: {
+      input: GetServiceInstanceSyncStatusCommandInput;
+      output: GetServiceInstanceSyncStatusCommandOutput;
+    };
+  };
+}

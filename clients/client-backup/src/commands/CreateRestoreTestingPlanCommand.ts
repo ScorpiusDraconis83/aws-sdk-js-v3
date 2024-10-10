@@ -117,9 +117,7 @@ export class CreateRestoreTestingPlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class CreateRestoreTestingPlanCommand extends $Command
   .f(CreateRestoreTestingPlanInputFilterSensitiveLog, void 0)
   .ser(se_CreateRestoreTestingPlanCommand)
   .de(de_CreateRestoreTestingPlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRestoreTestingPlanInput;
+      output: CreateRestoreTestingPlanOutput;
+    };
+    sdk: {
+      input: CreateRestoreTestingPlanCommandInput;
+      output: CreateRestoreTestingPlanCommandOutput;
+    };
+  };
+}

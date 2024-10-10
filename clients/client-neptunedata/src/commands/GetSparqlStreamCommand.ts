@@ -142,9 +142,7 @@ export class GetSparqlStreamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NeptunedataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -156,4 +154,16 @@ export class GetSparqlStreamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSparqlStreamCommand)
   .de(de_GetSparqlStreamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSparqlStreamInput;
+      output: GetSparqlStreamOutput;
+    };
+    sdk: {
+      input: GetSparqlStreamCommandInput;
+      output: GetSparqlStreamCommandOutput;
+    };
+  };
+}

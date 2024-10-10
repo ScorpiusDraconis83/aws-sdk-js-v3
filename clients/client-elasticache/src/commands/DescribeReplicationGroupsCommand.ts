@@ -32,7 +32,7 @@ export interface DescribeReplicationGroupsCommandOutput extends ReplicationGroup
  *             specified, <code>DescribeReplicationGroups</code> returns information about all
  *             replication groups.</p>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -169,6 +169,7 @@ export interface DescribeReplicationGroupsCommandOutput extends ReplicationGroup
  * //       IpDiscovery: "ipv4" || "ipv6",
  * //       TransitEncryptionMode: "preferred" || "required",
  * //       ClusterMode: "enabled" || "disabled" || "compatible",
+ * //       Engine: "STRING_VALUE",
  * //     },
  * //   ],
  * // };
@@ -266,9 +267,7 @@ export class DescribeReplicationGroupsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -280,4 +279,16 @@ export class DescribeReplicationGroupsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeReplicationGroupsCommand)
   .de(de_DescribeReplicationGroupsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplicationGroupsMessage;
+      output: ReplicationGroupMessage;
+    };
+    sdk: {
+      input: DescribeReplicationGroupsCommandInput;
+      output: DescribeReplicationGroupsCommandOutput;
+    };
+  };
+}

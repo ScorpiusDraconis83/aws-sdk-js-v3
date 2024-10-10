@@ -91,9 +91,7 @@ export class ListConfiguredTablesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListConfiguredTablesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListConfiguredTablesCommand)
   .de(de_ListConfiguredTablesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListConfiguredTablesInput;
+      output: ListConfiguredTablesOutput;
+    };
+    sdk: {
+      input: ListConfiguredTablesCommandInput;
+      output: ListConfiguredTablesCommandOutput;
+    };
+  };
+}

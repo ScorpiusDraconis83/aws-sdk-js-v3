@@ -1,6 +1,6 @@
 {
   "name": "@aws-sdk/lib-dynamodb",
-  "version": "3.637.0",
+  "version": "3.669.0",
   "description": "The document client simplifies working with items in Amazon DynamoDB by abstracting away the notion of attribute values.",
   "main": "./dist-cjs/index.js",
   "module": "./dist-es/index.js",
@@ -26,10 +26,11 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@aws-sdk/core": "*",
     "@aws-sdk/util-dynamodb": "*",
-    "@smithy/core": "^2.4.0",
-    "@smithy/smithy-client": "^3.2.0",
-    "@smithy/types": "^3.3.0",
+    "@smithy/core": "^2.4.8",
+    "@smithy/smithy-client": "^3.4.0",
+    "@smithy/types": "^3.5.0",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {

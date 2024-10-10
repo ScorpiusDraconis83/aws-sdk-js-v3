@@ -1011,9 +1011,7 @@ export class UpdateFileSystemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -1025,4 +1023,16 @@ export class UpdateFileSystemCommand extends $Command
   .f(UpdateFileSystemRequestFilterSensitiveLog, UpdateFileSystemResponseFilterSensitiveLog)
   .ser(se_UpdateFileSystemCommand)
   .de(de_UpdateFileSystemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFileSystemRequest;
+      output: UpdateFileSystemResponse;
+    };
+    sdk: {
+      input: UpdateFileSystemCommandInput;
+      output: UpdateFileSystemCommandOutput;
+    };
+  };
+}

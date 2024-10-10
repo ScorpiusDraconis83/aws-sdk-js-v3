@@ -56,6 +56,12 @@ export interface CreateGlobalClusterCommandOutput extends CreateGlobalClusterRes
  *   DeletionProtection: true || false,
  *   DatabaseName: "STRING_VALUE",
  *   StorageEncrypted: true || false,
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
  * };
  * const command = new CreateGlobalClusterCommand(input);
  * const response = await client.send(command);
@@ -88,6 +94,12 @@ export interface CreateGlobalClusterCommandOutput extends CreateGlobalClusterRes
  * //       ToDbClusterArn: "STRING_VALUE",
  * //       IsDataLossAllowed: true || false,
  * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
  * //   },
  * // };
  *
@@ -152,9 +164,7 @@ export class CreateGlobalClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -166,4 +176,16 @@ export class CreateGlobalClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateGlobalClusterCommand)
   .de(de_CreateGlobalClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGlobalClusterMessage;
+      output: CreateGlobalClusterResult;
+    };
+    sdk: {
+      input: CreateGlobalClusterCommandInput;
+      output: CreateGlobalClusterCommandOutput;
+    };
+  };
+}

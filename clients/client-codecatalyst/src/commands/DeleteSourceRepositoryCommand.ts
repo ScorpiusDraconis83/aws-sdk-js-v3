@@ -89,9 +89,7 @@ export class DeleteSourceRepositoryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCatalystClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class DeleteSourceRepositoryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSourceRepositoryCommand)
   .de(de_DeleteSourceRepositoryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSourceRepositoryRequest;
+      output: DeleteSourceRepositoryResponse;
+    };
+    sdk: {
+      input: DeleteSourceRepositoryCommandInput;
+      output: DeleteSourceRepositoryCommandOutput;
+    };
+  };
+}

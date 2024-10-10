@@ -118,9 +118,7 @@ export class ListSharedEndpointsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: S3OutpostsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ListSharedEndpointsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSharedEndpointsCommand)
   .de(de_ListSharedEndpointsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSharedEndpointsRequest;
+      output: ListSharedEndpointsResult;
+    };
+    sdk: {
+      input: ListSharedEndpointsCommandInput;
+      output: ListSharedEndpointsCommandOutput;
+    };
+  };
+}

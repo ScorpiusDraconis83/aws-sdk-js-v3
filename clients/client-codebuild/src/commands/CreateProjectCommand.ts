@@ -341,7 +341,7 @@ export interface CreateProjectCommandOutput extends CreateProjectOutput, __Metad
  * //       scopeConfiguration: { // ScopeConfiguration
  * //         name: "STRING_VALUE", // required
  * //         domain: "STRING_VALUE",
- * //         scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL", // required
+ * //         scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
  * //       },
  * //     },
  * //     vpcConfig: { // VpcConfig
@@ -429,9 +429,7 @@ export class CreateProjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -443,4 +441,16 @@ export class CreateProjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateProjectCommand)
   .de(de_CreateProjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProjectInput;
+      output: CreateProjectOutput;
+    };
+    sdk: {
+      input: CreateProjectCommandInput;
+      output: CreateProjectCommandOutput;
+    };
+  };
+}

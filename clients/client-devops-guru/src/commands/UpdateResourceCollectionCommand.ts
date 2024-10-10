@@ -101,9 +101,7 @@ export class UpdateResourceCollectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DevOpsGuruClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class UpdateResourceCollectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateResourceCollectionCommand)
   .de(de_UpdateResourceCollectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateResourceCollectionRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateResourceCollectionCommandInput;
+      output: UpdateResourceCollectionCommandOutput;
+    };
+  };
+}

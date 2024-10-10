@@ -123,9 +123,7 @@ export class ExecuteQueryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class ExecuteQueryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExecuteQueryCommand)
   .de(de_ExecuteQueryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExecuteQueryRequest;
+      output: ExecuteQueryResponse;
+    };
+    sdk: {
+      input: ExecuteQueryCommandInput;
+      output: ExecuteQueryCommandOutput;
+    };
+  };
+}

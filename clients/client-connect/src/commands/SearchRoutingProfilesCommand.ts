@@ -158,9 +158,7 @@ export class SearchRoutingProfilesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -172,4 +170,16 @@ export class SearchRoutingProfilesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchRoutingProfilesCommand)
   .de(de_SearchRoutingProfilesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchRoutingProfilesRequest;
+      output: SearchRoutingProfilesResponse;
+    };
+    sdk: {
+      input: SearchRoutingProfilesCommandInput;
+      output: SearchRoutingProfilesCommandOutput;
+    };
+  };
+}

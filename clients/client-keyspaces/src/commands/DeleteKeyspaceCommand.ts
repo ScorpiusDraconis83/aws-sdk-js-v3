@@ -84,9 +84,7 @@ export class DeleteKeyspaceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KeyspacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class DeleteKeyspaceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteKeyspaceCommand)
   .de(de_DeleteKeyspaceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteKeyspaceRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteKeyspaceCommandInput;
+      output: DeleteKeyspaceCommandOutput;
+    };
+  };
+}

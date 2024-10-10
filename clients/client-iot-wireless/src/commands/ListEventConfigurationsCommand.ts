@@ -118,9 +118,7 @@ export class ListEventConfigurationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ListEventConfigurationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEventConfigurationsCommand)
   .de(de_ListEventConfigurationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventConfigurationsRequest;
+      output: ListEventConfigurationsResponse;
+    };
+    sdk: {
+      input: ListEventConfigurationsCommandInput;
+      output: ListEventConfigurationsCommandOutput;
+    };
+  };
+}

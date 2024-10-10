@@ -25,6 +25,7 @@ import {
   Customer,
   CustomerVoiceActivity,
   DisconnectDetails,
+  Endpoint,
   EvaluationFormQuestion,
   EvaluationFormScoringStrategy,
   Expiry,
@@ -97,6 +98,121 @@ import {
   TrafficDistributionGroupStatus,
   WisdomInfo,
 } from "./models_1";
+
+/**
+ * @public
+ */
+export interface ListTaskTemplatesRequest {
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The token for the next set of results. Use the value returned in the previous
+   * response in the next request to retrieve the next set of results.</p>
+   *          <important>
+   *             <p>It is not expected that you set this because the value returned in the previous response is
+   *     always null.</p>
+   *          </important>
+   * @public
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of results to return per page.</p>
+   *          <important>
+   *             <p>It is not expected that you set this.</p>
+   *          </important>
+   * @public
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+   * Tasks can only be created from <code>ACTIVE</code> templates.
+   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
+   * @public
+   */
+  Status?: TaskTemplateStatus;
+
+  /**
+   * <p>The name of the task template.</p>
+   * @public
+   */
+  Name?: string;
+}
+
+/**
+ * <p>Contains summary information about the task template.</p>
+ * @public
+ */
+export interface TaskTemplateMetadata {
+  /**
+   * <p>A unique identifier for the task template.</p>
+   * @public
+   */
+  Id?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the task template.</p>
+   * @public
+   */
+  Arn?: string;
+
+  /**
+   * <p>The name of the task template.</p>
+   * @public
+   */
+  Name?: string;
+
+  /**
+   * <p>The description of the task template.</p>
+   * @public
+   */
+  Description?: string;
+
+  /**
+   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+   * Tasks can only be created from <code>ACTIVE</code> templates.
+   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
+   * @public
+   */
+  Status?: TaskTemplateStatus;
+
+  /**
+   * <p>The timestamp when the task template was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date;
+
+  /**
+   * <p>The timestamp when the task template was created.</p>
+   * @public
+   */
+  CreatedTime?: Date;
+}
+
+/**
+ * @public
+ */
+export interface ListTaskTemplatesResponse {
+  /**
+   * <p>Provides details about a list of task templates belonging to an instance.</p>
+   * @public
+   */
+  TaskTemplates?: TaskTemplateMetadata[];
+
+  /**
+   * <p>If there are additional results, this is the token for the next set of results.</p>
+   *          <important>
+   *             <p>This is always returned as a null in the response.</p>
+   *          </important>
+   * @public
+   */
+  NextToken?: string;
+}
 
 /**
  * @public
@@ -3401,6 +3517,167 @@ export interface StartContactStreamingResponse {
 }
 
 /**
+ * @public
+ */
+export interface StartOutboundChatContactRequest {
+  /**
+   * <p>Information about the endpoint.</p>
+   * @public
+   */
+  SourceEndpoint: Endpoint | undefined;
+
+  /**
+   * <p>Information about the endpoint.</p>
+   * @public
+   */
+  DestinationEndpoint: Endpoint | undefined;
+
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can find the instance ID in the
+   *    Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>A set of system defined key-value pairs stored on individual contact segments using an
+   *    attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in
+   *    flows.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Attribute keys can include only alphanumeric, <code>-</code>, and <code>_</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>This field can be used to show channel subtype, such as <code>connect:Guide</code> and
+   *       <code>connect:SMS</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SegmentAttributes: Record<string, SegmentAttributeValue> | undefined;
+
+  /**
+   * <p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in flows just like any other contact attributes.</p>
+   * @public
+   */
+  Attributes?: Record<string, string>;
+
+  /**
+   * <p>The identifier of the flow for the call. To see the ContactFlowId in the Amazon Connect
+   *    console user interface, on the navigation menu go to <b>Routing, Contact
+   *     Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose
+   *     <b>Show additional flow information</b>. The ContactFlowId is the last
+   *    part of the ARN, shown here in bold:</p>
+   *          <ul>
+   *             <li>
+   *                <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>123ec456-a007-89c0-1234-xxxxxxxxxxxx</b>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ContactFlowId: string | undefined;
+
+  /**
+   * <p>The total duration of the newly started chat session. If not specified, the chat session
+   *    duration defaults to 25 hour. The minimum configurable time is 60 minutes. The maximum
+   *    configurable time is 10,080 minutes (7 days).</p>
+   * @public
+   */
+  ChatDurationInMinutes?: number;
+
+  /**
+   * <p>The customer's details.</p>
+   * @public
+   */
+  ParticipantDetails?: ParticipantDetails;
+
+  /**
+   * <p>A chat message.</p>
+   * @public
+   */
+  InitialSystemMessage?: ChatMessage;
+
+  /**
+   * <p>The unique identifier for an Amazon Connect contact. This identifier is related to the
+   *    contact starting.</p>
+   * @public
+   */
+  RelatedContactId?: string;
+
+  /**
+   * <p>The supported chat message content types. Supported types are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>text/plain</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>text/markdown</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>application/json,
+   *      application/vnd.amazonaws.connect.message.interactive</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>application/vnd.amazonaws.connect.message.interactive.response</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>Content types must always contain <code>text/plain</code>. You can then put any other
+   *    supported type in the list. For example, all the following lists are valid because they contain
+   *     <code>text/plain</code>:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>[text/plain, text/markdown, application/json]</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>[text/markdown, text/plain]</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>[text/plain, application/json,
+   *       application/vnd.amazonaws.connect.message.interactive.response]</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SupportedMessagingContentTypes?: string[];
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *    request. If not provided, the AWS SDK populates this field. For more information about
+   *    idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making
+   *     retries safe with idempotent APIs</a>. The token is valid for 7 days after creation. If a
+   *    contact is already started, the contact ID is returned.</p>
+   * @public
+   */
+  ClientToken?: string;
+}
+
+/**
+ * @public
+ */
+export interface StartOutboundChatContactResponse {
+  /**
+   * <p>The identifier of this contact within the Amazon Connect instance.</p>
+   * @public
+   */
+  ContactId?: string;
+}
+
+/**
  * <p>Outbound calls to the destination number are not allowed.</p>
  * @public
  */
@@ -4757,14 +5034,14 @@ export interface UpdateContactFlowNameRequest {
 export interface UpdateContactFlowNameResponse {}
 
 /**
- * <p>Specify whether this routing criteria step should apply for only a limited amount of time,  or if it should
- *    never expire.</p>
+ * <p>Specify whether this routing criteria step should apply for only a limited amount of time,
+ *    or if it should never expire.</p>
  * @public
  */
 export interface RoutingCriteriaInputStepExpiry {
   /**
-   * <p>The number of seconds that the contact will be routed only to agents matching this routing  step, if expiry
-   *    was configured for this routing step.</p>
+   * <p>The number of seconds that the contact will be routed only to agents matching this routing
+   *    step, if expiry was configured for this routing step.</p>
    * @public
    */
   DurationInSeconds?: number;
@@ -6966,8 +7243,8 @@ export interface DescribeEvaluationFormResponse {
 }
 
 /**
- * <p>Step defines the list of agents to be routed or route based on the agent requirements such as ProficiencyLevel,
- *    Name, or Value.</p>
+ * <p>Step defines the list of agents to be routed or route based on the agent requirements such
+ *    as ProficiencyLevel, Name, or Value.</p>
  * @public
  */
 export interface RoutingCriteriaInputStep {
@@ -7512,10 +7789,10 @@ export interface RoutingCriteria {
  */
 export interface RoutingCriteriaInput {
   /**
-   * <p>When Amazon Connect does not find an available agent meeting the requirements in a step for
-   *    a given step duration, the routing criteria will move on to the next step sequentially until a
-   *    join is completed with an agent. When all steps are exhausted, the contact will be offered to any agent
-   *    in the queue.</p>
+   * <p>When Amazon Connect does not find an available agent meeting the requirements in a step
+   *    for  a given step duration, the routing criteria will move on to the next step sequentially until
+   *    a  join is completed with an agent. When all steps are exhausted, the contact will be offered to
+   *    any agent in the queue.</p>
    * @public
    */
   Steps?: RoutingCriteriaInputStep[];

@@ -92,6 +92,37 @@ export interface ListLayersCommandOutput extends ListLayersResponse, __MetadataB
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To list the layers that are compatible with your function's runtime
+ * ```javascript
+ * // The following example returns information about layers that are compatible with the Python 3.7 runtime.
+ * const input = {
+ *   "CompatibleRuntime": "python3.7"
+ * };
+ * const command = new ListLayersCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "Layers": [
+ *     {
+ *       "LatestMatchingVersion": {
+ *         "CompatibleRuntimes": [
+ *           "python3.6",
+ *           "python3.7"
+ *         ],
+ *         "CreatedDate": "2018-11-15T00:37:46.592+0000",
+ *         "Description": "My layer",
+ *         "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2",
+ *         "Version": 2
+ *       },
+ *       "LayerArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer",
+ *       "LayerName": "my-layer"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * // example id: to-list-the-layers-that-are-compatible-with-your-functions-runtime-1586490857297
+ * ```
+ *
  */
 export class ListLayersCommand extends $Command
   .classBuilder<
@@ -101,9 +132,7 @@ export class ListLayersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +144,16 @@ export class ListLayersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListLayersCommand)
   .de(de_ListLayersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLayersRequest;
+      output: ListLayersResponse;
+    };
+    sdk: {
+      input: ListLayersCommandInput;
+      output: ListLayersCommandOutput;
+    };
+  };
+}

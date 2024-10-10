@@ -162,9 +162,7 @@ export class DisableKeyRotationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +174,16 @@ export class DisableKeyRotationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisableKeyRotationCommand)
   .de(de_DisableKeyRotationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableKeyRotationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisableKeyRotationCommandInput;
+      output: DisableKeyRotationCommandOutput;
+    };
+  };
+}

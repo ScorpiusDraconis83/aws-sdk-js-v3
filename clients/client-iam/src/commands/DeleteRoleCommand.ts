@@ -123,9 +123,7 @@ export class DeleteRoleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class DeleteRoleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRoleCommand)
   .de(de_DeleteRoleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRoleRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRoleCommandInput;
+      output: DeleteRoleCommandOutput;
+    };
+  };
+}

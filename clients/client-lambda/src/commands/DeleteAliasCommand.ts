@@ -67,6 +67,18 @@ export interface DeleteAliasCommandOutput extends __MetadataBearer {}
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To delete a Lambda function alias
+ * ```javascript
+ * // The following example deletes an alias named BLUE from a function named my-function
+ * const input = {
+ *   "FunctionName": "my-function",
+ *   "Name": "BLUE"
+ * };
+ * const command = new DeleteAliasCommand(input);
+ * await client.send(command);
+ * // example id: to-delete-a-lambda-function-alias-1481660370804
+ * ```
+ *
  */
 export class DeleteAliasCommand extends $Command
   .classBuilder<
@@ -76,9 +88,7 @@ export class DeleteAliasCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +100,16 @@ export class DeleteAliasCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteAliasCommand)
   .de(de_DeleteAliasCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAliasRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteAliasCommandInput;
+      output: DeleteAliasCommandOutput;
+    };
+  };
+}

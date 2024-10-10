@@ -164,9 +164,7 @@ export class CreateTransformJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -178,4 +176,16 @@ export class CreateTransformJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTransformJobCommand)
   .de(de_CreateTransformJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTransformJobRequest;
+      output: CreateTransformJobResponse;
+    };
+    sdk: {
+      input: CreateTransformJobCommandInput;
+      output: CreateTransformJobCommandOutput;
+    };
+  };
+}

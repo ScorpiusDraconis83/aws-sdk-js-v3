@@ -194,9 +194,7 @@ export class ListRetirableGrantsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -208,4 +206,16 @@ export class ListRetirableGrantsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRetirableGrantsCommand)
   .de(de_ListRetirableGrantsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRetirableGrantsRequest;
+      output: ListGrantsResponse;
+    };
+    sdk: {
+      input: ListRetirableGrantsCommandInput;
+      output: ListRetirableGrantsCommandOutput;
+    };
+  };
+}

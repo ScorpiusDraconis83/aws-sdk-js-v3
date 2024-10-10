@@ -93,9 +93,7 @@ export class BatchGetFlowAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class BatchGetFlowAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchGetFlowAssociationCommand)
   .de(de_BatchGetFlowAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetFlowAssociationRequest;
+      output: BatchGetFlowAssociationResponse;
+    };
+    sdk: {
+      input: BatchGetFlowAssociationCommandInput;
+      output: BatchGetFlowAssociationCommandOutput;
+    };
+  };
+}

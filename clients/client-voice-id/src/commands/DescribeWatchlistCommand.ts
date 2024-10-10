@@ -99,9 +99,7 @@ export class DescribeWatchlistCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VoiceIDClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class DescribeWatchlistCommand extends $Command
   .f(void 0, DescribeWatchlistResponseFilterSensitiveLog)
   .ser(se_DescribeWatchlistCommand)
   .de(de_DescribeWatchlistCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWatchlistRequest;
+      output: DescribeWatchlistResponse;
+    };
+    sdk: {
+      input: DescribeWatchlistCommandInput;
+      output: DescribeWatchlistCommandOutput;
+    };
+  };
+}

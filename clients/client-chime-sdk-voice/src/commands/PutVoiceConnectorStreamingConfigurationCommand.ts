@@ -122,9 +122,7 @@ export class PutVoiceConnectorStreamingConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class PutVoiceConnectorStreamingConfigurationCommand extends $Command
   )
   .ser(se_PutVoiceConnectorStreamingConfigurationCommand)
   .de(de_PutVoiceConnectorStreamingConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutVoiceConnectorStreamingConfigurationRequest;
+      output: PutVoiceConnectorStreamingConfigurationResponse;
+    };
+    sdk: {
+      input: PutVoiceConnectorStreamingConfigurationCommandInput;
+      output: PutVoiceConnectorStreamingConfigurationCommandOutput;
+    };
+  };
+}

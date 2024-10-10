@@ -121,9 +121,7 @@ export class TagQueueCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SQSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class TagQueueCommand extends $Command
   .f(void 0, void 0)
   .ser(se_TagQueueCommand)
   .de(de_TagQueueCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagQueueRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagQueueCommandInput;
+      output: TagQueueCommandOutput;
+    };
+  };
+}

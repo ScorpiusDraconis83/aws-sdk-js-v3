@@ -334,9 +334,7 @@ export class PutTargetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EventBridgeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -348,4 +346,16 @@ export class PutTargetsCommand extends $Command
   .f(PutTargetsRequestFilterSensitiveLog, void 0)
   .ser(se_PutTargetsCommand)
   .de(de_PutTargetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutTargetsRequest;
+      output: PutTargetsResponse;
+    };
+    sdk: {
+      input: PutTargetsCommandInput;
+      output: PutTargetsCommandOutput;
+    };
+  };
+}

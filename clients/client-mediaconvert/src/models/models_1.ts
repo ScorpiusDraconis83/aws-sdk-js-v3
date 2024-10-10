@@ -1,8 +1,4 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
-
-import { MediaConvertServiceException as __BaseException } from "./MediaConvertServiceException";
-
 import {
   AccelerationSettings,
   AccelerationStatus,
@@ -12,17 +8,14 @@ import {
   BillingTagsSource,
   CaptionDescription,
   CaptionDescriptionPreset,
-  CmfcAudioDuration,
-  CmfcAudioTrackType,
-  CmfcDescriptiveVideoServiceFlag,
-  CmfcIFrameOnlyManifest,
-  CmfcKlvMetadata,
-  CmfcManifestMetadataSignaling,
-  CmfcScte35Esam,
+  CmafGroupSettings,
   ColorConversion3DLUTSetting,
+  DashIsoGroupSettings,
   EsamSettings,
   ExtendedDataServices,
+  FileGroupSettings,
   Hdr10Metadata,
+  HlsGroupSettings,
   HopDestination,
   Id3Insertion,
   ImageInserter,
@@ -32,13 +25,158 @@ import {
   JobPhase,
   KantarWatermarkSettings,
   MotionImageInserter,
+  MsSmoothGroupSettings,
   NielsenConfiguration,
   NielsenNonLinearWatermarkSettings,
   OutputGroupDetail,
-  OutputGroupSettings,
+  OutputGroupType,
   QueueTransition,
   Rectangle,
 } from "./models_0";
+
+/**
+ * Output Group settings, including type
+ * @public
+ */
+export interface OutputGroupSettings {
+  /**
+   * Settings related to your CMAF output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
+   * @public
+   */
+  CmafGroupSettings?: CmafGroupSettings;
+
+  /**
+   * Settings related to your DASH output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
+   * @public
+   */
+  DashIsoGroupSettings?: DashIsoGroupSettings;
+
+  /**
+   * Settings related to your File output group. MediaConvert uses this group of settings to generate a single standalone file, rather than a streaming package.
+   * @public
+   */
+  FileGroupSettings?: FileGroupSettings;
+
+  /**
+   * Settings related to your HLS output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
+   * @public
+   */
+  HlsGroupSettings?: HlsGroupSettings;
+
+  /**
+   * Settings related to your Microsoft Smooth Streaming output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
+   * @public
+   */
+  MsSmoothGroupSettings?: MsSmoothGroupSettings;
+
+  /**
+   * Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming, CMAF)
+   * @public
+   */
+  Type?: OutputGroupType;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcAudioDuration = {
+  DEFAULT_CODEC_DURATION: "DEFAULT_CODEC_DURATION",
+  MATCH_VIDEO_DURATION: "MATCH_VIDEO_DURATION",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcAudioDuration = (typeof CmfcAudioDuration)[keyof typeof CmfcAudioDuration];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcAudioTrackType = {
+  ALTERNATE_AUDIO_AUTO_SELECT: "ALTERNATE_AUDIO_AUTO_SELECT",
+  ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
+  ALTERNATE_AUDIO_NOT_AUTO_SELECT: "ALTERNATE_AUDIO_NOT_AUTO_SELECT",
+  AUDIO_ONLY_VARIANT_STREAM: "AUDIO_ONLY_VARIANT_STREAM",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcAudioTrackType = (typeof CmfcAudioTrackType)[keyof typeof CmfcAudioTrackType];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcDescriptiveVideoServiceFlag = {
+  DONT_FLAG: "DONT_FLAG",
+  FLAG: "FLAG",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcDescriptiveVideoServiceFlag =
+  (typeof CmfcDescriptiveVideoServiceFlag)[keyof typeof CmfcDescriptiveVideoServiceFlag];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcIFrameOnlyManifest = {
+  EXCLUDE: "EXCLUDE",
+  INCLUDE: "INCLUDE",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcIFrameOnlyManifest = (typeof CmfcIFrameOnlyManifest)[keyof typeof CmfcIFrameOnlyManifest];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcKlvMetadata = {
+  NONE: "NONE",
+  PASSTHROUGH: "PASSTHROUGH",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcKlvMetadata = (typeof CmfcKlvMetadata)[keyof typeof CmfcKlvMetadata];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcManifestMetadataSignaling = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcManifestMetadataSignaling =
+  (typeof CmfcManifestMetadataSignaling)[keyof typeof CmfcManifestMetadataSignaling];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmfcScte35Esam = {
+  INSERT: "INSERT",
+  NONE: "NONE",
+} as const;
+
+/**
+ * @public
+ */
+export type CmfcScte35Esam = (typeof CmfcScte35Esam)[keyof typeof CmfcScte35Esam];
 
 /**
  * @public
@@ -190,6 +328,7 @@ export const ContainerType = {
   MP4: "MP4",
   MPD: "MPD",
   MXF: "MXF",
+  OGG: "OGG",
   RAW: "RAW",
   WEBM: "WEBM",
   Y4M: "Y4M",
@@ -2543,6 +2682,20 @@ export type H264RepeatPps = (typeof H264RepeatPps)[keyof typeof H264RepeatPps];
  * @public
  * @enum
  */
+export const H264SaliencyAwareEncoding = {
+  DISABLED: "DISABLED",
+  PREFERRED: "PREFERRED",
+} as const;
+
+/**
+ * @public
+ */
+export type H264SaliencyAwareEncoding = (typeof H264SaliencyAwareEncoding)[keyof typeof H264SaliencyAwareEncoding];
+
+/**
+ * @public
+ * @enum
+ */
 export const H264ScanTypeConversionMode = {
   INTERLACED: "INTERLACED",
   INTERLACED_OPTIMIZE: "INTERLACED_OPTIMIZE",
@@ -2800,7 +2953,7 @@ export interface H264Settings {
   MaxBitrate?: number;
 
   /**
-   * Use this setting only when you also enable Scene change detection. This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, do this by keeping the default empty value. When you explicitly specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs.
+   * Specify the minimum number of frames allowed between two IDR-frames in your output. This includes frames created at the start of a GOP or a scene change. Use Min I-Interval to improve video compression by varying GOP size when two IDR-frames would be created near each other. For example, if a regular cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame, and you set Min I-interval to 5, then the encoder would only write an IDR-frame for the scene-change. In this way, one GOP is shortened or extended. If a cadence-driven IDR-frame would be further than 5 frames from a scene-change IDR-frame, then the encoder leaves all IDR-frames in place. To use an automatically determined interval: We recommend that you keep this value blank. This allows for MediaConvert to use an optimal setting according to the characteristics of your input video, and results in better video compression. To manually specify an interval: Enter a value from 1 to 30. Use when your downstream systems have specific GOP size requirements. To disable GOP size variance: Enter 0. MediaConvert will only create IDR-frames at the start of your output's cadence-driven GOP. Use when your downstream systems require a regular GOP size.
    * @public
    */
   MinIInterval?: number;
@@ -2858,6 +3011,12 @@ export interface H264Settings {
    * @public
    */
   RepeatPps?: H264RepeatPps;
+
+  /**
+   * Specify whether to apply Saliency aware encoding to your output. Use to improve the perceptual video quality of your output by allocating more encoding bits to the prominent or noticeable parts of your content. To apply saliency aware encoding, when possible: We recommend that you choose Preferred. The effects of Saliency aware encoding are best seen in lower bitrate outputs. When you choose Preferred, note that Saliency aware encoding will only apply to outputs that are 720p or higher in resolution. To not apply saliency aware encoding, prioritizing encoding speed over perceptual video quality: Choose Disabled.
+   * @public
+   */
+  SaliencyAwareEncoding?: H264SaliencyAwareEncoding;
 
   /**
    * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive.
@@ -3486,7 +3645,7 @@ export interface H265Settings {
   MaxBitrate?: number;
 
   /**
-   * Use this setting only when you also enable Scene change detection. This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, do this by keeping the default empty value. When you explicitly specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs.
+   * Specify the minimum number of frames allowed between two IDR-frames in your output. This includes frames created at the start of a GOP or a scene change. Use Min I-Interval to improve video compression by varying GOP size when two IDR-frames would be created near each other. For example, if a regular cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame, and you set Min I-interval to 5, then the encoder would only write an IDR-frame for the scene-change. In this way, one GOP is shortened or extended. If a cadence-driven IDR-frame would be further than 5 frames from a scene-change IDR-frame, then the encoder leaves all IDR-frames in place. To use an automatically determined interval: We recommend that you keep this value blank. This allows for MediaConvert to use an optimal setting according to the characteristics of your input video, and results in better video compression. To manually specify an interval: Enter a value from 1 to 30. Use when your downstream systems have specific GOP size requirements. To disable GOP size variance: Enter 0. MediaConvert will only create IDR-frames at the start of your output's cadence-driven GOP. Use when your downstream systems require a regular GOP size.
    * @public
    */
   MinIInterval?: number;
@@ -4009,7 +4168,7 @@ export interface Mpeg2Settings {
   MaxBitrate?: number;
 
   /**
-   * Use this setting only when you also enable Scene change detection. This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. When you specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs.
+   * Specify the minimum number of frames allowed between two IDR-frames in your output. This includes frames created at the start of a GOP or a scene change. Use Min I-Interval to improve video compression by varying GOP size when two IDR-frames would be created near each other. For example, if a regular cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame, and you set Min I-interval to 5, then the encoder would only write an IDR-frame for the scene-change. In this way, one GOP is shortened or extended. If a cadence-driven IDR-frame would be further than 5 frames from a scene-change IDR-frame, then the encoder leaves all IDR-frames in place. To manually specify an interval: Enter a value from 1 to 30. Use when your downstream systems have specific GOP size requirements. To disable GOP size variance: Enter 0. MediaConvert will only create IDR-frames at the start of your output's cadence-driven GOP. Use when your downstream systems require a regular GOP size.
    * @public
    */
   MinIInterval?: number;
@@ -6824,6 +6983,18 @@ export interface Job {
   Id?: string;
 
   /**
+   * The Job engine version that you requested for your job. Valid versions are in a YYYY-MM-DD format.
+   * @public
+   */
+  JobEngineVersionRequested?: string;
+
+  /**
+   * The Job engine version that your job used. Job engine versions are in a YYYY-MM-DD format. When you request an expired version, the response for this property will be empty. Requests to create jobs with an expired version result in a regular job, as if no specific Job engine version was requested. When you request an invalid version, the response for this property will be empty. Requests to create jobs with an invalid version result in a 400 error message, and no job is created.
+   * @public
+   */
+  JobEngineVersionUsed?: string;
+
+  /**
    * An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
    * @public
    */
@@ -6918,6 +7089,24 @@ export interface Job {
    * @public
    */
   Warnings?: WarningGroup[];
+}
+
+/**
+ * Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. Job engine versions are in a YYYY-MM-DD format.
+ * @public
+ */
+export interface JobEngineVersion {
+  /**
+   * The date that this Job engine version expires. Requests to create jobs with an expired version result in a regular job, as if no specific Job engine version was requested.
+   * @public
+   */
+  ExpirationDate?: Date;
+
+  /**
+   * Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. Job engine versions are in a YYYY-MM-DD format.
+   * @public
+   */
+  Version?: string;
 }
 
 /**
@@ -7246,257 +7435,3 @@ export const ReservationPlanStatus = {
  * @public
  */
 export type ReservationPlanStatus = (typeof ReservationPlanStatus)[keyof typeof ReservationPlanStatus];
-
-/**
- * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
- * @public
- */
-export interface ReservationPlan {
-  /**
-   * The length of the term of your reserved queue pricing plan commitment.
-   * @public
-   */
-  Commitment?: Commitment;
-
-  /**
-   * The timestamp in epoch seconds for when the current pricing plan term for this reserved queue expires.
-   * @public
-   */
-  ExpiresAt?: Date;
-
-  /**
-   * The timestamp in epoch seconds for when you set up the current pricing plan for this reserved queue.
-   * @public
-   */
-  PurchasedAt?: Date;
-
-  /**
-   * Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
-   * @public
-   */
-  RenewalType?: RenewalType;
-
-  /**
-   * Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. When you increase this number, you extend your existing commitment with a new 12-month commitment for a larger number of RTS. The new commitment begins when you purchase the additional capacity. You can't decrease the number of RTS in your reserved queue.
-   * @public
-   */
-  ReservedSlots?: number;
-
-  /**
-   * Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
-   * @public
-   */
-  Status?: ReservationPlanStatus;
-}
-
-/**
- * @public
- * @enum
- */
-export const QueueStatus = {
-  ACTIVE: "ACTIVE",
-  PAUSED: "PAUSED",
-} as const;
-
-/**
- * @public
- */
-export type QueueStatus = (typeof QueueStatus)[keyof typeof QueueStatus];
-
-/**
- * You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
- * @public
- */
-export interface Queue {
-  /**
-   * An identifier for this resource that is unique within all of AWS.
-   * @public
-   */
-  Arn?: string;
-
-  /**
-   * The timestamp in epoch seconds for when you created the queue.
-   * @public
-   */
-  CreatedAt?: Date;
-
-  /**
-   * An optional description that you create for each queue.
-   * @public
-   */
-  Description?: string;
-
-  /**
-   * The timestamp in epoch seconds for when you most recently updated the queue.
-   * @public
-   */
-  LastUpdated?: Date;
-
-  /**
-   * A name that you create for each queue. Each name must be unique within your account.
-   * @public
-   */
-  Name: string | undefined;
-
-  /**
-   * Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment.
-   * @public
-   */
-  PricingPlan?: PricingPlan;
-
-  /**
-   * The estimated number of jobs with a PROGRESSING status.
-   * @public
-   */
-  ProgressingJobsCount?: number;
-
-  /**
-   * Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
-   * @public
-   */
-  ReservationPlan?: ReservationPlan;
-
-  /**
-   * Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error.
-   * @public
-   */
-  Status?: QueueStatus;
-
-  /**
-   * The estimated number of jobs with a SUBMITTED status.
-   * @public
-   */
-  SubmittedJobsCount?: number;
-
-  /**
-   * Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
-   * @public
-   */
-  Type?: Type;
-}
-
-/**
- * @public
- */
-export interface AssociateCertificateRequest {
-  /**
-   * The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
-   * @public
-   */
-  Arn: string | undefined;
-}
-
-/**
- * @public
- */
-export interface AssociateCertificateResponse {}
-
-/**
- * The service can't process your request because of a problem in the request. Please check your request form and syntax.
- * @public
- */
-export class BadRequestException extends __BaseException {
-  readonly name: "BadRequestException" = "BadRequestException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<BadRequestException, __BaseException>) {
-    super({
-      name: "BadRequestException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, BadRequestException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * The service couldn't complete your request because there is a conflict with the current state of the resource.
- * @public
- */
-export class ConflictException extends __BaseException {
-  readonly name: "ConflictException" = "ConflictException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
-    super({
-      name: "ConflictException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConflictException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * You don't have permissions for this action with the credentials you sent.
- * @public
- */
-export class ForbiddenException extends __BaseException {
-  readonly name: "ForbiddenException" = "ForbiddenException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ForbiddenException, __BaseException>) {
-    super({
-      name: "ForbiddenException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ForbiddenException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * The service encountered an unexpected condition and can't fulfill your request.
- * @public
- */
-export class InternalServerErrorException extends __BaseException {
-  readonly name: "InternalServerErrorException" = "InternalServerErrorException";
-  readonly $fault: "server" = "server";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InternalServerErrorException, __BaseException>) {
-    super({
-      name: "InternalServerErrorException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalServerErrorException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * The resource you requested doesn't exist.
- * @public
- */
-export class NotFoundException extends __BaseException {
-  readonly name: "NotFoundException" = "NotFoundException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<NotFoundException, __BaseException>) {
-    super({
-      name: "NotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, NotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}

@@ -43,19 +43,13 @@ export interface DescribeInstanceAttributeCommandOutput extends InstanceAttribut
  * // const { EC2Client, DescribeInstanceAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeInstanceAttributeRequest
- *   Attribute: "instanceType" || "kernel" || "ramdisk" || "userData" || "disableApiTermination" || "instanceInitiatedShutdownBehavior" || "rootDeviceName" || "blockDeviceMapping" || "productCodes" || "sourceDestCheck" || "groupSet" || "ebsOptimized" || "sriovNetSupport" || "enaSupport" || "enclaveOptions" || "disableApiStop", // required
  *   DryRun: true || false,
  *   InstanceId: "STRING_VALUE", // required
+ *   Attribute: "instanceType" || "kernel" || "ramdisk" || "userData" || "disableApiTermination" || "instanceInitiatedShutdownBehavior" || "rootDeviceName" || "blockDeviceMapping" || "productCodes" || "sourceDestCheck" || "groupSet" || "ebsOptimized" || "sriovNetSupport" || "enaSupport" || "enclaveOptions" || "disableApiStop", // required
  * };
  * const command = new DescribeInstanceAttributeCommand(input);
  * const response = await client.send(command);
  * // { // InstanceAttribute
- * //   Groups: [ // GroupIdentifierList
- * //     { // GroupIdentifier
- * //       GroupName: "STRING_VALUE",
- * //       GroupId: "STRING_VALUE",
- * //     },
- * //   ],
  * //   BlockDeviceMappings: [ // InstanceBlockDeviceMappingList
  * //     { // InstanceBlockDeviceMapping
  * //       DeviceName: "STRING_VALUE",
@@ -111,6 +105,12 @@ export interface DescribeInstanceAttributeCommandOutput extends InstanceAttribut
  * //   DisableApiStop: {
  * //     Value: true || false,
  * //   },
+ * //   Groups: [ // GroupIdentifierList
+ * //     { // GroupIdentifier
+ * //       GroupId: "STRING_VALUE",
+ * //       GroupName: "STRING_VALUE",
+ * //     },
+ * //   ],
  * // };
  *
  * ```
@@ -214,9 +214,7 @@ export class DescribeInstanceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -228,4 +226,16 @@ export class DescribeInstanceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInstanceAttributeCommand)
   .de(de_DescribeInstanceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstanceAttributeRequest;
+      output: InstanceAttribute;
+    };
+    sdk: {
+      input: DescribeInstanceAttributeCommandInput;
+      output: DescribeInstanceAttributeCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class GetRevisionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QLDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class GetRevisionCommand extends $Command
   .f(GetRevisionRequestFilterSensitiveLog, GetRevisionResponseFilterSensitiveLog)
   .ser(se_GetRevisionCommand)
   .de(de_GetRevisionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRevisionRequest;
+      output: GetRevisionResponse;
+    };
+    sdk: {
+      input: GetRevisionCommandInput;
+      output: GetRevisionCommandOutput;
+    };
+  };
+}

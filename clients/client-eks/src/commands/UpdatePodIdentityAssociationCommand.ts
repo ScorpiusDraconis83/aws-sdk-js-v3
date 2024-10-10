@@ -105,9 +105,7 @@ export class UpdatePodIdentityAssociationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EKSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class UpdatePodIdentityAssociationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdatePodIdentityAssociationCommand)
   .de(de_UpdatePodIdentityAssociationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePodIdentityAssociationRequest;
+      output: UpdatePodIdentityAssociationResponse;
+    };
+    sdk: {
+      input: UpdatePodIdentityAssociationCommandInput;
+      output: UpdatePodIdentityAssociationCommandOutput;
+    };
+  };
+}

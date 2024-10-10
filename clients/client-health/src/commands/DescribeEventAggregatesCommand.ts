@@ -133,9 +133,7 @@ export class DescribeEventAggregatesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -147,4 +145,16 @@ export class DescribeEventAggregatesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEventAggregatesCommand)
   .de(de_DescribeEventAggregatesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventAggregatesRequest;
+      output: DescribeEventAggregatesResponse;
+    };
+    sdk: {
+      input: DescribeEventAggregatesCommandInput;
+      output: DescribeEventAggregatesCommandOutput;
+    };
+  };
+}

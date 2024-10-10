@@ -122,9 +122,7 @@ export class ListInvestigationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DetectiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class ListInvestigationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListInvestigationsCommand)
   .de(de_ListInvestigationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInvestigationsRequest;
+      output: ListInvestigationsResponse;
+    };
+    sdk: {
+      input: ListInvestigationsCommandInput;
+      output: ListInvestigationsCommandOutput;
+    };
+  };
+}

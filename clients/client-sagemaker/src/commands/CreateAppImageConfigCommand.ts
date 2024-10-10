@@ -5,7 +5,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { CreateAppImageConfigRequest, CreateAppImageConfigResponse } from "../models/models_0";
+import { CreateAppImageConfigRequest, CreateAppImageConfigResponse } from "../models/models_1";
 import { de_CreateAppImageConfigCommand, se_CreateAppImageConfigCommand } from "../protocols/Aws_json1_1";
 import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
 
@@ -125,9 +125,7 @@ export class CreateAppImageConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class CreateAppImageConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateAppImageConfigCommand)
   .de(de_CreateAppImageConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAppImageConfigRequest;
+      output: CreateAppImageConfigResponse;
+    };
+    sdk: {
+      input: CreateAppImageConfigCommandInput;
+      output: CreateAppImageConfigCommandOutput;
+    };
+  };
+}

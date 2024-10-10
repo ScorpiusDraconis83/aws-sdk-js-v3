@@ -139,9 +139,7 @@ export class UpdateApiCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApiGatewayV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class UpdateApiCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateApiCommand)
   .de(de_UpdateApiCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApiRequest;
+      output: UpdateApiResponse;
+    };
+    sdk: {
+      input: UpdateApiCommandInput;
+      output: UpdateApiCommandOutput;
+    };
+  };
+}

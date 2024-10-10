@@ -93,9 +93,7 @@ export class UpdateAppInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UpdateAppInstanceCommand extends $Command
   .f(UpdateAppInstanceRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateAppInstanceCommand)
   .de(de_UpdateAppInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAppInstanceRequest;
+      output: UpdateAppInstanceResponse;
+    };
+    sdk: {
+      input: UpdateAppInstanceCommandInput;
+      output: UpdateAppInstanceCommandOutput;
+    };
+  };
+}

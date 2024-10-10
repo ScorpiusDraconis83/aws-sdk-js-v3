@@ -93,9 +93,7 @@ export class UpdateAssetPropertyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UpdateAssetPropertyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateAssetPropertyCommand)
   .de(de_UpdateAssetPropertyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssetPropertyRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateAssetPropertyCommandInput;
+      output: UpdateAssetPropertyCommandOutput;
+    };
+  };
+}

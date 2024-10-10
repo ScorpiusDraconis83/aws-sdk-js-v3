@@ -163,9 +163,7 @@ export class ReEncryptDataCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PaymentCryptographyDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -177,4 +175,16 @@ export class ReEncryptDataCommand extends $Command
   .f(ReEncryptDataInputFilterSensitiveLog, ReEncryptDataOutputFilterSensitiveLog)
   .ser(se_ReEncryptDataCommand)
   .de(de_ReEncryptDataCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReEncryptDataInput;
+      output: ReEncryptDataOutput;
+    };
+    sdk: {
+      input: ReEncryptDataCommandInput;
+      output: ReEncryptDataCommandOutput;
+    };
+  };
+}

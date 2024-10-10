@@ -56,16 +56,16 @@ export interface CreateReservedInstancesListingCommandOutput
  * // const { EC2Client, CreateReservedInstancesListingCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // CreateReservedInstancesListingRequest
- *   ClientToken: "STRING_VALUE", // required
+ *   ReservedInstancesId: "STRING_VALUE", // required
  *   InstanceCount: Number("int"), // required
  *   PriceSchedules: [ // PriceScheduleSpecificationList // required
  *     { // PriceScheduleSpecification
- *       CurrencyCode: "USD",
- *       Price: Number("double"),
  *       Term: Number("long"),
+ *       Price: Number("double"),
+ *       CurrencyCode: "USD",
  *     },
  *   ],
- *   ReservedInstancesId: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE", // required
  * };
  * const command = new CreateReservedInstancesListingCommand(input);
  * const response = await client.send(command);
@@ -124,9 +124,7 @@ export class CreateReservedInstancesListingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class CreateReservedInstancesListingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateReservedInstancesListingCommand)
   .de(de_CreateReservedInstancesListingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReservedInstancesListingRequest;
+      output: CreateReservedInstancesListingResult;
+    };
+    sdk: {
+      input: CreateReservedInstancesListingCommandInput;
+      output: CreateReservedInstancesListingCommandOutput;
+    };
+  };
+}

@@ -151,9 +151,7 @@ export class CreateEntityRecognizerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class CreateEntityRecognizerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateEntityRecognizerCommand)
   .de(de_CreateEntityRecognizerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEntityRecognizerRequest;
+      output: CreateEntityRecognizerResponse;
+    };
+    sdk: {
+      input: CreateEntityRecognizerCommandInput;
+      output: CreateEntityRecognizerCommandOutput;
+    };
+  };
+}

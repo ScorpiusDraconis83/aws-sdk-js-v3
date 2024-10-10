@@ -29,8 +29,8 @@ export interface CreateCacheClusterCommandOutput extends CreateCacheClusterResul
 
 /**
  * <p>Creates a cluster. All nodes in the cluster run the same protocol-compliant cache
- *             engine software, either Memcached or Redis OSS.</p>
- *          <p>This operation is not supported for Redis OSS (cluster mode enabled) clusters.</p>
+ *             engine software, either Memcached, Valkey or Redis OSS.</p>
+ *          <p>This operation is not supported for Valkey or Redis OSS (cluster mode enabled) clusters.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -330,9 +330,7 @@ export class CreateCacheClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -344,4 +342,16 @@ export class CreateCacheClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCacheClusterCommand)
   .de(de_CreateCacheClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCacheClusterMessage;
+      output: CreateCacheClusterResult;
+    };
+    sdk: {
+      input: CreateCacheClusterCommandInput;
+      output: CreateCacheClusterCommandOutput;
+    };
+  };
+}

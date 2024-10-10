@@ -114,9 +114,7 @@ export class StartSpeakerSearchTaskCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMediaPipelinesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class StartSpeakerSearchTaskCommand extends $Command
   .f(StartSpeakerSearchTaskRequestFilterSensitiveLog, void 0)
   .ser(se_StartSpeakerSearchTaskCommand)
   .de(de_StartSpeakerSearchTaskCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSpeakerSearchTaskRequest;
+      output: StartSpeakerSearchTaskResponse;
+    };
+    sdk: {
+      input: StartSpeakerSearchTaskCommandInput;
+      output: StartSpeakerSearchTaskCommandOutput;
+    };
+  };
+}

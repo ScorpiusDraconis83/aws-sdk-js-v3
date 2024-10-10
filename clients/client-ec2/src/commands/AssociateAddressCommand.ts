@@ -56,10 +56,10 @@ export interface AssociateAddressCommandOutput extends AssociateAddressResult, _
  *   AllocationId: "STRING_VALUE",
  *   InstanceId: "STRING_VALUE",
  *   PublicIp: "STRING_VALUE",
- *   AllowReassociation: true || false,
  *   DryRun: true || false,
  *   NetworkInterfaceId: "STRING_VALUE",
  *   PrivateIpAddress: "STRING_VALUE",
+ *   AllowReassociation: true || false,
  * };
  * const command = new AssociateAddressCommand(input);
  * const response = await client.send(command);
@@ -122,9 +122,7 @@ export class AssociateAddressCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class AssociateAddressCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateAddressCommand)
   .de(de_AssociateAddressCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateAddressRequest;
+      output: AssociateAddressResult;
+    };
+    sdk: {
+      input: AssociateAddressCommandInput;
+      output: AssociateAddressCommandOutput;
+    };
+  };
+}

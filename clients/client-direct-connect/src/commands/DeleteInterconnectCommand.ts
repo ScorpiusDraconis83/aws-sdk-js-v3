@@ -75,9 +75,7 @@ export class DeleteInterconnectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -89,4 +87,16 @@ export class DeleteInterconnectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteInterconnectCommand)
   .de(de_DeleteInterconnectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInterconnectRequest;
+      output: DeleteInterconnectResponse;
+    };
+    sdk: {
+      input: DeleteInterconnectCommandInput;
+      output: DeleteInterconnectCommandOutput;
+    };
+  };
+}

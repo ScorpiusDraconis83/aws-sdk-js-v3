@@ -397,7 +397,7 @@ export interface AddPermissionRequest {
   Action: string | undefined;
 
   /**
-   * <p>The Amazon Web Servicesservice or Amazon Web Services account that invokes the function. If you specify a
+   * <p>The Amazon Web Services service, Amazon Web Services account, IAM user, or IAM role that invokes the function. If you specify a
    *       service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through
    *       that service.</p>
    * @public
@@ -405,7 +405,7 @@ export interface AddPermissionRequest {
   Principal: string | undefined;
 
   /**
-   * <p>For Amazon Web Servicesservices, the ARN of the Amazon Web Services resource that invokes the function. For
+   * <p>For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For
    *       example, an Amazon S3 bucket or Amazon SNS topic.</p>
    *          <p>Note that Lambda configures the comparison using the <code>StringLike</code> operator.</p>
    * @public
@@ -413,7 +413,7 @@ export interface AddPermissionRequest {
   SourceArn?: string;
 
   /**
-   * <p>For Amazon Web Servicesservice, the ID of the Amazon Web Services account that owns the resource. Use this
+   * <p>For Amazon Web Services service, the ID of the Amazon Web Services account that owns the resource. Use this
    *       together with <code>SourceArn</code> to ensure that the specified account owns the resource. It is possible for an
    *         Amazon S3 bucket to be deleted by its owner and recreated by another account.</p>
    * @public
@@ -687,6 +687,12 @@ export interface CreateCodeSigningConfigRequest {
    * @public
    */
   CodeSigningPolicies?: CodeSigningPolicies;
+
+  /**
+   * <p>A list of tags to add to the code signing configuration.</p>
+   * @public
+   */
+  Tags?: Record<string, string>;
 }
 
 /**
@@ -1205,6 +1211,12 @@ export interface CreateEventSourceMappingRequest {
   MaximumRetryAttempts?: number;
 
   /**
+   * <p>A list of tags to apply to the event source mapping.</p>
+   * @public
+   */
+  Tags?: Record<string, string>;
+
+  /**
    * <p>(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.</p>
    * @public
    */
@@ -1496,6 +1508,12 @@ export interface EventSourceMappingConfiguration {
    * @public
    */
   FilterCriteriaError?: FilterCriteriaError;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the event source mapping.</p>
+   * @public
+   */
+  EventSourceMappingArn?: string;
 }
 
 /**
@@ -5979,8 +5997,8 @@ export interface ListProvisionedConcurrencyConfigsResponse {
  */
 export interface ListTagsRequest {
   /**
-   * <p>The function's Amazon Resource Name (ARN).
-   *       Note: Lambda does not support adding tags to aliases or versions.</p>
+   * <p>The resource's Amazon Resource Name (ARN).
+   *       Note: Lambda does not support adding tags to function aliases or versions.</p>
    * @public
    */
   Resource: string | undefined;
@@ -6770,13 +6788,13 @@ export interface RemovePermissionRequest {
  */
 export interface TagResourceRequest {
   /**
-   * <p>The function's Amazon Resource Name (ARN).</p>
+   * <p>The resource's Amazon Resource Name (ARN).</p>
    * @public
    */
   Resource: string | undefined;
 
   /**
-   * <p>A list of tags to apply to the function.</p>
+   * <p>A list of tags to apply to the resource.</p>
    * @public
    */
   Tags: Record<string, string> | undefined;
@@ -6787,13 +6805,13 @@ export interface TagResourceRequest {
  */
 export interface UntagResourceRequest {
   /**
-   * <p>The function's Amazon Resource Name (ARN).</p>
+   * <p>The resource's Amazon Resource Name (ARN).</p>
    * @public
    */
   Resource: string | undefined;
 
   /**
-   * <p>A list of tag keys to remove from the function.</p>
+   * <p>A list of tag keys to remove from the resource.</p>
    * @public
    */
   TagKeys: string[] | undefined;

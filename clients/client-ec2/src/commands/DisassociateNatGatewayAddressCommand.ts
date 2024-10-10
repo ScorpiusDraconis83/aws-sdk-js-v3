@@ -91,9 +91,7 @@ export class DisassociateNatGatewayAddressCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class DisassociateNatGatewayAddressCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateNatGatewayAddressCommand)
   .de(de_DisassociateNatGatewayAddressCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateNatGatewayAddressRequest;
+      output: DisassociateNatGatewayAddressResult;
+    };
+    sdk: {
+      input: DisassociateNatGatewayAddressCommandInput;
+      output: DisassociateNatGatewayAddressCommandOutput;
+    };
+  };
+}

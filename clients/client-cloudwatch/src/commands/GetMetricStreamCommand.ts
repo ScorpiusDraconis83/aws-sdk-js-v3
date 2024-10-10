@@ -117,9 +117,7 @@ export class GetMetricStreamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class GetMetricStreamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMetricStreamCommand)
   .de(de_GetMetricStreamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMetricStreamInput;
+      output: GetMetricStreamOutput;
+    };
+    sdk: {
+      input: GetMetricStreamCommandInput;
+      output: GetMetricStreamCommandOutput;
+    };
+  };
+}

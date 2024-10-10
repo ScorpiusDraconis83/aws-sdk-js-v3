@@ -300,9 +300,7 @@ export class GenerateDataKeyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KMSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -314,4 +312,16 @@ export class GenerateDataKeyCommand extends $Command
   .f(void 0, GenerateDataKeyResponseFilterSensitiveLog)
   .ser(se_GenerateDataKeyCommand)
   .de(de_GenerateDataKeyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateDataKeyRequest;
+      output: GenerateDataKeyResponse;
+    };
+    sdk: {
+      input: GenerateDataKeyCommandInput;
+      output: GenerateDataKeyCommandOutput;
+    };
+  };
+}

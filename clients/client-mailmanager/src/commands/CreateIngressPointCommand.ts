@@ -92,9 +92,7 @@ export class CreateIngressPointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class CreateIngressPointCommand extends $Command
   .f(CreateIngressPointRequestFilterSensitiveLog, void 0)
   .ser(se_CreateIngressPointCommand)
   .de(de_CreateIngressPointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIngressPointRequest;
+      output: CreateIngressPointResponse;
+    };
+    sdk: {
+      input: CreateIngressPointCommandInput;
+      output: CreateIngressPointCommandOutput;
+    };
+  };
+}

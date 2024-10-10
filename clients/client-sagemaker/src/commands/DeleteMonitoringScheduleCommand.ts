@@ -67,9 +67,7 @@ export class DeleteMonitoringScheduleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -81,4 +79,16 @@ export class DeleteMonitoringScheduleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteMonitoringScheduleCommand)
   .de(de_DeleteMonitoringScheduleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMonitoringScheduleRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteMonitoringScheduleCommandInput;
+      output: DeleteMonitoringScheduleCommandOutput;
+    };
+  };
+}

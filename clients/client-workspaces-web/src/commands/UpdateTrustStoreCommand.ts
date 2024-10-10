@@ -90,9 +90,7 @@ export class UpdateTrustStoreCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class UpdateTrustStoreCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTrustStoreCommand)
   .de(de_UpdateTrustStoreCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrustStoreRequest;
+      output: UpdateTrustStoreResponse;
+    };
+    sdk: {
+      input: UpdateTrustStoreCommandInput;
+      output: UpdateTrustStoreCommandOutput;
+    };
+  };
+}

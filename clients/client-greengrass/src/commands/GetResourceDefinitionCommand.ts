@@ -77,9 +77,7 @@ export class GetResourceDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class GetResourceDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetResourceDefinitionCommand)
   .de(de_GetResourceDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceDefinitionRequest;
+      output: GetResourceDefinitionResponse;
+    };
+    sdk: {
+      input: GetResourceDefinitionCommandInput;
+      output: GetResourceDefinitionCommandOutput;
+    };
+  };
+}

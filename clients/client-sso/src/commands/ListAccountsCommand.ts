@@ -91,9 +91,7 @@ export class ListAccountsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListAccountsCommand extends $Command
   .f(ListAccountsRequestFilterSensitiveLog, void 0)
   .ser(se_ListAccountsCommand)
   .de(de_ListAccountsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccountsRequest;
+      output: ListAccountsResponse;
+    };
+    sdk: {
+      input: ListAccountsCommandInput;
+      output: ListAccountsCommandOutput;
+    };
+  };
+}

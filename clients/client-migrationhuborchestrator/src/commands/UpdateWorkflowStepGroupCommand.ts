@@ -109,9 +109,7 @@ export class UpdateWorkflowStepGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MigrationHubOrchestratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class UpdateWorkflowStepGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateWorkflowStepGroupCommand)
   .de(de_UpdateWorkflowStepGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkflowStepGroupRequest;
+      output: UpdateWorkflowStepGroupResponse;
+    };
+    sdk: {
+      input: UpdateWorkflowStepGroupCommandInput;
+      output: UpdateWorkflowStepGroupCommandOutput;
+    };
+  };
+}

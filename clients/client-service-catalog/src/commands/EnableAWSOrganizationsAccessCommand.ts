@@ -88,9 +88,7 @@ export class EnableAWSOrganizationsAccessCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ServiceCatalogClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class EnableAWSOrganizationsAccessCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnableAWSOrganizationsAccessCommand)
   .de(de_EnableAWSOrganizationsAccessCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: EnableAWSOrganizationsAccessCommandInput;
+      output: EnableAWSOrganizationsAccessCommandOutput;
+    };
+  };
+}

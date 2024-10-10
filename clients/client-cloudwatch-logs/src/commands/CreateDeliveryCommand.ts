@@ -73,6 +73,14 @@ export interface CreateDeliveryCommandOutput extends CreateDeliveryResponse, __M
  * const input = { // CreateDeliveryRequest
  *   deliverySourceName: "STRING_VALUE", // required
  *   deliveryDestinationArn: "STRING_VALUE", // required
+ *   recordFields: [ // RecordFields
+ *     "STRING_VALUE",
+ *   ],
+ *   fieldDelimiter: "STRING_VALUE",
+ *   s3DeliveryConfiguration: { // S3DeliveryConfiguration
+ *     suffixPath: "STRING_VALUE",
+ *     enableHiveCompatiblePath: true || false,
+ *   },
  *   tags: { // Tags
  *     "<keys>": "STRING_VALUE",
  *   },
@@ -86,6 +94,14 @@ export interface CreateDeliveryCommandOutput extends CreateDeliveryResponse, __M
  * //     deliverySourceName: "STRING_VALUE",
  * //     deliveryDestinationArn: "STRING_VALUE",
  * //     deliveryDestinationType: "S3" || "CWL" || "FH",
+ * //     recordFields: [ // RecordFields
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     fieldDelimiter: "STRING_VALUE",
+ * //     s3DeliveryConfiguration: { // S3DeliveryConfiguration
+ * //       suffixPath: "STRING_VALUE",
+ * //       enableHiveCompatiblePath: true || false,
+ * //     },
  * //     tags: { // Tags
  * //       "<keys>": "STRING_VALUE",
  * //     },
@@ -134,9 +150,7 @@ export class CreateDeliveryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudWatchLogsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +162,16 @@ export class CreateDeliveryCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDeliveryCommand)
   .de(de_CreateDeliveryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDeliveryRequest;
+      output: CreateDeliveryResponse;
+    };
+    sdk: {
+      input: CreateDeliveryCommandInput;
+      output: CreateDeliveryCommandOutput;
+    };
+  };
+}

@@ -345,6 +345,23 @@ export interface BatchWriteCommandOutput extends BatchWriteResponse, __MetadataB
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To run a batch write command
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *   "Operations": []
+ * };
+ * const command = new BatchWriteCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "Responses": []
+ * }
+ * *\/
+ * // example id: to-run-a-batch-write-command-1506122878964
+ * ```
+ *
  */
 export class BatchWriteCommand extends $Command
   .classBuilder<
@@ -354,9 +371,7 @@ export class BatchWriteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -368,4 +383,16 @@ export class BatchWriteCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchWriteCommand)
   .de(de_BatchWriteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchWriteRequest;
+      output: BatchWriteResponse;
+    };
+    sdk: {
+      input: BatchWriteCommandInput;
+      output: BatchWriteCommandOutput;
+    };
+  };
+}

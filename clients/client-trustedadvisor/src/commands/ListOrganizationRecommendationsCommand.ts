@@ -124,9 +124,7 @@ export class ListOrganizationRecommendationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TrustedAdvisorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class ListOrganizationRecommendationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListOrganizationRecommendationsCommand)
   .de(de_ListOrganizationRecommendationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOrganizationRecommendationsRequest;
+      output: ListOrganizationRecommendationsResponse;
+    };
+    sdk: {
+      input: ListOrganizationRecommendationsCommandInput;
+      output: ListOrganizationRecommendationsCommandOutput;
+    };
+  };
+}

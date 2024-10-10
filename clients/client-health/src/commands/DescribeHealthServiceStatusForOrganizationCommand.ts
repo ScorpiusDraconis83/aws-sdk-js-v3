@@ -70,9 +70,7 @@ export class DescribeHealthServiceStatusForOrganizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: HealthClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -84,4 +82,16 @@ export class DescribeHealthServiceStatusForOrganizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeHealthServiceStatusForOrganizationCommand)
   .de(de_DescribeHealthServiceStatusForOrganizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeHealthServiceStatusForOrganizationResponse;
+    };
+    sdk: {
+      input: DescribeHealthServiceStatusForOrganizationCommandInput;
+      output: DescribeHealthServiceStatusForOrganizationCommandOutput;
+    };
+  };
+}

@@ -74,9 +74,7 @@ export class CreatePreparedStatementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AthenaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -88,4 +86,16 @@ export class CreatePreparedStatementCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePreparedStatementCommand)
   .de(de_CreatePreparedStatementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePreparedStatementInput;
+      output: {};
+    };
+    sdk: {
+      input: CreatePreparedStatementCommandInput;
+      output: CreatePreparedStatementCommandOutput;
+    };
+  };
+}

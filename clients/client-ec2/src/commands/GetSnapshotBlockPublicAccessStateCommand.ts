@@ -73,9 +73,7 @@ export class GetSnapshotBlockPublicAccessStateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class GetSnapshotBlockPublicAccessStateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetSnapshotBlockPublicAccessStateCommand)
   .de(de_GetSnapshotBlockPublicAccessStateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSnapshotBlockPublicAccessStateRequest;
+      output: GetSnapshotBlockPublicAccessStateResult;
+    };
+    sdk: {
+      input: GetSnapshotBlockPublicAccessStateCommandInput;
+      output: GetSnapshotBlockPublicAccessStateCommandOutput;
+    };
+  };
+}

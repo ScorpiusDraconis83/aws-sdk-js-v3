@@ -125,9 +125,7 @@ export class AdminUpdateAuthEventFeedbackCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class AdminUpdateAuthEventFeedbackCommand extends $Command
   .f(AdminUpdateAuthEventFeedbackRequestFilterSensitiveLog, void 0)
   .ser(se_AdminUpdateAuthEventFeedbackCommand)
   .de(de_AdminUpdateAuthEventFeedbackCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminUpdateAuthEventFeedbackRequest;
+      output: {};
+    };
+    sdk: {
+      input: AdminUpdateAuthEventFeedbackCommandInput;
+      output: AdminUpdateAuthEventFeedbackCommandOutput;
+    };
+  };
+}

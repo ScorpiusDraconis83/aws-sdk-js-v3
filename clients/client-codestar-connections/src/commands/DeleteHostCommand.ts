@@ -76,9 +76,7 @@ export class DeleteHostCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeStarConnectionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DeleteHostCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteHostCommand)
   .de(de_DeleteHostCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteHostInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteHostCommandInput;
+      output: DeleteHostCommandOutput;
+    };
+  };
+}

@@ -99,9 +99,7 @@ export class TerminateWorkspacesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class TerminateWorkspacesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_TerminateWorkspacesCommand)
   .de(de_TerminateWorkspacesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TerminateWorkspacesRequest;
+      output: TerminateWorkspacesResult;
+    };
+    sdk: {
+      input: TerminateWorkspacesCommandInput;
+      output: TerminateWorkspacesCommandOutput;
+    };
+  };
+}

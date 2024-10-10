@@ -137,9 +137,7 @@ export class MeterUsageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MarketplaceMeteringClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -151,4 +149,16 @@ export class MeterUsageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_MeterUsageCommand)
   .de(de_MeterUsageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MeterUsageRequest;
+      output: MeterUsageResult;
+    };
+    sdk: {
+      input: MeterUsageCommandInput;
+      output: MeterUsageCommandOutput;
+    };
+  };
+}

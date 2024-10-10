@@ -159,9 +159,7 @@ export class UpdateConfiguredTableAssociationAnalysisRuleCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -173,4 +171,16 @@ export class UpdateConfiguredTableAssociationAnalysisRuleCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_UpdateConfiguredTableAssociationAnalysisRuleCommand)
   .de(de_UpdateConfiguredTableAssociationAnalysisRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfiguredTableAssociationAnalysisRuleInput;
+      output: UpdateConfiguredTableAssociationAnalysisRuleOutput;
+    };
+    sdk: {
+      input: UpdateConfiguredTableAssociationAnalysisRuleCommandInput;
+      output: UpdateConfiguredTableAssociationAnalysisRuleCommandOutput;
+    };
+  };
+}

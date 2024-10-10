@@ -100,9 +100,7 @@ export class UpdateRoomCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class UpdateRoomCommand extends $Command
   .f(UpdateRoomRequestFilterSensitiveLog, UpdateRoomResponseFilterSensitiveLog)
   .ser(se_UpdateRoomCommand)
   .de(de_UpdateRoomCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRoomRequest;
+      output: UpdateRoomResponse;
+    };
+    sdk: {
+      input: UpdateRoomCommandInput;
+      output: UpdateRoomCommandOutput;
+    };
+  };
+}

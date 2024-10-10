@@ -145,9 +145,7 @@ export class CreateAnalysisTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +157,16 @@ export class CreateAnalysisTemplateCommand extends $Command
   .f(CreateAnalysisTemplateInputFilterSensitiveLog, CreateAnalysisTemplateOutputFilterSensitiveLog)
   .ser(se_CreateAnalysisTemplateCommand)
   .de(de_CreateAnalysisTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAnalysisTemplateInput;
+      output: CreateAnalysisTemplateOutput;
+    };
+    sdk: {
+      input: CreateAnalysisTemplateCommandInput;
+      output: CreateAnalysisTemplateCommandOutput;
+    };
+  };
+}

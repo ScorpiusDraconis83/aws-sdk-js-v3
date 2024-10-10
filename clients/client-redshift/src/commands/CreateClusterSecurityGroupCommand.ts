@@ -127,9 +127,7 @@ export class CreateClusterSecurityGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -141,4 +139,16 @@ export class CreateClusterSecurityGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateClusterSecurityGroupCommand)
   .de(de_CreateClusterSecurityGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateClusterSecurityGroupMessage;
+      output: CreateClusterSecurityGroupResult;
+    };
+    sdk: {
+      input: CreateClusterSecurityGroupCommandInput;
+      output: CreateClusterSecurityGroupCommandOutput;
+    };
+  };
+}

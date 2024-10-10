@@ -86,6 +86,29 @@ export interface ListFacetNamesCommandOutput extends ListFacetNamesResponse, __M
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To list facet names
+ * ```javascript
+ * //
+ * const input = {
+ *   "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+ * };
+ * const command = new ListFacetNamesCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "FacetNames": [
+ *     "Legal_Entity",
+ *     "Organization",
+ *     "node1",
+ *     "node2",
+ *     "nodex",
+ *     "policyfacet"
+ *   ]
+ * }
+ * *\/
+ * // example id: to-list-facet-names-1508275974689
+ * ```
+ *
  */
 export class ListFacetNamesCommand extends $Command
   .classBuilder<
@@ -95,9 +118,7 @@ export class ListFacetNamesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +130,16 @@ export class ListFacetNamesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListFacetNamesCommand)
   .de(de_ListFacetNamesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFacetNamesRequest;
+      output: ListFacetNamesResponse;
+    };
+    sdk: {
+      input: ListFacetNamesCommandInput;
+      output: ListFacetNamesCommandOutput;
+    };
+  };
+}

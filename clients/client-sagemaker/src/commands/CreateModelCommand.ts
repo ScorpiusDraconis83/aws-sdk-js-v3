@@ -75,6 +75,7 @@ export interface CreateModelCommandOutput extends CreateModelOutput, __MetadataB
  *         HubAccessConfig: { // InferenceHubAccessConfig
  *           HubContentArn: "STRING_VALUE", // required
  *         },
+ *         ManifestS3Uri: "STRING_VALUE",
  *       },
  *     },
  *     AdditionalModelDataSources: [ // AdditionalModelDataSources
@@ -90,6 +91,7 @@ export interface CreateModelCommandOutput extends CreateModelOutput, __MetadataB
  *           HubAccessConfig: {
  *             HubContentArn: "STRING_VALUE", // required
  *           },
+ *           ManifestS3Uri: "STRING_VALUE",
  *         },
  *       },
  *     ],
@@ -125,6 +127,7 @@ export interface CreateModelCommandOutput extends CreateModelOutput, __MetadataB
  *           HubAccessConfig: {
  *             HubContentArn: "STRING_VALUE", // required
  *           },
+ *           ManifestS3Uri: "STRING_VALUE",
  *         },
  *       },
  *       AdditionalModelDataSources: [
@@ -194,9 +197,7 @@ export class CreateModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -208,4 +209,16 @@ export class CreateModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateModelCommand)
   .de(de_CreateModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateModelInput;
+      output: CreateModelOutput;
+    };
+    sdk: {
+      input: CreateModelCommandInput;
+      output: CreateModelCommandOutput;
+    };
+  };
+}

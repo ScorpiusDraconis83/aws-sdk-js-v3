@@ -141,9 +141,7 @@ export class UpdateProtectedQueryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +153,16 @@ export class UpdateProtectedQueryCommand extends $Command
   .f(void 0, UpdateProtectedQueryOutputFilterSensitiveLog)
   .ser(se_UpdateProtectedQueryCommand)
   .de(de_UpdateProtectedQueryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProtectedQueryInput;
+      output: UpdateProtectedQueryOutput;
+    };
+    sdk: {
+      input: UpdateProtectedQueryCommandInput;
+      output: UpdateProtectedQueryCommandOutput;
+    };
+  };
+}

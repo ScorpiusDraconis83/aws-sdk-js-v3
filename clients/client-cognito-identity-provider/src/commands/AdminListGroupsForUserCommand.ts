@@ -128,9 +128,7 @@ export class AdminListGroupsForUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class AdminListGroupsForUserCommand extends $Command
   .f(AdminListGroupsForUserRequestFilterSensitiveLog, void 0)
   .ser(se_AdminListGroupsForUserCommand)
   .de(de_AdminListGroupsForUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminListGroupsForUserRequest;
+      output: AdminListGroupsForUserResponse;
+    };
+    sdk: {
+      input: AdminListGroupsForUserCommandInput;
+      output: AdminListGroupsForUserCommandOutput;
+    };
+  };
+}

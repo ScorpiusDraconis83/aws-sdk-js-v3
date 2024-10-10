@@ -130,9 +130,7 @@ export class DeleteRegexMatchSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFRegionalClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class DeleteRegexMatchSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRegexMatchSetCommand)
   .de(de_DeleteRegexMatchSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRegexMatchSetRequest;
+      output: DeleteRegexMatchSetResponse;
+    };
+    sdk: {
+      input: DeleteRegexMatchSetCommandInput;
+      output: DeleteRegexMatchSetCommandOutput;
+    };
+  };
+}

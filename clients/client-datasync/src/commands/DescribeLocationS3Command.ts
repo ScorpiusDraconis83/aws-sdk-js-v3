@@ -82,9 +82,7 @@ export class DescribeLocationS3Command extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DescribeLocationS3Command extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeLocationS3Command)
   .de(de_DescribeLocationS3Command)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocationS3Request;
+      output: DescribeLocationS3Response;
+    };
+    sdk: {
+      input: DescribeLocationS3CommandInput;
+      output: DescribeLocationS3CommandOutput;
+    };
+  };
+}

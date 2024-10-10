@@ -114,9 +114,7 @@ export class CreateDomainUnitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateDomainUnitCommand extends $Command
   .f(CreateDomainUnitInputFilterSensitiveLog, CreateDomainUnitOutputFilterSensitiveLog)
   .ser(se_CreateDomainUnitCommand)
   .de(de_CreateDomainUnitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDomainUnitInput;
+      output: CreateDomainUnitOutput;
+    };
+    sdk: {
+      input: CreateDomainUnitCommandInput;
+      output: CreateDomainUnitCommandOutput;
+    };
+  };
+}

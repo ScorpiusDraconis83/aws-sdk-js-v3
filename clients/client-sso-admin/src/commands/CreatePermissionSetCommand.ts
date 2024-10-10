@@ -114,9 +114,7 @@ export class CreatePermissionSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOAdminClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreatePermissionSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePermissionSetCommand)
   .de(de_CreatePermissionSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePermissionSetRequest;
+      output: CreatePermissionSetResponse;
+    };
+    sdk: {
+      input: CreatePermissionSetCommandInput;
+      output: CreatePermissionSetCommandOutput;
+    };
+  };
+}

@@ -98,9 +98,7 @@ export class GetConnectPeerAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class GetConnectPeerAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetConnectPeerAssociationsCommand)
   .de(de_GetConnectPeerAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConnectPeerAssociationsRequest;
+      output: GetConnectPeerAssociationsResponse;
+    };
+    sdk: {
+      input: GetConnectPeerAssociationsCommandInput;
+      output: GetConnectPeerAssociationsCommandOutput;
+    };
+  };
+}

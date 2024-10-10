@@ -71,9 +71,7 @@ export class DeleteTargetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodestarNotificationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -85,4 +83,16 @@ export class DeleteTargetCommand extends $Command
   .f(DeleteTargetRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteTargetCommand)
   .de(de_DeleteTargetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTargetRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteTargetCommandInput;
+      output: DeleteTargetCommandOutput;
+    };
+  };
+}

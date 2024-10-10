@@ -66,7 +66,7 @@ export interface ListRootsCommandOutput extends ListRootsResponse, __MetadataBea
  * //       Name: "STRING_VALUE",
  * //       PolicyTypes: [ // PolicyTypes
  * //         { // PolicyTypeSummary
- * //           Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY",
+ * //           Type: "SERVICE_CONTROL_POLICY" || "TAG_POLICY" || "BACKUP_POLICY" || "AISERVICES_OPT_OUT_POLICY" || "CHATBOT_POLICY",
  * //           Status: "ENABLED" || "PENDING_ENABLE" || "PENDING_DISABLE",
  * //         },
  * //       ],
@@ -246,9 +246,7 @@ export class ListRootsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -260,4 +258,16 @@ export class ListRootsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRootsCommand)
   .de(de_ListRootsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRootsRequest;
+      output: ListRootsResponse;
+    };
+    sdk: {
+      input: ListRootsCommandInput;
+      output: ListRootsCommandOutput;
+    };
+  };
+}

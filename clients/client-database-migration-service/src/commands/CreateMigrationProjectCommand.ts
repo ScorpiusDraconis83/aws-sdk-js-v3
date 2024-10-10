@@ -118,6 +118,9 @@ export interface CreateMigrationProjectCommandOutput extends CreateMigrationProj
  *  <p>DMS was denied access to the endpoint. Check that the
  *             role is correctly configured.</p>
  *
+ * @throws {@link FailedDependencyFault} (client fault)
+ *  <p>A dependency threw an exception.</p>
+ *
  * @throws {@link ResourceAlreadyExistsFault} (client fault)
  *  <p>The resource you are attempting to create already exists.</p>
  *
@@ -216,9 +219,7 @@ export class CreateMigrationProjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +231,16 @@ export class CreateMigrationProjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateMigrationProjectCommand)
   .de(de_CreateMigrationProjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMigrationProjectMessage;
+      output: CreateMigrationProjectResponse;
+    };
+    sdk: {
+      input: CreateMigrationProjectCommandInput;
+      output: CreateMigrationProjectCommandOutput;
+    };
+  };
+}

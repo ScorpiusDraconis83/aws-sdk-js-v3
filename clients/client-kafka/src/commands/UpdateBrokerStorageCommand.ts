@@ -92,9 +92,7 @@ export class UpdateBrokerStorageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KafkaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class UpdateBrokerStorageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateBrokerStorageCommand)
   .de(de_UpdateBrokerStorageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBrokerStorageRequest;
+      output: UpdateBrokerStorageResponse;
+    };
+    sdk: {
+      input: UpdateBrokerStorageCommandInput;
+      output: UpdateBrokerStorageCommandOutput;
+    };
+  };
+}

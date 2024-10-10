@@ -73,9 +73,7 @@ export class DeleteRecommenderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PersonalizeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class DeleteRecommenderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRecommenderCommand)
   .de(de_DeleteRecommenderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRecommenderRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRecommenderCommandInput;
+      output: DeleteRecommenderCommandOutput;
+    };
+  };
+}

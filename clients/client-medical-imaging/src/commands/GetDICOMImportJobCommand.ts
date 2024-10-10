@@ -101,9 +101,7 @@ export class GetDICOMImportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MedicalImagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class GetDICOMImportJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDICOMImportJobCommand)
   .de(de_GetDICOMImportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDICOMImportJobRequest;
+      output: GetDICOMImportJobResponse;
+    };
+    sdk: {
+      input: GetDICOMImportJobCommandInput;
+      output: GetDICOMImportJobCommandOutput;
+    };
+  };
+}

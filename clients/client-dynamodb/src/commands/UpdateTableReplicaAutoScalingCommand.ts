@@ -211,9 +211,19 @@ export interface UpdateTableReplicaAutoScalingCommandOutput
  *             this limit may result in request throttling.</p>
  *
  * @throws {@link ResourceInUseException} (client fault)
- *  <p>The operation conflicts with the resource's availability. For example, you
- *             attempted to recreate an existing table, or tried to delete a table currently in the
- *                 <code>CREATING</code> state.</p>
+ *  <p>The operation conflicts with the resource's availability. For example:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You attempted to recreate an existing table.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a table currently in the <code>CREATING</code> state.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a resource that was already being updated.</p>
+ *             </li>
+ *          </ul>
+ *          <p>When appropriate, wait for the ongoing update to complete and attempt the request again.</p>
  *
  * @throws {@link ResourceNotFoundException} (client fault)
  *  <p>The operation tried to access a nonexistent table or index. The resource might not
@@ -232,9 +242,7 @@ export class UpdateTableReplicaAutoScalingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DynamoDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -246,4 +254,16 @@ export class UpdateTableReplicaAutoScalingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTableReplicaAutoScalingCommand)
   .de(de_UpdateTableReplicaAutoScalingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTableReplicaAutoScalingInput;
+      output: UpdateTableReplicaAutoScalingOutput;
+    };
+    sdk: {
+      input: UpdateTableReplicaAutoScalingCommandInput;
+      output: UpdateTableReplicaAutoScalingCommandOutput;
+    };
+  };
+}

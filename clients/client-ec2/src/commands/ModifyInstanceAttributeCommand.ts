@@ -49,36 +49,28 @@ export interface ModifyInstanceAttributeCommandOutput extends __MetadataBearer {
  *   SourceDestCheck: { // AttributeBooleanValue
  *     Value: true || false,
  *   },
+ *   DisableApiStop: {
+ *     Value: true || false,
+ *   },
+ *   DryRun: true || false,
+ *   InstanceId: "STRING_VALUE", // required
  *   Attribute: "instanceType" || "kernel" || "ramdisk" || "userData" || "disableApiTermination" || "instanceInitiatedShutdownBehavior" || "rootDeviceName" || "blockDeviceMapping" || "productCodes" || "sourceDestCheck" || "groupSet" || "ebsOptimized" || "sriovNetSupport" || "enaSupport" || "enclaveOptions" || "disableApiStop",
+ *   Value: "STRING_VALUE",
  *   BlockDeviceMappings: [ // InstanceBlockDeviceMappingSpecificationList
  *     { // InstanceBlockDeviceMappingSpecification
  *       DeviceName: "STRING_VALUE",
  *       Ebs: { // EbsInstanceBlockDeviceSpecification
- *         DeleteOnTermination: true || false,
  *         VolumeId: "STRING_VALUE",
+ *         DeleteOnTermination: true || false,
  *       },
- *       NoDevice: "STRING_VALUE",
  *       VirtualName: "STRING_VALUE",
+ *       NoDevice: "STRING_VALUE",
  *     },
  *   ],
  *   DisableApiTermination: {
  *     Value: true || false,
  *   },
- *   DryRun: true || false,
- *   EbsOptimized: {
- *     Value: true || false,
- *   },
- *   EnaSupport: {
- *     Value: true || false,
- *   },
- *   Groups: [ // GroupIdStringList
- *     "STRING_VALUE",
- *   ],
- *   InstanceId: "STRING_VALUE", // required
- *   InstanceInitiatedShutdownBehavior: { // AttributeValue
- *     Value: "STRING_VALUE",
- *   },
- *   InstanceType: {
+ *   InstanceType: { // AttributeValue
  *     Value: "STRING_VALUE",
  *   },
  *   Kernel: {
@@ -87,14 +79,22 @@ export interface ModifyInstanceAttributeCommandOutput extends __MetadataBearer {
  *   Ramdisk: {
  *     Value: "STRING_VALUE",
  *   },
- *   SriovNetSupport: {
- *     Value: "STRING_VALUE",
- *   },
  *   UserData: { // BlobAttributeValue
  *     Value: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
  *   },
- *   Value: "STRING_VALUE",
- *   DisableApiStop: {
+ *   InstanceInitiatedShutdownBehavior: {
+ *     Value: "STRING_VALUE",
+ *   },
+ *   Groups: [ // GroupIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   EbsOptimized: {
+ *     Value: true || false,
+ *   },
+ *   SriovNetSupport: {
+ *     Value: "STRING_VALUE",
+ *   },
+ *   EnaSupport: {
  *     Value: true || false,
  *   },
  * };
@@ -151,9 +151,7 @@ export class ModifyInstanceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class ModifyInstanceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ModifyInstanceAttributeCommand)
   .de(de_ModifyInstanceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyInstanceAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ModifyInstanceAttributeCommandInput;
+      output: ModifyInstanceAttributeCommandOutput;
+    };
+  };
+}

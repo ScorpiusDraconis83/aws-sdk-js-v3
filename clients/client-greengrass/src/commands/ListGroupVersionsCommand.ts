@@ -78,9 +78,7 @@ export class ListGroupVersionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GreengrassClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class ListGroupVersionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListGroupVersionsCommand)
   .de(de_ListGroupVersionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGroupVersionsRequest;
+      output: ListGroupVersionsResponse;
+    };
+    sdk: {
+      input: ListGroupVersionsCommandInput;
+      output: ListGroupVersionsCommandOutput;
+    };
+  };
+}

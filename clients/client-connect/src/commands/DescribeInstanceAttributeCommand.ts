@@ -85,9 +85,7 @@ export class DescribeInstanceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class DescribeInstanceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInstanceAttributeCommand)
   .de(de_DescribeInstanceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstanceAttributeRequest;
+      output: DescribeInstanceAttributeResponse;
+    };
+    sdk: {
+      input: DescribeInstanceAttributeCommandInput;
+      output: DescribeInstanceAttributeCommandOutput;
+    };
+  };
+}

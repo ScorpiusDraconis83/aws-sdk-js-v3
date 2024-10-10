@@ -112,9 +112,7 @@ export class UpdateIpAccessSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class UpdateIpAccessSettingsCommand extends $Command
   .f(UpdateIpAccessSettingsRequestFilterSensitiveLog, UpdateIpAccessSettingsResponseFilterSensitiveLog)
   .ser(se_UpdateIpAccessSettingsCommand)
   .de(de_UpdateIpAccessSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateIpAccessSettingsRequest;
+      output: UpdateIpAccessSettingsResponse;
+    };
+    sdk: {
+      input: UpdateIpAccessSettingsCommandInput;
+      output: UpdateIpAccessSettingsCommandOutput;
+    };
+  };
+}

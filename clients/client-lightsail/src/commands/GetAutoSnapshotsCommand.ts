@@ -106,9 +106,7 @@ export class GetAutoSnapshotsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class GetAutoSnapshotsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAutoSnapshotsCommand)
   .de(de_GetAutoSnapshotsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAutoSnapshotsRequest;
+      output: GetAutoSnapshotsResult;
+    };
+    sdk: {
+      input: GetAutoSnapshotsCommandInput;
+      output: GetAutoSnapshotsCommandOutput;
+    };
+  };
+}

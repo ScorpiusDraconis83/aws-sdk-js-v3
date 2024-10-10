@@ -147,9 +147,7 @@ export class RegisterSlackWorkspaceForOrganizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SupportAppClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class RegisterSlackWorkspaceForOrganizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RegisterSlackWorkspaceForOrganizationCommand)
   .de(de_RegisterSlackWorkspaceForOrganizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterSlackWorkspaceForOrganizationRequest;
+      output: RegisterSlackWorkspaceForOrganizationResult;
+    };
+    sdk: {
+      input: RegisterSlackWorkspaceForOrganizationCommandInput;
+      output: RegisterSlackWorkspaceForOrganizationCommandOutput;
+    };
+  };
+}

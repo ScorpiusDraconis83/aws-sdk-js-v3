@@ -117,6 +117,7 @@ import {
 import { PrepareAgentCommandInput, PrepareAgentCommandOutput } from "../commands/PrepareAgentCommand";
 import { PrepareFlowCommandInput, PrepareFlowCommandOutput } from "../commands/PrepareFlowCommand";
 import { StartIngestionJobCommandInput, StartIngestionJobCommandOutput } from "../commands/StartIngestionJobCommand";
+import { StopIngestionJobCommandInput, StopIngestionJobCommandOutput } from "../commands/StopIngestionJobCommand";
 import { TagResourceCommandInput, TagResourceCommandOutput } from "../commands/TagResourceCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "../commands/UntagResourceCommand";
 import {
@@ -226,6 +227,7 @@ import {
   PromptFlowNodeSourceConfiguration,
   PromptInferenceConfiguration,
   PromptInputVariable,
+  PromptMetadataEntry,
   PromptModelInferenceConfiguration,
   PromptOverrideConfiguration,
   PromptSummary,
@@ -1334,6 +1336,24 @@ export const se_StartIngestionJobCommand = async (
 };
 
 /**
+ * serializeAws_restJson1StopIngestionJobCommand
+ */
+export const se_StopIngestionJobCommand = async (
+  input: StopIngestionJobCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {};
+  b.bp("/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/{ingestionJobId}/stop");
+  b.p("knowledgeBaseId", () => input.knowledgeBaseId!, "{knowledgeBaseId}", false);
+  b.p("dataSourceId", () => input.dataSourceId!, "{dataSourceId}", false);
+  b.p("ingestionJobId", () => input.ingestionJobId!, "{ingestionJobId}", false);
+  let body: any;
+  b.m("POST").h(headers).b(body);
+  return b.build();
+};
+
+/**
  * serializeAws_restJson1TagResourceCommand
  */
 export const se_TagResourceCommand = async (
@@ -1368,10 +1388,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/tags/{resourceArn}");
   b.p("resourceArn", () => input.resourceArn!, "{resourceArn}", false);
   const query: any = map({
-    [_tK]: [
-      __expectNonNull(input.tagKeys, `tagKeys`) != null,
-      () => (input[_tK]! || []).map((_entry) => _entry as any),
-    ],
+    [_tK]: [__expectNonNull(input.tagKeys, `tagKeys`) != null, () => input[_tK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -2779,6 +2796,27 @@ export const de_StartIngestionJobCommand = async (
 };
 
 /**
+ * deserializeAws_restJson1StopIngestionJobCommand
+ */
+export const de_StopIngestionJobCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<StopIngestionJobCommandOutput> => {
+  if (output.statusCode !== 202 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    ingestionJob: (_) => de_IngestionJob(_, context),
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
  * deserializeAws_restJson1TagResourceCommand
  */
 export const de_TagResourceCommand = async (
@@ -3480,6 +3518,10 @@ const se_PromptInferenceConfiguration = (input: PromptInferenceConfiguration, co
 
 // se_PromptInputVariablesList omitted.
 
+// se_PromptMetadataEntry omitted.
+
+// se_PromptMetadataList omitted.
+
 /**
  * serializeAws_restJson1PromptModelInferenceConfiguration
  */
@@ -3514,6 +3556,7 @@ const se_PromptOverrideConfiguration = (input: PromptOverrideConfiguration, cont
 const se_PromptVariant = (input: PromptVariant, context: __SerdeContext): any => {
   return take(input, {
     inferenceConfiguration: (_) => se_PromptInferenceConfiguration(_, context),
+    metadata: _json,
     modelId: [],
     name: [],
     templateConfiguration: _json,
@@ -4426,6 +4469,10 @@ const de_PromptInferenceConfiguration = (output: any, context: __SerdeContext): 
 
 // de_PromptInputVariablesList omitted.
 
+// de_PromptMetadataEntry omitted.
+
+// de_PromptMetadataList omitted.
+
 /**
  * deserializeAws_restJson1PromptModelInferenceConfiguration
  */
@@ -4487,6 +4534,7 @@ const de_PromptSummary = (output: any, context: __SerdeContext): PromptSummary =
 const de_PromptVariant = (output: any, context: __SerdeContext): PromptVariant => {
   return take(output, {
     inferenceConfiguration: (_: any) => de_PromptInferenceConfiguration(__expectUnion(_), context),
+    metadata: _json,
     modelId: __expectString,
     name: __expectString,
     templateConfiguration: (_: any) => _json(__expectUnion(_)),
@@ -4603,13 +4651,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _mR = "maxResults";
 const _nT = "nextToken";

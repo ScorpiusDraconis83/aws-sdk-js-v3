@@ -66,19 +66,14 @@ export interface CreateCustomerGatewayCommandOutput extends CreateCustomerGatewa
  *   ],
  *   DeviceName: "STRING_VALUE",
  *   IpAddress: "STRING_VALUE",
- *   DryRun: true || false,
  *   BgpAsnExtended: Number("long"),
+ *   DryRun: true || false,
  * };
  * const command = new CreateCustomerGatewayCommand(input);
  * const response = await client.send(command);
  * // { // CreateCustomerGatewayResult
  * //   CustomerGateway: { // CustomerGateway
- * //     BgpAsn: "STRING_VALUE",
- * //     CustomerGatewayId: "STRING_VALUE",
- * //     IpAddress: "STRING_VALUE",
  * //     CertificateArn: "STRING_VALUE",
- * //     State: "STRING_VALUE",
- * //     Type: "STRING_VALUE",
  * //     DeviceName: "STRING_VALUE",
  * //     Tags: [ // TagList
  * //       { // Tag
@@ -87,6 +82,11 @@ export interface CreateCustomerGatewayCommandOutput extends CreateCustomerGatewa
  * //       },
  * //     ],
  * //     BgpAsnExtended: "STRING_VALUE",
+ * //     CustomerGatewayId: "STRING_VALUE",
+ * //     State: "STRING_VALUE",
+ * //     Type: "STRING_VALUE",
+ * //     IpAddress: "STRING_VALUE",
+ * //     BgpAsn: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -135,9 +135,7 @@ export class CreateCustomerGatewayCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class CreateCustomerGatewayCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCustomerGatewayCommand)
   .de(de_CreateCustomerGatewayCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCustomerGatewayRequest;
+      output: CreateCustomerGatewayResult;
+    };
+    sdk: {
+      input: CreateCustomerGatewayCommandInput;
+      output: CreateCustomerGatewayCommandOutput;
+    };
+  };
+}

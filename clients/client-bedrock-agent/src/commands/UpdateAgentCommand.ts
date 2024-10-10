@@ -182,9 +182,7 @@ export class UpdateAgentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -196,4 +194,16 @@ export class UpdateAgentCommand extends $Command
   .f(UpdateAgentRequestFilterSensitiveLog, UpdateAgentResponseFilterSensitiveLog)
   .ser(se_UpdateAgentCommand)
   .de(de_UpdateAgentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAgentRequest;
+      output: UpdateAgentResponse;
+    };
+    sdk: {
+      input: UpdateAgentCommandInput;
+      output: UpdateAgentCommandOutput;
+    };
+  };
+}

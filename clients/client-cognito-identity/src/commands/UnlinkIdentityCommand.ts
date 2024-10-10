@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoIdentityClient";
 import { commonParams } from "../endpoint/EndpointParameters";
-import { UnlinkIdentityInput } from "../models/models_0";
+import { UnlinkIdentityInput, UnlinkIdentityInputFilterSensitiveLog } from "../models/models_0";
 import { de_UnlinkIdentityCommand, se_UnlinkIdentityCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -96,9 +96,7 @@ export class UnlinkIdentityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,7 +105,19 @@ export class UnlinkIdentityCommand extends $Command
   })
   .s("AWSCognitoIdentityService", "UnlinkIdentity", {})
   .n("CognitoIdentityClient", "UnlinkIdentityCommand")
-  .f(void 0, void 0)
+  .f(UnlinkIdentityInputFilterSensitiveLog, void 0)
   .ser(se_UnlinkIdentityCommand)
   .de(de_UnlinkIdentityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnlinkIdentityInput;
+      output: {};
+    };
+    sdk: {
+      input: UnlinkIdentityCommandInput;
+      output: UnlinkIdentityCommandOutput;
+    };
+  };
+}

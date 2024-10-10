@@ -103,9 +103,7 @@ export class DeprecateDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SWFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class DeprecateDomainCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeprecateDomainCommand)
   .de(de_DeprecateDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeprecateDomainInput;
+      output: {};
+    };
+    sdk: {
+      input: DeprecateDomainCommandInput;
+      output: DeprecateDomainCommandOutput;
+    };
+  };
+}

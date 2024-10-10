@@ -95,9 +95,7 @@ export class AcceptPrimaryEmailUpdateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AccountClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class AcceptPrimaryEmailUpdateCommand extends $Command
   .f(AcceptPrimaryEmailUpdateRequestFilterSensitiveLog, void 0)
   .ser(se_AcceptPrimaryEmailUpdateCommand)
   .de(de_AcceptPrimaryEmailUpdateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptPrimaryEmailUpdateRequest;
+      output: AcceptPrimaryEmailUpdateResponse;
+    };
+    sdk: {
+      input: AcceptPrimaryEmailUpdateCommandInput;
+      output: AcceptPrimaryEmailUpdateCommandOutput;
+    };
+  };
+}

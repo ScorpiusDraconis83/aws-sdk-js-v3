@@ -118,9 +118,7 @@ export class DeleteRelationalDatabaseCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class DeleteRelationalDatabaseCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRelationalDatabaseCommand)
   .de(de_DeleteRelationalDatabaseCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRelationalDatabaseRequest;
+      output: DeleteRelationalDatabaseResult;
+    };
+    sdk: {
+      input: DeleteRelationalDatabaseCommandInput;
+      output: DeleteRelationalDatabaseCommandOutput;
+    };
+  };
+}

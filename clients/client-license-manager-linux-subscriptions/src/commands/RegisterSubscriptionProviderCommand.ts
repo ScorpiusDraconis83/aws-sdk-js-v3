@@ -93,9 +93,7 @@ export class RegisterSubscriptionProviderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerLinuxSubscriptionsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class RegisterSubscriptionProviderCommand extends $Command
   .f(RegisterSubscriptionProviderRequestFilterSensitiveLog, void 0)
   .ser(se_RegisterSubscriptionProviderCommand)
   .de(de_RegisterSubscriptionProviderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterSubscriptionProviderRequest;
+      output: RegisterSubscriptionProviderResponse;
+    };
+    sdk: {
+      input: RegisterSubscriptionProviderCommandInput;
+      output: RegisterSubscriptionProviderCommandOutput;
+    };
+  };
+}

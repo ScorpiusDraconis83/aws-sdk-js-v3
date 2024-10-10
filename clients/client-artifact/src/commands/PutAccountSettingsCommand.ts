@@ -106,9 +106,7 @@ export class PutAccountSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ArtifactClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class PutAccountSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutAccountSettingsCommand)
   .de(de_PutAccountSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAccountSettingsRequest;
+      output: PutAccountSettingsResponse;
+    };
+    sdk: {
+      input: PutAccountSettingsCommandInput;
+      output: PutAccountSettingsCommandOutput;
+    };
+  };
+}

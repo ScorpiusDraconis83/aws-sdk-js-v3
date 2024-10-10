@@ -166,6 +166,7 @@ export interface StartMigrationCommandOutput extends StartMigrationResponse, __M
  * //     IpDiscovery: "ipv4" || "ipv6",
  * //     TransitEncryptionMode: "preferred" || "required",
  * //     ClusterMode: "enabled" || "disabled" || "compatible",
+ * //     Engine: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -202,9 +203,7 @@ export class StartMigrationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -216,4 +215,16 @@ export class StartMigrationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartMigrationCommand)
   .de(de_StartMigrationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMigrationMessage;
+      output: StartMigrationResponse;
+    };
+    sdk: {
+      input: StartMigrationCommandInput;
+      output: StartMigrationCommandOutput;
+    };
+  };
+}

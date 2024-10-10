@@ -77,9 +77,7 @@ export class CreatePublicIpv4PoolCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -91,4 +89,16 @@ export class CreatePublicIpv4PoolCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePublicIpv4PoolCommand)
   .de(de_CreatePublicIpv4PoolCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePublicIpv4PoolRequest;
+      output: CreatePublicIpv4PoolResult;
+    };
+    sdk: {
+      input: CreatePublicIpv4PoolCommandInput;
+      output: CreatePublicIpv4PoolCommandOutput;
+    };
+  };
+}

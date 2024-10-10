@@ -89,9 +89,7 @@ export class ListTargetsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodestarNotificationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ListTargetsCommand extends $Command
   .f(void 0, ListTargetsResultFilterSensitiveLog)
   .ser(se_ListTargetsCommand)
   .de(de_ListTargetsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTargetsRequest;
+      output: ListTargetsResult;
+    };
+    sdk: {
+      input: ListTargetsCommandInput;
+      output: ListTargetsCommandOutput;
+    };
+  };
+}

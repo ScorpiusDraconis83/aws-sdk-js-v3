@@ -128,9 +128,7 @@ export class StartImageBuilderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppStreamClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class StartImageBuilderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartImageBuilderCommand)
   .de(de_StartImageBuilderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartImageBuilderRequest;
+      output: StartImageBuilderResult;
+    };
+    sdk: {
+      input: StartImageBuilderCommandInput;
+      output: StartImageBuilderCommandOutput;
+    };
+  };
+}

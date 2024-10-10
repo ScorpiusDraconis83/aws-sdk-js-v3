@@ -97,9 +97,7 @@ export class VerifySMSSandboxPhoneNumberCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SNSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class VerifySMSSandboxPhoneNumberCommand extends $Command
   .f(VerifySMSSandboxPhoneNumberInputFilterSensitiveLog, void 0)
   .ser(se_VerifySMSSandboxPhoneNumberCommand)
   .de(de_VerifySMSSandboxPhoneNumberCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifySMSSandboxPhoneNumberInput;
+      output: {};
+    };
+    sdk: {
+      input: VerifySMSSandboxPhoneNumberCommandInput;
+      output: VerifySMSSandboxPhoneNumberCommandOutput;
+    };
+  };
+}

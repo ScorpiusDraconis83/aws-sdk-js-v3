@@ -87,6 +87,24 @@ export interface ListAppliedSchemaArnsCommandOutput extends ListAppliedSchemaArn
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To list applied schema ARNs for a specified directory
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY"
+ * };
+ * const command = new ListAppliedSchemaArnsCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "SchemaArns": [
+ *     "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+ *   ]
+ * }
+ * *\/
+ * // example id: to-list-applied-schema-arns-for-a-specified-directory-1508194900072
+ * ```
+ *
  */
 export class ListAppliedSchemaArnsCommand extends $Command
   .classBuilder<
@@ -96,9 +114,7 @@ export class ListAppliedSchemaArnsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +126,16 @@ export class ListAppliedSchemaArnsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAppliedSchemaArnsCommand)
   .de(de_ListAppliedSchemaArnsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppliedSchemaArnsRequest;
+      output: ListAppliedSchemaArnsResponse;
+    };
+    sdk: {
+      input: ListAppliedSchemaArnsCommandInput;
+      output: ListAppliedSchemaArnsCommandOutput;
+    };
+  };
+}

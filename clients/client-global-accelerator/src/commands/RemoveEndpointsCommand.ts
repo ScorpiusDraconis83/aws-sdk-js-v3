@@ -104,9 +104,7 @@ export class RemoveEndpointsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlobalAcceleratorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class RemoveEndpointsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemoveEndpointsCommand)
   .de(de_RemoveEndpointsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveEndpointsRequest;
+      output: {};
+    };
+    sdk: {
+      input: RemoveEndpointsCommandInput;
+      output: RemoveEndpointsCommandOutput;
+    };
+  };
+}

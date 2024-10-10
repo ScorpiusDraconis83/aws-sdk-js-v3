@@ -112,9 +112,7 @@ export class CreateDeviceProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class CreateDeviceProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDeviceProfileCommand)
   .de(de_CreateDeviceProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDeviceProfileRequest;
+      output: CreateDeviceProfileResponse;
+    };
+    sdk: {
+      input: CreateDeviceProfileCommandInput;
+      output: CreateDeviceProfileCommandOutput;
+    };
+  };
+}

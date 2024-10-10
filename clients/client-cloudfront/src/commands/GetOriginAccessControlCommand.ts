@@ -81,9 +81,7 @@ export class GetOriginAccessControlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudFrontClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class GetOriginAccessControlCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetOriginAccessControlCommand)
   .de(de_GetOriginAccessControlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOriginAccessControlRequest;
+      output: GetOriginAccessControlResult;
+    };
+    sdk: {
+      input: GetOriginAccessControlCommandInput;
+      output: GetOriginAccessControlCommandOutput;
+    };
+  };
+}

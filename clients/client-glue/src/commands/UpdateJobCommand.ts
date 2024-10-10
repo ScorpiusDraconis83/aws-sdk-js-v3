@@ -1173,9 +1173,7 @@ export class UpdateJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -1187,4 +1185,16 @@ export class UpdateJobCommand extends $Command
   .f(UpdateJobRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateJobCommand)
   .de(de_UpdateJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobRequest;
+      output: UpdateJobResponse;
+    };
+    sdk: {
+      input: UpdateJobCommandInput;
+      output: UpdateJobCommandOutput;
+    };
+  };
+}

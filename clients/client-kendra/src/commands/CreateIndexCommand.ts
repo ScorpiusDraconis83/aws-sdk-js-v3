@@ -138,9 +138,7 @@ export class CreateIndexCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KendraClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class CreateIndexCommand extends $Command
   .f(CreateIndexRequestFilterSensitiveLog, void 0)
   .ser(se_CreateIndexCommand)
   .de(de_CreateIndexCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIndexRequest;
+      output: CreateIndexResponse;
+    };
+    sdk: {
+      input: CreateIndexCommandInput;
+      output: CreateIndexCommandOutput;
+    };
+  };
+}

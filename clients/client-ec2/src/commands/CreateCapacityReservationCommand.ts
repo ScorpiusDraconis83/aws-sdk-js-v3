@@ -115,6 +115,7 @@ export interface CreateCapacityReservationCommandOutput extends CreateCapacityRe
  * //       },
  * //     ],
  * //     ReservationType: "default" || "capacity-block",
+ * //     UnusedReservationBillingOwnerId: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -139,9 +140,7 @@ export class CreateCapacityReservationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +152,16 @@ export class CreateCapacityReservationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateCapacityReservationCommand)
   .de(de_CreateCapacityReservationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCapacityReservationRequest;
+      output: CreateCapacityReservationResult;
+    };
+    sdk: {
+      input: CreateCapacityReservationCommandInput;
+      output: CreateCapacityReservationCommandOutput;
+    };
+  };
+}

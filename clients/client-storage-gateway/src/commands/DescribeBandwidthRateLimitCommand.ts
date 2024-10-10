@@ -100,9 +100,7 @@ export class DescribeBandwidthRateLimitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class DescribeBandwidthRateLimitCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeBandwidthRateLimitCommand)
   .de(de_DescribeBandwidthRateLimitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBandwidthRateLimitInput;
+      output: DescribeBandwidthRateLimitOutput;
+    };
+    sdk: {
+      input: DescribeBandwidthRateLimitCommandInput;
+      output: DescribeBandwidthRateLimitCommandOutput;
+    };
+  };
+}

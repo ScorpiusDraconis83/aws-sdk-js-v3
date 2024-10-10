@@ -130,9 +130,7 @@ export class ListSensorStatisticsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LookoutEquipmentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class ListSensorStatisticsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSensorStatisticsCommand)
   .de(de_ListSensorStatisticsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSensorStatisticsRequest;
+      output: ListSensorStatisticsResponse;
+    };
+    sdk: {
+      input: ListSensorStatisticsCommandInput;
+      output: ListSensorStatisticsCommandOutput;
+    };
+  };
+}

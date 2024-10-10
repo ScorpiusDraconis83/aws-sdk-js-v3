@@ -115,9 +115,7 @@ export class UpdateSiteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class UpdateSiteCommand extends $Command
   .f(UpdateSiteRequestFilterSensitiveLog, UpdateSiteResponseFilterSensitiveLog)
   .ser(se_UpdateSiteCommand)
   .de(de_UpdateSiteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSiteRequest;
+      output: UpdateSiteResponse;
+    };
+    sdk: {
+      input: UpdateSiteCommandInput;
+      output: UpdateSiteCommandOutput;
+    };
+  };
+}

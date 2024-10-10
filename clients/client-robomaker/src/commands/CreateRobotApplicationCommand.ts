@@ -125,9 +125,7 @@ export class CreateRobotApplicationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class CreateRobotApplicationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRobotApplicationCommand)
   .de(de_CreateRobotApplicationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRobotApplicationRequest;
+      output: CreateRobotApplicationResponse;
+    };
+    sdk: {
+      input: CreateRobotApplicationCommandInput;
+      output: CreateRobotApplicationCommandOutput;
+    };
+  };
+}

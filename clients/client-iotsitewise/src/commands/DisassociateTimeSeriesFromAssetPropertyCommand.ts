@@ -90,9 +90,7 @@ export class DisassociateTimeSeriesFromAssetPropertyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class DisassociateTimeSeriesFromAssetPropertyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateTimeSeriesFromAssetPropertyCommand)
   .de(de_DisassociateTimeSeriesFromAssetPropertyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateTimeSeriesFromAssetPropertyRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateTimeSeriesFromAssetPropertyCommandInput;
+      output: DisassociateTimeSeriesFromAssetPropertyCommandOutput;
+    };
+  };
+}

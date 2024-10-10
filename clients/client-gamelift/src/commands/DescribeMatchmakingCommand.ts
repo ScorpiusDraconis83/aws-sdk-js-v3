@@ -148,9 +148,7 @@ export class DescribeMatchmakingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -162,4 +160,16 @@ export class DescribeMatchmakingCommand extends $Command
   .f(void 0, DescribeMatchmakingOutputFilterSensitiveLog)
   .ser(se_DescribeMatchmakingCommand)
   .de(de_DescribeMatchmakingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeMatchmakingInput;
+      output: DescribeMatchmakingOutput;
+    };
+    sdk: {
+      input: DescribeMatchmakingCommandInput;
+      output: DescribeMatchmakingCommandOutput;
+    };
+  };
+}

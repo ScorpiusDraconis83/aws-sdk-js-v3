@@ -76,9 +76,7 @@ export class ListRelaysCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class ListRelaysCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRelaysCommand)
   .de(de_ListRelaysCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRelaysRequest;
+      output: ListRelaysResponse;
+    };
+    sdk: {
+      input: ListRelaysCommandInput;
+      output: ListRelaysCommandOutput;
+    };
+  };
+}

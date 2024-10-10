@@ -121,9 +121,7 @@ export class UpdateDomainCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VoiceIDClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class UpdateDomainCommand extends $Command
   .f(UpdateDomainRequestFilterSensitiveLog, UpdateDomainResponseFilterSensitiveLog)
   .ser(se_UpdateDomainCommand)
   .de(de_UpdateDomainCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDomainRequest;
+      output: UpdateDomainResponse;
+    };
+    sdk: {
+      input: UpdateDomainCommandInput;
+      output: UpdateDomainCommandOutput;
+    };
+  };
+}

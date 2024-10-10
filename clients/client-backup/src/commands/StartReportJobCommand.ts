@@ -79,9 +79,7 @@ export class StartReportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class StartReportJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartReportJobCommand)
   .de(de_StartReportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartReportJobInput;
+      output: StartReportJobOutput;
+    };
+    sdk: {
+      input: StartReportJobCommandInput;
+      output: StartReportJobCommandOutput;
+    };
+  };
+}

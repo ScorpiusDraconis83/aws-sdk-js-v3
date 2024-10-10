@@ -32,7 +32,7 @@ export interface DeleteSnapshotCommandOutput extends DeleteSnapshotResult, __Met
  *             operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or
  *             revert this operation.</p>
  *          <note>
- *             <p>This operation is valid for Redis OSS only.</p>
+ *             <p>This operation is valid for Valkey or Redis OSS only.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
@@ -177,9 +177,7 @@ export class DeleteSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -191,4 +189,16 @@ export class DeleteSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSnapshotCommand)
   .de(de_DeleteSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSnapshotMessage;
+      output: DeleteSnapshotResult;
+    };
+    sdk: {
+      input: DeleteSnapshotCommandInput;
+      output: DeleteSnapshotCommandOutput;
+    };
+  };
+}

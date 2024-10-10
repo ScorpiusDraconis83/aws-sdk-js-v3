@@ -128,9 +128,7 @@ export class EnterStandbyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class EnterStandbyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnterStandbyCommand)
   .de(de_EnterStandbyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnterStandbyQuery;
+      output: EnterStandbyAnswer;
+    };
+    sdk: {
+      input: EnterStandbyCommandInput;
+      output: EnterStandbyCommandOutput;
+    };
+  };
+}

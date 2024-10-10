@@ -255,9 +255,7 @@ export class UpdateDecoderManifestCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTFleetWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -269,4 +267,16 @@ export class UpdateDecoderManifestCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateDecoderManifestCommand)
   .de(de_UpdateDecoderManifestCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDecoderManifestRequest;
+      output: UpdateDecoderManifestResponse;
+    };
+    sdk: {
+      input: UpdateDecoderManifestCommandInput;
+      output: UpdateDecoderManifestCommandOutput;
+    };
+  };
+}

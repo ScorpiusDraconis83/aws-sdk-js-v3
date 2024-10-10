@@ -58,6 +58,10 @@ import {
   AcceptAddressTransferCommandOutput,
 } from "./commands/AcceptAddressTransferCommand";
 import {
+  AcceptCapacityReservationBillingOwnershipCommandInput,
+  AcceptCapacityReservationBillingOwnershipCommandOutput,
+} from "./commands/AcceptCapacityReservationBillingOwnershipCommand";
+import {
   AcceptReservedInstancesExchangeQuoteCommandInput,
   AcceptReservedInstancesExchangeQuoteCommandOutput,
 } from "./commands/AcceptReservedInstancesExchangeQuoteCommand";
@@ -105,6 +109,10 @@ import {
   AssignPrivateNatGatewayAddressCommandOutput,
 } from "./commands/AssignPrivateNatGatewayAddressCommand";
 import { AssociateAddressCommandInput, AssociateAddressCommandOutput } from "./commands/AssociateAddressCommand";
+import {
+  AssociateCapacityReservationBillingOwnerCommandInput,
+  AssociateCapacityReservationBillingOwnerCommandOutput,
+} from "./commands/AssociateCapacityReservationBillingOwnerCommand";
 import {
   AssociateClientVpnTargetNetworkCommandInput,
   AssociateClientVpnTargetNetworkCommandOutput,
@@ -799,6 +807,10 @@ import {
   DescribeCapacityBlockOfferingsCommandOutput,
 } from "./commands/DescribeCapacityBlockOfferingsCommand";
 import {
+  DescribeCapacityReservationBillingRequestsCommandInput,
+  DescribeCapacityReservationBillingRequestsCommandOutput,
+} from "./commands/DescribeCapacityReservationBillingRequestsCommand";
+import {
   DescribeCapacityReservationFleetsCommandInput,
   DescribeCapacityReservationFleetsCommandOutput,
 } from "./commands/DescribeCapacityReservationFleetsCommand";
@@ -1384,6 +1396,10 @@ import {
   DisassociateAddressCommandOutput,
 } from "./commands/DisassociateAddressCommand";
 import {
+  DisassociateCapacityReservationBillingOwnerCommandInput,
+  DisassociateCapacityReservationBillingOwnerCommandOutput,
+} from "./commands/DisassociateCapacityReservationBillingOwnerCommand";
+import {
   DisassociateClientVpnTargetNetworkCommandInput,
   DisassociateClientVpnTargetNetworkCommandOutput,
 } from "./commands/DisassociateClientVpnTargetNetworkCommand";
@@ -1769,6 +1785,10 @@ import {
   ModifyInstanceCapacityReservationAttributesCommandOutput,
 } from "./commands/ModifyInstanceCapacityReservationAttributesCommand";
 import {
+  ModifyInstanceCpuOptionsCommandInput,
+  ModifyInstanceCpuOptionsCommandOutput,
+} from "./commands/ModifyInstanceCpuOptionsCommand";
+import {
   ModifyInstanceCreditSpecificationCommandInput,
   ModifyInstanceCreditSpecificationCommandOutput,
 } from "./commands/ModifyInstanceCreditSpecificationCommand";
@@ -1998,6 +2018,10 @@ import {
   RegisterTransitGatewayMulticastGroupSourcesCommandOutput,
 } from "./commands/RegisterTransitGatewayMulticastGroupSourcesCommand";
 import {
+  RejectCapacityReservationBillingOwnershipCommandInput,
+  RejectCapacityReservationBillingOwnershipCommandOutput,
+} from "./commands/RejectCapacityReservationBillingOwnershipCommand";
+import {
   RejectTransitGatewayMulticastDomainAssociationsCommandInput,
   RejectTransitGatewayMulticastDomainAssociationsCommandOutput,
 } from "./commands/RejectTransitGatewayMulticastDomainAssociationsCommand";
@@ -2193,6 +2217,7 @@ export { __Client };
  */
 export type ServiceInputTypes =
   | AcceptAddressTransferCommandInput
+  | AcceptCapacityReservationBillingOwnershipCommandInput
   | AcceptReservedInstancesExchangeQuoteCommandInput
   | AcceptTransitGatewayMulticastDomainAssociationsCommandInput
   | AcceptTransitGatewayPeeringAttachmentCommandInput
@@ -2208,6 +2233,7 @@ export type ServiceInputTypes =
   | AssignPrivateIpAddressesCommandInput
   | AssignPrivateNatGatewayAddressCommandInput
   | AssociateAddressCommandInput
+  | AssociateCapacityReservationBillingOwnerCommandInput
   | AssociateClientVpnTargetNetworkCommandInput
   | AssociateDhcpOptionsCommandInput
   | AssociateEnclaveCertificateIamRoleCommandInput
@@ -2424,6 +2450,7 @@ export type ServiceInputTypes =
   | DescribeBundleTasksCommandInput
   | DescribeByoipCidrsCommandInput
   | DescribeCapacityBlockOfferingsCommandInput
+  | DescribeCapacityReservationBillingRequestsCommandInput
   | DescribeCapacityReservationFleetsCommandInput
   | DescribeCapacityReservationsCommandInput
   | DescribeCarrierGatewaysCommandInput
@@ -2589,6 +2616,7 @@ export type ServiceInputTypes =
   | DisableVpcClassicLinkCommandInput
   | DisableVpcClassicLinkDnsSupportCommandInput
   | DisassociateAddressCommandInput
+  | DisassociateCapacityReservationBillingOwnerCommandInput
   | DisassociateClientVpnTargetNetworkCommandInput
   | DisassociateEnclaveCertificateIamRoleCommandInput
   | DisassociateIamInstanceProfileCommandInput
@@ -2698,6 +2726,7 @@ export type ServiceInputTypes =
   | ModifyImageAttributeCommandInput
   | ModifyInstanceAttributeCommandInput
   | ModifyInstanceCapacityReservationAttributesCommandInput
+  | ModifyInstanceCpuOptionsCommandInput
   | ModifyInstanceCreditSpecificationCommandInput
   | ModifyInstanceEventStartTimeCommandInput
   | ModifyInstanceEventWindowCommandInput
@@ -2765,6 +2794,7 @@ export type ServiceInputTypes =
   | RegisterInstanceEventNotificationAttributesCommandInput
   | RegisterTransitGatewayMulticastGroupMembersCommandInput
   | RegisterTransitGatewayMulticastGroupSourcesCommandInput
+  | RejectCapacityReservationBillingOwnershipCommandInput
   | RejectTransitGatewayMulticastDomainAssociationsCommandInput
   | RejectTransitGatewayPeeringAttachmentCommandInput
   | RejectTransitGatewayVpcAttachmentCommandInput
@@ -2825,6 +2855,7 @@ export type ServiceInputTypes =
  */
 export type ServiceOutputTypes =
   | AcceptAddressTransferCommandOutput
+  | AcceptCapacityReservationBillingOwnershipCommandOutput
   | AcceptReservedInstancesExchangeQuoteCommandOutput
   | AcceptTransitGatewayMulticastDomainAssociationsCommandOutput
   | AcceptTransitGatewayPeeringAttachmentCommandOutput
@@ -2840,6 +2871,7 @@ export type ServiceOutputTypes =
   | AssignPrivateIpAddressesCommandOutput
   | AssignPrivateNatGatewayAddressCommandOutput
   | AssociateAddressCommandOutput
+  | AssociateCapacityReservationBillingOwnerCommandOutput
   | AssociateClientVpnTargetNetworkCommandOutput
   | AssociateDhcpOptionsCommandOutput
   | AssociateEnclaveCertificateIamRoleCommandOutput
@@ -3056,6 +3088,7 @@ export type ServiceOutputTypes =
   | DescribeBundleTasksCommandOutput
   | DescribeByoipCidrsCommandOutput
   | DescribeCapacityBlockOfferingsCommandOutput
+  | DescribeCapacityReservationBillingRequestsCommandOutput
   | DescribeCapacityReservationFleetsCommandOutput
   | DescribeCapacityReservationsCommandOutput
   | DescribeCarrierGatewaysCommandOutput
@@ -3221,6 +3254,7 @@ export type ServiceOutputTypes =
   | DisableVpcClassicLinkCommandOutput
   | DisableVpcClassicLinkDnsSupportCommandOutput
   | DisassociateAddressCommandOutput
+  | DisassociateCapacityReservationBillingOwnerCommandOutput
   | DisassociateClientVpnTargetNetworkCommandOutput
   | DisassociateEnclaveCertificateIamRoleCommandOutput
   | DisassociateIamInstanceProfileCommandOutput
@@ -3330,6 +3364,7 @@ export type ServiceOutputTypes =
   | ModifyImageAttributeCommandOutput
   | ModifyInstanceAttributeCommandOutput
   | ModifyInstanceCapacityReservationAttributesCommandOutput
+  | ModifyInstanceCpuOptionsCommandOutput
   | ModifyInstanceCreditSpecificationCommandOutput
   | ModifyInstanceEventStartTimeCommandOutput
   | ModifyInstanceEventWindowCommandOutput
@@ -3397,6 +3432,7 @@ export type ServiceOutputTypes =
   | RegisterInstanceEventNotificationAttributesCommandOutput
   | RegisterTransitGatewayMulticastGroupMembersCommandOutput
   | RegisterTransitGatewayMulticastGroupSourcesCommandOutput
+  | RejectCapacityReservationBillingOwnershipCommandOutput
   | RejectTransitGatewayMulticastDomainAssociationsCommandOutput
   | RejectTransitGatewayPeeringAttachmentCommandOutput
   | RejectTransitGatewayVpcAttachmentCommandOutput

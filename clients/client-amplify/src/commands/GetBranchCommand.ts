@@ -117,9 +117,7 @@ export class GetBranchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class GetBranchCommand extends $Command
   .f(void 0, GetBranchResultFilterSensitiveLog)
   .ser(se_GetBranchCommand)
   .de(de_GetBranchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBranchRequest;
+      output: GetBranchResult;
+    };
+    sdk: {
+      input: GetBranchCommandInput;
+      output: GetBranchCommandOutput;
+    };
+  };
+}

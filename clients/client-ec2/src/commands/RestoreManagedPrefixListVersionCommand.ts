@@ -89,9 +89,7 @@ export class RestoreManagedPrefixListVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class RestoreManagedPrefixListVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RestoreManagedPrefixListVersionCommand)
   .de(de_RestoreManagedPrefixListVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreManagedPrefixListVersionRequest;
+      output: RestoreManagedPrefixListVersionResult;
+    };
+    sdk: {
+      input: RestoreManagedPrefixListVersionCommandInput;
+      output: RestoreManagedPrefixListVersionCommandOutput;
+    };
+  };
+}

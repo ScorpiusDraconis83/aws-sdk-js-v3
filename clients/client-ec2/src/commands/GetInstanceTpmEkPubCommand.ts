@@ -76,9 +76,7 @@ export class GetInstanceTpmEkPubCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class GetInstanceTpmEkPubCommand extends $Command
   .f(void 0, GetInstanceTpmEkPubResultFilterSensitiveLog)
   .ser(se_GetInstanceTpmEkPubCommand)
   .de(de_GetInstanceTpmEkPubCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceTpmEkPubRequest;
+      output: GetInstanceTpmEkPubResult;
+    };
+    sdk: {
+      input: GetInstanceTpmEkPubCommandInput;
+      output: GetInstanceTpmEkPubCommandOutput;
+    };
+  };
+}

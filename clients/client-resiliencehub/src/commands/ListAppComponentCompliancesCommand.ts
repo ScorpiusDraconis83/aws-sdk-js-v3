@@ -130,9 +130,7 @@ export class ListAppComponentCompliancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class ListAppComponentCompliancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAppComponentCompliancesCommand)
   .de(de_ListAppComponentCompliancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppComponentCompliancesRequest;
+      output: ListAppComponentCompliancesResponse;
+    };
+    sdk: {
+      input: ListAppComponentCompliancesCommandInput;
+      output: ListAppComponentCompliancesCommandOutput;
+    };
+  };
+}

@@ -37,8 +37,7 @@ export interface PurchaseReservedCacheNodesOfferingCommandOutput
 
 /**
  * <p>Allows you to purchase a reserved cache node offering. Reserved nodes are not eligible
- *             for cancellation and are non-refundable. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html">Managing Costs with Reserved Nodes</a> for Redis OSS or <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html">Managing Costs with
- *                 Reserved Nodes</a> for Memcached.</p>
+ *             for cancellation and are non-refundable. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html">Managing Costs with Reserved Nodes</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -134,9 +133,7 @@ export class PurchaseReservedCacheNodesOfferingCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -148,4 +145,16 @@ export class PurchaseReservedCacheNodesOfferingCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PurchaseReservedCacheNodesOfferingCommand)
   .de(de_PurchaseReservedCacheNodesOfferingCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseReservedCacheNodesOfferingMessage;
+      output: PurchaseReservedCacheNodesOfferingResult;
+    };
+    sdk: {
+      input: PurchaseReservedCacheNodesOfferingCommandInput;
+      output: PurchaseReservedCacheNodesOfferingCommandOutput;
+    };
+  };
+}

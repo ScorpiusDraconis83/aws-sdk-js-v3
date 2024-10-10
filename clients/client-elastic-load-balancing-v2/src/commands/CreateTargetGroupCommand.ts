@@ -192,9 +192,7 @@ export class CreateTargetGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticLoadBalancingV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -206,4 +204,16 @@ export class CreateTargetGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateTargetGroupCommand)
   .de(de_CreateTargetGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTargetGroupInput;
+      output: CreateTargetGroupOutput;
+    };
+    sdk: {
+      input: CreateTargetGroupCommandInput;
+      output: CreateTargetGroupCommandOutput;
+    };
+  };
+}

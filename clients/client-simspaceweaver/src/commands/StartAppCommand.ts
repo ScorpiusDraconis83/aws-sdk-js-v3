@@ -91,9 +91,7 @@ export class StartAppCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SimSpaceWeaverClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class StartAppCommand extends $Command
   .f(StartAppInputFilterSensitiveLog, void 0)
   .ser(se_StartAppCommand)
   .de(de_StartAppCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartAppInput;
+      output: StartAppOutput;
+    };
+    sdk: {
+      input: StartAppCommandInput;
+      output: StartAppCommandOutput;
+    };
+  };
+}

@@ -117,9 +117,7 @@ export class UpdateAppImageConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class UpdateAppImageConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateAppImageConfigCommand)
   .de(de_UpdateAppImageConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAppImageConfigRequest;
+      output: UpdateAppImageConfigResponse;
+    };
+    sdk: {
+      input: UpdateAppImageConfigCommandInput;
+      output: UpdateAppImageConfigCommandOutput;
+    };
+  };
+}

@@ -177,9 +177,7 @@ export class GenerateEmbedUrlForAnonymousUserCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -194,4 +192,16 @@ export class GenerateEmbedUrlForAnonymousUserCommand extends $Command
   )
   .ser(se_GenerateEmbedUrlForAnonymousUserCommand)
   .de(de_GenerateEmbedUrlForAnonymousUserCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateEmbedUrlForAnonymousUserRequest;
+      output: GenerateEmbedUrlForAnonymousUserResponse;
+    };
+    sdk: {
+      input: GenerateEmbedUrlForAnonymousUserCommandInput;
+      output: GenerateEmbedUrlForAnonymousUserCommandOutput;
+    };
+  };
+}

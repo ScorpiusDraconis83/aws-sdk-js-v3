@@ -103,9 +103,7 @@ export class StartNextPendingJobExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTJobsDataPlaneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class StartNextPendingJobExecutionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartNextPendingJobExecutionCommand)
   .de(de_StartNextPendingJobExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartNextPendingJobExecutionRequest;
+      output: StartNextPendingJobExecutionResponse;
+    };
+    sdk: {
+      input: StartNextPendingJobExecutionCommandInput;
+      output: StartNextPendingJobExecutionCommandOutput;
+    };
+  };
+}

@@ -122,9 +122,7 @@ export class GetBackupPlanFromTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class GetBackupPlanFromTemplateCommand extends $Command
   .f(void 0, GetBackupPlanFromTemplateOutputFilterSensitiveLog)
   .ser(se_GetBackupPlanFromTemplateCommand)
   .de(de_GetBackupPlanFromTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBackupPlanFromTemplateInput;
+      output: GetBackupPlanFromTemplateOutput;
+    };
+    sdk: {
+      input: GetBackupPlanFromTemplateCommandInput;
+      output: GetBackupPlanFromTemplateCommandOutput;
+    };
+  };
+}

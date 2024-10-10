@@ -174,9 +174,7 @@ export class GetMLTransformsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -188,4 +186,16 @@ export class GetMLTransformsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMLTransformsCommand)
   .de(de_GetMLTransformsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMLTransformsRequest;
+      output: GetMLTransformsResponse;
+    };
+    sdk: {
+      input: GetMLTransformsCommandInput;
+      output: GetMLTransformsCommandOutput;
+    };
+  };
+}

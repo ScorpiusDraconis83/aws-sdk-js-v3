@@ -106,9 +106,7 @@ export class CreateMaintenanceWindowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class CreateMaintenanceWindowCommand extends $Command
   .f(CreateMaintenanceWindowRequestFilterSensitiveLog, void 0)
   .ser(se_CreateMaintenanceWindowCommand)
   .de(de_CreateMaintenanceWindowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMaintenanceWindowRequest;
+      output: CreateMaintenanceWindowResult;
+    };
+    sdk: {
+      input: CreateMaintenanceWindowCommandInput;
+      output: CreateMaintenanceWindowCommandOutput;
+    };
+  };
+}

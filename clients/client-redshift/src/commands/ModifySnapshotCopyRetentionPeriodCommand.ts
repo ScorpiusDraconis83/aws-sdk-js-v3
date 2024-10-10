@@ -288,9 +288,7 @@ export class ModifySnapshotCopyRetentionPeriodCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RedshiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -302,4 +300,16 @@ export class ModifySnapshotCopyRetentionPeriodCommand extends $Command
   .f(void 0, ModifySnapshotCopyRetentionPeriodResultFilterSensitiveLog)
   .ser(se_ModifySnapshotCopyRetentionPeriodCommand)
   .de(de_ModifySnapshotCopyRetentionPeriodCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySnapshotCopyRetentionPeriodMessage;
+      output: ModifySnapshotCopyRetentionPeriodResult;
+    };
+    sdk: {
+      input: ModifySnapshotCopyRetentionPeriodCommandInput;
+      output: ModifySnapshotCopyRetentionPeriodCommandOutput;
+    };
+  };
+}

@@ -119,9 +119,7 @@ export class DescribeConnectionsOnInterconnectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DirectConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +131,16 @@ export class DescribeConnectionsOnInterconnectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeConnectionsOnInterconnectCommand)
   .de(de_DescribeConnectionsOnInterconnectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConnectionsOnInterconnectRequest;
+      output: Connections;
+    };
+    sdk: {
+      input: DescribeConnectionsOnInterconnectCommandInput;
+      output: DescribeConnectionsOnInterconnectCommandOutput;
+    };
+  };
+}

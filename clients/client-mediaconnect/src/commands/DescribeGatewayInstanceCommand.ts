@@ -101,9 +101,7 @@ export class DescribeGatewayInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class DescribeGatewayInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeGatewayInstanceCommand)
   .de(de_DescribeGatewayInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGatewayInstanceRequest;
+      output: DescribeGatewayInstanceResponse;
+    };
+    sdk: {
+      input: DescribeGatewayInstanceCommandInput;
+      output: DescribeGatewayInstanceCommandOutput;
+    };
+  };
+}

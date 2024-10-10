@@ -88,9 +88,7 @@ export class SetIdentityNotificationTopicCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class SetIdentityNotificationTopicCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SetIdentityNotificationTopicCommand)
   .de(de_SetIdentityNotificationTopicCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetIdentityNotificationTopicRequest;
+      output: {};
+    };
+    sdk: {
+      input: SetIdentityNotificationTopicCommandInput;
+      output: SetIdentityNotificationTopicCommandOutput;
+    };
+  };
+}

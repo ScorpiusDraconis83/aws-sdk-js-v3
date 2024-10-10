@@ -72,7 +72,7 @@ export interface ResolveAliasCommandOutput extends ResolveAliasOutput, __Metadat
  *             values before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link TerminalRoutingStrategyException} (client fault)
  *  <p>The service is unable to resolve the routing for a particular alias because it has a
@@ -96,9 +96,7 @@ export class ResolveAliasCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class ResolveAliasCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ResolveAliasCommand)
   .de(de_ResolveAliasCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResolveAliasInput;
+      output: ResolveAliasOutput;
+    };
+    sdk: {
+      input: ResolveAliasCommandInput;
+      output: ResolveAliasCommandOutput;
+    };
+  };
+}

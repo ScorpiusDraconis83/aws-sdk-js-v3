@@ -86,9 +86,7 @@ export class GetUpgradeStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class GetUpgradeStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetUpgradeStatusCommand)
   .de(de_GetUpgradeStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUpgradeStatusRequest;
+      output: GetUpgradeStatusResponse;
+    };
+    sdk: {
+      input: GetUpgradeStatusCommandInput;
+      output: GetUpgradeStatusCommandOutput;
+    };
+  };
+}

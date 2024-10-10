@@ -98,9 +98,7 @@ export class UpdateBotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class UpdateBotCommand extends $Command
   .f(void 0, UpdateBotResponseFilterSensitiveLog)
   .ser(se_UpdateBotCommand)
   .de(de_UpdateBotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBotRequest;
+      output: UpdateBotResponse;
+    };
+    sdk: {
+      input: UpdateBotCommandInput;
+      output: UpdateBotCommandOutput;
+    };
+  };
+}

@@ -97,9 +97,7 @@ export class UpdateBrowserSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class UpdateBrowserSettingsCommand extends $Command
   .f(UpdateBrowserSettingsRequestFilterSensitiveLog, UpdateBrowserSettingsResponseFilterSensitiveLog)
   .ser(se_UpdateBrowserSettingsCommand)
   .de(de_UpdateBrowserSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBrowserSettingsRequest;
+      output: UpdateBrowserSettingsResponse;
+    };
+    sdk: {
+      input: UpdateBrowserSettingsCommandInput;
+      output: UpdateBrowserSettingsCommandOutput;
+    };
+  };
+}

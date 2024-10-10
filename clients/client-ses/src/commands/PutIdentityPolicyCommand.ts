@@ -92,9 +92,7 @@ export class PutIdentityPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class PutIdentityPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutIdentityPolicyCommand)
   .de(de_PutIdentityPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutIdentityPolicyRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutIdentityPolicyCommandInput;
+      output: PutIdentityPolicyCommandOutput;
+    };
+  };
+}

@@ -154,9 +154,7 @@ export class CopyOptionGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -168,4 +166,16 @@ export class CopyOptionGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CopyOptionGroupCommand)
   .de(de_CopyOptionGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyOptionGroupMessage;
+      output: CopyOptionGroupResult;
+    };
+    sdk: {
+      input: CopyOptionGroupCommandInput;
+      output: CopyOptionGroupCommandOutput;
+    };
+  };
+}

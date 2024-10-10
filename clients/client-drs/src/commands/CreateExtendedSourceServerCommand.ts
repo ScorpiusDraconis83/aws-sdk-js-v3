@@ -199,9 +199,7 @@ export class CreateExtendedSourceServerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DrsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -213,4 +211,16 @@ export class CreateExtendedSourceServerCommand extends $Command
   .f(CreateExtendedSourceServerRequestFilterSensitiveLog, CreateExtendedSourceServerResponseFilterSensitiveLog)
   .ser(se_CreateExtendedSourceServerCommand)
   .de(de_CreateExtendedSourceServerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateExtendedSourceServerRequest;
+      output: CreateExtendedSourceServerResponse;
+    };
+    sdk: {
+      input: CreateExtendedSourceServerCommandInput;
+      output: CreateExtendedSourceServerCommandOutput;
+    };
+  };
+}

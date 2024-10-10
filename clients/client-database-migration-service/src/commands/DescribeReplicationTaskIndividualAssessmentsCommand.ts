@@ -101,9 +101,7 @@ export class DescribeReplicationTaskIndividualAssessmentsCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class DescribeReplicationTaskIndividualAssessmentsCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_DescribeReplicationTaskIndividualAssessmentsCommand)
   .de(de_DescribeReplicationTaskIndividualAssessmentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplicationTaskIndividualAssessmentsMessage;
+      output: DescribeReplicationTaskIndividualAssessmentsResponse;
+    };
+    sdk: {
+      input: DescribeReplicationTaskIndividualAssessmentsCommandInput;
+      output: DescribeReplicationTaskIndividualAssessmentsCommandOutput;
+    };
+  };
+}

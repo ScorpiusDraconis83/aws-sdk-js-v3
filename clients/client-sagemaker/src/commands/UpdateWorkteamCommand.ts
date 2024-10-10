@@ -5,7 +5,8 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { UpdateWorkteamRequest, UpdateWorkteamResponse } from "../models/models_4";
+import { UpdateWorkteamRequest } from "../models/models_4";
+import { UpdateWorkteamResponse } from "../models/models_5";
 import { de_UpdateWorkteamCommand, se_UpdateWorkteamCommand } from "../protocols/Aws_json1_1";
 import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
 
@@ -131,9 +132,7 @@ export class UpdateWorkteamCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +144,16 @@ export class UpdateWorkteamCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateWorkteamCommand)
   .de(de_UpdateWorkteamCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkteamRequest;
+      output: UpdateWorkteamResponse;
+    };
+    sdk: {
+      input: UpdateWorkteamCommandInput;
+      output: UpdateWorkteamCommandOutput;
+    };
+  };
+}

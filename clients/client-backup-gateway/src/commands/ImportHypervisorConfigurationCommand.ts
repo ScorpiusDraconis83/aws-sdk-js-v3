@@ -100,9 +100,7 @@ export class ImportHypervisorConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BackupGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ImportHypervisorConfigurationCommand extends $Command
   .f(ImportHypervisorConfigurationInputFilterSensitiveLog, void 0)
   .ser(se_ImportHypervisorConfigurationCommand)
   .de(de_ImportHypervisorConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportHypervisorConfigurationInput;
+      output: ImportHypervisorConfigurationOutput;
+    };
+    sdk: {
+      input: ImportHypervisorConfigurationCommandInput;
+      output: ImportHypervisorConfigurationCommandOutput;
+    };
+  };
+}

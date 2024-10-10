@@ -82,9 +82,7 @@ export class DeleteSolNetworkInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DeleteSolNetworkInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteSolNetworkInstanceCommand)
   .de(de_DeleteSolNetworkInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSolNetworkInstanceInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteSolNetworkInstanceCommandInput;
+      output: DeleteSolNetworkInstanceCommandOutput;
+    };
+  };
+}

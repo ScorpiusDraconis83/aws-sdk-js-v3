@@ -99,9 +99,7 @@ export class RemoveTagsFromVaultCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class RemoveTagsFromVaultCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RemoveTagsFromVaultCommand)
   .de(de_RemoveTagsFromVaultCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveTagsFromVaultInput;
+      output: {};
+    };
+    sdk: {
+      input: RemoveTagsFromVaultCommandInput;
+      output: RemoveTagsFromVaultCommandOutput;
+    };
+  };
+}

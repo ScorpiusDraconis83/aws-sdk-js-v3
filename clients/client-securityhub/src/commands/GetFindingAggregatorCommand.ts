@@ -28,7 +28,11 @@ export interface GetFindingAggregatorCommandInput extends GetFindingAggregatorRe
 export interface GetFindingAggregatorCommandOutput extends GetFindingAggregatorResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the current finding aggregation configuration.</p>
+ * <note>
+ *             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
+ *          </note>
+ *          <p>Returns the current configuration in the calling account for cross-Region aggregation. A finding aggregator is a resource that establishes
+ * the home Region and any linked Regions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -112,9 +116,7 @@ export class GetFindingAggregatorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +128,16 @@ export class GetFindingAggregatorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetFindingAggregatorCommand)
   .de(de_GetFindingAggregatorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingAggregatorRequest;
+      output: GetFindingAggregatorResponse;
+    };
+    sdk: {
+      input: GetFindingAggregatorCommandInput;
+      output: GetFindingAggregatorCommandOutput;
+    };
+  };
+}

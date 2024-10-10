@@ -338,9 +338,7 @@ export class ListJobsByPipelineCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticTranscoderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -352,4 +350,16 @@ export class ListJobsByPipelineCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListJobsByPipelineCommand)
   .de(de_ListJobsByPipelineCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobsByPipelineRequest;
+      output: ListJobsByPipelineResponse;
+    };
+    sdk: {
+      input: ListJobsByPipelineCommandInput;
+      output: ListJobsByPipelineCommandOutput;
+    };
+  };
+}

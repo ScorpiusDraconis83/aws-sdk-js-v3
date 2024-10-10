@@ -94,9 +94,7 @@ export class DeleteDefaultMessageTypeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointSMSVoiceV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class DeleteDefaultMessageTypeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDefaultMessageTypeCommand)
   .de(de_DeleteDefaultMessageTypeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDefaultMessageTypeRequest;
+      output: DeleteDefaultMessageTypeResult;
+    };
+    sdk: {
+      input: DeleteDefaultMessageTypeCommandInput;
+      output: DeleteDefaultMessageTypeCommandOutput;
+    };
+  };
+}

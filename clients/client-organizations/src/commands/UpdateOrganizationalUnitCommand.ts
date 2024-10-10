@@ -229,9 +229,7 @@ export class UpdateOrganizationalUnitCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -243,4 +241,16 @@ export class UpdateOrganizationalUnitCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateOrganizationalUnitCommand)
   .de(de_UpdateOrganizationalUnitCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateOrganizationalUnitRequest;
+      output: UpdateOrganizationalUnitResponse;
+    };
+    sdk: {
+      input: UpdateOrganizationalUnitCommandInput;
+      output: UpdateOrganizationalUnitCommandOutput;
+    };
+  };
+}

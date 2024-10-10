@@ -91,9 +91,7 @@ export class DeleteNodeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ManagedBlockchainClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class DeleteNodeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteNodeCommand)
   .de(de_DeleteNodeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNodeInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteNodeCommandInput;
+      output: DeleteNodeCommandOutput;
+    };
+  };
+}

@@ -83,9 +83,7 @@ export class GetRevealConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Macie2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class GetRevealConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetRevealConfigurationCommand)
   .de(de_GetRevealConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetRevealConfigurationResponse;
+    };
+    sdk: {
+      input: GetRevealConfigurationCommandInput;
+      output: GetRevealConfigurationCommandOutput;
+    };
+  };
+}

@@ -100,9 +100,7 @@ export class ListTagsForResourcesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Route53ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListTagsForResourcesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTagsForResourcesCommand)
   .de(de_ListTagsForResourcesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForResourcesRequest;
+      output: ListTagsForResourcesResponse;
+    };
+    sdk: {
+      input: ListTagsForResourcesCommandInput;
+      output: ListTagsForResourcesCommandOutput;
+    };
+  };
+}

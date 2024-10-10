@@ -100,9 +100,7 @@ export class ListRepositoryAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeGuruReviewerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListRepositoryAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListRepositoryAssociationsCommand)
   .de(de_ListRepositoryAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRepositoryAssociationsRequest;
+      output: ListRepositoryAssociationsResponse;
+    };
+    sdk: {
+      input: ListRepositoryAssociationsCommandInput;
+      output: ListRepositoryAssociationsCommandOutput;
+    };
+  };
+}

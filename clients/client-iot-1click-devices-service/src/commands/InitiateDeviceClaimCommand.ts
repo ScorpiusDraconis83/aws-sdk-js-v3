@@ -81,9 +81,7 @@ export class InitiateDeviceClaimCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoT1ClickDevicesServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class InitiateDeviceClaimCommand extends $Command
   .f(void 0, void 0)
   .ser(se_InitiateDeviceClaimCommand)
   .de(de_InitiateDeviceClaimCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InitiateDeviceClaimRequest;
+      output: InitiateDeviceClaimResponse;
+    };
+    sdk: {
+      input: InitiateDeviceClaimCommandInput;
+      output: InitiateDeviceClaimCommandOutput;
+    };
+  };
+}

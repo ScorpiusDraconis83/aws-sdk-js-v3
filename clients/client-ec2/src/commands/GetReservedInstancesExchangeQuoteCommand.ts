@@ -118,9 +118,7 @@ export class GetReservedInstancesExchangeQuoteCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class GetReservedInstancesExchangeQuoteCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetReservedInstancesExchangeQuoteCommand)
   .de(de_GetReservedInstancesExchangeQuoteCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReservedInstancesExchangeQuoteRequest;
+      output: GetReservedInstancesExchangeQuoteResult;
+    };
+    sdk: {
+      input: GetReservedInstancesExchangeQuoteCommandInput;
+      output: GetReservedInstancesExchangeQuoteCommandOutput;
+    };
+  };
+}

@@ -117,9 +117,7 @@ export class UpdatePortalCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class UpdatePortalCommand extends $Command
   .f(UpdatePortalRequestFilterSensitiveLog, UpdatePortalResponseFilterSensitiveLog)
   .ser(se_UpdatePortalCommand)
   .de(de_UpdatePortalCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePortalRequest;
+      output: UpdatePortalResponse;
+    };
+    sdk: {
+      input: UpdatePortalCommandInput;
+      output: UpdatePortalCommandOutput;
+    };
+  };
+}

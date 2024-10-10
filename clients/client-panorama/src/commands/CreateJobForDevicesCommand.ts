@@ -94,9 +94,7 @@ export class CreateJobForDevicesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PanoramaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class CreateJobForDevicesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateJobForDevicesCommand)
   .de(de_CreateJobForDevicesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateJobForDevicesRequest;
+      output: CreateJobForDevicesResponse;
+    };
+    sdk: {
+      input: CreateJobForDevicesCommandInput;
+      output: CreateJobForDevicesCommandOutput;
+    };
+  };
+}

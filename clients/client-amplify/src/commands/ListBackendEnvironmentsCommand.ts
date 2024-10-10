@@ -93,9 +93,7 @@ export class ListBackendEnvironmentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class ListBackendEnvironmentsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListBackendEnvironmentsCommand)
   .de(de_ListBackendEnvironmentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBackendEnvironmentsRequest;
+      output: ListBackendEnvironmentsResult;
+    };
+    sdk: {
+      input: ListBackendEnvironmentsCommandInput;
+      output: ListBackendEnvironmentsCommandOutput;
+    };
+  };
+}

@@ -121,9 +121,7 @@ export class ListStreamingImagesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class ListStreamingImagesCommand extends $Command
   .f(void 0, ListStreamingImagesResponseFilterSensitiveLog)
   .ser(se_ListStreamingImagesCommand)
   .de(de_ListStreamingImagesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamingImagesRequest;
+      output: ListStreamingImagesResponse;
+    };
+    sdk: {
+      input: ListStreamingImagesCommandInput;
+      output: ListStreamingImagesCommandOutput;
+    };
+  };
+}

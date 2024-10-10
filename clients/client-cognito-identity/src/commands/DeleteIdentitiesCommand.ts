@@ -83,9 +83,7 @@ export class DeleteIdentitiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DeleteIdentitiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteIdentitiesCommand)
   .de(de_DeleteIdentitiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIdentitiesInput;
+      output: DeleteIdentitiesResponse;
+    };
+    sdk: {
+      input: DeleteIdentitiesCommandInput;
+      output: DeleteIdentitiesCommandOutput;
+    };
+  };
+}

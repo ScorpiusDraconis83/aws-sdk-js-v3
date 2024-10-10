@@ -109,9 +109,7 @@ export class ChangePasswordCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IAMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class ChangePasswordCommand extends $Command
   .f(ChangePasswordRequestFilterSensitiveLog, void 0)
   .ser(se_ChangePasswordCommand)
   .de(de_ChangePasswordCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ChangePasswordRequest;
+      output: {};
+    };
+    sdk: {
+      input: ChangePasswordCommandInput;
+      output: ChangePasswordCommandOutput;
+    };
+  };
+}

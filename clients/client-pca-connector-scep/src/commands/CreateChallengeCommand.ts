@@ -110,9 +110,7 @@ export class CreateChallengeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PcaConnectorScepClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class CreateChallengeCommand extends $Command
   .f(void 0, CreateChallengeResponseFilterSensitiveLog)
   .ser(se_CreateChallengeCommand)
   .de(de_CreateChallengeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateChallengeRequest;
+      output: CreateChallengeResponse;
+    };
+    sdk: {
+      input: CreateChallengeCommandInput;
+      output: CreateChallengeCommandOutput;
+    };
+  };
+}

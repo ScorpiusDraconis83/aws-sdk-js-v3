@@ -137,9 +137,7 @@ export class UpdateCustomLineItemCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BillingconductorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -151,4 +149,16 @@ export class UpdateCustomLineItemCommand extends $Command
   .f(UpdateCustomLineItemInputFilterSensitiveLog, UpdateCustomLineItemOutputFilterSensitiveLog)
   .ser(se_UpdateCustomLineItemCommand)
   .de(de_UpdateCustomLineItemCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCustomLineItemInput;
+      output: UpdateCustomLineItemOutput;
+    };
+    sdk: {
+      input: UpdateCustomLineItemCommandInput;
+      output: UpdateCustomLineItemCommandOutput;
+    };
+  };
+}

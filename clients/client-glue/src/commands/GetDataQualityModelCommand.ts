@@ -81,9 +81,7 @@ export class GetDataQualityModelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class GetDataQualityModelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDataQualityModelCommand)
   .de(de_GetDataQualityModelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataQualityModelRequest;
+      output: GetDataQualityModelResponse;
+    };
+    sdk: {
+      input: GetDataQualityModelCommandInput;
+      output: GetDataQualityModelCommandOutput;
+    };
+  };
+}

@@ -140,9 +140,7 @@ export class AssociateIdentityProviderConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EKSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class AssociateIdentityProviderConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AssociateIdentityProviderConfigCommand)
   .de(de_AssociateIdentityProviderConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateIdentityProviderConfigRequest;
+      output: AssociateIdentityProviderConfigResponse;
+    };
+    sdk: {
+      input: AssociateIdentityProviderConfigCommandInput;
+      output: AssociateIdentityProviderConfigCommandOutput;
+    };
+  };
+}

@@ -165,9 +165,7 @@ export class UploadMultipartPartCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlacierClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -179,4 +177,16 @@ export class UploadMultipartPartCommand extends $Command
   .f(UploadMultipartPartInputFilterSensitiveLog, void 0)
   .ser(se_UploadMultipartPartCommand)
   .de(de_UploadMultipartPartCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadMultipartPartInput;
+      output: UploadMultipartPartOutput;
+    };
+    sdk: {
+      input: UploadMultipartPartCommandInput;
+      output: UploadMultipartPartCommandOutput;
+    };
+  };
+}

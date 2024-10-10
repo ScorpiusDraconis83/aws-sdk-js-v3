@@ -76,9 +76,7 @@ export class DeleteRecipeVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataBrewClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -90,4 +88,16 @@ export class DeleteRecipeVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRecipeVersionCommand)
   .de(de_DeleteRecipeVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRecipeVersionRequest;
+      output: DeleteRecipeVersionResponse;
+    };
+    sdk: {
+      input: DeleteRecipeVersionCommandInput;
+      output: DeleteRecipeVersionCommandOutput;
+    };
+  };
+}

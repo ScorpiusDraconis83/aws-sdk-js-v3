@@ -96,9 +96,7 @@ export class ImportCrlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RolesAnywhereClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class ImportCrlCommand extends $Command
   .f(ImportCrlRequestFilterSensitiveLog, void 0)
   .ser(se_ImportCrlCommand)
   .de(de_ImportCrlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportCrlRequest;
+      output: CrlDetailResponse;
+    };
+    sdk: {
+      input: ImportCrlCommandInput;
+      output: ImportCrlCommandOutput;
+    };
+  };
+}

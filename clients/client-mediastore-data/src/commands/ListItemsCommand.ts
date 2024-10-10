@@ -84,9 +84,7 @@ export class ListItemsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaStoreDataClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class ListItemsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListItemsCommand)
   .de(de_ListItemsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListItemsRequest;
+      output: ListItemsResponse;
+    };
+    sdk: {
+      input: ListItemsCommandInput;
+      output: ListItemsCommandOutput;
+    };
+  };
+}

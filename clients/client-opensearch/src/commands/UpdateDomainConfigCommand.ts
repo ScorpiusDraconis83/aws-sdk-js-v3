@@ -468,9 +468,7 @@ export class UpdateDomainConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -482,4 +480,16 @@ export class UpdateDomainConfigCommand extends $Command
   .f(UpdateDomainConfigRequestFilterSensitiveLog, void 0)
   .ser(se_UpdateDomainConfigCommand)
   .de(de_UpdateDomainConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDomainConfigRequest;
+      output: UpdateDomainConfigResponse;
+    };
+    sdk: {
+      input: UpdateDomainConfigCommandInput;
+      output: UpdateDomainConfigCommandOutput;
+    };
+  };
+}

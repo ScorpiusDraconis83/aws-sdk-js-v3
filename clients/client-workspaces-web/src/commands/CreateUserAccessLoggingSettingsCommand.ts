@@ -37,7 +37,8 @@ export interface CreateUserAccessLoggingSettingsCommandOutput
     __MetadataBearer {}
 
 /**
- * <p>Creates a user access logging settings resource that can be associated with a web portal.</p>
+ * <p>Creates a user access logging settings resource that can be associated with a web
+ *          portal.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -99,9 +100,7 @@ export class CreateUserAccessLoggingSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +112,16 @@ export class CreateUserAccessLoggingSettingsCommand extends $Command
   .f(CreateUserAccessLoggingSettingsRequestFilterSensitiveLog, void 0)
   .ser(se_CreateUserAccessLoggingSettingsCommand)
   .de(de_CreateUserAccessLoggingSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateUserAccessLoggingSettingsRequest;
+      output: CreateUserAccessLoggingSettingsResponse;
+    };
+    sdk: {
+      input: CreateUserAccessLoggingSettingsCommandInput;
+      output: CreateUserAccessLoggingSettingsCommandOutput;
+    };
+  };
+}

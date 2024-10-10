@@ -92,9 +92,7 @@ export class ListServicePipelineOutputsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ProtonClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class ListServicePipelineOutputsCommand extends $Command
   .f(void 0, ListServicePipelineOutputsOutputFilterSensitiveLog)
   .ser(se_ListServicePipelineOutputsCommand)
   .de(de_ListServicePipelineOutputsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListServicePipelineOutputsInput;
+      output: ListServicePipelineOutputsOutput;
+    };
+    sdk: {
+      input: ListServicePipelineOutputsCommandInput;
+      output: ListServicePipelineOutputsCommandOutput;
+    };
+  };
+}

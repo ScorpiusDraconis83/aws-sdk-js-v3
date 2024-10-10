@@ -106,9 +106,7 @@ export class PutCoreNetworkPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class PutCoreNetworkPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutCoreNetworkPolicyCommand)
   .de(de_PutCoreNetworkPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutCoreNetworkPolicyRequest;
+      output: PutCoreNetworkPolicyResponse;
+    };
+    sdk: {
+      input: PutCoreNetworkPolicyCommandInput;
+      output: PutCoreNetworkPolicyCommandOutput;
+    };
+  };
+}

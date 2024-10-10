@@ -109,9 +109,7 @@ export class ListChannelModeratorsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class ListChannelModeratorsCommand extends $Command
   .f(ListChannelModeratorsRequestFilterSensitiveLog, ListChannelModeratorsResponseFilterSensitiveLog)
   .ser(se_ListChannelModeratorsCommand)
   .de(de_ListChannelModeratorsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChannelModeratorsRequest;
+      output: ListChannelModeratorsResponse;
+    };
+    sdk: {
+      input: ListChannelModeratorsCommandInput;
+      output: ListChannelModeratorsCommandOutput;
+    };
+  };
+}

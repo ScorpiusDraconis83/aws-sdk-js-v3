@@ -72,9 +72,7 @@ export class DeleteRelayCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -86,4 +84,16 @@ export class DeleteRelayCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteRelayCommand)
   .de(de_DeleteRelayCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRelayRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteRelayCommandInput;
+      output: DeleteRelayCommandOutput;
+    };
+  };
+}

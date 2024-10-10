@@ -368,9 +368,7 @@ export class CreateJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SnowballClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -382,4 +380,16 @@ export class CreateJobCommand extends $Command
   .f(CreateJobRequestFilterSensitiveLog, void 0)
   .ser(se_CreateJobCommand)
   .de(de_CreateJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateJobRequest;
+      output: CreateJobResult;
+    };
+    sdk: {
+      input: CreateJobCommandInput;
+      output: CreateJobCommandOutput;
+    };
+  };
+}

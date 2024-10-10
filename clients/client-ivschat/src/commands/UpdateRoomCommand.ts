@@ -103,9 +103,7 @@ export class UpdateRoomCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IvschatClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class UpdateRoomCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateRoomCommand)
   .de(de_UpdateRoomCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRoomRequest;
+      output: UpdateRoomResponse;
+    };
+    sdk: {
+      input: UpdateRoomCommandInput;
+      output: UpdateRoomCommandOutput;
+    };
+  };
+}

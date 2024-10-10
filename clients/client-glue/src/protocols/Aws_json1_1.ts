@@ -469,6 +469,7 @@ import { StopSessionCommandInput, StopSessionCommandOutput } from "../commands/S
 import { StopTriggerCommandInput, StopTriggerCommandOutput } from "../commands/StopTriggerCommand";
 import { StopWorkflowRunCommandInput, StopWorkflowRunCommandOutput } from "../commands/StopWorkflowRunCommand";
 import { TagResourceCommandInput, TagResourceCommandOutput } from "../commands/TagResourceCommand";
+import { TestConnectionCommandInput, TestConnectionCommandOutput } from "../commands/TestConnectionCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "../commands/UntagResourceCommand";
 import { UpdateBlueprintCommandInput, UpdateBlueprintCommandOutput } from "../commands/UpdateBlueprintCommand";
 import { UpdateClassifierCommandInput, UpdateClassifierCommandOutput } from "../commands/UpdateClassifierCommand";
@@ -564,9 +565,6 @@ import {
   BatchUpdatePartitionRequestEntry,
   Blueprint,
   CancelDataQualityRuleRecommendationRunRequest,
-  CancelDataQualityRulesetEvaluationRunRequest,
-  CancelMLTaskRunRequest,
-  CancelStatementRequest,
   CatalogDeltaSource,
   CatalogHudiSource,
   CatalogKafkaSource,
@@ -574,8 +572,8 @@ import {
   CatalogSchemaChangePolicy,
   CatalogSource,
   CatalogTarget,
-  CheckSchemaVersionValidityInput,
   Column,
+  CompactionMetrics,
   Condition,
   ConditionExpression,
   ConnectionsList,
@@ -627,8 +625,12 @@ import {
   GovernedCatalogSource,
   GovernedCatalogTarget,
   HudiTarget,
+  IcebergCompactionMetrics,
+  IcebergOrphanFileDeletionConfiguration,
+  IcebergOrphanFileDeletionMetrics,
+  IcebergRetentionConfiguration,
+  IcebergRetentionMetrics,
   IcebergTarget,
-  IllegalSessionStateException,
   InternalServiceException,
   InvalidInputException,
   InvalidStateException,
@@ -667,6 +669,8 @@ import {
   OracleSQLCatalogSource,
   OracleSQLCatalogTarget,
   Order,
+  OrphanFileDeletionConfiguration,
+  OrphanFileDeletionMetrics,
   Partition,
   PartitionInput,
   PartitionValueList,
@@ -685,6 +689,8 @@ import {
   RenameField,
   ResourceNotReadyException,
   ResourceNumberLimitExceededException,
+  RetentionConfiguration,
+  RetentionMetrics,
   S3CatalogDeltaSource,
   S3CatalogHudiSource,
   S3CatalogSource,
@@ -726,6 +732,7 @@ import {
   TableOptimizer,
   TableOptimizerConfiguration,
   TableOptimizerRun,
+  ThrottlingException,
   TimestampedInclusionAnnotation,
   TransformConfigParameter,
   Union,
@@ -738,14 +745,17 @@ import {
   BinaryColumnStatisticsData,
   BlueprintRun,
   BooleanColumnStatisticsData,
+  CancelDataQualityRulesetEvaluationRunRequest,
+  CancelMLTaskRunRequest,
+  CancelStatementRequest,
   CatalogEntry,
   CatalogImportStatus,
+  CheckSchemaVersionValidityInput,
   Classifier,
   CloudWatchEncryption,
   CodeGenEdge,
   CodeGenNode,
   CodeGenNodeArg,
-  ColumnImportance,
   ColumnStatistics,
   ColumnStatisticsData,
   ColumnStatisticsTaskRun,
@@ -830,10 +840,8 @@ import {
   DoubleColumnStatisticsData,
   EncryptionAtRest,
   EncryptionConfiguration,
-  EvaluationMetrics,
   FederatedDatabase,
   FederatedResourceAlreadyExistsException,
-  FindMatchesMetrics,
   FindMatchesParameters,
   GetBlueprintRequest,
   GetBlueprintResponse,
@@ -901,11 +909,10 @@ import {
   GetMLTaskRunResponse,
   GetMLTaskRunsRequest,
   GetMLTaskRunsResponse,
-  GetMLTransformRequest,
-  GetMLTransformResponse,
   GrokClassifier,
   IcebergInput,
   IdempotentParameterMismatchException,
+  IllegalSessionStateException,
   JobBookmarksEncryption,
   JsonClassifier,
   Location,
@@ -923,7 +930,6 @@ import {
   ResourceUri,
   S3Encryption,
   SchedulerTransitioningException,
-  SchemaColumn,
   Session,
   SessionCommand,
   StatisticModelResult,
@@ -934,9 +940,7 @@ import {
   TaskRunFilterCriteria,
   TaskRunSortCriteria,
   TransformEncryption,
-  TransformFilterCriteria,
   TransformParameters,
-  TransformSortCriteria,
   UserDefinedFunctionInput,
   ValidationException,
   ViewDefinitionInput,
@@ -944,6 +948,7 @@ import {
   XMLClassifier,
 } from "../models/models_1";
 import {
+  ColumnImportance,
   ColumnStatisticsError,
   ColumnStatisticsTaskNotRunningException,
   ColumnStatisticsTaskRunningException,
@@ -962,6 +967,10 @@ import {
   DataQualityRulesetFilterCriteria,
   DataQualityRulesetListDetails,
   DevEndpointCustomLibraries,
+  EvaluationMetrics,
+  FindMatchesMetrics,
+  GetMLTransformRequest,
+  GetMLTransformResponse,
   GetMLTransformsRequest,
   GetMLTransformsResponse,
   GetPartitionIndexesRequest,
@@ -1073,6 +1082,7 @@ import {
   RunStatementRequest,
   SchedulerNotRunningException,
   SchedulerRunningException,
+  SchemaColumn,
   SchemaVersionNumber,
   SearchTablesRequest,
   SecurityConfiguration,
@@ -1102,8 +1112,11 @@ import {
   SupportedDialect,
   TableAttributes,
   TagResourceRequest,
+  TestConnectionInput,
+  TestConnectionRequest,
   TimestampFilter,
-  TriggerUpdate,
+  TransformFilterCriteria,
+  TransformSortCriteria,
   UnfilteredPartition,
   UntagResourceRequest,
   UpdateBlueprintRequest,
@@ -1127,12 +1140,6 @@ import {
   UpdateRegistryInput,
   UpdateSchemaInput,
   UpdateSourceControlFromJobRequest,
-  UpdateTableOptimizerRequest,
-  UpdateTableRequest,
-  UpdateTriggerRequest,
-  UpdateUsageProfileRequest,
-  UpdateUserDefinedFunctionRequest,
-  UpdateWorkflowRequest,
   UpdateXMLClassifierRequest,
   UsageProfileDefinition,
   UserDefinedFunction,
@@ -1159,7 +1166,14 @@ import {
   Table,
   TableStatus,
   TableVersion,
+  TriggerUpdate,
   UpdateJobRequest,
+  UpdateTableOptimizerRequest,
+  UpdateTableRequest,
+  UpdateTriggerRequest,
+  UpdateUsageProfileRequest,
+  UpdateUserDefinedFunctionRequest,
+  UpdateWorkflowRequest,
 } from "../models/models_3";
 
 /**
@@ -3754,6 +3768,19 @@ export const se_TagResourceCommand = async (
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
   const headers: __HeaderBag = sharedHeaders("TagResource");
+  let body: any;
+  body = JSON.stringify(_json(input));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
+ * serializeAws_json1_1TestConnectionCommand
+ */
+export const se_TestConnectionCommand = async (
+  input: TestConnectionCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = sharedHeaders("TestConnection");
   let body: any;
   body = JSON.stringify(_json(input));
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -8072,6 +8099,26 @@ export const de_TagResourceCommand = async (
 };
 
 /**
+ * deserializeAws_json1_1TestConnectionCommand
+ */
+export const de_TestConnectionCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<TestConnectionCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = _json(data);
+  const response: TestConnectionCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return response;
+};
+
+/**
  * deserializeAws_json1_1UntagResourceCommand
  */
 export const de_UntagResourceCommand = async (
@@ -8597,6 +8644,9 @@ const de_CommandError = async (output: __HttpResponse, context: __SerdeContext):
     case "InvalidStateException":
     case "com.amazonaws.glue#InvalidStateException":
       throw await de_InvalidStateExceptionRes(parsedOutput, context);
+    case "ThrottlingException":
+    case "com.amazonaws.glue#ThrottlingException":
+      throw await de_ThrottlingExceptionRes(parsedOutput, context);
     case "IllegalSessionStateException":
     case "com.amazonaws.glue#IllegalSessionStateException":
       throw await de_IllegalSessionStateExceptionRes(parsedOutput, context);
@@ -9211,6 +9261,19 @@ const de_SchedulerTransitioningExceptionRes = async (
   const body = parsedOutput.body;
   const deserialized: any = _json(body);
   const exception = new SchedulerTransitioningException({
+    $metadata: deserializeMetadata(parsedOutput),
+    ...deserialized,
+  });
+  return __decorateServiceException(exception, body);
+};
+
+/**
+ * deserializeAws_json1_1ThrottlingExceptionRes
+ */
+const de_ThrottlingExceptionRes = async (parsedOutput: any, context: __SerdeContext): Promise<ThrottlingException> => {
+  const body = parsedOutput.body;
+  const deserialized: any = _json(body);
+  const exception = new ThrottlingException({
     $metadata: deserializeMetadata(parsedOutput),
     ...deserialized,
   });
@@ -10438,6 +10501,10 @@ const se_GetUnfilteredTableMetadataRequest = (
 
 // se_IcebergInput omitted.
 
+// se_IcebergOrphanFileDeletionConfiguration omitted.
+
+// se_IcebergRetentionConfiguration omitted.
+
 // se_IcebergTarget omitted.
 
 // se_IcebergTargetList omitted.
@@ -10791,6 +10858,8 @@ const se_Mappings = (input: Mapping[], context: __SerdeContext): any => {
 
 // se_OrderList omitted.
 
+// se_OrphanFileDeletionConfiguration omitted.
+
 // se_ParameterMap omitted.
 
 // se_ParametersMap omitted.
@@ -10861,6 +10930,8 @@ const se_PIIDetection = (input: PIIDetection, context: __SerdeContext): any => {
 
 // se_ProfileConfiguration omitted.
 
+// se_PropertyMap omitted.
+
 // se_PropertyPredicate omitted.
 
 // se_PublicKeysList omitted.
@@ -10923,6 +10994,8 @@ const se_QuerySessionContext = (input: QuerySessionContext, context: __SerdeCont
 // se_ResourceUriList omitted.
 
 // se_ResumeWorkflowRunRequest omitted.
+
+// se_RetentionConfiguration omitted.
 
 // se_RulesetNames omitted.
 
@@ -11174,6 +11247,10 @@ const se_TaskRunFilterCriteria = (input: TaskRunFilterCriteria, context: __Serde
 };
 
 // se_TaskRunSortCriteria omitted.
+
+// se_TestConnectionInput omitted.
+
+// se_TestConnectionRequest omitted.
 
 /**
  * serializeAws_json1_1TimestampFilter
@@ -12047,6 +12124,15 @@ const de_ColumnStatisticsTaskRunsList = (output: any, context: __SerdeContext): 
 
 // de_ColumnValueStringList omitted.
 
+/**
+ * deserializeAws_json1_1CompactionMetrics
+ */
+const de_CompactionMetrics = (output: any, context: __SerdeContext): CompactionMetrics => {
+  return take(output, {
+    IcebergMetrics: (_: any) => de_IcebergCompactionMetrics(_, context),
+  }) as any;
+};
+
 // de_ConcurrentModificationException omitted.
 
 // de_ConcurrentRunsExceededException omitted.
@@ -12074,6 +12160,7 @@ const de_ColumnStatisticsTaskRunsList = (output: any, context: __SerdeContext): 
  */
 const de_Connection = (output: any, context: __SerdeContext): Connection => {
   return take(output, {
+    AthenaProperties: _json,
     AuthenticationConfiguration: _json,
     ConnectionProperties: _json,
     ConnectionType: __expectString,
@@ -13770,6 +13857,49 @@ const de_GrokClassifier = (output: any, context: __SerdeContext): GrokClassifier
 
 // de_HudiTargetList omitted.
 
+/**
+ * deserializeAws_json1_1IcebergCompactionMetrics
+ */
+const de_IcebergCompactionMetrics = (output: any, context: __SerdeContext): IcebergCompactionMetrics => {
+  return take(output, {
+    JobDurationInHour: __limitedParseDouble,
+    NumberOfBytesCompacted: __expectLong,
+    NumberOfDpus: __expectInt32,
+    NumberOfFilesCompacted: __expectLong,
+  }) as any;
+};
+
+// de_IcebergOrphanFileDeletionConfiguration omitted.
+
+/**
+ * deserializeAws_json1_1IcebergOrphanFileDeletionMetrics
+ */
+const de_IcebergOrphanFileDeletionMetrics = (
+  output: any,
+  context: __SerdeContext
+): IcebergOrphanFileDeletionMetrics => {
+  return take(output, {
+    JobDurationInHour: __limitedParseDouble,
+    NumberOfDpus: __expectInt32,
+    NumberOfOrphanFilesDeleted: __expectLong,
+  }) as any;
+};
+
+// de_IcebergRetentionConfiguration omitted.
+
+/**
+ * deserializeAws_json1_1IcebergRetentionMetrics
+ */
+const de_IcebergRetentionMetrics = (output: any, context: __SerdeContext): IcebergRetentionMetrics => {
+  return take(output, {
+    JobDurationInHour: __limitedParseDouble,
+    NumberOfDataFilesDeleted: __expectLong,
+    NumberOfDpus: __expectInt32,
+    NumberOfManifestFilesDeleted: __expectLong,
+    NumberOfManifestListsDeleted: __expectLong,
+  }) as any;
+};
+
 // de_IcebergTarget omitted.
 
 // de_IcebergTargetList omitted.
@@ -14354,6 +14484,17 @@ const de_NodeList = (output: any, context: __SerdeContext): Node[] => {
 
 // de_OrderList omitted.
 
+// de_OrphanFileDeletionConfiguration omitted.
+
+/**
+ * deserializeAws_json1_1OrphanFileDeletionMetrics
+ */
+const de_OrphanFileDeletionMetrics = (output: any, context: __SerdeContext): OrphanFileDeletionMetrics => {
+  return take(output, {
+    IcebergMetrics: (_: any) => de_IcebergOrphanFileDeletionMetrics(_, context),
+  }) as any;
+};
+
 // de_OtherMetadataValueList omitted.
 
 // de_OtherMetadataValueListItem omitted.
@@ -14441,6 +14582,8 @@ const de_PIIDetection = (output: any, context: __SerdeContext): PIIDetection => 
 
 // de_ProfileConfiguration omitted.
 
+// de_PropertyMap omitted.
+
 // de_PublicKeysList omitted.
 
 // de_PutDataCatalogEncryptionSettingsResponse omitted.
@@ -14496,6 +14639,17 @@ const de_PIIDetection = (output: any, context: __SerdeContext): PIIDetection => 
 // de_ResourceUriList omitted.
 
 // de_ResumeWorkflowRunResponse omitted.
+
+// de_RetentionConfiguration omitted.
+
+/**
+ * deserializeAws_json1_1RetentionMetrics
+ */
+const de_RetentionMetrics = (output: any, context: __SerdeContext): RetentionMetrics => {
+  return take(output, {
+    IcebergMetrics: (_: any) => de_IcebergRetentionMetrics(_, context),
+  }) as any;
+};
 
 // de_RulesetNames omitted.
 
@@ -14933,10 +15087,13 @@ const de_TableOptimizer = (output: any, context: __SerdeContext): TableOptimizer
  */
 const de_TableOptimizerRun = (output: any, context: __SerdeContext): TableOptimizerRun => {
   return take(output, {
+    compactionMetrics: (_: any) => de_CompactionMetrics(_, context),
     endTimestamp: (_: any) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
     error: __expectString,
     eventType: __expectString,
     metrics: _json,
+    orphanFileDeletionMetrics: (_: any) => de_OrphanFileDeletionMetrics(_, context),
+    retentionMetrics: (_: any) => de_RetentionMetrics(_, context),
     startTimestamp: (_: any) => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
   }) as any;
 };
@@ -15018,6 +15175,10 @@ const de_TaskRunList = (output: any, context: __SerdeContext): TaskRun[] => {
 };
 
 // de_TaskRunProperties omitted.
+
+// de_TestConnectionResponse omitted.
+
+// de_ThrottlingException omitted.
 
 /**
  * deserializeAws_json1_1TimestampedInclusionAnnotation

@@ -104,9 +104,7 @@ export class ListEventBridgeRuleTemplateGroupsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class ListEventBridgeRuleTemplateGroupsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListEventBridgeRuleTemplateGroupsCommand)
   .de(de_ListEventBridgeRuleTemplateGroupsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventBridgeRuleTemplateGroupsRequest;
+      output: ListEventBridgeRuleTemplateGroupsResponse;
+    };
+    sdk: {
+      input: ListEventBridgeRuleTemplateGroupsCommandInput;
+      output: ListEventBridgeRuleTemplateGroupsCommandOutput;
+    };
+  };
+}

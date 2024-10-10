@@ -324,6 +324,7 @@ export interface GetFindingsCommandOutput extends GetFindingsResponse, __Metadat
  * //               },
  * //             ],
  * //             Group: "STRING_VALUE",
+ * //             LaunchType: "STRING_VALUE",
  * //           },
  * //         },
  * //         ContainerDetails: {
@@ -853,9 +854,7 @@ export class GetFindingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -867,4 +866,16 @@ export class GetFindingsCommand extends $Command
   .f(void 0, GetFindingsResponseFilterSensitiveLog)
   .ser(se_GetFindingsCommand)
   .de(de_GetFindingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingsRequest;
+      output: GetFindingsResponse;
+    };
+    sdk: {
+      input: GetFindingsCommandInput;
+      output: GetFindingsCommandOutput;
+    };
+  };
+}

@@ -99,9 +99,7 @@ export class DeployWorkspaceApplicationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class DeployWorkspaceApplicationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeployWorkspaceApplicationsCommand)
   .de(de_DeployWorkspaceApplicationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeployWorkspaceApplicationsRequest;
+      output: DeployWorkspaceApplicationsResult;
+    };
+    sdk: {
+      input: DeployWorkspaceApplicationsCommandInput;
+      output: DeployWorkspaceApplicationsCommandOutput;
+    };
+  };
+}

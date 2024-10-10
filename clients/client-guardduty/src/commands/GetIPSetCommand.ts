@@ -78,9 +78,7 @@ export class GetIPSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GuardDutyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class GetIPSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetIPSetCommand)
   .de(de_GetIPSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIPSetRequest;
+      output: GetIPSetResponse;
+    };
+    sdk: {
+      input: GetIPSetCommandInput;
+      output: GetIPSetCommandOutput;
+    };
+  };
+}

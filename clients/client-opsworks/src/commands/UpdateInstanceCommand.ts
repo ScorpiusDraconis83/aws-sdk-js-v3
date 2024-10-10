@@ -87,9 +87,7 @@ export class UpdateInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpsWorksClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class UpdateInstanceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateInstanceCommand)
   .de(de_UpdateInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateInstanceRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateInstanceCommandInput;
+      output: UpdateInstanceCommandOutput;
+    };
+  };
+}

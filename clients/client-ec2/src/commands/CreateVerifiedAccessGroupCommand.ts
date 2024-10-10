@@ -106,9 +106,7 @@ export class CreateVerifiedAccessGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class CreateVerifiedAccessGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateVerifiedAccessGroupCommand)
   .de(de_CreateVerifiedAccessGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVerifiedAccessGroupRequest;
+      output: CreateVerifiedAccessGroupResult;
+    };
+    sdk: {
+      input: CreateVerifiedAccessGroupCommandInput;
+      output: CreateVerifiedAccessGroupCommandOutput;
+    };
+  };
+}

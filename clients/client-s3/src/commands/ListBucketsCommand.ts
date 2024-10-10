@@ -114,9 +114,7 @@ export class ListBucketsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: S3ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class ListBucketsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListBucketsCommand)
   .de(de_ListBucketsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBucketsRequest;
+      output: ListBucketsOutput;
+    };
+    sdk: {
+      input: ListBucketsCommandInput;
+      output: ListBucketsCommandOutput;
+    };
+  };
+}

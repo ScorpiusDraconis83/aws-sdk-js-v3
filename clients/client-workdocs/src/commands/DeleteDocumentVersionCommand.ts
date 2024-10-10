@@ -92,9 +92,7 @@ export class DeleteDocumentVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DeleteDocumentVersionCommand extends $Command
   .f(DeleteDocumentVersionRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteDocumentVersionCommand)
   .de(de_DeleteDocumentVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDocumentVersionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDocumentVersionCommandInput;
+      output: DeleteDocumentVersionCommandOutput;
+    };
+  };
+}

@@ -82,9 +82,7 @@ export class GetMailboxDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkMailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class GetMailboxDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetMailboxDetailsCommand)
   .de(de_GetMailboxDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMailboxDetailsRequest;
+      output: GetMailboxDetailsResponse;
+    };
+    sdk: {
+      input: GetMailboxDetailsCommandInput;
+      output: GetMailboxDetailsCommandOutput;
+    };
+  };
+}

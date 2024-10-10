@@ -256,9 +256,7 @@ export class CreateTokenWithIAMCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSOOIDCClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -270,4 +268,16 @@ export class CreateTokenWithIAMCommand extends $Command
   .f(CreateTokenWithIAMRequestFilterSensitiveLog, CreateTokenWithIAMResponseFilterSensitiveLog)
   .ser(se_CreateTokenWithIAMCommand)
   .de(de_CreateTokenWithIAMCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTokenWithIAMRequest;
+      output: CreateTokenWithIAMResponse;
+    };
+    sdk: {
+      input: CreateTokenWithIAMCommandInput;
+      output: CreateTokenWithIAMCommandOutput;
+    };
+  };
+}

@@ -58,7 +58,7 @@ export interface DescribeRepositoriesCommandOutput extends DescribeRepositoriesR
  * //         scanOnPush: true || false,
  * //       },
  * //       encryptionConfiguration: { // EncryptionConfiguration
- * //         encryptionType: "AES256" || "KMS", // required
+ * //         encryptionType: "AES256" || "KMS" || "KMS_DSSE", // required
  * //         kmsKey: "STRING_VALUE",
  * //       },
  * //     },
@@ -123,9 +123,7 @@ export class DescribeRepositoriesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -137,4 +135,16 @@ export class DescribeRepositoriesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRepositoriesCommand)
   .de(de_DescribeRepositoriesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRepositoriesRequest;
+      output: DescribeRepositoriesResponse;
+    };
+    sdk: {
+      input: DescribeRepositoriesCommandInput;
+      output: DescribeRepositoriesCommandOutput;
+    };
+  };
+}

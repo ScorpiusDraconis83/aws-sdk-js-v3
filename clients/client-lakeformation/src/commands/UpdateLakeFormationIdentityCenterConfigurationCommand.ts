@@ -102,9 +102,7 @@ export class UpdateLakeFormationIdentityCenterConfigurationCommand extends $Comm
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LakeFormationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class UpdateLakeFormationIdentityCenterConfigurationCommand extends $Comm
   .f(void 0, void 0)
   .ser(se_UpdateLakeFormationIdentityCenterConfigurationCommand)
   .de(de_UpdateLakeFormationIdentityCenterConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLakeFormationIdentityCenterConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLakeFormationIdentityCenterConfigurationCommandInput;
+      output: UpdateLakeFormationIdentityCenterConfigurationCommandOutput;
+    };
+  };
+}

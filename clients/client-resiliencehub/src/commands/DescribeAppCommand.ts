@@ -116,9 +116,7 @@ export class DescribeAppCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class DescribeAppCommand extends $Command
   .f(void 0, DescribeAppResponseFilterSensitiveLog)
   .ser(se_DescribeAppCommand)
   .de(de_DescribeAppCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAppRequest;
+      output: DescribeAppResponse;
+    };
+    sdk: {
+      input: DescribeAppCommandInput;
+      output: DescribeAppCommandOutput;
+    };
+  };
+}

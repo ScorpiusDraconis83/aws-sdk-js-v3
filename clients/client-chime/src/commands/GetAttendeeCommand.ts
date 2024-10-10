@@ -104,9 +104,7 @@ export class GetAttendeeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class GetAttendeeCommand extends $Command
   .f(void 0, GetAttendeeResponseFilterSensitiveLog)
   .ser(se_GetAttendeeCommand)
   .de(de_GetAttendeeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAttendeeRequest;
+      output: GetAttendeeResponse;
+    };
+    sdk: {
+      input: GetAttendeeCommandInput;
+      output: GetAttendeeCommandOutput;
+    };
+  };
+}

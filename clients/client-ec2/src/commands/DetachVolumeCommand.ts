@@ -59,14 +59,14 @@ export interface DetachVolumeCommandOutput extends VolumeAttachment, __MetadataB
  * const command = new DetachVolumeCommand(input);
  * const response = await client.send(command);
  * // { // VolumeAttachment
- * //   AttachTime: new Date("TIMESTAMP"),
- * //   Device: "STRING_VALUE",
- * //   InstanceId: "STRING_VALUE",
- * //   State: "attaching" || "attached" || "detaching" || "detached" || "busy",
- * //   VolumeId: "STRING_VALUE",
  * //   DeleteOnTermination: true || false,
  * //   AssociatedResource: "STRING_VALUE",
  * //   InstanceOwningService: "STRING_VALUE",
+ * //   VolumeId: "STRING_VALUE",
+ * //   InstanceId: "STRING_VALUE",
+ * //   Device: "STRING_VALUE",
+ * //   State: "attaching" || "attached" || "detaching" || "detached" || "busy",
+ * //   AttachTime: new Date("TIMESTAMP"),
  * // };
  *
  * ```
@@ -110,9 +110,7 @@ export class DetachVolumeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class DetachVolumeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DetachVolumeCommand)
   .de(de_DetachVolumeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachVolumeRequest;
+      output: VolumeAttachment;
+    };
+    sdk: {
+      input: DetachVolumeCommandInput;
+      output: DetachVolumeCommandOutput;
+    };
+  };
+}

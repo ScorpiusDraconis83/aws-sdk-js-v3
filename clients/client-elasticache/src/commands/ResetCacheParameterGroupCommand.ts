@@ -109,9 +109,7 @@ export class ResetCacheParameterGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class ResetCacheParameterGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ResetCacheParameterGroupCommand)
   .de(de_ResetCacheParameterGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResetCacheParameterGroupMessage;
+      output: CacheParameterGroupNameMessage;
+    };
+    sdk: {
+      input: ResetCacheParameterGroupCommandInput;
+      output: ResetCacheParameterGroupCommandOutput;
+    };
+  };
+}

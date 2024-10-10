@@ -118,9 +118,7 @@ export class CopyImageSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MedicalImagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class CopyImageSetCommand extends $Command
   .f(CopyImageSetRequestFilterSensitiveLog, void 0)
   .ser(se_CopyImageSetCommand)
   .de(de_CopyImageSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyImageSetRequest;
+      output: CopyImageSetResponse;
+    };
+    sdk: {
+      input: CopyImageSetCommandInput;
+      output: CopyImageSetCommandOutput;
+    };
+  };
+}

@@ -78,9 +78,7 @@ export class DescribeInboundDmarcSettingsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkMailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class DescribeInboundDmarcSettingsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeInboundDmarcSettingsCommand)
   .de(de_DescribeInboundDmarcSettingsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInboundDmarcSettingsRequest;
+      output: DescribeInboundDmarcSettingsResponse;
+    };
+    sdk: {
+      input: DescribeInboundDmarcSettingsCommandInput;
+      output: DescribeInboundDmarcSettingsCommandOutput;
+    };
+  };
+}

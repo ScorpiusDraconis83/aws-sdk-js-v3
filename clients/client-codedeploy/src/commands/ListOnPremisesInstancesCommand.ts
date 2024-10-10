@@ -88,9 +88,7 @@ export class ListOnPremisesInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeDeployClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class ListOnPremisesInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListOnPremisesInstancesCommand)
   .de(de_ListOnPremisesInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOnPremisesInstancesInput;
+      output: ListOnPremisesInstancesOutput;
+    };
+    sdk: {
+      input: ListOnPremisesInstancesCommandInput;
+      output: ListOnPremisesInstancesCommandOutput;
+    };
+  };
+}

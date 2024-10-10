@@ -73,9 +73,7 @@ export class DeleteDimensionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class DeleteDimensionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDimensionCommand)
   .de(de_DeleteDimensionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDimensionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDimensionCommandInput;
+      output: DeleteDimensionCommandOutput;
+    };
+  };
+}

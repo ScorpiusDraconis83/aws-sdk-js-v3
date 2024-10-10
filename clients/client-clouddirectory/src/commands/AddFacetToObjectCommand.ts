@@ -106,6 +106,25 @@ export interface AddFacetToObjectCommandOutput extends AddFacetToObjectResponse,
  * <p>Base exception class for all service exceptions from CloudDirectory service.</p>
  *
  * @public
+ * @example To add a facet to an object
+ * ```javascript
+ * //
+ * const input = {
+ *   "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+ *   "ObjectAttributeList": [],
+ *   "ObjectReference": {
+ *     "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ"
+ *   },
+ *   "SchemaFacet": {
+ *     "FacetName": "node1",
+ *     "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+ *   }
+ * };
+ * const command = new AddFacetToObjectCommand(input);
+ * await client.send(command);
+ * // example id: to-add-a-facet-to-an-object-1507568792747
+ * ```
+ *
  */
 export class AddFacetToObjectCommand extends $Command
   .classBuilder<
@@ -115,9 +134,7 @@ export class AddFacetToObjectCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudDirectoryClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +146,16 @@ export class AddFacetToObjectCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddFacetToObjectCommand)
   .de(de_AddFacetToObjectCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddFacetToObjectRequest;
+      output: {};
+    };
+    sdk: {
+      input: AddFacetToObjectCommandInput;
+      output: AddFacetToObjectCommandOutput;
+    };
+  };
+}

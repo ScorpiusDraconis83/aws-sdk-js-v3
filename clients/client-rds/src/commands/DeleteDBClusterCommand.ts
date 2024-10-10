@@ -235,6 +235,7 @@ export interface DeleteDBClusterCommandOutput extends DeleteDBClusterResult, __M
  * //       MinRequiredACU: Number("double"),
  * //     },
  * //     StorageThroughput: Number("int"),
+ * //     ClusterScalabilityType: "standard" || "limitless",
  * //     CertificateDetails: {
  * //       CAIdentifier: "STRING_VALUE",
  * //       ValidTill: new Date("TIMESTAMP"),
@@ -315,9 +316,7 @@ export class DeleteDBClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -329,4 +328,16 @@ export class DeleteDBClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDBClusterCommand)
   .de(de_DeleteDBClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDBClusterMessage;
+      output: DeleteDBClusterResult;
+    };
+    sdk: {
+      input: DeleteDBClusterCommandInput;
+      output: DeleteDBClusterCommandOutput;
+    };
+  };
+}

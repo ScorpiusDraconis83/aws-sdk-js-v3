@@ -185,9 +185,7 @@ export class GetDocumentTextDetectionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TextractClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -199,4 +197,16 @@ export class GetDocumentTextDetectionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDocumentTextDetectionCommand)
   .de(de_GetDocumentTextDetectionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDocumentTextDetectionRequest;
+      output: GetDocumentTextDetectionResponse;
+    };
+    sdk: {
+      input: GetDocumentTextDetectionCommandInput;
+      output: GetDocumentTextDetectionCommandOutput;
+    };
+  };
+}

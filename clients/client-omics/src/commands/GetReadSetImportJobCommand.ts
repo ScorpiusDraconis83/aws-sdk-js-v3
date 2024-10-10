@@ -111,9 +111,7 @@ export class GetReadSetImportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OmicsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class GetReadSetImportJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetReadSetImportJobCommand)
   .de(de_GetReadSetImportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReadSetImportJobRequest;
+      output: GetReadSetImportJobResponse;
+    };
+    sdk: {
+      input: GetReadSetImportJobCommandInput;
+      output: GetReadSetImportJobCommandOutput;
+    };
+  };
+}

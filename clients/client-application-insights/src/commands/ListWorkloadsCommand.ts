@@ -91,9 +91,7 @@ export class ListWorkloadsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApplicationInsightsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class ListWorkloadsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListWorkloadsCommand)
   .de(de_ListWorkloadsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWorkloadsRequest;
+      output: ListWorkloadsResponse;
+    };
+    sdk: {
+      input: ListWorkloadsCommandInput;
+      output: ListWorkloadsCommandOutput;
+    };
+  };
+}

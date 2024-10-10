@@ -147,9 +147,7 @@ export class SearchPlaceIndexForSuggestionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class SearchPlaceIndexForSuggestionsCommand extends $Command
   .f(SearchPlaceIndexForSuggestionsRequestFilterSensitiveLog, SearchPlaceIndexForSuggestionsResponseFilterSensitiveLog)
   .ser(se_SearchPlaceIndexForSuggestionsCommand)
   .de(de_SearchPlaceIndexForSuggestionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchPlaceIndexForSuggestionsRequest;
+      output: SearchPlaceIndexForSuggestionsResponse;
+    };
+    sdk: {
+      input: SearchPlaceIndexForSuggestionsCommandInput;
+      output: SearchPlaceIndexForSuggestionsCommandOutput;
+    };
+  };
+}

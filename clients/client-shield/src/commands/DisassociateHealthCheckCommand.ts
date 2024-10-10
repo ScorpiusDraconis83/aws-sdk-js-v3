@@ -81,9 +81,7 @@ export class DisassociateHealthCheckCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ShieldClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DisassociateHealthCheckCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateHealthCheckCommand)
   .de(de_DisassociateHealthCheckCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateHealthCheckRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateHealthCheckCommandInput;
+      output: DisassociateHealthCheckCommandOutput;
+    };
+  };
+}

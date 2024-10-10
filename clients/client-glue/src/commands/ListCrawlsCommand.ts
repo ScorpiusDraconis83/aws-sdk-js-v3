@@ -112,9 +112,7 @@ export class ListCrawlsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class ListCrawlsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCrawlsCommand)
   .de(de_ListCrawlsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCrawlsRequest;
+      output: ListCrawlsResponse;
+    };
+    sdk: {
+      input: ListCrawlsCommandInput;
+      output: ListCrawlsCommandOutput;
+    };
+  };
+}

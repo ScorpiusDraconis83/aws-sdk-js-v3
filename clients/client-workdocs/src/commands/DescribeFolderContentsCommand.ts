@@ -151,9 +151,7 @@ export class DescribeFolderContentsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkDocsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class DescribeFolderContentsCommand extends $Command
   .f(DescribeFolderContentsRequestFilterSensitiveLog, DescribeFolderContentsResponseFilterSensitiveLog)
   .ser(se_DescribeFolderContentsCommand)
   .de(de_DescribeFolderContentsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFolderContentsRequest;
+      output: DescribeFolderContentsResponse;
+    };
+    sdk: {
+      input: DescribeFolderContentsCommandInput;
+      output: DescribeFolderContentsCommandOutput;
+    };
+  };
+}

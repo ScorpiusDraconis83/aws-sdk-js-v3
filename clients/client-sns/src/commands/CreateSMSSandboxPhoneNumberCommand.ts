@@ -98,9 +98,7 @@ export class CreateSMSSandboxPhoneNumberCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SNSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class CreateSMSSandboxPhoneNumberCommand extends $Command
   .f(CreateSMSSandboxPhoneNumberInputFilterSensitiveLog, void 0)
   .ser(se_CreateSMSSandboxPhoneNumberCommand)
   .de(de_CreateSMSSandboxPhoneNumberCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSMSSandboxPhoneNumberInput;
+      output: {};
+    };
+    sdk: {
+      input: CreateSMSSandboxPhoneNumberCommandInput;
+      output: CreateSMSSandboxPhoneNumberCommandOutput;
+    };
+  };
+}

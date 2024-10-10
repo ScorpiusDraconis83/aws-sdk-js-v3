@@ -682,9 +682,7 @@ export class DescribeSnapshotsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -696,4 +694,16 @@ export class DescribeSnapshotsCommand extends $Command
   .f(void 0, DescribeSnapshotsResponseFilterSensitiveLog)
   .ser(se_DescribeSnapshotsCommand)
   .de(de_DescribeSnapshotsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotsRequest;
+      output: DescribeSnapshotsResponse;
+    };
+    sdk: {
+      input: DescribeSnapshotsCommandInput;
+      output: DescribeSnapshotsCommandOutput;
+    };
+  };
+}

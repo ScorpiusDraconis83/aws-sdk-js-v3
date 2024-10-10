@@ -80,9 +80,7 @@ export class GetWorkflowRunPropertiesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class GetWorkflowRunPropertiesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetWorkflowRunPropertiesCommand)
   .de(de_GetWorkflowRunPropertiesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkflowRunPropertiesRequest;
+      output: GetWorkflowRunPropertiesResponse;
+    };
+    sdk: {
+      input: GetWorkflowRunPropertiesCommandInput;
+      output: GetWorkflowRunPropertiesCommandOutput;
+    };
+  };
+}

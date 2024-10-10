@@ -81,9 +81,7 @@ export class UpdateQueueStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class UpdateQueueStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateQueueStatusCommand)
   .de(de_UpdateQueueStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateQueueStatusRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateQueueStatusCommandInput;
+      output: UpdateQueueStatusCommandOutput;
+    };
+  };
+}

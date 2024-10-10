@@ -120,9 +120,7 @@ export class DeleteBranchCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -134,4 +132,16 @@ export class DeleteBranchCommand extends $Command
   .f(void 0, DeleteBranchResultFilterSensitiveLog)
   .ser(se_DeleteBranchCommand)
   .de(de_DeleteBranchCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBranchRequest;
+      output: DeleteBranchResult;
+    };
+    sdk: {
+      input: DeleteBranchCommandInput;
+      output: DeleteBranchCommandOutput;
+    };
+  };
+}

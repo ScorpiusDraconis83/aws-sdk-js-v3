@@ -83,6 +83,7 @@ export interface ApplyGuardrailCommandOutput extends ApplyGuardrailResponse, __M
  * //           { // GuardrailContentFilter
  * //             type: "INSULTS" || "HATE" || "SEXUAL" || "VIOLENCE" || "MISCONDUCT" || "PROMPT_ATTACK", // required
  * //             confidence: "NONE" || "LOW" || "MEDIUM" || "HIGH", // required
+ * //             filterStrength: "NONE" || "LOW" || "MEDIUM" || "HIGH",
  * //             action: "BLOCKED", // required
  * //           },
  * //         ],
@@ -129,8 +130,31 @@ export interface ApplyGuardrailCommandOutput extends ApplyGuardrailResponse, __M
  * //           },
  * //         ],
  * //       },
+ * //       invocationMetrics: { // GuardrailInvocationMetrics
+ * //         guardrailProcessingLatency: Number("long"),
+ * //         usage: {
+ * //           topicPolicyUnits: Number("int"), // required
+ * //           contentPolicyUnits: Number("int"), // required
+ * //           wordPolicyUnits: Number("int"), // required
+ * //           sensitiveInformationPolicyUnits: Number("int"), // required
+ * //           sensitiveInformationPolicyFreeUnits: Number("int"), // required
+ * //           contextualGroundingPolicyUnits: Number("int"), // required
+ * //         },
+ * //         guardrailCoverage: { // GuardrailCoverage
+ * //           textCharacters: { // GuardrailTextCharactersCoverage
+ * //             guarded: Number("int"),
+ * //             total: Number("int"),
+ * //           },
+ * //         },
+ * //       },
  * //     },
  * //   ],
+ * //   guardrailCoverage: {
+ * //     textCharacters: {
+ * //       guarded: Number("int"),
+ * //       total: Number("int"),
+ * //     },
+ * //   },
  * // };
  *
  * ```
@@ -172,9 +196,7 @@ export class ApplyGuardrailCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockRuntimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -186,4 +208,16 @@ export class ApplyGuardrailCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ApplyGuardrailCommand)
   .de(de_ApplyGuardrailCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ApplyGuardrailRequest;
+      output: ApplyGuardrailResponse;
+    };
+    sdk: {
+      input: ApplyGuardrailCommandInput;
+      output: ApplyGuardrailCommandOutput;
+    };
+  };
+}

@@ -98,9 +98,7 @@ export class ExecuteActionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTSiteWiseClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class ExecuteActionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ExecuteActionCommand)
   .de(de_ExecuteActionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExecuteActionRequest;
+      output: ExecuteActionResponse;
+    };
+    sdk: {
+      input: ExecuteActionCommandInput;
+      output: ExecuteActionCommandOutput;
+    };
+  };
+}

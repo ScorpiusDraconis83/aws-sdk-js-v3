@@ -50,7 +50,7 @@ export interface TestFailoverCommandOutput extends TestFailoverResult, __Metadat
  *                <p> </p>
  *             </li>
  *             <li>
- *                <p>If calling this operation multiple times on different shards in the same Redis OSS (cluster mode enabled) replication group, the first node replacement must
+ *                <p>If calling this operation multiple times on different shards in the same Valkey or Redis OSS (cluster mode enabled) replication group, the first node replacement must
  *                     complete before a subsequent call can be made.</p>
  *             </li>
  *             <li>
@@ -237,6 +237,7 @@ export interface TestFailoverCommandOutput extends TestFailoverResult, __Metadat
  * //     IpDiscovery: "ipv4" || "ipv6",
  * //     TransitEncryptionMode: "preferred" || "required",
  * //     ClusterMode: "enabled" || "disabled" || "compatible",
+ * //     Engine: "STRING_VALUE",
  * //   },
  * // };
  *
@@ -290,9 +291,7 @@ export class TestFailoverCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElastiCacheClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -304,4 +303,16 @@ export class TestFailoverCommand extends $Command
   .f(void 0, void 0)
   .ser(se_TestFailoverCommand)
   .de(de_TestFailoverCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TestFailoverMessage;
+      output: TestFailoverResult;
+    };
+    sdk: {
+      input: TestFailoverCommandInput;
+      output: TestFailoverCommandOutput;
+    };
+  };
+}

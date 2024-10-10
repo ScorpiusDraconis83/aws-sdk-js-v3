@@ -105,9 +105,7 @@ export class GetCollaborationPrivacyBudgetTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CleanRoomsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -119,4 +117,16 @@ export class GetCollaborationPrivacyBudgetTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetCollaborationPrivacyBudgetTemplateCommand)
   .de(de_GetCollaborationPrivacyBudgetTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCollaborationPrivacyBudgetTemplateInput;
+      output: GetCollaborationPrivacyBudgetTemplateOutput;
+    };
+    sdk: {
+      input: GetCollaborationPrivacyBudgetTemplateCommandInput;
+      output: GetCollaborationPrivacyBudgetTemplateCommandOutput;
+    };
+  };
+}

@@ -43,6 +43,9 @@ export interface DescribeDhcpOptionsCommandOutput extends DescribeDhcpOptionsRes
  *   DhcpOptionsIds: [ // DhcpOptionsIdStringList
  *     "STRING_VALUE",
  *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   DryRun: true || false,
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -51,15 +54,21 @@ export interface DescribeDhcpOptionsCommandOutput extends DescribeDhcpOptionsRes
  *       ],
  *     },
  *   ],
- *   DryRun: true || false,
- *   NextToken: "STRING_VALUE",
- *   MaxResults: Number("int"),
  * };
  * const command = new DescribeDhcpOptionsCommand(input);
  * const response = await client.send(command);
  * // { // DescribeDhcpOptionsResult
+ * //   NextToken: "STRING_VALUE",
  * //   DhcpOptions: [ // DhcpOptionsList
  * //     { // DhcpOptions
+ * //       OwnerId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       DhcpOptionsId: "STRING_VALUE",
  * //       DhcpConfigurations: [ // DhcpConfigurationList
  * //         { // DhcpConfiguration
  * //           Key: "STRING_VALUE",
@@ -70,17 +79,8 @@ export interface DescribeDhcpOptionsCommandOutput extends DescribeDhcpOptionsRes
  * //           ],
  * //         },
  * //       ],
- * //       DhcpOptionsId: "STRING_VALUE",
- * //       OwnerId: "STRING_VALUE",
- * //       Tags: [ // TagList
- * //         { // Tag
- * //           Key: "STRING_VALUE",
- * //           Value: "STRING_VALUE",
- * //         },
- * //       ],
  * //     },
  * //   ],
- * //   NextToken: "STRING_VALUE",
  * // };
  *
  * ```
@@ -139,9 +139,7 @@ export class DescribeDhcpOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class DescribeDhcpOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeDhcpOptionsCommand)
   .de(de_DescribeDhcpOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDhcpOptionsRequest;
+      output: DescribeDhcpOptionsResult;
+    };
+    sdk: {
+      input: DescribeDhcpOptionsCommandInput;
+      output: DescribeDhcpOptionsCommandOutput;
+    };
+  };
+}

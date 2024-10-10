@@ -117,9 +117,7 @@ export class StopRelationalDatabaseCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class StopRelationalDatabaseCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopRelationalDatabaseCommand)
   .de(de_StopRelationalDatabaseCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopRelationalDatabaseRequest;
+      output: StopRelationalDatabaseResult;
+    };
+    sdk: {
+      input: StopRelationalDatabaseCommandInput;
+      output: StopRelationalDatabaseCommandOutput;
+    };
+  };
+}

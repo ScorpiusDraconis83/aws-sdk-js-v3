@@ -135,9 +135,7 @@ export class DescribeWorkspacesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -149,4 +147,16 @@ export class DescribeWorkspacesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeWorkspacesCommand)
   .de(de_DescribeWorkspacesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkspacesRequest;
+      output: DescribeWorkspacesResult;
+    };
+    sdk: {
+      input: DescribeWorkspacesCommandInput;
+      output: DescribeWorkspacesCommandOutput;
+    };
+  };
+}

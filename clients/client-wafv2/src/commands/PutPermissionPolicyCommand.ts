@@ -139,9 +139,7 @@ export class PutPermissionPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -153,4 +151,16 @@ export class PutPermissionPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutPermissionPolicyCommand)
   .de(de_PutPermissionPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPermissionPolicyRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutPermissionPolicyCommandInput;
+      output: PutPermissionPolicyCommandOutput;
+    };
+  };
+}

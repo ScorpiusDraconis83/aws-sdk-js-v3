@@ -452,6 +452,12 @@ export interface S3ModelDataSource {
    * @public
    */
   HubAccessConfig?: InferenceHubAccessConfig;
+
+  /**
+   * <p>The Amazon S3 URI of the manifest file. The manifest file is a CSV file that stores the artifact locations.</p>
+   * @public
+   */
+  ManifestS3Uri?: string;
 }
 
 /**
@@ -4267,6 +4273,14 @@ export const AppInstanceType = {
   ML_G5_4XLARGE: "ml.g5.4xlarge",
   ML_G5_8XLARGE: "ml.g5.8xlarge",
   ML_G5_XLARGE: "ml.g5.xlarge",
+  ML_G6E_12XLARGE: "ml.g6e.12xlarge",
+  ML_G6E_16XLARGE: "ml.g6e.16xlarge",
+  ML_G6E_24XLARGE: "ml.g6e.24xlarge",
+  ML_G6E_2XLARGE: "ml.g6e.2xlarge",
+  ML_G6E_48XLARGE: "ml.g6e.48xlarge",
+  ML_G6E_4XLARGE: "ml.g6e.4xlarge",
+  ML_G6E_8XLARGE: "ml.g6e.8xlarge",
+  ML_G6E_XLARGE: "ml.g6e.xlarge",
   ML_G6_12XLARGE: "ml.g6.12xlarge",
   ML_G6_16XLARGE: "ml.g6.16xlarge",
   ML_G6_24XLARGE: "ml.g6.24xlarge",
@@ -4681,6 +4695,64 @@ export const AppImageConfigSortKey = {
  * @public
  */
 export type AppImageConfigSortKey = (typeof AppImageConfigSortKey)[keyof typeof AppImageConfigSortKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const LifecycleManagement = {
+  Disabled: "DISABLED",
+  Enabled: "ENABLED",
+} as const;
+
+/**
+ * @public
+ */
+export type LifecycleManagement = (typeof LifecycleManagement)[keyof typeof LifecycleManagement];
+
+/**
+ * <p>Settings related to idle shutdown of Studio applications.</p>
+ * @public
+ */
+export interface IdleSettings {
+  /**
+   * <p>Indicates whether idle shutdown is activated for the application type.</p>
+   * @public
+   */
+  LifecycleManagement?: LifecycleManagement;
+
+  /**
+   * <p>The time that SageMaker waits after the application becomes idle before shutting it
+   *       down.</p>
+   * @public
+   */
+  IdleTimeoutInMinutes?: number;
+
+  /**
+   * <p>The minimum value in minutes that custom idle shutdown can be set to by the user.</p>
+   * @public
+   */
+  MinIdleTimeoutInMinutes?: number;
+
+  /**
+   * <p>The maximum value in minutes that custom idle shutdown can be set to by the user.</p>
+   * @public
+   */
+  MaxIdleTimeoutInMinutes?: number;
+}
+
+/**
+ * <p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio
+ *       applications.</p>
+ * @public
+ */
+export interface AppLifecycleManagement {
+  /**
+   * <p>Settings related to idle shutdown of Studio applications.</p>
+   * @public
+   */
+  IdleSettings?: IdleSettings;
+}
 
 /**
  * @public
@@ -7409,6 +7481,21 @@ export const AutoMLSortOrder = {
 export type AutoMLSortOrder = (typeof AutoMLSortOrder)[keyof typeof AutoMLSortOrder];
 
 /**
+ * @public
+ * @enum
+ */
+export const AutoMountHomeEFS = {
+  DEFAULT_AS_DOMAIN: "DefaultAsDomain",
+  DISABLED: "Disabled",
+  ENABLED: "Enabled",
+} as const;
+
+/**
+ * @public
+ */
+export type AutoMountHomeEFS = (typeof AutoMountHomeEFS)[keyof typeof AutoMountHomeEFS];
+
+/**
  * <p>The name and an example value of the hyperparameter that you want to use in Autotune.
  *             If Automatic model tuning (AMT) determines that your hyperparameter is eligible for
  *             Autotune, an optimal hyperparameter range is selected for you.</p>
@@ -9210,6 +9297,20 @@ export interface ClusterLifeCycleConfig {
 }
 
 /**
+ * @public
+ * @enum
+ */
+export const DeepHealthCheckType = {
+  INSTANCE_CONNECTIVITY: "InstanceConnectivity",
+  INSTANCE_STRESS: "InstanceStress",
+} as const;
+
+/**
+ * @public
+ */
+export type DeepHealthCheckType = (typeof DeepHealthCheckType)[keyof typeof DeepHealthCheckType];
+
+/**
  * <p>Details of an instance group in a SageMaker HyperPod cluster.</p>
  * @public
  */
@@ -9269,6 +9370,12 @@ export interface ClusterInstanceGroupDetails {
    * @public
    */
   InstanceStorageConfigs?: ClusterInstanceStorageConfig[];
+
+  /**
+   * <p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>
+   * @public
+   */
+  OnStartDeepHealthChecks?: DeepHealthCheckType[];
 }
 
 /**
@@ -9325,6 +9432,12 @@ export interface ClusterInstanceGroupSpecification {
    * @public
    */
   InstanceStorageConfigs?: ClusterInstanceStorageConfig[];
+
+  /**
+   * <p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>
+   * @public
+   */
+  OnStartDeepHealthChecks?: DeepHealthCheckType[];
 }
 
 /**
@@ -9352,6 +9465,7 @@ export interface ClusterInstancePlacement {
  * @enum
  */
 export const ClusterInstanceStatus = {
+  DEEP_HEALTH_CHECK_IN_PROGRESS: "DeepHealthCheckInProgress",
   FAILURE: "Failure",
   PENDING: "Pending",
   RUNNING: "Running",
@@ -9458,6 +9572,20 @@ export interface ClusterNodeDetails {
 }
 
 /**
+ * @public
+ * @enum
+ */
+export const ClusterNodeRecovery = {
+  AUTOMATIC: "Automatic",
+  NONE: "None",
+} as const;
+
+/**
+ * @public
+ */
+export type ClusterNodeRecovery = (typeof ClusterNodeRecovery)[keyof typeof ClusterNodeRecovery];
+
+/**
  * <p>Lists a summary of the properties of an instance (also called a
  *             <i>node</i> interchangeably) of a SageMaker HyperPod cluster.</p>
  * @public
@@ -9492,6 +9620,30 @@ export interface ClusterNodeSummary {
    * @public
    */
   InstanceStatus: ClusterInstanceStatusDetails | undefined;
+}
+
+/**
+ * <p>The configuration settings for the Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>
+ * @public
+ */
+export interface ClusterOrchestratorEksConfig {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the SageMaker HyperPod cluster.</p>
+   * @public
+   */
+  ClusterArn: string | undefined;
+}
+
+/**
+ * <p>The type of orchestrator used for the SageMaker HyperPod cluster.</p>
+ * @public
+ */
+export interface ClusterOrchestrator {
+  /**
+   * <p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>
+   * @public
+   */
+  Eks: ClusterOrchestratorEksConfig | undefined;
 }
 
 /**
@@ -9608,6 +9760,20 @@ export interface CodeEditorAppSettings {
    * @public
    */
   LifecycleConfigArns?: string[];
+
+  /**
+   * <p>Settings that are used to configure and manage the lifecycle of CodeEditor
+   *       applications.</p>
+   * @public
+   */
+  AppLifecycleManagement?: AppLifecycleManagement;
+
+  /**
+   * <p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default
+   *       lifecycle configuration.</p>
+   * @public
+   */
+  BuiltInLifecycleConfigArn?: string;
 }
 
 /**
@@ -10336,7 +10502,8 @@ export interface ContainerDefinition {
   AdditionalModelDataSources?: AdditionalModelDataSource[];
 
   /**
-   * <p>The environment variables to set in the Docker container.</p>
+   * <p>The environment variables to set in the Docker container. Don't include any
+   *         sensitive data in your environment variables.</p>
    *          <p>The maximum length of each key and value in the <code>Environment</code> map is
    *             1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If
    *             you pass multiple containers to a <code>CreateModel</code> request, then the maximum
@@ -11042,248 +11209,4 @@ export interface CreateAppResponse {
    * @public
    */
   AppArn?: string;
-}
-
-/**
- * <p>Resource being accessed is in use.</p>
- * @public
- */
-export class ResourceInUse extends __BaseException {
-  readonly name: "ResourceInUse" = "ResourceInUse";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceInUse, __BaseException>) {
-    super({
-      name: "ResourceInUse",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceInUse.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * @public
- */
-export interface CreateAppImageConfigRequest {
-  /**
-   * <p>The name of the AppImageConfig. Must be unique to your account.</p>
-   * @public
-   */
-  AppImageConfigName: string | undefined;
-
-  /**
-   * <p>A list of tags to apply to the AppImageConfig.</p>
-   * @public
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>The KernelGatewayImageConfig. You can only specify one image kernel in the
-   *          AppImageConfig API. This kernel will be shown to users before the
-   *          image starts. Once the image runs, all kernels are visible in JupyterLab.</p>
-   * @public
-   */
-  KernelGatewayImageConfig?: KernelGatewayImageConfig;
-
-  /**
-   * <p>The <code>JupyterLabAppImageConfig</code>. You can only specify one image kernel in the <code>AppImageConfig</code> API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.</p>
-   * @public
-   */
-  JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
-
-  /**
-   * <p>The <code>CodeEditorAppImageConfig</code>. You can only specify one image kernel
-   *       in the AppImageConfig API. This kernel is shown to users before the image starts.
-   *       After the image runs, all kernels are visible in Code Editor.</p>
-   * @public
-   */
-  CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
-}
-
-/**
- * @public
- */
-export interface CreateAppImageConfigResponse {
-  /**
-   * <p>The ARN of the AppImageConfig.</p>
-   * @public
-   */
-  AppImageConfigArn?: string;
-}
-
-/**
- * @public
- */
-export interface CreateArtifactRequest {
-  /**
-   * <p>The name of the artifact. Must be unique to your account in an Amazon Web Services Region.</p>
-   * @public
-   */
-  ArtifactName?: string;
-
-  /**
-   * <p>The ID, ID type, and URI of the source.</p>
-   * @public
-   */
-  Source: ArtifactSource | undefined;
-
-  /**
-   * <p>The artifact type.</p>
-   * @public
-   */
-  ArtifactType: string | undefined;
-
-  /**
-   * <p>A list of properties to add to the artifact.</p>
-   * @public
-   */
-  Properties?: Record<string, string>;
-
-  /**
-   * <p>Metadata properties of the tracking entity, trial, or trial component.</p>
-   * @public
-   */
-  MetadataProperties?: MetadataProperties;
-
-  /**
-   * <p>A list of tags to apply to the artifact.</p>
-   * @public
-   */
-  Tags?: Tag[];
-}
-
-/**
- * @public
- */
-export interface CreateArtifactResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the artifact.</p>
-   * @public
-   */
-  ArtifactArn?: string;
-}
-
-/**
- * <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model
- *          deployment.</p>
- * @public
- */
-export interface ModelDeployConfig {
-  /**
-   * <p>Set to <code>True</code> to automatically generate an endpoint name for a one-click
-   *          Autopilot model deployment; set to <code>False</code> otherwise. The default value is
-   *             <code>False</code>.</p>
-   *          <note>
-   *             <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify
-   *             the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>
-   *          </note>
-   * @public
-   */
-  AutoGenerateEndpointName?: boolean;
-
-  /**
-   * <p>Specifies the endpoint name to use for a one-click Autopilot model deployment if the
-   *          endpoint name is not generated automatically.</p>
-   *          <note>
-   *             <p>Specify the <code>EndpointName</code> if and only if you set
-   *                <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error is
-   *             thrown.</p>
-   *          </note>
-   * @public
-   */
-  EndpointName?: string;
-}
-
-/**
- * @public
- */
-export interface CreateAutoMLJobRequest {
-  /**
-   * <p>Identifies an Autopilot job. The name must be unique to your account and is case
-   *          insensitive.</p>
-   * @public
-   */
-  AutoMLJobName: string | undefined;
-
-  /**
-   * <p>An array of channel objects that describes the input data and its location. Each channel
-   *          is a named input source. Similar to <code>InputDataConfig</code> supported by <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html">HyperParameterTrainingJobDefinition</a>. Format(s) supported: CSV, Parquet. A
-   *          minimum of 500 rows is required for the training dataset. There is not a minimum number of
-   *          rows required for the validation dataset.</p>
-   * @public
-   */
-  InputDataConfig: AutoMLChannel[] | undefined;
-
-  /**
-   * <p>Provides information about encryption and the Amazon S3 output path needed to
-   *          store artifacts from an AutoML job. Format(s) supported: CSV.</p>
-   * @public
-   */
-  OutputDataConfig: AutoMLOutputDataConfig | undefined;
-
-  /**
-   * <p>Defines the type of supervised learning problem available for the candidates. For more
-   *          information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types">
-   *             SageMaker Autopilot problem types</a>.</p>
-   * @public
-   */
-  ProblemType?: ProblemType;
-
-  /**
-   * <p>Specifies a metric to minimize or maximize as the objective of a job. If not specified,
-   *          the default objective metric depends on the problem type. See <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html">AutoMLJobObjective</a> for the default values.</p>
-   * @public
-   */
-  AutoMLJobObjective?: AutoMLJobObjective;
-
-  /**
-   * <p>A collection of settings used to configure an AutoML job.</p>
-   * @public
-   */
-  AutoMLJobConfig?: AutoMLJobConfig;
-
-  /**
-   * <p>The ARN of the role that is used to access the data.</p>
-   * @public
-   */
-  RoleArn: string | undefined;
-
-  /**
-   * <p>Generates possible candidates without training the models. A candidate is a combination
-   *          of data preprocessors, algorithms, and algorithm parameter settings.</p>
-   * @public
-   */
-  GenerateCandidateDefinitionsOnly?: boolean;
-
-  /**
-   * <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services
-   *          resources in different ways, for example, by purpose, owner, or environment. For more
-   *          information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web ServicesResources</a>. Tag keys must be unique per
-   *          resource.</p>
-   * @public
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model
-   *          deployment.</p>
-   * @public
-   */
-  ModelDeployConfig?: ModelDeployConfig;
-}
-
-/**
- * @public
- */
-export interface CreateAutoMLJobResponse {
-  /**
-   * <p>The unique ARN assigned to the AutoML job when it is created.</p>
-   * @public
-   */
-  AutoMLJobArn: string | undefined;
 }

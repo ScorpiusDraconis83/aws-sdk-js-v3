@@ -187,9 +187,7 @@ export class CreateApplicationVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -201,4 +199,16 @@ export class CreateApplicationVersionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateApplicationVersionCommand)
   .de(de_CreateApplicationVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApplicationVersionMessage;
+      output: ApplicationVersionDescriptionMessage;
+    };
+    sdk: {
+      input: CreateApplicationVersionCommandInput;
+      output: CreateApplicationVersionCommandOutput;
+    };
+  };
+}

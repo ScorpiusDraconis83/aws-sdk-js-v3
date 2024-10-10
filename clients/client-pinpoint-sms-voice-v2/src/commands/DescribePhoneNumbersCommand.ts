@@ -59,6 +59,7 @@ export interface DescribePhoneNumbersCommandOutput extends DescribePhoneNumbersR
  *   ],
  *   NextToken: "STRING_VALUE",
  *   MaxResults: Number("int"),
+ *   Owner: "STRING_VALUE",
  * };
  * const command = new DescribePhoneNumbersCommand(input);
  * const response = await client.send(command);
@@ -129,9 +130,7 @@ export class DescribePhoneNumbersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointSMSVoiceV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +142,16 @@ export class DescribePhoneNumbersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribePhoneNumbersCommand)
   .de(de_DescribePhoneNumbersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePhoneNumbersRequest;
+      output: DescribePhoneNumbersResult;
+    };
+    sdk: {
+      input: DescribePhoneNumbersCommandInput;
+      output: DescribePhoneNumbersCommandOutput;
+    };
+  };
+}

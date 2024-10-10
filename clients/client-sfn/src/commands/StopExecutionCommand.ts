@@ -88,9 +88,7 @@ export class StopExecutionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SFNClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class StopExecutionCommand extends $Command
   .f(StopExecutionInputFilterSensitiveLog, void 0)
   .ser(se_StopExecutionCommand)
   .de(de_StopExecutionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopExecutionInput;
+      output: StopExecutionOutput;
+    };
+    sdk: {
+      input: StopExecutionCommandInput;
+      output: StopExecutionCommandOutput;
+    };
+  };
+}

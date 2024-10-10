@@ -147,9 +147,7 @@ export class ListManagedEndpointsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRContainersClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -161,4 +159,16 @@ export class ListManagedEndpointsCommand extends $Command
   .f(void 0, ListManagedEndpointsResponseFilterSensitiveLog)
   .ser(se_ListManagedEndpointsCommand)
   .de(de_ListManagedEndpointsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListManagedEndpointsRequest;
+      output: ListManagedEndpointsResponse;
+    };
+    sdk: {
+      input: ListManagedEndpointsCommandInput;
+      output: ListManagedEndpointsCommandOutput;
+    };
+  };
+}

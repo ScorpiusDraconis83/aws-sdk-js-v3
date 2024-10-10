@@ -78,7 +78,7 @@ export interface StartSessionCommandOutput extends StartSessionResponse, __Metad
  *
  * @throws {@link TargetNotConnected} (client fault)
  *  <p>The specified target managed node for the session isn't fully configured for use with Session Manager.
- *    For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html">Getting started with
+ *    For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html">Setting up
  *     Session Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. This error is also returned if you
  *    attempt to start a session on a managed node that is located in a different account or
  *    Region</p>
@@ -96,9 +96,7 @@ export class StartSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class StartSessionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartSessionCommand)
   .de(de_StartSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSessionRequest;
+      output: StartSessionResponse;
+    };
+    sdk: {
+      input: StartSessionCommandInput;
+      output: StartSessionCommandOutput;
+    };
+  };
+}

@@ -87,9 +87,7 @@ export class ListTopicRulesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ListTopicRulesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTopicRulesCommand)
   .de(de_ListTopicRulesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTopicRulesRequest;
+      output: ListTopicRulesResponse;
+    };
+    sdk: {
+      input: ListTopicRulesCommandInput;
+      output: ListTopicRulesCommandOutput;
+    };
+  };
+}

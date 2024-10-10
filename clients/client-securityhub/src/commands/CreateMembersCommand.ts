@@ -50,7 +50,7 @@ export interface CreateMembersCommandOutput extends CreateMembersResponse, __Met
  *          then send an invitation to the member account. To send the invitation, you use the
  *                <code>InviteMembers</code> operation. If the account owner accepts
  *          the invitation, the account becomes a member account in Security Hub.</p>
- *          <p>Accounts that are managed using Organizations do not receive an invitation. They
+ *          <p>Accounts that are managed using Organizations don't receive an invitation. They
  *          automatically become a member account in Security Hub.</p>
  *          <ul>
  *             <li>
@@ -152,9 +152,7 @@ export class CreateMembersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -166,4 +164,16 @@ export class CreateMembersCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateMembersCommand)
   .de(de_CreateMembersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMembersRequest;
+      output: CreateMembersResponse;
+    };
+    sdk: {
+      input: CreateMembersCommandInput;
+      output: CreateMembersCommandOutput;
+    };
+  };
+}

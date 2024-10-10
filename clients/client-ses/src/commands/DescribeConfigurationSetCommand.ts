@@ -112,9 +112,7 @@ export class DescribeConfigurationSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class DescribeConfigurationSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeConfigurationSetCommand)
   .de(de_DescribeConfigurationSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationSetRequest;
+      output: DescribeConfigurationSetResponse;
+    };
+    sdk: {
+      input: DescribeConfigurationSetCommandInput;
+      output: DescribeConfigurationSetCommandOutput;
+    };
+  };
+}

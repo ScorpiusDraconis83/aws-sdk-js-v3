@@ -100,9 +100,7 @@ export class CreateStorageProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class CreateStorageProfileCommand extends $Command
   .f(CreateStorageProfileRequestFilterSensitiveLog, void 0)
   .ser(se_CreateStorageProfileCommand)
   .de(de_CreateStorageProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStorageProfileRequest;
+      output: CreateStorageProfileResponse;
+    };
+    sdk: {
+      input: CreateStorageProfileCommandInput;
+      output: CreateStorageProfileCommandOutput;
+    };
+  };
+}

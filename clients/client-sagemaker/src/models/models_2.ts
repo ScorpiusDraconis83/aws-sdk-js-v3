@@ -42,6 +42,8 @@ import {
   CheckpointConfig,
   ClusterInstanceGroupDetails,
   ClusterNodeDetails,
+  ClusterNodeRecovery,
+  ClusterOrchestrator,
   ClusterStatus,
   CodeEditorAppImageConfig,
   CodeRepository,
@@ -49,7 +51,6 @@ import {
   CognitoMemberDefinition,
   CollectionConfiguration,
   CompilationJobStatus,
-  ContainerDefinition,
   ContextSource,
   GitConfig,
   HyperParameterTuningJobObjectiveType,
@@ -57,7 +58,6 @@ import {
   JupyterLabAppImageConfig,
   KernelGatewayImageConfig,
   MetadataProperties,
-  ModelDeployConfig,
   ObjectiveStatus,
   OutputDataConfig,
   ProblemType,
@@ -78,7 +78,6 @@ import {
 
 import {
   DataCaptureConfig,
-  DataDistributionType,
   DataQualityAppSpecification,
   DataQualityBaselineConfig,
   DataQualityJobInput,
@@ -91,7 +90,6 @@ import {
   EdgeOutputConfig,
   EdgePresetDeploymentType,
   EndpointInfo,
-  ExperimentConfig,
   ExplainerConfig,
   FeatureDefinition,
   FeatureType,
@@ -100,28 +98,19 @@ import {
   HumanLoopActivationConfig,
   HumanLoopConfig,
   HumanLoopRequestSource,
-  HumanTaskConfig,
   HyperParameterTrainingJobDefinition,
   HyperParameterTuningJobConfig,
   HyperParameterTuningJobWarmStartConfig,
   InferenceComponentComputeResourceRequirements,
   InferenceComponentStartupParameters,
-  InferenceExecutionConfig,
   InferenceExperimentDataStorageConfig,
   InferenceExperimentSchedule,
   InferenceExperimentType,
   InputConfig,
-  InputMode,
   JobType,
   JupyterServerAppSettings,
   KernelGatewayAppSettings,
-  LabelingJobAlgorithmsConfig,
-  LabelingJobInputConfig,
-  LabelingJobOutputConfig,
-  LabelingJobStoppingConditions,
-  ModelBiasAppSpecification,
-  ModelBiasBaselineConfig,
-  ModelBiasJobInput,
+  ModelDeployConfig,
   ModelInfrastructureConfig,
   MonitoringNetworkConfig,
   MonitoringOutputConfig,
@@ -143,15 +132,272 @@ import {
   RecommendationJobInputConfig,
   RecommendationJobStoppingConditions,
   RecommendationJobType,
-  RedshiftResultCompressionType,
-  RedshiftResultFormat,
   RetryStrategy,
   ShadowModeConfig,
+  TagPropagation,
   ThroughputMode,
-  TrackingServerSize,
   UserSettings,
   VendorGuidance,
 } from "./models_1";
+
+/**
+ * @public
+ */
+export interface CreatePresignedDomainUrlRequest {
+  /**
+   * <p>The domain ID.</p>
+   * @public
+   */
+  DomainId: string | undefined;
+
+  /**
+   * <p>The name of the UserProfile to sign-in as.</p>
+   * @public
+   */
+  UserProfileName: string | undefined;
+
+  /**
+   * <p>The session expiration duration in seconds. This value defaults to 43200.</p>
+   * @public
+   */
+  SessionExpirationDurationInSeconds?: number;
+
+  /**
+   * <p>The number of seconds until the pre-signed URL expires. This value defaults to 300.</p>
+   * @public
+   */
+  ExpiresInSeconds?: number;
+
+  /**
+   * <p>The name of the space.</p>
+   * @public
+   */
+  SpaceName?: string;
+
+  /**
+   * <p>The landing page that the user is directed to when accessing the presigned URL. Using this
+   *       value, users can access Studio or Studio Classic, even if it is not the default experience for
+   *       the domain. The supported values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>studio::relative/path</code>: Directs users to the relative path in
+   *           Studio.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>app:JupyterServer:relative/path</code>: Directs users to the relative path in
+   *           the Studio Classic application.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>app:JupyterLab:relative/path</code>: Directs users to the relative path in the
+   *           JupyterLab application.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>app:RStudioServerPro:relative/path</code>: Directs users to the relative path in
+   *           the RStudio application.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>app:CodeEditor:relative/path</code>: Directs users to the relative path in the
+   *           Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>app:Canvas:relative/path</code>: Directs users to the relative path in the
+   *           Canvas application.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  LandingUri?: string;
+}
+
+/**
+ * @public
+ */
+export interface CreatePresignedDomainUrlResponse {
+  /**
+   * <p>The presigned URL.</p>
+   * @public
+   */
+  AuthorizedUrl?: string;
+}
+
+/**
+ * @public
+ */
+export interface CreatePresignedMlflowTrackingServerUrlRequest {
+  /**
+   * <p>The name of the tracking server to connect to your MLflow UI.</p>
+   * @public
+   */
+  TrackingServerName: string | undefined;
+
+  /**
+   * <p>The duration in seconds that your presigned URL is valid. The presigned URL can be used
+   *       only once.</p>
+   * @public
+   */
+  ExpiresInSeconds?: number;
+
+  /**
+   * <p>The duration in seconds that your MLflow UI session is valid.</p>
+   * @public
+   */
+  SessionExpirationDurationInSeconds?: number;
+}
+
+/**
+ * @public
+ */
+export interface CreatePresignedMlflowTrackingServerUrlResponse {
+  /**
+   * <p>A presigned URL with an authorization token.</p>
+   * @public
+   */
+  AuthorizedUrl?: string;
+}
+
+/**
+ * @public
+ */
+export interface CreatePresignedNotebookInstanceUrlInput {
+  /**
+   * <p>The name of the notebook instance.</p>
+   * @public
+   */
+  NotebookInstanceName: string | undefined;
+
+  /**
+   * <p>The duration of the session, in seconds. The default is 12 hours.</p>
+   * @public
+   */
+  SessionExpirationDurationInSeconds?: number;
+}
+
+/**
+ * @public
+ */
+export interface CreatePresignedNotebookInstanceUrlOutput {
+  /**
+   * <p>A JSON object that contains the URL string. </p>
+   * @public
+   */
+  AuthorizedUrl?: string;
+}
+
+/**
+ * <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when
+ *       you call the following APIs:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export interface ExperimentConfig {
+  /**
+   * <p>The name of an existing experiment to associate with the trial component.</p>
+   * @public
+   */
+  ExperimentName?: string;
+
+  /**
+   * <p>The name of an existing trial to associate the trial component with. If not specified, a
+   *       new trial is created.</p>
+   * @public
+   */
+  TrialName?: string;
+
+  /**
+   * <p>The display name for the trial component. If this key isn't specified, the display name is
+   *       the trial component name.</p>
+   * @public
+   */
+  TrialComponentDisplayName?: string;
+
+  /**
+   * <p>The name of the experiment run to associate with the trial component.</p>
+   * @public
+   */
+  RunName?: string;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const DataDistributionType = {
+  FULLYREPLICATED: "FullyReplicated",
+  SHARDEDBYS3KEY: "ShardedByS3Key",
+} as const;
+
+/**
+ * @public
+ */
+export type DataDistributionType = (typeof DataDistributionType)[keyof typeof DataDistributionType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InputMode = {
+  FILE: "File",
+  PIPE: "Pipe",
+} as const;
+
+/**
+ * @public
+ */
+export type InputMode = (typeof InputMode)[keyof typeof InputMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const RedshiftResultCompressionType = {
+  BZIP2: "BZIP2",
+  GZIP: "GZIP",
+  NONE: "None",
+  SNAPPY: "SNAPPY",
+  ZSTD: "ZSTD",
+} as const;
+
+/**
+ * @public
+ */
+export type RedshiftResultCompressionType =
+  (typeof RedshiftResultCompressionType)[keyof typeof RedshiftResultCompressionType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RedshiftResultFormat = {
+  CSV: "CSV",
+  PARQUET: "PARQUET",
+} as const;
+
+/**
+ * @public
+ */
+export type RedshiftResultFormat = (typeof RedshiftResultFormat)[keyof typeof RedshiftResultFormat];
 
 /**
  * <p>Configuration for Redshift Dataset Definition input.</p>
@@ -778,6 +1024,32 @@ export interface OwnershipSettings {
 }
 
 /**
+ * <p>Settings related to idle shutdown of Studio applications in a space.</p>
+ * @public
+ */
+export interface SpaceIdleSettings {
+  /**
+   * <p>The time that SageMaker waits after the application becomes idle before shutting it
+   *       down.</p>
+   * @public
+   */
+  IdleTimeoutInMinutes?: number;
+}
+
+/**
+ * <p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio
+ *       applications in a space.</p>
+ * @public
+ */
+export interface SpaceAppLifecycleManagement {
+  /**
+   * <p>Settings related to idle shutdown of Studio applications.</p>
+   * @public
+   */
+  IdleSettings?: SpaceIdleSettings;
+}
+
+/**
  * <p>The application settings for a Code Editor space.</p>
  * @public
  */
@@ -788,6 +1060,13 @@ export interface SpaceCodeEditorAppSettings {
    * @public
    */
   DefaultResourceSpec?: ResourceSpec;
+
+  /**
+   * <p>Settings that are used to configure and manage the lifecycle of CodeEditor applications in
+   *       a space.</p>
+   * @public
+   */
+  AppLifecycleManagement?: SpaceAppLifecycleManagement;
 }
 
 /**
@@ -860,6 +1139,13 @@ export interface SpaceJupyterLabAppSettings {
    * @public
    */
   CodeRepositories?: CodeRepository[];
+
+  /**
+   * <p>Settings that are used to configure and manage the lifecycle of JupyterLab applications in
+   *       a space.</p>
+   * @public
+   */
+  AppLifecycleManagement?: SpaceAppLifecycleManagement;
 }
 
 /**
@@ -1756,7 +2042,8 @@ export interface CreateTransformJobRequest {
   BatchStrategy?: BatchStrategy;
 
   /**
-   * <p>The environment variables to set in the Docker container. We support up to 16 key and
+   * <p>The environment variables to set in the Docker container. Don't include any
+   *             sensitive data in your environment variables. We support up to 16 key and
    *             values entries in the map.</p>
    * @public
    */
@@ -4105,6 +4392,12 @@ export interface DescribeAppResponse {
    * @public
    */
   ResourceSpec?: ResourceSpec;
+
+  /**
+   * <p>The lifecycle configuration that runs before the default lifecycle configuration</p>
+   * @public
+   */
+  BuiltInLifecycleConfigArn?: string;
 }
 
 /**
@@ -4656,6 +4949,18 @@ export interface DescribeClusterResponse {
    * @public
    */
   VpcConfig?: VpcConfig;
+
+  /**
+   * <p>The type of orchestrator used for the SageMaker HyperPod cluster. </p>
+   * @public
+   */
+  Orchestrator?: ClusterOrchestrator;
+
+  /**
+   * <p>The node recovery mode configured for the SageMaker HyperPod cluster.</p>
+   * @public
+   */
+  NodeRecovery?: ClusterNodeRecovery;
 }
 
 /**
@@ -5447,6 +5752,12 @@ export interface DescribeDomainResponse {
    * @public
    */
   AppSecurityGroupManagement?: AppSecurityGroupManagement;
+
+  /**
+   * <p>Indicates whether custom tag propagation is supported for the domain.</p>
+   * @public
+   */
+  TagPropagation?: TagPropagation;
 
   /**
    * <p>The default settings used to create a space.</p>
@@ -8859,605 +9170,6 @@ export const LabelingJobStatus = {
  * @public
  */
 export type LabelingJobStatus = (typeof LabelingJobStatus)[keyof typeof LabelingJobStatus];
-
-/**
- * @public
- */
-export interface DescribeLabelingJobResponse {
-  /**
-   * <p>The processing status of the labeling job. </p>
-   * @public
-   */
-  LabelingJobStatus: LabelingJobStatus | undefined;
-
-  /**
-   * <p>Provides a breakdown of the number of data objects labeled by humans, the number of
-   *             objects labeled by machine, the number of objects than couldn't be labeled, and the
-   *             total number of objects labeled. </p>
-   * @public
-   */
-  LabelCounters: LabelCounters | undefined;
-
-  /**
-   * <p>If the job failed, the reason that it failed. </p>
-   * @public
-   */
-  FailureReason?: string;
-
-  /**
-   * <p>The date and time that the labeling job was created.</p>
-   * @public
-   */
-  CreationTime: Date | undefined;
-
-  /**
-   * <p>The date and time that the labeling job was last updated.</p>
-   * @public
-   */
-  LastModifiedTime: Date | undefined;
-
-  /**
-   * <p>A unique identifier for work done as part of a labeling job.</p>
-   * @public
-   */
-  JobReferenceCode: string | undefined;
-
-  /**
-   * <p>The name assigned to the labeling job when it was created.</p>
-   * @public
-   */
-  LabelingJobName: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the labeling job.</p>
-   * @public
-   */
-  LabelingJobArn: string | undefined;
-
-  /**
-   * <p>The attribute used as the label in the output manifest file.</p>
-   * @public
-   */
-  LabelAttributeName?: string;
-
-  /**
-   * <p>Input configuration information for the labeling job, such as the Amazon S3 location of the
-   *             data objects and the location of the manifest file that describes the data
-   *             objects.</p>
-   * @public
-   */
-  InputConfig: LabelingJobInputConfig | undefined;
-
-  /**
-   * <p>The location of the job's output data and the Amazon Web Services Key Management
-   *             Service key ID for the key used to encrypt the output data, if any.</p>
-   * @public
-   */
-  OutputConfig: LabelingJobOutputConfig | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on your behalf
-   *             during data labeling.</p>
-   * @public
-   */
-  RoleArn: string | undefined;
-
-  /**
-   * <p>The S3 location of the JSON file that defines the categories used to label data
-   *             objects. Please note the following label-category limits:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Semantic segmentation labeling jobs using automated labeling: 20 labels</p>
-   *             </li>
-   *             <li>
-   *                <p>Box bounding labeling jobs (all): 10 labels</p>
-   *             </li>
-   *          </ul>
-   *          <p>The file is a JSON structure in the following format:</p>
-   *          <p>
-   *             <code>\{</code>
-   *          </p>
-   *          <p>
-   *             <code> "document-version": "2018-11-28"</code>
-   *          </p>
-   *          <p>
-   *             <code> "labels": [</code>
-   *          </p>
-   *          <p>
-   *             <code> \{</code>
-   *          </p>
-   *          <p>
-   *             <code> "label": "<i>label 1</i>"</code>
-   *          </p>
-   *          <p>
-   *             <code> \},</code>
-   *          </p>
-   *          <p>
-   *             <code> \{</code>
-   *          </p>
-   *          <p>
-   *             <code> "label": "<i>label 2</i>"</code>
-   *          </p>
-   *          <p>
-   *             <code> \},</code>
-   *          </p>
-   *          <p>
-   *             <code> ...</code>
-   *          </p>
-   *          <p>
-   *             <code> \{</code>
-   *          </p>
-   *          <p>
-   *             <code> "label": "<i>label n</i>"</code>
-   *          </p>
-   *          <p>
-   *             <code> \}</code>
-   *          </p>
-   *          <p>
-   *             <code> ]</code>
-   *          </p>
-   *          <p>
-   *             <code>\}</code>
-   *          </p>
-   * @public
-   */
-  LabelCategoryConfigS3Uri?: string;
-
-  /**
-   * <p>A set of conditions for stopping a labeling job. If any of the conditions are met, the
-   *             job is automatically stopped.</p>
-   * @public
-   */
-  StoppingConditions?: LabelingJobStoppingConditions;
-
-  /**
-   * <p>Configuration information for automated data labeling.</p>
-   * @public
-   */
-  LabelingJobAlgorithmsConfig?: LabelingJobAlgorithmsConfig;
-
-  /**
-   * <p>Configuration information required for human workers to complete a labeling
-   *             task.</p>
-   * @public
-   */
-  HumanTaskConfig: HumanTaskConfig | undefined;
-
-  /**
-   * <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services
-   *             resources in different ways, for example, by purpose, owner, or environment. For more
-   *             information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
-   * @public
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>The location of the output produced by the labeling job.</p>
-   * @public
-   */
-  LabelingJobOutput?: LabelingJobOutput;
-}
-
-/**
- * @public
- */
-export interface DescribeLineageGroupRequest {
-  /**
-   * <p>The name of the lineage group.</p>
-   * @public
-   */
-  LineageGroupName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DescribeLineageGroupResponse {
-  /**
-   * <p>The name of the lineage group.</p>
-   * @public
-   */
-  LineageGroupName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the lineage group.</p>
-   * @public
-   */
-  LineageGroupArn?: string;
-
-  /**
-   * <p>The display name of the lineage group.</p>
-   * @public
-   */
-  DisplayName?: string;
-
-  /**
-   * <p>The description of the lineage group.</p>
-   * @public
-   */
-  Description?: string;
-
-  /**
-   * <p>The creation time of lineage group.</p>
-   * @public
-   */
-  CreationTime?: Date;
-
-  /**
-   * <p>Information about the user who created or modified an experiment, trial, trial
-   *       component, lineage group, project, or model card.</p>
-   * @public
-   */
-  CreatedBy?: UserContext;
-
-  /**
-   * <p>The last modified time of the lineage group.</p>
-   * @public
-   */
-  LastModifiedTime?: Date;
-
-  /**
-   * <p>Information about the user who created or modified an experiment, trial, trial
-   *       component, lineage group, project, or model card.</p>
-   * @public
-   */
-  LastModifiedBy?: UserContext;
-}
-
-/**
- * @public
- */
-export interface DescribeMlflowTrackingServerRequest {
-  /**
-   * <p>The name of the MLflow Tracking Server to describe.</p>
-   * @public
-   */
-  TrackingServerName: string | undefined;
-}
-
-/**
- * @public
- * @enum
- */
-export const IsTrackingServerActive = {
-  ACTIVE: "Active",
-  INACTIVE: "Inactive",
-} as const;
-
-/**
- * @public
- */
-export type IsTrackingServerActive = (typeof IsTrackingServerActive)[keyof typeof IsTrackingServerActive];
-
-/**
- * @public
- * @enum
- */
-export const TrackingServerStatus = {
-  CREATED: "Created",
-  CREATE_FAILED: "CreateFailed",
-  CREATING: "Creating",
-  DELETE_FAILED: "DeleteFailed",
-  DELETING: "Deleting",
-  MAINTENANCE_COMPLETE: "MaintenanceComplete",
-  MAINTENANCE_FAILED: "MaintenanceFailed",
-  MAINTENANCE_IN_PROGRESS: "MaintenanceInProgress",
-  STARTED: "Started",
-  STARTING: "Starting",
-  START_FAILED: "StartFailed",
-  STOPPED: "Stopped",
-  STOPPING: "Stopping",
-  STOP_FAILED: "StopFailed",
-  UPDATED: "Updated",
-  UPDATE_FAILED: "UpdateFailed",
-  UPDATING: "Updating",
-} as const;
-
-/**
- * @public
- */
-export type TrackingServerStatus = (typeof TrackingServerStatus)[keyof typeof TrackingServerStatus];
-
-/**
- * @public
- */
-export interface DescribeMlflowTrackingServerResponse {
-  /**
-   * <p>The ARN of the described tracking server.</p>
-   * @public
-   */
-  TrackingServerArn?: string;
-
-  /**
-   * <p>The name of the described tracking server.</p>
-   * @public
-   */
-  TrackingServerName?: string;
-
-  /**
-   * <p>The S3 URI of the general purpose bucket used as the MLflow Tracking Server
-   *       artifact store.</p>
-   * @public
-   */
-  ArtifactStoreUri?: string;
-
-  /**
-   * <p>The size of the described tracking server.</p>
-   * @public
-   */
-  TrackingServerSize?: TrackingServerSize;
-
-  /**
-   * <p>The MLflow version used for the described tracking server.</p>
-   * @public
-   */
-  MlflowVersion?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for an IAM role in your account that the described MLflow Tracking Server
-   *       uses to access the artifact store in Amazon S3.</p>
-   * @public
-   */
-  RoleArn?: string;
-
-  /**
-   * <p>The current creation status of the described MLflow Tracking Server.</p>
-   * @public
-   */
-  TrackingServerStatus?: TrackingServerStatus;
-
-  /**
-   * <p>Whether the described MLflow Tracking Server is currently active.</p>
-   * @public
-   */
-  IsActive?: IsTrackingServerActive;
-
-  /**
-   * <p>The URL to connect to the MLflow user interface for the described tracking server.</p>
-   * @public
-   */
-  TrackingServerUrl?: string;
-
-  /**
-   * <p>The day and time of the week when weekly maintenance occurs on the described tracking server.</p>
-   * @public
-   */
-  WeeklyMaintenanceWindowStart?: string;
-
-  /**
-   * <p>Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.</p>
-   * @public
-   */
-  AutomaticModelRegistration?: boolean;
-
-  /**
-   * <p>The timestamp of when the described MLflow Tracking Server was created.</p>
-   * @public
-   */
-  CreationTime?: Date;
-
-  /**
-   * <p>Information about the user who created or modified an experiment, trial, trial
-   *       component, lineage group, project, or model card.</p>
-   * @public
-   */
-  CreatedBy?: UserContext;
-
-  /**
-   * <p>The timestamp of when the described MLflow Tracking Server was last modified.</p>
-   * @public
-   */
-  LastModifiedTime?: Date;
-
-  /**
-   * <p>Information about the user who created or modified an experiment, trial, trial
-   *       component, lineage group, project, or model card.</p>
-   * @public
-   */
-  LastModifiedBy?: UserContext;
-}
-
-/**
- * @public
- */
-export interface DescribeModelInput {
-  /**
-   * <p>The name of the model.</p>
-   * @public
-   */
-  ModelName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DescribeModelOutput {
-  /**
-   * <p>Name of the SageMaker model.</p>
-   * @public
-   */
-  ModelName: string | undefined;
-
-  /**
-   * <p>The location of the primary inference code, associated artifacts, and custom
-   *             environment map that the inference code uses when it is deployed in production.
-   *         </p>
-   * @public
-   */
-  PrimaryContainer?: ContainerDefinition;
-
-  /**
-   * <p>The containers in the inference pipeline.</p>
-   * @public
-   */
-  Containers?: ContainerDefinition[];
-
-  /**
-   * <p>Specifies details of how containers in a multi-container endpoint are called.</p>
-   * @public
-   */
-  InferenceExecutionConfig?: InferenceExecutionConfig;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the IAM role that you specified for the
-   *             model.</p>
-   * @public
-   */
-  ExecutionRoleArn?: string;
-
-  /**
-   * <p>A <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html">VpcConfig</a> object that specifies the VPC that this model has access to. For
-   *             more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html">Protect Endpoints by Using an Amazon Virtual
-   *                 Private Cloud</a>
-   *          </p>
-   * @public
-   */
-  VpcConfig?: VpcConfig;
-
-  /**
-   * <p>A timestamp that shows when the model was created.</p>
-   * @public
-   */
-  CreationTime: Date | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the model.</p>
-   * @public
-   */
-  ModelArn: string | undefined;
-
-  /**
-   * <p>If <code>True</code>, no inbound or outbound network calls can be made to or from the
-   *             model container.</p>
-   * @public
-   */
-  EnableNetworkIsolation?: boolean;
-
-  /**
-   * <p>A set of recommended deployment configurations for the model.</p>
-   * @public
-   */
-  DeploymentRecommendation?: DeploymentRecommendation;
-}
-
-/**
- * @public
- */
-export interface DescribeModelBiasJobDefinitionRequest {
-  /**
-   * <p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>
-   * @public
-   */
-  JobDefinitionName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DescribeModelBiasJobDefinitionResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the model bias job.</p>
-   * @public
-   */
-  JobDefinitionArn: string | undefined;
-
-  /**
-   * <p>The name of the bias job definition. The name must be unique within an Amazon Web Services
-   *    Region in the Amazon Web Services account.</p>
-   * @public
-   */
-  JobDefinitionName: string | undefined;
-
-  /**
-   * <p>The time at which the model bias job was created.</p>
-   * @public
-   */
-  CreationTime: Date | undefined;
-
-  /**
-   * <p>The baseline configuration for a model bias job.</p>
-   * @public
-   */
-  ModelBiasBaselineConfig?: ModelBiasBaselineConfig;
-
-  /**
-   * <p>Configures the model bias job to run a specified Docker container image.</p>
-   * @public
-   */
-  ModelBiasAppSpecification: ModelBiasAppSpecification | undefined;
-
-  /**
-   * <p>Inputs for the model bias job.</p>
-   * @public
-   */
-  ModelBiasJobInput: ModelBiasJobInput | undefined;
-
-  /**
-   * <p>The output configuration for monitoring jobs.</p>
-   * @public
-   */
-  ModelBiasJobOutputConfig: MonitoringOutputConfig | undefined;
-
-  /**
-   * <p>Identifies the resources to deploy for a monitoring job.</p>
-   * @public
-   */
-  JobResources: MonitoringResources | undefined;
-
-  /**
-   * <p>Networking options for a model bias job.</p>
-   * @public
-   */
-  NetworkConfig?: MonitoringNetworkConfig;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the IAM role that has read permission to the
-   *    input data location and write permission to the output data location in Amazon S3.</p>
-   * @public
-   */
-  RoleArn: string | undefined;
-
-  /**
-   * <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
-   * @public
-   */
-  StoppingCondition?: MonitoringStoppingCondition;
-}
-
-/**
- * @public
- */
-export interface DescribeModelCardRequest {
-  /**
-   * <p>The name or Amazon Resource Name (ARN) of the model card to describe.</p>
-   * @public
-   */
-  ModelCardName: string | undefined;
-
-  /**
-   * <p>The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.</p>
-   * @public
-   */
-  ModelCardVersion?: number;
-}
-
-/**
- * @public
- * @enum
- */
-export const ModelCardProcessingStatus = {
-  CONTENT_DELETED: "ContentDeleted",
-  DELETE_COMPLETED: "DeleteCompleted",
-  DELETE_FAILED: "DeleteFailed",
-  DELETE_INPROGRESS: "DeleteInProgress",
-  DELETE_PENDING: "DeletePending",
-  EXPORTJOBS_DELETED: "ExportJobsDeleted",
-} as const;
-
-/**
- * @public
- */
-export type ModelCardProcessingStatus = (typeof ModelCardProcessingStatus)[keyof typeof ModelCardProcessingStatus];
 
 /**
  * @internal

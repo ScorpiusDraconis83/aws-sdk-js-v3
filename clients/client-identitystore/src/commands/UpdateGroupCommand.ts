@@ -99,9 +99,7 @@ export class UpdateGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IdentitystoreClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class UpdateGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateGroupCommand)
   .de(de_UpdateGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGroupRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateGroupCommandInput;
+      output: UpdateGroupCommandOutput;
+    };
+  };
+}

@@ -43,7 +43,6 @@ export interface DescribeVpcAttributeCommandOutput extends DescribeVpcAttributeR
  * const command = new DescribeVpcAttributeCommand(input);
  * const response = await client.send(command);
  * // { // DescribeVpcAttributeResult
- * //   VpcId: "STRING_VALUE",
  * //   EnableDnsHostnames: { // AttributeBooleanValue
  * //     Value: true || false,
  * //   },
@@ -53,6 +52,7 @@ export interface DescribeVpcAttributeCommandOutput extends DescribeVpcAttributeR
  * //   EnableNetworkAddressUsageMetrics: {
  * //     Value: true || false,
  * //   },
+ * //   VpcId: "STRING_VALUE",
  * // };
  *
  * ```
@@ -116,9 +116,7 @@ export class DescribeVpcAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -130,4 +128,16 @@ export class DescribeVpcAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVpcAttributeCommand)
   .de(de_DescribeVpcAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcAttributeRequest;
+      output: DescribeVpcAttributeResult;
+    };
+    sdk: {
+      input: DescribeVpcAttributeCommandInput;
+      output: DescribeVpcAttributeCommandOutput;
+    };
+  };
+}

@@ -202,9 +202,7 @@ export class UpdateContainerServiceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LightsailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -216,4 +214,16 @@ export class UpdateContainerServiceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateContainerServiceCommand)
   .de(de_UpdateContainerServiceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateContainerServiceRequest;
+      output: UpdateContainerServiceResult;
+    };
+    sdk: {
+      input: UpdateContainerServiceCommandInput;
+      output: UpdateContainerServiceCommandOutput;
+    };
+  };
+}

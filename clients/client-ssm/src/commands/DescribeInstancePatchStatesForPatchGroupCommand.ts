@@ -122,9 +122,7 @@ export class DescribeInstancePatchStatesForPatchGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class DescribeInstancePatchStatesForPatchGroupCommand extends $Command
   .f(void 0, DescribeInstancePatchStatesForPatchGroupResultFilterSensitiveLog)
   .ser(se_DescribeInstancePatchStatesForPatchGroupCommand)
   .de(de_DescribeInstancePatchStatesForPatchGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstancePatchStatesForPatchGroupRequest;
+      output: DescribeInstancePatchStatesForPatchGroupResult;
+    };
+    sdk: {
+      input: DescribeInstancePatchStatesForPatchGroupCommandInput;
+      output: DescribeInstancePatchStatesForPatchGroupCommandOutput;
+    };
+  };
+}

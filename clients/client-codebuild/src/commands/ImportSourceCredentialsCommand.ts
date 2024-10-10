@@ -84,9 +84,7 @@ export class ImportSourceCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -98,4 +96,16 @@ export class ImportSourceCredentialsCommand extends $Command
   .f(ImportSourceCredentialsInputFilterSensitiveLog, void 0)
   .ser(se_ImportSourceCredentialsCommand)
   .de(de_ImportSourceCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportSourceCredentialsInput;
+      output: ImportSourceCredentialsOutput;
+    };
+    sdk: {
+      input: ImportSourceCredentialsCommandInput;
+      output: ImportSourceCredentialsCommandOutput;
+    };
+  };
+}

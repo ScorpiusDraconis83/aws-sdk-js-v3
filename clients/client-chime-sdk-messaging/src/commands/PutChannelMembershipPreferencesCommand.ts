@@ -128,9 +128,7 @@ export class PutChannelMembershipPreferencesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKMessagingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class PutChannelMembershipPreferencesCommand extends $Command
   )
   .ser(se_PutChannelMembershipPreferencesCommand)
   .de(de_PutChannelMembershipPreferencesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutChannelMembershipPreferencesRequest;
+      output: PutChannelMembershipPreferencesResponse;
+    };
+    sdk: {
+      input: PutChannelMembershipPreferencesCommandInput;
+      output: PutChannelMembershipPreferencesCommandOutput;
+    };
+  };
+}

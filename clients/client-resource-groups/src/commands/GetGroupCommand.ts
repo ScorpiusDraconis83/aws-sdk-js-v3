@@ -57,6 +57,12 @@ export interface GetGroupCommandOutput extends GetGroupOutput, __MetadataBearer 
  * //     GroupArn: "STRING_VALUE", // required
  * //     Name: "STRING_VALUE", // required
  * //     Description: "STRING_VALUE",
+ * //     Criticality: Number("int"),
+ * //     Owner: "STRING_VALUE",
+ * //     DisplayName: "STRING_VALUE",
+ * //     ApplicationTag: { // ApplicationTag
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
  * //   },
  * // };
  *
@@ -100,9 +106,7 @@ export class GetGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResourceGroupsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +118,16 @@ export class GetGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetGroupCommand)
   .de(de_GetGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGroupInput;
+      output: GetGroupOutput;
+    };
+    sdk: {
+      input: GetGroupCommandInput;
+      output: GetGroupCommandOutput;
+    };
+  };
+}

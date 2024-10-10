@@ -44,9 +44,9 @@ export interface ResetInstanceAttributeCommandOutput extends __MetadataBearer {}
  * // const { EC2Client, ResetInstanceAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // ResetInstanceAttributeRequest
- *   Attribute: "instanceType" || "kernel" || "ramdisk" || "userData" || "disableApiTermination" || "instanceInitiatedShutdownBehavior" || "rootDeviceName" || "blockDeviceMapping" || "productCodes" || "sourceDestCheck" || "groupSet" || "ebsOptimized" || "sriovNetSupport" || "enaSupport" || "enclaveOptions" || "disableApiStop", // required
  *   DryRun: true || false,
  *   InstanceId: "STRING_VALUE", // required
+ *   Attribute: "instanceType" || "kernel" || "ramdisk" || "userData" || "disableApiTermination" || "instanceInitiatedShutdownBehavior" || "rootDeviceName" || "blockDeviceMapping" || "productCodes" || "sourceDestCheck" || "groupSet" || "ebsOptimized" || "sriovNetSupport" || "enaSupport" || "enclaveOptions" || "disableApiStop", // required
  * };
  * const command = new ResetInstanceAttributeCommand(input);
  * const response = await client.send(command);
@@ -85,9 +85,7 @@ export class ResetInstanceAttributeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class ResetInstanceAttributeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ResetInstanceAttributeCommand)
   .de(de_ResetInstanceAttributeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResetInstanceAttributeRequest;
+      output: {};
+    };
+    sdk: {
+      input: ResetInstanceAttributeCommandInput;
+      output: ResetInstanceAttributeCommandOutput;
+    };
+  };
+}

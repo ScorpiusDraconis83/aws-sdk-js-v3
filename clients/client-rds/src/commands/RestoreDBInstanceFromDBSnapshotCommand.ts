@@ -44,6 +44,9 @@ export interface RestoreDBInstanceFromDBSnapshotCommandOutput
  *             DB instance with the DB instance created from the snapshot.</p>
  *          <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code>
  *       must be the ARN of the shared DB snapshot.</p>
+ *          <p>To restore from a DB snapshot with an unsupported engine version, you must first upgrade the
+ *         engine version of the snapshot. For more information about upgrading a RDS for MySQL DB snapshot engine version, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html">Upgrading a MySQL DB snapshot engine version</a>.
+ *         For more information about upgrading a RDS for PostgreSQL DB snapshot engine version, <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html">Upgrading a PostgreSQL DB snapshot engine version</a>.</p>
  *          <note>
  *             <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p>
  *          </note>
@@ -486,9 +489,7 @@ export class RestoreDBInstanceFromDBSnapshotCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -500,4 +501,16 @@ export class RestoreDBInstanceFromDBSnapshotCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RestoreDBInstanceFromDBSnapshotCommand)
   .de(de_RestoreDBInstanceFromDBSnapshotCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreDBInstanceFromDBSnapshotMessage;
+      output: RestoreDBInstanceFromDBSnapshotResult;
+    };
+    sdk: {
+      input: RestoreDBInstanceFromDBSnapshotCommandInput;
+      output: RestoreDBInstanceFromDBSnapshotCommandOutput;
+    };
+  };
+}

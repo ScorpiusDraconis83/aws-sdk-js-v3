@@ -89,9 +89,7 @@ export class DeleteSpeakerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VoiceIDClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class DeleteSpeakerCommand extends $Command
   .f(DeleteSpeakerRequestFilterSensitiveLog, void 0)
   .ser(se_DeleteSpeakerCommand)
   .de(de_DeleteSpeakerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSpeakerRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteSpeakerCommandInput;
+      output: DeleteSpeakerCommandOutput;
+    };
+  };
+}

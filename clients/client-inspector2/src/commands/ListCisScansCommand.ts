@@ -168,9 +168,7 @@ export class ListCisScansCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Inspector2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -182,4 +180,16 @@ export class ListCisScansCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListCisScansCommand)
   .de(de_ListCisScansCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCisScansRequest;
+      output: ListCisScansResponse;
+    };
+    sdk: {
+      input: ListCisScansCommandInput;
+      output: ListCisScansCommandOutput;
+    };
+  };
+}

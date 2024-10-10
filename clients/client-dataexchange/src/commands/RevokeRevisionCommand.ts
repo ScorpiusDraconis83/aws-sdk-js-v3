@@ -95,9 +95,7 @@ export class RevokeRevisionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataExchangeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -109,4 +107,16 @@ export class RevokeRevisionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_RevokeRevisionCommand)
   .de(de_RevokeRevisionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeRevisionRequest;
+      output: RevokeRevisionResponse;
+    };
+    sdk: {
+      input: RevokeRevisionCommandInput;
+      output: RevokeRevisionCommandOutput;
+    };
+  };
+}

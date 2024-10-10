@@ -238,9 +238,7 @@ export class StartCallAnalyticsStreamTranscriptionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TranscribeStreamingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -268,4 +266,16 @@ export class StartCallAnalyticsStreamTranscriptionCommand extends $Command
   )
   .ser(se_StartCallAnalyticsStreamTranscriptionCommand)
   .de(de_StartCallAnalyticsStreamTranscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartCallAnalyticsStreamTranscriptionRequest;
+      output: StartCallAnalyticsStreamTranscriptionResponse;
+    };
+    sdk: {
+      input: StartCallAnalyticsStreamTranscriptionCommandInput;
+      output: StartCallAnalyticsStreamTranscriptionCommandOutput;
+    };
+  };
+}

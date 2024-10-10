@@ -117,9 +117,7 @@ export class ListContactReferencesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -131,4 +129,16 @@ export class ListContactReferencesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListContactReferencesCommand)
   .de(de_ListContactReferencesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContactReferencesRequest;
+      output: ListContactReferencesResponse;
+    };
+    sdk: {
+      input: ListContactReferencesCommandInput;
+      output: ListContactReferencesCommandOutput;
+    };
+  };
+}

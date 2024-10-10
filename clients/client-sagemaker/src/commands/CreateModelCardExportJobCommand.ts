@@ -81,9 +81,7 @@ export class CreateModelCardExportJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class CreateModelCardExportJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateModelCardExportJobCommand)
   .de(de_CreateModelCardExportJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateModelCardExportJobRequest;
+      output: CreateModelCardExportJobResponse;
+    };
+    sdk: {
+      input: CreateModelCardExportJobCommandInput;
+      output: CreateModelCardExportJobCommandOutput;
+    };
+  };
+}

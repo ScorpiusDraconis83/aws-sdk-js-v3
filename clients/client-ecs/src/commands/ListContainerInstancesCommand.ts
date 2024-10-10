@@ -118,9 +118,7 @@ export class ListContainerInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -132,4 +130,16 @@ export class ListContainerInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListContainerInstancesCommand)
   .de(de_ListContainerInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContainerInstancesRequest;
+      output: ListContainerInstancesResponse;
+    };
+    sdk: {
+      input: ListContainerInstancesCommandInput;
+      output: ListContainerInstancesCommandOutput;
+    };
+  };
+}

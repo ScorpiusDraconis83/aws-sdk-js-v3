@@ -91,9 +91,7 @@ export class GetClusterSessionCredentialsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EMRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetClusterSessionCredentialsCommand extends $Command
   .f(void 0, GetClusterSessionCredentialsOutputFilterSensitiveLog)
   .ser(se_GetClusterSessionCredentialsCommand)
   .de(de_GetClusterSessionCredentialsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetClusterSessionCredentialsInput;
+      output: GetClusterSessionCredentialsOutput;
+    };
+    sdk: {
+      input: GetClusterSessionCredentialsCommandInput;
+      output: GetClusterSessionCredentialsCommandOutput;
+    };
+  };
+}

@@ -85,9 +85,7 @@ export class DeletePricingPlanCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BillingconductorClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class DeletePricingPlanCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeletePricingPlanCommand)
   .de(de_DeletePricingPlanCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePricingPlanInput;
+      output: DeletePricingPlanOutput;
+    };
+    sdk: {
+      input: DeletePricingPlanCommandInput;
+      output: DeletePricingPlanCommandOutput;
+    };
+  };
+}

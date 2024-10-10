@@ -111,9 +111,7 @@ export class DescribeWorkerConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KafkaConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class DescribeWorkerConfigurationCommand extends $Command
   .f(void 0, DescribeWorkerConfigurationResponseFilterSensitiveLog)
   .ser(se_DescribeWorkerConfigurationCommand)
   .de(de_DescribeWorkerConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkerConfigurationRequest;
+      output: DescribeWorkerConfigurationResponse;
+    };
+    sdk: {
+      input: DescribeWorkerConfigurationCommandInput;
+      output: DescribeWorkerConfigurationCommandOutput;
+    };
+  };
+}

@@ -212,9 +212,7 @@ export class CreateFlowVersionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -226,4 +224,16 @@ export class CreateFlowVersionCommand extends $Command
   .f(void 0, CreateFlowVersionResponseFilterSensitiveLog)
   .ser(se_CreateFlowVersionCommand)
   .de(de_CreateFlowVersionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFlowVersionRequest;
+      output: CreateFlowVersionResponse;
+    };
+    sdk: {
+      input: CreateFlowVersionCommandInput;
+      output: CreateFlowVersionCommandOutput;
+    };
+  };
+}

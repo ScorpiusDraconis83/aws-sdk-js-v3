@@ -159,9 +159,7 @@ export class CreateConfigurationTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticBeanstalkClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -173,4 +171,16 @@ export class CreateConfigurationTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateConfigurationTemplateCommand)
   .de(de_CreateConfigurationTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConfigurationTemplateMessage;
+      output: ConfigurationSettingsDescription;
+    };
+    sdk: {
+      input: CreateConfigurationTemplateCommandInput;
+      output: CreateConfigurationTemplateCommandOutput;
+    };
+  };
+}

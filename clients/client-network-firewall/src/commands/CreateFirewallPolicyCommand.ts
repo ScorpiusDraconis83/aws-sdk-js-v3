@@ -185,9 +185,7 @@ export class CreateFirewallPolicyCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NetworkFirewallClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -199,4 +197,16 @@ export class CreateFirewallPolicyCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateFirewallPolicyCommand)
   .de(de_CreateFirewallPolicyCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFirewallPolicyRequest;
+      output: CreateFirewallPolicyResponse;
+    };
+    sdk: {
+      input: CreateFirewallPolicyCommandInput;
+      output: CreateFirewallPolicyCommandOutput;
+    };
+  };
+}

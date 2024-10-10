@@ -104,9 +104,7 @@ export class PutRegistryScanningConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ECRClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class PutRegistryScanningConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutRegistryScanningConfigurationCommand)
   .de(de_PutRegistryScanningConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutRegistryScanningConfigurationRequest;
+      output: PutRegistryScanningConfigurationResponse;
+    };
+    sdk: {
+      input: PutRegistryScanningConfigurationCommandInput;
+      output: PutRegistryScanningConfigurationCommandOutput;
+    };
+  };
+}

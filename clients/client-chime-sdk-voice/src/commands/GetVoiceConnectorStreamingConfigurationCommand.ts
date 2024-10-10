@@ -110,9 +110,7 @@ export class GetVoiceConnectorStreamingConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeSDKVoiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -124,4 +122,16 @@ export class GetVoiceConnectorStreamingConfigurationCommand extends $Command
   .f(void 0, GetVoiceConnectorStreamingConfigurationResponseFilterSensitiveLog)
   .ser(se_GetVoiceConnectorStreamingConfigurationCommand)
   .de(de_GetVoiceConnectorStreamingConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVoiceConnectorStreamingConfigurationRequest;
+      output: GetVoiceConnectorStreamingConfigurationResponse;
+    };
+    sdk: {
+      input: GetVoiceConnectorStreamingConfigurationCommandInput;
+      output: GetVoiceConnectorStreamingConfigurationCommandOutput;
+    };
+  };
+}

@@ -94,9 +94,7 @@ export class UpdateTimelineEventCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMIncidentsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -108,4 +106,16 @@ export class UpdateTimelineEventCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTimelineEventCommand)
   .de(de_UpdateTimelineEventCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTimelineEventInput;
+      output: {};
+    };
+    sdk: {
+      input: UpdateTimelineEventCommandInput;
+      output: UpdateTimelineEventCommandOutput;
+    };
+  };
+}

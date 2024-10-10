@@ -87,9 +87,7 @@ export class ImportBackendAuthCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AmplifyBackendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ImportBackendAuthCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ImportBackendAuthCommand)
   .de(de_ImportBackendAuthCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportBackendAuthRequest;
+      output: ImportBackendAuthResponse;
+    };
+    sdk: {
+      input: ImportBackendAuthCommandInput;
+      output: ImportBackendAuthCommandOutput;
+    };
+  };
+}

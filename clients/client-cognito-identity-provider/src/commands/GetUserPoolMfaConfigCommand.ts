@@ -56,6 +56,10 @@ export interface GetUserPoolMfaConfigCommandOutput extends GetUserPoolMfaConfigR
  * //   SoftwareTokenMfaConfiguration: { // SoftwareTokenMfaConfigType
  * //     Enabled: true || false,
  * //   },
+ * //   EmailMfaConfiguration: { // EmailMfaConfigType
+ * //     Message: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
+ * //   },
  * //   MfaConfiguration: "OFF" || "ON" || "OPTIONAL",
  * // };
  *
@@ -98,9 +102,7 @@ export class GetUserPoolMfaConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +114,16 @@ export class GetUserPoolMfaConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetUserPoolMfaConfigCommand)
   .de(de_GetUserPoolMfaConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUserPoolMfaConfigRequest;
+      output: GetUserPoolMfaConfigResponse;
+    };
+    sdk: {
+      input: GetUserPoolMfaConfigCommandInput;
+      output: GetUserPoolMfaConfigCommandOutput;
+    };
+  };
+}

@@ -93,9 +93,7 @@ export class ListSimulationJobBatchesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RoboMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class ListSimulationJobBatchesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSimulationJobBatchesCommand)
   .de(de_ListSimulationJobBatchesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSimulationJobBatchesRequest;
+      output: ListSimulationJobBatchesResponse;
+    };
+    sdk: {
+      input: ListSimulationJobBatchesCommandInput;
+      output: ListSimulationJobBatchesCommandOutput;
+    };
+  };
+}

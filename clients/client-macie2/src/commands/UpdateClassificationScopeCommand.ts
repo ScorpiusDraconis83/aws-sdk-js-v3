@@ -86,9 +86,7 @@ export class UpdateClassificationScopeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Macie2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -100,4 +98,16 @@ export class UpdateClassificationScopeCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateClassificationScopeCommand)
   .de(de_UpdateClassificationScopeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateClassificationScopeRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateClassificationScopeCommandInput;
+      output: UpdateClassificationScopeCommandOutput;
+    };
+  };
+}

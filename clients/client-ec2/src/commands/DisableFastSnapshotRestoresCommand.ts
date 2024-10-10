@@ -99,9 +99,7 @@ export class DisableFastSnapshotRestoresCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class DisableFastSnapshotRestoresCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisableFastSnapshotRestoresCommand)
   .de(de_DisableFastSnapshotRestoresCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableFastSnapshotRestoresRequest;
+      output: DisableFastSnapshotRestoresResult;
+    };
+    sdk: {
+      input: DisableFastSnapshotRestoresCommandInput;
+      output: DisableFastSnapshotRestoresCommandOutput;
+    };
+  };
+}

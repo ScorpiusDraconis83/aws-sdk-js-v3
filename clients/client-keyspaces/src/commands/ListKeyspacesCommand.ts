@@ -92,9 +92,7 @@ export class ListKeyspacesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KeyspacesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class ListKeyspacesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListKeyspacesCommand)
   .de(de_ListKeyspacesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListKeyspacesRequest;
+      output: ListKeyspacesResponse;
+    };
+    sdk: {
+      input: ListKeyspacesCommandInput;
+      output: ListKeyspacesCommandOutput;
+    };
+  };
+}

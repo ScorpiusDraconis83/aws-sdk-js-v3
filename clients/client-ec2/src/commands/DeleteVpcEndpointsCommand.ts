@@ -80,9 +80,7 @@ export class DeleteVpcEndpointsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DeleteVpcEndpointsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteVpcEndpointsCommand)
   .de(de_DeleteVpcEndpointsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVpcEndpointsRequest;
+      output: DeleteVpcEndpointsResult;
+    };
+    sdk: {
+      input: DeleteVpcEndpointsCommandInput;
+      output: DeleteVpcEndpointsCommandOutput;
+    };
+  };
+}

@@ -45,9 +45,6 @@ export interface CreatePlacementGroupCommandOutput extends CreatePlacementGroupR
  * // const { EC2Client, CreatePlacementGroupCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // CreatePlacementGroupRequest
- *   DryRun: true || false,
- *   GroupName: "STRING_VALUE",
- *   Strategy: "cluster" || "spread" || "partition",
  *   PartitionCount: Number("int"),
  *   TagSpecifications: [ // TagSpecificationList
  *     { // TagSpecification
@@ -61,6 +58,9 @@ export interface CreatePlacementGroupCommandOutput extends CreatePlacementGroupR
  *     },
  *   ],
  *   SpreadLevel: "host" || "rack",
+ *   DryRun: true || false,
+ *   GroupName: "STRING_VALUE",
+ *   Strategy: "cluster" || "spread" || "partition",
  * };
  * const command = new CreatePlacementGroupCommand(input);
  * const response = await client.send(command);
@@ -115,9 +115,7 @@ export class CreatePlacementGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class CreatePlacementGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePlacementGroupCommand)
   .de(de_CreatePlacementGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePlacementGroupRequest;
+      output: CreatePlacementGroupResult;
+    };
+    sdk: {
+      input: CreatePlacementGroupCommandInput;
+      output: CreatePlacementGroupCommandOutput;
+    };
+  };
+}

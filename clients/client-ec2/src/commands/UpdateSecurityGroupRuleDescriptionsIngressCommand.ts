@@ -53,36 +53,36 @@ export interface UpdateSecurityGroupRuleDescriptionsIngressCommandOutput
  *   GroupName: "STRING_VALUE",
  *   IpPermissions: [ // IpPermissionList
  *     { // IpPermission
- *       FromPort: Number("int"),
  *       IpProtocol: "STRING_VALUE",
+ *       FromPort: Number("int"),
+ *       ToPort: Number("int"),
+ *       UserIdGroupPairs: [ // UserIdGroupPairList
+ *         { // UserIdGroupPair
+ *           Description: "STRING_VALUE",
+ *           UserId: "STRING_VALUE",
+ *           GroupName: "STRING_VALUE",
+ *           GroupId: "STRING_VALUE",
+ *           VpcId: "STRING_VALUE",
+ *           VpcPeeringConnectionId: "STRING_VALUE",
+ *           PeeringStatus: "STRING_VALUE",
+ *         },
+ *       ],
  *       IpRanges: [ // IpRangeList
  *         { // IpRange
- *           CidrIp: "STRING_VALUE",
  *           Description: "STRING_VALUE",
+ *           CidrIp: "STRING_VALUE",
  *         },
  *       ],
  *       Ipv6Ranges: [ // Ipv6RangeList
  *         { // Ipv6Range
- *           CidrIpv6: "STRING_VALUE",
  *           Description: "STRING_VALUE",
+ *           CidrIpv6: "STRING_VALUE",
  *         },
  *       ],
  *       PrefixListIds: [ // PrefixListIdList
  *         { // PrefixListId
  *           Description: "STRING_VALUE",
  *           PrefixListId: "STRING_VALUE",
- *         },
- *       ],
- *       ToPort: Number("int"),
- *       UserIdGroupPairs: [ // UserIdGroupPairList
- *         { // UserIdGroupPair
- *           Description: "STRING_VALUE",
- *           GroupId: "STRING_VALUE",
- *           GroupName: "STRING_VALUE",
- *           PeeringStatus: "STRING_VALUE",
- *           UserId: "STRING_VALUE",
- *           VpcId: "STRING_VALUE",
- *           VpcPeeringConnectionId: "STRING_VALUE",
  *         },
  *       ],
  *     },
@@ -145,9 +145,7 @@ export class UpdateSecurityGroupRuleDescriptionsIngressCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -159,4 +157,16 @@ export class UpdateSecurityGroupRuleDescriptionsIngressCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateSecurityGroupRuleDescriptionsIngressCommand)
   .de(de_UpdateSecurityGroupRuleDescriptionsIngressCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSecurityGroupRuleDescriptionsIngressRequest;
+      output: UpdateSecurityGroupRuleDescriptionsIngressResult;
+    };
+    sdk: {
+      input: UpdateSecurityGroupRuleDescriptionsIngressCommandInput;
+      output: UpdateSecurityGroupRuleDescriptionsIngressCommandOutput;
+    };
+  };
+}

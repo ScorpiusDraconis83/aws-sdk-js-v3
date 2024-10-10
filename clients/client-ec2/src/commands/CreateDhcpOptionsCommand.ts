@@ -110,6 +110,14 @@ export interface CreateDhcpOptionsCommandOutput extends CreateDhcpOptionsResult,
  * const response = await client.send(command);
  * // { // CreateDhcpOptionsResult
  * //   DhcpOptions: { // DhcpOptions
+ * //     OwnerId: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DhcpOptionsId: "STRING_VALUE",
  * //     DhcpConfigurations: [ // DhcpConfigurationList
  * //       { // DhcpConfiguration
  * //         Key: "STRING_VALUE",
@@ -118,14 +126,6 @@ export interface CreateDhcpOptionsCommandOutput extends CreateDhcpOptionsResult,
  * //             Value: "STRING_VALUE",
  * //           },
  * //         ],
- * //       },
- * //     ],
- * //     DhcpOptionsId: "STRING_VALUE",
- * //     OwnerId: "STRING_VALUE",
- * //     Tags: [ // TagList
- * //       { // Tag
- * //         Key: "STRING_VALUE",
- * //         Value: "STRING_VALUE",
  * //       },
  * //     ],
  * //   },
@@ -191,9 +191,7 @@ export class CreateDhcpOptionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -205,4 +203,16 @@ export class CreateDhcpOptionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDhcpOptionsCommand)
   .de(de_CreateDhcpOptionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDhcpOptionsRequest;
+      output: CreateDhcpOptionsResult;
+    };
+    sdk: {
+      input: CreateDhcpOptionsCommandInput;
+      output: CreateDhcpOptionsCommandOutput;
+    };
+  };
+}

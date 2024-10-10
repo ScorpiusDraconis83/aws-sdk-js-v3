@@ -65,11 +65,11 @@ export interface StartInstancesCommandOutput extends StartInstancesResult, __Met
  * // { // StartInstancesResult
  * //   StartingInstances: [ // InstanceStateChangeList
  * //     { // InstanceStateChange
+ * //       InstanceId: "STRING_VALUE",
  * //       CurrentState: { // InstanceState
  * //         Code: Number("int"),
  * //         Name: "pending" || "running" || "shutting-down" || "terminated" || "stopping" || "stopped",
  * //       },
- * //       InstanceId: "STRING_VALUE",
  * //       PreviousState: {
  * //         Code: Number("int"),
  * //         Name: "pending" || "running" || "shutting-down" || "terminated" || "stopping" || "stopped",
@@ -129,9 +129,7 @@ export class StartInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class StartInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StartInstancesCommand)
   .de(de_StartInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartInstancesRequest;
+      output: StartInstancesResult;
+    };
+    sdk: {
+      input: StartInstancesCommandInput;
+      output: StartInstancesCommandOutput;
+    };
+  };
+}

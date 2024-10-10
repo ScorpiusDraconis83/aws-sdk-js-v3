@@ -109,9 +109,7 @@ export class DescribePackagesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticsearchServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class DescribePackagesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribePackagesCommand)
   .de(de_DescribePackagesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePackagesRequest;
+      output: DescribePackagesResponse;
+    };
+    sdk: {
+      input: DescribePackagesCommandInput;
+      output: DescribePackagesCommandOutput;
+    };
+  };
+}

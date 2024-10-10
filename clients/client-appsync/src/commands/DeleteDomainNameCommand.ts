@@ -80,9 +80,7 @@ export class DeleteDomainNameCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppSyncClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class DeleteDomainNameCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteDomainNameCommand)
   .de(de_DeleteDomainNameCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDomainNameRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteDomainNameCommandInput;
+      output: DeleteDomainNameCommandOutput;
+    };
+  };
+}

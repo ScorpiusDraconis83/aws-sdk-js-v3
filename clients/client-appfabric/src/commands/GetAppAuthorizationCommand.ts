@@ -96,9 +96,7 @@ export class GetAppAuthorizationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppFabricClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -110,4 +108,16 @@ export class GetAppAuthorizationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAppAuthorizationCommand)
   .de(de_GetAppAuthorizationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAppAuthorizationRequest;
+      output: GetAppAuthorizationResponse;
+    };
+    sdk: {
+      input: GetAppAuthorizationCommandInput;
+      output: GetAppAuthorizationCommandOutput;
+    };
+  };
+}

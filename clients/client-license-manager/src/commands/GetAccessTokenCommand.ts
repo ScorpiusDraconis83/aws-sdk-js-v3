@@ -85,9 +85,7 @@ export class GetAccessTokenCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LicenseManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -99,4 +97,16 @@ export class GetAccessTokenCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetAccessTokenCommand)
   .de(de_GetAccessTokenCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAccessTokenRequest;
+      output: GetAccessTokenResponse;
+    };
+    sdk: {
+      input: GetAccessTokenCommandInput;
+      output: GetAccessTokenCommandOutput;
+    };
+  };
+}

@@ -258,9 +258,7 @@ export class GetPipelineStateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodePipelineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -272,4 +270,16 @@ export class GetPipelineStateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetPipelineStateCommand)
   .de(de_GetPipelineStateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPipelineStateInput;
+      output: GetPipelineStateOutput;
+    };
+    sdk: {
+      input: GetPipelineStateCommandInput;
+      output: GetPipelineStateCommandOutput;
+    };
+  };
+}

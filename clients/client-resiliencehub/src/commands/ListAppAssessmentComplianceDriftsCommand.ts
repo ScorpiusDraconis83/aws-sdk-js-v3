@@ -130,9 +130,7 @@ export class ListAppAssessmentComplianceDriftsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ResiliencehubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class ListAppAssessmentComplianceDriftsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListAppAssessmentComplianceDriftsCommand)
   .de(de_ListAppAssessmentComplianceDriftsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppAssessmentComplianceDriftsRequest;
+      output: ListAppAssessmentComplianceDriftsResponse;
+    };
+    sdk: {
+      input: ListAppAssessmentComplianceDriftsCommandInput;
+      output: ListAppAssessmentComplianceDriftsCommandOutput;
+    };
+  };
+}

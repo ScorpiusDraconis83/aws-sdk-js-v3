@@ -73,9 +73,7 @@ export class GetEncryptionConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: XRayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class GetEncryptionConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetEncryptionConfigCommand)
   .de(de_GetEncryptionConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetEncryptionConfigResult;
+    };
+    sdk: {
+      input: GetEncryptionConfigCommandInput;
+      output: GetEncryptionConfigCommandOutput;
+    };
+  };
+}

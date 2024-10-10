@@ -97,9 +97,7 @@ export class EnableOrganizationAdminAccountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -111,4 +109,16 @@ export class EnableOrganizationAdminAccountCommand extends $Command
   .f(void 0, void 0)
   .ser(se_EnableOrganizationAdminAccountCommand)
   .de(de_EnableOrganizationAdminAccountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableOrganizationAdminAccountRequest;
+      output: {};
+    };
+    sdk: {
+      input: EnableOrganizationAdminAccountCommandInput;
+      output: EnableOrganizationAdminAccountCommandOutput;
+    };
+  };
+}

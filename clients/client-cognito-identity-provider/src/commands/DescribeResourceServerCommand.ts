@@ -98,9 +98,7 @@ export class DescribeResourceServerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class DescribeResourceServerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeResourceServerCommand)
   .de(de_DescribeResourceServerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeResourceServerRequest;
+      output: DescribeResourceServerResponse;
+    };
+    sdk: {
+      input: DescribeResourceServerCommandInput;
+      output: DescribeResourceServerCommandOutput;
+    };
+  };
+}

@@ -181,9 +181,7 @@ export class CreateConfigurationProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppConfigClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -195,4 +193,16 @@ export class CreateConfigurationProfileCommand extends $Command
   .f(CreateConfigurationProfileRequestFilterSensitiveLog, ConfigurationProfileFilterSensitiveLog)
   .ser(se_CreateConfigurationProfileCommand)
   .de(de_CreateConfigurationProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConfigurationProfileRequest;
+      output: ConfigurationProfile;
+    };
+    sdk: {
+      input: CreateConfigurationProfileCommandInput;
+      output: CreateConfigurationProfileCommandOutput;
+    };
+  };
+}

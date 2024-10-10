@@ -131,9 +131,7 @@ export class ConfirmDeviceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -145,4 +143,16 @@ export class ConfirmDeviceCommand extends $Command
   .f(ConfirmDeviceRequestFilterSensitiveLog, void 0)
   .ser(se_ConfirmDeviceCommand)
   .de(de_ConfirmDeviceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfirmDeviceRequest;
+      output: ConfirmDeviceResponse;
+    };
+    sdk: {
+      input: ConfirmDeviceCommandInput;
+      output: ConfirmDeviceCommandOutput;
+    };
+  };
+}

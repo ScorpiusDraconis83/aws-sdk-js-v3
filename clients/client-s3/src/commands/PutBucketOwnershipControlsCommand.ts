@@ -6,7 +6,7 @@ import { Command as $Command } from "@smithy/smithy-client";
 import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
-import { PutBucketOwnershipControlsRequest } from "../models/models_0";
+import { PutBucketOwnershipControlsRequest } from "../models/models_1";
 import { de_PutBucketOwnershipControlsCommand, se_PutBucketOwnershipControlsCommand } from "../protocols/Aws_restXml";
 import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
 
@@ -114,4 +114,16 @@ export class PutBucketOwnershipControlsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_PutBucketOwnershipControlsCommand)
   .de(de_PutBucketOwnershipControlsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutBucketOwnershipControlsRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutBucketOwnershipControlsCommandInput;
+      output: PutBucketOwnershipControlsCommandOutput;
+    };
+  };
+}

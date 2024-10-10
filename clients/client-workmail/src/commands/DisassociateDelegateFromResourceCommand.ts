@@ -92,9 +92,7 @@ export class DisassociateDelegateFromResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkMailClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -106,4 +104,16 @@ export class DisassociateDelegateFromResourceCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateDelegateFromResourceCommand)
   .de(de_DisassociateDelegateFromResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateDelegateFromResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateDelegateFromResourceCommandInput;
+      output: DisassociateDelegateFromResourceCommandOutput;
+    };
+  };
+}

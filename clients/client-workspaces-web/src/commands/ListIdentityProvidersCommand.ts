@@ -90,9 +90,7 @@ export class ListIdentityProvidersCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WorkSpacesWebClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class ListIdentityProvidersCommand extends $Command
   .f(void 0, ListIdentityProvidersResponseFilterSensitiveLog)
   .ser(se_ListIdentityProvidersCommand)
   .de(de_ListIdentityProvidersCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIdentityProvidersRequest;
+      output: ListIdentityProvidersResponse;
+    };
+    sdk: {
+      input: ListIdentityProvidersCommandInput;
+      output: ListIdentityProvidersCommandOutput;
+    };
+  };
+}

@@ -121,9 +121,7 @@ export class CreateEndpointCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EventBridgeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -135,4 +133,16 @@ export class CreateEndpointCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateEndpointCommand)
   .de(de_CreateEndpointCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEndpointRequest;
+      output: CreateEndpointResponse;
+    };
+    sdk: {
+      input: CreateEndpointCommandInput;
+      output: CreateEndpointCommandOutput;
+    };
+  };
+}

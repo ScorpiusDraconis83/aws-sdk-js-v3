@@ -107,9 +107,7 @@ export class CreateApprovalRuleTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeCommitClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -121,4 +119,16 @@ export class CreateApprovalRuleTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateApprovalRuleTemplateCommand)
   .de(de_CreateApprovalRuleTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApprovalRuleTemplateInput;
+      output: CreateApprovalRuleTemplateOutput;
+    };
+    sdk: {
+      input: CreateApprovalRuleTemplateCommandInput;
+      output: CreateApprovalRuleTemplateCommandOutput;
+    };
+  };
+}

@@ -140,9 +140,7 @@ export class AdminConfirmSignUpCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class AdminConfirmSignUpCommand extends $Command
   .f(AdminConfirmSignUpRequestFilterSensitiveLog, void 0)
   .ser(se_AdminConfirmSignUpCommand)
   .de(de_AdminConfirmSignUpCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminConfirmSignUpRequest;
+      output: {};
+    };
+    sdk: {
+      input: AdminConfirmSignUpCommandInput;
+      output: AdminConfirmSignUpCommandOutput;
+    };
+  };
+}

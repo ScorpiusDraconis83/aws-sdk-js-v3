@@ -156,9 +156,7 @@ export class DescribeDashboardSnapshotJobResultCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: QuickSightClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -170,4 +168,16 @@ export class DescribeDashboardSnapshotJobResultCommand extends $Command
   .f(void 0, DescribeDashboardSnapshotJobResultResponseFilterSensitiveLog)
   .ser(se_DescribeDashboardSnapshotJobResultCommand)
   .de(de_DescribeDashboardSnapshotJobResultCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDashboardSnapshotJobResultRequest;
+      output: DescribeDashboardSnapshotJobResultResponse;
+    };
+    sdk: {
+      input: DescribeDashboardSnapshotJobResultCommandInput;
+      output: DescribeDashboardSnapshotJobResultCommandOutput;
+    };
+  };
+}

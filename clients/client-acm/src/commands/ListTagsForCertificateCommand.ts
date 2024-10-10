@@ -79,9 +79,7 @@ export class ListTagsForCertificateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ACMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -93,4 +91,16 @@ export class ListTagsForCertificateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTagsForCertificateCommand)
   .de(de_ListTagsForCertificateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForCertificateRequest;
+      output: ListTagsForCertificateResponse;
+    };
+    sdk: {
+      input: ListTagsForCertificateCommandInput;
+      output: ListTagsForCertificateCommandOutput;
+    };
+  };
+}

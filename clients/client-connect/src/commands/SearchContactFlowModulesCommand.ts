@@ -141,9 +141,7 @@ export class SearchContactFlowModulesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +153,16 @@ export class SearchContactFlowModulesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SearchContactFlowModulesCommand)
   .de(de_SearchContactFlowModulesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchContactFlowModulesRequest;
+      output: SearchContactFlowModulesResponse;
+    };
+    sdk: {
+      input: SearchContactFlowModulesCommandInput;
+      output: SearchContactFlowModulesCommandOutput;
+    };
+  };
+}

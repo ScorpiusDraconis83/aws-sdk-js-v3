@@ -41,7 +41,7 @@ export interface SetUserPoolMfaConfigCommandOutput extends SetUserPoolMfaConfigR
  *             Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must
  *             receive SMS messages might not be able to sign up, activate their accounts, or sign
  *             in.</p>
- *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,
+ *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Servicesservice,
  *             Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>
  *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
  *                     mode</a>
@@ -69,6 +69,10 @@ export interface SetUserPoolMfaConfigCommandOutput extends SetUserPoolMfaConfigR
  *   SoftwareTokenMfaConfiguration: { // SoftwareTokenMfaConfigType
  *     Enabled: true || false,
  *   },
+ *   EmailMfaConfiguration: { // EmailMfaConfigType
+ *     Message: "STRING_VALUE",
+ *     Subject: "STRING_VALUE",
+ *   },
  *   MfaConfiguration: "OFF" || "ON" || "OPTIONAL",
  * };
  * const command = new SetUserPoolMfaConfigCommand(input);
@@ -84,6 +88,10 @@ export interface SetUserPoolMfaConfigCommandOutput extends SetUserPoolMfaConfigR
  * //   },
  * //   SoftwareTokenMfaConfiguration: { // SoftwareTokenMfaConfigType
  * //     Enabled: true || false,
+ * //   },
+ * //   EmailMfaConfiguration: { // EmailMfaConfigType
+ * //     Message: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
  * //   },
  * //   MfaConfiguration: "OFF" || "ON" || "OPTIONAL",
  * // };
@@ -141,9 +149,7 @@ export class SetUserPoolMfaConfigCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CognitoIdentityProviderClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +161,16 @@ export class SetUserPoolMfaConfigCommand extends $Command
   .f(void 0, void 0)
   .ser(se_SetUserPoolMfaConfigCommand)
   .de(de_SetUserPoolMfaConfigCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetUserPoolMfaConfigRequest;
+      output: SetUserPoolMfaConfigResponse;
+    };
+    sdk: {
+      input: SetUserPoolMfaConfigCommandInput;
+      output: SetUserPoolMfaConfigCommandOutput;
+    };
+  };
+}

@@ -114,9 +114,7 @@ export class CreateNetworkAnalyzerConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class CreateNetworkAnalyzerConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateNetworkAnalyzerConfigurationCommand)
   .de(de_CreateNetworkAnalyzerConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkAnalyzerConfigurationRequest;
+      output: CreateNetworkAnalyzerConfigurationResponse;
+    };
+    sdk: {
+      input: CreateNetworkAnalyzerConfigurationCommandInput;
+      output: CreateNetworkAnalyzerConfigurationCommandOutput;
+    };
+  };
+}

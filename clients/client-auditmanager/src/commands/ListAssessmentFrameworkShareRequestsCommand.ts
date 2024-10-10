@@ -106,9 +106,7 @@ export class ListAssessmentFrameworkShareRequestsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -120,4 +118,16 @@ export class ListAssessmentFrameworkShareRequestsCommand extends $Command
   .f(void 0, ListAssessmentFrameworkShareRequestsResponseFilterSensitiveLog)
   .ser(se_ListAssessmentFrameworkShareRequestsCommand)
   .de(de_ListAssessmentFrameworkShareRequestsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssessmentFrameworkShareRequestsRequest;
+      output: ListAssessmentFrameworkShareRequestsResponse;
+    };
+    sdk: {
+      input: ListAssessmentFrameworkShareRequestsCommandInput;
+      output: ListAssessmentFrameworkShareRequestsCommandOutput;
+    };
+  };
+}

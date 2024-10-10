@@ -71,6 +71,12 @@ export interface CreatePromptCommandOutput extends CreatePromptResponse, __Metad
  *           ],
  *         },
  *       },
+ *       metadata: [ // PromptMetadataList
+ *         { // PromptMetadataEntry
+ *           key: "STRING_VALUE", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *       ],
  *     },
  *   ],
  *   clientToken: "STRING_VALUE",
@@ -111,6 +117,12 @@ export interface CreatePromptCommandOutput extends CreatePromptResponse, __Metad
  * //           ],
  * //         },
  * //       },
+ * //       metadata: [ // PromptMetadataList
+ * //         { // PromptMetadataEntry
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
  * //     },
  * //   ],
  * //   id: "STRING_VALUE", // required
@@ -159,9 +171,7 @@ export class CreatePromptCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockAgentClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -173,4 +183,16 @@ export class CreatePromptCommand extends $Command
   .f(CreatePromptRequestFilterSensitiveLog, CreatePromptResponseFilterSensitiveLog)
   .ser(se_CreatePromptCommand)
   .de(de_CreatePromptCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePromptRequest;
+      output: CreatePromptResponse;
+    };
+    sdk: {
+      input: CreatePromptCommandInput;
+      output: CreatePromptCommandOutput;
+    };
+  };
+}

@@ -81,9 +81,7 @@ export class DeleteReplicationSetCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMIncidentsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -95,4 +93,16 @@ export class DeleteReplicationSetCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteReplicationSetCommand)
   .de(de_DeleteReplicationSetCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReplicationSetInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteReplicationSetCommandInput;
+      output: DeleteReplicationSetCommandOutput;
+    };
+  };
+}

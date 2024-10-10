@@ -151,9 +151,7 @@ export class BatchUpdateStandardsControlAssociationsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SecurityHubClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -165,4 +163,16 @@ export class BatchUpdateStandardsControlAssociationsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_BatchUpdateStandardsControlAssociationsCommand)
   .de(de_BatchUpdateStandardsControlAssociationsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchUpdateStandardsControlAssociationsRequest;
+      output: BatchUpdateStandardsControlAssociationsResponse;
+    };
+    sdk: {
+      input: BatchUpdateStandardsControlAssociationsCommandInput;
+      output: BatchUpdateStandardsControlAssociationsCommandOutput;
+    };
+  };
+}

@@ -57,6 +57,8 @@ export interface GetStageCommandOutput extends GetStageResponse, __MetadataBeare
  * //     endpoints: { // StageEndpoints
  * //       events: "STRING_VALUE",
  * //       whip: "STRING_VALUE",
+ * //       rtmp: "STRING_VALUE",
+ * //       rtmps: "STRING_VALUE",
  * //     },
  * //   },
  * // };
@@ -91,9 +93,7 @@ export class GetStageCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IVSRealTimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +105,16 @@ export class GetStageCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetStageCommand)
   .de(de_GetStageCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStageRequest;
+      output: GetStageResponse;
+    };
+    sdk: {
+      input: GetStageCommandInput;
+      output: GetStageCommandOutput;
+    };
+  };
+}

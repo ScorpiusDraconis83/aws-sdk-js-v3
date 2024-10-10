@@ -78,9 +78,7 @@ export class ListContactListsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class ListContactListsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListContactListsCommand)
   .de(de_ListContactListsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContactListsRequest;
+      output: ListContactListsResponse;
+    };
+    sdk: {
+      input: ListContactListsCommandInput;
+      output: ListContactListsCommandOutput;
+    };
+  };
+}

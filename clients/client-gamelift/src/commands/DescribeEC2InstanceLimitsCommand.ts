@@ -141,9 +141,7 @@ export class DescribeEC2InstanceLimitsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -155,4 +153,16 @@ export class DescribeEC2InstanceLimitsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEC2InstanceLimitsCommand)
   .de(de_DescribeEC2InstanceLimitsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEC2InstanceLimitsInput;
+      output: DescribeEC2InstanceLimitsOutput;
+    };
+    sdk: {
+      input: DescribeEC2InstanceLimitsCommandInput;
+      output: DescribeEC2InstanceLimitsCommandOutput;
+    };
+  };
+}

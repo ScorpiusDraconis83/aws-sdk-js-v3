@@ -162,9 +162,7 @@ export class CreateResourceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudControlClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +174,16 @@ export class CreateResourceCommand extends $Command
   .f(CreateResourceInputFilterSensitiveLog, CreateResourceOutputFilterSensitiveLog)
   .ser(se_CreateResourceCommand)
   .de(de_CreateResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateResourceInput;
+      output: CreateResourceOutput;
+    };
+    sdk: {
+      input: CreateResourceCommandInput;
+      output: CreateResourceCommandOutput;
+    };
+  };
+}

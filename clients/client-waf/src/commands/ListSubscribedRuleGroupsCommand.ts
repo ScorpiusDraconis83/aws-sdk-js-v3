@@ -87,9 +87,7 @@ export class ListSubscribedRuleGroupsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WAFClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -101,4 +99,16 @@ export class ListSubscribedRuleGroupsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListSubscribedRuleGroupsCommand)
   .de(de_ListSubscribedRuleGroupsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSubscribedRuleGroupsRequest;
+      output: ListSubscribedRuleGroupsResponse;
+    };
+    sdk: {
+      input: ListSubscribedRuleGroupsCommandInput;
+      output: ListSubscribedRuleGroupsCommandOutput;
+    };
+  };
+}

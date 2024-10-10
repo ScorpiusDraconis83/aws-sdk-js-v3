@@ -690,9 +690,7 @@ export class DescribeJobDefinitionsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BatchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -704,4 +702,16 @@ export class DescribeJobDefinitionsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeJobDefinitionsCommand)
   .de(de_DescribeJobDefinitionsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeJobDefinitionsRequest;
+      output: DescribeJobDefinitionsResponse;
+    };
+    sdk: {
+      input: DescribeJobDefinitionsCommandInput;
+      output: DescribeJobDefinitionsCommandOutput;
+    };
+  };
+}

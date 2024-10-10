@@ -181,9 +181,7 @@ export class CreateDataQualityJobDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -195,4 +193,16 @@ export class CreateDataQualityJobDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDataQualityJobDefinitionCommand)
   .de(de_CreateDataQualityJobDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataQualityJobDefinitionRequest;
+      output: CreateDataQualityJobDefinitionResponse;
+    };
+    sdk: {
+      input: CreateDataQualityJobDefinitionCommandInput;
+      output: CreateDataQualityJobDefinitionCommandOutput;
+    };
+  };
+}

@@ -1,6 +1,6 @@
 {
   "name": "@aws-sdk/aws-util-test",
-  "version": "3.641.0",
+  "version": "3.669.0",
   "private": true,
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:types'",
@@ -17,8 +17,8 @@
   "sideEffects": false,
   "dependencies": {
     "@aws-sdk/aws-protocoltests-json": "*",
-    "@smithy/protocol-http": "^4.1.0",
-    "@smithy/types": "^3.3.0",
+    "@smithy/protocol-http": "^4.1.4",
+    "@smithy/types": "^3.5.0",
     "tslib": "^2.6.2"
   },
   "devDependencies": {

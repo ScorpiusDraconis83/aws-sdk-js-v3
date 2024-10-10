@@ -269,9 +269,7 @@ export class DescribePoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -283,4 +281,16 @@ export class DescribePoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribePoliciesCommand)
   .de(de_DescribePoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePoliciesType;
+      output: PoliciesType;
+    };
+    sdk: {
+      input: DescribePoliciesCommandInput;
+      output: DescribePoliciesCommandOutput;
+    };
+  };
+}

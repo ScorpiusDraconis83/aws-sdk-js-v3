@@ -91,9 +91,7 @@ export class DescribeComponentConfigurationRecommendationCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApplicationInsightsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class DescribeComponentConfigurationRecommendationCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_DescribeComponentConfigurationRecommendationCommand)
   .de(de_DescribeComponentConfigurationRecommendationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeComponentConfigurationRecommendationRequest;
+      output: DescribeComponentConfigurationRecommendationResponse;
+    };
+    sdk: {
+      input: DescribeComponentConfigurationRecommendationCommandInput;
+      output: DescribeComponentConfigurationRecommendationCommandOutput;
+    };
+  };
+}

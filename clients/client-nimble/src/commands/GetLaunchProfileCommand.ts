@@ -157,9 +157,7 @@ export class GetLaunchProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -171,4 +169,16 @@ export class GetLaunchProfileCommand extends $Command
   .f(void 0, GetLaunchProfileResponseFilterSensitiveLog)
   .ser(se_GetLaunchProfileCommand)
   .de(de_GetLaunchProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLaunchProfileRequest;
+      output: GetLaunchProfileResponse;
+    };
+    sdk: {
+      input: GetLaunchProfileCommandInput;
+      output: GetLaunchProfileCommandOutput;
+    };
+  };
+}

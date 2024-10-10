@@ -109,9 +109,7 @@ export class DescribeCacheCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: StorageGatewayClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -123,4 +121,16 @@ export class DescribeCacheCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeCacheCommand)
   .de(de_DescribeCacheCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCacheInput;
+      output: DescribeCacheOutput;
+    };
+    sdk: {
+      input: DescribeCacheCommandInput;
+      output: DescribeCacheCommandOutput;
+    };
+  };
+}

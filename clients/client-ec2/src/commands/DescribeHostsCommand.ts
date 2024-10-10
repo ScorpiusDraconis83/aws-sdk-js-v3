@@ -39,6 +39,11 @@ export interface DescribeHostsCommandOutput extends DescribeHostsResult, __Metad
  * // const { EC2Client, DescribeHostsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeHostsRequest
+ *   HostIds: [ // RequestHostIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
  *   Filter: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -47,11 +52,6 @@ export interface DescribeHostsCommandOutput extends DescribeHostsResult, __Metad
  *       ],
  *     },
  *   ],
- *   HostIds: [ // RequestHostIdList
- *     "STRING_VALUE",
- *   ],
- *   MaxResults: Number("int"),
- *   NextToken: "STRING_VALUE",
  * };
  * const command = new DescribeHostsCommand(input);
  * const response = await client.send(command);
@@ -130,9 +130,7 @@ export class DescribeHostsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -144,4 +142,16 @@ export class DescribeHostsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeHostsCommand)
   .de(de_DescribeHostsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeHostsRequest;
+      output: DescribeHostsResult;
+    };
+    sdk: {
+      input: DescribeHostsCommandInput;
+      output: DescribeHostsCommandOutput;
+    };
+  };
+}

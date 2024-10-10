@@ -186,9 +186,7 @@ export class SearchProfilesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CustomerProfilesClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -200,4 +198,16 @@ export class SearchProfilesCommand extends $Command
   .f(void 0, SearchProfilesResponseFilterSensitiveLog)
   .ser(se_SearchProfilesCommand)
   .de(de_SearchProfilesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchProfilesRequest;
+      output: SearchProfilesResponse;
+    };
+    sdk: {
+      input: SearchProfilesCommandInput;
+      output: SearchProfilesCommandOutput;
+    };
+  };
+}

@@ -98,9 +98,7 @@ export class InvokeEndpointAsyncCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerRuntimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -112,4 +110,16 @@ export class InvokeEndpointAsyncCommand extends $Command
   .f(InvokeEndpointAsyncInputFilterSensitiveLog, void 0)
   .ser(se_InvokeEndpointAsyncCommand)
   .de(de_InvokeEndpointAsyncCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InvokeEndpointAsyncInput;
+      output: InvokeEndpointAsyncOutput;
+    };
+    sdk: {
+      input: InvokeEndpointAsyncCommandInput;
+      output: InvokeEndpointAsyncCommandOutput;
+    };
+  };
+}

@@ -125,9 +125,7 @@ export class DescribeFraudsterRegistrationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: VoiceIDClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -139,4 +137,16 @@ export class DescribeFraudsterRegistrationJobCommand extends $Command
   .f(void 0, DescribeFraudsterRegistrationJobResponseFilterSensitiveLog)
   .ser(se_DescribeFraudsterRegistrationJobCommand)
   .de(de_DescribeFraudsterRegistrationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFraudsterRegistrationJobRequest;
+      output: DescribeFraudsterRegistrationJobResponse;
+    };
+    sdk: {
+      input: DescribeFraudsterRegistrationJobCommandInput;
+      output: DescribeFraudsterRegistrationJobCommandOutput;
+    };
+  };
+}

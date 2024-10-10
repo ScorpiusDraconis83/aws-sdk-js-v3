@@ -8,8 +8,8 @@ import { commonParams } from "../endpoint/EndpointParameters";
 import {
   PutEmailIdentityDkimSigningAttributesRequest,
   PutEmailIdentityDkimSigningAttributesRequestFilterSensitiveLog,
-  PutEmailIdentityDkimSigningAttributesResponse,
 } from "../models/models_0";
+import { PutEmailIdentityDkimSigningAttributesResponse } from "../models/models_1";
 import {
   de_PutEmailIdentityDkimSigningAttributesCommand,
   se_PutEmailIdentityDkimSigningAttributesCommand,
@@ -115,9 +115,7 @@ export class PutEmailIdentityDkimSigningAttributesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -129,4 +127,16 @@ export class PutEmailIdentityDkimSigningAttributesCommand extends $Command
   .f(PutEmailIdentityDkimSigningAttributesRequestFilterSensitiveLog, void 0)
   .ser(se_PutEmailIdentityDkimSigningAttributesCommand)
   .de(de_PutEmailIdentityDkimSigningAttributesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutEmailIdentityDkimSigningAttributesRequest;
+      output: PutEmailIdentityDkimSigningAttributesResponse;
+    };
+    sdk: {
+      input: PutEmailIdentityDkimSigningAttributesCommandInput;
+      output: PutEmailIdentityDkimSigningAttributesCommandOutput;
+    };
+  };
+}

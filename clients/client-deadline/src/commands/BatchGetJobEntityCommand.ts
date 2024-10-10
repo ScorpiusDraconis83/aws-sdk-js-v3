@@ -203,9 +203,7 @@ export class BatchGetJobEntityCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -217,4 +215,16 @@ export class BatchGetJobEntityCommand extends $Command
   .f(void 0, BatchGetJobEntityResponseFilterSensitiveLog)
   .ser(se_BatchGetJobEntityCommand)
   .de(de_BatchGetJobEntityCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetJobEntityRequest;
+      output: BatchGetJobEntityResponse;
+    };
+    sdk: {
+      input: BatchGetJobEntityCommandInput;
+      output: BatchGetJobEntityCommandOutput;
+    };
+  };
+}

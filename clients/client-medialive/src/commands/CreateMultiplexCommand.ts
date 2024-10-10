@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { CreateMultiplexRequest, CreateMultiplexResponse } from "../models/models_1";
+import { CreateMultiplexRequest, CreateMultiplexResponse } from "../models/models_2";
 import { de_CreateMultiplexCommand, se_CreateMultiplexCommand } from "../protocols/Aws_restJson1";
 
 /**
@@ -128,9 +128,7 @@ export class CreateMultiplexCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MediaLiveClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -142,4 +140,16 @@ export class CreateMultiplexCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateMultiplexCommand)
   .de(de_CreateMultiplexCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMultiplexRequest;
+      output: CreateMultiplexResponse;
+    };
+    sdk: {
+      input: CreateMultiplexCommandInput;
+      output: CreateMultiplexCommandOutput;
+    };
+  };
+}

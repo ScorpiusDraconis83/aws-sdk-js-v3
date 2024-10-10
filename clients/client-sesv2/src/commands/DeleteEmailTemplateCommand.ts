@@ -73,9 +73,7 @@ export class DeleteEmailTemplateCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SESv2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -87,4 +85,16 @@ export class DeleteEmailTemplateCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteEmailTemplateCommand)
   .de(de_DeleteEmailTemplateCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEmailTemplateRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteEmailTemplateCommandInput;
+      output: DeleteEmailTemplateCommandOutput;
+    };
+  };
+}

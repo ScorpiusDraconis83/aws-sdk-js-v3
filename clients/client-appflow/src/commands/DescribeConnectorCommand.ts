@@ -245,9 +245,7 @@ export class DescribeConnectorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppflowClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -259,4 +257,16 @@ export class DescribeConnectorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeConnectorCommand)
   .de(de_DescribeConnectorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConnectorRequest;
+      output: DescribeConnectorResponse;
+    };
+    sdk: {
+      input: DescribeConnectorCommandInput;
+      output: DescribeConnectorCommandOutput;
+    };
+  };
+}

@@ -874,9 +874,7 @@ export class CreateFileSystemFromBackupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -888,4 +886,16 @@ export class CreateFileSystemFromBackupCommand extends $Command
   .f(CreateFileSystemFromBackupRequestFilterSensitiveLog, CreateFileSystemFromBackupResponseFilterSensitiveLog)
   .ser(se_CreateFileSystemFromBackupCommand)
   .de(de_CreateFileSystemFromBackupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFileSystemFromBackupRequest;
+      output: CreateFileSystemFromBackupResponse;
+    };
+    sdk: {
+      input: CreateFileSystemFromBackupCommandInput;
+      output: CreateFileSystemFromBackupCommandOutput;
+    };
+  };
+}

@@ -60,13 +60,23 @@ export interface GetModelInvocationJobCommandOutput extends GetModelInvocationJo
  * //     s3InputDataConfig: { // ModelInvocationJobS3InputDataConfig
  * //       s3InputFormat: "JSONL",
  * //       s3Uri: "STRING_VALUE", // required
+ * //       s3BucketOwner: "STRING_VALUE",
  * //     },
  * //   },
  * //   outputDataConfig: { // ModelInvocationJobOutputDataConfig Union: only one key present
  * //     s3OutputDataConfig: { // ModelInvocationJobS3OutputDataConfig
  * //       s3Uri: "STRING_VALUE", // required
  * //       s3EncryptionKeyId: "STRING_VALUE",
+ * //       s3BucketOwner: "STRING_VALUE",
  * //     },
+ * //   },
+ * //   vpcConfig: { // VpcConfig
+ * //     subnetIds: [ // SubnetIds // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     securityGroupIds: [ // SecurityGroupIds // required
+ * //       "STRING_VALUE",
+ * //     ],
  * //   },
  * //   timeoutDurationInHours: Number("int"),
  * //   jobExpirationTime: new Date("TIMESTAMP"),
@@ -108,9 +118,7 @@ export class GetModelInvocationJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: BedrockClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -122,4 +130,16 @@ export class GetModelInvocationJobCommand extends $Command
   .f(void 0, GetModelInvocationJobResponseFilterSensitiveLog)
   .ser(se_GetModelInvocationJobCommand)
   .de(de_GetModelInvocationJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetModelInvocationJobRequest;
+      output: GetModelInvocationJobResponse;
+    };
+    sdk: {
+      input: GetModelInvocationJobCommandInput;
+      output: GetModelInvocationJobCommandOutput;
+    };
+  };
+}

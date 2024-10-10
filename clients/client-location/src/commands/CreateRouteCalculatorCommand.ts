@@ -102,9 +102,7 @@ export class CreateRouteCalculatorCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LocationClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +114,16 @@ export class CreateRouteCalculatorCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateRouteCalculatorCommand)
   .de(de_CreateRouteCalculatorCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRouteCalculatorRequest;
+      output: CreateRouteCalculatorResponse;
+    };
+    sdk: {
+      input: CreateRouteCalculatorCommandInput;
+      output: CreateRouteCalculatorCommandOutput;
+    };
+  };
+}

@@ -8,7 +8,7 @@ import { commonParams } from "../endpoint/EndpointParameters";
 import {
   CreatePresignedMlflowTrackingServerUrlRequest,
   CreatePresignedMlflowTrackingServerUrlResponse,
-} from "../models/models_1";
+} from "../models/models_2";
 import {
   de_CreatePresignedMlflowTrackingServerUrlCommand,
   se_CreatePresignedMlflowTrackingServerUrlCommand,
@@ -80,9 +80,7 @@ export class CreatePresignedMlflowTrackingServerUrlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SageMakerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -94,4 +92,16 @@ export class CreatePresignedMlflowTrackingServerUrlCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreatePresignedMlflowTrackingServerUrlCommand)
   .de(de_CreatePresignedMlflowTrackingServerUrlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePresignedMlflowTrackingServerUrlRequest;
+      output: CreatePresignedMlflowTrackingServerUrlResponse;
+    };
+    sdk: {
+      input: CreatePresignedMlflowTrackingServerUrlCommandInput;
+      output: CreatePresignedMlflowTrackingServerUrlCommandOutput;
+    };
+  };
+}

@@ -216,9 +216,7 @@ export class PutSessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LexRuntimeV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +228,16 @@ export class PutSessionCommand extends $Command
   .f(PutSessionRequestFilterSensitiveLog, PutSessionResponseFilterSensitiveLog)
   .ser(se_PutSessionCommand)
   .de(de_PutSessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutSessionRequest;
+      output: PutSessionResponse;
+    };
+    sdk: {
+      input: PutSessionCommandInput;
+      output: PutSessionCommandOutput;
+    };
+  };
+}

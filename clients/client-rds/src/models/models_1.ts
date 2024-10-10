@@ -9543,7 +9543,7 @@ export interface ConnectionPoolConfiguration {
 
   /**
    * <p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. This setting only applies when the
-   *         proxy has opened its maximum number of connections and all connections are busy with client sessions. For an unlimited wait time, specify <code>0</code>.</p>
+   *         proxy has opened its maximum number of connections and all connections are busy with client sessions.</p>
    *          <p>Default: <code>120</code>
    *          </p>
    *          <p>Constraints:</p>
@@ -9717,6 +9717,23 @@ export interface ModifyDBShardGroupMessage {
    * @public
    */
   MinACU?: number;
+
+  /**
+   * <p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>
+   *             </li>
+   *             <li>
+   *                <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>
+   *             </li>
+   *             <li>
+   *                <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ComputeRedundancy?: number;
 }
 
 /**
@@ -12498,9 +12515,9 @@ export interface RestoreDBInstanceFromDBSnapshotMessage {
    * <p>License model information for the restored DB instance.</p>
    *          <note>
    *             <p>License models for RDS for Db2 require additional configuration. The Bring Your
-   *                 Own License (BYOL) model requires a custom parameter group. The Db2 license through
+   *                 Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
    *                 Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">RDS for Db2 licensing
+   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
    *                     options</a> in the <i>Amazon RDS User Guide</i>.</p>
    *          </note>
    *          <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
@@ -13832,9 +13849,9 @@ export interface RestoreDBInstanceToPointInTimeMessage {
    * <p>The license model information for the restored DB instance.</p>
    *          <note>
    *             <p>License models for RDS for Db2 require additional configuration. The Bring Your
-   *                 Own License (BYOL) model requires a custom parameter group. The Db2 license through
+   *                 Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
    *                 Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">RDS for Db2 licensing
+   *                 information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
    *                     options</a> in the <i>Amazon RDS User Guide</i>.</p>
    *          </note>
    *          <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>

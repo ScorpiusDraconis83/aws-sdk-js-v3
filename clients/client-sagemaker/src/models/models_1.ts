@@ -1,22 +1,32 @@
 // smithy-typescript generated code
-import { LazyJsonString as __LazyJsonString, SENSITIVE_STRING } from "@smithy/smithy-client";
+import {
+  ExceptionOptionType as __ExceptionOptionType,
+  LazyJsonString as __LazyJsonString,
+  SENSITIVE_STRING,
+} from "@smithy/smithy-client";
 
 import {
   AdditionalInferenceSpecificationDefinition,
   AmazonQSettings,
   AnnotationConsolidationConfig,
+  AppInstanceType,
+  AppLifecycleManagement,
   AppNetworkAccessType,
   AppSecurityGroupManagement,
   AppType,
+  ArtifactSource,
   AsyncInferenceConfig,
   AuthMode,
+  AutoMLChannel,
   AutoMLComputeConfig,
   AutoMLDataSplitConfig,
   AutoMLJobChannel,
+  AutoMLJobConfig,
   AutoMLJobObjective,
   AutoMLOutputDataConfig,
   AutoMLProblemTypeConfig,
   AutoMLSecurityConfig,
+  AutoMountHomeEFS,
   AutoParameter,
   AutoRollbackConfig,
   Autotune,
@@ -35,6 +45,9 @@ import {
   CheckpointConfig,
   ClarifyExplainerConfig,
   ClusterInstanceGroupSpecification,
+  ClusterNodeRecovery,
+  ClusterOrchestrator,
+  CodeEditorAppImageConfig,
   CodeEditorAppSettings,
   CodeRepository,
   CollectionConfig,
@@ -50,13 +63,15 @@ import {
   HyperParameterScalingType,
   HyperParameterTuningJobObjective,
   InferenceSpecification,
+  JupyterLabAppImageConfig,
+  KernelGatewayImageConfig,
   MetadataProperties,
   MetricDefinition,
   MetricsSource,
   ModelApprovalStatus,
   ModelDataSource,
-  ModelDeployConfig,
   OutputDataConfig,
+  ProblemType,
   ProcessingS3DataDistributionType,
   ProcessingS3InputMode,
   ProductionVariantInstanceType,
@@ -73,6 +88,252 @@ import {
   TransformJobDefinition,
   VpcConfig,
 } from "./models_0";
+
+import { SageMakerServiceException as __BaseException } from "./SageMakerServiceException";
+
+/**
+ * <p>Resource being accessed is in use.</p>
+ * @public
+ */
+export class ResourceInUse extends __BaseException {
+  readonly name: "ResourceInUse" = "ResourceInUse";
+  readonly $fault: "client" = "client";
+  Message?: string;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ResourceInUse, __BaseException>) {
+    super({
+      name: "ResourceInUse",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ResourceInUse.prototype);
+    this.Message = opts.Message;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreateAppImageConfigRequest {
+  /**
+   * <p>The name of the AppImageConfig. Must be unique to your account.</p>
+   * @public
+   */
+  AppImageConfigName: string | undefined;
+
+  /**
+   * <p>A list of tags to apply to the AppImageConfig.</p>
+   * @public
+   */
+  Tags?: Tag[];
+
+  /**
+   * <p>The KernelGatewayImageConfig. You can only specify one image kernel in the
+   *          AppImageConfig API. This kernel will be shown to users before the
+   *          image starts. Once the image runs, all kernels are visible in JupyterLab.</p>
+   * @public
+   */
+  KernelGatewayImageConfig?: KernelGatewayImageConfig;
+
+  /**
+   * <p>The <code>JupyterLabAppImageConfig</code>. You can only specify one image kernel in the <code>AppImageConfig</code> API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.</p>
+   * @public
+   */
+  JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
+
+  /**
+   * <p>The <code>CodeEditorAppImageConfig</code>. You can only specify one image kernel
+   *       in the AppImageConfig API. This kernel is shown to users before the image starts.
+   *       After the image runs, all kernels are visible in Code Editor.</p>
+   * @public
+   */
+  CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
+}
+
+/**
+ * @public
+ */
+export interface CreateAppImageConfigResponse {
+  /**
+   * <p>The ARN of the AppImageConfig.</p>
+   * @public
+   */
+  AppImageConfigArn?: string;
+}
+
+/**
+ * @public
+ */
+export interface CreateArtifactRequest {
+  /**
+   * <p>The name of the artifact. Must be unique to your account in an Amazon Web Services Region.</p>
+   * @public
+   */
+  ArtifactName?: string;
+
+  /**
+   * <p>The ID, ID type, and URI of the source.</p>
+   * @public
+   */
+  Source: ArtifactSource | undefined;
+
+  /**
+   * <p>The artifact type.</p>
+   * @public
+   */
+  ArtifactType: string | undefined;
+
+  /**
+   * <p>A list of properties to add to the artifact.</p>
+   * @public
+   */
+  Properties?: Record<string, string>;
+
+  /**
+   * <p>Metadata properties of the tracking entity, trial, or trial component.</p>
+   * @public
+   */
+  MetadataProperties?: MetadataProperties;
+
+  /**
+   * <p>A list of tags to apply to the artifact.</p>
+   * @public
+   */
+  Tags?: Tag[];
+}
+
+/**
+ * @public
+ */
+export interface CreateArtifactResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the artifact.</p>
+   * @public
+   */
+  ArtifactArn?: string;
+}
+
+/**
+ * <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model
+ *          deployment.</p>
+ * @public
+ */
+export interface ModelDeployConfig {
+  /**
+   * <p>Set to <code>True</code> to automatically generate an endpoint name for a one-click
+   *          Autopilot model deployment; set to <code>False</code> otherwise. The default value is
+   *             <code>False</code>.</p>
+   *          <note>
+   *             <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify
+   *             the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>
+   *          </note>
+   * @public
+   */
+  AutoGenerateEndpointName?: boolean;
+
+  /**
+   * <p>Specifies the endpoint name to use for a one-click Autopilot model deployment if the
+   *          endpoint name is not generated automatically.</p>
+   *          <note>
+   *             <p>Specify the <code>EndpointName</code> if and only if you set
+   *                <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error is
+   *             thrown.</p>
+   *          </note>
+   * @public
+   */
+  EndpointName?: string;
+}
+
+/**
+ * @public
+ */
+export interface CreateAutoMLJobRequest {
+  /**
+   * <p>Identifies an Autopilot job. The name must be unique to your account and is case
+   *          insensitive.</p>
+   * @public
+   */
+  AutoMLJobName: string | undefined;
+
+  /**
+   * <p>An array of channel objects that describes the input data and its location. Each channel
+   *          is a named input source. Similar to <code>InputDataConfig</code> supported by <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html">HyperParameterTrainingJobDefinition</a>. Format(s) supported: CSV, Parquet. A
+   *          minimum of 500 rows is required for the training dataset. There is not a minimum number of
+   *          rows required for the validation dataset.</p>
+   * @public
+   */
+  InputDataConfig: AutoMLChannel[] | undefined;
+
+  /**
+   * <p>Provides information about encryption and the Amazon S3 output path needed to
+   *          store artifacts from an AutoML job. Format(s) supported: CSV.</p>
+   * @public
+   */
+  OutputDataConfig: AutoMLOutputDataConfig | undefined;
+
+  /**
+   * <p>Defines the type of supervised learning problem available for the candidates. For more
+   *          information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types">
+   *             SageMaker Autopilot problem types</a>.</p>
+   * @public
+   */
+  ProblemType?: ProblemType;
+
+  /**
+   * <p>Specifies a metric to minimize or maximize as the objective of a job. If not specified,
+   *          the default objective metric depends on the problem type. See <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html">AutoMLJobObjective</a> for the default values.</p>
+   * @public
+   */
+  AutoMLJobObjective?: AutoMLJobObjective;
+
+  /**
+   * <p>A collection of settings used to configure an AutoML job.</p>
+   * @public
+   */
+  AutoMLJobConfig?: AutoMLJobConfig;
+
+  /**
+   * <p>The ARN of the role that is used to access the data.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>Generates possible candidates without training the models. A candidate is a combination
+   *          of data preprocessors, algorithms, and algorithm parameter settings.</p>
+   * @public
+   */
+  GenerateCandidateDefinitionsOnly?: boolean;
+
+  /**
+   * <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services
+   *          resources in different ways, for example, by purpose, owner, or environment. For more
+   *          information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web ServicesResources</a>. Tag keys must be unique per
+   *          resource.</p>
+   * @public
+   */
+  Tags?: Tag[];
+
+  /**
+   * <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model
+   *          deployment.</p>
+   * @public
+   */
+  ModelDeployConfig?: ModelDeployConfig;
+}
+
+/**
+ * @public
+ */
+export interface CreateAutoMLJobResponse {
+  /**
+   * <p>The unique ARN assigned to the AutoML job when it is created.</p>
+   * @public
+   */
+  AutoMLJobArn: string | undefined;
+}
 
 /**
  * @public
@@ -247,6 +508,23 @@ export interface CreateClusterRequest {
    * @public
    */
   Tags?: Tag[];
+
+  /**
+   * <p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, the only supported
+   *          value is <code>"eks"</code>, which is to use an Amazon Elastic Kubernetes Service (EKS)
+   *          cluster as the orchestrator.</p>
+   * @public
+   */
+  Orchestrator?: ClusterOrchestrator;
+
+  /**
+   * <p>The node recovery mode for the SageMaker HyperPod cluster. When set to <code>Automatic</code>,
+   *          SageMaker HyperPod will automatically reboot or replace faulty nodes when issues are detected. When set
+   *          to <code>None</code>, cluster administrators will need to manually manage any faulty
+   *          cluster instances.</p>
+   * @public
+   */
+  NodeRecovery?: ClusterNodeRecovery;
 }
 
 /**
@@ -2023,6 +2301,12 @@ export interface JupyterLabAppSettings {
   CodeRepositories?: CodeRepository[];
 
   /**
+   * <p>Indicates whether idle shutdown is activated for JupyterLab applications.</p>
+   * @public
+   */
+  AppLifecycleManagement?: AppLifecycleManagement;
+
+  /**
    * <p>The configuration parameters that specify the IAM roles assumed by the execution role of
    *             SageMaker (assumable roles) and the cluster instances or job execution environments
    *             (execution roles or runtime roles) to manage and access resources required for running Amazon EMR
@@ -2030,6 +2314,13 @@ export interface JupyterLabAppSettings {
    * @public
    */
   EmrSettings?: EmrSettings;
+
+  /**
+   * <p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default
+   *       lifecycle configuration.</p>
+   * @public
+   */
+  BuiltInLifecycleConfigArn?: string;
 }
 
 /**
@@ -2332,6 +2623,7 @@ export const MlTools = {
   JUMP_START: "JumpStart",
   MODELS: "Models",
   MODEL_EVALUATION: "ModelEvaluation",
+  PERFORMANCE_EVALUATION: "PerformanceEvaluation",
   PIPELINES: "Pipelines",
   PROJECTS: "Projects",
   TRAINING: "Training",
@@ -2341,6 +2633,42 @@ export const MlTools = {
  * @public
  */
 export type MlTools = (typeof MlTools)[keyof typeof MlTools];
+
+/**
+ * @public
+ * @enum
+ */
+export const SageMakerImageName = {
+  sagemaker_distribution: "sagemaker_distribution",
+} as const;
+
+/**
+ * @public
+ */
+export type SageMakerImageName = (typeof SageMakerImageName)[keyof typeof SageMakerImageName];
+
+/**
+ * <p>The SageMaker images that are hidden from the Studio user interface. You must specify the SageMaker
+ *       image name and version aliases.</p>
+ * @public
+ */
+export interface HiddenSageMakerImage {
+  /**
+   * <p>
+   *       The SageMaker image name that you are hiding from the Studio user interface.
+   *     </p>
+   * @public
+   */
+  SageMakerImageName?: SageMakerImageName;
+
+  /**
+   * <p>
+   *       The version aliases you are hiding from the Studio user interface.
+   *     </p>
+   * @public
+   */
+  VersionAliases?: string[];
+}
 
 /**
  * <p>Studio settings. If these settings are applied on a user level, they take priority over
@@ -2360,6 +2688,22 @@ export interface StudioWebPortalSettings {
    * @public
    */
   HiddenAppTypes?: AppType[];
+
+  /**
+   * <p>
+   *       The instance types you are hiding from the Studio user interface.
+   *     </p>
+   * @public
+   */
+  HiddenInstanceTypes?: AppInstanceType[];
+
+  /**
+   * <p>
+   *       The version aliases you are hiding from the Studio user interface.
+   *     </p>
+   * @public
+   */
+  HiddenSageMakerImageVersionAliases?: HiddenSageMakerImage[];
 }
 
 /**
@@ -2512,6 +2856,14 @@ export interface UserSettings {
    * @public
    */
   StudioWebPortalSettings?: StudioWebPortalSettings;
+
+  /**
+   * <p>Indicates whether auto-mounting of an EFS volume is supported for the user profile. The
+   *         <code>DefaultAsDomain</code> value is only supported for user profiles. Do not use the
+   *         <code>DefaultAsDomain</code> value when setting this parameter for a domain.</p>
+   * @public
+   */
+  AutoMountHomeEFS?: AutoMountHomeEFS;
 }
 
 /**
@@ -2624,6 +2976,20 @@ export interface DomainSettings {
 
 /**
  * @public
+ * @enum
+ */
+export const TagPropagation = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+
+/**
+ * @public
+ */
+export type TagPropagation = (typeof TagPropagation)[keyof typeof TagPropagation];
+
+/**
+ * @public
  */
 export interface CreateDomainRequest {
   /**
@@ -2720,6 +3086,12 @@ export interface CreateDomainRequest {
    * @public
    */
   AppSecurityGroupManagement?: AppSecurityGroupManagement;
+
+  /**
+   * <p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>
+   * @public
+   */
+  TagPropagation?: TagPropagation;
 
   /**
    * <p>The default settings used to create a space.</p>
@@ -9444,7 +9816,7 @@ export interface HumanTaskConfig {
    *          </ul>
    * @public
    */
-  PreHumanTaskLambdaArn: string | undefined;
+  PreHumanTaskLambdaArn?: string;
 
   /**
    * <p>Keywords used to describe the task so that workers on Amazon Mechanical Turk can
@@ -9520,7 +9892,7 @@ export interface HumanTaskConfig {
    * <p>Configures how labels are consolidated across human workers.</p>
    * @public
    */
-  AnnotationConsolidationConfig: AnnotationConsolidationConfig | undefined;
+  AnnotationConsolidationConfig?: AnnotationConsolidationConfig;
 
   /**
    * <p>The price that you pay for each task performed by an Amazon Mechanical Turk worker.</p>
@@ -12570,265 +12942,6 @@ export interface CreatePipelineResponse {
    */
   PipelineArn?: string;
 }
-
-/**
- * @public
- */
-export interface CreatePresignedDomainUrlRequest {
-  /**
-   * <p>The domain ID.</p>
-   * @public
-   */
-  DomainId: string | undefined;
-
-  /**
-   * <p>The name of the UserProfile to sign-in as.</p>
-   * @public
-   */
-  UserProfileName: string | undefined;
-
-  /**
-   * <p>The session expiration duration in seconds. This value defaults to 43200.</p>
-   * @public
-   */
-  SessionExpirationDurationInSeconds?: number;
-
-  /**
-   * <p>The number of seconds until the pre-signed URL expires. This value defaults to 300.</p>
-   * @public
-   */
-  ExpiresInSeconds?: number;
-
-  /**
-   * <p>The name of the space.</p>
-   * @public
-   */
-  SpaceName?: string;
-
-  /**
-   * <p>The landing page that the user is directed to when accessing the presigned URL. Using this
-   *       value, users can access Studio or Studio Classic, even if it is not the default experience for
-   *       the domain. The supported values are:</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>studio::relative/path</code>: Directs users to the relative path in
-   *           Studio.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>app:JupyterServer:relative/path</code>: Directs users to the relative path in
-   *           the Studio Classic application.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>app:JupyterLab:relative/path</code>: Directs users to the relative path in the
-   *           JupyterLab application.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>app:RStudioServerPro:relative/path</code>: Directs users to the relative path in
-   *           the RStudio application.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>app:CodeEditor:relative/path</code>: Directs users to the relative path in the
-   *           Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>app:Canvas:relative/path</code>: Directs users to the relative path in the
-   *           Canvas application.</p>
-   *             </li>
-   *          </ul>
-   * @public
-   */
-  LandingUri?: string;
-}
-
-/**
- * @public
- */
-export interface CreatePresignedDomainUrlResponse {
-  /**
-   * <p>The presigned URL.</p>
-   * @public
-   */
-  AuthorizedUrl?: string;
-}
-
-/**
- * @public
- */
-export interface CreatePresignedMlflowTrackingServerUrlRequest {
-  /**
-   * <p>The name of the tracking server to connect to your MLflow UI.</p>
-   * @public
-   */
-  TrackingServerName: string | undefined;
-
-  /**
-   * <p>The duration in seconds that your presigned URL is valid. The presigned URL can be used
-   *       only once.</p>
-   * @public
-   */
-  ExpiresInSeconds?: number;
-
-  /**
-   * <p>The duration in seconds that your MLflow UI session is valid.</p>
-   * @public
-   */
-  SessionExpirationDurationInSeconds?: number;
-}
-
-/**
- * @public
- */
-export interface CreatePresignedMlflowTrackingServerUrlResponse {
-  /**
-   * <p>A presigned URL with an authorization token.</p>
-   * @public
-   */
-  AuthorizedUrl?: string;
-}
-
-/**
- * @public
- */
-export interface CreatePresignedNotebookInstanceUrlInput {
-  /**
-   * <p>The name of the notebook instance.</p>
-   * @public
-   */
-  NotebookInstanceName: string | undefined;
-
-  /**
-   * <p>The duration of the session, in seconds. The default is 12 hours.</p>
-   * @public
-   */
-  SessionExpirationDurationInSeconds?: number;
-}
-
-/**
- * @public
- */
-export interface CreatePresignedNotebookInstanceUrlOutput {
-  /**
-   * <p>A JSON object that contains the URL string. </p>
-   * @public
-   */
-  AuthorizedUrl?: string;
-}
-
-/**
- * <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when
- *       you call the following APIs:</p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a>
- *                </p>
- *             </li>
- *          </ul>
- * @public
- */
-export interface ExperimentConfig {
-  /**
-   * <p>The name of an existing experiment to associate with the trial component.</p>
-   * @public
-   */
-  ExperimentName?: string;
-
-  /**
-   * <p>The name of an existing trial to associate the trial component with. If not specified, a
-   *       new trial is created.</p>
-   * @public
-   */
-  TrialName?: string;
-
-  /**
-   * <p>The display name for the trial component. If this key isn't specified, the display name is
-   *       the trial component name.</p>
-   * @public
-   */
-  TrialComponentDisplayName?: string;
-
-  /**
-   * <p>The name of the experiment run to associate with the trial component.</p>
-   * @public
-   */
-  RunName?: string;
-}
-
-/**
- * @public
- * @enum
- */
-export const DataDistributionType = {
-  FULLYREPLICATED: "FullyReplicated",
-  SHARDEDBYS3KEY: "ShardedByS3Key",
-} as const;
-
-/**
- * @public
- */
-export type DataDistributionType = (typeof DataDistributionType)[keyof typeof DataDistributionType];
-
-/**
- * @public
- * @enum
- */
-export const InputMode = {
-  FILE: "File",
-  PIPE: "Pipe",
-} as const;
-
-/**
- * @public
- */
-export type InputMode = (typeof InputMode)[keyof typeof InputMode];
-
-/**
- * @public
- * @enum
- */
-export const RedshiftResultCompressionType = {
-  BZIP2: "BZIP2",
-  GZIP: "GZIP",
-  NONE: "None",
-  SNAPPY: "SNAPPY",
-  ZSTD: "ZSTD",
-} as const;
-
-/**
- * @public
- */
-export type RedshiftResultCompressionType =
-  (typeof RedshiftResultCompressionType)[keyof typeof RedshiftResultCompressionType];
-
-/**
- * @public
- * @enum
- */
-export const RedshiftResultFormat = {
-  CSV: "CSV",
-  PARQUET: "PARQUET",
-} as const;
-
-/**
- * @public
- */
-export type RedshiftResultFormat = (typeof RedshiftResultFormat)[keyof typeof RedshiftResultFormat];
 
 /**
  * @internal

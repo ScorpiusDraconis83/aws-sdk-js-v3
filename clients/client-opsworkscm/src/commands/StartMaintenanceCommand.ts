@@ -129,9 +129,7 @@ export class StartMaintenanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpsWorksCMClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class StartMaintenanceCommand extends $Command
   .f(StartMaintenanceRequestFilterSensitiveLog, StartMaintenanceResponseFilterSensitiveLog)
   .ser(se_StartMaintenanceCommand)
   .de(de_StartMaintenanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMaintenanceRequest;
+      output: StartMaintenanceResponse;
+    };
+    sdk: {
+      input: StartMaintenanceCommandInput;
+      output: StartMaintenanceCommandOutput;
+    };
+  };
+}

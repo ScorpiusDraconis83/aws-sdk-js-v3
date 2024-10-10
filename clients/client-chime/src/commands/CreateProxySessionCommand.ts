@@ -138,9 +138,7 @@ export class CreateProxySessionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -152,4 +150,16 @@ export class CreateProxySessionCommand extends $Command
   .f(CreateProxySessionRequestFilterSensitiveLog, CreateProxySessionResponseFilterSensitiveLog)
   .ser(se_CreateProxySessionCommand)
   .de(de_CreateProxySessionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProxySessionRequest;
+      output: CreateProxySessionResponse;
+    };
+    sdk: {
+      input: CreateProxySessionCommandInput;
+      output: CreateProxySessionCommandOutput;
+    };
+  };
+}

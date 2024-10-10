@@ -73,6 +73,12 @@ export interface DescribeVolumeStatusCommandOutput extends DescribeVolumeStatusR
  * // const { EC2Client, DescribeVolumeStatusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
  * const client = new EC2Client(config);
  * const input = { // DescribeVolumeStatusRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   VolumeIds: [ // VolumeIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
  *   Filters: [ // FilterList
  *     { // Filter
  *       Name: "STRING_VALUE",
@@ -81,12 +87,6 @@ export interface DescribeVolumeStatusCommandOutput extends DescribeVolumeStatusR
  *       ],
  *     },
  *   ],
- *   MaxResults: Number("int"),
- *   NextToken: "STRING_VALUE",
- *   VolumeIds: [ // VolumeIdStringList
- *     "STRING_VALUE",
- *   ],
- *   DryRun: true || false,
  * };
  * const command = new DescribeVolumeStatusCommand(input);
  * const response = await client.send(command);
@@ -216,9 +216,7 @@ export class DescribeVolumeStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +228,16 @@ export class DescribeVolumeStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeVolumeStatusCommand)
   .de(de_DescribeVolumeStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVolumeStatusRequest;
+      output: DescribeVolumeStatusResult;
+    };
+    sdk: {
+      input: DescribeVolumeStatusCommandInput;
+      output: DescribeVolumeStatusCommandOutput;
+    };
+  };
+}

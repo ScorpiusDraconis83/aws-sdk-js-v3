@@ -114,9 +114,7 @@ export class GetVoiceConnectorTerminationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class GetVoiceConnectorTerminationCommand extends $Command
   .f(void 0, GetVoiceConnectorTerminationResponseFilterSensitiveLog)
   .ser(se_GetVoiceConnectorTerminationCommand)
   .de(de_GetVoiceConnectorTerminationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVoiceConnectorTerminationRequest;
+      output: GetVoiceConnectorTerminationResponse;
+    };
+    sdk: {
+      input: GetVoiceConnectorTerminationCommandInput;
+      output: GetVoiceConnectorTerminationCommandOutput;
+    };
+  };
+}

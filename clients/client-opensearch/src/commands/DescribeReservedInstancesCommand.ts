@@ -104,9 +104,7 @@ export class DescribeReservedInstancesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OpenSearchClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class DescribeReservedInstancesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeReservedInstancesCommand)
   .de(de_DescribeReservedInstancesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReservedInstancesRequest;
+      output: DescribeReservedInstancesResponse;
+    };
+    sdk: {
+      input: DescribeReservedInstancesCommandInput;
+      output: DescribeReservedInstancesCommandOutput;
+    };
+  };
+}

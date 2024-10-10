@@ -251,6 +251,10 @@ import {
 } from "../commands/DescribeKeyRegistrationCommand";
 import { DescribeNamespaceCommandInput, DescribeNamespaceCommandOutput } from "../commands/DescribeNamespaceCommand";
 import {
+  DescribeQPersonalizationConfigurationCommandInput,
+  DescribeQPersonalizationConfigurationCommandOutput,
+} from "../commands/DescribeQPersonalizationConfigurationCommand";
+import {
   DescribeRefreshScheduleCommandInput,
   DescribeRefreshScheduleCommandOutput,
 } from "../commands/DescribeRefreshScheduleCommand";
@@ -326,6 +330,10 @@ import { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "../commands
 import { ListDataSourcesCommandInput, ListDataSourcesCommandOutput } from "../commands/ListDataSourcesCommand";
 import { ListFolderMembersCommandInput, ListFolderMembersCommandOutput } from "../commands/ListFolderMembersCommand";
 import { ListFoldersCommandInput, ListFoldersCommandOutput } from "../commands/ListFoldersCommand";
+import {
+  ListFoldersForResourceCommandInput,
+  ListFoldersForResourceCommandOutput,
+} from "../commands/ListFoldersForResourceCommand";
 import {
   ListGroupMembershipsCommandInput,
   ListGroupMembershipsCommandOutput,
@@ -469,6 +477,10 @@ import {
   UpdatePublicSharingSettingsCommandInput,
   UpdatePublicSharingSettingsCommandOutput,
 } from "../commands/UpdatePublicSharingSettingsCommand";
+import {
+  UpdateQPersonalizationConfigurationCommandInput,
+  UpdateQPersonalizationConfigurationCommandOutput,
+} from "../commands/UpdateQPersonalizationConfigurationCommand";
 import {
   UpdateRefreshScheduleCommandInput,
   UpdateRefreshScheduleCommandOutput,
@@ -979,7 +991,6 @@ import {
   TotalAggregationOption,
   TotalOptions,
   TreeMapAggregatedFieldWells,
-  TreeMapConfiguration,
   TreeMapFieldWells,
   TreeMapSortConfiguration,
   TrendArrowOptions,
@@ -1017,6 +1028,8 @@ import {
   AssetBundleExportJobDataSetPropertyToOverride,
   AssetBundleExportJobDataSourceOverrideProperties,
   AssetBundleExportJobDataSourcePropertyToOverride,
+  AssetBundleExportJobFolderOverrideProperties,
+  AssetBundleExportJobFolderPropertyToOverride,
   AssetBundleExportJobRefreshScheduleOverrideProperties,
   AssetBundleExportJobRefreshSchedulePropertyToOverride,
   AssetBundleExportJobResourceIdOverrideConfiguration,
@@ -1040,6 +1053,9 @@ import {
   AssetBundleImportJobDataSourceOverrideParameters,
   AssetBundleImportJobDataSourceOverridePermissions,
   AssetBundleImportJobDataSourceOverrideTags,
+  AssetBundleImportJobFolderOverrideParameters,
+  AssetBundleImportJobFolderOverridePermissions,
+  AssetBundleImportJobFolderOverrideTags,
   AssetBundleImportJobOverrideParameters,
   AssetBundleImportJobOverridePermissions,
   AssetBundleImportJobOverrideTags,
@@ -1082,7 +1098,6 @@ import {
   ContributionAnalysisFactor,
   ContributionAnalysisTimeRanges,
   CreateColumnsOperation,
-  CredentialPair,
   CustomSql,
   DashboardPublishOptions,
   DashboardSourceEntity,
@@ -1097,7 +1112,6 @@ import {
   DatasetParameter,
   DataSetReference,
   DataSetUsageConfiguration,
-  DataSourceCredentials,
   DataSourceParameters,
   DateTimeDatasetParameter,
   DateTimeDatasetParameterDefaultValues,
@@ -1152,8 +1166,6 @@ import {
   ResourcePermission,
   ResourceUnavailableException,
   RowLevelPermissionDataSet,
-  RowLevelPermissionTagConfiguration,
-  RowLevelPermissionTagRule,
   S3BucketConfiguration,
   S3Parameters,
   S3Source,
@@ -1188,6 +1200,7 @@ import {
   TopicSortClause,
   TopicTemplate,
   TransformOperation,
+  TreeMapConfiguration,
   TreeMapVisual,
   TrinoParameters,
   TwitterParameters,
@@ -1215,6 +1228,7 @@ import {
   WordCloudVisual,
 } from "../models/models_2";
 import {
+  CredentialPair,
   CustomerManagedKeyUnavailableException,
   Dashboard,
   DashboardSearchFilter,
@@ -1231,6 +1245,7 @@ import {
   DataSetSearchFilter,
   DataSetSummary,
   DataSource,
+  DataSourceCredentials,
   DataSourceSearchFilter,
   DataSourceSummary,
   DefaultFormatting,
@@ -1249,6 +1264,8 @@ import {
   RefreshFrequency,
   RefreshSchedule,
   RegisteredCustomerManagedKey,
+  RowLevelPermissionTagConfiguration,
+  RowLevelPermissionTagRule,
   ScheduleRefreshOnEntity,
   SemanticEntityType,
   SemanticType,
@@ -1271,6 +1288,7 @@ import {
   TopicCategoryFilter,
   TopicCategoryFilterConstant,
   TopicColumn,
+  TopicConfigOptions,
   TopicDateRangeFilter,
   TopicDetails,
   TopicFilter,
@@ -2965,6 +2983,22 @@ export const se_DescribeNamespaceCommand = async (
 };
 
 /**
+ * serializeAws_restJson1DescribeQPersonalizationConfigurationCommand
+ */
+export const se_DescribeQPersonalizationConfigurationCommand = async (
+  input: DescribeQPersonalizationConfigurationCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {};
+  b.bp("/accounts/{AwsAccountId}/q-personalization-configuration");
+  b.p("AwsAccountId", () => input.AwsAccountId!, "{AwsAccountId}", false);
+  let body: any;
+  b.m("GET").h(headers).b(body);
+  return b.build();
+};
+
+/**
  * serializeAws_restJson1DescribeRefreshScheduleCommand
  */
 export const se_DescribeRefreshScheduleCommand = async (
@@ -3312,7 +3346,7 @@ export const se_GetDashboardEmbedUrlCommand = async (
     [_spe]: [() => input.StatePersistenceEnabled !== void 0, () => input[_SPE]!.toString()],
     [_ua]: [, input[_UA]!],
     [_n]: [, input[_N]!],
-    [_adi]: [() => input.AdditionalDashboardIds !== void 0, () => (input[_ADI]! || []).map((_entry) => _entry as any)],
+    [_adi]: [() => input.AdditionalDashboardIds !== void 0, () => input[_ADI]! || []],
   });
   let body: any;
   b.m("GET").h(headers).q(query).b(body);
@@ -3513,6 +3547,27 @@ export const se_ListFoldersCommand = async (
   const headers: any = {};
   b.bp("/accounts/{AwsAccountId}/folders");
   b.p("AwsAccountId", () => input.AwsAccountId!, "{AwsAccountId}", false);
+  const query: any = map({
+    [_nt]: [, input[_NT]!],
+    [_mr]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
+  });
+  let body: any;
+  b.m("GET").h(headers).q(query).b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1ListFoldersForResourceCommand
+ */
+export const se_ListFoldersForResourceCommand = async (
+  input: ListFoldersForResourceCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {};
+  b.bp("/accounts/{AwsAccountId}/resource/{ResourceArn}/folders");
+  b.p("AwsAccountId", () => input.AwsAccountId!, "{AwsAccountId}", false);
+  b.p("ResourceArn", () => input.ResourceArn!, "{ResourceArn}", false);
   const query: any = map({
     [_nt]: [, input[_NT]!],
     [_mr]: [() => input.MaxResults !== void 0, () => input[_MR]!.toString()],
@@ -4215,6 +4270,8 @@ export const se_StartAssetBundleExportJobCommand = async (
       CloudFormationOverridePropertyConfiguration: (_) => _json(_),
       ExportFormat: [],
       IncludeAllDependencies: [],
+      IncludeFolderMembers: [],
+      IncludeFolderMemberships: [],
       IncludePermissions: [],
       IncludeTags: [],
       ResourceArns: (_) => _json(_),
@@ -4315,7 +4372,7 @@ export const se_UntagResourceCommand = async (
   b.bp("/resources/{ResourceArn}/tags");
   b.p("ResourceArn", () => input.ResourceArn!, "{ResourceArn}", false);
   const query: any = map({
-    [_k]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => (input[_TK]! || []).map((_entry) => _entry as any)],
+    [_k]: [__expectNonNull(input.TagKeys, `TagKeys`) != null, () => input[_TK]! || []],
   });
   let body: any;
   b.m("DELETE").h(headers).q(query).b(body);
@@ -4830,6 +4887,29 @@ export const se_UpdatePublicSharingSettingsCommand = async (
   body = JSON.stringify(
     take(input, {
       PublicSharingEnabled: [],
+    })
+  );
+  b.m("PUT").h(headers).b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1UpdateQPersonalizationConfigurationCommand
+ */
+export const se_UpdateQPersonalizationConfigurationCommand = async (
+  input: UpdateQPersonalizationConfigurationCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    "content-type": "application/json",
+  };
+  b.bp("/accounts/{AwsAccountId}/q-personalization-configuration");
+  b.p("AwsAccountId", () => input.AwsAccountId!, "{AwsAccountId}", false);
+  let body: any;
+  body = JSON.stringify(
+    take(input, {
+      PersonalizationMode: [],
     })
   );
   b.m("PUT").h(headers).b(body);
@@ -6700,6 +6780,8 @@ export const de_DescribeAssetBundleExportJobCommand = async (
     Errors: _json,
     ExportFormat: __expectString,
     IncludeAllDependencies: __expectBoolean,
+    IncludeFolderMembers: __expectString,
+    IncludeFolderMemberships: __expectBoolean,
     IncludePermissions: __expectBoolean,
     IncludeTags: __expectBoolean,
     JobStatus: __expectString,
@@ -7277,6 +7359,31 @@ export const de_DescribeNamespaceCommand = async (
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   const doc = take(data, {
     Namespace: _json,
+    RequestId: __expectString,
+  });
+  Object.assign(contents, doc);
+  map(contents, {
+    Status: [, output.statusCode],
+  });
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1DescribeQPersonalizationConfigurationCommand
+ */
+export const de_DescribeQPersonalizationConfigurationCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeQPersonalizationConfigurationCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    PersonalizationMode: __expectString,
     RequestId: __expectString,
   });
   Object.assign(contents, doc);
@@ -7999,6 +8106,32 @@ export const de_ListFoldersCommand = async (
   const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
   const doc = take(data, {
     FolderSummaryList: (_) => de_FolderSummaryList(_, context),
+    NextToken: __expectString,
+    RequestId: __expectString,
+  });
+  Object.assign(contents, doc);
+  map(contents, {
+    Status: [, output.statusCode],
+  });
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1ListFoldersForResourceCommand
+ */
+export const de_ListFoldersForResourceCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListFoldersForResourceCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    Folders: _json,
     NextToken: __expectString,
     RequestId: __expectString,
   });
@@ -9460,6 +9593,31 @@ export const de_UpdatePublicSharingSettingsCommand = async (
 };
 
 /**
+ * deserializeAws_restJson1UpdateQPersonalizationConfigurationCommand
+ */
+export const de_UpdateQPersonalizationConfigurationCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateQPersonalizationConfigurationCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
+  const doc = take(data, {
+    PersonalizationMode: __expectString,
+    RequestId: __expectString,
+  });
+  Object.assign(contents, doc);
+  map(contents, {
+    Status: [, output.statusCode],
+  });
+  return contents;
+};
+
+/**
  * deserializeAws_restJson1UpdateRefreshScheduleCommand
  */
 export const de_UpdateRefreshScheduleCommand = async (
@@ -10489,6 +10647,12 @@ const se_ArcConfiguration = (input: ArcConfiguration, context: __SerdeContext): 
 
 // se_AssetBundleExportJobDataSourcePropertyToOverrideList omitted.
 
+// se_AssetBundleExportJobFolderOverrideProperties omitted.
+
+// se_AssetBundleExportJobFolderOverridePropertiesList omitted.
+
+// se_AssetBundleExportJobFolderPropertyToOverrideList omitted.
+
 // se_AssetBundleExportJobRefreshScheduleOverrideProperties omitted.
 
 // se_AssetBundleExportJobRefreshScheduleOverridePropertiesList omitted.
@@ -10563,6 +10727,18 @@ const se_ArcConfiguration = (input: ArcConfiguration, context: __SerdeContext): 
 
 // se_AssetBundleImportJobDataSourceOverrideTagsList omitted.
 
+// se_AssetBundleImportJobFolderOverrideParameters omitted.
+
+// se_AssetBundleImportJobFolderOverrideParametersList omitted.
+
+// se_AssetBundleImportJobFolderOverridePermissions omitted.
+
+// se_AssetBundleImportJobFolderOverridePermissionsList omitted.
+
+// se_AssetBundleImportJobFolderOverrideTags omitted.
+
+// se_AssetBundleImportJobFolderOverrideTagsList omitted.
+
 /**
  * serializeAws_restJson1AssetBundleImportJobOverrideParameters
  */
@@ -10575,6 +10751,7 @@ const se_AssetBundleImportJobOverrideParameters = (
     Dashboards: _json,
     DataSets: _json,
     DataSources: _json,
+    Folders: _json,
     RefreshSchedules: (_) => se_AssetBundleImportJobRefreshScheduleOverrideParametersList(_, context),
     ResourceIdOverrideConfiguration: _json,
     Themes: _json,
@@ -14966,6 +15143,8 @@ const se_TopBottomRankedComputation = (input: TopBottomRankedComputation, contex
 
 // se_TopicColumns omitted.
 
+// se_TopicConfigOptions omitted.
+
 // se_TopicConstantValue omitted.
 
 // se_TopicDateRangeFilter omitted.
@@ -15690,6 +15869,12 @@ const de_ArcConfiguration = (output: any, context: __SerdeContext): ArcConfigura
 
 // de_AssetBundleExportJobErrorList omitted.
 
+// de_AssetBundleExportJobFolderOverrideProperties omitted.
+
+// de_AssetBundleExportJobFolderOverridePropertiesList omitted.
+
+// de_AssetBundleExportJobFolderPropertyToOverrideList omitted.
+
 // de_AssetBundleExportJobRefreshScheduleOverrideProperties omitted.
 
 // de_AssetBundleExportJobRefreshScheduleOverridePropertiesList omitted.
@@ -15800,6 +15985,18 @@ const de_AssetBundleExportJobSummaryList = (output: any, context: __SerdeContext
 
 // de_AssetBundleImportJobErrorList omitted.
 
+// de_AssetBundleImportJobFolderOverrideParameters omitted.
+
+// de_AssetBundleImportJobFolderOverrideParametersList omitted.
+
+// de_AssetBundleImportJobFolderOverridePermissions omitted.
+
+// de_AssetBundleImportJobFolderOverridePermissionsList omitted.
+
+// de_AssetBundleImportJobFolderOverrideTags omitted.
+
+// de_AssetBundleImportJobFolderOverrideTagsList omitted.
+
 /**
  * deserializeAws_restJson1AssetBundleImportJobOverrideParameters
  */
@@ -15812,6 +16009,7 @@ const de_AssetBundleImportJobOverrideParameters = (
     Dashboards: _json,
     DataSets: _json,
     DataSources: _json,
+    Folders: _json,
     RefreshSchedules: (_: any) => de_AssetBundleImportJobRefreshScheduleOverrideParametersList(_, context),
     ResourceIdOverrideConfiguration: _json,
     Themes: _json,
@@ -17762,6 +17960,8 @@ const de_Folder = (output: any, context: __SerdeContext): Folder => {
 // de_FolderMember omitted.
 
 // de_FolderMemberList omitted.
+
+// de_FoldersForResourceArnList omitted.
 
 /**
  * deserializeAws_restJson1FolderSummary
@@ -20744,6 +20944,8 @@ const de_TopBottomRankedComputation = (output: any, context: __SerdeContext): To
 
 // de_TopicColumns omitted.
 
+// de_TopicConfigOptions omitted.
+
 // de_TopicConstantValue omitted.
 
 // de_TopicDateRangeFilter omitted.
@@ -21422,13 +21624,6 @@ const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
 // Encode Uint8Array data into string with utf-8.
 const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
   collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
 
 const _ADI = "AdditionalDashboardIds";
 const _AN = "AliasName";

@@ -102,6 +102,38 @@ export interface UpdateAliasCommandOutput extends AliasConfiguration, __Metadata
  * <p>Base exception class for all service exceptions from Lambda service.</p>
  *
  * @public
+ * @example To update a function alias
+ * ```javascript
+ * // The following example updates the alias named BLUE to send 30% of traffic to version 2 and 70% to version 1.
+ * const input = {
+ *   "FunctionName": "my-function",
+ *   "FunctionVersion": "2",
+ *   "Name": "BLUE",
+ *   "RoutingConfig": {
+ *     "AdditionalVersionWeights": {
+ *       "1": 0.7
+ *     }
+ *   }
+ * };
+ * const command = new UpdateAliasCommand(input);
+ * const response = await client.send(command);
+ * /* response ==
+ * {
+ *   "AliasArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE",
+ *   "Description": "Production environment BLUE.",
+ *   "FunctionVersion": "2",
+ *   "Name": "BLUE",
+ *   "RevisionId": "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93",
+ *   "RoutingConfig": {
+ *     "AdditionalVersionWeights": {
+ *       "1": 0.7
+ *     }
+ *   }
+ * }
+ * *\/
+ * // example id: to-update-a-function-alias-1481650817950
+ * ```
+ *
  */
 export class UpdateAliasCommand extends $Command
   .classBuilder<
@@ -111,9 +143,7 @@ export class UpdateAliasCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LambdaClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +155,16 @@ export class UpdateAliasCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateAliasCommand)
   .de(de_UpdateAliasCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAliasRequest;
+      output: AliasConfiguration;
+    };
+    sdk: {
+      input: UpdateAliasCommandInput;
+      output: UpdateAliasCommandOutput;
+    };
+  };
+}

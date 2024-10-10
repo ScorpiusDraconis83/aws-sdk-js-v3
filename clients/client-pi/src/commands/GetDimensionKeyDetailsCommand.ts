@@ -89,9 +89,7 @@ export class GetDimensionKeyDetailsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PIClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class GetDimensionKeyDetailsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDimensionKeyDetailsCommand)
   .de(de_GetDimensionKeyDetailsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDimensionKeyDetailsRequest;
+      output: GetDimensionKeyDetailsResponse;
+    };
+    sdk: {
+      input: GetDimensionKeyDetailsCommandInput;
+      output: GetDimensionKeyDetailsCommandOutput;
+    };
+  };
+}

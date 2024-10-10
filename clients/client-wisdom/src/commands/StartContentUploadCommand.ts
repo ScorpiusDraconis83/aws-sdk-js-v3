@@ -88,9 +88,7 @@ export class StartContentUploadCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: WisdomClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -102,4 +100,16 @@ export class StartContentUploadCommand extends $Command
   .f(void 0, StartContentUploadResponseFilterSensitiveLog)
   .ser(se_StartContentUploadCommand)
   .de(de_StartContentUploadCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartContentUploadRequest;
+      output: StartContentUploadResponse;
+    };
+    sdk: {
+      input: StartContentUploadCommandInput;
+      output: StartContentUploadCommandOutput;
+    };
+  };
+}

@@ -111,9 +111,7 @@ export class BatchDetectSentimentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class BatchDetectSentimentCommand extends $Command
   .f(BatchDetectSentimentRequestFilterSensitiveLog, BatchDetectSentimentResponseFilterSensitiveLog)
   .ser(se_BatchDetectSentimentCommand)
   .de(de_BatchDetectSentimentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectSentimentRequest;
+      output: BatchDetectSentimentResponse;
+    };
+    sdk: {
+      input: BatchDetectSentimentCommandInput;
+      output: BatchDetectSentimentCommandOutput;
+    };
+  };
+}

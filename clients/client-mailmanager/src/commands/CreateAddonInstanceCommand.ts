@@ -90,9 +90,7 @@ export class CreateAddonInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MailManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -104,4 +102,16 @@ export class CreateAddonInstanceCommand extends $Command
   .f(CreateAddonInstanceRequestFilterSensitiveLog, void 0)
   .ser(se_CreateAddonInstanceCommand)
   .de(de_CreateAddonInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAddonInstanceRequest;
+      output: CreateAddonInstanceResponse;
+    };
+    sdk: {
+      input: CreateAddonInstanceCommandInput;
+      output: CreateAddonInstanceCommandOutput;
+    };
+  };
+}

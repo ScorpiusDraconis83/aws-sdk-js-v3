@@ -93,9 +93,7 @@ export class UpdateAuthenticationProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -107,4 +105,16 @@ export class UpdateAuthenticationProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateAuthenticationProfileCommand)
   .de(de_UpdateAuthenticationProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAuthenticationProfileRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateAuthenticationProfileCommandInput;
+      output: UpdateAuthenticationProfileCommandOutput;
+    };
+  };
+}

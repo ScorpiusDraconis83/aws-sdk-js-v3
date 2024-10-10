@@ -216,9 +216,7 @@ export class DescribeScalingPoliciesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ApplicationAutoScalingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -230,4 +228,16 @@ export class DescribeScalingPoliciesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeScalingPoliciesCommand)
   .de(de_DescribeScalingPoliciesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScalingPoliciesRequest;
+      output: DescribeScalingPoliciesResponse;
+    };
+    sdk: {
+      input: DescribeScalingPoliciesCommandInput;
+      output: DescribeScalingPoliciesCommandOutput;
+    };
+  };
+}

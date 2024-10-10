@@ -99,9 +99,7 @@ export class TagAttendeeCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -113,4 +111,16 @@ export class TagAttendeeCommand extends $Command
   .f(TagAttendeeRequestFilterSensitiveLog, void 0)
   .ser(se_TagAttendeeCommand)
   .de(de_TagAttendeeCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagAttendeeRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagAttendeeCommandInput;
+      output: TagAttendeeCommandOutput;
+    };
+  };
+}

@@ -61,15 +61,11 @@ export interface BundleInstanceCommandOutput extends BundleInstanceResult, __Met
  * const response = await client.send(command);
  * // { // BundleInstanceResult
  * //   BundleTask: { // BundleTask
- * //     BundleId: "STRING_VALUE",
- * //     BundleTaskError: { // BundleTaskError
- * //       Code: "STRING_VALUE",
- * //       Message: "STRING_VALUE",
- * //     },
  * //     InstanceId: "STRING_VALUE",
- * //     Progress: "STRING_VALUE",
- * //     StartTime: new Date("TIMESTAMP"),
+ * //     BundleId: "STRING_VALUE",
  * //     State: "pending" || "waiting-for-shutdown" || "bundling" || "storing" || "cancelling" || "complete" || "failed",
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     UpdateTime: new Date("TIMESTAMP"),
  * //     Storage: { // Storage
  * //       S3: { // S3Storage
  * //         AWSAccessKeyId: "STRING_VALUE",
@@ -79,7 +75,11 @@ export interface BundleInstanceCommandOutput extends BundleInstanceResult, __Met
  * //         UploadPolicySignature: "STRING_VALUE",
  * //       },
  * //     },
- * //     UpdateTime: new Date("TIMESTAMP"),
+ * //     Progress: "STRING_VALUE",
+ * //     BundleTaskError: { // BundleTaskError
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
  * //   },
  * // };
  *
@@ -104,9 +104,7 @@ export class BundleInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class BundleInstanceCommand extends $Command
   .f(BundleInstanceRequestFilterSensitiveLog, BundleInstanceResultFilterSensitiveLog)
   .ser(se_BundleInstanceCommand)
   .de(de_BundleInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BundleInstanceRequest;
+      output: BundleInstanceResult;
+    };
+    sdk: {
+      input: BundleInstanceCommandInput;
+      output: BundleInstanceCommandOutput;
+    };
+  };
+}

@@ -104,9 +104,7 @@ export class DescribeEnvironmentStatusCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Cloud9ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -118,4 +116,16 @@ export class DescribeEnvironmentStatusCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeEnvironmentStatusCommand)
   .de(de_DescribeEnvironmentStatusCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEnvironmentStatusRequest;
+      output: DescribeEnvironmentStatusResult;
+    };
+    sdk: {
+      input: DescribeEnvironmentStatusCommandInput;
+      output: DescribeEnvironmentStatusCommandOutput;
+    };
+  };
+}

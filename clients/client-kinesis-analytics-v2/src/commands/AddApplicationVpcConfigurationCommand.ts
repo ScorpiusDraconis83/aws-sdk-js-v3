@@ -124,9 +124,7 @@ export class AddApplicationVpcConfigurationCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: KinesisAnalyticsV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class AddApplicationVpcConfigurationCommand extends $Command
   .f(void 0, void 0)
   .ser(se_AddApplicationVpcConfigurationCommand)
   .de(de_AddApplicationVpcConfigurationCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationVpcConfigurationRequest;
+      output: AddApplicationVpcConfigurationResponse;
+    };
+    sdk: {
+      input: AddApplicationVpcConfigurationCommandInput;
+      output: AddApplicationVpcConfigurationCommandOutput;
+    };
+  };
+}

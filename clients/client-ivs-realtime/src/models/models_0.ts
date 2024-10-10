@@ -61,7 +61,7 @@ export class ConflictException extends __BaseException {
  */
 export interface Video {
   /**
-   * <p>Video-resolution width. Note that the maximum value is determined by <code>width</code>
+   * <p>Video-resolution width. This must be an even number. Note that the maximum value is determined by <code>width</code>
    *          times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or
    *          1080x1920). Default: 1280.</p>
    * @public
@@ -69,7 +69,7 @@ export interface Video {
   width?: number;
 
   /**
-   * <p>Video-resolution height. Note that the maximum value is determined by <code>width</code>
+   * <p>Video-resolution height. This must be an even number. Note that the maximum value is determined by <code>width</code>
    *          times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or
    *          1080x1920). Default: 720.</p>
    * @public
@@ -108,8 +108,8 @@ export interface CreateEncoderConfigurationRequest {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
    *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
@@ -143,10 +143,9 @@ export interface EncoderConfiguration {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -291,6 +290,173 @@ export class ValidationException extends __BaseException {
     Object.setPrototypeOf(this, ValidationException.prototype);
     this.exceptionMessage = opts.exceptionMessage;
   }
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const IngestProtocol = {
+  RTMP: "RTMP",
+  RTMPS: "RTMPS",
+} as const;
+
+/**
+ * @public
+ */
+export type IngestProtocol = (typeof IngestProtocol)[keyof typeof IngestProtocol];
+
+/**
+ * @public
+ */
+export interface CreateIngestConfigurationRequest {
+  /**
+   * <p>Optional name that can be specified for the IngestConfiguration being created.</p>
+   * @public
+   */
+  name?: string;
+
+  /**
+   * <p>ARN of the stage with which the IngestConfiguration is associated.</p>
+   * @public
+   */
+  stageArn?: string;
+
+  /**
+   * <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
+   *       <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
+   *          </p>
+   * @public
+   */
+  userId?: string;
+
+  /**
+   * <p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
+   *       <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
+   *          </p>
+   * @public
+   */
+  attributes?: Record<string, string>;
+
+  /**
+   * <p>Type of ingest protocol that the user employs to broadcast. If this is set to <code>RTMP</code>, <code>insecureIngest</code> must be set to <code>true</code>.</p>
+   * @public
+   */
+  ingestProtocol: IngestProtocol | undefined;
+
+  /**
+   * <p>Whether the stage allows insecure RTMP ingest. This must be set to <code>true</code>, if <code>ingestProtocol</code> is set to <code>RTMP</code>. Default: <code>false</code>. </p>
+   * @public
+   */
+  insecureIngest?: boolean;
+
+  /**
+   * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
+   * 	 there.</p>
+   * @public
+   */
+  tags?: Record<string, string>;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const IngestConfigurationState = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+} as const;
+
+/**
+ * @public
+ */
+export type IngestConfigurationState = (typeof IngestConfigurationState)[keyof typeof IngestConfigurationState];
+
+/**
+ * <p>Object specifying an ingest configuration.</p>
+ * @public
+ */
+export interface IngestConfiguration {
+  /**
+   * <p>Ingest name</p>
+   * @public
+   */
+  name?: string;
+
+  /**
+   * <p>Ingest configuration ARN.</p>
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * <p>Type of ingest protocol that the user employs for broadcasting.</p>
+   * @public
+   */
+  ingestProtocol: IngestProtocol | undefined;
+
+  /**
+   * <p>Ingest-key value for the RTMP(S) protocol.</p>
+   * @public
+   */
+  streamKey: string | undefined;
+
+  /**
+   * <p>ARN of the stage with which the IngestConfiguration is associated.</p>
+   * @public
+   */
+  stageArn: string | undefined;
+
+  /**
+   * <p>ID of the participant within the stage.</p>
+   * @public
+   */
+  participantId: string | undefined;
+
+  /**
+   * <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>
+   * @public
+   */
+  state: IngestConfigurationState | undefined;
+
+  /**
+   * <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
+   *       <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
+   *          </p>
+   * @public
+   */
+  userId?: string;
+
+  /**
+   * <p>Application-provided attributes to to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
+   *       <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
+   *          </p>
+   * @public
+   */
+  attributes?: Record<string, string>;
+
+  /**
+   * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
+   * @public
+   */
+  tags?: Record<string, string>;
+}
+
+/**
+ * @public
+ */
+export interface CreateIngestConfigurationResponse {
+  /**
+   * <p>The IngestConfiguration that was created.</p>
+   * @public
+   */
+  ingestConfiguration?: IngestConfiguration;
 }
 
 /**
@@ -511,8 +677,8 @@ export interface CreateStageRequest {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
    *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there. </p>
    * @public
@@ -527,7 +693,8 @@ export interface CreateStageRequest {
 }
 
 /**
- * <p>Summary information about various endpoints for a stage.</p>
+ * <p>Summary information about various endpoints for a stage. We recommend that you cache these values at stage
+ *             creation; the values can be cached for up to 14 days.</p>
  * @public
  */
 export interface StageEndpoints {
@@ -538,10 +705,22 @@ export interface StageEndpoints {
   events?: string;
 
   /**
-   * <p>WHIP endpoint.</p>
+   * <p>The endpoint to be used for IVS real-time streaming using the WHIP protocol.</p>
    * @public
    */
   whip?: string;
+
+  /**
+   * <p>The endpoint to be used for IVS real-time streaming using the RTMP protocol.</p>
+   * @public
+   */
+  rtmp?: string;
+
+  /**
+   * <p>The endpoint to be used for IVS real-time streaming using the RTMPS protocol.</p>
+   * @public
+   */
+  rtmps?: string;
 }
 
 /**
@@ -569,10 +748,9 @@ export interface Stage {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -639,8 +817,8 @@ export interface CreateStorageConfigurationRequest {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   * 	 in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
    *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
@@ -673,10 +851,9 @@ export interface StorageConfiguration {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -708,6 +885,28 @@ export interface DeleteEncoderConfigurationRequest {
  * @public
  */
 export interface DeleteEncoderConfigurationResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteIngestConfigurationRequest {
+  /**
+   * <p>ARN of the IngestConfiguration.</p>
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * <p>Optional field to force deletion of the IngestConfiguration. If this is set to <code>true</code> when a participant is actively publishing, the participant is disconnected from the stage, followed by deletion of the IngestConfiguration. Default: <code>false</code>.</p>
+   * @public
+   */
+  force?: boolean;
+}
+
+/**
+ * @public
+ */
+export interface DeleteIngestConfigurationResponse {}
 
 /**
  * @public
@@ -768,8 +967,9 @@ export interface DisconnectParticipantRequest {
   stageArn: string | undefined;
 
   /**
-   * <p>Identifier of the participant to be disconnected. This is assigned by IVS and returned
-   *          by <a>CreateParticipantToken</a>.</p>
+   * <p>Identifier of the participant to be disconnected. IVS assigns this; it is returned
+   *             by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for
+   * 	    streams using RTMP ingest).</p>
    * @public
    */
   participantId: string | undefined;
@@ -1237,10 +1437,9 @@ export interface Composition {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -1296,6 +1495,28 @@ export interface GetEncoderConfigurationResponse {
 /**
  * @public
  */
+export interface GetIngestConfigurationRequest {
+  /**
+   * <p>ARN of the ingest for which the information is to be retrieved.</p>
+   * @public
+   */
+  arn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetIngestConfigurationResponse {
+  /**
+   * <p>The IngestConfiguration that was returned.</p>
+   * @public
+   */
+  ingestConfiguration?: IngestConfiguration;
+}
+
+/**
+ * @public
+ */
 export interface GetParticipantRequest {
   /**
    * <p>Stage ARN.</p>
@@ -1315,6 +1536,22 @@ export interface GetParticipantRequest {
    */
   participantId: string | undefined;
 }
+
+/**
+ * @public
+ * @enum
+ */
+export const ParticipantProtocol = {
+  RTMP: "RTMP",
+  RTMPS: "RTMPS",
+  UNKNOWN: "UNKNOWN",
+  WHIP: "WHIP",
+} as const;
+
+/**
+ * @public
+ */
+export type ParticipantProtocol = (typeof ParticipantProtocol)[keyof typeof ParticipantProtocol];
 
 /**
  * @public
@@ -1449,6 +1686,12 @@ export interface Participant {
    * @public
    */
   recordingState?: ParticipantRecordingState;
+
+  /**
+   * <p>Type of ingest protocol that the participant employs for broadcasting.</p>
+   * @public
+   */
+  protocol?: ParticipantProtocol;
 }
 
 /**
@@ -1504,10 +1747,9 @@ export interface PublicKey {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -1642,8 +1884,8 @@ export interface ImportPublicKeyRequest {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
    *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
@@ -1756,10 +1998,9 @@ export interface CompositionSummary {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -1834,10 +2075,9 @@ export interface EncoderConfigurationSummary {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -1856,6 +2096,102 @@ export interface ListEncoderConfigurationsResponse {
   /**
    * <p>If there are more encoder configurations than <code>maxResults</code>, use
    *             <code>nextToken</code> in the request to get the next set.</p>
+   * @public
+   */
+  nextToken?: string;
+}
+
+/**
+ * @public
+ */
+export interface ListIngestConfigurationsRequest {
+  /**
+   * <p>Filters the response list to match the specified stage ARN. Only one filter (by stage ARN or by state) can be used at a time.</p>
+   * @public
+   */
+  filterByStageArn?: string;
+
+  /**
+   * <p>Filters the response list to match the specified state. Only one filter (by stage ARN or by state) can be used at a time.</p>
+   * @public
+   */
+  filterByState?: IngestConfigurationState;
+
+  /**
+   * <p>The first IngestConfiguration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
+   * @public
+   */
+  nextToken?: string;
+
+  /**
+   * <p>Maximum number of results to return. Default: 50.</p>
+   * @public
+   */
+  maxResults?: number;
+}
+
+/**
+ * <p>Summary information about an IngestConfiguration.</p>
+ * @public
+ */
+export interface IngestConfigurationSummary {
+  /**
+   * <p>Ingest name.</p>
+   * @public
+   */
+  name?: string;
+
+  /**
+   * <p>Ingest configuration ARN.</p>
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * <p>Type of ingest protocol that the user employs for broadcasting.</p>
+   * @public
+   */
+  ingestProtocol: IngestProtocol | undefined;
+
+  /**
+   * <p>ARN of the stage with which the IngestConfiguration is associated.</p>
+   * @public
+   */
+  stageArn: string | undefined;
+
+  /**
+   * <p>ID of the participant within the stage.</p>
+   * @public
+   */
+  participantId: string | undefined;
+
+  /**
+   * <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>
+   * @public
+   */
+  state: IngestConfigurationState | undefined;
+
+  /**
+   * <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
+   *       <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
+   *          </p>
+   * @public
+   */
+  userId?: string;
+}
+
+/**
+ * @public
+ */
+export interface ListIngestConfigurationsResponse {
+  /**
+   * <p>List of the matching ingest configurations (summary information only).</p>
+   * @public
+   */
+  ingestConfigurations: IngestConfigurationSummary[] | undefined;
+
+  /**
+   * <p>If there are more IngestConfigurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
    * @public
    */
   nextToken?: string;
@@ -1902,9 +2238,20 @@ export interface ListParticipantEventsRequest {
  * @enum
  */
 export const EventErrorCode = {
+  BITRATE_EXCEEDED: "BITRATE_EXCEEDED",
+  B_FRAME_PRESENT: "B_FRAME_PRESENT",
   INSUFFICIENT_CAPABILITIES: "INSUFFICIENT_CAPABILITIES",
+  INTERNAL_SERVER_EXCEPTION: "INTERNAL_SERVER_EXCEPTION",
+  INVALID_AUDIO_CODEC: "INVALID_AUDIO_CODEC",
+  INVALID_INPUT: "INVALID_INPUT",
+  INVALID_PROTOCOL: "INVALID_PROTOCOL",
+  INVALID_STREAM_KEY: "INVALID_STREAM_KEY",
+  INVALID_VIDEO_CODEC: "INVALID_VIDEO_CODEC",
   PUBLISHER_NOT_FOUND: "PUBLISHER_NOT_FOUND",
   QUOTA_EXCEEDED: "QUOTA_EXCEEDED",
+  RESOLUTION_EXCEEDED: "RESOLUTION_EXCEEDED",
+  REUSE_OF_STREAM_KEY: "REUSE_OF_STREAM_KEY",
+  STREAM_DURATION_EXCEEDED: "STREAM_DURATION_EXCEEDED",
 } as const;
 
 /**
@@ -1966,14 +2313,99 @@ export interface Event {
 
   /**
    * <p>If the event is an error event, the error code is provided to give insight into the
-   *          specific error that occurred. If the event is not an error event, this field is null.
-   *             <code>INSUFFICIENT_CAPABILITIES</code> indicates that the participant tried to take an
-   *          action that the participant’s token is not allowed to do. For more information about
-   *          participant capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>. <code>QUOTA_EXCEEDED</code> indicates that the
-   *          number of participants who want to publish/subscribe to a stage exceeds the quota; for more
-   *          information, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">Service Quotas</a>.
-   *             <code>PUBLISHER_NOT_FOUND</code> indicates that the participant tried to subscribe to a
-   *          publisher that doesn’t exist. </p>
+   *          specific error that occurred. If the event is not an error event, this field is null.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>B_FRAME_PRESENT</code> —
+   * 		     The participant's stream includes B-frames.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html">
+   * 		     IVS RTMP Publishing</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BITRATE_EXCEEDED</code> —
+   * 		     The participant exceeded the maximum supported bitrate.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">
+   * 		     Service Quotas</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INSUFFICIENT_CAPABILITIES</code> —
+   * 		     The participant tried to take an action
+   * 		     that the participant’s token is not allowed to do. For details on participant capabilities, see
+   * 		     the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INTERNAL_SERVER_EXCEPTION</code> —
+   * 		     The participant failed to publish to the stage due to an internal server error.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_AUDIO_CODEC</code> —
+   * 		     The participant is using an invalid audio codec.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html">
+   * 		     Stream Ingest</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_INPUT</code> —
+   * 		     The participant is using an invalid input stream.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_PROTOCOL</code> —
+   * 		     The participant's IngestConfiguration resource is configured for RTMPS but they tried streaming with RTMP.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html">
+   * 		     IVS RTMP Publishing</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_STREAM_KEY</code> —
+   * 		     The participant is using an invalid stream key.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html">
+   * 		     IVS RTMP Publishing</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_VIDEO_CODEC</code> —
+   * 		     The participant is using an invalid video codec.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html">
+   * 		     Stream Ingest</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PUBLISHER_NOT_FOUND</code> —
+   * 		     The participant tried to subscribe to a publisher that doesn’t exist.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>QUOTA_EXCEEDED</code> —
+   * 		     The number of participants who want to publish/subscribe to a stage exceeds the quota.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">
+   * 		     Service Quotas</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RESOLUTION_EXCEEDED</code> —
+   * 		     The participant exceeded the maximum supported resolution.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">
+   * 		     Service Quotas</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>REUSE_OF_STREAM_KEY</code> —
+   * 		     The participant tried to use a stream key that is associated with another active stage session.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STREAM_DURATION_EXCEEDED</code> —
+   * 		     The participant exceeded the maximum allowed stream duration.
+   * 		     For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">
+   * 		     Service Quotas</a>.</p>
+   *             </li>
+   *          </ul>
    * @public
    */
   errorCode?: EventErrorCode;
@@ -2180,10 +2612,9 @@ export interface PublicKeySummary {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -2249,10 +2680,9 @@ export interface StageSummary {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -2387,10 +2817,9 @@ export interface StorageConfigurationSummary {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-   *          there.</p>
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   * 	 limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
    * @public
    */
   tags?: Record<string, string>;
@@ -2467,8 +2896,8 @@ export interface StartCompositionRequest {
 
   /**
    * <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
    *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
@@ -2515,9 +2944,9 @@ export interface TagResourceRequest {
 
   /**
    * <p>Array of tags to be added or updated. Array of maps, each of the form
-   *             <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints beyond what is documented
+   *          <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
    */
@@ -2541,9 +2970,9 @@ export interface UntagResourceRequest {
 
   /**
    * <p>Array of tags to be removed. Array of maps, each of the form <code>string:string
-   *             (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *             Resources</a> for details, including restrictions that apply to tags and "Tag naming
-   *          limits and requirements"; Amazon IVS has no constraints beyond what is documented
+   *          (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
+   *          in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
+   *          limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
    *          there.</p>
    * @public
    */
@@ -2554,6 +2983,34 @@ export interface UntagResourceRequest {
  * @public
  */
 export interface UntagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface UpdateIngestConfigurationRequest {
+  /**
+   * <p>ARN of the IngestConfiguration, for which the related stage ARN needs to be updated.</p>
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * <p>Stage ARN that needs to be updated.</p>
+   * @public
+   */
+  stageArn?: string;
+}
+
+/**
+ * @public
+ */
+export interface UpdateIngestConfigurationResponse {
+  /**
+   * <p>The updated IngestConfiguration.</p>
+   * @public
+   */
+  ingestConfiguration?: IngestConfiguration;
+}
 
 /**
  * @public
@@ -2592,6 +3049,24 @@ export interface UpdateStageResponse {
 /**
  * @internal
  */
+export const IngestConfigurationFilterSensitiveLog = (obj: IngestConfiguration): any => ({
+  ...obj,
+  ...(obj.streamKey && { streamKey: SENSITIVE_STRING }),
+});
+
+/**
+ * @internal
+ */
+export const CreateIngestConfigurationResponseFilterSensitiveLog = (obj: CreateIngestConfigurationResponse): any => ({
+  ...obj,
+  ...(obj.ingestConfiguration && {
+    ingestConfiguration: IngestConfigurationFilterSensitiveLog(obj.ingestConfiguration),
+  }),
+});
+
+/**
+ * @internal
+ */
 export const ParticipantTokenFilterSensitiveLog = (obj: ParticipantToken): any => ({
   ...obj,
   ...(obj.token && { token: SENSITIVE_STRING }),
@@ -2612,5 +3087,25 @@ export const CreateStageResponseFilterSensitiveLog = (obj: CreateStageResponse):
   ...obj,
   ...(obj.participantTokens && {
     participantTokens: obj.participantTokens.map((item) => ParticipantTokenFilterSensitiveLog(item)),
+  }),
+});
+
+/**
+ * @internal
+ */
+export const GetIngestConfigurationResponseFilterSensitiveLog = (obj: GetIngestConfigurationResponse): any => ({
+  ...obj,
+  ...(obj.ingestConfiguration && {
+    ingestConfiguration: IngestConfigurationFilterSensitiveLog(obj.ingestConfiguration),
+  }),
+});
+
+/**
+ * @internal
+ */
+export const UpdateIngestConfigurationResponseFilterSensitiveLog = (obj: UpdateIngestConfigurationResponse): any => ({
+  ...obj,
+  ...(obj.ingestConfiguration && {
+    ingestConfiguration: IngestConfigurationFilterSensitiveLog(obj.ingestConfiguration),
   }),
 });

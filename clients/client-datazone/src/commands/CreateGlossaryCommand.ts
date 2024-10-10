@@ -101,9 +101,7 @@ export class CreateGlossaryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DataZoneClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -115,4 +113,16 @@ export class CreateGlossaryCommand extends $Command
   .f(CreateGlossaryInputFilterSensitiveLog, CreateGlossaryOutputFilterSensitiveLog)
   .ser(se_CreateGlossaryCommand)
   .de(de_CreateGlossaryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGlossaryInput;
+      output: CreateGlossaryOutput;
+    };
+    sdk: {
+      input: CreateGlossaryCommandInput;
+      output: CreateGlossaryCommandOutput;
+    };
+  };
+}

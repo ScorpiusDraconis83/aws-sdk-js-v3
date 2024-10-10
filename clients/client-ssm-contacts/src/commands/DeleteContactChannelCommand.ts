@@ -82,9 +82,7 @@ export class DeleteContactChannelCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SSMContactsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -96,4 +94,16 @@ export class DeleteContactChannelCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteContactChannelCommand)
   .de(de_DeleteContactChannelCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteContactChannelRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteContactChannelCommandInput;
+      output: DeleteContactChannelCommandOutput;
+    };
+  };
+}

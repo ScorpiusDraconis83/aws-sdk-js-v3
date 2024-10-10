@@ -89,6 +89,9 @@ export interface CreateInstanceProfileCommandOutput extends CreateInstanceProfil
  *  <p>DMS was denied access to the endpoint. Check that the
  *             role is correctly configured.</p>
  *
+ * @throws {@link FailedDependencyFault} (client fault)
+ *  <p>A dependency threw an exception.</p>
+ *
  * @throws {@link InvalidResourceStateFault} (client fault)
  *  <p>The resource is in a state that prevents it from being used for database migration.</p>
  *
@@ -162,9 +165,7 @@ export class CreateInstanceProfileCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DatabaseMigrationServiceClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -176,4 +177,16 @@ export class CreateInstanceProfileCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateInstanceProfileCommand)
   .de(de_CreateInstanceProfileCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateInstanceProfileMessage;
+      output: CreateInstanceProfileResponse;
+    };
+    sdk: {
+      input: CreateInstanceProfileCommandInput;
+      output: CreateInstanceProfileCommandOutput;
+    };
+  };
+}

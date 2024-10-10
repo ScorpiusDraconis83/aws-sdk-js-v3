@@ -77,7 +77,7 @@ export interface UpdateWebhookCommandOutput extends UpdateWebhookOutput, __Metad
  * //     scopeConfiguration: { // ScopeConfiguration
  * //       name: "STRING_VALUE", // required
  * //       domain: "STRING_VALUE",
- * //       scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL", // required
+ * //       scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
  * //     },
  * //   },
  * // };
@@ -112,9 +112,7 @@ export class UpdateWebhookCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CodeBuildClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -126,4 +124,16 @@ export class UpdateWebhookCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateWebhookCommand)
   .de(de_UpdateWebhookCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWebhookInput;
+      output: UpdateWebhookOutput;
+    };
+    sdk: {
+      input: UpdateWebhookCommandInput;
+      output: UpdateWebhookCommandOutput;
+    };
+  };
+}

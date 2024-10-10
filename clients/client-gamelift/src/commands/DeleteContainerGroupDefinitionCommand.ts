@@ -77,7 +77,7 @@ export interface DeleteContainerGroupDefinitionCommandOutput extends __MetadataB
  *             values before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link TaggingFailedException} (client fault)
  *  <p>The requested tagging operation did not succeed. This may be due to invalid tag format
@@ -103,9 +103,7 @@ export class DeleteContainerGroupDefinitionCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -117,4 +115,16 @@ export class DeleteContainerGroupDefinitionCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DeleteContainerGroupDefinitionCommand)
   .de(de_DeleteContainerGroupDefinitionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteContainerGroupDefinitionInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteContainerGroupDefinitionCommandInput;
+      output: DeleteContainerGroupDefinitionCommandOutput;
+    };
+  };
+}

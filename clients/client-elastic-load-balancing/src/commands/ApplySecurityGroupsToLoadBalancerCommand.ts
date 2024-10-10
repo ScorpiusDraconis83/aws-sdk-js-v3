@@ -111,9 +111,7 @@ export class ApplySecurityGroupsToLoadBalancerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ElasticLoadBalancingClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class ApplySecurityGroupsToLoadBalancerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ApplySecurityGroupsToLoadBalancerCommand)
   .de(de_ApplySecurityGroupsToLoadBalancerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ApplySecurityGroupsToLoadBalancerInput;
+      output: ApplySecurityGroupsToLoadBalancerOutput;
+    };
+    sdk: {
+      input: ApplySecurityGroupsToLoadBalancerCommandInput;
+      output: ApplySecurityGroupsToLoadBalancerCommandOutput;
+    };
+  };
+}

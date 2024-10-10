@@ -229,9 +229,7 @@ export class DescribeAccountCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OrganizationsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -243,4 +241,16 @@ export class DescribeAccountCommand extends $Command
   .f(void 0, DescribeAccountResponseFilterSensitiveLog)
   .ser(se_DescribeAccountCommand)
   .de(de_DescribeAccountCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountRequest;
+      output: DescribeAccountResponse;
+    };
+    sdk: {
+      input: DescribeAccountCommandInput;
+      output: DescribeAccountCommandOutput;
+    };
+  };
+}

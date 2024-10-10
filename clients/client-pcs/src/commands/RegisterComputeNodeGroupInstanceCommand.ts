@@ -111,9 +111,7 @@ export class RegisterComputeNodeGroupInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PCSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -125,4 +123,16 @@ export class RegisterComputeNodeGroupInstanceCommand extends $Command
   .f(void 0, RegisterComputeNodeGroupInstanceResponseFilterSensitiveLog)
   .ser(se_RegisterComputeNodeGroupInstanceCommand)
   .de(de_RegisterComputeNodeGroupInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterComputeNodeGroupInstanceRequest;
+      output: RegisterComputeNodeGroupInstanceResponse;
+    };
+    sdk: {
+      input: RegisterComputeNodeGroupInstanceCommandInput;
+      output: RegisterComputeNodeGroupInstanceCommandOutput;
+    };
+  };
+}

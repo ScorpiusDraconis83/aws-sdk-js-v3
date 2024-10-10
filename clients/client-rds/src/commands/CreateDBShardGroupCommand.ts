@@ -43,6 +43,12 @@ export interface CreateDBShardGroupCommandOutput extends DBShardGroup, __Metadat
  *   MaxACU: Number("double"), // required
  *   MinACU: Number("double"),
  *   PubliclyAccessible: true || false,
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
  * };
  * const command = new CreateDBShardGroupCommand(input);
  * const response = await client.send(command);
@@ -56,6 +62,13 @@ export interface CreateDBShardGroupCommandOutput extends DBShardGroup, __Metadat
  * //   Status: "STRING_VALUE",
  * //   PubliclyAccessible: true || false,
  * //   Endpoint: "STRING_VALUE",
+ * //   DBShardGroupArn: "STRING_VALUE",
+ * //   TagList: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
  * // };
  *
  * ```
@@ -76,15 +89,15 @@ export interface CreateDBShardGroupCommandOutput extends DBShardGroup, __Metadat
  * @throws {@link InvalidDBClusterStateFault} (client fault)
  *  <p>The requested operation can't be performed while the cluster is in this state.</p>
  *
- * @throws {@link InvalidMaxAcuFault} (client fault)
- *  <p>The maximum capacity of the DB shard group must be 48-7168 Aurora capacity units (ACUs).</p>
- *
  * @throws {@link InvalidVPCNetworkStateFault} (client fault)
  *  <p>The DB subnet group doesn't cover all Availability Zones after it's
  *             created because of users' change.</p>
  *
  * @throws {@link MaxDBShardGroupLimitReached} (client fault)
  *  <p>The maximum number of DB shard groups for your Amazon Web Services account in the specified Amazon Web Services Region has been reached.</p>
+ *
+ * @throws {@link NetworkTypeNotSupported} (client fault)
+ *  <p>The network type is invalid for the DB instance. Valid nework type values are <code>IPV4</code> and <code>DUAL</code>.</p>
  *
  * @throws {@link UnsupportedDBEngineVersionFault} (client fault)
  *  <p>The specified DB engine version isn't supported for Aurora Limitless Database.</p>
@@ -102,9 +115,7 @@ export class CreateDBShardGroupCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: RDSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -116,4 +127,16 @@ export class CreateDBShardGroupCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateDBShardGroupCommand)
   .de(de_CreateDBShardGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDBShardGroupMessage;
+      output: DBShardGroup;
+    };
+    sdk: {
+      input: CreateDBShardGroupCommandInput;
+      output: CreateDBShardGroupCommandOutput;
+    };
+  };
+}

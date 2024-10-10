@@ -114,9 +114,7 @@ export class GetSolFunctionInstanceCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: TnbClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class GetSolFunctionInstanceCommand extends $Command
   .f(void 0, GetSolFunctionInstanceOutputFilterSensitiveLog)
   .ser(se_GetSolFunctionInstanceCommand)
   .de(de_GetSolFunctionInstanceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSolFunctionInstanceInput;
+      output: GetSolFunctionInstanceOutput;
+    };
+    sdk: {
+      input: GetSolFunctionInstanceCommandInput;
+      output: GetSolFunctionInstanceCommandOutput;
+    };
+  };
+}

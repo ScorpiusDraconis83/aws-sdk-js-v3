@@ -91,9 +91,7 @@ export class GetDeploymentCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: LaunchWizardClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class GetDeploymentCommand extends $Command
   .f(void 0, GetDeploymentOutputFilterSensitiveLog)
   .ser(se_GetDeploymentCommand)
   .de(de_GetDeploymentCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentInput;
+      output: GetDeploymentOutput;
+    };
+    sdk: {
+      input: GetDeploymentCommandInput;
+      output: GetDeploymentCommandOutput;
+    };
+  };
+}

@@ -124,9 +124,7 @@ export class DescribeBackupsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CloudHSMV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class DescribeBackupsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeBackupsCommand)
   .de(de_DescribeBackupsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBackupsRequest;
+      output: DescribeBackupsResponse;
+    };
+    sdk: {
+      input: DescribeBackupsCommandInput;
+      output: DescribeBackupsCommandOutput;
+    };
+  };
+}

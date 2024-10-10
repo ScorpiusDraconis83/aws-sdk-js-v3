@@ -122,9 +122,7 @@ export class UpdateStudioCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: NimbleClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -136,4 +134,16 @@ export class UpdateStudioCommand extends $Command
   .f(UpdateStudioRequestFilterSensitiveLog, UpdateStudioResponseFilterSensitiveLog)
   .ser(se_UpdateStudioCommand)
   .de(de_UpdateStudioCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateStudioRequest;
+      output: UpdateStudioResponse;
+    };
+    sdk: {
+      input: UpdateStudioCommandInput;
+      output: UpdateStudioCommandOutput;
+    };
+  };
+}

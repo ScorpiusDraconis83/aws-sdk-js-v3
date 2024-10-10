@@ -89,9 +89,7 @@ export class ListPartnerAccountsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: IoTWirelessClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class ListPartnerAccountsCommand extends $Command
   .f(void 0, ListPartnerAccountsResponseFilterSensitiveLog)
   .ser(se_ListPartnerAccountsCommand)
   .de(de_ListPartnerAccountsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPartnerAccountsRequest;
+      output: ListPartnerAccountsResponse;
+    };
+    sdk: {
+      input: ListPartnerAccountsCommandInput;
+      output: ListPartnerAccountsCommandOutput;
+    };
+  };
+}

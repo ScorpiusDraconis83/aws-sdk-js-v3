@@ -137,9 +137,7 @@ export class BatchImportEvidenceToAssessmentControlCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AuditManagerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -154,4 +152,16 @@ export class BatchImportEvidenceToAssessmentControlCommand extends $Command
   )
   .ser(se_BatchImportEvidenceToAssessmentControlCommand)
   .de(de_BatchImportEvidenceToAssessmentControlCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchImportEvidenceToAssessmentControlRequest;
+      output: BatchImportEvidenceToAssessmentControlResponse;
+    };
+    sdk: {
+      input: BatchImportEvidenceToAssessmentControlCommandInput;
+      output: BatchImportEvidenceToAssessmentControlCommandOutput;
+    };
+  };
+}

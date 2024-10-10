@@ -649,9 +649,7 @@ export class StartMisconfiguredStateRecoveryCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: FSxClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -663,4 +661,16 @@ export class StartMisconfiguredStateRecoveryCommand extends $Command
   .f(void 0, StartMisconfiguredStateRecoveryResponseFilterSensitiveLog)
   .ser(se_StartMisconfiguredStateRecoveryCommand)
   .de(de_StartMisconfiguredStateRecoveryCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMisconfiguredStateRecoveryRequest;
+      output: StartMisconfiguredStateRecoveryResponse;
+    };
+    sdk: {
+      input: StartMisconfiguredStateRecoveryCommandInput;
+      output: StartMisconfiguredStateRecoveryCommandOutput;
+    };
+  };
+}

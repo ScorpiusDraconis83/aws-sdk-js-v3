@@ -533,6 +533,45 @@ client.middlewareStack.add(
 await client.listBuckets({});
 ```
 
+### Middleware Caching `cacheMiddleware`.
+
+> Available only in [v3.649.0](https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.649.0) and later.
+
+By default (false), the middleware function stack is resolved every request,
+because the user may modify the middleware stack by adding middleware to the
+`client` or `command` instances at any time.
+
+By contrast, when `cacheMiddleware=true`, the creation of the middleware function stack
+is cached on a per-client, per-command-class basis.
+
+In the following example, the S3 HeadObject Command is called 10 times, but
+its middleware function stack is only created once, instead of once per request.
+
+```ts
+// example: middleware caching
+import { S3Client, HeadObjectCommand } from "@aws-sdk/client-s3";
+
+const client = new S3Client({ cacheMiddleware: true });
+
+for (let i = 0; i < 10; ++i) {
+  await client.send(
+    new HeadObjectCommand({
+      Bucket: "...",
+      Key: String(i),
+    })
+  );
+}
+```
+
+This caches the combination of `S3Client+HeadObjectCommand`'s resolved
+`middlewareStack` upon the first request. This has two key effects:
+
+- request creation time is reduced by (up to) a few milliseconds per request
+- modifying the middleware stack after requests have begun will have no effect.
+
+**Only enable this feature if you need the marginal increaese to
+request performance, and are aware of its side-effects.**
+
 ### Dual-stack `useDualstackEndpoint`
 
 This is a simple `boolean` setting that is present in most SDK Clients.
@@ -565,6 +604,17 @@ new S3Client({
 Refer to:
 
 - https://aws.amazon.com/compliance/fips/
+
+### User Agent Application ID `userAgentAppId`
+
+Application ID or AppId is an optional application specific identifier that can be set. When set it will be appended to the User-Agent header of every request in the form of App/{AppId}. This variable is sourced from environment variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id. See https://docs.aws.amazon.com/sdkref/latest/guide/settings-reference.html for more information on environment variables and shared config settings.
+
+```ts
+// Example: setting userAgentAppId
+new S3Client({
+  userAgentAppId: "testApp",
+});
+```
 
 ### (Smithy) Runtime Extensions `extensions`
 

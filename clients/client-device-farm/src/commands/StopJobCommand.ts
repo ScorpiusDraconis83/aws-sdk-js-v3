@@ -157,9 +157,7 @@ export class StopJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeviceFarmClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -171,4 +169,16 @@ export class StopJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopJobCommand)
   .de(de_StopJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopJobRequest;
+      output: StopJobResult;
+    };
+    sdk: {
+      input: StopJobCommandInput;
+      output: StopJobCommandOutput;
+    };
+  };
+}

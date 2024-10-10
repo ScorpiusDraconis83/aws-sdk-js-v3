@@ -126,9 +126,7 @@ export class ModifyVerifiedAccessTrustProviderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -143,4 +141,16 @@ export class ModifyVerifiedAccessTrustProviderCommand extends $Command
   )
   .ser(se_ModifyVerifiedAccessTrustProviderCommand)
   .de(de_ModifyVerifiedAccessTrustProviderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVerifiedAccessTrustProviderRequest;
+      output: ModifyVerifiedAccessTrustProviderResult;
+    };
+    sdk: {
+      input: ModifyVerifiedAccessTrustProviderCommandInput;
+      output: ModifyVerifiedAccessTrustProviderCommandOutput;
+    };
+  };
+}

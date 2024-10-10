@@ -91,9 +91,7 @@ export class SendTaskSuccessCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SFNClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -105,4 +103,16 @@ export class SendTaskSuccessCommand extends $Command
   .f(SendTaskSuccessInputFilterSensitiveLog, void 0)
   .ser(se_SendTaskSuccessCommand)
   .de(de_SendTaskSuccessCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendTaskSuccessInput;
+      output: {};
+    };
+    sdk: {
+      input: SendTaskSuccessCommandInput;
+      output: SendTaskSuccessCommandOutput;
+    };
+  };
+}

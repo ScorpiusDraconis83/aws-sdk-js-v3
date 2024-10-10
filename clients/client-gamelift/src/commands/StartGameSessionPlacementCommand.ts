@@ -163,7 +163,7 @@ export interface StartGameSessionPlacementCommandOutput extends StartGameSession
  *             values before retrying.</p>
  *
  * @throws {@link NotFoundException} (client fault)
- *  <p>THe requested resources was not found. The resource was either not created yet or deleted.</p>
+ *  <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
  *
  * @throws {@link UnauthorizedException} (client fault)
  *  <p>The client failed authentication. Clients should not retry such requests.</p>
@@ -181,9 +181,7 @@ export class StartGameSessionPlacementCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GameLiftClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -195,4 +193,16 @@ export class StartGameSessionPlacementCommand extends $Command
   .f(StartGameSessionPlacementInputFilterSensitiveLog, StartGameSessionPlacementOutputFilterSensitiveLog)
   .ser(se_StartGameSessionPlacementCommand)
   .de(de_StartGameSessionPlacementCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartGameSessionPlacementInput;
+      output: StartGameSessionPlacementOutput;
+    };
+    sdk: {
+      input: StartGameSessionPlacementCommandInput;
+      output: StartGameSessionPlacementCommandOutput;
+    };
+  };
+}

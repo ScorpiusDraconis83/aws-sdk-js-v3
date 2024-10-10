@@ -78,9 +78,7 @@ export class DisableAwsNetworkPerformanceMetricSubscriptionCommand extends $Comm
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: EC2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class DisableAwsNetworkPerformanceMetricSubscriptionCommand extends $Comm
   .f(void 0, void 0)
   .ser(se_DisableAwsNetworkPerformanceMetricSubscriptionCommand)
   .de(de_DisableAwsNetworkPerformanceMetricSubscriptionCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableAwsNetworkPerformanceMetricSubscriptionRequest;
+      output: DisableAwsNetworkPerformanceMetricSubscriptionResult;
+    };
+    sdk: {
+      input: DisableAwsNetworkPerformanceMetricSubscriptionCommandInput;
+      output: DisableAwsNetworkPerformanceMetricSubscriptionCommandOutput;
+    };
+  };
+}

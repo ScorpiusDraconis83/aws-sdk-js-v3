@@ -6,7 +6,7 @@ import { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
 import { commonParams } from "../endpoint/EndpointParameters";
 import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { UpdateTriggerRequest, UpdateTriggerResponse } from "../models/models_2";
+import { UpdateTriggerRequest, UpdateTriggerResponse } from "../models/models_3";
 import { de_UpdateTriggerCommand, se_UpdateTriggerCommand } from "../protocols/Aws_json1_1";
 
 /**
@@ -153,9 +153,7 @@ export class UpdateTriggerCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: GlueClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -167,4 +165,16 @@ export class UpdateTriggerCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateTriggerCommand)
   .de(de_UpdateTriggerCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTriggerRequest;
+      output: UpdateTriggerResponse;
+    };
+    sdk: {
+      input: UpdateTriggerCommandInput;
+      output: UpdateTriggerCommandOutput;
+    };
+  };
+}

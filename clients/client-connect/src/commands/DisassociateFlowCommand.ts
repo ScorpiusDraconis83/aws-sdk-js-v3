@@ -83,9 +83,7 @@ export class DisassociateFlowCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -97,4 +95,16 @@ export class DisassociateFlowCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DisassociateFlowCommand)
   .de(de_DisassociateFlowCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateFlowRequest;
+      output: {};
+    };
+    sdk: {
+      input: DisassociateFlowCommandInput;
+      output: DisassociateFlowCommandOutput;
+    };
+  };
+}

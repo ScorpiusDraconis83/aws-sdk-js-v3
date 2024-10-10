@@ -78,9 +78,7 @@ export class CancelOrderCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: OutpostsClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -92,4 +90,16 @@ export class CancelOrderCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CancelOrderCommand)
   .de(de_CancelOrderCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelOrderInput;
+      output: {};
+    };
+    sdk: {
+      input: CancelOrderCommandInput;
+      output: CancelOrderCommandOutput;
+    };
+  };
+}

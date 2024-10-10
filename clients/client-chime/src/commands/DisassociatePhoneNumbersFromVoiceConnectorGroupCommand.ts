@@ -114,9 +114,7 @@ export class DisassociatePhoneNumbersFromVoiceConnectorGroupCommand extends $Com
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ChimeClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -128,4 +126,16 @@ export class DisassociatePhoneNumbersFromVoiceConnectorGroupCommand extends $Com
   .f(DisassociatePhoneNumbersFromVoiceConnectorGroupRequestFilterSensitiveLog, void 0)
   .ser(se_DisassociatePhoneNumbersFromVoiceConnectorGroupCommand)
   .de(de_DisassociatePhoneNumbersFromVoiceConnectorGroupCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociatePhoneNumbersFromVoiceConnectorGroupRequest;
+      output: DisassociatePhoneNumbersFromVoiceConnectorGroupResponse;
+    };
+    sdk: {
+      input: DisassociatePhoneNumbersFromVoiceConnectorGroupCommandInput;
+      output: DisassociatePhoneNumbersFromVoiceConnectorGroupCommandOutput;
+    };
+  };
+}

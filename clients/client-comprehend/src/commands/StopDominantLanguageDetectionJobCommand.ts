@@ -89,9 +89,7 @@ export class StopDominantLanguageDetectionJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ComprehendClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -103,4 +101,16 @@ export class StopDominantLanguageDetectionJobCommand extends $Command
   .f(void 0, void 0)
   .ser(se_StopDominantLanguageDetectionJobCommand)
   .de(de_StopDominantLanguageDetectionJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopDominantLanguageDetectionJobRequest;
+      output: StopDominantLanguageDetectionJobResponse;
+    };
+    sdk: {
+      input: StopDominantLanguageDetectionJobCommandInput;
+      output: StopDominantLanguageDetectionJobCommandOutput;
+    };
+  };
+}

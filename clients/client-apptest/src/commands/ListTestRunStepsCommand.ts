@@ -100,9 +100,7 @@ export class ListTestRunStepsCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: AppTestClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -114,4 +112,16 @@ export class ListTestRunStepsCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListTestRunStepsCommand)
   .de(de_ListTestRunStepsCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTestRunStepsRequest;
+      output: ListTestRunStepsResponse;
+    };
+    sdk: {
+      input: ListTestRunStepsCommandInput;
+      output: ListTestRunStepsCommandOutput;
+    };
+  };
+}

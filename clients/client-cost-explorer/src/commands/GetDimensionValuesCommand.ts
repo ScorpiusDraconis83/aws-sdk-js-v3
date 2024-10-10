@@ -173,9 +173,7 @@ export class GetDimensionValuesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: CostExplorerClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -187,4 +185,16 @@ export class GetDimensionValuesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_GetDimensionValuesCommand)
   .de(de_GetDimensionValuesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDimensionValuesRequest;
+      output: GetDimensionValuesResponse;
+    };
+    sdk: {
+      input: GetDimensionValuesCommandInput;
+      output: GetDimensionValuesCommandOutput;
+    };
+  };
+}

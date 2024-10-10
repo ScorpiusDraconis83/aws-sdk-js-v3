@@ -64,6 +64,7 @@ export interface CreateClusterCommandOutput extends CreateClusterResponse, __Met
  *   ],
  *   SnapshotWindow: "STRING_VALUE",
  *   ACLName: "STRING_VALUE", // required
+ *   Engine: "STRING_VALUE",
  *   EngineVersion: "STRING_VALUE",
  *   AutoMinorVersionUpgrade: true || false,
  *   DataTiering: true || false,
@@ -118,6 +119,7 @@ export interface CreateClusterCommandOutput extends CreateClusterResponse, __Met
  * //       Port: Number("int"),
  * //     },
  * //     NodeType: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
  * //     EngineVersion: "STRING_VALUE",
  * //     EnginePatchVersion: "STRING_VALUE",
  * //     ParameterGroupName: "STRING_VALUE",
@@ -212,9 +214,7 @@ export class CreateClusterCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: MemoryDBClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -226,4 +226,16 @@ export class CreateClusterCommand extends $Command
   .f(void 0, void 0)
   .ser(se_CreateClusterCommand)
   .de(de_CreateClusterCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateClusterRequest;
+      output: CreateClusterResponse;
+    };
+    sdk: {
+      input: CreateClusterCommandInput;
+      output: CreateClusterCommandOutput;
+    };
+  };
+}

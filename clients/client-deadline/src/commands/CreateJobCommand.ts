@@ -41,8 +41,8 @@ export interface CreateJobCommandOutput extends CreateJobResponse, __MetadataBea
  *   farmId: "STRING_VALUE", // required
  *   queueId: "STRING_VALUE", // required
  *   clientToken: "STRING_VALUE",
- *   template: "STRING_VALUE", // required
- *   templateType: "JSON" || "YAML", // required
+ *   template: "STRING_VALUE",
+ *   templateType: "JSON" || "YAML",
  *   priority: Number("int"), // required
  *   parameters: { // JobParameters
  *     "<keys>": { // JobParameter Union: only one key present
@@ -71,6 +71,7 @@ export interface CreateJobCommandOutput extends CreateJobResponse, __MetadataBea
  *   targetTaskRunStatus: "READY" || "SUSPENDED",
  *   maxFailedTasksCount: Number("int"),
  *   maxRetriesPerTask: Number("int"),
+ *   sourceJobId: "STRING_VALUE",
  * };
  * const command = new CreateJobCommand(input);
  * const response = await client.send(command);
@@ -119,9 +120,7 @@ export class CreateJobCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: DeadlineClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -133,4 +132,16 @@ export class CreateJobCommand extends $Command
   .f(CreateJobRequestFilterSensitiveLog, void 0)
   .ser(se_CreateJobCommand)
   .de(de_CreateJobCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateJobRequest;
+      output: CreateJobResponse;
+    };
+    sdk: {
+      input: CreateJobCommandInput;
+      output: CreateJobCommandOutput;
+    };
+  };
+}

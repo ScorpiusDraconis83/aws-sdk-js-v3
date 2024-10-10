@@ -152,9 +152,7 @@ export class UpdateRuleCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: ConnectClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -166,4 +164,16 @@ export class UpdateRuleCommand extends $Command
   .f(void 0, void 0)
   .ser(se_UpdateRuleCommand)
   .de(de_UpdateRuleCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRuleRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateRuleCommandInput;
+      output: UpdateRuleCommandOutput;
+    };
+  };
+}

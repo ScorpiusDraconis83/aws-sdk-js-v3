@@ -113,9 +113,7 @@ export class DescribeRegistrationFieldValuesCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: PinpointSMSVoiceV2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -127,4 +125,16 @@ export class DescribeRegistrationFieldValuesCommand extends $Command
   .f(void 0, void 0)
   .ser(se_DescribeRegistrationFieldValuesCommand)
   .de(de_DescribeRegistrationFieldValuesCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRegistrationFieldValuesRequest;
+      output: DescribeRegistrationFieldValuesResult;
+    };
+    sdk: {
+      input: DescribeRegistrationFieldValuesCommandInput;
+      output: DescribeRegistrationFieldValuesCommandOutput;
+    };
+  };
+}

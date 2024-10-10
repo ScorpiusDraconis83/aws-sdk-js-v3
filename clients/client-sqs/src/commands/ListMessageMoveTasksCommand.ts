@@ -124,9 +124,7 @@ export class ListMessageMoveTasksCommand extends $Command
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: SQSClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -138,4 +136,16 @@ export class ListMessageMoveTasksCommand extends $Command
   .f(void 0, void 0)
   .ser(se_ListMessageMoveTasksCommand)
   .de(de_ListMessageMoveTasksCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMessageMoveTasksRequest;
+      output: ListMessageMoveTasksResult;
+    };
+    sdk: {
+      input: ListMessageMoveTasksCommandInput;
+      output: ListMessageMoveTasksCommandOutput;
+    };
+  };
+}

@@ -171,9 +171,7 @@ export class ListCisScanResultsAggregatedByTargetResourceCommand extends $Comman
     ServiceInputTypes,
     ServiceOutputTypes
   >()
-  .ep({
-    ...commonParams,
-  })
+  .ep(commonParams)
   .m(function (this: any, Command: any, cs: any, config: Inspector2ClientResolvedConfig, o: any) {
     return [
       getSerdePlugin(config, this.serialize, this.deserialize),
@@ -185,4 +183,16 @@ export class ListCisScanResultsAggregatedByTargetResourceCommand extends $Comman
   .f(void 0, void 0)
   .ser(se_ListCisScanResultsAggregatedByTargetResourceCommand)
   .de(de_ListCisScanResultsAggregatedByTargetResourceCommand)
-  .build() {}
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCisScanResultsAggregatedByTargetResourceRequest;
+      output: ListCisScanResultsAggregatedByTargetResourceResponse;
+    };
+    sdk: {
+      input: ListCisScanResultsAggregatedByTargetResourceCommandInput;
+      output: ListCisScanResultsAggregatedByTargetResourceCommandOutput;
+    };
+  };
+}
